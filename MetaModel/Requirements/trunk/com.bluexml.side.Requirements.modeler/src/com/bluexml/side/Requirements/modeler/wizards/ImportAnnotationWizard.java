@@ -38,7 +38,6 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
-import com.bluexml.side.Util.ecore.EResourceUtils;
 import com.bluexml.side.requirements.AnnotableElement;
 import com.bluexml.side.requirements.Annotation;
 import com.bluexml.side.requirements.AnnotationStatus;
@@ -47,6 +46,7 @@ import com.bluexml.side.requirements.RequirementsDefinition;
 import com.bluexml.side.requirements.RequirementsFactory;
 import com.bluexml.side.requirements.util.RequirementsResource;
 import com.bluexml.side.requirements.util.RequirementsResourceFactory;
+import com.bluexml.side.util.libs.ecore.EResourceUtils;
 
 
 public class ImportAnnotationWizard extends Wizard implements IImportWizard {

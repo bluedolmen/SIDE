@@ -7,7 +7,7 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
 Require-Bundle: fr.obeo.acceleo.chain,
  fr.obeo.acceleo.gen,
  com.bluexml.side.Form,

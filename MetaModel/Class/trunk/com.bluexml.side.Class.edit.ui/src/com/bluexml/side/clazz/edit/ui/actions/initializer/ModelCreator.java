@@ -34,6 +34,7 @@ import org.eclipse.ui.part.FileEditorInput;
 import com.bluexml.side.Util.ecore.ModelInitializationUtils;
 import com.bluexml.side.clazz.edit.ui.Messages;
 import com.bluexml.side.util.libs.eclipse.ProjectNatureHelper;
+import com.bluexml.side.util.libs.ecore.EResourceUtils;
 import com.bluexml.side.util.libs.ui.UIUtils;
 
 public abstract class ModelCreator {
@@ -100,8 +101,8 @@ public abstract class ModelCreator {
 	}
 
 	protected void saveNewModel() throws Exception {
-		//		ModelInitializationUtils.saveModel(newModelPath.toFile(), newRootObject);
-		ModelInitializationUtils.saveModel(getNewModelIFile(), newRootObject);
+		//		EResourceUtils.saveModel(newModelPath.toFile(), newRootObject);
+		EResourceUtils.saveModel(getNewModelIFile(), newRootObject);
 	}
 
 	public IFile getNewModelIFile() {
@@ -155,7 +156,7 @@ public abstract class ModelCreator {
 	}
 
 	protected static EObject openModel(IFile classModel) throws IOException {
-		EList<EObject> l = ModelInitializationUtils.openModel(classModel);
+		EList<EObject> l = EResourceUtils.openModel(classModel);
 		return l.get(0);
 	}
 

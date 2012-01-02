@@ -8,28 +8,27 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
-import com.bluexml.side.Util.ecore.ModelInitializationUtils;
 import com.bluexml.side.alfresco.binding.Aspect;
 import com.bluexml.side.alfresco.binding.Association;
-import com.bluexml.side.alfresco.binding.ChildAssociation;
-import com.bluexml.side.alfresco.binding.Constraint;
-import com.bluexml.side.alfresco.binding.MandatoryDef;
-import com.bluexml.side.alfresco.binding.NamedValue;
-import com.bluexml.side.alfresco.binding.Property;
-import com.bluexml.side.alfresco.binding.PropertyOverride;
-import com.bluexml.side.alfresco.binding.Type;
 import com.bluexml.side.alfresco.binding.Association.Source;
 import com.bluexml.side.alfresco.binding.Association.Target;
+import com.bluexml.side.alfresco.binding.ChildAssociation;
 import com.bluexml.side.alfresco.binding.Class.Associations;
 import com.bluexml.side.alfresco.binding.Class.MandatoryAspects;
 import com.bluexml.side.alfresco.binding.Class.Overrides;
 import com.bluexml.side.alfresco.binding.Class.Properties;
+import com.bluexml.side.alfresco.binding.Constraint;
+import com.bluexml.side.alfresco.binding.MandatoryDef;
 import com.bluexml.side.alfresco.binding.Model.Aspects;
 import com.bluexml.side.alfresco.binding.Model.Constraints;
 import com.bluexml.side.alfresco.binding.Model.Namespaces;
-import com.bluexml.side.alfresco.binding.Model.Types;
 import com.bluexml.side.alfresco.binding.Model.Namespaces.Namespace;
+import com.bluexml.side.alfresco.binding.Model.Types;
+import com.bluexml.side.alfresco.binding.NamedValue;
+import com.bluexml.side.alfresco.binding.Property;
 import com.bluexml.side.alfresco.binding.Property.Index;
+import com.bluexml.side.alfresco.binding.PropertyOverride;
+import com.bluexml.side.alfresco.binding.Type;
 import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.AssociationEnd;
 import com.bluexml.side.clazz.AssociationType;
@@ -50,6 +49,7 @@ import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NameSpace;
 import com.bluexml.side.common.NamedModelElement;
+import com.bluexml.side.util.libs.ecore.EResourceUtils;
 
 public class ReverseModel {
 
@@ -80,7 +80,7 @@ public class ReverseModel {
 
 	public void loadSIDEModels(List<IFile> models) throws Exception {
 		for (IFile iFile : models) {
-			EList<EObject> openModel = ModelInitializationUtils.openModel(iFile);
+			EList<EObject> openModel = EResourceUtils.openModel(iFile);
 			if (openModel.size() == 1) {
 				EObject eObject = openModel.get(0);
 				if (eObject instanceof Model) {

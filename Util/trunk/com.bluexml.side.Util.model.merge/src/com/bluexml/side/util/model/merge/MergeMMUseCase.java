@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 
-import com.bluexml.side.Util.ecore.EResourceUtils;
+import com.bluexml.side.util.libs.ecore.EResourceUtils;
 
 public class MergeMMUseCase {
 	public static final String DEFAULT_ROOT_PACKAGE_NAME = "common";

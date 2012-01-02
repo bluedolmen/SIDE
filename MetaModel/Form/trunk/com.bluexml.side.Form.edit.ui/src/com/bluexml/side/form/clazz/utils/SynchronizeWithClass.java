@@ -106,7 +106,7 @@ public class SynchronizeWithClass {
 		InternalModification.moveToDisabled();
 	}
 
-	public void setFormContainer(AbstractClass abstractClass, FormContainer formContainer) {
+	protected void setFormContainer(AbstractClass abstractClass, FormContainer formContainer) {
 		ClassReference cref = (ClassReference) formContainer;
 		cref.setReal_class(abstractClass);
 	}
@@ -212,7 +212,7 @@ public class SynchronizeWithClass {
 		}
 	}
 
-	public void updateFormContainerId(FormContainer formContainer) {
+	protected void updateFormContainerId(FormContainer formContainer) {
 		if (formContainer instanceof FormSearch) {
 			SearchInitialization.initializeFormProperties((FormSearch) formContainer);
 			updateId(formContainer, formContainer.getId());
@@ -253,7 +253,7 @@ public class SynchronizeWithClass {
 		}
 	}
 
-	public void updateId(FormElement fw, String computeFormWorkflowId) {
+	protected void updateId(FormElement fw, String computeFormWorkflowId) {
 		if (headless) {
 			fw.setId(computeFormWorkflowId);
 		} else {
@@ -261,7 +261,7 @@ public class SynchronizeWithClass {
 		}
 	}
 
-	public void updateLabel(FormElement fw, String name) {
+	protected void updateLabel(FormElement fw, String name) {
 		if (headless) {
 			fw.setLabel(name);
 		} else {
@@ -357,7 +357,7 @@ public class SynchronizeWithClass {
 		synchronizeMissingAssociations(o, allchildren, real_class, groups, filterNS);
 	}
 
-	public void synchronizeMissingAssociations(FormContainer o, List<FormElement> children, AbstractClass real_class, Set<FormGroup> groups, String filterNS) {
+	protected void synchronizeMissingAssociations(FormContainer o, List<FormElement> children, AbstractClass real_class, Set<FormGroup> groups, String filterNS) {
 
 		List<Association> allAssociations = real_class.getAllSourceAssociations();
 
@@ -436,7 +436,7 @@ public class SynchronizeWithClass {
 
 	}
 
-	public void synchronizeMissingAttributes(FormContainer o, List<FormElement> children, AbstractClass real_class, Set<FormGroup> groups, String filterNS) {
+	protected void synchronizeMissingAttributes(FormContainer o, List<FormElement> children, AbstractClass real_class, Set<FormGroup> groups, String filterNS) {
 
 		List<Attribute> allAttributes = real_class.getAllAttributes();
 
@@ -505,7 +505,7 @@ public class SynchronizeWithClass {
 		return cc;
 	}
 
-	public void addChild(FormGroup fw, FormElement f) {
+	protected void addChild(FormGroup fw, FormElement f) {
 		if (headless) {
 			fw.getChildren().add(f);
 		} else {

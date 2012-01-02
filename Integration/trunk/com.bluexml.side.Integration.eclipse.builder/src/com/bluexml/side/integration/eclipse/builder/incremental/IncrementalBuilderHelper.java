@@ -30,7 +30,6 @@ import org.eclipse.emf.compare.util.EMFComparePreferenceConstants;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import com.bluexml.side.Util.ecore.EResourceUtils;
 import com.bluexml.side.Util.ecore.ModelInitializationUtils;
 import com.bluexml.side.application.Application;
 import com.bluexml.side.application.ApplicationFactory;
@@ -52,6 +51,7 @@ import com.bluexml.side.integration.eclipse.builder.settings.SIDEBuilderConfigur
 import com.bluexml.side.integration.standalone.ApplicationModelGenerateGenerationJob;
 import com.bluexml.side.integration.standalone.GenerateModelHelper;
 import com.bluexml.side.util.libs.CollectionHelper;
+import com.bluexml.side.util.libs.ecore.EResourceUtils;
 
 public class IncrementalBuilderHelper {
 	private static final String ONLY_DEPLOYERS_APPLICATION = "onlyDeployers.application";
@@ -87,7 +87,7 @@ public class IncrementalBuilderHelper {
 				System.out.println("oupse");
 			}
 
-			Application app = (Application) com.bluexml.side.Util.ecore.ModelInitializationUtils.openModel(file).get(0);
+			Application app = (Application) com.bluexml.side.util.libs.ecore.EResourceUtils.openModel(file).get(0);
 
 			generateApplicationWithoutClean(confName, app, null);
 		}
@@ -128,7 +128,7 @@ public class IncrementalBuilderHelper {
 				System.out.println("oupse");
 			}
 
-			Application app = (Application) com.bluexml.side.Util.ecore.ModelInitializationUtils.openModel(file).get(0);
+			Application app = (Application) com.bluexml.side.util.libs.ecore.EResourceUtils.openModel(file).get(0);
 
 			// changed model type application or other
 			System.out.println(" changedmodel " + changedmodel);
@@ -396,7 +396,7 @@ public class IncrementalBuilderHelper {
 		if (!incrementalApplicationModel.exists()) {
 			incrementalApplicationModel.create(null, true, new NullProgressMonitor());
 		}
-		ModelInitializationUtils.saveModel(incrementalApplicationModel, createApplication);
+		EResourceUtils.saveModel(incrementalApplicationModel, createApplication);
 		return incrementalApplicationModel;
 	}
 

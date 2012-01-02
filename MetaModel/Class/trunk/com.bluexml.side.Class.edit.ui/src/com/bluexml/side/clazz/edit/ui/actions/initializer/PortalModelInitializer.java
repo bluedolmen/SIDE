@@ -25,6 +25,7 @@ import com.bluexml.side.portal.Portlet;
 import com.bluexml.side.portal.PortletInternal;
 import com.bluexml.side.portal.PositionGroup;
 import com.bluexml.side.util.libs.IFileHelper;
+import com.bluexml.side.util.libs.ecore.EResourceUtils;
 import com.bluexml.side.view.ComposedView;
 import com.bluexml.side.view.ViewCollection;
 
@@ -119,7 +120,7 @@ public class PortalModelInitializer extends ModelAndDiagramInitializer {
 
 	private ComposedView getFirstExtrenalComposedView(IFile model, int index) throws Exception {
 		ComposedView ob = null;
-		EList<EObject> viewRoot = ModelInitializationUtils.openModel(model);
+		EList<EObject> viewRoot = EResourceUtils.openModel(model);
 		ob = ((ViewCollection) viewRoot.get(0)).getComposedViews().get(index);
 		return ob;
 	}
@@ -172,7 +173,7 @@ public class PortalModelInitializer extends ModelAndDiagramInitializer {
 
 	private FormCollection getFirstExtrenalFormCollection(IFile model, int index) throws Exception {
 		FormCollection ob = null;
-		EList<EObject> viewRoot = ModelInitializationUtils.openModel(model);
+		EList<EObject> viewRoot = EResourceUtils.openModel(model);
 		ob = ((FormCollection) viewRoot.get(0));
 		return ob;
 	}

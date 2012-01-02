@@ -1425,7 +1425,7 @@
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_B3_T7ZuPEd68JO4ATwwBpA" lineColor="0"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_B3_T7puPEd68JO4ATwwBpA" fontName="Sans" fontHeight="10"/>
     <element xmi:type="ecore:EReference" href="Forms.ecore#//ModelChoiceField/target"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_B3_T75uPEd68JO4ATwwBpA" points="[0, 0, 242, 111]$[-241, -61, 1, 50]$[-242, -111, 0, 0]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_B3_T75uPEd68JO4ATwwBpA" points="[0, 0, 291, 169]$[-291, -53, 0, 116]$[-291, -169, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_CAl2QJuPEd68JO4ATwwBpA" id="(0.3974359,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_CAl2QZuPEd68JO4ATwwBpA" id="(0.875,1.0)"/>
   </edges>
@@ -1439,7 +1439,7 @@
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_B3_69ZuPEd68JO4ATwwBpA" lineColor="0"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_B3_69puPEd68JO4ATwwBpA" fontName="Sans" fontHeight="10"/>
     <element xmi:type="ecore:EReference" href="Forms.ecore#//ModelChoiceField/association_formClass"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_B3_695uPEd68JO4ATwwBpA" points="[0, 0, 214, 111]$[-172, -61, 42, 50]$[-214, -111, 0, 0]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_B3_695uPEd68JO4ATwwBpA" points="[0, 0, 265, 169]$[-100, -141, 165, 28]$[-265, -169, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_CAlPNJuPEd68JO4ATwwBpA" id="(0.1965812,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_CAlPNZuPEd68JO4ATwwBpA" id="(0.75,1.0)"/>
   </edges>

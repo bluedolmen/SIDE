@@ -54,6 +54,7 @@ public class SynchronizeWorkflowFormWithClass {
 
 	public SynchronizeWorkflowFormWithClass() {
 		headless = true;
+		synchroWithClass = new SynchronizeWithClass();
 	}
 
 	public void synchronize(FormCollection fc) {
@@ -122,7 +123,7 @@ public class SynchronizeWorkflowFormWithClass {
 		Clazz advancedTaskDefinition = st.getAdvancedTaskDefinition();
 		if (advancedTaskDefinition != null) {
 			// From Clazz
-			synchroWithClass.addMissing(o, allchildren, advancedTaskDefinition,"http://www.alfresco.org/model");			
+			synchroWithClass.addMissing(o, allchildren, advancedTaskDefinition, "http://www.alfresco.org/model");
 
 		} else {
 			// From Task

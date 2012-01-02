@@ -34,6 +34,6 @@ public abstract class AbstractIFileJob extends WorkspaceJob {
 		return new Status(IStatus.OK, Activator.PLUGIN_ID, "initialization done");
 	}
 
-	protected abstract void execute() throws Exception;
+	public abstract void execute() throws Exception;
 
 }

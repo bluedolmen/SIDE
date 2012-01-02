@@ -29,9 +29,9 @@ import org.topcased.modeler.utils.Utils;
 
 import com.bluexml.side.Requirements.modeler.views.internal.IField;
 import com.bluexml.side.Requirements.modeler.views.internal.TableView;
-import com.bluexml.side.Util.ecore.EResourceUtils;
 import com.bluexml.side.requirements.Annotation;
 import com.bluexml.side.requirements.util.RequirementsResource;
+import com.bluexml.side.util.libs.ecore.EResourceUtils;
 
 /**
  * This sample class demonstrates how to plug-in a new workbench view. The view

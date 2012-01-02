@@ -33,7 +33,6 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 
-import com.bluexml.side.Util.ecore.EResourceUtils;
 import com.bluexml.side.Util.ecore.autofix.ClassFixer;
 import com.bluexml.side.Util.ecore.autofix.Fixer;
 import com.bluexml.side.Util.ecore.autofix.FormFixer;
@@ -60,6 +59,7 @@ import com.bluexml.side.application.ui.action.tree.TreeElement;
 import com.bluexml.side.util.dependencies.DependencesManager;
 import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.libs.eclipse.ExtensionPointUtils;
+import com.bluexml.side.util.libs.ecore.EResourceUtils;
 import com.bluexml.side.util.libs.ecore.EcoreHelper;
 import com.bluexml.side.util.security.Checkable;
 

@@ -28,10 +28,10 @@ import org.sideLabs.referential.references.Model;
 import org.sideLabs.referential.references.ModelsDocument;
 import org.sideLabs.referential.references.Reference;
 
-import com.bluexml.side.Util.ecore.EResourceUtils;
 import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 import com.bluexml.side.integration.eclipse.builder.incremental.DeltaCollector;
 import com.bluexml.side.util.libs.IFileHelper;
+import com.bluexml.side.util.libs.ecore.EResourceUtils;
 
 public class SIDEBuilderChecker {
 	private List<IFile> checkedFiles = new ArrayList<IFile>();

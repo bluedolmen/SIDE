@@ -6,6 +6,9 @@ public class Messages extends NLS {
 	private static final String BUNDLE_NAME = "com.bluexml.side.clazz.edit.ui.messages"; //$NON-NLS-1$
 	public static String InitializeModels_0;
 	public static String InitializeModels_1;
+	public static String InitializeModelsAction_0;
+	public static String InitializeModelsAction_1;
+	public static String InitializeModelsAction_2;
 	public static String InitializerPageWelcome_1;
 	public static String InitializerPageWelcome_2;
 	public static String InitializerPageWelcome_3;

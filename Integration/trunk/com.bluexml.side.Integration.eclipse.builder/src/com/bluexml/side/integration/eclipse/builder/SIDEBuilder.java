@@ -47,10 +47,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.bluexml.side.Util.ecore.EResourceUtils;
 import com.bluexml.side.Util.ecore.QuietModelModification.QuietModelModificationListener;
 import com.bluexml.side.application.ui.action.MustBeStopped;
 import com.bluexml.side.integration.eclipse.builder.incremental.IncrementalBuilderHelper;
+import com.bluexml.side.util.libs.ecore.EResourceUtils;
 
 public class SIDEBuilder extends IncrementalProjectBuilder {
 	private boolean activated = true;

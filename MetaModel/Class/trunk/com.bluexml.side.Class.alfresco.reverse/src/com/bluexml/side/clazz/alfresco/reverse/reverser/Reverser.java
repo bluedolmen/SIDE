@@ -9,9 +9,9 @@ import java.util.Map;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.EObject;
 
-import com.bluexml.side.Util.ecore.ModelInitializationUtils;
 import com.bluexml.side.alfresco.binding.Class;
 import com.bluexml.side.alfresco.binding.Model;
+import com.bluexml.side.util.libs.ecore.EResourceUtils;
 
 public class Reverser {
 
@@ -30,7 +30,7 @@ public class Reverser {
 				file.getParentFile().mkdirs();
 				file.createNewFile();
 				System.out.println("save model :" + file);
-				ModelInitializationUtils.saveModel(file, sideO);
+				EResourceUtils.saveModel(file, sideO);
 			}
 		}
 

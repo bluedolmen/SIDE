@@ -15,6 +15,7 @@ import com.bluexml.side.application.Application;
 import com.bluexml.side.application.ApplicationFactory;
 import com.bluexml.side.application.Configuration;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.creator.ApplicationCreator;
+import com.bluexml.side.util.libs.ecore.EResourceUtils;
 
 public class ApplicationModelInitializer extends ModelUpdater {
 	private static ApplicationFactory FACTORY = ApplicationFactory.eINSTANCE;
@@ -34,7 +35,7 @@ public class ApplicationModelInitializer extends ModelUpdater {
 	}
 
 	public ApplicationModelInitializer(IFile classModel, InitializerRegister register, ASK_USER ask, String formModelFileName, String alfrescoVersion, String alfrescoHome) throws IOException {
-		this(classModel, ModelInitializationUtils.openModel(classModel).get(0), register, ask, formModelFileName, alfrescoVersion, alfrescoHome);
+		this(classModel, EResourceUtils.openModel(classModel).get(0), register, ask, formModelFileName, alfrescoVersion, alfrescoHome);
 	}
 
 	@Override

@@ -45,6 +45,7 @@ import com.bluexml.side.requirements.RequirementsFactory;
 import com.bluexml.side.util.alfresco.tools.ToolingUtils;
 import com.bluexml.side.util.libs.IFileHelper;
 import com.bluexml.side.util.libs.eclipse.WorkspaceModifyOperation;
+import com.bluexml.side.util.libs.ecore.EResourceUtils;
 import com.bluexml.side.view.ViewFactory;
 
 public class NewSIDEProjectCreator {
@@ -476,7 +477,7 @@ public class NewSIDEProjectCreator {
 
 	private IFile createInitialModel(String editorId, EObject model) throws IOException {
 		IFile file = getIFileForEditorId(editorId);
-		ModelInitializationUtils.saveModel(file.getLocation().toFile(), model);
+		EResourceUtils.saveModel(file.getLocation().toFile(), model);
 		createdModels.add(file);
 		return file;
 	}

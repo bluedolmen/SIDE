@@ -17,12 +17,12 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
-import com.bluexml.side.Util.ecore.ModelInitializationUtils;
 import com.bluexml.side.application.Application;
 import com.bluexml.side.application.Configuration;
 import com.bluexml.side.application.ModelElement;
 import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 import com.bluexml.side.util.libs.IFileHelper;
+import com.bluexml.side.util.libs.ecore.EResourceUtils;
 
 public class SIDEBuilderConfiguration {
 
@@ -57,7 +57,7 @@ public class SIDEBuilderConfiguration {
 
 	public Application getApplication() throws IOException {
 		if (app == null) {
-			EList<EObject> openModel = ModelInitializationUtils.openModel(applicationFile);
+			EList<EObject> openModel = EResourceUtils.openModel(applicationFile);
 			app = (Application) openModel.get(0);
 		}
 		return app;

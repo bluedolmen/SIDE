@@ -51,8 +51,8 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 
 import com.bluexml.side.Util.ecore.EClassUtils;
 import com.bluexml.side.Util.ecore.EObjectUtils;
-import com.bluexml.side.Util.ecore.EResourceUtils;
 import com.bluexml.side.Util.ecore.EStructuralFeatureUtils;
+import com.bluexml.side.util.libs.ecore.EResourceUtils;
 
 //import com.bluexml.generator.alfresco.chain.Chain;
 //import com.bluexml.generator.alfresco.chain.Model;

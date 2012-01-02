@@ -28,8 +28,8 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 import org.topcased.modeler.edit.EMFGraphNodeEditPart;
 
-import com.bluexml.side.Util.ecore.ModelInitializationUtils;
 import com.bluexml.side.util.libs.IFileHelper;
+import com.bluexml.side.util.libs.ecore.EResourceUtils;
 
 public abstract class AbstractModelerOpenLinkedObject extends WorkbenchPartAction implements ISelectionChangedListener {
 
@@ -86,7 +86,7 @@ public abstract class AbstractModelerOpenLinkedObject extends WorkbenchPartActio
 	}
 
 	private static EObject openModel(IFile model) throws IOException {
-		return ModelInitializationUtils.openModel(model).get(0);
+		return EResourceUtils.openModel(model).get(0);
 	}
 
 	private static IFile XMIResource2IFile(XMIResource resource) {

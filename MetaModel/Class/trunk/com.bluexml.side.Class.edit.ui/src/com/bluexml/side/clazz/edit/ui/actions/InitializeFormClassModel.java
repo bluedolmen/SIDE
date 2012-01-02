@@ -11,13 +11,13 @@ import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 
-import com.bluexml.side.Util.ecore.ModelInitializationUtils;
 import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.FormModelInitializer;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.InitializerRegister;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.ModelCreator;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.ModelCreator.ASK_USER;
 import com.bluexml.side.util.libs.eclipse.AbstractIFileJob;
+import com.bluexml.side.util.libs.ecore.EResourceUtils;
 
 public class InitializeFormClassModel implements IObjectActionDelegate {
 
@@ -46,7 +46,7 @@ public class InitializeFormClassModel implements IObjectActionDelegate {
 	}
 
 	static ClassPackage openModel(IFile classModel) throws IOException {
-		EList<?> l = ModelInitializationUtils.openModel(classModel);
+		EList<?> l = EResourceUtils.openModel(classModel);
 		return (ClassPackage) l.get(0);
 	}
 
@@ -57,8 +57,8 @@ public class InitializeFormClassModel implements IObjectActionDelegate {
 		}
 
 		@Override
-		protected void execute() throws Exception {
-			ClassPackage cp = (ClassPackage) ModelInitializationUtils.openModel(iFile).get(0);
+		public void execute() throws Exception {
+			ClassPackage cp = (ClassPackage) EResourceUtils.openModel(iFile).get(0);
 
 			InitializerRegister initilizerList = InitializerRegister.getDefaultInitializerRegister(iFile, cp, ASK_USER.ASK);
 

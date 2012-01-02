@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import com.bluexml.side.Util.ecore.EResourceUtils;
 import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
@@ -63,6 +62,7 @@ import com.bluexml.side.form.NumericalSearchField;
 import com.bluexml.side.form.SearchField;
 import com.bluexml.side.form.TextField;
 import com.bluexml.side.util.componentmonitor.indy.CoreInterface;
+import com.bluexml.side.util.libs.ecore.EResourceUtils;
 import com.bluexml.side.workflow.WorkflowPackage;
 import com.bluexml.xforms.generator.GeneratorInterface.AssociationCardinality;
 import com.bluexml.xforms.generator.GeneratorInterface.AssociationKind;

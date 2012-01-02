@@ -64,7 +64,14 @@
             enablesFor="1"
             icon="icon/initializeFormModel.png"
             id="com.bluexml.side.Class.edit.ui.action1"
-            label="Initialize SIDE Models"
+            label="Initialize Models"
+            menubarPath="com.bluexml.side/application">
+      </action>
+      <action
+            class="com.bluexml.side.integration.eclipse.builder.actions.ActionSynchronizeModels"
+            icon="icon/synchronizeWithClassDiagram.png"
+            id="com.bluexml.side.Integration.eclipse.builder.action1"
+            label="Synchronize Models"
             menubarPath="com.bluexml.side/application">
       </action>
     </objectContribution>

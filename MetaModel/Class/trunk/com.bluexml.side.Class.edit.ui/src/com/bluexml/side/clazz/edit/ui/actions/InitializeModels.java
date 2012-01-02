@@ -11,9 +11,11 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 
-import com.bluexml.side.Util.ecore.ModelInitializationUtils;
+import com.bluexml.side.clazz.edit.ui.Messages;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.InitializerRegister;
 import com.bluexml.side.util.libs.eclipse.AbstractIFileJob;
+import com.bluexml.side.util.libs.ecore.EResourceUtils;
+import com.bluexml.side.util.libs.ui.UIUtils;
 
 public class InitializeModels implements IObjectActionDelegate {
 
@@ -29,9 +31,12 @@ public class InitializeModels implements IObjectActionDelegate {
 	public void run(IAction action) {
 		IFile applicationModel = getApplication();
 		try {
+			boolean doWork = UIUtils.showConfirmation(Messages.InitializeModelsAction_0, Messages.InitializeModelsAction_1);
+			if (doWork) {
 
-			Job job = new Job(applicationModel);
-			job.schedule();
+				Job job = new Job(applicationModel);
+				job.schedule();
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -49,18 +54,20 @@ public class InitializeModels implements IObjectActionDelegate {
 	}
 
 	public static EObject openModel(IFile classModel) throws IOException {
-		EList<EObject> l = ModelInitializationUtils.openModel(classModel);
+		EList<EObject> l = EResourceUtils.openModel(classModel);
 		return l.get(0);
 	}
 
 	class Job extends AbstractIFileJob {
 		public Job(IFile applicationModel) {
-			super("Initilize Models From Application", applicationModel);
+			super(Messages.InitializeModelsAction_2, applicationModel);
 		}
+
 		@Override
-		protected void execute() throws Exception {
+		public void execute() throws Exception {
 			InitializerRegister initializerRegister = InitializerRegister.getInitializerRegister(iFile);
 			initializerRegister.initialize();
+
 		}
 	}
 }

@@ -39,7 +39,7 @@ public class InitializeFormWorkflowModel implements IObjectActionDelegate {
 		}
 
 		@Override
-		protected void execute() throws Exception {
+		public void execute() throws Exception {
 			InitializerRegister reg = InitializerRegister.getFormWorkFlowInitializerRegister(iFile, ModelInitializer.ASK_USER.ASK);
 			reg.initialize();
 		}

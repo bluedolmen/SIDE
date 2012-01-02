@@ -22,7 +22,7 @@ import com.bluexml.side.application.ModelElement;
 import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.ModelCreator.ASK_USER;
 import com.bluexml.side.util.libs.IFileHelper;
-import com.bluexml.side.util.metaModel.validate.OCLextension.OCLEvaluator;
+import com.bluexml.side.util.libs.ecore.EResourceUtils;
 
 public class InitializerRegister {
 
@@ -177,7 +177,7 @@ public class InitializerRegister {
 	}
 
 	private static EObject openModel(IFile classModel) throws IOException {
-		EList<EObject> l = ModelInitializationUtils.openModel(classModel);
+		EList<EObject> l = EResourceUtils.openModel(classModel);
 		return l.get(0);
 	}
 

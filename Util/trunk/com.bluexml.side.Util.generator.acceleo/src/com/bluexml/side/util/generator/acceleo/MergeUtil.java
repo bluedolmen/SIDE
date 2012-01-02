@@ -10,10 +10,10 @@ import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 
-import com.bluexml.side.Util.ecore.EResourceUtils;
 import com.bluexml.side.common.Package;
 import com.bluexml.side.requirements.RequirementsDefinition;
 import com.bluexml.side.util.libs.IFileHelper;
+import com.bluexml.side.util.libs.ecore.EResourceUtils;
 
 public class MergeUtil {
 

@@ -2,7 +2,6 @@ package com.bluexml.side.form.clazz;
 
 import java.util.Iterator;
 
-import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.domain.EditingDomain;
@@ -13,10 +12,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.IWorkbenchPart;
 
-import com.bluexml.side.form.FormClass;
 import com.bluexml.side.form.FormCollection;
-import com.bluexml.side.form.FormContainer;
-import com.bluexml.side.form.clazz.utils.ClassSynchronizationUtils;
 import com.bluexml.side.form.clazz.utils.SynchronizeWithClass;
 
 public class SynchonizeWithClassDiagramAction extends Action implements ISelectionChangedListener {

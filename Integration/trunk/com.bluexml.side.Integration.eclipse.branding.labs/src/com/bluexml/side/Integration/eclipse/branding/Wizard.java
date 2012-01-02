@@ -55,6 +55,7 @@ import com.bluexml.side.portal.PortalFactory;
 import com.bluexml.side.requirements.RequirementsDefinition;
 import com.bluexml.side.requirements.RequirementsFactory;
 import com.bluexml.side.util.libs.IFileHelper;
+import com.bluexml.side.util.libs.ecore.EResourceUtils;
 import com.bluexml.side.view.ViewCollection;
 import com.bluexml.side.view.ViewFactory;
 import com.bluexml.side.workflow.WorkflowFactory;
@@ -161,21 +162,21 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 	private void createInitialFormModel() throws CoreException, IOException {
 		IFile file = createFileForModel(ModelInitializationUtils.getExtensionForEditorId("com.bluexml.side.form.presentation.formEditorID")); //$NON-NLS-1$
 		ClassFormCollection formCollection = FormFactory.eINSTANCE.createClassFormCollection();
-		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)formCollection);
+		EResourceUtils.saveModel(file.getLocation().toFile(), (EObject)formCollection);
 		createdModels.add(file);
 	}
 
 	private void createInitialViewModel() throws CoreException, IOException {
 		IFile file = createFileForModel(ModelInitializationUtils.getExtensionForEditorId("com.bluexml.side.view.presentation.ViewEditorID")); //$NON-NLS-1$
 		ViewCollection viewCollection = ViewFactory.eINSTANCE.createViewCollection();
-		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)viewCollection);
+		EResourceUtils.saveModel(file.getLocation().toFile(), (EObject)viewCollection);
 		createdModels.add(file);
 	}
 
 	private void createInitialWorkflowModel() throws CoreException, IOException {
 		IFile file = createFileForModel(ModelInitializationUtils.getExtensionForEditorId("com.bluexml.side.workflow.presentation.WorkflowEditorID")); //$NON-NLS-1$
 		com.bluexml.side.workflow.Process process = WorkflowFactory.eINSTANCE.createProcess();
-		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)process);
+		EResourceUtils.saveModel(file.getLocation().toFile(), (EObject)process);
 		createdModels.add(file);
 		createDiagramFile(file, process, "com.bluexml.side.Workflow.modeler.diagram"); //$NON-NLS-1$
 	}
@@ -183,7 +184,7 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 	private void createInitialRequirementModel() throws CoreException, IOException {
 		IFile file = createFileForModel(ModelInitializationUtils.getExtensionForEditorId("com.bluexml.side.requirements.presentation.RequirementsEditorID")); //$NON-NLS-1$
 		RequirementsDefinition definition = RequirementsFactory.eINSTANCE.createRequirementsDefinition();
-		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)definition);
+		EResourceUtils.saveModel(file.getLocation().toFile(), (EObject)definition);
 		createdModels.add(file);
 		createDiagramFile(file, definition, "com.bluexml.side.Requirements.modeler.goalDiagram"); //$NON-NLS-1$
 	}
@@ -191,7 +192,7 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 	private void createInitialPortalModel() throws CoreException, IOException {
 		IFile file = createFileForModel(ModelInitializationUtils.getExtensionForEditorId("com.bluexml.side.portal.presentation.PortalEditorID")); //$NON-NLS-1$
 		Portal portal = PortalFactory.eINSTANCE.createPortal();
-		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)portal);
+		EResourceUtils.saveModel(file.getLocation().toFile(), (EObject)portal);
 		createdModels.add(file);
 
 		createDiagramFile(file, portal, "com.bluexml.side.Portal.modeler.diagram"); //$NON-NLS-1$
@@ -219,7 +220,7 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 			packageRoot.setName("root"); //$NON-NLS-1$
 		}
 		model.getPackageSet().add(packageRoot);
-		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)model);
+		EResourceUtils.saveModel(file.getLocation().toFile(), (EObject)model);
 		createDiagramFile(file, lastPackage, "com.bluexml.side.Class.modeler.diagram"); //$NON-NLS-1$
 	}
 
@@ -273,7 +274,7 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements
 			model.setFile(path);
 			app.getElements().add(model);
 		}
-		ModelInitializationUtils.saveModel(file.getLocation().toFile(), (EObject)app);
+		EResourceUtils.saveModel(file.getLocation().toFile(), (EObject)app);
 
 	}
 

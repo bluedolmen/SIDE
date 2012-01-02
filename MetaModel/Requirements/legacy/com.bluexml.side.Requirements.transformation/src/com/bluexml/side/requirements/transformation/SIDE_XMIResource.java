@@ -13,8 +13,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
-import com.bluexml.side.Util.ecore.EResourceUtils;
 import com.bluexml.side.requirements.RequirementsPackage;
+import com.bluexml.side.util.libs.ecore.EResourceUtils;
 
 public class SIDE_XMIResource extends XMIResourceImpl {
 

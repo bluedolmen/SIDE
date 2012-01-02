@@ -23,8 +23,8 @@ import org.sideLabs.referential.references.Model;
 import org.sideLabs.referential.references.ModelsDocument;
 import org.sideLabs.referential.references.Reference;
 
-import com.bluexml.side.Util.ecore.EResourceUtils;
 import com.bluexml.side.util.antrunner.AntFileGeneratorAction;
+import com.bluexml.side.util.libs.ecore.EResourceUtils;
 
 public class SIDEBuilderReferencies {
 	public static void computeReferential(IFile file) {

@@ -14,8 +14,10 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Boston, MA 02111.
  *******************************************************************************/
-package com.bluexml.side.Util.ecore;
+package com.bluexml.side.util.libs.ecore;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -265,6 +267,22 @@ public class EResourceUtils {
 		return result;
 	}
 
+	/**
+	 * Open the specified model.
+	 * 
+	 * @param model
+	 * @return
+	 * @throws IOException
+	 */
+	public static EList<EObject> openModel(IFile model) throws IOException {
+		ResourceSetImpl set = new ResourceSetImpl();
+		URI uri = URI.createPlatformResourceURI(model.getFullPath().toString(), true);
+		Resource inputResource = set.createResource(uri);
+		inputResource.load(null);
+		EList<EObject> l = inputResource.getContents();
+		return l;
+	}
+
 	/************************
 	 * SAVING ***************************
 	 * Method that helps to store the resource
@@ -409,6 +427,32 @@ public class EResourceUtils {
 
 		}
 		return result;
+	}
+
+	/**
+	 * Save a new model in file.
+	 * 
+	 * @param file
+	 * @param rootObject
+	 * @throws IOException
+	 */
+	public static void saveModel(File file, EObject rootObject) throws IOException {
+		FileOutputStream os = new FileOutputStream(file);
+		ResourceSetImpl set = new ResourceSetImpl();
+		Resource outputResource = set.createResource(URI.createFileURI(file.getCanonicalPath()));
+		outputResource.getContents().add(rootObject);
+		outputResource.save(os, null);
+		os.close();
+	}
+
+	public static void saveModel(IFile model, EObject rootObject) throws Exception {
+		ResourceSet resourceSet = new ResourceSetImpl();
+		URI fileURI = URI.createPlatformResourceURI(model.getFullPath().toString(), true);
+		Resource resource = resourceSet.createResource(fileURI);
+		Map<Object, Object> options = new HashMap<Object, Object>();
+		options.put(XMLResource.OPTION_ENCODING, "UTF-8"); //$NON-NLS-1$	
+		resource.getContents().add(rootObject);
+		resource.save(options);
 	}
 
 }

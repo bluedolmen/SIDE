@@ -1,7 +1,6 @@
 package com.bluexml.side.Util.ecore;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
@@ -27,7 +26,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.swt.widgets.Display;
@@ -47,6 +45,7 @@ import org.topcased.modeler.tools.DiagramFileInitializer;
 import org.topcased.modeler.tools.Importer;
 import org.topcased.modeler.utils.Utils;
 
+import com.bluexml.side.util.libs.ecore.EResourceUtils;
 import com.bluexml.side.util.libs.ui.UIUtils;
 
 public final class ModelInitializationUtils {
@@ -54,66 +53,22 @@ public final class ModelInitializationUtils {
 	public static final IPath SRC_PATH = new Path("src"); // $NON-NLS-1$ // should be defined elsewhere
 	public static final IPath SRC_MODELS_PATH = SRC_PATH.append("models"); // $NON-NLS-1$
 	public static final String DIAGRAM_SUFFIX = "di"; // $NON-NLS-1$
-	
+
 	@SuppressWarnings("serial")
-	private static final Map<String, String> FOLDER_NAME_MAP = new HashMap<String, String>() {{
-		put(SIDEEditorUtils.DATA_MODEL_EDITOR_ID,"data");
-		put(SIDEEditorUtils.FORM_MODEL_EDITOR_ID,"form");
-		put(SIDEEditorUtils.PORTAL_MODEL_EDITOR_ID,"portal");
-		put(SIDEEditorUtils.REQUIREMENTS_MODEL_EDITOR_ID,"requirement");
-		put(SIDEEditorUtils.VIEW_MODEL_EDITOR_ID,"view");
-		put(SIDEEditorUtils.WORKFLOW_MODEL_EDITOR_ID,"workflow");
-		put(SIDEEditorUtils.APPLICATION_MODEL_EDITOR_ID,"application");
+	private static final Map<String, String> FOLDER_NAME_MAP = new HashMap<String, String>() {
+		{
+			put(SIDEEditorUtils.DATA_MODEL_EDITOR_ID, "data");
+			put(SIDEEditorUtils.FORM_MODEL_EDITOR_ID, "form");
+			put(SIDEEditorUtils.PORTAL_MODEL_EDITOR_ID, "portal");
+			put(SIDEEditorUtils.REQUIREMENTS_MODEL_EDITOR_ID, "requirement");
+			put(SIDEEditorUtils.VIEW_MODEL_EDITOR_ID, "view");
+			put(SIDEEditorUtils.WORKFLOW_MODEL_EDITOR_ID, "workflow");
+			put(SIDEEditorUtils.APPLICATION_MODEL_EDITOR_ID, "application");
 
-	}};
-	
+		}
+	};
+
 	private final static Logger LOGGER = Logger.getLogger(ModelInitializationUtils.class.getName());
-	
-	/*
-	 * BASIC I/O MODEL MANAGEMENT
-	 */
-	
-	/**
-	 * Save a new model in file.
-	 * 
-	 * @param file
-	 * @param rootObject
-	 * @throws IOException
-	 */
-	public static void saveModel(File file, EObject rootObject) throws IOException {
-		FileOutputStream os = new FileOutputStream(file);
-		ResourceSetImpl set = new ResourceSetImpl();
-		Resource outputResource = set.createResource(URI.createFileURI(file.getCanonicalPath()));
-		outputResource.getContents().add(rootObject);
-		outputResource.save(os, null);
-		os.close();
-	}
-
-	public static void saveModel(IFile model, EObject rootObject) throws Exception {
-		ResourceSet resourceSet = new ResourceSetImpl();
-		URI fileURI = URI.createPlatformResourceURI(model.getFullPath().toString(), true);
-		Resource resource = resourceSet.createResource(fileURI);
-		Map<Object, Object> options = new HashMap<Object, Object>();
-		options.put(XMLResource.OPTION_ENCODING, "UTF-8"); //$NON-NLS-1$	
-		resource.getContents().add(rootObject);
-		resource.save(options);
-	}
-
-	/**
-	 * Open the specified model.
-	 * 
-	 * @param model
-	 * @return
-	 * @throws IOException
-	 */
-	public static EList<EObject> openModel(IFile model) throws IOException {
-		ResourceSetImpl set = new ResourceSetImpl();
-		URI uri = URI.createPlatformResourceURI(model.getFullPath().toString(), true);
-		Resource inputResource = set.createResource(uri);
-		inputResource.load(null);
-		EList<EObject> l = inputResource.getContents();
-		return l;
-	}
 
 	/**
 	 * Returns an {@link EObject} of the given type if it can be found in the
@@ -131,26 +86,26 @@ public final class ModelInitializationUtils {
 		if (iFile == null) {
 			throw new IllegalArgumentException("The provided IFile cannot be null");
 		}
-		
+
 		EList<EObject> eObjects = null;
 		try {
-			eObjects = ModelInitializationUtils.openModel(iFile);
+			eObjects = EResourceUtils.openModel(iFile);
 		} catch (IOException e) {
 			LOGGER.log(Level.SEVERE, String.format("Cannot load %s from file '%s' because of an unexpected IO/Exception", type.getSimpleName(), iFile.getName()), e);
 			return null;
 		}
-		
+
 		if (eObjects.isEmpty()) {
 			LOGGER.finest(String.format("The provided IFile '%s' does not contain any EObject", iFile.getName()));
 			return null;
 		}
-		
+
 		EObject firstEObject = eObjects.get(0);
-		if (!type.isInstance(firstEObject) ) {
+		if (!type.isInstance(firstEObject)) {
 			LOGGER.finest(String.format("The provided IFile '%s' does not contain a %s object", iFile.getName(), type.getSimpleName()));
 			return null;
 		}
-		
+
 		return type.cast(firstEObject);
 	}
 
@@ -167,7 +122,7 @@ public final class ModelInitializationUtils {
 	 * @param file
 	 * @param type
 	 * @return
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public static <T extends EObject> T getCheckedEObject(File file, Class<T> type) throws IOException {
 		if (file == null) {
@@ -183,22 +138,21 @@ public final class ModelInitializationUtils {
 		if (rootEObjects.isEmpty()) {
 			LOGGER.finest(String.format("The provided file '%s' does not contain any EObject", file.getName()));
 			return null;
-		}		
-		
+		}
+
 		EObject firstEObject = rootEObjects.get(0);
-		if (!type.isInstance(firstEObject) ) {
+		if (!type.isInstance(firstEObject)) {
 			LOGGER.finest(String.format("The provided IFile '%s' does not contain a %s object", file.getName(), type.getSimpleName()));
 			return null;
 		}
-		
+
 		return type.cast(firstEObject);
 	}
-	
-	
+
 	/*
 	 * MODEL DIAGRAM MANAGEMENT
 	 */
-	
+
 	public static Resource createDiagramFile(final EObject root, String diagramId, String name, final IFile diagramFile) throws IOException {
 		// retrieve the Diagrams and the DiagramInterchange factory singletons
 		DiagramsFactory factory = DiagramsFactory.eINSTANCE;
@@ -242,7 +196,7 @@ public final class ModelInitializationUtils {
 
 		return resource;
 	}
-	
+
 	public static boolean createDiagramFromExistingModel(final EObject rootDiagramObject, final String diagramId) {
 		Runnable op = new Runnable() {
 
@@ -284,7 +238,6 @@ public final class ModelInitializationUtils {
 		return modeler;
 	}
 
-	
 	private static void importObjects(Resource resource, EObject root, IFile diagramFile) {
 		Modeler modeler = openDiagram(resource, diagramFile);
 
@@ -302,17 +255,15 @@ public final class ModelInitializationUtils {
 			importer.setAutoLayout(true);
 		}
 	}
-	
-	
+
 	private static EObject getActiveRoot(Modeler editor) {
 		return Utils.getElement(editor.getActiveDiagram());
 	}
 
-
 	/*
 	 * EXTENSIONS MANAGEMENT
 	 */
-	
+
 	private static final String ACCEPTED_EDITORS_PREFIX = "com.bluexml.side"; // $NON-NLS-1$
 	private static Map<String, String> extensionsByEditorId = null;
 	private static final String EXTENSIONS_SEPARATOR = ","; // $NON-NLS-1$
@@ -320,37 +271,38 @@ public final class ModelInitializationUtils {
 	/**
 	 * Get the extension for a given editor id
 	 * 
-	 * @param id the editor id
+	 * @param id
+	 *            the editor id
 	 * @return the extension if it is defined, else null
 	 */
 	public static String getExtensionForEditorId(String id) {
-		
+
 		String extension = getExtensionNameForEditorId(id);
-		
+
 		if (extension == null) {
 			return null;
 		} else {
 			return '.' + extension;
 		}
-		
+
 	}
 
 	/**
 	 * Get the extension name for a given editor id
 	 * 
-	 * @param id the editor id
+	 * @param id
+	 *            the editor id
 	 * @return the extension name if it is defined, else null
 	 */
 	public static String getExtensionNameForEditorId(String id) {
-		
+
 		if (extensionsByEditorId == null) {
 			initializeExtensions();
 		}
-		
+
 		return extensionsByEditorId.get(id);
 	}
 
-	
 	/**
 	 * Initialize extensions by using org.eclipse.ui.editors extension point and
 	 * the declared extensions.
@@ -358,50 +310,42 @@ public final class ModelInitializationUtils {
 	private static void initializeExtensions() {
 		// Initialize at first call
 		extensionsByEditorId = new HashMap<String, String>();
-		
+
 		for (IConfigurationElement ce : Platform.getExtensionRegistry().getConfigurationElementsFor("org.eclipse.ui.editors")) { // $NON-NLS-1$
 			String editorId = ce.getAttribute("id");
 			String extensions = ce.getAttribute("extensions");
-			
+
 			if (editorId != null && !editorId.isEmpty()) {
 				if (!editorId.startsWith(ACCEPTED_EDITORS_PREFIX)) {
 					// Only process SIDE editors
 					continue;
 				}
 			}
-			
+
 			if (extensions != null && !extensions.isEmpty()) {
-				
+
 				if (extensions.contains(EXTENSIONS_SEPARATOR)) {
 					// Defined several extensions => only keep first one
 					extensions = extensions.split(EXTENSIONS_SEPARATOR)[0].trim();
-					final String message = String.format(
-							"Editor with id '%s' contains several extension definitions (%s), keeping only first", 
-							editorId,
-							extensions
-					);
+					final String message = String.format("Editor with id '%s' contains several extension definitions (%s), keeping only first", editorId, extensions);
 					Activator.getDefault().getLog().log(new Status(IStatus.WARNING, Activator.PLUGIN_ID, message));
 				}
-				
+
 				extensionsByEditorId.put(editorId, extensions);
-				continue;	
+				continue;
 			}
 
 			// One of editorId or extensions is invalid, display a warning message!
-			final String message = String.format(
-					"Invalid combination editorId (%s) / extension (%s)", 
-					editorId != null ? editorId : "unknown",
-					extensions != null ? extensions : "unknown"
-			);
+			final String message = String.format("Invalid combination editorId (%s) / extension (%s)", editorId != null ? editorId : "unknown", extensions != null ? extensions : "unknown");
 			Activator.getDefault().getLog().log(new Status(IStatus.WARNING, Activator.PLUGIN_ID, message));
-				
-		}		
+
+		}
 	}
-	
+
 	/*
 	 * MODELS FOLDER MANAGEMENT
 	 */
-	
+
 	/**
 	 * Returns the {@link IFolder} corresponding to the models directory of the
 	 * given {@link IProject}
@@ -413,11 +357,11 @@ public final class ModelInitializationUtils {
 		IFolder modelsFolder = baseProject.getFolder(SRC_MODELS_PATH);
 		return modelsFolder;
 	}
-	
+
 	public static String getDirectoryNameForEditorId(String editorId) {
 		return FOLDER_NAME_MAP.get(editorId);
 	}
-	
+
 	/**
 	 * Returns the target folder for a given file-extension (as a {@link String}
 	 * ) and a base {@link IProject}
@@ -427,12 +371,12 @@ public final class ModelInitializationUtils {
 	 * @return the target {@link IFolder}
 	 */
 	public static IFolder getIFolderForModelExtension(IProject baseProject, String extension) {
-		
+
 		IFolder modelsFolder = getModelsFolder(baseProject);
-		
+
 		for (Object key : FOLDER_NAME_MAP.keySet()) {
 			String editorId = (String) key;
-			
+
 			if (extension.equalsIgnoreCase(ModelInitializationUtils.getExtensionForEditorId(editorId))) {
 				String targetFolder = getDirectoryNameForEditorId(editorId);
 				if (targetFolder != null) {
@@ -440,7 +384,7 @@ public final class ModelInitializationUtils {
 				}
 			}
 		}
-			
+
 		return null;
 	}
 
@@ -453,7 +397,7 @@ public final class ModelInitializationUtils {
 	 * @return the target {@link IFolder}
 	 */
 	public static IFolder getIFolderForEditorId(IProject baseProject, String editorId) {
-		
+
 		IFolder modelsFolder = getModelsFolder(baseProject);
 		if (modelsFolder != null) {
 			String targetFolder = getDirectoryNameForEditorId(editorId);
@@ -461,11 +405,10 @@ public final class ModelInitializationUtils {
 				return modelsFolder.getFolder(targetFolder);
 			}
 		}
-		
+
 		return null;
 	}
 
-	
 	/**
 	 * Gets all the declared model folder names
 	 * 
@@ -475,6 +418,6 @@ public final class ModelInitializationUtils {
 		return FOLDER_NAME_MAP.values().toArray(new String[0]);
 	}
 
-	
-	private ModelInitializationUtils() {}; // Utility class
+	private ModelInitializationUtils() {
+	}; // Utility class
 }

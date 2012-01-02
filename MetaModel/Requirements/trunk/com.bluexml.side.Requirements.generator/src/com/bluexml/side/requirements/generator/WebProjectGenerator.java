@@ -25,9 +25,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.dialogs.MessageDialog;
 
-import com.bluexml.side.Util.ecore.EResourceUtils;
 import com.bluexml.side.requirements.AnnotableElement;
 import com.bluexml.side.requirements.Annotation;
+import com.bluexml.side.util.libs.ecore.EResourceUtils;
 
 public class WebProjectGenerator extends RequirementsGenerator {
 

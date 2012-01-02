@@ -17,5 +17,30 @@
   <extension point="org.eclipse.ui.editors">
     <editor id="com.bluexml.side.form.presentation.formEditorID" name="%_UI_formEditor_label" icon="icons/full/obj16/formModelFile.gif" extensions="form" class="com.bluexml.side.form.presentation.FormEditor" contributorClass="com.bluexml.side.form.presentation.FormActionBarContributor" />
   </extension>
+  <extension
+        point="org.eclipse.ui.popupMenus">
+     <objectContribution
+           id="com.bluexml.side.Form.edit.ui.objectContribution1"
+           nameFilter="*.form"
+           objectClass="org.eclipse.core.resources.IFile">
+        <action
+              class="com.bluexml.side.form.actions.SynchronizeFormModel"
+              enablesFor="1"
+              icon="icons/menu/synchronizeWithClassDiagram.png"
+              id="com.bluexml.side.Form.editor.action1"
+              label="Synchronize"
+              menubarPath="com.bluexml.side.Form.editor.menu1/group1">
+        </action>
+        <menu
+              icon="icons/menu/side_16.gif"
+              id="com.bluexml.side.Form.editor.menu1"
+              label="SIDE"
+              path="additions">
+           <separator
+                 name="group1">
+           </separator>
+        </menu>
+     </objectContribution>
+  </extension>
 </plugin>
 

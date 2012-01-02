@@ -11,13 +11,13 @@ import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 
-import com.bluexml.side.Util.ecore.ModelInitializationUtils;
 import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.InitializerRegister;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.ModelCreator;
-import com.bluexml.side.clazz.edit.ui.actions.initializer.ViewModelInitializer;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.ModelCreator.ASK_USER;
+import com.bluexml.side.clazz.edit.ui.actions.initializer.ViewModelInitializer;
 import com.bluexml.side.util.libs.eclipse.AbstractIFileJob;
+import com.bluexml.side.util.libs.ecore.EResourceUtils;
 
 public class InitializeViewModel implements IObjectActionDelegate {
 
@@ -38,7 +38,7 @@ public class InitializeViewModel implements IObjectActionDelegate {
 		}
 
 		@Override
-		protected void execute() throws Exception {
+		public void execute() throws Exception {
 			ClassPackage cp = openModel(iFile);
 			InitializerRegister initilizerList = InitializerRegister.getDefaultInitializerRegister(iFile, cp, ASK_USER.ASK);
 			for (ModelCreator initializer : initilizerList.getInitializers(ViewModelInitializer.class).values()) {
@@ -59,7 +59,7 @@ public class InitializeViewModel implements IObjectActionDelegate {
 	}
 
 	private static ClassPackage openModel(IFile classModel) throws IOException {
-		EList<?> l = ModelInitializationUtils.openModel(classModel);
+		EList<?> l = EResourceUtils.openModel(classModel);
 		return (ClassPackage) l.get(0);
 	}
 }
