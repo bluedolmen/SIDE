@@ -107,7 +107,7 @@
       <refEdgeToSource xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Transition/parentTaskNode"/>
       <refEdgeToTarget xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//Transition/to"/>
     </sourceTargetCouple>
-    <sourceTargetCouple xmi:id="_YKvM4AnGEd6njOkWCso0oA" containerType="SOURCE" sourceNode="_ExDMEIyBEdy0-r37LrMUlA" targetNode="_ExDMEIyBEdy0-r37LrMUlA">
+    <sourceTargetCouple xmi:id="_YKvM4AnGEd6njOkWCso0oA" containerType="SOURCE" autoRef="true" sourceNode="_ExDMEIyBEdy0-r37LrMUlA" targetNode="_ExDMEIyBEdy0-r37LrMUlA">
       <containerObject href="../../com.bluexml.side.Workflow/model/Workflow.genmodel#//workflow/TaskNode"/>
       <containerRef xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//TransitionTask/transition"/>
       <refSourceToEdge xsi:type="ecore:EReference" href="../../com.bluexml.side.Workflow/model/Workflow.ecore#//TransitionTask/transition"/>

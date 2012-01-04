@@ -294,10 +294,8 @@ public class TransitionEdgeCreationEditPolicy extends
 		}
 
 		if (sourceObject instanceof com.bluexml.side.workflow.TaskNode
-				&& targetObject instanceof com.bluexml.side.workflow.TaskNode) {
-			if (!sourceObject.equals(targetObject)) {
-				return true;
-			}
+				&& targetObject instanceof com.bluexml.side.workflow.TaskNode) {			
+			return true;			
 		}
 
 		if (sourceObject instanceof com.bluexml.side.workflow.TaskNode
