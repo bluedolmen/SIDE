@@ -154,8 +154,15 @@
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>5.0.3</version>
+      <scope>provided</scope>
     </dependency>
     <!-- Don't add here amp dependencies as it will break amp packaging -->
+    <dependency>
+    	<groupId>org.springmodules</groupId>
+    	<artifactId>jbpm31</artifactId>
+    	<version>0.9</version>
+    	<scope>provided</scope>
+    </dependency>
   </dependencies>
   <!-- The scm is required for the buildnumber-maven-plugin which is required for AMP version numbering
 -->
@@ -250,7 +257,7 @@
                 </goals>
                 <configuration>
                   <includeTypes>amp</includeTypes>
-                  <outputDirectory>${build.directory}/${webapp.name}</outputDirectory>
+                  <outputDirectory>${project.build.directory}/${webapp.name}</outputDirectory>
                   <excludes>META*</excludes>
                 </configuration>
               </execution>
@@ -285,7 +292,7 @@
               <primaryArtifact>false</primaryArtifact>
               <!-- Don't remove the following line otherwise WAR and AMP builds will be done in the same folder, with unexpected results
 -->
-              <webappDirectory>${build.directory}/${webapp.name}</webappDirectory>
+              <webappDirectory>${project.build.directory}/${webapp.name}</webappDirectory>
               <archive>
                 <addMavenDescriptor>false</addMavenDescriptor>
               </archive>
@@ -293,7 +300,7 @@
               <webResources />
               <webResources>
                 <resource>
-                  <directory>${build.testOutputDirectory}</directory>
+                  <directory>${project.build.testOutputDirectory}</directory>
                   <targetPath>WEB-INF/classes</targetPath>
                   <filtering>true</filtering>
                   <includes>
@@ -334,7 +341,7 @@
                 </goals>
                 <configuration>
                   <contextPath>${webapp.name}</contextPath>
-                  <webApp>${pom.build.directory}/${webapp.name}</webApp>
+                  <webApp>${project.build.directory}/${webapp.name}</webApp>
                   <scanIntervalSeconds>10</scanIntervalSeconds>
                   <connectors>
                     <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">

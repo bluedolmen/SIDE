@@ -258,7 +258,7 @@
                 </goals>
                 <configuration>
                   <includeTypes>amp</includeTypes>
-                  <outputDirectory>${build.directory}/${webapp.name}</outputDirectory>
+                  <outputDirectory>${project.build.directory}/${webapp.name}</outputDirectory>
                   <excludes>META*</excludes>
                 </configuration>
               </execution>
@@ -298,7 +298,7 @@
 								Don't remove the following line otherwise WAR and AMP builds
 								will be done in the same folder, with unexpected results
 							-->
-              <webappDirectory>${build.directory}/${webapp.name}</webappDirectory>
+              <webappDirectory>${project.build.directory}/${webapp.name}</webappDirectory>
               <archive>
                 <addMavenDescriptor>false</addMavenDescriptor>
               </archive>
@@ -306,7 +306,7 @@
               <webResources />
               <webResources>
                 <resource>
-                  <directory>${build.testOutputDirectory}</directory>
+                  <directory>${project.build.testOutputDirectory}</directory>
                   <targetPath>WEB-INF/classes</targetPath>
                   <filtering>true</filtering>
                   <includes>
@@ -350,7 +350,7 @@
                 </goals>
                 <configuration>
                   <contextPath>${webapp.name}</contextPath>
-                  <webApp>${pom.build.directory}/${webapp.name}</webApp>
+                  <webApp>${project.build.directory}/${webapp.name}</webApp>
                   <scanIntervalSeconds>10</scanIntervalSeconds>
                   <connectors>
                     <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">

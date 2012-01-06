@@ -281,7 +281,7 @@
               <webResources />
               <webResources>
                 <resource>
-                  <directory>${build.testOutputDirectory}</directory>
+                  <directory>${project.build.testOutputDirectory}</directory>
                   <targetPath>WEB-INF/classes</targetPath>
                   <filtering>true</filtering>
                   <includes>
@@ -325,7 +325,7 @@
                 </goals>
                 <configuration>
                   <contextPath>/${webapp.name}</contextPath>
-                  <webApp>${pom.build.directory}/${webapp.name}</webApp>
+                  <webApp>${project.build.directory}/${webapp.name}</webApp>
                   <scanIntervalSeconds>10</scanIntervalSeconds>
                   <connectors>
                     <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
