@@ -30,7 +30,7 @@
   In order to be able to use Maven snapshots we cannot use the <version/> below as the AMP module
   version. Instead we use the buildnumber-maven-plugin. This requires a scm connection.
 	 -->
-  <version>1.0.43</version>
+  <version>1.0.44</version>
   <description>Generate or import pdf during specified workflow action</description>
   <parent>
     <groupId>org.bluexml</groupId>
@@ -158,10 +158,10 @@
     </dependency>
     <!-- Don't add here amp dependencies as it will break amp packaging -->
     <dependency>
-    	<groupId>org.springmodules</groupId>
-    	<artifactId>jbpm31</artifactId>
-    	<version>0.9</version>
-    	<scope>provided</scope>
+      <groupId>org.springmodules</groupId>
+      <artifactId>jbpm31</artifactId>
+      <version>0.9</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
   <!-- The scm is required for the buildnumber-maven-plugin which is required for AMP version numbering
