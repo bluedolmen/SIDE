@@ -47,8 +47,27 @@ public class DependencyTree {
 	}
 
 	public static void main(String[] args) {
+		if (args.length > 0 && args[0].equals("-loadXStream")) {
+			// -loadXStream xstreamedReg.xml profile out
+			try {
+				File xml = new File(args[1]);
+				Properties graphCollectorConfiguration = null;
+				String out = null;
+				if (args.length == 4) {
+					graphCollectorConfiguration = getProperties(args[2]);
+					out = args[3];
+				} else if (args.length == 3) {
+					graphCollectorConfiguration = getProperties(null);
+					out = args[2];
+				}
 
-		if (args.length < 3) {
+				applyFilterFromXMLStream(xml, graphCollectorConfiguration, out);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		} else if (args.length < 3) {
 			System.out.println("Usage : <.product> [<projects repository>]+ <propetiesFile> [-profile <profile>]");
 			System.out.println("");
 			System.exit(-1);
@@ -149,7 +168,6 @@ public class DependencyTree {
 
 		// render as .dot file
 		FileWriter fw = new FileWriter(new File("graph.dot"));
-
 		DotRenderer dotRenderer = new DotRenderer(fw, tree);
 		dotRenderer.render();
 		fw.flush();
@@ -161,6 +179,17 @@ public class DependencyTree {
 
 		filterGraphAndSave(graphCollectorConfiguration, g, "graph-filtered");
 
+		validateGraph(g);
+		compReg.saveToXML(new File("xstreamedReg.xml"));
+	}
+
+	public static void applyFilterFromXMLStream(File xml, Properties props, String out) throws Exception {
+		ComponantsRegisters load = ComponantsRegisters.load(xml);
+		Graph<Componant, String> g = JungConverter.convert(load.getTree());
+		filterGraphAndSave(props, g, out);
+	}
+
+	public void validateGraph(Graph<Componant, String> g) {
 		validate(g);
 
 		//		DisplayGraph.display(filtered);
@@ -181,7 +210,7 @@ public class DependencyTree {
 		logger.warn("Bundle not found in conf file :");
 		List<String[]> list3 = compReg.getAnomaly().bundleNotFoundInConf;
 		for (String[] string : list3) {
-			logger.warn(string[0]+" from "+string[1]);
+			logger.warn(string[0] + " from " + string[1]);
 		}
 
 		logger.warn("Invalide Bundle in conf file :");
@@ -214,7 +243,10 @@ public class DependencyTree {
 		String edgesfilter = getEdgesFilters(properties);
 		String vertexNameFilter = getVertexFilters(properties);
 		String vertexTypeFilter = getVertexTypeFilters(properties);
-		GraphFilter gf = new GraphFilter(g, edgesfilter, vertexNameFilter, vertexTypeFilter, true, false);
+		boolean includeAscendantFilters = getIncludeAscendantFilters(properties);
+		boolean includeDescendantFilters = getIncludeDescendantFilters(properties);
+		boolean caseSensitiveFilters = getCaseSensitiveFilters(properties);
+		GraphFilter gf = new GraphFilter(g, edgesfilter, vertexNameFilter, vertexTypeFilter, includeAscendantFilters, includeDescendantFilters, caseSensitiveFilters);
 
 		Graph<Componant, String> filtered = gf.filter();
 		return filtered;
@@ -230,6 +262,18 @@ public class DependencyTree {
 
 	public static String getEdgesFilters(Properties properties) {
 		return properties.getProperty("render.jung.filter.edgesType", "");
+	}
+
+	public static boolean getIncludeAscendantFilters(Properties properties) {
+		return Boolean.parseBoolean(properties.getProperty("render.jung.filter.includesAscendant", "false"));
+	}
+
+	public static boolean getIncludeDescendantFilters(Properties properties) {
+		return Boolean.parseBoolean(properties.getProperty("render.jung.filter.includesDescendant", "true"));
+	}
+
+	public static boolean getCaseSensitiveFilters(Properties properties) {
+		return Boolean.parseBoolean(properties.getProperty("render.jung.filter.caseSensitive", "false"));
 	}
 
 	/**
@@ -308,7 +352,7 @@ public class DependencyTree {
 		if (this.compReg != null) {
 			return this.compReg;
 		}
-		
+
 		// create ProductReader
 		ProductReader pr = new ProductReader(product, new ComponantsRegisters(repo, propertiesFileProjectsLocations), this.graphCollectorConfiguration);
 		// read product and all associated resources

@@ -1,6 +1,10 @@
 package com.bluexml.side.build.tools.reader;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -14,6 +18,7 @@ import com.bluexml.side.build.tools.componants.Feature;
 import com.bluexml.side.build.tools.componants.Module;
 import com.bluexml.side.build.tools.componants.Option;
 import com.bluexml.side.build.tools.componants.Plugin;
+import com.thoughtworks.xstream.XStream;
 
 public class ComponantsRegisters {
 	static Logger logger = Logger.getLogger(ComponantsRegisters.class);
@@ -74,7 +79,7 @@ public class ComponantsRegisters {
 	 * @return
 	 * @throws Exception
 	 */
-	public File getProjectFolder(String id,String from) throws Exception {
+	public File getProjectFolder(String id, String from) throws Exception {
 		if (!id.contains("bluexml")) {
 			return null;
 		}
@@ -86,7 +91,7 @@ public class ComponantsRegisters {
 		// if not found try to search in file system
 		if (path == null) {
 			logger.warn("Bundle " + id + " not found try to locate from file system");
-			getAnomaly().addBundleNotFoundInConf(new String[]{id,from});
+			getAnomaly().addBundleNotFoundInConf(new String[] { id, from });
 			for (File f : repositoryLocation) {
 				logger.warn("search in :" + f);
 				path = Utils.find(id, f);
@@ -97,7 +102,7 @@ public class ComponantsRegisters {
 			if (path == null) {
 				logger.error("bundle not found in FS");
 			} else {
-				logger.warn("bundle found in FS");				
+				logger.warn("bundle found in FS");
 			}
 
 		} else {
@@ -122,5 +127,27 @@ public class ComponantsRegisters {
 	public Feature getFeature(String id) throws Exception {
 		Feature f = featuresRegister.get(id);
 		return f;
+	}
+
+	public void saveToXML(File savedRegister) throws IOException {
+		XStream xs = new XStream();
+		if (!savedRegister.exists()) {
+			
+			File absoluteFile = savedRegister.getAbsoluteFile();
+			File parentFile = absoluteFile.getParentFile();
+			parentFile.mkdirs();
+			savedRegister.createNewFile();
+		}
+		OutputStream out = new FileOutputStream(savedRegister);
+		xs.toXML(this, out);
+		out.close();
+	}
+
+	public static ComponantsRegisters load(File f) throws IOException {
+		XStream xs = new XStream();
+		FileInputStream input = new FileInputStream(f);
+		ComponantsRegisters fromXML = (ComponantsRegisters) xs.fromXML(input);
+		input.close();
+		return fromXML;
 	}
 }

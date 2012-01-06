@@ -20,16 +20,18 @@ public class GraphFilter {
 	String edgesfilter;
 	String vertexFilter;
 	boolean includesAscendant;
+	boolean includesdecendant;
 	boolean caseSensitive;
 	String vertexTypeFilter;
 
-	public GraphFilter(Graph<Componant, String> graph, String edgesfilter, String vertexFilter, String vertexTypeFilter, boolean includesAscendant, boolean caseSensitive) {
+	public GraphFilter(Graph<Componant, String> graph, String edgesfilter, String vertexFilter, String vertexTypeFilter, boolean includesAscendant, boolean includesdecendant, boolean caseSensitive) {
 		this.graph = graph;
 		this.edgesfilter = edgesfilter;
 		this.vertexFilter = vertexFilter;
 		this.includesAscendant = includesAscendant;
 		this.caseSensitive = caseSensitive;
 		this.vertexTypeFilter = vertexTypeFilter;
+		this.includesdecendant = includesdecendant;
 	}
 
 	public Graph<Componant, String> filter() {
@@ -37,9 +39,9 @@ public class GraphFilter {
 
 		graph_ = applyEdgesFilter(graph_, edgesfilter);
 
-		graph_ = applyVertexTypeFilter(graph_, vertexTypeFilter, includesAscendant, caseSensitive);
+		graph_ = applyVertexTypeFilter(graph_, vertexTypeFilter, includesAscendant, includesdecendant, caseSensitive);
 
-		graph_ = applyVertexNameFilter(graph_, vertexFilter, includesAscendant, caseSensitive);
+		graph_ = applyVertexNameFilter(graph_, vertexFilter, includesAscendant, includesdecendant, caseSensitive);
 
 		return graph_;
 	}
@@ -97,21 +99,24 @@ public class GraphFilter {
 		return false;
 	}
 
-	public static Graph<Componant, String> applyVertexNameFilter(final Graph<Componant, String> graph, final String vertexNameFilter, final boolean includesAscendant, final boolean caseSensitive) {
+	public static Graph<Componant, String> applyVertexNameFilter(final Graph<Componant, String> graph, final String vertexNameFilter, final boolean includesAscendant, final boolean includesdecendant, final boolean caseSensitive) {
 		logger.debug("Apply Vertex Name Filter" + vertexNameFilter);
 		if (!vertexNameFilter.equals("")) {
 			Predicate<Componant> vertex_pred = new Predicate<Componant>() {
 				public boolean evaluate(Componant object) {
 					// TODO Auto-generated method stub
 					boolean matches = match(vertexNameFilter, object);
-					boolean isAscendant = false;
+					boolean isAscendant = false, isdescendant = false;
 
 					if (includesAscendant) {
 						// search if this vertex is an ascendent of matching vertex
-
 						isAscendant = ascandantMatches(vertexNameFilter, object);
 					}
-					return matches || isAscendant;
+
+					if (includesdecendant) {
+						isdescendant = decendantMatches(vertexNameFilter, object);
+					}
+					return matches || isAscendant || isdescendant;
 				}
 
 				private boolean ascandantMatches(final String vertexPatern, Componant object) {
@@ -121,6 +126,21 @@ public class GraphFilter {
 						Collection<Componant> successors = graph.getSuccessors(object);
 						for (Componant componant : successors) {
 							if (ascandantMatches(vertexPatern, componant)) {
+								matches = true;
+								break;
+							}
+						}
+					}
+					return matches;
+				}
+
+				private boolean decendantMatches(final String vertexPatern, Componant object) {
+					boolean matches = match(vertexPatern, object);
+					if (!matches) {
+						// try to search for ancestor that match
+						Collection<Componant> predecessors = graph.getPredecessors(object);
+						for (Componant componant : predecessors) {
+							if (decendantMatches(vertexPatern, componant)) {
 								matches = true;
 								break;
 							}
@@ -152,7 +172,7 @@ public class GraphFilter {
 		}
 	}
 
-	public static Graph<Componant, String> applyVertexTypeFilter(final Graph<Componant, String> graph, final String vertexTypeFilter, final boolean includesAscendant, final boolean caseSensitive) {
+	public static Graph<Componant, String> applyVertexTypeFilter(final Graph<Componant, String> graph, final String vertexTypeFilter, final boolean includesAscendant, final boolean includesdescendant, final boolean caseSensitive) {
 		logger.debug("Apply Vertex Type Filter" + vertexTypeFilter);
 		if (!vertexTypeFilter.equals("")) {
 
@@ -167,14 +187,18 @@ public class GraphFilter {
 				public boolean evaluate(Componant object) {
 					// TODO Auto-generated method stub
 					boolean matches = match(vertexTypes, object);
-					boolean isAscendant = false;
+					boolean isAscendant = false, isdecendant = false;
 
 					if (includesAscendant) {
 						// search if this vertex is an ascendent of matching vertex
 
 						isAscendant = ascandantMatches(vertexTypes, object);
 					}
-					return matches || isAscendant;
+
+					if (includesdescendant) {
+						isdecendant = descendantMatches(vertexTypes, object);
+					}
+					return matches || isAscendant || isdecendant;
 				}
 
 				private boolean ascandantMatches(final List<String> vertexTypes, Componant object) {
@@ -184,6 +208,21 @@ public class GraphFilter {
 						Collection<Componant> successors = graph.getSuccessors(object);
 						for (Componant componant : successors) {
 							if (ascandantMatches(vertexTypes, componant)) {
+								matches = true;
+								break;
+							}
+						}
+					}
+					return matches;
+				}
+
+				private boolean descendantMatches(final List<String> vertexTypes, Componant object) {
+					boolean matches = match(vertexTypes, object);
+					if (!matches) {
+						// try to search for children
+						Collection<Componant> predecessors = graph.getPredecessors(object);
+						for (Componant componant : predecessors) {
+							if (descendantMatches(vertexTypes, componant)) {
 								matches = true;
 								break;
 							}
