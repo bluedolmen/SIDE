@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.bluexml.side</groupId>
   <artifactId>com.bluexml.side.rcpDependencies</artifactId>
-  <version>0.0.18</version>
+  <version>0.0.19</version>
   <name>rcpDependencies</name>
   <description>project that scan product file and build all dependency graph</description>
   <parent>
@@ -116,9 +116,9 @@
       <version>1.2</version>
     </dependency>
     <dependency>
-    	<groupId>com.thoughtworks.xstream</groupId>
-    	<artifactId>xstream</artifactId>
-    	<version>1.3.1</version>
+      <groupId>com.thoughtworks.xstream</groupId>
+      <artifactId>xstream</artifactId>
+      <version>1.3.1</version>
     </dependency>
   </dependencies>
   <build>
