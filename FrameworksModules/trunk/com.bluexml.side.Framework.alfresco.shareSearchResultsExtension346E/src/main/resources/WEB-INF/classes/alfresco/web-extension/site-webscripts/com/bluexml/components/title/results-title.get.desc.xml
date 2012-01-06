@@ -1,0 +1,5 @@
+<webscript>
+  <shortname>Advanced Search Title</shortname>
+  <description>Title component used in the result search page</description>
+  <url>/components/title/results-title</url>
+</webscript>
