@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><archetype>
+  <id>shareTest</id>
+  <sources>
+    <source>src/main/java/Exemple.java</source>
+  </sources>
+  <resources>
+    <resource>src/main/resources/modulesRegistry/module.SIDE_shareTest.properties</resource>
+    <resource>src/main/resources/WEB-INF/classes/alfresco/site-webscripts/org/alfresco/components/dashlets/README.txt</resource>
+    <resource>.classpath</resource>
+    <resource>.project</resource>
+    <resource>.settings/org.eclipse.jdt.core.prefs</resource>
+    <resource>bin/com/bluexml/side/integration/alfresco/shareTest/Exemple.class</resource>
+    <resource>build.xml</resource>
+    <resource  filtered="false">lib/maven-ant-tasks-2.1.3.jar</resource>
+  </resources>
+</archetype>
