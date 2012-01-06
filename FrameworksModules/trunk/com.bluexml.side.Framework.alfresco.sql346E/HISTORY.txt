@@ -1,0 +1,3 @@
+* v. 1.1.3
+- Various refactorings and evolutions to provide an advanced condition in search query where it is
+possible to follow a path of associations
