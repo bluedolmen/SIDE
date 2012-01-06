@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 import org.eclipse.emf.ecore.EObject;
@@ -50,15 +49,5 @@ public class FormGenerator extends AbstractAlfrescoGenerator {
 		return buildModuleProperties(modelId).getProperty("module.id"); //$NON-NLS-1$
 	}
 
-	@Override
-	protected List<String> getOptionalTemplates() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected Map<String, String> getTemplatesSubstitution() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 }

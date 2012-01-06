@@ -31,3 +31,4 @@ Require-Bundle: com.bluexml.side.Application,
  com.bluexml.side.Class
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
+Export-Package: com.bluexml.side.workflow.generator.alfresco34d

@@ -2,6 +2,7 @@ package com.bluexml.side.portal.generator.alfresco34d;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -57,15 +58,16 @@ public class PortalGenerator extends PortalAlfrescoGenerator {
 	 * getTemplatesSubstitution()
 	 */
 	@Override
-	protected Map<String, String> getTemplatesSubstitution() {
-		Map<String, String> templatesSubstitution = super.getTemplatesSubstitution();
+	protected List<Map<String, String>> getTemplatesSubstitution() {
+		List<Map<String, String>> templatesSubstitution = super.getTemplatesSubstitution();
+		Map<String, String> map = new HashMap<String, String>();
 
-		if (getGeneratorOptionValue(GENERATOR_OPTIONS_DOCLIST)) {
-			// replace template to be compliant with alfresco community 3.4
-			templatesSubstitution.put(templatesRoot32r2 + "documentLibrary/DocumentLibraryPortletView.ftl.mt", templatesRoot + "customViews.ftl.mt");
-		}
-		templatesSubstitution.put(templatesRoot32r2 + "portalShare/create-site.get.properties.mt", templatesRoot + "create-site.get.properties.mt");
+		// replace template to be compliant with alfresco community 3.4
+		map.put(templatesRoot32r2 + "documentLibrary/DocumentLibraryPortletView.ftl.mt", templatesRoot + "customViews.ftl.mt");
 
+		map.put(templatesRoot32r2 + "portalShare/create-site.get.properties.mt", templatesRoot + "create-site.get.properties.mt");
+		
+		templatesSubstitution.add(map);
 		return templatesSubstitution;
 	}
 

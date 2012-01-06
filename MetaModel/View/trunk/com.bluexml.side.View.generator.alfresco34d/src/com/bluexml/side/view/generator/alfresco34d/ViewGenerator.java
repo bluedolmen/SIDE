@@ -1,5 +1,6 @@
 package com.bluexml.side.view.generator.alfresco34d;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,9 +26,11 @@ public class ViewGenerator extends com.bluexml.side.view.generator.alfresco.View
 	 * getTemplatesSubstitution()
 	 */
 	@Override
-	protected Map<String, String> getTemplatesSubstitution() {
-		Map<String, String> templatesSubstitution = super.getTemplatesSubstitution();
-		templatesSubstitution.put("/com.bluexml.side.View.generator.alfresco/com/bluexml/side/view/generator/alfresco/templates/doclistView/doclist_ftl.mt", "/com.bluexml.side.View.generator.alfresco34d/com/bluexml/side/view/generator/alfresco34d/templates/doclist_ftl.mt");
+	protected List<Map<String, String>> getTemplatesSubstitution() {
+		List<Map<String, String>> templatesSubstitution = super.getTemplatesSubstitution();
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("/com.bluexml.side.View.generator.alfresco/com/bluexml/side/view/generator/alfresco/templates/doclistView/doclist_ftl.mt", "/com.bluexml.side.View.generator.alfresco34d/com/bluexml/side/view/generator/alfresco34d/templates/doclist_ftl.mt");
+		templatesSubstitution.add(map);
 		return templatesSubstitution;
 	}
 
