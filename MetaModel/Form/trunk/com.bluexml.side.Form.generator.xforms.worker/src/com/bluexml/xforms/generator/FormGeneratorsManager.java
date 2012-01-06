@@ -1314,7 +1314,7 @@ public class FormGeneratorsManager {
 			if (StringUtils.trimToNull(fieldOp) == null) {
 				fieldOp = defaultTypeOp;
 			}
-			listOp.add(getOperatorFromPool(fieldOp));
+ 			listOp.add(getOperatorFromPool(fieldOp));
 		} else {
 			if (fieldOp == null) {
 				fieldOp = listOp.get(0).getId();

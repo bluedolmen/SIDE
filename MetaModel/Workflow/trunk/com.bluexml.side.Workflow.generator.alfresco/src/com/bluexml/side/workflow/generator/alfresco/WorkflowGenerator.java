@@ -1,9 +1,7 @@
 package com.bluexml.side.workflow.generator.alfresco;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 import org.eclipse.emf.ecore.EObject;
@@ -69,16 +67,6 @@ public class WorkflowGenerator extends AbstractAlfrescoGenerator {
 	@Override
 	public boolean check() {
 		return true;
-	}
-
-	@Override
-	protected List<String> getOptionalTemplates() {
-		return new ArrayList<String>();
-	}
-
-	@Override
-	protected Map<String, String> getTemplatesSubstitution() {
-		return new HashMap<String, String>();
 	}
 
 }

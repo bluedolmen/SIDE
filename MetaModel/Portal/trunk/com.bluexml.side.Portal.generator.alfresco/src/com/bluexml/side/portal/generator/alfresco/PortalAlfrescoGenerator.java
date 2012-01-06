@@ -3,9 +3,7 @@ package com.bluexml.side.portal.generator.alfresco;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 import org.eclipse.emf.ecore.EObject;
@@ -135,8 +133,4 @@ public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 		return getGenerationParameter(GENERATOR_PARAM_FACETMAPURL);
 	}
 
-	@Override
-	protected Map<String, String> getTemplatesSubstitution() {
-		return new HashMap<String, String>();
-	}
 }

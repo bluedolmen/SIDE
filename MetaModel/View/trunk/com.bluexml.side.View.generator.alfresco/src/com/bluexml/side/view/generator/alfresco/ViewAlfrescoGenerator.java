@@ -3,9 +3,7 @@ package com.bluexml.side.view.generator.alfresco;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 import com.bluexml.side.util.generator.alfresco.AbstractAlfrescoGenerator;
@@ -66,16 +64,6 @@ public class ViewAlfrescoGenerator extends AbstractAlfrescoGenerator {
 		props.put("module.title", "SIDE view extension");
 		props.put("module.description", "this module contains SIDE generated extension to extends Alfresco view,\n build at " + sdf.format(now));
 		return props;
-	}
-
-	@Override
-	protected List<String> getOptionalTemplates() {
-		return new ArrayList<String>();
-	}
-
-	@Override
-	protected Map<String, String> getTemplatesSubstitution() {
-		return new HashMap<String, String>();
 	}
 
 }

@@ -186,8 +186,8 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	}
 
 	@Override
-	protected Map<String, String> getTemplatesSubstitution() {
-		return Collections.emptyMap();
+	protected List<Map<String, String>> getTemplatesSubstitution() {
+		return new ArrayList<Map<String,String>>();
 	}
 
 	/**
