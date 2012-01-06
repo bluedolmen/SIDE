@@ -1,0 +1,18 @@
+<webapp-structure>
+  <registeredFiles>
+    <entry>
+      <string>currentBuild</string>
+      <path-set>
+        <pathsSet class="linked-hash-set">
+          <string>lib/model346E-1.0.0.jar</string>
+          <string>config/alfresco/module/SIDE_model346E/context/service-context.xml</string>
+          <string>config/alfresco/module/SIDE_model346E/model/messages.properties</string>
+          <string>config/alfresco/module/SIDE_model346E/model/model.xml</string>
+          <string>config/alfresco/module/SIDE_model346E/module-context.xml</string>
+          <string>config/alfresco/module/SIDE_model346E/synchronization-database-mapping.properties</string>
+          <string>module.properties</string>
+        </pathsSet>
+      </path-set>
+    </entry>
+  </registeredFiles>
+</webapp-structure>
