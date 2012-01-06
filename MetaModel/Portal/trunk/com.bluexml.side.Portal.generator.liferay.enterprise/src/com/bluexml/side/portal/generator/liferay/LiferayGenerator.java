@@ -119,15 +119,4 @@ public class LiferayGenerator extends AbstractAcceleoPackageGenerator {
 		return super.generate(modelsInfo, idMetamodel);
 	}
 
-	@Override
-	protected List<String> getOptionalTemplates() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected Map<String, String> getTemplatesSubstitution() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

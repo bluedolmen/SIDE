@@ -126,28 +126,6 @@ abstract public class RequirementsGenerator extends AbstractAcceleoGenerator {
 		return getTemplates(current_keyGenerator);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @seecom.bluexml.side.util.generator.acceleo.AbstractAcceleoGenerator#
-	 * getOptionalTemplates()
-	 */
-	@Override
-	protected List<String> getOptionalTemplates() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @seecom.bluexml.side.util.generator.acceleo.AbstractAcceleoGenerator#
-	 * getTemplatesSubstitution()
-	 */
-	@Override
-	protected Map<String, String> getTemplatesSubstitution() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	protected void computeServices() throws CoreException {
 		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 		IFolder targetFolder = myWorkspaceRoot.getFolder(new Path(getTemporaryFolder()));

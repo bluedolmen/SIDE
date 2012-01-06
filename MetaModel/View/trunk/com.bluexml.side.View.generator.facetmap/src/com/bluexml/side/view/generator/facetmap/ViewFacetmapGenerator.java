@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 import org.eclipse.core.resources.IFile;
@@ -116,15 +115,4 @@ public class ViewFacetmapGenerator extends AbstractAcceleoPackageGenerator {
 		return props;
 	}
 
-	@Override
-	protected List<String> getOptionalTemplates() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected Map<String, String> getTemplatesSubstitution() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
