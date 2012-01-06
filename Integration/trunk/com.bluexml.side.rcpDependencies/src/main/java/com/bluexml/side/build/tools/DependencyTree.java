@@ -198,32 +198,46 @@ public class DependencyTree {
 
 		List<String> list = compReg.getAnomaly().notTree;
 		logger.warn("*** Anomaly summary ***");
-		logger.warn("componant with more than one parent :");
-		for (String string : list) {
-			logger.warn(string);
+
+		if (list.size() > 0) {
+			logger.warn("componant with more than one parent :");
+			for (String string : list) {
+				logger.warn(string);
+			}
 		}
-		logger.warn("invalide check constraints :");
+
 		List<String> list2 = compReg.getAnomaly().invalideCheckRef;
-		for (String string : list2) {
-			logger.warn(string);
+		if (list2.size() > 0) {
+			logger.warn("invalide check constraints :");
+			for (String string : list2) {
+				logger.warn(string);
+			}
 		}
-		logger.warn("Bundle not found in conf file :");
+
 		List<String[]> list3 = compReg.getAnomaly().bundleNotFoundInConf;
-		for (String[] string : list3) {
-			logger.warn(string[0] + " from " + string[1]);
+		if (list3.size() > 0) {
+			logger.warn("Bundle not found in conf file :");
+			for (String[] string : list3) {
+				logger.warn(string[0] + " from " + string[1]);
+			}
 		}
 
-		logger.warn("Invalide Bundle in conf file :");
 		List<String> list4 = compReg.getAnomaly().invalideEntryInConf;
-		for (String string : list4) {
-			logger.warn(string);
+		if (list4.size() > 0) {
+			logger.warn("Invalide Bundle in conf file :");
+			for (String string : list4) {
+				logger.warn(string);
+			}
 		}
 
-		logger.warn("Missing required plugin in features");
 		List<String> list5 = compReg.getAnomaly().missingPluginsInFeatures;
-		for (String string : list5) {
-			logger.warn(string);
+		if (list5.size() > 0) {
+			logger.warn("Missing required plugin in features");
+			for (String string : list5) {
+				logger.warn(string);
+			}
 		}
+
 	}
 
 	public static void filterGraphAndSave(Properties properties, Graph<Componant, String> g, String outputFileName) throws IOException, Exception {
