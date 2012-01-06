@@ -14,8 +14,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -83,38 +83,50 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 
 		if (getGeneratorOptionValue(MAIN_OPTION)) {
 			List<String> mainTemplates = getMainTemplates();
-			if (mainTemplates != null) {
-				alltemplates.addAll(mainTemplates);
-			}
+
+			alltemplates.addAll(mainTemplates);
+
 		}
 		List<String> optionalTemplates = getOptionalTemplates();
-		if (optionalTemplates != null) {
-			alltemplates.addAll(optionalTemplates);
-		}
 
-		// apply templates substitution
-		Map<String, String> overrideTemplates = getTemplatesSubstitution();
-		if (overrideTemplates != null) {
+		alltemplates.addAll(optionalTemplates);
+
+		// apply templates substitution in the right order
+		List<Map<String, String>> templatesSubstitution = getTemplatesSubstitution();
+
+		for (Map<String, String> overrideTemplates : templatesSubstitution) {
 			Set<Entry<String, String>> entrySet = overrideTemplates.entrySet();
 			for (Entry<String, String> entry : entrySet) {
-				alltemplates.remove(entry.getKey());
-				alltemplates.add(entry.getValue());
+				String key = entry.getKey();
+				boolean remove = alltemplates.remove(key);
+				if (remove) {
+					// so only add the template if the template to replace exists and have been removed
+					// this avoid to add optional template even if the option is not selected 
+					alltemplates.add(entry.getValue());
+				}
 			}
 		}
 
 		return alltemplates;
 	}
 
-	abstract protected List<String> getOptionalTemplates();
-
-	abstract protected List<String> getMainTemplates();
-
 	/**
 	 * method to build a substitution map
 	 * 
 	 * @return
 	 */
-	abstract protected Map<String, String> getTemplatesSubstitution();
+	protected List<Map<String, String>> getTemplatesSubstitution() {
+		return new ArrayList<Map<String, String>>();
+	}
+
+	/**
+	 * @return
+	 */
+	protected List<String> getOptionalTemplates() {
+		return new ArrayList<String>();
+	}
+
+	abstract protected List<String> getMainTemplates();
 
 	abstract protected String getMetamodelURI();
 

@@ -17,7 +17,6 @@ import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.libs.IFileHelper;
 
 public abstract class DocumentationGenerator extends AbstractAcceleoGenerator {
-	
 
 	public static String MMUri;
 	protected static String GENERATOR_OPTIONS_SCREENSHOOT = "doc.gen.screenshoot";
@@ -41,18 +40,6 @@ public abstract class DocumentationGenerator extends AbstractAcceleoGenerator {
 		return templates;
 	}
 
-	@Override
-	protected List<String> getOptionalTemplates() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected Map<String, String> getTemplatesSubstitution() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	public Collection<IFile> complete(Map<String, List<IFile>> models) throws Exception {
 		for (Map.Entry<String, List<IFile>> l : groupedModels.entrySet()) {
 			String rootName = l.getKey();
@@ -102,10 +89,11 @@ public abstract class DocumentationGenerator extends AbstractAcceleoGenerator {
 	public boolean check() {
 		return true;
 	}
-	
+
 	public boolean checkOption(String optionID) {
 		return true;
 	}
+
 	public static boolean includeScreenShoot() {
 		return includeScreenShoot(null);
 	}
