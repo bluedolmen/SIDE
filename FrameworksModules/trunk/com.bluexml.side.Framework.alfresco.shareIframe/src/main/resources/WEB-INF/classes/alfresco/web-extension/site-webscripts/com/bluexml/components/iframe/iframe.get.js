@@ -1,7 +1,7 @@
 script: {
 
 	
-	// get facetName from component configuration
+	// get src from component configuration
 	model.src = getArgument("src");	
 	model.id = instance.getId();
 	var siteID =page.url.templateArgs.site;
