@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<component>
+   <scope>template</scope>
+   <region-id>workflowdata</region-id>
+   <source-id>standalonestartworkflow</source-id>
+   <url>/components/workflow/workflowdata?&amp;css={css}&amp;js={js}</url>
+   <properties>
+      <destination>{destination}</destination>
+      <selectedItems>{selectedItems}</selectedItems>
+   </properties>
+</component>

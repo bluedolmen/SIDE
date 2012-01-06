@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<component>
+	<scope>template</scope>
+	<region-id>standalonesearch</region-id>
+	<source-id>standalonesearchform</source-id>
+	<!--url>/components/form?&amp;css={css}&amp;js={js}</url-->
+	<url>/components/search/advsearch</url>
+	<properties>
+		<itemKind>type</itemKind>
+		<itemId>{itemId}</itemId>
+		<mode>edit</mode>
+		<formId>search</formId>
+		<showCaption>{showCaption}</showCaption>
+		<showSubmitButton>{showSubmitButton}</showSubmitButton>
+		<showCancelButton>{showCancelButton}</showCancelButton>
+	</properties>
+</component>

@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<page>
+   	<title>standalonesearchform</title>
+   	<title-id>page.standalonesearchform.title</title-id>
+   	<description>SIDE Generated Portal Page</description>
+   	<description-id>page.standalonesearchform.description</description-id>
+   	<template-instance>standalonesearchform</template-instance>
+   	<authentication>user</authentication>
+   	
+	<components>
+      <component>
+         <region-id>title</region-id>
+         <url>/components/title/advsearch-title</url>
+      </component>
+      <component>
+         <region-id>standalonesearch</region-id>
+         <url>/components/search/advsearch</url>
+      </component>
+   </components>
+</page>
