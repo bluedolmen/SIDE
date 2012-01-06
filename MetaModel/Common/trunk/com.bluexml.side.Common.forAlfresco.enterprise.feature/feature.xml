@@ -1,33 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.forAlfresco.enterprise.feature" label="SIDE Generators For Alfresco 3.2.0r Enterprise" version="1.0.540.v31485-20120104" provider-name="BlueXML">
-  <description url="http://www.example.com/description">[Enter Feature Description here.]</description>
-  <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
-  <license url="http://www.example.com/license">[Enter License Description here.]</license>
-  <includes id="com.bluexml.side.Common.forAlfresco34d.sideenterprise.feature" version="1.0.39.v31485-20120104" />
-  <includes id="com.bluexml.side.Deployer.xforms.feature" version="1.0.37.v28467-20111005" />
-  <includes id="com.bluexml.side.Deployer.xformsDirectCopy.feature" version="1.0.30.v28467-20111005" />
-  <includes id="com.bluexml.side.Deployer.demoWebApplication.feature" version="1.0.2.v28467-20111005" />
-  <includes id="com.bluexml.side.Common.forAlfresco320rE.sideenterprise.feature" version="1.0.2.v30201-20111116" />
-  <includes id="com.bluexml.side.Common.forAlfresco32r2CE.sideenterprise.feature" version="1.0.21.v31485-20120104" />
-  <includes id="com.bluexml.side.Common.forAlfresco333E.sideenterprise.feature" version="1.0.17.v30201-20111116" />
-  <includes id="com.bluexml.side.Common.forBirtReport.sideenterprise.feature" version="1.0.2.v30201-20111116" />
-  <includes id="com.bluexml.side.Common.forFacetMap.sideenterprise.feature" version="1.0.2.v30201-20111116" />
-  <requires>
-    <import plugin="org.eclipse.ui" />
-    <import plugin="org.eclipse.core.runtime" />
-    <import plugin="org.eclipse.ui.intro" />
-    <import plugin="org.eclipse.core.resources" />
-    <import plugin="com.bluexml.side.Util.libs" version="1.0.26" match="greaterOrEqual" />
-    <import plugin="com.bluexml.side.Util.ecore" version="1.0.14" match="greaterOrEqual" />
-    <import plugin="com.bluexml.side.Application" version="1.0.25" match="greaterOrEqual" />
-    <import plugin="com.bluexml.side.Class" version="1.0.21" match="greaterOrEqual" />
-    <import plugin="com.bluexml.side.Form" version="1.0.33" match="greaterOrEqual" />
-    <import plugin="com.bluexml.side.View" version="1.0.6" match="greaterOrEqual" />
-    <import plugin="com.bluexml.side.Requirements" version="1.0.14" match="greaterOrEqual" />
-    <import plugin="com.bluexml.side.Workflow" version="1.0.21" match="greaterOrEqual" />
-    <import plugin="com.bluexml.side.Portal" version="1.0.13" match="greaterOrEqual" />
-    <import plugin="org.topcased.modeler" version="2.4.0" match="greaterOrEqual" />
-    <import plugin="org.eclipse.ui.ide" />
-  </requires>
-</feature>
+<feature
+      id="com.bluexml.side.Common.forAlfresco.enterprise.feature"
+      label="SIDE Generators For Alfresco 3.2.0r Enterprise"
+      version="1.0.540.v31485-20120104"
+      provider-name="BlueXML">
 
+   <description url="http://www.example.com/description">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <includes
+         id="com.bluexml.side.Common.forAlfresco34d.sideenterprise.feature"
+         version="1.0.39.v31485-20120104"/>
+
+   <includes
+         id="com.bluexml.side.Deployer.xforms.feature"
+         version="1.0.37.v28467-20111005"/>
+
+   <includes
+         id="com.bluexml.side.Deployer.xformsDirectCopy.feature"
+         version="1.0.30.v28467-20111005"/>
+
+   <includes
+         id="com.bluexml.side.Deployer.demoWebApplication.feature"
+         version="1.0.2.v28467-20111005"/>
+
+   <includes
+         id="com.bluexml.side.Common.forAlfresco320rE.sideenterprise.feature"
+         version="1.0.2.v30201-20111116"/>
+
+   <includes
+         id="com.bluexml.side.Common.forAlfresco32r2CE.sideenterprise.feature"
+         version="1.0.21.v31485-20120104"/>
+
+   <includes
+         id="com.bluexml.side.Common.forAlfresco333E.sideenterprise.feature"
+         version="1.0.17.v30201-20111116"/>
+
+   <includes
+         id="com.bluexml.side.Common.forBirtReport.sideenterprise.feature"
+         version="1.0.2.v30201-20111116"/>
+
+   <includes
+         id="com.bluexml.side.Common.forFacetMap.sideenterprise.feature"
+         version="1.0.2.v30201-20111116"/>
+
+   <includes
+         id="com.bluexml.side.Common.forAlfresco346E.sideenterprise.feature"
+         version="1.0.0"/>
+
+   <requires>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.ui.intro"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="com.bluexml.side.Util.libs" version="1.0.26" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Util.ecore" version="1.0.14" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Application" version="1.0.25" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Class" version="1.0.21" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Form" version="1.0.33" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.View" version="1.0.6" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Requirements" version="1.0.14" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Workflow" version="1.0.21" match="greaterOrEqual"/>
+      <import plugin="com.bluexml.side.Portal" version="1.0.13" match="greaterOrEqual"/>
+      <import plugin="org.topcased.modeler" version="2.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.ide"/>
+   </requires>
+
+</feature>
