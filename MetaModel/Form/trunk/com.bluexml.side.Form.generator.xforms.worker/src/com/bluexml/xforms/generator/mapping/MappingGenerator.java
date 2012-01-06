@@ -47,6 +47,7 @@ import com.bluexml.side.form.FormGroup;
 import com.bluexml.side.form.FormSearch;
 import com.bluexml.side.form.FormWorkflow;
 import com.bluexml.side.form.ModelChoiceField;
+import com.bluexml.side.form.ModelChoiceSearchField;
 import com.bluexml.side.form.ModelChoiceWidgetType;
 import com.bluexml.side.form.Reference;
 import com.bluexml.side.form.SearchField;
@@ -195,7 +196,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 * @param attribute
 	 *            the attribute
 	 * @return the attribute type
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	private AttributeType processAttribute(AbstractClass classe, Attribute attribute) throws Exception {
 		String result;
@@ -354,7 +355,6 @@ public class MappingGenerator extends AbstractGenerator {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * 
 	 * com.bluexml.xforms.generator.GeneratorInterface#addAssociation(org.blueXML
 	 * .xforms.generator.GeneratorInterface.AssociationKind, java.lang.String,
 	 * java.lang.String,
@@ -509,7 +509,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 *     &lt;auto&gt;false&lt;/auto&gt;
 	 *     &lt;addParams&gt;true&lt;/addParams&gt;
 	 * &lt;/entry&gt;
-	 *</pre>
+	 * </pre>
 	 * 
 	 * @throws IOException
 	 */
@@ -793,40 +793,43 @@ public class MappingGenerator extends AbstractGenerator {
 	private void processSearchField(CanisterType formType, FormContainer formContainer, SearchField searchField) {
 		if (!(formContainer instanceof FormSearch)) {
 			throw new RuntimeException("Search fields are allowed only on FormSearch objects. '" + formContainer.getLabel() + "' is not a FormSearch.");
-		}
-		SearchFieldType fieldType = objectFactory.createSearchFieldType();
-		// name
-		fieldType.setName(searchField.getId());
+		} else if (!(searchField instanceof ModelChoiceSearchField)) {
 
-		// default operator
-		String defaultOp = formGenerator.getSearchFieldDefaultOperator(searchField);
-		fieldType.setPick(defaultOp);
+			SearchFieldType fieldType = objectFactory.createSearchFieldType();
+			// name
+			fieldType.setName(searchField.getId());
 
-		// number of UI input controls
-		Attribute attribute = (Attribute) formGenerator.getRealObject(searchField.getRef());
-		DataType typ = attribute.getTyp();
-		if (isDateType(typ)) {
-			fieldType.setInputs("2");
-		} else if (isNumericType(typ)) {
-			fieldType.setInputs("2");
-		}
+			// default operator
+			String defaultOp = formGenerator.getSearchFieldDefaultOperator(searchField);
+			fieldType.setPick(defaultOp);
 
-		// we set the 'type' attribute for data types whose inputs will be initialized
-		if (isDateType(typ)) {
-			fieldType.setType(typ.getName());
-		}
-		// enums need special processing by the controller at runtime so let's be courteous
-		if (attribute.getValueList() != null) {
-			fieldType.setEnum(ModelTools.getCompleteName(attribute.getValueList()));
-		}
+			// number of UI input controls
+			Attribute attribute = (Attribute) formGenerator.getRealObject(searchField.getRef());
+			DataType typ = attribute.getTyp();
+			if (isDateType(typ)) {
+				fieldType.setInputs("2");
+			} else if (isNumericType(typ)) {
+				fieldType.setInputs("2");
+			}
 
-		// style
-		String style = searchField.getStyle();
-		if (style != null) {
-			CSSCollector.add(style);
-		}
+			// we set the 'type' attribute for data types whose inputs will be initialized
+			if (isDateType(typ)) {
+				fieldType.setType(typ.getName());
+			}
+			// enums need special processing by the controller at runtime so let's be courteous
+			if (attribute.getValueList() != null) {
+				fieldType.setEnum(ModelTools.getCompleteName(attribute.getValueList()));
+			}
 
-		((SearchFormType) formType).getField().add(fieldType);
+			// style
+			String style = searchField.getStyle();
+			if (style != null) {
+				CSSCollector.add(style);
+			}
+
+			((SearchFormType) formType).getField().add(fieldType);
+
+		}
 	}
 
 	private boolean isDateType(DataType typ) {
@@ -848,7 +851,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 *            the form element
 	 * @param formContainer
 	 *            either a FormClass or FormWorkflow object
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	private void processFormElement(CanisterType canister, FormContainer formContainer, FormElement parent, FormElement formElement) throws Exception {
 		if (formElement instanceof FormGroup) {
@@ -915,7 +918,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 *            the field
 	 * @param formClass
 	 *            the form class
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	private void processField(CanisterType canister, FormContainer formContainer, Field field) throws Exception {
 		FormFieldType formFieldType = objectFactory.createFormFieldType();
@@ -1070,7 +1073,7 @@ public class MappingGenerator extends AbstractGenerator {
 	 * @param classe
 	 * @param ref
 	 * @return
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	private String getAlfrescoNameForAttribute(AbstractClass classe, ModelElement ref) throws Exception {
 		boolean noPrefix = false;
