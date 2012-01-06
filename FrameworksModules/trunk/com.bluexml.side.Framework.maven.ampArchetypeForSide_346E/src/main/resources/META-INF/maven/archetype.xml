@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><archetype>
+  <id>ampArchetype</id>
+  <sources>
+    <source>src/main/java/Demo.java</source>
+    <source>src/main/java/DemoComponent.java</source>
+  </sources>
+  <resources>
+    <resource>src/main/config/context/service-context.xml</resource>
+    <resource>src/main/config/log4j.properties</resource>
+    <resource>src/main/config/module-context.xml</resource>
+    <resource>src/main/webapp/css/demoamp.css</resource>
+    <resource filtered="false">src/main/webapp/images/sourcesense.gif</resource>
+    <resource>src/main/webapp/jsp/demoamp.jsp</resource>
+    <resource>src/main/webapp/licenses/README-licenses.txt</resource>
+    <resource>src/main/webapp/scripts/demoamp.js</resource>
+    <resource>build.properties</resource>
+    <resource>build.xml</resource>
+    <resource filtered="false">lib/maven-ant-tasks-2.1.3.jar</resource>
+    <resource>module.properties</resource>
+    <resource>README.txt</resource>
+    <resource>TODO.txt</resource>
+  </resources>
+  <testResources>
+    <resource>src/test/properties/local/application.properties</resource>
+    <resource>src/test/resources/alfresco/extension/custom-repository-context.xml</resource>
+    <resource>src/test/resources/alfresco/extension/file-servers-custom.xml</resource>
+    <resource>src/test/resources/log4j.properties</resource>
+  </testResources>
+</archetype>
