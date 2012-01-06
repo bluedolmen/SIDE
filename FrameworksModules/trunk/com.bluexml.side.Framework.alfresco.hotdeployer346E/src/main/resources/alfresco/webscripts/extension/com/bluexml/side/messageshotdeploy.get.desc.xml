@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+	<shortname>SIDE Workflow hotdeploy</shortname>
+	<format default="xml">any</format>
+	<authentication>admin</authentication>
+	<url>/side/messageshotdeploy?bundleBasePath=${bundleBasePath}</url>
+	<family>side</family>
+</webscript>
