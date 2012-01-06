@@ -66,4 +66,11 @@
          version="1.0.0"
          unpack="false"/>
 
+   <plugin
+         id="com.bluexml.side.Deployer.alfresco346E"
+         download-size="0"
+         install-size="0"
+         version="1.0.0"
+         unpack="false"/>
+
 </feature>
