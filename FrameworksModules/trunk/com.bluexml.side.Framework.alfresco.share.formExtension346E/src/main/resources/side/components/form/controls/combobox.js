@@ -86,7 +86,7 @@ if (!Array.prototype.indexOf) {
 				this.options.getDataSource = options.getDataSource;
 			} else {
 				var me = this;
-				this.options.getDataSource = function _getDataSource() {
+				this.options.getDataSource = function _getDataSource(me) {
 					var myDataSource = new YAHOO.util.XHRDataSource("/share/proxy/alfresco/api/forms/picker/search/children?selectableType=" + me.options.itemType + "&searchTerm="
 							+ me.options.filterTerm + "&size=" + me.options.maxResults + "&advancedQuery=" + me.options.advancedQuery);
 					myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
@@ -101,7 +101,7 @@ if (!Array.prototype.indexOf) {
 
 		load : function() {
 
-			var myDataSource = this.options.getDataSource();
+			var myDataSource = this.options.getDataSource(this);
 
 			if (this.options.multipleSelectMode) {
 				// cardinality n-n
