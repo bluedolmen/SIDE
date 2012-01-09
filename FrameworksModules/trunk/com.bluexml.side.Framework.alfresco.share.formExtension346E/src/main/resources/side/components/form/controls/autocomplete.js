@@ -77,21 +77,35 @@ if (!Array.prototype.indexOf) {
 			filterTerm : "*",
 			maxResults : -1
 		},
+		setOptions : function(options) {
+			this.log("setOptions :" + options);
+			SIDE.Autocomplete.superclass.setOptions.call(this, options);
+			if (options.getDataSource) {
+				this.options.getDataSource = options.getDataSource;
+			} else {
+				var me = this;
+				this.options.getDataSource = function _getDataSource(me) {
+					var url = "/share/proxy/alfresco/api/forms/picker/search/children?selectableType=" + me.options.itemType + "&size=" + me.options.maxResults;
+					
+					var myDataSource = new YAHOO.util.XHRDataSource(url);
+
+					myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
+					myDataSource.responseSchema = {
+						fields : [ "nodeRef", "name", "title" ],
+						resultsList : "data.items"
+					};
+
+					return myDataSource;
+				};
+			}
+		},
 		load : function() {
 			var me = this;
-			var url = "/share/proxy/alfresco/api/forms/picker/search/children?selectableType=" + this.options.itemType + "&size=" + this.options.maxResults;
-			// url += "&advancedQuery=NOT cm:name=toto"
-			var myDataSource = new YAHOO.util.XHRDataSource(url);
-
-			myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
-			myDataSource.responseSchema = {
-				fields : [ "nodeRef", "name", "title" ],
-				resultsList : "data.items"
-			};
-
+			
+			myDataSource = this.options.getDataSource(this);
+			
 			if (this.options.multipleSelectMode) {
 				// cardinality n-n
-
 				// compute query to remove from result selected items
 				var gen_req = function(sQuery) {
 					var notClause = "";

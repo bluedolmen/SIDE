@@ -16,8 +16,7 @@
    var autocomplete = new SIDE.Autocomplete("${controlId}", "${fieldHtmlId}",${value});
    
    autocomplete.setOptions(
-   {
-   	 initialValueLabel : "${field?string}",
+   { 
      itemType: "${field.endpointType}",
      multipleSelectMode: <#if field.control.params.multipleSelectMode??>${field.control.params.multipleSelectMode}<#else>${field.endpointMany?string}</#if>,
      <#if field.mandatory??>
@@ -27,7 +26,7 @@
      </#if>
      filterTerm : <#if field.control.params.filterTerm??>"${field.control.params.filterTerm}"<#else>"*"</#if>,
 	 maxResults : <#if field.control.params.maxResults??>${field.control.params.maxResults}<#else>-1</#if>
-	 
+	 <#if field.control.params.getDataSource??>, getDataSource :${field.control.params.getDataSource}</#if>
    });
    
    
