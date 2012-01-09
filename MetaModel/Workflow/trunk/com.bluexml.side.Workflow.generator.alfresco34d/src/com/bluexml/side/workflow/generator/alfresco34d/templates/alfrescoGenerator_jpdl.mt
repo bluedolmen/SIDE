@@ -144,7 +144,7 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 <%if (current("Process").startstate.initiator != current() || name.toLowerCase() != "initiator") {%>
 	<%if (actorid != null){%>
 		<%if (actorid.startsWith("#{")){%>
-	<assignment class="org.alfresco.repo.workflow.jbpm.AlfrescoAssignment">
+	<assignment class="<%generateAssignmentClass()%>">
 		<actor><%actorid%></actor>
 	</assignment>
   		<%}else{%>
@@ -153,15 +153,22 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
   	<%}%>  			
   	<%if (pooledactors != null){%>
   		<%if (pooledactors.startsWith("#{")){%>
-	<assignment class="org.alfresco.repo.workflow.jbpm.AlfrescoAssignment">
+	<assignment class="<%generateAssignmentClass()%>">
 		<pooledactors><%pooledactors%></pooledactors>
 	</assignment>
   		<%}else{%>
-	<assignment class="org.alfresco.repo.workflow.jbpm.AlfrescoAssignment">
+	<assignment class="<%generateAssignmentClass()%>">
 		<pooledactors>#{people.getGroup('GROUP_<%pooledactors%>')}</pooledactors>
     </assignment>	
   		<%}%>  			
   	<%}%>
+<%}%>
+
+<%script type="Swimlane" name="generateAssignmentClass" post="trim()" %>
+<%if (clazz != null && clazz != "") {%>
+<%clazz%>
+<%}else{%>
+org.alfresco.repo.workflow.jbpm.AlfrescoAssignment
 <%}%>
 
 <%script type="TransitionTask" name="generate_transition_timers"%>
