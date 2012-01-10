@@ -162,6 +162,9 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 	<%for (Xtension[!toString().startsWith("template")]){%>
 	<%current("FormElement").getXtensionAsControlParam(toString().substring(0, toString().indexOf("=")))%>
 	<%}%>
+	<%for (metainfo){%>
+	<%current("FormElement").getXtensionAsControlParam(key)%>
+	<%}%>
 </control>
 <%}else{%>
 	<%if (filter("CharField") && ref.getPrefixedQName() == "cm:content"){%>
