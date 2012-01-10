@@ -195,7 +195,7 @@ public class PageControlsHelper {
 		labelL.setLayoutData(layoutData);
 		labelL.setText(label);
 
-		final org.eclipse.swt.widgets.List modelList = new org.eclipse.swt.widgets.List(resourcesControl, SWT.BORDER | SWT.V_SCROLL);
+		final org.eclipse.swt.widgets.List modelList = new org.eclipse.swt.widgets.List(resourcesControl, SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL);
 		GridData gd_list = new GridData(SWT.FILL, SWT.TOP, true, false, 1, 2);
 		gd_list.heightHint = 100;
 		gd_list.minimumWidth = 100;
@@ -252,9 +252,11 @@ public class PageControlsHelper {
 						if (modelList.getItemCount() == 0) {
 							values.put(id, new ArrayList<IResource>());
 						}
-						modelList.add(key);
+						IResource value = ent.getValue();
+						modelList.add(value.getFullPath().toPortableString());
 						List<IResource> object = (List<IResource>) values.get(id);
-						object.add(ent.getValue());
+
+						object.add(value);
 						page.checkPageComplite();
 					}
 
@@ -269,7 +271,24 @@ public class PageControlsHelper {
 			public void widgetSelected(final SelectionEvent e) {
 				int select = modelList.getSelectionIndex();
 				if (select != -1) {
+					String value = modelList.getItem(select);
 					modelList.remove(select);
+					List<IResource> object = (List<IResource>) values.get(id);
+					IResource toremove = null;
+					for (IResource iResource : object) {
+						if (iResource.getFullPath().toPortableString().equals(value)) {
+							toremove = iResource;
+							break;
+						}
+					}
+					if (toremove != null) {
+						boolean remove = object.remove(toremove);
+						System.out.println("PageControlsHelper.createResourcesControl() removed ?" + remove);
+						if (object.size() == 0) {
+							values.put(id, null);
+						}
+					}
+					page.checkPageComplite();
 				}
 
 			}

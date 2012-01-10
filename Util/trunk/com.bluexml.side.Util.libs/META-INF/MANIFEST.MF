@@ -16,7 +16,9 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.debug.ui,
  org.eclipse.ui.externaltools,
  org.eclipse.ui.ide,
- org.eclipse.emf.ecore.xmi
+ org.eclipse.emf.ecore.xmi,
+ org.eclipse.gef,
+ org.topcased.modeler
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,

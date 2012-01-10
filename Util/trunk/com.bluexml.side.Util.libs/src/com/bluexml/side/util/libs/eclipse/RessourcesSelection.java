@@ -270,10 +270,9 @@ public class RessourcesSelection extends AbstractDialogCellEditor {
 			for (Object o : result) {
 				IResource file = (IResource) o;
 				String filePath = file.getFullPath().toPortableString();
-				String fileName = file.getName();
 
 				if (filePath != null) {
-					selection.put(fileName, file);
+					selection.put(filePath, file);
 
 				}
 			}
