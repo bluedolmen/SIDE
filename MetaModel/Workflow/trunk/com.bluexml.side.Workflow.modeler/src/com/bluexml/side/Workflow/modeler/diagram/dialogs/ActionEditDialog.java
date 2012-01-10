@@ -267,6 +267,8 @@ public class ActionEditDialog extends Dialog implements IDialogConstants {
 			Script s = null;
 			if (action.getScript().size() > 0) {
 				s = action.getScript().get(0);
+			} else {
+				script = false;
 			}
 			if (s != null && s.getExpression() != null) {
 				this.expression = s.getExpression();
