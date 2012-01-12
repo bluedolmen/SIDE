@@ -17,6 +17,12 @@
       <generatorVersion class="com.bluexml.side.util.framework.tools.alfresco32r2ce.Activator" hidden="visible" id="com.bluexml.side.View.generator.alfresco" version="com.bluexml.side.Util.framework.tools.alfresco32r2CE.generatorVersion8" />
       <generatorVersion class="com.bluexml.side.util.framework.tools.alfresco32r2ce.Activator" hidden="visible" id="com.bluexml.side.Form.generator.xforms.chiba" version="com.bluexml.side.Util.framework.tools.alfresco32r2CE.generatorVersion9" />
       <generatorVersion class="com.bluexml.side.util.framework.tools.alfresco32r2ce.Activator" hidden="visible" id="com.bluexml.side.Workflow.generator.alfresco" version="com.bluexml.side.Util.framework.tools.alfresco32r2CE.generatorVersion10" />
+      <generatorVersion
+            class="com.bluexml.side.util.framework.tools.alfresco32r2ce.Activator"
+            hidden="hidden and used by default"
+            id="side.customModules"
+            version="side.customModules">
+      </generatorVersion>
     </modelLibrary>
   </extension>
 </plugin>

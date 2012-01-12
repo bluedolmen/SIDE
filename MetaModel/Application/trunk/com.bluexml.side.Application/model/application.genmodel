@@ -59,8 +59,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ComponantConfiguration/metaModelName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ComponantConfiguration/technologyVersionName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ComponantConfiguration/technologyName"/>
-      <genFeatures notify="false" children="true" createChild="false" propertySortChoices="true"
-          ecoreFeature="ecore:EReference application.ecore#//ComponantConfiguration/moduleContraints"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference application.ecore#//ComponantConfiguration/moduleContraints"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute application.ecore#//ComponantConfiguration/contributorId"/>
     </genClasses>
     <genClasses ecoreClass="application.ecore#//ModuleConstraint">

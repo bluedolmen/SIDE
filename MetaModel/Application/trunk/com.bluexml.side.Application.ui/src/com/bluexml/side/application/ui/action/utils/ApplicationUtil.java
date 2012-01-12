@@ -97,7 +97,7 @@ public class ApplicationUtil {
 	/**
 	 * Return the configuration corresponding to the given key in the current
 	 * configuration. Return null if not found.
-	 *
+	 * 
 	 * @see ApplicationDialog#getCurrentConfiguration()
 	 * @param key
 	 * @return
@@ -141,38 +141,38 @@ public class ApplicationUtil {
 	 */
 	public static List<Configuration> getConfigurations(Application application) {
 		List<Configuration> configurations = new ArrayList<Configuration>();
-		
+
 		for (ModelElement modelElement : application.getElements()) {
 			if (modelElement instanceof Configuration) {
 				Configuration configuration = (Configuration) modelElement;
 				configurations.add(configuration);
 			}
 		}
-		
+
 		return configurations;
 	}
-	
+
 	/**
 	 * Returns the first available {@link Configuration} in the
 	 * {@link Application}, null if none exists yet
 	 * 
-	 * @param application an {@link Application} model
+	 * @param application
+	 *            an {@link Application} model
 	 * @return the first available {@link Configuration}
 	 */
 	public static Configuration getFirstConfiguration(Application application) {
 		Configuration configuration = null;
-		
+
 		for (ModelElement modelElement : application.getElements()) {
 			if (modelElement instanceof Configuration) {
 				configuration = (Configuration) modelElement;
 				break;
 			}
 		}
-		
+
 		return configuration;
 	}
-	
-	
+
 	/**
 	 * Delete the given generator from the given configuration
 	 * 
@@ -577,137 +577,140 @@ public class ApplicationUtil {
 				generatorConfiguration.setImpl_class(extFrag.getAttribute("class"));
 				generatorConfiguration.setContributorId(extFrag.getContributor().getName());
 
-				Map<String, IConfigurationElement> dependencies_ext = new HashMap<String, IConfigurationElement>();
+				// side.customModules generator is a system generator only used to list user module dependencies so modules are not listed in extension point but provided in configuration
+				if (!generatorConfiguration.getId().equals("side.customModules")) {
+					Map<String, IConfigurationElement> dependencies_ext = new HashMap<String, IConfigurationElement>();
 
-				// Obligatory dependences
-				List<String> dependencies_extObligatory = new ArrayList<String>();
-				// add generator/deployer dependencies to check
-				IConfigurationElement[] arrayOfdependencies_ext = extFrag.getChildren(APPLICATION_CONSTRAINTS);
-				for (IConfigurationElement configurationElement : arrayOfdependencies_ext) {
-					dependencies_ext.put(configurationElement.getAttribute(APPLICATION_CONSTRAINTS_MODULEID), configurationElement);
-					dependencies_extObligatory.add(configurationElement.getAttribute(APPLICATION_CONSTRAINTS_MODULEID));
-				}
-
-				// check options
-				EList<Option> options = generatorConfiguration.getOptions();
-				Map<String, IConfigurationElement> options_ext = new HashMap<String, IConfigurationElement>();
-				Map<String, List<String>> options_dependenciesExt = new HashMap<String, List<String>>();
-				IConfigurationElement[] arrayOfoptions_ext = extFrag.getChildren("option");
-				Map<String, IConfigurationElement> optionsExtMandatory = new HashMap<String, IConfigurationElement>();
-
-				for (IConfigurationElement optionExt : arrayOfoptions_ext) {
-					String attribute_optionId = optionExt.getAttribute("key");
-					options_ext.put(attribute_optionId, optionExt);
-
-					String attributeHidden = optionExt.getAttribute("hidden");
-					String attributeIsDefault = optionExt.getAttribute("defaultOption");
-					if ((attributeHidden != null && attributeHidden.equals("true")) && (attributeIsDefault != null && attributeIsDefault.equals("true"))) {
-						optionsExtMandatory.put(attribute_optionId, optionExt);
+					// Obligatory dependences
+					List<String> dependencies_extObligatory = new ArrayList<String>();
+					// add generator/deployer dependencies to check
+					IConfigurationElement[] arrayOfdependencies_ext = extFrag.getChildren(APPLICATION_CONSTRAINTS);
+					for (IConfigurationElement configurationElement : arrayOfdependencies_ext) {
+						dependencies_ext.put(configurationElement.getAttribute(APPLICATION_CONSTRAINTS_MODULEID), configurationElement);
+						dependencies_extObligatory.add(configurationElement.getAttribute(APPLICATION_CONSTRAINTS_MODULEID));
 					}
-					IConfigurationElement[] arrayOfConstraints_ext = optionExt.getChildren(APPLICATION_CONSTRAINTS);
-					for (IConfigurationElement configurationElement2 : arrayOfConstraints_ext) {
-						// add to list of dependencies to check
-						String attribute_moduleId = configurationElement2.getAttribute(APPLICATION_CONSTRAINTS_MODULEID);
-						dependencies_ext.put(attribute_moduleId, configurationElement2);
-						if (!options_dependenciesExt.containsKey(attribute_optionId)) {
-							options_dependenciesExt.put(attribute_optionId, new ArrayList<String>());
+
+					// check options
+					EList<Option> options = generatorConfiguration.getOptions();
+					Map<String, IConfigurationElement> options_ext = new HashMap<String, IConfigurationElement>();
+					Map<String, List<String>> options_dependenciesExt = new HashMap<String, List<String>>();
+					IConfigurationElement[] arrayOfoptions_ext = extFrag.getChildren("option");
+					Map<String, IConfigurationElement> optionsExtMandatory = new HashMap<String, IConfigurationElement>();
+
+					for (IConfigurationElement optionExt : arrayOfoptions_ext) {
+						String attribute_optionId = optionExt.getAttribute("key");
+						options_ext.put(attribute_optionId, optionExt);
+
+						String attributeHidden = optionExt.getAttribute("hidden");
+						String attributeIsDefault = optionExt.getAttribute("defaultOption");
+						if ((attributeHidden != null && attributeHidden.equals("true")) && (attributeIsDefault != null && attributeIsDefault.equals("true"))) {
+							optionsExtMandatory.put(attribute_optionId, optionExt);
 						}
-						options_dependenciesExt.get(attribute_optionId).add(attribute_moduleId);
-					}
-				}
-
-				// manage hidden and byDefault option that need to be added
-				List<Option> optionsToRemove = new ArrayList<Option>();
-				List<Option> optionsToCreate = new ArrayList<Option>();
-
-				List<String> dependencies_extOptionals = new ArrayList<String>();
-				for (Option option : options) {
-					// check if defined
-					String optionId = option.getKey();
-					if (!options_ext.keySet().contains(optionId)) {
-						// remove this
-						optionsToRemove.add(option);
-						// System.out.println("toRemove !"+option);
-					} else {
-						// build list of dependencies from selected options
-						List<String> modulesdependencies = options_dependenciesExt.get(optionId);
-						if (modulesdependencies != null) {
-							for (String moduleId : modulesdependencies) {
-								dependencies_extOptionals.add(moduleId);
+						IConfigurationElement[] arrayOfConstraints_ext = optionExt.getChildren(APPLICATION_CONSTRAINTS);
+						for (IConfigurationElement configurationElement2 : arrayOfConstraints_ext) {
+							// add to list of dependencies to check
+							String attribute_moduleId = configurationElement2.getAttribute(APPLICATION_CONSTRAINTS_MODULEID);
+							dependencies_ext.put(attribute_moduleId, configurationElement2);
+							if (!options_dependenciesExt.containsKey(attribute_optionId)) {
+								options_dependenciesExt.put(attribute_optionId, new ArrayList<String>());
 							}
+							options_dependenciesExt.get(attribute_optionId).add(attribute_moduleId);
+						}
+					}
+
+					// manage hidden and byDefault option that need to be added
+					List<Option> optionsToRemove = new ArrayList<Option>();
+					List<Option> optionsToCreate = new ArrayList<Option>();
+
+					List<String> dependencies_extOptionals = new ArrayList<String>();
+					for (Option option : options) {
+						// check if defined
+						String optionId = option.getKey();
+						if (!options_ext.keySet().contains(optionId)) {
+							// remove this
+							optionsToRemove.add(option);
+							// System.out.println("toRemove !"+option);
 						} else {
-							// option not found ...
+							// build list of dependencies from selected options
+							List<String> modulesdependencies = options_dependenciesExt.get(optionId);
+							if (modulesdependencies != null) {
+								for (String moduleId : modulesdependencies) {
+									dependencies_extOptionals.add(moduleId);
+								}
+							} else {
+								// option not found ...
+							}
+						}
+
+						//					if (!optionsExtMandatory.containsKey((optionId))) {
+						//						// option must be created
+						//						Option op = ApplicationFactory.eINSTANCE.createOption();
+						//						op.setKey(optionId);
+						//						optionsToCreate.add(op);
+						//					}
+					}
+
+					EList<Option> options2 = generatorConfiguration.getOptions();
+
+					options2.removeAll(optionsToRemove);
+
+					// add missing mandatory options
+					Set<Entry<String, IConfigurationElement>> entrySet = optionsExtMandatory.entrySet();
+					for (Entry<String, IConfigurationElement> entry : entrySet) {
+						String optionId = entry.getKey();
+						boolean ok = false;
+						for (Option option : options2) {
+							if (option.getKey().equals(optionId)) {
+								ok = true;
+								break;
+							}
+						}
+						if (!ok) {
+							// option must be created
+							Option op = ApplicationFactory.eINSTANCE.createOption();
+							op.setKey(optionId);
+							optionsToCreate.add(op);
 						}
 					}
 
-//					if (!optionsExtMandatory.containsKey((optionId))) {
-//						// option must be created
-//						Option op = ApplicationFactory.eINSTANCE.createOption();
-//						op.setKey(optionId);
-//						optionsToCreate.add(op);
-//					}
-				}
+					generatorConfiguration.getOptions().addAll(optionsToCreate);
 
-				EList<Option> options2 = generatorConfiguration.getOptions();
-
-				options2.removeAll(optionsToRemove);
-
-				// add missing mandatory options
-				Set<Entry<String, IConfigurationElement>> entrySet = optionsExtMandatory.entrySet();
-				for (Entry<String, IConfigurationElement> entry : entrySet) {
-					String optionId = entry.getKey();
-					boolean ok = false;
-					for (Option option : options2) {
-						if (option.getKey().equals(optionId)) {
-							ok = true;
-							break;
+					// check dependencies
+					EList<ModuleConstraint> mcs = generatorConfiguration.getModuleContraints();
+					List<String> updatedConstraints = new ArrayList<String>();
+					List<ModuleConstraint> mcsToRemove = new ArrayList<ModuleConstraint>();
+					for (ModuleConstraint moduleConstraint : mcs) {
+						if (!dependencies_ext.containsKey(moduleConstraint.getModuleId())) {
+							// to remove
+							mcsToRemove.add(moduleConstraint);
+						} else {
+							// update
+							IConfigurationElement configurationElement = dependencies_ext.get(moduleConstraint.getModuleId());
+							moduleConstraint.setModuleType(configurationElement.getAttribute(APPLICATION_CONSTRAINTS_MODULETYPE));
+							moduleConstraint.setVersionMax(configurationElement.getAttribute(APPLICATION_CONSTRAINTS_VERSIONMAX));
+							moduleConstraint.setVersionMin(configurationElement.getAttribute(APPLICATION_CONSTRAINTS_VERSIONMIN));
+							moduleConstraint.setTechnologyVersion(configurationElement.getAttribute(APPLICATION_CONSTRAINTS_TECHVERSION));
+							updatedConstraints.add(moduleConstraint.getModuleId());
 						}
 					}
-					if (!ok) {
-						// option must be created
-						Option op = ApplicationFactory.eINSTANCE.createOption();
-						op.setKey(optionId);
-						optionsToCreate.add(op);						
+					generatorConfiguration.getModuleContraints().removeAll(mcsToRemove);
+
+					// add new constraints
+					List<String> lnewConstraints = new ArrayList<String>();
+					lnewConstraints.addAll(dependencies_extObligatory);
+					lnewConstraints.addAll(dependencies_extOptionals);
+					lnewConstraints.removeAll(updatedConstraints);
+
+					for (String string : lnewConstraints) {
+						IConfigurationElement newConstraint_ext = dependencies_ext.get(string);
+						ModuleConstraint moduleConstraint = ApplicationFactory.eINSTANCE.createModuleConstraint();
+						moduleConstraint.setModuleId(newConstraint_ext.getAttribute(APPLICATION_CONSTRAINTS_MODULEID));
+						moduleConstraint.setModuleType(newConstraint_ext.getAttribute(APPLICATION_CONSTRAINTS_MODULETYPE));
+						moduleConstraint.setVersionMax(newConstraint_ext.getAttribute(APPLICATION_CONSTRAINTS_VERSIONMAX));
+						moduleConstraint.setVersionMin(newConstraint_ext.getAttribute(APPLICATION_CONSTRAINTS_VERSIONMIN));
+						moduleConstraint.setTechnologyVersion(newConstraint_ext.getAttribute(APPLICATION_CONSTRAINTS_TECHVERSION));
+						generatorConfiguration.getModuleContraints().add(moduleConstraint);
 					}
-				}
-
-				generatorConfiguration.getOptions().addAll(optionsToCreate);
-
-				// check dependencies
-				EList<ModuleConstraint> mcs = generatorConfiguration.getModuleContraints();
-				List<String> updatedConstraints = new ArrayList<String>();
-				List<ModuleConstraint> mcsToRemove = new ArrayList<ModuleConstraint>();
-				for (ModuleConstraint moduleConstraint : mcs) {
-					if (!dependencies_ext.containsKey(moduleConstraint.getModuleId())) {
-						// to remove
-						mcsToRemove.add(moduleConstraint);
-					} else {
-						// update
-						IConfigurationElement configurationElement = dependencies_ext.get(moduleConstraint.getModuleId());
-						moduleConstraint.setModuleType(configurationElement.getAttribute(APPLICATION_CONSTRAINTS_MODULETYPE));
-						moduleConstraint.setVersionMax(configurationElement.getAttribute(APPLICATION_CONSTRAINTS_VERSIONMAX));
-						moduleConstraint.setVersionMin(configurationElement.getAttribute(APPLICATION_CONSTRAINTS_VERSIONMIN));
-						moduleConstraint.setTechnologyVersion(configurationElement.getAttribute(APPLICATION_CONSTRAINTS_TECHVERSION));
-						updatedConstraints.add(moduleConstraint.getModuleId());
-					}
-				}
-				generatorConfiguration.getModuleContraints().removeAll(mcsToRemove);
-
-				// add new constraints
-				List<String> lnewConstraints = new ArrayList<String>();
-				lnewConstraints.addAll(dependencies_extObligatory);
-				lnewConstraints.addAll(dependencies_extOptionals);
-				lnewConstraints.removeAll(updatedConstraints);
-
-				for (String string : lnewConstraints) {
-					IConfigurationElement newConstraint_ext = dependencies_ext.get(string);
-					ModuleConstraint moduleConstraint = ApplicationFactory.eINSTANCE.createModuleConstraint();
-					moduleConstraint.setModuleId(newConstraint_ext.getAttribute(APPLICATION_CONSTRAINTS_MODULEID));
-					moduleConstraint.setModuleType(newConstraint_ext.getAttribute(APPLICATION_CONSTRAINTS_MODULETYPE));
-					moduleConstraint.setVersionMax(newConstraint_ext.getAttribute(APPLICATION_CONSTRAINTS_VERSIONMAX));
-					moduleConstraint.setVersionMin(newConstraint_ext.getAttribute(APPLICATION_CONSTRAINTS_VERSIONMIN));
-					moduleConstraint.setTechnologyVersion(newConstraint_ext.getAttribute(APPLICATION_CONSTRAINTS_TECHVERSION));
-					generatorConfiguration.getModuleContraints().add(moduleConstraint);
 				}
 			}
 		}
@@ -782,17 +785,16 @@ public class ApplicationUtil {
 						// check option constraints
 					}
 
-//					if (!optionsExtMandatory.containsKey((optionId))) {
-//						// option must be created
-//						Option op = ApplicationFactory.eINSTANCE.createOption();
-//						op.setKey(optionId);
-//						optionsToCreate.add(op);
-//					}
+					//					if (!optionsExtMandatory.containsKey((optionId))) {
+					//						// option must be created
+					//						Option op = ApplicationFactory.eINSTANCE.createOption();
+					//						op.setKey(optionId);
+					//						optionsToCreate.add(op);
+					//					}
 				}
 				EList<Option> options2 = deployerConfiguration.getOptions();
 				options2.removeAll(optionsToRemove);
-				
-				
+
 				// add missing mandatory options
 				Set<Entry<String, IConfigurationElement>> entrySet = optionsExtMandatory.entrySet();
 				for (Entry<String, IConfigurationElement> entry : entrySet) {
@@ -808,12 +810,10 @@ public class ApplicationUtil {
 						// option must be created
 						Option op = ApplicationFactory.eINSTANCE.createOption();
 						op.setKey(optionId);
-						optionsToCreate.add(op);						
+						optionsToCreate.add(op);
 					}
 				}
-				
-				
-				
+
 				deployerConfiguration.getOptions().addAll(optionsToCreate);
 
 				// check dependencies

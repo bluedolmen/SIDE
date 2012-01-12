@@ -18,6 +18,12 @@
         <option defaultOption="false" hidden="false" key="com.bluexml.side.Deployer.alfrescoDirectCopy34d.clean" label="com.bluexml.side.Deployer.alfrescoDirectCopy34d.clean" />
       </deployerVersion>
       <generatorVersion class="com.bluexml.side.util.framework.tools.alfresco34dce.Activator" hidden="visible" id="com.bluexml.side.Workflow.generator.alfresco34d" version="com.bluexml.side.Util.framework.tools.alfresco34dCE.generatorVersion5" />
+      <generatorVersion
+            class="com.bluexml.side.util.framework.tools.alfresco34dce.Activator"
+            hidden="hidden and used by default"
+            id="side.customModules"
+            version="side.customModules">
+      </generatorVersion>
     </modelLibrary>
   </extension>
 </plugin>
