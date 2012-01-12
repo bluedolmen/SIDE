@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.core.enterprise.feature" label="SIDE Enterprise Core Components" version="1.0.568.v31980-20120111" provider-name="BlueXML" plugin="com.bluexml.side.Integration.eclipse.branding.enterprise">
+<feature id="com.bluexml.side.Common.core.enterprise.feature" label="SIDE Enterprise Core Components" version="1.0.569.v32024-20120112" provider-name="BlueXML" plugin="com.bluexml.side.Integration.eclipse.branding.enterprise">
   <description url="http://www.example.com/description">[Enter Feature Description here.]</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
-  <includes id="com.bluexml.side.Application.feature" version="1.0.181.v31485-20120104" />
+  <includes id="com.bluexml.side.Application.feature" version="1.0.182.v32024-20120112" />
   <includes id="com.bluexml.side.Class.modeler.feature" version="1.0.140.v31485-20120104" />
   <includes id="com.bluexml.side.Common.feature" version="1.0.45.v30608-20111130" />
   <includes id="com.bluexml.side.Deployer.documentation.feature" version="1.0.42.v28467-20111005" />
@@ -20,7 +20,7 @@
     <import plugin="org.eclipse.ui.forms" />
     <import plugin="com.bluexml.side.Util.security" />
   </requires>
-  <plugin id="com.bluexml.side.Integration.eclipse.branding.enterprise" download-size="0" install-size="0" version="1.0.569.v31980-20120111" unpack="false" />
+  <plugin id="com.bluexml.side.Integration.eclipse.branding.enterprise" download-size="0" install-size="0" version="1.0.570.v32024-20120112" unpack="false" />
   <plugin id="com.bluexml.side.Integration.standAlone.enterprise" download-size="0" install-size="0" version="1.0.8.v30447-20111125" unpack="false" />
   <plugin id="com.bluexml.side.Class.alfresco.reverse" download-size="0" install-size="0" version="1.0.6.v31485-20120104" unpack="false" />
   <plugin id="com.bluexml.side.Application.ui.newSIDEProject" download-size="0" install-size="0" version="1.0.5.v31485-20120104" unpack="false" />
