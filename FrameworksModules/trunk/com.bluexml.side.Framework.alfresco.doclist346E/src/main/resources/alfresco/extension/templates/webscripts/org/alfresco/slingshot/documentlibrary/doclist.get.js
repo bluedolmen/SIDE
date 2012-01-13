@@ -40,16 +40,18 @@ function getDoclist()
 	    */
 		if (args.sorting) 
 		{
+			
 			var sortColumns = [];
-			var sort = args.sorting;
-			if (sort != null && sort.length != 0)
+			var sortParam = args.sorting;
+			if (sortParam != null && sortParam.length != 0)
 			{
+				var sort = sortArg;
 				var asc = true;
 				var separator = sort.indexOf("|");
 				if (separator != -1)
-				{
+				{					
 					sort = sort.substring(0, separator);
-					asc = (sort.substring(separator + 1) == "true");
+					asc = (sortParam.substring(separator + 1) == "true");
 				}
 				var column;
 				if (sort.charAt(0) == '.')
