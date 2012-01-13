@@ -657,7 +657,7 @@ function escapeString(value)
 
 /**
  * Return Search results with the given search terms.
- * 
+ * Patched and extended by SIDE to enable advanced search with operator, fix sorting ...
  * "or" is the default operator, AND and NOT are also supported - as is any other valid fts-alfresco
  * elements such as "quoted terms" and (bracket terms) and also propname:propvalue syntax.
  * 
@@ -759,15 +759,16 @@ function getSearchResults(params)
       //  - pseudo cm:content field starting with "." such as: .size
       //  - any other directly supported search field such as: TYPE
       var sortColumns = [];
-      var sort = params.sort;
-      if (sort != null && sort.length != 0)
+      var sortParam = params.sort;
+      if (sortParam != null && sortParam.length != 0)
       {
+    	 var sort = sortParam;
          var asc = true;
          var separator = sort.indexOf("|");
          if (separator != -1)
          {
             sort = sort.substring(0, separator);
-            asc = (sort.substring(separator + 1) == "true");
+            asc = (sortParam.substring(separator + 1) == "true");
          }
          var column;
          if (sort.charAt(0) == '.')
