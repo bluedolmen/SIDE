@@ -3,6 +3,8 @@ package com.bluexml.side.util.dependencies;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.apache.commons.lang.StringUtils;
+
 public class ModuleConstraint {
 
 	protected String artifactId = null;
@@ -29,10 +31,10 @@ public class ModuleConstraint {
 		setGroupAndArtifactId(id);
 		this.tech_version = tech_version;
 		this.moduleType = moduleType;
-		if (versionNumMin != null) {
+		if (StringUtils.trimToNull(versionNumMin) != null) {
 			this.versionMin = new ModuleVersion(versionNumMin);
 		}
-		if (versionNumMax != null) {
+		if (StringUtils.trimToNull(versionNumMax) != null) {
 			this.versionMax = new ModuleVersion(versionNumMax);
 		}
 	}
