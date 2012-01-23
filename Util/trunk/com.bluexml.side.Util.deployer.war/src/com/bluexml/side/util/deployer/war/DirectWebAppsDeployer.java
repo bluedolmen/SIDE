@@ -14,7 +14,6 @@ import org.apache.commons.io.FilenameUtils;
 import com.bluexml.side.util.componentmonitor.MonitorWriter;
 import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.libs.IFileHelper;
-import com.bluexml.side.util.libs.zip.TrueZipHelper;
 import com.bluexml.side.util.libs.zip.ZipManager;
 
 public abstract class DirectWebAppsDeployer extends WarDeployer {
@@ -24,10 +23,10 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 	public DirectWebAppsDeployer(String cleanKey, String webappName, String webappKeyName, String packageExt) {
 		super(cleanKey, null, webappName, webappKeyName);
 		this.packageExt = packageExt;
-		tzh = new TrueZipHelper(packageExt);
+		//		tzh = new TrueZipHelper(packageExt);
 	}
 
-	protected TrueZipHelper tzh = null;
+	//	protected TrueZipHelper tzh = null;
 	protected File wkdir = null;
 	protected String packageExt = null;
 	protected boolean incremental = true;
@@ -129,7 +128,7 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 		} else {
 			monitor.addWarningTextAndLog(Activator.Messages.getString("WarDeployer.5"), "");
 		}
-		
+
 		// deploy process is done, we need to mark the deployed webapp		
 		File incrementalLastDeploeydFlag = getIncrementalLastDeployedFlag();
 		System.out.println("DirectWebAppsDeployer.deployProcess() touch " + incrementalLastDeploeydFlag);
@@ -148,7 +147,8 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 
 		explodedPackage.mkdirs();
 		// unzip files in tmp
-		tzh.copyFiles(f, explodedPackage, true);
+		//		tzh.copyFiles(f, explodedPackage, true);
+		ZipManager.unzip(f, explodedPackage, true, true);
 
 		Map<String, File> map = createMapper(explodedPackage);
 		List<File> fileList = FileHelper.listAll(explodedPackage);
@@ -209,7 +209,7 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 		String path = FilenameUtils.separatorsToSystem("/WEB-INF/web.xml");
 		return new File(getDeployedWebbAppFolder().getAbsolutePath() + path);
 	}
-	
+
 	public File getIncrementalLastDeployedFlag() {
 		String path = FilenameUtils.separatorsToSystem("/META-INF/lastDeployed.txt");
 		return new File(getDeployedWebbAppFolder().getAbsolutePath() + path);
