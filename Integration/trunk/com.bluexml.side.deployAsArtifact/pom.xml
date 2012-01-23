@@ -1,0 +1,20 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.bluexml.side</groupId>
+	<artifactId>deployAsArtifact</artifactId>
+	<name>deployerAsArtifact</name>
+	<version>0.0.1</version>
+	<description>use this project to deploy jar to SIDE maven third party repositorycopy jars files into &quot;jarToDeploy&quot; execute main java method, execute the bash file.</description>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
