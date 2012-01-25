@@ -2,5 +2,18 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension-point id="com.bluexml.side.util.framework.tooling" name="Framwork Tooling" schema="schema/com.bluexml.side.util.framework.tooling.exsd"/>
+   <extension
+         point="org.eclipse.ui.importWizards">
+      <category
+            id="com.bluexml.side.Util.framework.tools"
+            name="Import SIDE Model Library">
+      </category>
+      <wizard
+            category="com.bluexml.side.Util.framework.tools"
+            class="com.bluexml.side.util.framework.tools.ImportWizard"
+            id="com.bluexml.side.Util.framework.tools.wizard"
+            name="Import SIDE Model Library">
+      </wizard>
+   </extension>
 
 </plugin>

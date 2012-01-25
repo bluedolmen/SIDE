@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ASCII"?>
+<clazz:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:clazz="http://www.kerblue.org/class/1.0" xmi:id="_3KGKoDh8EeG5-eDzZw5ZhQ" namespace="_3KGxsjh8EeG5-eDzZw5ZhQ" name="dictionary">
+  <namespaceSet xmi:id="_3KGxsDh8EeG5-eDzZw5ZhQ" prefix="" URI=""/>
+  <namespaceSet xmi:id="_3KGxsTh8EeG5-eDzZw5ZhQ" prefix="alf" URI="http://www.alfresco.org"/>
+  <namespaceSet xmi:id="_3KGxsjh8EeG5-eDzZw5ZhQ" prefix="d" URI="http://www.alfresco.org/model/dictionary/1.0"/>
+  <namespaceSet xmi:id="_3KGxszh8EeG5-eDzZw5ZhQ" prefix="view" URI="http://www.alfresco.org/view/repository/1.0"/>
+</clazz:Model>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<portal:Portal xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:portal="http://www.kerblue.org/portal/1.0" xmi:id="_Eua1EEaQEeGQg_YMsqwAlg" name="alfrescoSharePortal">
+  <pageSet xmi:id="_uJImEEaWEeGQg_YMsqwAlg" ID="documentLibrary" useLayout="_XN0voEaQEeGQg_YMsqwAlg">
+    <portlets xmi:id="_bTtGQEaYEeGQg_YMsqwAlg" associationPortlet="_cqQe8EaXEeGQg_YMsqwAlg" associationPage="_uJImEEaWEeGQg_YMsqwAlg">
+      <positionGroup xmi:id="_aOsJgEaZEeGQg_YMsqwAlg" onColumn="_JjI2YEaSEeGQg_YMsqwAlg" onLayout="_XN0voEaQEeGQg_YMsqwAlg"/>
+    </portlets>
+    <portlets xmi:id="_9jSekEakEeGYh8rbn3lCzg" associationPortlet="_l3taEEakEeGYh8rbn3lCzg" associationPage="_uJImEEaWEeGQg_YMsqwAlg">
+      <positionGroup xmi:id="_-BQ0AEakEeGYh8rbn3lCzg" onColumn="_JjI2YEaSEeGQg_YMsqwAlg" onLayout="_XN0voEaQEeGQg_YMsqwAlg"/>
+    </portlets>
+    <portlets xmi:id="_pDF7gEalEeGYh8rbn3lCzg" associationPortlet="_K0IpkEalEeGYh8rbn3lCzg" associationPage="_uJImEEaWEeGQg_YMsqwAlg">
+      <positionGroup xmi:id="_siXewEalEeGYh8rbn3lCzg" onColumn="_JjI2YEaSEeGQg_YMsqwAlg" onLayout="_XN0voEaQEeGQg_YMsqwAlg"/>
+    </portlets>
+    <portlets xmi:id="_ECCOMEamEeGYh8rbn3lCzg" associationPortlet="_BVg9kEamEeGYh8rbn3lCzg" associationPage="_uJImEEaWEeGQg_YMsqwAlg">
+      <positionGroup xmi:id="_GEz-QEamEeGYh8rbn3lCzg" onColumn="_N_qsEEaSEeGQg_YMsqwAlg" onLayout="_XN0voEaQEeGQg_YMsqwAlg"/>
+    </portlets>
+    <portlets xmi:id="_WA7csEamEeGYh8rbn3lCzg" associationPortlet="_Q_yeEEamEeGYh8rbn3lCzg" associationPage="_uJImEEaWEeGQg_YMsqwAlg">
+      <positionGroup xmi:id="_WqhMQEamEeGYh8rbn3lCzg" onColumn="_t3RhYEaTEeGQg_YMsqwAlg" onLayout="_XN0voEaQEeGQg_YMsqwAlg"/>
+    </portlets>
+    <portlets xmi:id="_fKaJsEamEeGYh8rbn3lCzg" associationPortlet="_cU244EamEeGYh8rbn3lCzg" associationPage="_uJImEEaWEeGQg_YMsqwAlg">
+      <positionGroup xmi:id="_jzd_gEamEeGYh8rbn3lCzg" onColumn="_t3RhYEaTEeGQg_YMsqwAlg" onLayout="_XN0voEaQEeGQg_YMsqwAlg"/>
+    </portlets>
+    <portlets xmi:id="_xo1z4EamEeGYh8rbn3lCzg" associationPortlet="_wDp-wEamEeGYh8rbn3lCzg" associationPage="_uJImEEaWEeGQg_YMsqwAlg">
+      <positionGroup xmi:id="_2PjgUEamEeGYh8rbn3lCzg" onColumn="_lK4ZAEaTEeGQg_YMsqwAlg" onLayout="_XN0voEaQEeGQg_YMsqwAlg"/>
+    </portlets>
+    <portlets xmi:id="_7a9OMEamEeGYh8rbn3lCzg" associationPortlet="_50m7cEamEeGYh8rbn3lCzg" associationPage="_uJImEEaWEeGQg_YMsqwAlg">
+      <positionGroup xmi:id="_8PMHgEamEeGYh8rbn3lCzg" onColumn="_lK4ZAEaTEeGQg_YMsqwAlg" onLayout="_XN0voEaQEeGQg_YMsqwAlg"/>
+    </portlets>
+    <portlets xmi:id="_GjXGAEanEeGYh8rbn3lCzg" associationPortlet="_Dz2LwEanEeGYh8rbn3lCzg" associationPage="_uJImEEaWEeGQg_YMsqwAlg">
+      <positionGroup xmi:id="_MPF5wEanEeGYh8rbn3lCzg" onColumn="_lK4ZAEaTEeGQg_YMsqwAlg" onLayout="_XN0voEaQEeGQg_YMsqwAlg"/>
+    </portlets>
+    <portlets xmi:id="_FkP88EaoEeGYh8rbn3lCzg" associationPortlet="_CjjzIEaoEeGYh8rbn3lCzg" associationPage="_uJImEEaWEeGQg_YMsqwAlg">
+      <positionGroup xmi:id="_OOWmUEaoEeGYh8rbn3lCzg" onColumn="_YL4BYEaSEeGQg_YMsqwAlg" onLayout="_XN0voEaQEeGQg_YMsqwAlg"/>
+    </portlets>
+    <portlets xmi:id="_czYWAEaoEeGYh8rbn3lCzg" associationPortlet="_VQOtoEaoEeGYh8rbn3lCzg" associationPage="_uJImEEaWEeGQg_YMsqwAlg">
+      <positionGroup xmi:id="_df3okEaoEeGYh8rbn3lCzg" onColumn="_YL4BYEaSEeGQg_YMsqwAlg" onLayout="_XN0voEaQEeGQg_YMsqwAlg"/>
+    </portlets>
+    <portlets xmi:id="_lpA58EaoEeGYh8rbn3lCzg" associationPortlet="_jQjNwEaoEeGYh8rbn3lCzg" associationPage="_uJImEEaWEeGQg_YMsqwAlg">
+      <positionGroup xmi:id="_qnbUsEaoEeGYh8rbn3lCzg" onColumn="_YL4BYEaSEeGQg_YMsqwAlg" onLayout="_XN0voEaQEeGQg_YMsqwAlg"/>
+    </portlets>
+    <portlets xmi:id="_wHyl8EaoEeGYh8rbn3lCzg" associationPortlet="_syKG4EaoEeGYh8rbn3lCzg" associationPage="_uJImEEaWEeGQg_YMsqwAlg">
+      <positionGroup xmi:id="_85c6kEaoEeGYh8rbn3lCzg" onColumn="_IP4z4EaUEeGQg_YMsqwAlg" onLayout="_XN0voEaQEeGQg_YMsqwAlg"/>
+    </portlets>
+    <portlets xmi:id="_LW8xkEc7EeGVKPH7ZdxAzA" associationPortlet="_xCUSEEc4EeGVKPH7ZdxAzA" associationPage="_uJImEEaWEeGQg_YMsqwAlg">
+      <positionGroup xmi:id="_MUJZoEc7EeGVKPH7ZdxAzA" onColumn="_1b7WoEc4EeGVKPH7ZdxAzA" onLayout="_XN0voEaQEeGQg_YMsqwAlg"/>
+    </portlets>
+    <portlets xmi:id="_8KxlgEc-EeGVKPH7ZdxAzA" associationPortlet="_xIsYIEc-EeGVKPH7ZdxAzA" associationPage="_uJImEEaWEeGQg_YMsqwAlg">
+      <positionGroup xmi:id="_8vpNIEc-EeGVKPH7ZdxAzA" onColumn="_bcl2IEaQEeGQg_YMsqwAlg" onLayout="_XN0voEaQEeGQg_YMsqwAlg"/>
+    </portlets>
+  </pageSet>
+  <layoutSet xmi:id="_XN0voEaQEeGQg_YMsqwAlg" name="PortalLayout1" columnMode="false">
+    <columns xmi:id="_1b7WoEc4EeGVKPH7ZdxAzA" name="includes">
+      <metainfo xmi:id="_381NIEc4EeGVKPH7ZdxAzA" key="tag"/>
+    </columns>
+    <columns xmi:id="_bcl2IEaQEeGQg_YMsqwAlg" name="@templateHeader">
+      <metainfo xmi:id="__3x7oEaiEeGYh8rbn3lCzg" key="tag" value="@templateHeader"/>
+    </columns>
+    <columns xmi:id="_-AyNgEaREeGQg_YMsqwAlg" name="@templateBody">
+      <metainfo xmi:id="_uGVTQEaiEeGYh8rbn3lCzg" key="tag" value="@templateBody"/>
+      <subColumns xmi:id="_JjI2YEaSEeGQg_YMsqwAlg" name="alf-hd"/>
+      <subColumns xmi:id="_Kf-SEEaSEeGQg_YMsqwAlg" name="bd">
+        <subColumns xmi:id="_N_qsEEaSEeGQg_YMsqwAlg" name="bd-1">
+          <metainfo xmi:id="_R5tDQEaTEeGQg_YMsqwAlg" key="tag"/>
+        </subColumns>
+        <subColumns xmi:id="_WSpO4EaSEeGQg_YMsqwAlg" name="alfresco-documentlibrary">
+          <metainfo xmi:id="_5-4MYEaTEeGQg_YMsqwAlg" key="class" value="yui-t1"/>
+          <subColumns xmi:id="_iC-z8EaTEeGQg_YMsqwAlg" name="yui-main">
+            <subColumns xmi:id="_t3RhYEaTEeGQg_YMsqwAlg" name="alf-content">
+              <metainfo xmi:id="__qXvkEaTEeGQg_YMsqwAlg" key="class" value="yui-b"/>
+            </subColumns>
+          </subColumns>
+          <subColumns xmi:id="_lK4ZAEaTEeGQg_YMsqwAlg" name="alf-filters">
+            <metainfo xmi:id="_DEd34EaUEeGQg_YMsqwAlg" key="class" value="yui-b"/>
+          </subColumns>
+        </subColumns>
+        <subColumns xmi:id="_YL4BYEaSEeGQg_YMsqwAlg" name="bd-2">
+          <metainfo xmi:id="_du8y8EaTEeGQg_YMsqwAlg" key="tag"/>
+        </subColumns>
+      </subColumns>
+    </columns>
+    <columns xmi:id="_EwSycEaSEeGQg_YMsqwAlg" name="@templateFooter">
+      <metainfo xmi:id="_xdNIcEaiEeGYh8rbn3lCzg" key="tag" value="@templateFooter"/>
+      <subColumns xmi:id="_IP4z4EaUEeGQg_YMsqwAlg" name="alf-ft"/>
+    </columns>
+  </layoutSet>
+  <portletSet xmi:id="_cqQe8EaXEeGQg_YMsqwAlg" name="header">
+    <isInstanceOfPortletType xmi:id="_aXy3oEaYEeGQg_YMsqwAlg" portletType="_A0eq4EaXEeGQg_YMsqwAlg">
+      <instances xmi:id="_nQZ14EalEeGYh8rbn3lCzg" value="/components/header" instanceOf="_a7wVwEaXEeGQg_YMsqwAlg"/>
+      <instances xmi:id="_nQZ14UalEeGYh8rbn3lCzg" value="global" instanceOf="_a7wVw0aXEeGQg_YMsqwAlg"/>
+    </isInstanceOfPortletType>
+  </portletSet>
+  <portletSet xmi:id="_l3taEEakEeGYh8rbn3lCzg" name="title">
+    <isInstanceOfPortletType xmi:id="_pOS7YEakEeGYh8rbn3lCzg" portletType="_A0eq4EaXEeGQg_YMsqwAlg">
+      <instances xmi:id="_mUMsUEalEeGYh8rbn3lCzg" value="/components/title/collaboration-title" instanceOf="_a7wVwEaXEeGQg_YMsqwAlg"/>
+      <instances xmi:id="_mUMsUUalEeGYh8rbn3lCzg" value="template" instanceOf="_a7wVw0aXEeGQg_YMsqwAlg"/>
+    </isInstanceOfPortletType>
+  </portletSet>
+  <portletSet xmi:id="_K0IpkEalEeGYh8rbn3lCzg" name="navigation">
+    <isInstanceOfPortletType xmi:id="_N49FcEalEeGYh8rbn3lCzg" portletType="_A0eq4EaXEeGQg_YMsqwAlg">
+      <instances xmi:id="_fyF0gEdFEeGVKPH7ZdxAzA" value="/components/navigation/collaboration-navigation" instanceOf="_a7wVwEaXEeGQg_YMsqwAlg"/>
+      <instances xmi:id="_fyF0gUdFEeGVKPH7ZdxAzA" value="template" instanceOf="_a7wVw0aXEeGQg_YMsqwAlg"/>
+    </isInstanceOfPortletType>
+  </portletSet>
+  <portletSet xmi:id="_BVg9kEamEeGYh8rbn3lCzg" name="actions-common">
+    <isInstanceOfPortletType xmi:id="_Eyv5cEamEeGYh8rbn3lCzg" portletType="_A0eq4EaXEeGQg_YMsqwAlg">
+      <instances xmi:id="_Kf7esEamEeGYh8rbn3lCzg" value="/components/documentlibrary/actions-common" instanceOf="_a7wVwEaXEeGQg_YMsqwAlg"/>
+      <instances xmi:id="_Kf7esUamEeGYh8rbn3lCzg" value="template" instanceOf="_a7wVw0aXEeGQg_YMsqwAlg"/>
+    </isInstanceOfPortletType>
+  </portletSet>
+  <portletSet xmi:id="_Q_yeEEamEeGYh8rbn3lCzg" name="toolbar">
+    <isInstanceOfPortletType xmi:id="_TnLXEEamEeGYh8rbn3lCzg" portletType="_A0eq4EaXEeGQg_YMsqwAlg">
+      <instances xmi:id="_VKSvoEamEeGYh8rbn3lCzg" value="/components/documentlibrary/toolbar" instanceOf="_a7wVwEaXEeGQg_YMsqwAlg"/>
+      <instances xmi:id="_VKSvoUamEeGYh8rbn3lCzg" value="template" instanceOf="_a7wVw0aXEeGQg_YMsqwAlg"/>
+    </isInstanceOfPortletType>
+  </portletSet>
+  <portletSet xmi:id="_cU244EamEeGYh8rbn3lCzg" name="documentlist">
+    <isInstanceOfPortletType xmi:id="_eO3HcEamEeGYh8rbn3lCzg" portletType="_A0eq4EaXEeGQg_YMsqwAlg">
+      <instances xmi:id="_i1VjUEamEeGYh8rbn3lCzg" value="/components/documentlibrary/documentlist" instanceOf="_a7wVwEaXEeGQg_YMsqwAlg"/>
+      <instances xmi:id="_i1VjUUamEeGYh8rbn3lCzg" value="template" instanceOf="_a7wVw0aXEeGQg_YMsqwAlg"/>
+    </isInstanceOfPortletType>
+  </portletSet>
+  <portletSet xmi:id="_wDp-wEamEeGYh8rbn3lCzg" name="filter">
+    <isInstanceOfPortletType xmi:id="_xL4LEEamEeGYh8rbn3lCzg" portletType="_A0eq4EaXEeGQg_YMsqwAlg">
+      <instances xmi:id="_1OUFwEamEeGYh8rbn3lCzg" value="/components/documentlibrary/filter" instanceOf="_a7wVwEaXEeGQg_YMsqwAlg"/>
+      <instances xmi:id="_1OUFwUamEeGYh8rbn3lCzg" value="template" instanceOf="_a7wVw0aXEeGQg_YMsqwAlg"/>
+    </isInstanceOfPortletType>
+  </portletSet>
+  <portletSet xmi:id="_50m7cEamEeGYh8rbn3lCzg" name="tree">
+    <isInstanceOfPortletType xmi:id="_6y8L8EamEeGYh8rbn3lCzg" portletType="_A0eq4EaXEeGQg_YMsqwAlg">
+      <instances xmi:id="__BlWoEamEeGYh8rbn3lCzg" value="/components/documentlibrary/tree" instanceOf="_a7wVwEaXEeGQg_YMsqwAlg"/>
+      <instances xmi:id="__Bl9sEamEeGYh8rbn3lCzg" value="template" instanceOf="_a7wVw0aXEeGQg_YMsqwAlg"/>
+    </isInstanceOfPortletType>
+  </portletSet>
+  <portletSet xmi:id="_Dz2LwEanEeGYh8rbn3lCzg" name="tags">
+    <isInstanceOfPortletType xmi:id="_E7kBwEanEeGYh8rbn3lCzg" portletType="_A0eq4EaXEeGQg_YMsqwAlg">
+      <instances xmi:id="_OdMJAEanEeGYh8rbn3lCzg" value="/components/tag-filter" instanceOf="_a7wVwEaXEeGQg_YMsqwAlg"/>
+      <instances xmi:id="_OdMJAUanEeGYh8rbn3lCzg" value="template" instanceOf="_a7wVw0aXEeGQg_YMsqwAlg"/>
+    </isInstanceOfPortletType>
+  </portletSet>
+  <portletSet xmi:id="_CjjzIEaoEeGYh8rbn3lCzg" name="html-upload">
+    <isInstanceOfPortletType xmi:id="_E2rFQEaoEeGYh8rbn3lCzg" portletType="_A0eq4EaXEeGQg_YMsqwAlg">
+      <instances xmi:id="_L-gqoEaoEeGYh8rbn3lCzg" value="/components/upload/html-upload" instanceOf="_a7wVwEaXEeGQg_YMsqwAlg"/>
+      <instances xmi:id="_L-gqoUaoEeGYh8rbn3lCzg" value="template" instanceOf="_a7wVw0aXEeGQg_YMsqwAlg"/>
+    </isInstanceOfPortletType>
+  </portletSet>
+  <portletSet xmi:id="_VQOtoEaoEeGYh8rbn3lCzg" name="flash-upload">
+    <isInstanceOfPortletType xmi:id="_VQOtoUaoEeGYh8rbn3lCzg" portletType="_A0eq4EaXEeGQg_YMsqwAlg">
+      <instances xmi:id="_bsfmcEaoEeGYh8rbn3lCzg" value="/components/upload/flash-upload" instanceOf="_a7wVwEaXEeGQg_YMsqwAlg"/>
+      <instances xmi:id="_bsgNgEaoEeGYh8rbn3lCzg" value="template" instanceOf="_a7wVw0aXEeGQg_YMsqwAlg"/>
+    </isInstanceOfPortletType>
+  </portletSet>
+  <portletSet xmi:id="_jQjNwEaoEeGYh8rbn3lCzg" name="file-upload">
+    <isInstanceOfPortletType xmi:id="_krED8EaoEeGYh8rbn3lCzg" portletType="_A0eq4EaXEeGQg_YMsqwAlg">
+      <instances xmi:id="_pw7KgEaoEeGYh8rbn3lCzg" value="/components/upload/file-upload" instanceOf="_a7wVwEaXEeGQg_YMsqwAlg"/>
+      <instances xmi:id="_pw7xkEaoEeGYh8rbn3lCzg" value="template" instanceOf="_a7wVw0aXEeGQg_YMsqwAlg"/>
+    </isInstanceOfPortletType>
+  </portletSet>
+  <portletSet xmi:id="_syKG4EaoEeGYh8rbn3lCzg" name="footer">
+    <isInstanceOfPortletType xmi:id="_vSOP4EaoEeGYh8rbn3lCzg" portletType="_A0eq4EaXEeGQg_YMsqwAlg">
+      <instances xmi:id="_7_P8IEaoEeGYh8rbn3lCzg" value="/components/footer" instanceOf="_a7wVwEaXEeGQg_YMsqwAlg"/>
+      <instances xmi:id="_7_P8IUaoEeGYh8rbn3lCzg" value="global" instanceOf="_a7wVw0aXEeGQg_YMsqwAlg"/>
+    </isInstanceOfPortletType>
+  </portletSet>
+  <portletSet xmi:id="_xCUSEEc4EeGVKPH7ZdxAzA" name="includes">
+    <metainfo xmi:id="_kLrdMEdAEeGVKPH7ZdxAzA" key="rawContent" multilineValue="&lt;#include &quot;/org/alfresco/include/alfresco-template.ftl&quot; />&#xA;&lt;#include &quot;/org/alfresco/include/documentlibrary.inc.ftl&quot; />"/>
+    <isInstanceOfPortletType xmi:id="_223jQEc7EeGVKPH7ZdxAzA" portletType="_wFJ-4Ec7EeGVKPH7ZdxAzA"/>
+  </portletSet>
+  <portletSet xmi:id="_xIsYIEc-EeGVKPH7ZdxAzA" name="templateHeader">
+    <metainfo xmi:id="_kx8soUc4EeGVKPH7ZdxAzA" key="rawContent" value="" multilineValue="   &lt;@documentLibraryJS />&#xA;   &lt;script type=&quot;text/javascript&quot;>//&lt;![CDATA[&#xA;      new Alfresco.widget.Resizer(&quot;DocumentLibrary&quot;);&#xA;   //]]>&lt;/script>&#xA;   &lt;@script type=&quot;text/javascript&quot; src=&quot;${url.context}/res/modules/documentlibrary/doclib-actions.js&quot;>&lt;/@script>"/>
+    <isInstanceOfPortletType xmi:id="_0y4K4Ec-EeGVKPH7ZdxAzA" portletType="_wFJ-4Ec7EeGVKPH7ZdxAzA"/>
+  </portletSet>
+  <portletSetType xmi:id="_A0eq4EaXEeGQg_YMsqwAlg" name="PortletType1">
+    <haveAttribute xmi:id="_a7wVwEaXEeGQg_YMsqwAlg" name="url" required="true"/>
+    <haveAttribute xmi:id="_a7wVw0aXEeGQg_YMsqwAlg" name="scope" required="true"/>
+  </portletSetType>
+  <portletSetType xmi:id="_wFJ-4Ec7EeGVKPH7ZdxAzA" id="RawContent" name="RawContent">
+    <haveAttribute xmi:id="_m2IOEEc8EeGVKPH7ZdxAzA" name="RawContent" type="multiline"/>
+    <haveAttribute xmi:id="_m2IOEUc8EeGVKPH7ZdxAzA" name="RawConentFilePath"/>
+  </portletSetType>
+</portal:Portal>
