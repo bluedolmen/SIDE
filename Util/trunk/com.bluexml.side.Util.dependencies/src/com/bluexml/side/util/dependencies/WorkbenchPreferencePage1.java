@@ -15,7 +15,7 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import com.bluexml.side.util.libs.eclipse.StylingUtil;
 import com.bluexml.side.util.libs.eclipse.RessourcesSelection.RESOURCE_TYPE;
-import com.bluexml.side.util.libs.eclipse.wizards.AbstractFieldsPreferencePage;
+import com.bluexml.side.util.libs.eclipse.pages.AbstractFieldsPreferencePage;
 
 public class WorkbenchPreferencePage1 extends AbstractFieldsPreferencePage implements IWorkbenchPreferencePage {
 

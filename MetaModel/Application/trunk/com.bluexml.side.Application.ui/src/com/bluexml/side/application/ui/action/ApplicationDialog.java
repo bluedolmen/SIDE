@@ -754,7 +754,7 @@ public class ApplicationDialog extends Dialog {
 			if (level == 0) {
 				el.setEnabled(true);
 			}
-			tv.update(item.getData(), null);
+			tv.update(el, null);
 			initializeTree(item.getItems(), tv, level + 1);
 		}
 	}

@@ -18,18 +18,20 @@ public class Generator extends ImplNode {
 
 	@Override
 	public void updateApplication() {
-		System.out.println("Generator.updateApplication()");
+		System.out.println("Generator.updateApplication() " + getId());
 		if (!ApplicationDialog.loadingTree) {
 			ApplicationDialog.modificationMade();
 			Configuration config = ApplicationDialog.getCurrentConfiguration();
-			if (config != null) {
+			boolean customModuleGenerator = ApplicationUtil.isCustomModuleGenerator(getId());
+			if (config != null && !customModuleGenerator) {
+
 				// Remove element
 				ApplicationUtil.deleteGeneratorFromConf(config, this);
 
 				// Add the new element
 				if (isChecked() && isEnabled()) {
 					GeneratorConfiguration elt = ApplicationFactory.eINSTANCE.createGeneratorConfiguration();
-					System.out.println("Generator.updateApplication() " + getId());
+					System.out.println("Generator.updateApplication() addToConfiguration" + getId());
 					elt.setId(getId());
 					elt.setId_techno_version(parent.getId());
 					elt.setImpl_class(getLaunchClass());
@@ -87,7 +89,10 @@ public class Generator extends ImplNode {
 
 					config.getGeneratorConfigurations().add(elt);
 				}
+			} else {
+				System.out.println("Generator.updateApplication() Is Custom Module Generator");
 			}
+
 		}
 	}
 

@@ -22,7 +22,9 @@ import com.bluexml.side.util.security.Checkable;
  *         technology
  */
 public abstract class Deployer implements Checkable {
-	public static String workingDirKey = "generation.options.destinationPath"; //$NON-NLS-1$
+	public static final String CUSTOM = "custom";
+	public static final String deployCustomKey = "deploy.custom";
+	public static final String workingDirKey = "generation.options.destinationPath"; //$NON-NLS-1$
 	private Map<String, String> configurationParameters;
 	private Map<String, String> generationParameters;
 	protected ComponentMonitor monitor;
@@ -35,7 +37,6 @@ public abstract class Deployer implements Checkable {
 	}
 
 	/**
-	 * 
 	 * @param cleanKey
 	 *            the option key use in extension point
 	 * @param logChangesKey
@@ -64,6 +65,8 @@ public abstract class Deployer implements Checkable {
 
 	public static String DEPLOYER_CODE = null;
 	protected String cleanKey = null;
+	
+
 	protected String cleanKeyMsg = Activator.Messages.getString("Deployer.0"); //$NON-NLS-1$
 	protected String logChangesKey = null;
 	protected String logChangesMsg = Activator.Messages.getString("Deployer.1"); //$NON-NLS-1$
@@ -105,7 +108,7 @@ public abstract class Deployer implements Checkable {
 	 * @throws Exception
 	 */
 	public void deploy() throws Exception {
-		File fileToDeploy = getFileToDeploy();
+		File fileToDeploy = getFileWhereToDeploy();
 		// addInfoLog("preProcessing ...", "", null);
 		// monitor.beginTask("preProcess start");
 		preProcess(fileToDeploy);
@@ -118,7 +121,11 @@ public abstract class Deployer implements Checkable {
 		// addInfoLog("Processing ...", "", null);
 		// monitor.customSubTask("main deploy process start");
 		deployProcess(fileToDeploy);
+		if (doDeployCustom()) {
+			deployProcess(getFileWhereToDeployCustom());
+		}
 		monitor.taskDone(null);
+
 		//monitor.taskDone(Activator.Messages.getString("Deployer.13")); //$NON-NLS-1$
 		// monitor.beginTask("postProcess start");
 		postProcess(fileToDeploy);
@@ -136,16 +143,32 @@ public abstract class Deployer implements Checkable {
 	}
 
 	/**
-	 * default method to get the File to deploy
+	 * default method to get the File where to deploy
 	 * 
 	 * @param absoluteWKDirPath
 	 * @return
 	 */
-	public File getFileToDeploy() {
+	public File getFileWhereToDeploy() {
 		if (fileToDeploy == null) {
 			String IfilewkDirPath = getTargetPath();
 			String absoluteWKDirPath = IFileHelper.getSystemFolderPath(IfilewkDirPath);
 			fileToDeploy = new File(absoluteWKDirPath + File.separator + techVersion);
+		}
+		return fileToDeploy;
+
+	}
+
+	/**
+	 * default method to get the File where to deploy custom artifacts
+	 * 
+	 * @param absoluteWKDirPath
+	 * @return
+	 */
+	public File getFileWhereToDeployCustom() {
+		if (fileToDeploy == null) {
+			String IfilewkDirPath = getTargetPath();
+			String absoluteWKDirPath = IFileHelper.getSystemFolderPath(IfilewkDirPath);
+			fileToDeploy = new File(absoluteWKDirPath + File.separator + techVersion + File.separator + CUSTOM);
 		}
 		return fileToDeploy;
 
@@ -215,6 +238,15 @@ public abstract class Deployer implements Checkable {
 	}
 
 	/**
+	 * check if clean must be done
+	 * 
+	 * @return
+	 */
+	protected boolean doDeployCustom() {
+		return options != null && options.contains(deployCustomKey);
+	}
+
+	/**
 	 * Move the stamp file added by the generator to the directory into log path
 	 * to be used for log purpose.
 	 * 
@@ -224,10 +256,10 @@ public abstract class Deployer implements Checkable {
 		// Seek all .xml files into gen directory
 		IFolder source = IFileHelper.getIFolder(getTargetPath() + System.getProperty("file.separator") + getTechVersion()); //$NON-NLS-1$
 		if (source.exists()) {
-			IFileHelper.refreshFolder((IContainer)source);
+			IFileHelper.refreshFolder((IContainer) source);
 			IFolder dest = IFileHelper.createFolder(logPath + System.getProperty("file.separator") + LogSave.LOG_STAMP_FOLDER + System.getProperty("file.separator")); //$NON-NLS-1$ //$NON-NLS-2$
 			if (dest.exists()) {
-				IFileHelper.refreshFolder((IContainer)dest);
+				IFileHelper.refreshFolder((IContainer) dest);
 				List<IFile> toMove = IFileHelper.getAllFiles(source);
 				for (IFile xmlFile : toMove) {
 					if (xmlFile.getName().endsWith("-stamp.xml")) { //$NON-NLS-1$
@@ -237,10 +269,11 @@ public abstract class Deployer implements Checkable {
 			}
 		}
 	}
-	
+
 	public boolean check() {
 		return true;
 	}
+
 	public boolean checkOption(String optionID) {
 		return true;
 	}
@@ -249,5 +282,5 @@ public abstract class Deployer implements Checkable {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 }

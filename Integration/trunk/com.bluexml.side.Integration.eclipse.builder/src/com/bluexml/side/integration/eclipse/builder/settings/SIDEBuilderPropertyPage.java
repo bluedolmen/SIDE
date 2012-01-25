@@ -11,8 +11,8 @@ import org.eclipse.swt.widgets.Composite;
 
 import com.bluexml.side.application.Configuration;
 import com.bluexml.side.util.libs.eclipse.RessourcesSelection.RESOURCE_TYPE;
+import com.bluexml.side.util.libs.eclipse.pages.AbstractFieldsPropertyPage;
 import com.bluexml.side.util.libs.eclipse.pages.PageControlsHelper;
-import com.bluexml.side.util.libs.eclipse.wizards.AbstractFieldsPropertyPage;
 import com.bluexml.side.util.libs.eclipse.wizards.ValueMapListener;
 
 public class SIDEBuilderPropertyPage extends AbstractFieldsPropertyPage {

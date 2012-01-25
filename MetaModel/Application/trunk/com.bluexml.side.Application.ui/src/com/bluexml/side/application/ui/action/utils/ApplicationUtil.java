@@ -180,6 +180,11 @@ public class ApplicationUtil {
 	 * @param in
 	 */
 	public static void deleteGeneratorFromConf(Configuration config, Generator in) {
+		Set<GeneratorConfiguration> eltsGc = getConfigurationsForGenerator(config, in);
+		config.getGeneratorConfigurations().removeAll(eltsGc);
+	}
+
+	public static Set<GeneratorConfiguration> getConfigurationsForGenerator(Configuration config, Generator in) {
 		Set<GeneratorConfiguration> eltsGc = new HashSet<GeneratorConfiguration>();
 
 		for (GeneratorConfiguration gc : config.getGeneratorConfigurations()) {
@@ -187,7 +192,7 @@ public class ApplicationUtil {
 				eltsGc.add(gc);
 			}
 		}
-		config.getGeneratorConfigurations().removeAll(eltsGc);
+		return eltsGc;
 	}
 
 	/**
@@ -578,7 +583,11 @@ public class ApplicationUtil {
 				generatorConfiguration.setContributorId(extFrag.getContributor().getName());
 
 				// side.customModules generator is a system generator only used to list user module dependencies so modules are not listed in extension point but provided in configuration
-				if (!generatorConfiguration.getId().equals("side.customModules")) {
+				String id = generatorConfiguration.getId();
+				System.out.println("ApplicationUtil.updateConfigurationFromExtensionPoint() generatorId :" + id);
+				
+				if (!isCustomModuleGenerator(id)) {
+					System.out.println("ApplicationUtil.updateConfigurationFromExtensionPoint() generatorId != side.customModules");
 					Map<String, IConfigurationElement> dependencies_ext = new HashMap<String, IConfigurationElement>();
 
 					// Obligatory dependences
@@ -881,6 +890,10 @@ public class ApplicationUtil {
 		// manage static parameters, if configurationPrameter do not exists create it with default value
 		ApplicationDialog.addStaticParameters(config);
 
+	}
+
+	public static boolean isCustomModuleGenerator(String id) {
+		return id.equals("side.customModules");
 	}
 
 	public static IConfigurationElement getIConfigurationElement(ConfigurationParameters configurationParameters) {

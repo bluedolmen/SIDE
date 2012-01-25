@@ -1,4 +1,4 @@
-package com.bluexml.side.util.libs.eclipse.wizards;
+package com.bluexml.side.util.libs.eclipse.pages;
 
 import java.util.List;
 
@@ -11,8 +11,7 @@ import org.eclipse.ui.dialogs.PropertyPage;
 
 import com.bluexml.side.util.libs.eclipse.StylingUtil;
 import com.bluexml.side.util.libs.eclipse.RessourcesSelection.RESOURCE_TYPE;
-import com.bluexml.side.util.libs.eclipse.pages.CheckablePage;
-import com.bluexml.side.util.libs.eclipse.pages.PageControlsHelper;
+import com.bluexml.side.util.libs.eclipse.wizards.ValuesMap;
 
 public abstract class AbstractFieldsPropertyPage extends PropertyPage implements CheckablePage {
 	PageControlsHelper controlHelper = new PageControlsHelper(this);
