@@ -16,7 +16,7 @@ public class FacetMapMultiDeployer extends AbstractMultiDeployer {
 		super.initialize(configurationParameters, generationParameters, options, monitor);
 		// instantiate deployers
 
-		File filetoDeploy = getFileToDeploy();
+		File filetoDeploy = getFileWhereToDeploy();
 		FileFilter fileFilter = new FileFilter() {
 			public boolean accept(File pathname) {
 				boolean ok = false;
