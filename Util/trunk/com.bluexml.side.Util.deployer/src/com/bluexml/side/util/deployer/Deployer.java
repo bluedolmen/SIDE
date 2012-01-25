@@ -13,6 +13,7 @@ import org.eclipse.core.resources.IFolder;
 
 import com.bluexml.side.application.StaticConfigurationParameters;
 import com.bluexml.side.util.componentmonitor.ComponentMonitor;
+import com.bluexml.side.util.dependencies.DependencesManager;
 import com.bluexml.side.util.documentation.LogSave;
 import com.bluexml.side.util.libs.IFileHelper;
 import com.bluexml.side.util.security.Checkable;
@@ -22,16 +23,21 @@ import com.bluexml.side.util.security.Checkable;
  *         technology
  */
 public abstract class Deployer implements Checkable {
-	public static final String CUSTOM = "custom";
 	public static final String deployCustomKey = "deploy.custom";
 	public static final String workingDirKey = "generation.options.destinationPath"; //$NON-NLS-1$
 	private Map<String, String> configurationParameters;
 	private Map<String, String> generationParameters;
 	protected ComponentMonitor monitor;
-	protected File fileToDeploy;
+	protected File fileToDeploy = null;
+	protected File customFileToDeploy = null;
 	protected String id;
 	protected String techVersion = null;
 
+	/**
+	 * use with caution at this time only facetmap deployer use this
+	 * 
+	 * @param fileToDeploy
+	 */
 	public void setFileToDeploy(File fileToDeploy) {
 		this.fileToDeploy = fileToDeploy;
 	}
@@ -65,7 +71,6 @@ public abstract class Deployer implements Checkable {
 
 	public static String DEPLOYER_CODE = null;
 	protected String cleanKey = null;
-	
 
 	protected String cleanKeyMsg = Activator.Messages.getString("Deployer.0"); //$NON-NLS-1$
 	protected String logChangesKey = null;
@@ -165,12 +170,12 @@ public abstract class Deployer implements Checkable {
 	 * @return
 	 */
 	public File getFileWhereToDeployCustom() {
-		if (fileToDeploy == null) {
+		if (customFileToDeploy == null) {
 			String IfilewkDirPath = getTargetPath();
 			String absoluteWKDirPath = IFileHelper.getSystemFolderPath(IfilewkDirPath);
-			fileToDeploy = new File(absoluteWKDirPath + File.separator + techVersion + File.separator + CUSTOM);
+			customFileToDeploy = new File(absoluteWKDirPath + File.separator + techVersion + File.separator + DependencesManager.CUSTOM_FOLDER);
 		}
-		return fileToDeploy;
+		return customFileToDeploy;
 
 	}
 

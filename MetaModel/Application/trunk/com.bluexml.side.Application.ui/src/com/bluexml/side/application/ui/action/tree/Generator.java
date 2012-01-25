@@ -1,5 +1,7 @@
 package com.bluexml.side.application.ui.action.tree;
 
+import java.util.Set;
+
 import org.eclipse.core.runtime.IConfigurationElement;
 
 import com.bluexml.side.application.ApplicationFactory;
@@ -22,8 +24,10 @@ public class Generator extends ImplNode {
 		if (!ApplicationDialog.loadingTree) {
 			ApplicationDialog.modificationMade();
 			Configuration config = ApplicationDialog.getCurrentConfiguration();
+			boolean configurationsForGeneratorExists = ApplicationUtil.getConfigurationsForGenerator(config, this).size() > 0;
+			System.out.println("Generator.updateApplication() conf exists ?" + configurationsForGeneratorExists);
 			boolean customModuleGenerator = ApplicationUtil.isCustomModuleGenerator(getId());
-			if (config != null && !customModuleGenerator) {
+			if (config != null && (!customModuleGenerator || (customModuleGenerator && !configurationsForGeneratorExists))) {
 
 				// Remove element
 				ApplicationUtil.deleteGeneratorFromConf(config, this);

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class DependencesManager {
+	public static final String CUSTOM_FOLDER = "custom";
 	private boolean offline;
 	private Map<String, List<ModuleConstraint>> contraints = new HashMap<String, List<ModuleConstraint>>();
 	private String generatorID;
@@ -38,7 +39,7 @@ public class DependencesManager {
 		if (tech_v_dep.containsKey(tech_v)) {
 			List<ModuleConstraint> list = tech_v_dep.get(tech_v);
 			if (!list.contains(mc)) {
-				System.err.println("add :" + mc);				 //$NON-NLS-1$
+				System.err.println("add :" + mc); //$NON-NLS-1$
 				list.add(mc);
 			} else {
 				System.err.println("Avoid duplicate"); //$NON-NLS-1$
@@ -96,11 +97,15 @@ public class DependencesManager {
 	//
 	// }
 
-	public void copyDependencies(File workFolder, File generateFolder) throws Exception {
+	public void copyDependencies(File workFolder, File generateFolder, boolean custom) throws Exception {
 		for (Map.Entry<String, List<ModuleConstraint>> mc : this.getContraints().entrySet()) {
 			// copy dependencies
 			MavenTmpProject mvp = new MavenTmpProject(workFolder, mc.getKey(), getConstraintsFor(mc.getKey()), offline);
-			mvp.copyAllDependencies(new File(generateFolder, mc.getKey()), generatorID);
+			File whereTocopy = new File(generateFolder, mc.getKey());
+			if (custom) {
+				whereTocopy = new File(whereTocopy, CUSTOM_FOLDER);
+			}
+			mvp.copyAllDependencies(whereTocopy, generatorID);
 
 		}
 	}
