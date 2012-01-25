@@ -25,8 +25,10 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.bluexml.side.portal.HavePortlet;
+import com.bluexml.side.portal.Page;
 import com.bluexml.side.portal.PortalFactory;
 import com.bluexml.side.portal.PortalPackage;
+import com.bluexml.side.portal.Portlet;
 
 /**
  * This is the item provider adapter for a {@link com.bluexml.side.portal.HavePortlet} object.
@@ -158,11 +160,17 @@ public class HavePortletItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_HavePortlet_type");
+		String label = getString("_UI_HavePortlet_type");
+		Portlet associationPortlet = ((HavePortlet)object).getAssociationPortlet();
+		if (associationPortlet != null && associationPortlet.getName() != null) {
+			label += " " + associationPortlet.getName();
+		}		
+		return label;
+		
 	}
 
 	/**
