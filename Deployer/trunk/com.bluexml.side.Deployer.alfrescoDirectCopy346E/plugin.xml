@@ -75,13 +75,6 @@
                      </optionRef>
                   </mustBeUnchecked>
                </option>
-               <option
-                     defaultOption="true"
-                     documentation="if some modules are declared in cutomModule generator this option allow you to install them as any other modules"
-                     hidden="false"
-                     key="deploy.custom"
-                     label="deploy custom modules">
-               </option>
             </deployerVersion>
          </technologyVersion>
       </technology>
