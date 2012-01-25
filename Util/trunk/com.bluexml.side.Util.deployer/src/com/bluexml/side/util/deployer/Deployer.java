@@ -23,7 +23,6 @@ import com.bluexml.side.util.security.Checkable;
  *         technology
  */
 public abstract class Deployer implements Checkable {
-	public static final String deployCustomKey = "deploy.custom";
 	public static final String workingDirKey = "generation.options.destinationPath"; //$NON-NLS-1$
 	private Map<String, String> configurationParameters;
 	private Map<String, String> generationParameters;
@@ -126,7 +125,7 @@ public abstract class Deployer implements Checkable {
 		// addInfoLog("Processing ...", "", null);
 		// monitor.customSubTask("main deploy process start");
 		deployProcess(fileToDeploy);
-		if (doDeployCustom()) {
+		if (getFileWhereToDeployCustom().exists()) {
 			deployProcess(getFileWhereToDeployCustom());
 		}
 		monitor.taskDone(null);
@@ -240,15 +239,6 @@ public abstract class Deployer implements Checkable {
 	 */
 	protected boolean doClean() {
 		return options != null && options.contains(cleanKey);
-	}
-
-	/**
-	 * check if clean must be done
-	 * 
-	 * @return
-	 */
-	protected boolean doDeployCustom() {
-		return options != null && options.contains(deployCustomKey);
 	}
 
 	/**
