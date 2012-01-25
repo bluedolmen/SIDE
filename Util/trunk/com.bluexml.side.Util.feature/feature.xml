@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Util.feature" label="SIDE Modeler Generator Deployer MDA Utilities" version="1.0.311.v32201-20120123" provider-name="BlueXML">
+<feature id="com.bluexml.side.Util.feature" label="SIDE Modeler Generator Deployer MDA Utilities" version="1.0.312.v32264-20120125" provider-name="BlueXML">
   <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature gathers common tools used by the SIDE modeler, generators and deployers.</description>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
   <requires>
@@ -34,23 +34,23 @@
     <import plugin="org.apache.ant" />
     <import plugin="com.bluexml.side.Util.feedback" />
   </requires>
-  <plugin id="com.bluexml.side.Util.deployer" download-size="0" install-size="0" version="1.0.47.v29723-20111108" unpack="false" />
+  <plugin id="com.bluexml.side.Util.deployer" download-size="0" install-size="0" version="1.0.48.v32264-20120125" unpack="false" />
   <plugin id="com.bluexml.side.Util.deployer.war" download-size="0" install-size="0" version="1.0.48.v32201-20120123" unpack="false" />
   <plugin id="com.bluexml.side.Util.ecore" download-size="0" install-size="0" version="1.0.46.v31485-20120104" unpack="false" />
-  <plugin id="com.bluexml.side.Util.generator" download-size="0" install-size="0" version="1.0.77.v29723-20111108" unpack="false" />
+  <plugin id="com.bluexml.side.Util.generator" download-size="0" install-size="0" version="1.0.78.v32264-20120125" unpack="false" />
   <plugin id="com.bluexml.side.Util.generator.acceleo" download-size="0" install-size="0" version="1.0.60.v31653-20120106" unpack="false" />
   <plugin id="com.bluexml.side.Util.generator.alfresco" download-size="0" install-size="0" version="1.0.51.v29723-20111108" unpack="false" />
-  <plugin id="com.bluexml.side.Util.libs" download-size="0" install-size="0" version="1.0.106.v31980-20120111" unpack="false" />
+  <plugin id="com.bluexml.side.Util.libs" download-size="0" install-size="0" version="1.0.107.v32264-20120125" unpack="false" />
   <plugin id="com.bluexml.side.Util.log" download-size="0" install-size="0" version="1.0.40.v29723-20111108" unpack="false" />
   <plugin id="com.bluexml.side.Util.metaModel.validate" download-size="0" install-size="0" version="1.0.36.v30360-20111122" unpack="false" />
   <plugin id="com.bluexml.side.Util.model.merge" download-size="0" install-size="0" version="1.0.34.v31485-20120104" unpack="false" />
   <plugin id="com.bluexml.side.Util.security" download-size="0" install-size="0" version="1.0.46.v29723-20111108" unpack="false" />
-  <plugin id="com.bluexml.side.Util.dependencies" download-size="0" install-size="0" version="1.0.148.v32107-20120116" unpack="false" />
+  <plugin id="com.bluexml.side.Util.dependencies" download-size="0" install-size="0" version="1.0.149.v32264-20120125" unpack="false" />
   <plugin id="com.bluexml.side.Util.feedback" download-size="0" install-size="0" version="1.0.39.v29723-20111108" unpack="false" />
   <plugin id="com.bluexml.side.Util.generator.documentation" download-size="0" install-size="0" version="1.0.32.v31653-20120106" unpack="false" />
   <plugin id="com.bluexml.side.Util.componentMonitor" download-size="0" install-size="0" version="1.0.38.v29723-20111108" unpack="false" />
   <plugin id="com.bluexml.side.Deployer.antDeployer" download-size="0" install-size="0" version="1.0.23.v28467-20111005" unpack="false" />
   <plugin id="com.bluexml.side.Util.feedback.startup" download-size="0" install-size="0" version="1.0.10.v29723-20111108" unpack="false" />
-  <plugin id="com.bluexml.side.Util.framework.tools" download-size="0" install-size="0" version="1.0.1.v30447-20111125" unpack="false" />
+  <plugin id="com.bluexml.side.Util.framework.tools" download-size="0" install-size="0" version="1.0.2.v32264-20120125" unpack="false" />
 </feature>
 
