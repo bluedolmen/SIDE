@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="com.bluexml.side.util.framework.tooling">
+      <modelLibrary
+            activator="com.bluexml.side.util.framework.tools.builtinmodelsalfresco.Activator"
+            archivePath="/com/bluexml/side/util/framework/tools/builtinmodelsalfresco/buildInModels.zip"
+            id="Model_library_SIDE_Built_in"
+            label="SIDE Built-in Models"
+            pluginId="com.bluexml.side.Util.framework.tools.builtinModelsAlfresco"
+            projectId="Model-library-SIDE-Built-in">
+         <generatorVersion
+               class="com.bluexml.side.util.framework.tools.builtinmodelsalfresco.Activator"
+               hidden="hidden and used by default"
+               id="side.customModules"
+               version="side.customModules">
+         </generatorVersion>
+      </modelLibrary>
+   </extension>
+
+</plugin>
