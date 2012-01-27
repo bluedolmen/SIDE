@@ -29,7 +29,7 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 <%}%>
 <%script type="Column" name="generateLayout"%>
 <%if (metainfo[key == "tag"]){%>
-<%if (metainfo[key == "tag"].value != null){%>
+<%if (metainfo[key == "tag"].value != null && metainfo[key == "tag"].value != ""){%>
 <%if (metainfo[key == "tag"].value.startsWith("@")){%>
 <<%metainfo[key == "tag"].value%>>
 <%generateLayout_sub()%>
@@ -67,6 +67,8 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 			<%}else if (metainfo[key == "rawContentFilePath"]){%>
 			<%-- load external files content and add it here --%>
 <%getFileContent(metainfo[key == "rawContentFilePath"].value)%>
+			<%}else if (metainfo[key == "rawContent"]){%>
+			<%metainfo[key == "rawContent"].multilineValue%>
 			<%}else{%>
 				<%-- use default share components --%>
 			<@region 
