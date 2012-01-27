@@ -2,6 +2,7 @@ package com.bluexml.side.clazz.edit.ui.actions.initializer.creator;
 
 import java.io.IOException;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
@@ -32,15 +33,18 @@ public class ClassModelCreator extends ModelAndDiagramCreator {
 
 	@Override
 	protected void headLessInitialize() throws Exception {
-		// create packages
-		String[] split = packages.split("/");
+		// create packages		
 		com.bluexml.side.common.Package parent = (Model) newRootObject;
-		for (String string : split) {
-			ClassPackage createClassPackage = ClazzFactory.eINSTANCE.createClassPackage();
-			createClassPackage.setName(string);
-			parent.getPackageSet().add(createClassPackage);
-			parent = createClassPackage;
+		if (StringUtils.trimToNull(packages) != null) {
+			String[] split = packages.split("/");
+			for (String string : split) {
+				ClassPackage createClassPackage = ClazzFactory.eINSTANCE.createClassPackage();
+				createClassPackage.setName(string);
+				parent.getPackageSet().add(createClassPackage);
+				parent = createClassPackage;
+			}
 		}
+
 		rootDiagram = parent;
 	}
 
