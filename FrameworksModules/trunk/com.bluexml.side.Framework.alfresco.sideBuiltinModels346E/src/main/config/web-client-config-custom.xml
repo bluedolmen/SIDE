@@ -19,8 +19,8 @@
 		<!-- The list of aspects to show in the add/remove features action -->
 		<!-- and the has-aspect condition -->
 		<aspects>
-			<aspect name="sideBuildInLibraryAlfresco:HasTreeFilter" />
-			<aspect name="sideBuildInLibraryAlfresco:TreeFilter" />
+			<aspect name="buildInLibraryAlfresco:HasTreeFilter" />
+			<aspect name="buildInLibraryAlfresco:TreeFilter" />
 
 
 		</aspects>
@@ -47,8 +47,8 @@
 
 			</content-types>
 			<custom-properties>
-				<meta-data aspect="sideBuildInLibraryAlfresco:TreeFilter"
-					property="sideBuildInLibraryAlfresco:TreeFilter_root" />
+				<meta-data aspect="buildInLibraryAlfresco:TreeFilter"
+					property="buildInLibraryAlfresco:TreeFilter_root" />
 
 
 			</custom-properties>
@@ -75,13 +75,13 @@
 
 
 
-	<config evaluator="aspect-name" condition="sideBuildInLibraryAlfresco:HasTreeFilter">
+	<config evaluator="aspect-name" condition="buildInLibraryAlfresco:HasTreeFilter">
 		<property-sheet>
 		</property-sheet>
 	</config>
-	<config evaluator="aspect-name" condition="sideBuildInLibraryAlfresco:TreeFilter">
+	<config evaluator="aspect-name" condition="buildInLibraryAlfresco:TreeFilter">
 		<property-sheet>
-			<show-property name="sideBuildInLibraryAlfresco:TreeFilter_root" />
+			<show-property name="buildInLibraryAlfresco:TreeFilter_root" />
 		</property-sheet>
 	</config>
 

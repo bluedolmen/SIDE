@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='iso-8859-1'?>
 
-<model name="sideBuildInLibraryAlfresco:model" xmlns="http://www.alfresco.org/model/dictionary/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+<model name="buildInLibraryAlfresco:model" xmlns="http://www.alfresco.org/model/dictionary/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
 	<!-- Definition of the model -->
 
-	<description>sideBuildInLibraryAlfresco</description>
+	<description>buildInLibraryAlfresco</description>
 	<author>Alfresco Generator</author>
 	<version>1.0</version>
 	
@@ -47,14 +47,14 @@
 		<namespaces>
 			
 			<!-- STARTMMLOOP -->
-			<namespace uri="http://www.bluexml.com/model/content/sideBuildInLibraryAlfresco/1.0" prefix="sideBuildInLibraryAlfresco" />
+			<namespace uri="http://www.bluexml.com/model/content/buildInLibraryAlfresco/1.0" prefix="buildInLibraryAlfresco" />
 			 
 			 
 			<!-- ENDMMLOOP -->
 		</namespaces>
 	
 		 <constraints>
-			<constraint name="sideBuildInLibraryAlfresco:nomenclature:comparison" type="LIST">
+			<constraint name="buildInLibraryAlfresco:nomenclature:comparison" type="LIST">
 	            <parameter name="allowedValues">
 	                <list>
 	                    <value>&lt;</value>
@@ -64,7 +64,7 @@
 	            </parameter>
 	        </constraint>
 	        
-	        <constraint name="sideBuildInLibraryAlfresco:nomenclature:booleanoperator" type="LIST">
+	        <constraint name="buildInLibraryAlfresco:nomenclature:booleanoperator" type="LIST">
 	            <parameter name="allowedValues">
 	                <list>
 	                    <value>AND</value>
@@ -74,7 +74,7 @@
 	            </parameter>
 	        </constraint>
 	        
-			<constraint name="sideBuildInLibraryAlfresco:constraint:mail" type="REGEX">
+			<constraint name="buildInLibraryAlfresco:constraint:mail" type="REGEX">
 		        <parameter name="expression"><value>^(|[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+)$</value></parameter>
 		        <parameter name="requiresMatch"><value>true</value></parameter>
 		    </constraint>
@@ -90,7 +90,7 @@
 	</types>
 	<aspects>
 			
-				<aspect name="sideBuildInLibraryAlfresco:HasTreeFilter">		
+				<aspect name="buildInLibraryAlfresco:HasTreeFilter">		
 					
 					
 					<!-- Generalization -->						
@@ -103,7 +103,7 @@
 						<!-- Properties for search association true-->
 						<!-- generate_searchFieldForAssociation -->
 					<!-- properties to store seachable associations target-->
-					<property name="sideBuildInLibraryAlfresco:HasTreeFilter_hasTreeFilter_TreeFiltersearch">
+					<property name="buildInLibraryAlfresco:HasTreeFilter_hasTreeFilter_TreeFiltersearch">
 						<type>d:text</type>
 						<multiple>true</multiple>
 						<index enabled="true">
@@ -116,14 +116,14 @@
 					</properties>
 					<!-- Associations -->
 					<associations>
-						<association name="sideBuildInLibraryAlfresco:HasTreeFilter_hasTreeFilter_TreeFilter">
+						<association name="buildInLibraryAlfresco:HasTreeFilter_hasTreeFilter_TreeFilter">
 							<title>hasTreeFilter</title>
 							<source>
 								<mandatory>false</mandatory>
 								<many>true</many>						
 							</source>
 							<target>
-								<class>sideBuildInLibraryAlfresco:TreeFilter</class>
+								<class>buildInLibraryAlfresco:TreeFilter</class>
 								<mandatory>false</mandatory>
 								<many>true</many>						
 							</target>
@@ -133,7 +133,7 @@
 			<!-- Aspects -->
 				</aspect>
 			
-				<aspect name="sideBuildInLibraryAlfresco:TreeFilter">		
+				<aspect name="buildInLibraryAlfresco:TreeFilter">		
 					
 					
 					<!-- Generalization -->						
@@ -143,7 +143,7 @@
 					<!--<includedInSuperTypeQuery>false</includedInSuperTypeQuery>-->
 					<!-- Properties -->
 					<properties>
-						<property name="sideBuildInLibraryAlfresco:TreeFilter_root">
+						<property name="buildInLibraryAlfresco:TreeFilter_root">
 							<type>d:boolean</type>
 					          <index enabled="true">
 					          	 <atomic>true</atomic>
@@ -155,7 +155,7 @@
 						<!-- Properties for search association true-->
 						<!-- generate_searchFieldForAssociation -->
 					<!-- properties to store seachable associations target-->
-					<property name="sideBuildInLibraryAlfresco:TreeFilter_AssociationTree_TreeFiltersearch">
+					<property name="buildInLibraryAlfresco:TreeFilter_AssociationTree_TreeFiltersearch">
 						<type>d:text</type>
 						<multiple>true</multiple>
 						<index enabled="true">
@@ -168,14 +168,14 @@
 					</properties>
 					<!-- Associations -->
 					<associations>
-						<association name="sideBuildInLibraryAlfresco:TreeFilter_AssociationTree_TreeFilter">
+						<association name="buildInLibraryAlfresco:TreeFilter_AssociationTree_TreeFilter">
 							<title>AssociationTree</title>
 							<source>
 								<mandatory>false</mandatory>
 								<many>true</many>						
 							</source>
 							<target>
-								<class>sideBuildInLibraryAlfresco:TreeFilter</class>
+								<class>buildInLibraryAlfresco:TreeFilter</class>
 								<mandatory>false</mandatory>
 								<many>true</many>						
 							</target>
