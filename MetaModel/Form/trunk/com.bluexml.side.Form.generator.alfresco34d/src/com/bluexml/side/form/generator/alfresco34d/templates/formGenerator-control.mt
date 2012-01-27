@@ -249,9 +249,14 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 <%}else if (widget.toString() == "Select"){%>
 	<control template="/side/controls/association-select.ftl" >
 		<%if (args(0) == "multiple"){%>
-		 	<control-param name="multipleSelectMode">true</control-param>		
+		<control-param name="multipleSelectMode">true</control-param>		
 		<%}else{%>
-			<%getXtensionAsControlParam("multipleSelectMode")%>
+		<%getXtensionAsControlParam("multipleSelectMode")%>
+		<%}%>
+		<%if (filter("ClassReference").real_class.filter("clazz.Aspect") != null){%>
+		<control-param name="selectableTypeIsAspect">true</control-param>
+		<%}else{%>
+		<control-param name="selectableTypeIsAspect">false</control-param>
 		<%}%>
 		<%getXtensionAsControlParam("filterTerm")%>
 		<%getXtensionAsControlParam("advancedQuery")%>
