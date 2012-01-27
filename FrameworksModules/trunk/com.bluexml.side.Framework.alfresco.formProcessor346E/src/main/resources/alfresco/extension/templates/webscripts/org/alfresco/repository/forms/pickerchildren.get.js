@@ -4,6 +4,7 @@ function main()
 {
    var argsFilterType = args['filterType'],
       argsSelectableType = args['selectableType'],
+      argsSelectableTypeIsAspect = args['selectableTypeIsAspect'],
       argsSearchTerm = args['searchTerm'],
       argsAdvancedQuery = args['advancedQuery'],
       argsMaxResults = args['size'],
@@ -223,8 +224,13 @@ function main()
          }
       } else {
     	  // search in given path of the given type
+    	  var type ="";
+    	  if (argsSelectableTypeIsAspect == "true") {
+    		  type = "ASPECT:\"" + argsSelectableType + "\"";
+    	  } else {
+    		  type = "TYPE:\"" + argsSelectableType + "\"";  
+    	  }
     	  
-    	  var type = "TYPE:\"" + argsSelectableType + "\"";
     	  var path = null;
     	  if (nodeRef != 'null://null/null') {
     		  path = "PATH:\"" + nodeRef + "\"";

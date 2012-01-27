@@ -26,7 +26,7 @@
 	/**
 	 * YUI Library aliases
 	 */
-	var Dom = YAHOO.util.Dom, Event = YAHOO.util.Event;
+	var Dom = YAHOO.util.Dom, Event = YAHOO.util.Event, JSON = YAHOO.lang.JSON;
 
 	/**
 	 * Alfresco Slingshot aliases
@@ -2713,7 +2713,14 @@
 								// IDE
 								// search parameters
 								if (this.options.search) {
-									params += "&search=" + encodeURIComponent(this.options.search.toSource());
+									params += "&search=" + encodeURIComponent(JSON.stringify(this.options.search));
+								}
+							} else if (obj.filter.filterId == "metadata") {
+								params += "?filter=metadata";
+								// IDE
+								// search parameters
+								if (obj.filter.filterData) {
+									params += "&search=" + encodeURIComponent(obj.filter.filterData);
 								}
 							} else if (this.options.search.fullText && this.options.search.fullText.length > 0) {
 								params += "?filter=fullTextSearch";

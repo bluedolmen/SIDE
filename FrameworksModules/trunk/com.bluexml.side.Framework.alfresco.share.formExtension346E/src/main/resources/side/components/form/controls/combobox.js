@@ -88,7 +88,7 @@ if (!Array.prototype.indexOf) {
 				var me = this;
 				this.options.getDataSource = function _getDataSource(me) {
 					var myDataSource = new YAHOO.util.XHRDataSource("/share/proxy/alfresco/api/forms/picker/search/children?selectableType=" + me.options.itemType + "&searchTerm="
-							+ me.options.filterTerm + "&size=" + me.options.maxResults + "&advancedQuery=" + me.options.advancedQuery);
+							+ me.options.filterTerm + "&size=" + me.options.maxResults + "&advancedQuery=" + me.options.advancedQuery + "&selectableTypeIsAspect=" + me.options.selectableTypeIsAspect);
 					myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
 					myDataSource.responseSchema = {
 						fields : [ "nodeRef", "name", "title" ],

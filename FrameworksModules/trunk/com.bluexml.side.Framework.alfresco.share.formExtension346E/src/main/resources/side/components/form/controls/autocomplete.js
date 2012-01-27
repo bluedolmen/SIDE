@@ -85,7 +85,7 @@ if (!Array.prototype.indexOf) {
 			} else {
 				var me = this;
 				this.options.getDataSource = function _getDataSource(me) {
-					var url = "/share/proxy/alfresco/api/forms/picker/search/children?selectableType=" + me.options.itemType + "&size=" + me.options.maxResults;
+					var url = "/share/proxy/alfresco/api/forms/picker/search/children?selectableType=" + me.options.itemType + "&size=" + me.options.maxResults + "&selectableTypeIsAspect=" + me.options.selectableTypeIsAspect;
 					
 					var myDataSource = new YAHOO.util.XHRDataSource(url);
 

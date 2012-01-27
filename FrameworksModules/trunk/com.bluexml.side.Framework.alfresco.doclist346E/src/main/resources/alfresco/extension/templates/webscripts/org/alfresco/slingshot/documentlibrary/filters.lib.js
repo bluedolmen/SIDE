@@ -195,7 +195,7 @@ var Filters =
         	 if (parsedArgs.args.search) {
         		 searchObj = eval('('+parsedArgs.args.search+')');
         	 }
-        	 if (filterData != null && filterData != "") {
+        	 if (filterData != null && filterData != "" && filterData != "null") {
         		 searchObj = eval('('+filterData+')');
         	 }
         	 
