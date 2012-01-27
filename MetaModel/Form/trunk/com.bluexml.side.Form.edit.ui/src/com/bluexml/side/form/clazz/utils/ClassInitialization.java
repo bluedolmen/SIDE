@@ -79,8 +79,8 @@ public class ClassInitialization {
 		try {
 			if (fc.getReal_class() != null) {
 				String[] updateLabelAndName = updateLabelAndName(fc);
-				String label = updateLabelAndName[0];
-				String name = updateLabelAndName[1];
+				String label = updateLabelAndName[1];
+				String name = updateLabelAndName[0];
 
 				if (fc.getLabel() == null || fc.getLabel().length() == 0) {
 					cc.append(SetCommand.create(domain, fc, FormPackage.eINSTANCE.getFormElement_Label(), label));
