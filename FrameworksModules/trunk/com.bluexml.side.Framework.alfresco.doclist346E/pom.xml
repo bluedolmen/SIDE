@@ -112,7 +112,12 @@
       <version>5.0.3</version>
       <scope>provided</scope>
     </dependency>
-    <!-- Don't add here amp dependencies as it will break amp packaging -->
+    <dependency>
+    	<groupId>com.bluexml.side.Framework.alfresco</groupId>
+    	<artifactId>builtinModels346E</artifactId>
+    	<version>1.0.0</version>
+    	<type>amp</type>
+    </dependency>
   </dependencies>
   <!-- The scm is required for the buildnumber-maven-plugin which is required 
 		for AMP version numbering -->
