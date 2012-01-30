@@ -41,7 +41,14 @@ if (console == undefined) {
 	 * @constructor
 	 */
 	SIDE.DocListTree = function DLT_constructor(htmlId) {
-		SIDE.DocListTree.superclass.constructor.call(this, htmlId);
+		Alfresco.DocListTree.superclass.constructor.call(this, "SIDE.DocListTree", htmlId, ["treeview", "json"]);
+	      
+	      // Register with Filter Manager
+	      Alfresco.util.FilterManager.register(this.name, "metadata");
+	      
+	      // Initialise prototype properties
+	      this.currentFilter = {};
+	      this.pathsToExpand = [];
 
 		// Decoupled event listeners
 		YAHOO.Bubbling.on("folderCopied", this.onFolderCopied, this);
@@ -210,13 +217,16 @@ if (console == undefined) {
 		 */
 		onNodeClicked : function DLT_onNodeClicked(args) {
 			var node = args.node;
-
+			this.log("OnNodeClicked");
 			if (this.isFilterOwner && node == this.selectedNode) {
+				this.log("isFilterOwner && this.selectedNode");
 				YAHOO.Bubbling.fire("metadataRefresh");
 			} else {
+				this.log("else >>>");
 				this._updateSelectedNode(node);
 
 				// Fire the change filter event
+				this.log("this.name :" + this.name);
 				YAHOO.Bubbling.fire("changeFilter", {
 					filterOwner : this.name,
 					filterId : "metadata",
@@ -240,7 +250,7 @@ if (console == undefined) {
 				query.type = this.options.nodeTypeDocument;
 			}
 			query.fields = {};
-			query.fields[this.options.assoTypeDocument.replace(":","\\:")] = {
+			query.fields[this.options.assoTypeDocument.replace(":", "\\:")] = {
 				type : "String",
 				operator : "is",
 				values : [ node.data.nodeRef ]
