@@ -3,6 +3,8 @@ package com.bluexml.side.portal.generator.alfresco.service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.InvalidPropertiesFormatException;
 import java.util.List;
 import java.util.Properties;
@@ -25,22 +27,21 @@ public class ShareGeneratorServices {
 
 	public ShareGeneratorServices() {
 		defaultShareElements = new Properties();
-		InputStream in = this.getClass().getResourceAsStream(
-				"defaultShareElements.properties");
+		InputStream in = this.getClass().getResourceAsStream("defaultShareElements.properties");
 
 		try {
 
 			defaultShareElements.load(in);
-			
-			String[] pages =defaultShareElements.getProperty(defaultPagesKey).split(",");
+
+			String[] pages = defaultShareElements.getProperty(defaultPagesKey).split(",");
 			for (String string : pages) {
 				publicPages.add(string);
 			}
-			String[] publicPages =defaultShareElements.getProperty(defaultPublicPagesKey).split(",");
+			String[] publicPages = defaultShareElements.getProperty(defaultPublicPagesKey).split(",");
 			for (String string : publicPages) {
 				defaultPages.add(string);
 			}
-			
+
 		} catch (InvalidPropertiesFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -56,26 +57,39 @@ public class ShareGeneratorServices {
 	}
 
 	public static String getPublicPageList(Portal p) {
-		EList<Page> l=p.getPageSet();
+		EList<Page> l = p.getPageSet();
+
+		// sort page following page.position
+		List<Page> sortedPage = new ArrayList<Page>(l);
+		Collections.sort(sortedPage, new Comparator<Page>() {
+
+			public int compare(Page arg0, Page arg1) {
+				return arg0.getPosition() - arg1.getPosition();
+			}
+
+		});
+
 		List<String> rt = new ArrayList<String>();
-		for (Page page : l) {
+		for (Page page : sortedPage) {
 			if (page.getVisibility().equals(Visibility.PUBLIC)) {
-				rt.add("{\"pageId\":\""+page.getID().toLowerCase()+"\"}");
+				rt.add("{\"pageId\":\"" + page.getID().toLowerCase() + "\"}");
 			}
 		}
-		
+
 		return rt.toString();
 	}
-	
+
 	public static boolean isFormPortlet(Portlet p) {
-		PortletInternal pInt=p.getIsPortletInternal();
-		return pInt !=null && pInt.getType().equals(InternalPortletType.FORM);
+		PortletInternal pInt = p.getIsPortletInternal();
+		return pInt != null && pInt.getType().equals(InternalPortletType.FORM);
 	}
+
 	public static boolean isViewPortlet(Portlet p) {
-		PortletInternal pInt=p.getIsPortletInternal();
-		return pInt !=null && pInt.getType().equals(InternalPortletType.VIEW);
+		PortletInternal pInt = p.getIsPortletInternal();
+		return pInt != null && pInt.getType().equals(InternalPortletType.VIEW);
 	}
+
 	public static boolean isCustomPortlet(Portlet p) {
-		return p.getIsPortletInternal() == null && p.getIsInstanceOfPortletType() !=null;
+		return p.getIsPortletInternal() == null && p.getIsInstanceOfPortletType() != null;
 	}
 }
