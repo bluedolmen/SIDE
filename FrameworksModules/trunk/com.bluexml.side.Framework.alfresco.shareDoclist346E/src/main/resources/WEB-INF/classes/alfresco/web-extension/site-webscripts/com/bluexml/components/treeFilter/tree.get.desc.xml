@@ -16,7 +16,7 @@
 		<li>{rootName} : the root cm:name value</li>
 	</ul>
 	
-	you can used SIDE built-in model (sideBuildInLibraryAlfresco) that includes Aspect usable with this filter
+	you can used SIDE built-in model (buildInLibraryAlfresco) that includes Aspect usable with this filter
 	if you do not use built-in model you must setup component instance by setting <properties> in template instance
   ]]>
   </description>
