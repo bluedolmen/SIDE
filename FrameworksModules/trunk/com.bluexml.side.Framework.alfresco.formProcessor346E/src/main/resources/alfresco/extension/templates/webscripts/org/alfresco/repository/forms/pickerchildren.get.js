@@ -1,9 +1,10 @@
 <import resource="classpath:/alfresco/templates/webscripts/org/alfresco/repository/forms/pickerresults.lib.js">
-
+const SITES_SPACE_QNAME_PATH = "/app:company_home/st:sites/";
 function main()
 {
    var argsFilterType = args['filterType'],
       argsSelectableType = args['selectableType'],
+      argsSite = args['site'],
       argsSelectableTypeIsAspect = args['selectableTypeIsAspect'],
       argsSearchTerm = args['searchTerm'],
       argsAdvancedQuery = args['advancedQuery'],
@@ -232,9 +233,17 @@ function main()
     	  }
     	  
     	  var path = null;
-    	  if (nodeRef != 'null://null/null') {
-    		  path = "PATH:\"" + nodeRef + "\"";
+    	  
+    	  if (argsSite) {
+    		  path = SITES_SPACE_QNAME_PATH;
+              if (argsSite !== null && argsSite.length > 0)
+              {
+                 path += "cm:" + search.ISO9075Encode(argsSite) + "//*";
+                 
+              }
+              path = "PATH:\"" + path + "\"";
     	  }
+    	 
     	  
     	  var query = type ;
     	  if (path != null) {
