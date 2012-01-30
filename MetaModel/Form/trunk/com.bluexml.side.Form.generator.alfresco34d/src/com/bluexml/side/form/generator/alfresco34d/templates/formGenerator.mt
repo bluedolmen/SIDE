@@ -47,7 +47,12 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 <%script type="form.FormCollection" name="generateInputForms"%>
 <%for (forms.filter("FormClass")){%>
 	<!-- SIDE <%id%> Form -->
-
+	<%if (real_class.filter("clazz.Aspect")){%>
+	<!-- <%real_class.getPrefixedQName()%> ASPECT -->
+	<config evaluator="aspect" condition="<%real_class.getPrefixedQName()%>">
+		<%generate_fromClass()%>
+	</config>
+	<%}else{%>
 	<!-- <%real_class.getPrefixedQName()%> CREATE -->
 	<config evaluator="model-type" condition="<%real_class.getPrefixedQName()%>">
 		<%generate_fromClass()%>
@@ -57,6 +62,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 	<config evaluator="node-type" condition="<%real_class.getPrefixedQName()%>">
 		<%generate_fromClass()%>
 	</config>
+	<%}%>
 <%}%>
 
 <%script type="form.FormCollection" name="generateSearchForms"%>
