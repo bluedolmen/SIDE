@@ -77,7 +77,9 @@ if (!Array.prototype.indexOf) {
 			mandatory : false,
 			filterTerm : "*",
 			advancedQuery : "",
-			maxResults : -1
+			maxResults : -1,
+			selectableTypeIsAspect : false,
+			searchInSite : true
 		},
 		setOptions : function(options) {
 			this.log("setOptions :" + options);
@@ -87,8 +89,12 @@ if (!Array.prototype.indexOf) {
 			} else {
 				var me = this;
 				this.options.getDataSource = function _getDataSource(me) {
-					var myDataSource = new YAHOO.util.XHRDataSource("/share/proxy/alfresco/api/forms/picker/search/children?selectableType=" + me.options.itemType + "&searchTerm="
-							+ me.options.filterTerm + "&size=" + me.options.maxResults + "&advancedQuery=" + me.options.advancedQuery + "&selectableTypeIsAspect=" + me.options.selectableTypeIsAspect);
+					var url = "/share/proxy/alfresco/api/forms/picker/search/children?selectableType=" + me.options.itemType + "&searchTerm=" + me.options.filterTerm + "&size="
+							+ me.options.maxResults + "&advancedQuery=" + me.options.advancedQuery + "&selectableTypeIsAspect=" + me.options.selectableTypeIsAspect;
+					if (me.options.searchInSite && Alfresco.constants.SITE != "" && Alfresco.constants.SITE != undefined) {
+						url += "&site=" + Alfresco.constants.SITE;
+					}
+					var myDataSource = new YAHOO.util.XHRDataSource(url);
 					myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
 					myDataSource.responseSchema = {
 						fields : [ "nodeRef", "name", "title" ],
@@ -234,15 +240,16 @@ if (!Array.prototype.indexOf) {
 		/**
 		 * reload the list and can make selection changes : mode
 		 * :[add|replace|keep|cancel] use keep to only reload the list cancel
-		 * restore values to initial values
-		 * This can be used to manage case like : create a new item, refresh the list and select the new item
+		 * restore values to initial values This can be used to manage case like :
+		 * create a new item, refresh the list and select the new item
 		 */
 		reload : function ComboBox_addNew(mode, addNodesToSelection) {
 			this.log("mode :" + mode + " addNodesToSelection :" + addNodesToSelection);
 			this.DSSelectWidget.reload(mode, addNodesToSelection);
 		},
 		/**
-		 * this method is used to define a behavior on event fired to reload the widget.
+		 * this method is used to define a behavior on event fired to reload the
+		 * widget.
 		 */
 		reloadBehavior : function ComboBox_reloadBehavior(event, obj, scope) {
 			this.log("event :" + event);

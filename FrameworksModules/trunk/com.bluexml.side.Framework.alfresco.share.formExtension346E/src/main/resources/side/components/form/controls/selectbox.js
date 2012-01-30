@@ -77,12 +77,18 @@ if (!Array.prototype.indexOf) {
 			mandatory : false,
 			filterTerm : "*",
 			advancedQuery : "",
-			maxResults : -1
+			maxResults : -1,
+			selectableTypeIsAspect : false,
+			searchInSite : true
 		},
 		load : function() {
+			var url = "/share/proxy/alfresco/api/forms/picker/search/children?selectableType=" + this.options.itemType + "&searchTerm=" + this.options.filterTerm + "&size=" + this.options.maxResults
+					+ "&advancedQuery=" + this.options.advancedQuery + "&selectableTypeIsAspect=" + this.options.selectableTypeIsAspect;
+			if (this.options.searchInSite && Alfresco.constants.SITE != "" && Alfresco.constants.SITE != undefined) {
+				url += "&site=" + Alfresco.constants.SITE;
+			}
 
-			var myDataSource = new YAHOO.util.XHRDataSource("/share/proxy/alfresco/api/forms/picker/search/children?selectableType=" + this.options.itemType + "&searchTerm=" + this.options.filterTerm
-					+ "&size=" + this.options.maxResults + "&advancedQuery=" + this.options.advancedQuery + "&selectableTypeIsAspect=" + me.options.selectableTypeIsAspect);
+			var myDataSource = new YAHOO.util.XHRDataSource(url);
 			myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
 			myDataSource.responseSchema = {
 				fields : [ "nodeRef", "name", "title" ],
@@ -223,8 +229,8 @@ if (!Array.prototype.indexOf) {
 		/**
 		 * reload the list and can make selection changes : mode
 		 * :[add|replace|keep|cancel] use keep to only reload the list cancel
-		 * restore values to initial values
-		 * This can be used to manage case like : create a new item, refresh the list and select the new item
+		 * restore values to initial values This can be used to manage case like :
+		 * create a new item, refresh the list and select the new item
 		 */
 		reload : function ComboBox_addNew(mode, addNodesToSelection) {
 			this.log("mode :" + mode + " addNodesToSelection :" + addNodesToSelection);

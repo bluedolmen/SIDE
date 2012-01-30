@@ -75,7 +75,9 @@ if (!Array.prototype.indexOf) {
 			multipleSelectMode : false,
 			mandatory : false,
 			filterTerm : "*",
-			maxResults : -1
+			maxResults : -1,
+			selectableTypeIsAspect : false,
+			searchInSite : true
 		},
 		setOptions : function(options) {
 			this.log("setOptions :" + options);
@@ -86,7 +88,9 @@ if (!Array.prototype.indexOf) {
 				var me = this;
 				this.options.getDataSource = function _getDataSource(me) {
 					var url = "/share/proxy/alfresco/api/forms/picker/search/children?selectableType=" + me.options.itemType + "&size=" + me.options.maxResults + "&selectableTypeIsAspect=" + me.options.selectableTypeIsAspect;
-					
+					if (me.options.searchInSite && Alfresco.constants.SITE != "" && Alfresco.constants.SITE != undefined) {
+						url += "&site=" + Alfresco.constants.SITE;
+					}
 					var myDataSource = new YAHOO.util.XHRDataSource(url);
 
 					myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
