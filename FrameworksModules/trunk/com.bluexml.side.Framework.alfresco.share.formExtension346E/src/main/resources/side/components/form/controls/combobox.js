@@ -72,6 +72,7 @@ if (!Array.prototype.indexOf) {
 		 * @type object
 		 */
 		options : {
+			disabled : false,
 			itemType : "",
 			multipleSelectMode : false,
 			mandatory : false,
@@ -108,8 +109,15 @@ if (!Array.prototype.indexOf) {
 		load : function() {
 
 			var myDataSource = this.options.getDataSource(this);
-
-			if (this.options.multipleSelectMode) {
+			if (this.options.disabled) {
+				// use object-piker instance
+				return new Alfresco.ObjectFinder(this.htmlid, this.currentValueHtmlId).setOptions({
+					disabled : true,
+					field : this.options.field,
+					compactMode : true,
+					currentValue : this.initialValue,
+				});
+			} else if (this.options.multipleSelectMode) {
 				// cardinality n-n
 				var multiselect = new SIDE.MyDSMultiSelectField({
 					name : "-",
@@ -220,14 +228,15 @@ if (!Array.prototype.indexOf) {
 			if (this.options.mandatory) {
 				YAHOO.Bubbling.fire("mandatoryControlValueUpdated", this);
 			}
-			if (this.initialValue) {
+			if (!this.options.disabled && this.initialValue) {
 				this.setValue(this.initialValue);
 			}
 			YAHOO.Bubbling.fire("/side-labs/onInitialized/" + this.currentValueHtmlId, this);
-			// add widget reference on html element
-			var el = document.getElementById(this.currentValueHtmlId);
-			el.widget = this;
-
+			if (!this.options.disabled) {
+				// add widget reference on html element
+				var el = document.getElementById(this.currentValueHtmlId);
+				el.widget = this;
+			}
 		},
 		setValue : function ComboBox_setValue(value) {
 			this.log("before setValue :" + this.getValue());

@@ -1,5 +1,3 @@
-
-
 <#assign controlId = fieldHtmlId + "-cntrl">
 
 <#if field.value != "" >
@@ -17,7 +15,9 @@
    
    combo.setOptions(
    {
+   	 <#if form.mode == "view" || (field.disabled && !(field.control.params.forceEditable?? && field.control.params.forceEditable == "true"))>disabled: true,</#if>
      itemType: "${field.endpointType}",
+     field: "${field.name}",
      multipleSelectMode: <#if field.control.params.multipleSelectMode??>${field.control.params.multipleSelectMode}<#else>${field.endpointMany?string}</#if>,
      <#if field.mandatory??>
      mandatory: ${field.mandatory?string},
