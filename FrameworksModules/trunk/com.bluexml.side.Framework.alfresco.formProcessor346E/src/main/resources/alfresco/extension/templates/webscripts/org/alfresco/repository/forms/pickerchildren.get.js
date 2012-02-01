@@ -38,12 +38,12 @@ function main()
   		if (url.templateArgs["store_type"]) {
   			params.nodeRef = url.templateArgs["store_type"] + "://" + url.templateArgs["store_id"] + "/" + url.templateArgs["id"];
   		}
+  		params.site = argsSite;
+  		
   		params.selectableTypeIsAspect = args["selectableTypeIsAspect"];
   		params.nodeType = args["nodeType"];
   		params.rootProperty = args["rootProperty"];
   		params.rootName = args["rootName"];
-  		params.path = url.templateArgs.path || "";
-
   		params.assoType = args["assoType"];
 
   		

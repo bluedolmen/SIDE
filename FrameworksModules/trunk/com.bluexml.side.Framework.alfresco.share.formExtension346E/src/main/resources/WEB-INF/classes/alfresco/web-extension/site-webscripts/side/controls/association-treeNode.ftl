@@ -15,7 +15,7 @@
       itemType: "${field.endpointType}",
       multipleSelectMode: <#if field.control.params.multipleSelectMode??>${field.control.params.multipleSelectMode}<#else>${field.endpointMany?string}</#if>,
       itemFamily: "treeNode",
-      params: "${field.control.params.params!""}",
+      params: "${field.control.params.params!""}&site=${url.templateArgs.site!""}",
       allowNavigationToContentChildren: true
    });
 })();

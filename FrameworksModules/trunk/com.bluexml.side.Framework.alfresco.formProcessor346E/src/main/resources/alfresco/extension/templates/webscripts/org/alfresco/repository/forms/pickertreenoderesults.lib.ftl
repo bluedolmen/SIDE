@@ -2,8 +2,8 @@
 	<#escape x as jsonUtils.encodeJSONString(x)>
 	${indent}"parent":
 	${indent}{
-	<#if (node != rootNode) && node.sourceAssocs[sourceAsso][0]??>
-		<@renderParentTreeNode node.sourceAssocs[sourceAsso][0] indent+"   " />
+	<#if (node != rootNode) && node.assocs[sourceAsso][0]??>
+		<@renderParentTreeNode node.assocs[sourceAsso][0] indent+"   " />
 	</#if>
 		${indent}"type": "${node.typeShort}",
 		${indent}"isContainer": ${node.isContainer?string},

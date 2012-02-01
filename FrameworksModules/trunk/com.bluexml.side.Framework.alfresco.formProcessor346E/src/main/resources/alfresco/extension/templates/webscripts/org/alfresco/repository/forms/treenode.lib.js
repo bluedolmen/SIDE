@@ -13,7 +13,7 @@ function getTreeNodeChidren(params) {
 	}
 
 	return {
-		children : currentNode.assocs[params.assoType],
+		children : currentNode.sourceAssocs[params.assoType],
 		parent : currentNode,
 		root : root
 	};
@@ -30,10 +30,10 @@ function getRootNode(params) {
 	rootQuery += " AND ";
 
 	var path = null;
-	if (params.argSite) {
+	if (params.site) {
 		path = SITES_SPACE_QNAME_PATH;
-		if (params.argSite !== null && params.argSite.length > 0) {
-			path += "cm:" + search.ISO9075Encode(params.argSite) + "//*";
+		if (params.site !== null && params.site.length > 0) {
+			path += "cm:" + search.ISO9075Encode(params.site) + "//*";
 		}
 	} else if (params.path) {
 		path = params.path;

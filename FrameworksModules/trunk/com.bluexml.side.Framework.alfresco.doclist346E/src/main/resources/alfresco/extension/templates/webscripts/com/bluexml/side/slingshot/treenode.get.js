@@ -1,4 +1,4 @@
-<import resource="classpath:/alfresco/extension/templates/webscripts/com/bluexml/side/slingshot/treenode.lib.js">
+<import resource="classpath:/alfresco/extension/templates/webscripts/org/alfresco/repository/forms/treenode.lib.js">
 /**
  * Document List Component: treenode
  */
@@ -8,6 +8,8 @@ model.treenode = getTreeNode();
 function getTreeNode() {
 	try {
 		var params = {};
+		params.path = url.templateArgs.path || "";
+		params.site = url.templateArgs.site;
 		
 		params.evalChildFolders = args["children"] !== "false";
 		params.argMax = parseInt(args["max"], 10);
@@ -17,8 +19,9 @@ function getTreeNode() {
 		params.nodeType = args["nodeType"];
 		params.rootProperty = args["rootProperty"];
 		params.rootName = args["rootName"];
-		params.path = url.templateArgs.path || "";
+		
 		params.nodeRef = args["nodeRef"];
+		
 
 		var evalChildFolders = args["children"] !== "false";
 		

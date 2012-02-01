@@ -177,7 +177,7 @@
 							<target>
 								<class>buildInLibraryAlfresco:TreeFilter</class>
 								<mandatory>false</mandatory>
-								<many>true</many>						
+								<many>false</many>						
 							</target>
 						</association>							
 					</associations>
