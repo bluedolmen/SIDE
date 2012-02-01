@@ -118,6 +118,12 @@
       <version>1.0.1</version>
       <type>amp</type>
     </dependency>
+    <dependency>
+    	<groupId>com.bluexml.side.Framework.alfresco</groupId>
+    	<artifactId>formProcessor346E</artifactId>
+    	<version>1.0.3</version>
+    	<type>amp</type>
+    </dependency>
   </dependencies>
   <!-- The scm is required for the buildnumber-maven-plugin which is required 
 		for AMP version numbering -->

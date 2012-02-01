@@ -1,5 +1,6 @@
 <import resource="classpath:/alfresco/templates/webscripts/org/alfresco/repository/forms/pickerresults.lib.js">
-const SITES_SPACE_QNAME_PATH = "/app:company_home/st:sites/";
+<import resource="classpath:/alfresco/extension/templates/webscripts/org/alfresco/repository/forms/treenode.lib.js">
+
 function main()
 {
    var argsFilterType = args['filterType'],
@@ -30,268 +31,314 @@ function main()
    }
          
    try
-   {
-      // construct the NodeRef from the URL
-      var nodeRef = url.templateArgs.store_type + "://" + url.templateArgs.store_id + "/" + url.templateArgs.id;
-      
-      // determine if we need to resolve the parent NodeRef
-      
-      if (argsXPath != null)
-      {
-         // resolve the provided XPath to a NodeRef
-         var nodes = search.xpathSearch(argsXPath);
-         if (nodes.length > 0)
-         {
-            nodeRef = String(nodes[0].nodeRef);
-         }
-      }
-      
-      // if the last path element is 'doclib' or 'siblings' find parent node
-      if (pathElements.length > 0)
-      {
-         lastPathElement = pathElements[pathElements.length-1];
-         
-         if (logger.isLoggingEnabled())
-            logger.log("lastPathElement = " + lastPathElement);
-         
-         if (lastPathElement == "siblings")
-         {
-            // the provided nodeRef is the node we want the siblings of so get
-			// it's parent
-            var node = search.findNode(nodeRef);
-            if (node !== null)
-            {
-               nodeRef = node.parent.nodeRef;
-            }
-            else
-            {
-               // if the provided node was not found default to companyhome
-               nodeRef = "alfresco://company/home";
-            }
-         }
-         else if (lastPathElement == "doclib")
-         {
-            // we want to find the document library for the nodeRef provided
-            nodeRef = findDoclib(nodeRef);
-         }
-      }
+   {  
+      if (url.templateArgs.type == "treeNode") {
+    	  var params = {};
 
-      if (url.templateArgs.type == "node")
-      {
-         // nodeRef input
-         if (nodeRef == "alfresco://company/home")
-         {
-            parent = companyhome;
-         }
-         else if (nodeRef == "alfresco://user/home")
-         {
-            parent = userhome;
-         }
-         else if (nodeRef == "alfresco://sites/home")
-         {
-            parent = companyhome.childrenByXPath("st:sites")[0];
-         }
-         else
-         {
-            parent = search.findNode(nodeRef);
-            if (parent === null)
-            {
-               status.setCode(status.STATUS_NOT_FOUND, "Not a valid nodeRef: '" + nodeRef + "'");
-               return null;
-            }
-         }
+  		if (url.templateArgs["store_type"]) {
+  			params.nodeRef = url.templateArgs["store_type"] + "://" + url.templateArgs["store_id"] + "/" + url.templateArgs["id"];
+  		}
+  		params.selectableTypeIsAspect = args["selectableTypeIsAspect"];
+  		params.nodeType = args["nodeType"];
+  		params.rootProperty = args["rootProperty"];
+  		params.rootName = args["rootName"];
+  		params.path = url.templateArgs.path || "";
 
-         var query = "+PARENT:\"" + parent.nodeRef + "\"";
-         if (argsFilterType != null)
-         {
-            // map short name to long name
-            var types =
-            {
-              'rma:dispositionSchedule': '{http://www.alfresco.org/model/recordsmanagement/1.0}dispositionSchedule',
-              'rma:dispositionActionDefinition': '{http://www.alfresco.org/model/recordsmanagement/1.0}dispositionActionDefinition',
-              'rma:dispositionAction': '{http://www.alfresco.org/model/recordsmanagement/1.0}dispositionAction',
-              'rma:hold':'{http://www.alfresco.org/model/recordsmanagement/1.0}hold',
-              'rma:transfer':'{http://www.alfresco.org/model/recordsmanagement/1.0}transfer',
-              'cm:thumbnail': '{http://www.alfresco.org/model/content/1.0}thumbnail'
-            };
+  		params.assoType = args["assoType"];
 
-            var filterTypes = argsFilterType.split(',');
-            for (var i=0,len=filterTypes.length; i<len; i++)
-            {
-               var identifier = filterTypes[i];
-               if (types[identifier])
-               {
-                  query += " -TYPE:\"" + types[identifier] + "\"";
-               }
-            }
-         }
+  		
+  		var hasSubfolders = true;
+  		var argMax = parseInt(args["max"], 10);
+  		var maxItems = isNaN(argMax) ? -1 : argMax;
 
-         // make sure we don't return system folders
-         query += " -TYPE:\"{http://www.alfresco.org/model/content/1.0}systemfolder\"";
+  		var result = getTreeNodeChidren(params);
+  		var children = result.children;
+  		
+  		if (children) {
+  			children.sort(sortByName);
+  			// get Nodes
+  			for ( var c = 0; c < children.length; c++) {
+  				var item = children[c];
+  				results.push({
+  					item : item,
+  					selectable : true
+  				});
 
-         if (logger.isLoggingEnabled())
-            logger.log("query = " + query);
-
-         var searchResults = search.luceneSearch(query, "@{http://www.alfresco.org/model/content/1.0}name", true);
-
-         // Ensure folders and folderlinks appear at the top of the list
-         var containerResults = new Array(),
-            contentResults = new Array();
-
-         for each (var result in searchResults)
-         {
-            if (result.isContainer || result.type == "{http://www.alfresco.org/model/application/1.0}folderlink")
-            {
-               // wrap result and determine if it is selectable in the UI
-               resultObj = 
-               { 
-                  item: result
-               };
-               resultObj.selectable = isItemSelectable(result, argsSelectableType);
-               
-               containerResults.push(resultObj);
-            }
-            else
-            {
-               // wrap result and determine if it is selectable in the UI
-               resultObj = 
-               { 
-                  item: result
-               };
-               resultObj.selectable = isItemSelectable(result, argsSelectableType);
-               
-               contentResults.push(resultObj);
-            }
-         }
-         results = containerResults.concat(contentResults);
-      }
-      else if (url.templateArgs.type == "category")
-      {
-         var catAspect = (args["aspect"] != null) ? args["aspect"] : "cm:generalclassifiable";
-
-         // TODO: Better way of finding this
-         var rootCategories = classification.getRootCategories(catAspect);
-         if (rootCategories != null && rootCategories.length > 0)
-         {
-            rootNode = rootCategories[0].parent;
-            if (nodeRef == "alfresco://category/root")
-            {
-               parent = rootNode;
-               categoryResults = classification.getRootCategories(catAspect);
-            }
-            else
-            {
-               parent = search.findNode(nodeRef);
-               categoryResults = parent.children;
-            }
-            
-            categoryResults.sort(sortByName);
-            
-            // make each result an object and indicate it is selectable in the
-			// UI
-            for each (var result in categoryResults)
-            {
-               results.push(
-               { 
-                  item: result, 
-                  selectable: true 
-               });
-            }
-         }
-      }
-      else if (url.templateArgs.type == "authority")
-      {
-         // default to max of 100 results
-         var maxResults = 100;
-         if (argsMaxResults != null)
-         {
-            // force the argsMaxResults var to be treated as a number
-            maxResults = argsMaxResults + 0;
-         }
-         
-         if (argsSelectableType == "cm:person")
-         {
-            findUsers(argsSearchTerm, maxResults, results);
-         }
-         else if (argsSelectableType == "cm:authorityContainer")
-         {
-            findGroups(argsSearchTerm, maxResults, results);
-         }
-         else
-         {
-            // combine groups and users
-            findGroups(argsSearchTerm, maxResults, results);
-            findUsers(argsSearchTerm, maxResults, results);
-         }
+  				if (maxItems !== -1 && items.length > maxItems) {
+  					results.pop();
+  					break;
+  				}
+  			}
+  		}
+  		parent = result.parent;
+		rootNode = result.root;
+		model.sourceAsso = params.assoType;
       } else {
-    	  // search in given path of the given type
-    	  var type ="";
-    	  if (argsSelectableTypeIsAspect == "true") {
-    		  type = "ASPECT:\"" + argsSelectableType + "\"";
-    	  } else {
-    		  type = "TYPE:\"" + argsSelectableType + "\"";  
-    	  }
-    	  
-    	  var path = null;
-    	  
-    	  if (argsSite) {
-    		  path = SITES_SPACE_QNAME_PATH;
-              if (argsSite !== null && argsSite.length > 0)
-              {
-                 path += "cm:" + search.ISO9075Encode(argsSite) + "//*";
-                 
-              }
-              path = "PATH:\"" + path + "\"";
-    	  }
-    	 
-    	  
-    	  var query = type ;
-    	  if (path != null) {
-    		  query += " AND " + path;
-    	  }
-    	  
-    	  var advancedQuery = argsAdvancedQuery && argsAdvancedQuery != "";
-    	  
-    	  if (argsSearchTerm != undefined && argsSearchTerm != '') {
-    		  query += " AND " + "@cm\\:name:*" + argsSearchTerm + "*";
-    	  }
-    	  
-    	  if (advancedQuery) {
-    		  query += " AND ";
-    		  var queryArray = argsAdvancedQuery.split(' ');
-    		  
-			  for (var x=0; x<queryArray.length; x++) {
-				  var q_part = " ";
-			      var v = queryArray[x];	
-			      if (v.indexOf(":") != -1) {
-			         var part= v.split("=");
-			         var key=part[0];
-			         var value=part[1];
-			         q_part += "@" + key.replace(":","\\:") + ":" + value;
-			      } else {
-			    	 q_part += " " + v + " ";
-			      }
-			      query += q_part;			      
-			  }			  
-    	  }
-    	  if (logger.isLoggingEnabled()) {
-    	      logger.log("pickerchildren.get.js : query :" + query);
-    	  }
-    	  
-    	  var searchResults = search.query({
-    		  query: query
-    	  });
-    	  
-    	  for each (var result in searchResults) {
-	    	  results.push(
-	          { 
-	             item: result, 
-	             selectable: true 
-	          });
-    	  }
+    	// construct the NodeRef from the URL
+          var nodeRef = url.templateArgs.store_type + "://" + url.templateArgs.store_id + "/" + url.templateArgs.id;
+	      // determine if we need to resolve the parent NodeRef
+	      
+	      if (argsXPath != null)
+	      {
+	         // resolve the provided XPath to a NodeRef
+	         var nodes = search.xpathSearch(argsXPath);
+	         if (nodes.length > 0)
+	         {
+	            nodeRef = String(nodes[0].nodeRef);
+	         }
+	      }
+	      
+	      // if the last path element is 'doclib' or 'siblings' find parent
+			// node
+	      if (pathElements.length > 0)
+	      {
+	         lastPathElement = pathElements[pathElements.length-1];
+	         
+	         if (logger.isLoggingEnabled())
+	            logger.log("lastPathElement = " + lastPathElement);
+	         
+	         if (lastPathElement == "siblings")
+	         {
+	            // the provided nodeRef is the node we want the siblings of so
+				// get
+				// it's parent
+	            var node = search.findNode(nodeRef);
+	            if (node !== null)
+	            {
+	               nodeRef = node.parent.nodeRef;
+	            }
+	            else
+	            {
+	               // if the provided node was not found default to companyhome
+	               nodeRef = "alfresco://company/home";
+	            }
+	         }
+	         else if (lastPathElement == "doclib")
+	         {
+	            // we want to find the document library for the nodeRef provided
+	            nodeRef = findDoclib(nodeRef);
+	         }
+	      }
+	
+	      if (url.templateArgs.type == "node")
+	      {
+	         // nodeRef input
+	         if (nodeRef == "alfresco://company/home")
+	         {
+	            parent = companyhome;
+	         }
+	         else if (nodeRef == "alfresco://user/home")
+	         {
+	            parent = userhome;
+	         }
+	         else if (nodeRef == "alfresco://sites/home")
+	         {
+	            parent = companyhome.childrenByXPath("st:sites")[0];
+	         }
+	         else
+	         {
+	            parent = search.findNode(nodeRef);
+	            if (parent === null)
+	            {
+	               status.setCode(status.STATUS_NOT_FOUND, "Not a valid nodeRef: '" + nodeRef + "'");
+	               return null;
+	            }
+	         }
+	
+	         var query = "+PARENT:\"" + parent.nodeRef + "\"";
+	         if (argsFilterType != null)
+	         {
+	            // map short name to long name
+	            var types =
+	            {
+	              'rma:dispositionSchedule': '{http://www.alfresco.org/model/recordsmanagement/1.0}dispositionSchedule',
+	              'rma:dispositionActionDefinition': '{http://www.alfresco.org/model/recordsmanagement/1.0}dispositionActionDefinition',
+	              'rma:dispositionAction': '{http://www.alfresco.org/model/recordsmanagement/1.0}dispositionAction',
+	              'rma:hold':'{http://www.alfresco.org/model/recordsmanagement/1.0}hold',
+	              'rma:transfer':'{http://www.alfresco.org/model/recordsmanagement/1.0}transfer',
+	              'cm:thumbnail': '{http://www.alfresco.org/model/content/1.0}thumbnail'
+	            };
+	
+	            var filterTypes = argsFilterType.split(',');
+	            for (var i=0,len=filterTypes.length; i<len; i++)
+	            {
+	               var identifier = filterTypes[i];
+	               if (types[identifier])
+	               {
+	                  query += " -TYPE:\"" + types[identifier] + "\"";
+	               }
+	            }
+	         }
+	
+	         // make sure we don't return system folders
+	         query += " -TYPE:\"{http://www.alfresco.org/model/content/1.0}systemfolder\"";
+	
+	         if (logger.isLoggingEnabled())
+	            logger.log("query = " + query);
+	
+	         var searchResults = search.luceneSearch(query, "@{http://www.alfresco.org/model/content/1.0}name", true);
+	
+	         // Ensure folders and folderlinks appear at the top of the list
+	         var containerResults = new Array(),
+	            contentResults = new Array();
+	
+	         for each (var result in searchResults)
+	         {
+	            if (result.isContainer || result.type == "{http://www.alfresco.org/model/application/1.0}folderlink")
+	            {
+	               // wrap result and determine if it is selectable in the UI
+	               resultObj = 
+	               { 
+	                  item: result
+	               };
+	               resultObj.selectable = isItemSelectable(result, argsSelectableType);
+	               
+	               containerResults.push(resultObj);
+	            }
+	            else
+	            {
+	               // wrap result and determine if it is selectable in the UI
+	               resultObj = 
+	               { 
+	                  item: result
+	               };
+	               resultObj.selectable = isItemSelectable(result, argsSelectableType);
+	               
+	               contentResults.push(resultObj);
+	            }
+	         }
+	         results = containerResults.concat(contentResults);
+	      }
+	      else if (url.templateArgs.type == "category")
+	      {
+	         var catAspect = (args["aspect"] != null) ? args["aspect"] : "cm:generalclassifiable";
+	
+	         // TODO: Better way of finding this
+	         var rootCategories = classification.getRootCategories(catAspect);
+	         if (rootCategories != null && rootCategories.length > 0)
+	         {
+	            rootNode = rootCategories[0].parent;
+	            if (nodeRef == "alfresco://category/root")
+	            {
+	               parent = rootNode;
+	               categoryResults = classification.getRootCategories(catAspect);
+	            }
+	            else
+	            {
+	               parent = search.findNode(nodeRef);
+	               categoryResults = parent.children;
+	            }
+	            
+	            categoryResults.sort(sortByName);
+	            
+	            // make each result an object and indicate it is selectable in
+				// the
+				// UI
+	            for each (var result in categoryResults)
+	            {
+	               results.push(
+	               { 
+	                  item: result, 
+	                  selectable: true 
+	               });
+	            }
+	         }
+	      }
+	      else if (url.templateArgs.type == "authority")
+	      {
+	         // default to max of 100 results
+	         var maxResults = 100;
+	         if (argsMaxResults != null)
+	         {
+	            // force the argsMaxResults var to be treated as a number
+	            maxResults = argsMaxResults + 0;
+	         }
+	         
+	         if (argsSelectableType == "cm:person")
+	         {
+	            findUsers(argsSearchTerm, maxResults, results);
+	         }
+	         else if (argsSelectableType == "cm:authorityContainer")
+	         {
+	            findGroups(argsSearchTerm, maxResults, results);
+	         }
+	         else
+	         {
+	            // combine groups and users
+	            findGroups(argsSearchTerm, maxResults, results);
+	            findUsers(argsSearchTerm, maxResults, results);
+	         }
+	      } else if (url.templateArgs.type == "search"){
+	    	  // search in given path of the given type
+	    	  var type ="";
+	    	  if (argsSelectableTypeIsAspect == "true") {
+	    		  type = "ASPECT:\"" + argsSelectableType + "\"";
+	    	  } else {
+	    		  type = "TYPE:\"" + argsSelectableType + "\"";  
+	    	  }
+	    	  
+	    	  var path = null;
+	    	  
+	    	  if (argsSite) {
+	    		  path = SITES_SPACE_QNAME_PATH;
+	              if (argsSite !== null && argsSite.length > 0)
+	              {
+	                 path += "cm:" + search.ISO9075Encode(argsSite) + "//*";
+	                 
+	              }
+	              path = "PATH:\"" + path + "\"";
+	    	  }
+	    	 
+	    	  
+	    	  var query = type ;
+	    	  if (path != null) {
+	    		  query += " AND " + path;
+	    	  }
+	    	  
+	    	  var advancedQuery = argsAdvancedQuery && argsAdvancedQuery != "";
+	    	  
+	    	  if (argsSearchTerm != undefined && argsSearchTerm != '') {
+	    		  query += " AND " + "@cm\\:name:*" + argsSearchTerm + "*";
+	    	  }
+	    	  
+	    	  if (advancedQuery) {
+	    		  query += " AND ";
+	    		  var queryArray = argsAdvancedQuery.split(' ');
+	    		  
+				  for (var x=0; x<queryArray.length; x++) {
+					  var q_part = " ";
+				      var v = queryArray[x];	
+				      if (v.indexOf(":") != -1) {
+				         var part= v.split("=");
+				         var key=part[0];
+				         var value=part[1];
+				         q_part += "@" + key.replace(":","\\:") + ":" + value;
+				      } else {
+				    	 q_part += " " + v + " ";
+				      }
+				      query += q_part;			      
+				  }			  
+	    	  }
+	    	  if (logger.isLoggingEnabled()) {
+	    	      logger.log("pickerchildren.get.js : query :" + query);
+	    	  }
+	    	  
+	    	  var searchResults = search.query({
+	    		  query: query
+	    	  });
+	    	  
+	    	  for each (var result in searchResults) {
+		    	  results.push(
+		          { 
+		             item: result, 
+		             selectable: true 
+		          });
+	    	  }
+	      }
+	      if (logger.isLoggingEnabled()) {
+	         logger.log("Found " + results.length + " results");
+	      }
       }
-      if (logger.isLoggingEnabled())
-         logger.log("Found " + results.length + " results");
    }
    catch (e)
    {
@@ -308,6 +355,7 @@ function main()
    model.parent = parent;
    model.rootNode = rootNode;
    model.results = results;
+   model.type = url.templateArgs.type;
 }
 
 function isItemSelectable(node, selectableType)

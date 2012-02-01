@@ -19,6 +19,7 @@ function main() {
 		model.assoTypeDocument = paramValide("assoTypeDocument") ? args.assoTypeDocument : "buildInLibraryAlfresco:HasTreeFilter_hasTreeFilter_TreeFiltersearch";
 		model.selectableTypeIsAspect = paramValide("selectableTypeIsAspect") ? args.selectableTypeIsAspect : "true";
 		model.rootProperty = paramValide("rootProperty") ? args.rootProperty : "buildInLibraryAlfresco:TreeFilter_root";
+		model.rootLabelId= paramValide("rootLabelId") ? args.rootLabelId : "header.library";
 		model.rootName = args.rootName;
 	} else {
 		// error

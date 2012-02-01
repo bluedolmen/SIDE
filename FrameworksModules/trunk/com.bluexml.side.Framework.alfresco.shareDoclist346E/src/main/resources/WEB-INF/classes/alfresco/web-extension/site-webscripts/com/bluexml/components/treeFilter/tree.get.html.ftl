@@ -8,7 +8,7 @@
    {
       siteId: "${page.url.templateArgs.site!""}",
       containerId: "${template.properties.container!"documentLibrary"}",
-      evaluateChildFolders: ${evaluateChildFolders!"true"},
+      evaluateChildFolders: ${evaluateChildFolders!"false"},
       maximumFolderCount: ${maximumFolderCount!"-1"},
       nodeType: "${nodeType}",
       selectableTypeIsAspect: "${selectableTypeIsAspect}",
@@ -22,6 +22,6 @@
    );
 //]]></script>
 <div class="treeview filter">
-   <h2 id="${args.htmlid}-h2">${rootName}</h2>
+   <h2 id="${args.htmlid}-h2">${msg(rootLabelId)}</h2>
    <div id="${args.htmlid}-treeview" class="tree"></div>
 </div>
