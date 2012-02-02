@@ -1,6 +1,5 @@
 package com.bluexml.side.util.alfresco.tools;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -17,20 +16,26 @@ public abstract class AlfrescoModelBaseVersionChooser extends AbstractFieldsPage
 	}
 
 	protected void createAlfrescoLibComboBox(Composite composite,String fieldId) {
-		Map<String, String> libs = new TreeMap<String, String>();
+		Map<String, Object> allowedValues = new TreeMap<String, Object>();
 		
 		List<IConfigurationElement> configurationElements = ToolingUtils.getAllToolingModelLibraryExtensions();
 
 		for (IConfigurationElement iConfigurationElement : configurationElements) {
 			String label = iConfigurationElement.getAttribute("label");
-			libs.put(label, label);
+			String techVersion = iConfigurationElement.getAttribute("id");
+			allowedValues.put(label, techVersion);
 		}
 		
-		libs.put("", "");
+		allowedValues.put("", "");
 		
-		ArrayList<String> allowedValues = new ArrayList<String>();
-		allowedValues.addAll(libs.values());
+		
+		
 
 		createComboControl(composite, "model library", fieldId, allowedValues);
+	}
+	
+	public class Lib {
+		String techVersion="";
+		String label="";
 	}
 }

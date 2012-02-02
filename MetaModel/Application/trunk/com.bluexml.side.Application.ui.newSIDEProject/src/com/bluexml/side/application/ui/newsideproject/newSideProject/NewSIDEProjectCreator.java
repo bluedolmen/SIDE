@@ -330,7 +330,7 @@ public class NewSIDEProjectCreator {
 				// create additional files build.xml etc ...
 				String checkedValue_techVersion = createOptions.getCheckedValue(CreateFields.TECHNOLOGY, String.class);
 				// TODO comboBox component must manage Object instead of String as allowed values
-				checkedValue_techVersion = "alfresco_3.x";
+//				checkedValue_techVersion = "alfresco_3.x";
 				ProjectGenerator.generate(newProject, checkedValue_techVersion);
 
 				newProject.refreshLocal(IResource.DEPTH_INFINITE, monitor);

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.viewers.Viewer;
@@ -86,7 +87,7 @@ public class PageControlsHelper {
 	 * @param composite
 	 * @param values
 	 */
-	public Object[] createComboControl(Composite composite, String label, final String id, List<String> allowedValues, final Map<String, Object> values) {
+	public Object[] createComboControl(Composite composite, String label, final String id, final Map<String, Object> allowedValues, final Map<String, Object> values) {
 
 		if (!values.containsKey(id)) {
 			values.put(id, null);
@@ -105,7 +106,7 @@ public class PageControlsHelper {
 		archetypeIdControl.addSelectionListener(new SelectionListener() {
 
 			public void widgetSelected(SelectionEvent e) {
-				values.put(id, archetypeIdControl.getItem(archetypeIdControl.getSelectionIndex()));
+				values.put(id, allowedValues.get(archetypeIdControl.getItem(archetypeIdControl.getSelectionIndex())));
 				page.checkPageComplite();
 			}
 
@@ -116,12 +117,12 @@ public class PageControlsHelper {
 		return new Object[] { archetypeIdLabel, archetypeIdControl };
 	}
 
-	public static void initializeCombo(final String id, List<String> allowedValues, final Map<String, Object> values, final Combo archetypeIdControl) {
-		String[] items = allowedValues.toArray(new String[allowedValues.size()]);
+	public static void initializeCombo(final String id, Map<String,Object> allowedValues, final Map<String, Object> values, final Combo archetypeIdControl) {
+		String[] items = allowedValues.keySet().toArray(new String[allowedValues.size()]);
 		archetypeIdControl.setItems(items);
 		Object string = values.get(id);
 		if (string != null) {
-			archetypeIdControl.select(allowedValues.indexOf(string));
+			archetypeIdControl.select(ArrayUtils.indexOf(items, string));
 		}
 	}
 

@@ -14,7 +14,7 @@ public class UIUtils {
 	public static int showAvert(String title, String message) {
 		int style = 0;
 		style |= SWT.YES | SWT.NO | SWT.CANCEL;
-		MessageBox mb = new MessageBox(Display.getCurrent().getActiveShell(), style);
+		MessageBox mb = new MessageBox(getDisplay().getActiveShell(), style);
 		mb.setText(title);
 		mb.setMessage(message);
 		int val = mb.open();
@@ -22,10 +22,11 @@ public class UIUtils {
 	}
 
 	public static boolean showConfirmation(String title, String message) {
+		
 		boolean doWork = true;
 		int style = 0;
 		style |= SWT.YES | SWT.NO;
-		MessageBox mb = new MessageBox(Display.getCurrent().getActiveShell(), style);
+		MessageBox mb = new MessageBox(getDisplay().getActiveShell(), style);
 		mb.setText(title);
 		mb.setMessage(message);
 		int val = mb.open();
@@ -49,7 +50,7 @@ public class UIUtils {
 	public static void showError(String title, String message) {
 		int style = 0;
 		style |= SWT.OK;
-		MessageBox mb = new MessageBox(Display.getCurrent().getActiveShell(), style);
+		MessageBox mb = new MessageBox(getDisplay().getActiveShell(), style);
 		mb.setText(title);
 		mb.setMessage(message);
 		mb.open();
@@ -58,12 +59,13 @@ public class UIUtils {
 	public static Display getDisplay() {
 		Display display = Display.getCurrent();
 		// may be null if outside the UI thread
-		if (display == null)
+		if (display == null) {
 			display = Display.getDefault();
+		}
 		return display;
 	}
-	
-	public static ImageDescriptor getImage(String pluginID,String imgPath) {
+
+	public static ImageDescriptor getImage(String pluginID, String imgPath) {
 		Bundle plugin = Platform.getBundle(pluginID);
 		URL imgURL = plugin.getResource(imgPath);
 		ImageDescriptor imgDesc = ImageDescriptor.createFromURL(imgURL);

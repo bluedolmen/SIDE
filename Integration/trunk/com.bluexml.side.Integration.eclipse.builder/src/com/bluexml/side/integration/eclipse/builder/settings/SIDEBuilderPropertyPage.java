@@ -1,8 +1,10 @@
 package com.bluexml.side.integration.eclipse.builder.settings;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IAdaptable;
@@ -24,7 +26,7 @@ public class SIDEBuilderPropertyPage extends AbstractFieldsPropertyPage {
 		IAdaptable element = this.getElement();
 		final IProject project = (IProject) element;
 		SIDEBuilderConfiguration confs = new SIDEBuilderConfiguration(project);
-		ArrayList<String> allowedValues = new ArrayList<String>();
+		Map<String, Object> allowedValues = new HashMap<String, Object>();
 		try {
 			if (confs.load()) {
 				// project have properties
@@ -52,7 +54,7 @@ public class SIDEBuilderPropertyPage extends AbstractFieldsPropertyPage {
 			public void put(String key, Object o) {
 				try {
 					if (key.equals(APPLICATION_MODEL)) {
-						List<String> allowedValues = new ArrayList<String>();
+						TreeMap<String, Object> allowedValues = new TreeMap<String, Object>();
 						// get configuration names
 						String o2 = (String) o;
 						//						String path = ApplicationUtil.eclipseVariableSubstitution(o2);
@@ -60,7 +62,7 @@ public class SIDEBuilderPropertyPage extends AbstractFieldsPropertyPage {
 
 						initializeConfigurations(allowedValues, conf);
 						if (allowedValues.size() > 0) {
-							String string = allowedValues.get(0);
+							String string = allowedValues.firstKey();
 							values.put(CONF, string);
 						}
 						// update comboBox
@@ -76,10 +78,11 @@ public class SIDEBuilderPropertyPage extends AbstractFieldsPropertyPage {
 		});
 	}
 
-	private static void initializeConfigurations(List<String> allowedValues, SIDEBuilderConfiguration conf) throws IOException {
+	private static void initializeConfigurations(Map<String, Object> allowedValues, SIDEBuilderConfiguration conf) throws IOException {
 		List<Configuration> configurations = conf.getConfigurations();
 		for (Configuration configuration : configurations) {
-			allowedValues.add(configuration.getName());
+			String name = configuration.getName();
+			allowedValues.put(name, name);
 		}
 	}
 

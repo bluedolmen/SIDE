@@ -1,7 +1,8 @@
 package com.bluexml.side.Integration.eclipse.branding.enterprise.wizards.newAlfrescoModule.pages;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.swt.widgets.Composite;
@@ -40,14 +41,14 @@ public class GeneralProjectInformationsPage extends AbstractFieldsPage {
 
 	public void createFieldsControls(Composite composite) {
 
-		ArrayList<String> allowedValues = new ArrayList<String>();
+		Map<String, Object> allowedValues = new HashMap<String, Object>();
 		List<IConfigurationElement> allToolingModuleExtensions = ToolingUtils.getAllToolingModuleExtensions();
-		
+
 		for (IConfigurationElement iConfigurationElement : allToolingModuleExtensions) {
 			String label = iConfigurationElement.getAttribute("label");
-			allowedValues.add(label);
+			allowedValues.put(label, label);
 		}
-		
+
 		createComboControl(composite, "archetypeId", Fields.archetypeId.toString(), allowedValues);
 
 		createTextFieldControl(composite, "groupId", Fields.groupId.toString());

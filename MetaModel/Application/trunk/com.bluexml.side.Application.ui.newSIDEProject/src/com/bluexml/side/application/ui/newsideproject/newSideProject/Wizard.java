@@ -23,7 +23,6 @@ import com.bluexml.side.util.libs.eclipse.WorkspaceModifyOperation;
 
 public class Wizard extends org.eclipse.jface.wizard.Wizard implements INewWizard {
 
-
 	// The workbench
 	protected IWorkbench currentWorkbench;
 	protected WizardNewProjectCreationPage mainPage;
@@ -51,7 +50,6 @@ public class Wizard extends org.eclipse.jface.wizard.Wizard implements INewWizar
 			URI locationURI = mainPage.getLocationURI();
 			location = locationURI;
 		}
-
 
 		final IProject newProject = mainPage.getProjectHandle();
 		CreateOptions createOptions = optionsPage.toOptions();

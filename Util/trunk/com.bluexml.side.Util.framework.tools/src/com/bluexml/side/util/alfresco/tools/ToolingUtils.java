@@ -42,7 +42,7 @@ public class ToolingUtils {
 		return ExtensionPointUtils.getConfigurationElements(com.bluexml.side.util.alfresco.tools.Activator.EXTENSION_POINT_TOOLING, nodeName);
 	}
 	
-	public static IConfigurationElement getModelLibraryFromLabel(String label) {
+	public static IConfigurationElement getModelLibraryFromLabel_(String label) {
 		return getModelLibraryFor("label", label);
 	}
 
@@ -68,7 +68,7 @@ public class ToolingUtils {
 	}
 
 	public static IProject importLibrary(String libraryId) throws Exception {
-		IConfigurationElement modelLibraryFromLabel = getModelLibraryFromLabel(libraryId);
+		IConfigurationElement modelLibraryFromLabel = getModelLibraryForId(libraryId);
 
 		String className = modelLibraryFromLabel.getAttribute(MODEL_LIBRARY_ACTIVATOR);
 		String resourcePath = modelLibraryFromLabel.getAttribute(MODEL_LIBRARY_ARCHIVEPATH);

@@ -76,7 +76,7 @@ public abstract class AbstractFieldsPage extends WizardPage implements Checkable
 	/**
 	 * @param composite
 	 */
-	protected void createComboControl(Composite composite, String label, final String id, List<String> allowedValues) {
+	protected void createComboControl(Composite composite, String label, final String id, Map<String, Object> allowedValues) {
 		controlHelper.createComboControl(composite, label, id, allowedValues, values);
 	}
 

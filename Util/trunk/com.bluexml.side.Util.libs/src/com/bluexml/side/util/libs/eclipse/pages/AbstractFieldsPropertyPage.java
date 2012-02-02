@@ -1,6 +1,6 @@
 package com.bluexml.side.util.libs.eclipse.pages;
 
-import java.util.List;
+import java.util.Map;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
@@ -9,8 +9,8 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.PropertyPage;
 
-import com.bluexml.side.util.libs.eclipse.StylingUtil;
 import com.bluexml.side.util.libs.eclipse.RessourcesSelection.RESOURCE_TYPE;
+import com.bluexml.side.util.libs.eclipse.StylingUtil;
 import com.bluexml.side.util.libs.eclipse.wizards.ValuesMap;
 
 public abstract class AbstractFieldsPropertyPage extends PropertyPage implements CheckablePage {
@@ -43,7 +43,7 @@ public abstract class AbstractFieldsPropertyPage extends PropertyPage implements
 	 * @param composite
 	 * @return
 	 */
-	protected Object[] createComboControl(Composite composite, String label, final String id, List<String> allowedValues) {
+	protected Object[] createComboControl(Composite composite, String label, final String id, Map<String, Object> allowedValues) {
 		return controlHelper.createComboControl(composite, label, id, allowedValues, values);
 	}
 
