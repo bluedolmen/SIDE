@@ -24,3 +24,29 @@ function loadShareDashboardWithLang(lang)
 	
 	window.location.href = window.location.protocol + "//" + window.location.host + window.location.pathname + searchString;
 }
+
+function changeLanguage(lang) {
+    var preferences = new Alfresco.service.Preferences();
+    var responseConfig = 
+         {
+            failureCallback: {
+            
+               fn: function DL_oFD_failure(event, p_oRecord) {
+                  Alfresco.util.PopupManager.displayPrompt(
+                  {
+                     title: "Error",
+                     text: "Fail to change user language"
+                  });
+               },
+               scope: this
+            },
+            successCallback : {
+                fn: function (response, obj) {
+                    loadShareDashboardWithLang(lang);
+                },
+                scope: this
+            }
+         };
+    preferences.set("user_language", lang ,responseConfig);
+
+}
