@@ -32,7 +32,7 @@
 	<!-- file and directory paths -->
 	<property name="buildName" value="${ant.project.name}_${version.build}" />
 	<property name="buildPath" value="${basedir}/build/${buildName}" />
-	<property name="alfrescoVersion" value="alfresco_3.x" />
+	<property name="alfrescoVersion" value="${velocity_alfrescoVersion}" />
 	<property name="tomcatPatch" value="${buildPath}-[${config}]_${NOW_FR}.zip" />
 	<property name="configPath" value="${basedir}/src/configs/${config}" />
 	<property name="commonConfigPath" value="${basedir}/src/configs/commonConf" />

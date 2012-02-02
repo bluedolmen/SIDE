@@ -13,17 +13,18 @@ import com.bluexml.side.util.libs.velocity.VelocityGenerator;
 
 public final class ProjectGenerator {
 
+	public static void generate(IProject project, String checkedValue_techVersion) throws Exception {
 
-	public static void generate(IProject project) throws Exception {
-		
 		String templates = "/com/bluexml/side/application/ui/newsideproject/newSideProject/project/templates";
 		String property_userName = System.getProperty("user.name");
-		
+
 		Map<String, Object> context = new HashMap<String, Object>();
 		context.put("velocity_projectName", project.getName());
 		context.put("velocity_userName", property_userName);
-		
+
 		context.put("velocity_currentDate", new Date());
+
+		context.put("velocity_alfrescoVersion", checkedValue_techVersion);
 
 		// register VelocityAction for build.xml
 		IFile ifile = IFileHelper.createFile(project, "build.xml");
@@ -34,12 +35,11 @@ public final class ProjectGenerator {
 		ifile = IFileHelper.createFile(project, "src/license.txt");
 		f = IFileHelper.convertIRessourceToFile(ifile);
 		vg.addAction(templates + "/SRC_license.txt.vm", f.getAbsolutePath(), context);
-		
+
 		// register VelocityAction for license.txt
 		ifile = IFileHelper.createFile(project, "license.txt");
 		f = IFileHelper.convertIRessourceToFile(ifile);
 		vg.addAction(templates + "/license.txt.vm", f.getAbsolutePath(), context);
-
 
 		// register VelocityAction for pom.xml
 		ifile = IFileHelper.createFile(project.getFolder("src/modules/mavenProjects"), "pom.xml");
@@ -66,9 +66,9 @@ public final class ProjectGenerator {
 		f = IFileHelper.convertIRessourceToFile(ifile);
 		vg.addAction(templates + "/com.bluexml.side.builder.properties.vm", f.getAbsolutePath(), context);
 
-		
 		vg.generateAll();
 	}
 
-	private ProjectGenerator() {} // Utility class
+	private ProjectGenerator() {
+	} // Utility class
 }
