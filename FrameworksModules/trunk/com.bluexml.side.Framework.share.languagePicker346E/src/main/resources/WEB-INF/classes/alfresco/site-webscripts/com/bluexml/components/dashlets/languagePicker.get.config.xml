@@ -1,0 +1,7 @@
+<languages>
+<language code="fr" icon="fr_FR.png" label="languagePicker.french"/>
+<language code="en" icon="en_US.png" label="languagePicker.english"/>
+<language code="es" icon="es_ES.png" label="languagePicker.spanish"/>
+<language code="de" icon="de_DE.png" label="languagePicker.german"/>
+<language code="it" icon="it_IT.png" label="languagePicker.italy"/>
+</languages>
