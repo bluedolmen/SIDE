@@ -1,7 +1,8 @@
 package com.bluexml.side.clazz.edit.ui.actions.wizards.initializefromclass.pages;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.swt.widgets.Composite;
@@ -24,11 +25,12 @@ public class InitializerPageWelcome extends AbstractFieldsPage {
 
 		createResourceControl(composite, Messages.InitializerPageWelcome_2, Fields.alfresco_home.toString(), RESOURCE_TYPE.RESOURCE_TYPE_DIRECTORY);
 
-		ArrayList<String> allowedValues = new ArrayList<String>();
+		Map<String, Object> allowedValues = new HashMap<String, Object>();
 		List<IConfigurationElement> allToolingModelLibraryExtensions = ToolingUtils.getAllToolingModelLibraryExtensions();
 
 		for (IConfigurationElement alfV : allToolingModelLibraryExtensions) {
-			allowedValues.add(alfV.getAttribute("label"));
+			String attribute = alfV.getAttribute("label");
+			allowedValues.put(attribute, attribute);
 		}
 		createComboControl(composite, Messages.InitializerPageWelcome_3, Fields.alfresco_version.toString(), allowedValues);
 
