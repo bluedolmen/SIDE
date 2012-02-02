@@ -6,11 +6,12 @@
          point="org.eclipse.ui.importWizards">
       <category
             id="com.bluexml.side.Util.framework.tools"
-            name="Import SIDE Model Library">
+            name="SIDE">
       </category>
       <wizard
             category="com.bluexml.side.Util.framework.tools"
             class="com.bluexml.side.util.framework.tools.ImportWizard"
+            icon="icons/project_icon.png"
             id="com.bluexml.side.Util.framework.tools.wizard"
             name="Import SIDE Model Library">
       </wizard>
