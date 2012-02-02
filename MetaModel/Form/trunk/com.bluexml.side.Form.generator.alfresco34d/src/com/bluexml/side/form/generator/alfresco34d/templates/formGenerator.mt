@@ -76,7 +76,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 <%script type="FormContainer" name="generate_fromClass"%>
 <forms>
 	<form<%if (service::getRootContainer().name.toLowerCase() != "default"){%>
-		id="<%if (isSearchForm){%>search<%}else{%>form.<%current("ClassFormCollection").name%><%}%>"<%}%>>
+		id="<%if (isSearchForm){%>search<%}else{%><%current("ClassFormCollection").name%><%}%>"<%}%>>
 	
 		<%generate_templateForClass(presentation.toString())%>
 		

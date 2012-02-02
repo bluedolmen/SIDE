@@ -129,7 +129,7 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
          <url>/components/form</url>
          <properties>
          	<%if (name.toLowerCase().trim() == "document-details" && isPortletInternal != null && isPortletInternal.form != null && isPortletInternal.form.name != "default"){%>
-            <formId>form.<%isPortletInternal.form.name%></formId>
+            <formId><%isPortletInternal.form.name%></formId>
             <%}%>
             <itemKind>node</itemKind>
             <itemId>{nodeRef}</itemId>
@@ -141,7 +141,7 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
          <url>/components/form</url>
          <properties>
          	<%if (name.toLowerCase().trim() == "document-details" && isPortletInternal != null && isPortletInternal.form != null && isPortletInternal.form.name != "default"){%>
-            <formId>form.<%isPortletInternal.form.name%></formId>
+            <formId><%isPortletInternal.form.name%></formId>
             <%}%>
             <itemKind>node</itemKind>
             <itemId>{nodeRef}</itemId>
