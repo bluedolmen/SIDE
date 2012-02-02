@@ -57,7 +57,7 @@ public class ReverseFromAlfrescoWizard extends Wizard implements IWorkbenchWizar
 				ToolingUtils.importLibrary(libraryId);
 
 				// models can be acceded in current workspace
-				IConfigurationElement libFromLabel = ToolingUtils.getModelLibraryFromLabel(libraryId);
+				IConfigurationElement libFromLabel = ToolingUtils.getModelLibraryForId(libraryId);
 				String projectId = libFromLabel.getAttribute(ToolingUtils.MODEL_LIBRARY_PROJECT_ID);
 				IFolder iFolder = IFileHelper.getIFolder("/" + projectId + "/data");
 				sideModels.addAll(IFileHelper.getAllFiles(iFolder));
