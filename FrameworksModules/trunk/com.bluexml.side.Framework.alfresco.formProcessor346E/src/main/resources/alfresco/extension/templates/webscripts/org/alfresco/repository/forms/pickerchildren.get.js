@@ -45,6 +45,7 @@ function main()
   		params.rootProperty = args["rootProperty"];
   		params.rootName = args["rootName"];
   		params.assoType = args["assoType"];
+  		params.selectableRoot = args["selectableRoot"] == "true";
 
   		
   		var hasSubfolders = true;

@@ -4,17 +4,30 @@ SITES_SPACE_QNAME_PATH = "/app:company_home/st:sites/";
 function getTreeNodeChidren(params) {
 	var currentNode = null;
 	var parentNode = null;
+	var children = null;
+	var isRoot = false;
 	var root = getRootNode(params)[0];
-	
-	if (params.nodeRef == null || params.nodeRef == "" || params.nodeRef == root.nodeRef) {
+
+	// set currentNode
+	if (params.nodeRef == null || params.nodeRef == "" ) {
+		isRoot = true;
 		currentNode = root;
-	} else {		
+	} else {
 		currentNode = search.findNode(params.nodeRef);
 	}
 
+	// set parentNode and children
+	if (isRoot && params.selectableRoot) {
+		parentNode = null;
+		children = [currentNode];
+	} else {
+		parentNode = currentNode;
+		children = currentNode.sourceAssocs[params.assoType];
+	}
+
 	return {
-		children : currentNode.sourceAssocs[params.assoType],
-		parent : currentNode,
+		children : children,
+		parent : parentNode,
 		root : root
 	};
 

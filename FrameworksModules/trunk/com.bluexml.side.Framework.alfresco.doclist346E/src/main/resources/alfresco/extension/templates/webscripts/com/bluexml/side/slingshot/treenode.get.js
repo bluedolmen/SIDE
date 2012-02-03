@@ -21,7 +21,7 @@ function getTreeNode() {
 		params.rootName = args["rootName"];
 		
 		params.nodeRef = args["nodeRef"];
-		
+		params.selectableRoot = args["selectableRoot"] == "true";
 
 		var evalChildFolders = args["children"] !== "false";
 		
