@@ -37,12 +37,17 @@ public class MyLocalResolver implements LocaleResolver, ApplicationContextAware 
 			l = new Locale(languageFromLayoutParam);
 		} catch (Exception e) {
 			logger.error("oups " + e.getMessage(), e);
+			e.printStackTrace();
 		}
 		logger.debug("[resolveLocale] resolveLocale = " + l);
-
+		if (l == null) {
+			l = Locale.getDefault();
+			logger.warn("[resolveLocale] back to default (local is null)= " + l);
+		}
 		session.setAttribute(LanguageSetter.SHARE_LANG, l.getLanguage());
-//		session.setAttribute(LanguageSetter.userSessionok, true);
+
 		I18NUtil.setLocale(l);
+
 		return l;
 	}
 
