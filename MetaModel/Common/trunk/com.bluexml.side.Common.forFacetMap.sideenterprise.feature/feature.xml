@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.forFacetMap.sideenterprise.feature" label="SIDE Generator For FacetMap" version="1.0.4.v32264-20120125" provider-name="BLUEXML">
+<feature id="com.bluexml.side.Common.forFacetMap.sideenterprise.feature" label="SIDE Generator For FacetMap" version="1.0.5.v32489-20120203" provider-name="BLUEXML">
   <description url="http://www.example.com/description">[Enter Feature Description here.]</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
   <includes id="com.bluexml.side.Deployer.facetMap.feature" version="1.0.35.v32264-20120125" />
-  <includes id="com.bluexml.side.View.generator.facetmap.feature" version="1.0.85.v31653-20120106" />
+  <includes id="com.bluexml.side.View.generator.facetmap.feature" version="1.0.86.v32489-20120203" />
 </feature>
 
