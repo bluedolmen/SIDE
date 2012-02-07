@@ -28,6 +28,7 @@ import com.bluexml.side.util.libs.ui.UIUtils;
 
 public class ClassInitialization {
 
+	protected static boolean groupRootChildren = true;
 	public static Command initializeClass(FormClass fc, EditingDomain domain) {
 
 		CompoundCommand cc = new CompoundCommand();
@@ -127,7 +128,7 @@ public class ClassInitialization {
 		fc.getDisabled().clear();
 		fc.getChildren().removeAll(fc.getChildren());
 		AbstractClass cl = fc.getReal_class();
-		Collection<FormElement> c = createChildsForClass(cl, false);
+		Collection<FormElement> c = createChildsForClass(cl, groupRootChildren);
 
 		return c;
 	}

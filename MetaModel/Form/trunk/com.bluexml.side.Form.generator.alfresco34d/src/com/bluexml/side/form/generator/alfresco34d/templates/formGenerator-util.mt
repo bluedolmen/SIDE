@@ -52,6 +52,13 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 		<%args(0)%>="<%toString().substring(toString().indexOf("=") + 1, toString().length())%>"
 	<%}%>
 <%}%>
+<%for (metainfo){%>
+<%if (key.toLowerCase() == args(0).toLowerCase()){%>
+		<%args(0)%>="<%if (value != null && value != ""){%><%value%><%}%>"
+<%}%>
+<%}%>
+
+
 <%-- getXtensionAsControlParam :
 	 args(0) : expected parameter name
 	 returns the value of the expected parameter stored in Xtension and create control-param element

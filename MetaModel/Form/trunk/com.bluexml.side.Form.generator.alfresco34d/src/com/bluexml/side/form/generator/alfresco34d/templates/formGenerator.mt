@@ -98,6 +98,13 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 </forms>
 
 <%script type="FormContainer" name="generate_templateForClass"%>
+<!--<%Xtension%>-->
+<!-- <%Xtension[toString().startsWith("template")].nSize()%>-->
+<%if (metainfo[key == "template"] || Xtension[toString().startsWith("template")].nSize() > 0){%>
+	<edit-form <%getXtensionAsXMLAttribute("template")%> />
+	<create-form <%getXtensionAsXMLAttribute("template")%> />
+	<view-form <%getXtensionAsXMLAttribute("template")%> />
+<%}else{%>
 <%if (isSearchForm) {%>
  	<edit-form template="/side/templates/search-form.ftl" />
 <%}else if (args(0) == "tabbed" || args(0) == "auto"){%>
@@ -106,6 +113,9 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 	<create-form template="/fdk/templates/tab-edit-form.ftl" />
 	<view-form template="/fdk/templates/tab-edit-form.ftl" />
 <%}%>
+
+<%}%>
+
 
 <%script type="FormContainer" name="generate_visibilityForClass"%>
 <%for (getAllKindFields()){%>

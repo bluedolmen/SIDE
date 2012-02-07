@@ -262,6 +262,20 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 		<%getXtensionAsControlParam("advancedQuery")%>
 		<%getXtensionAsControlParam("maxResults")%>
 		<%getXtensionAsControlParam("getDataSource")%>
+		
+		<%if (filter("ModelChoiceField").association_formClass.nSize() == 1){%>
+		<control-param name="addNewConfig">true</control-param>
+		<%if (filter("ModelChoiceField").association_formClass.nGet(0).eContainer().filter("FormCollection").name != "default"){%>
+		<control-param name="targetFormId"><%filter("ModelChoiceField").association_formClass.nGet(0).eContainer().filter("FormCollection").name%></control-param>
+		<%}%>
+		<%}else{%>
+		<%getXtensionAsControlParam("addNewConfig")%>
+		<%getXtensionAsControlParam("targetFormId")%>
+		<%}%>
+		<%getXtensionAsControlParam("targetItemKind")%>
+		<%getXtensionAsControlParam("targetFormMode")%>
+		<%getXtensionAsControlParam("targetFormSubmitType")%>		
+		<%getXtensionAsControlParam("targetDestination")%>
 		<%getBehaviour()%>
 	</control>
 <%}else if (widget.toString() == "Inline"){%>
