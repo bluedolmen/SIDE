@@ -1031,7 +1031,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   new String[] {
 			 "TwoModelElementWithSameName", "AbstractClass.allInstances()->select(a | a.name = self.name and a.getContainer() = self.getContainer() and a <> self)->size() = 0",
 			 "NameNull", "not self.name.oclIsUndefined() and self.name <> \'\'",
-			 "noSpecialCharacters", "self.name.regexMatch(\'[\\\\w]*\') = true",
+			 "noSpecialCharacters", "self.name.regexMatch(\'[a-zA-Z0-9-]*\') = true",
 			 "TwoAttributesSameName", "self.attributes -> forAll( a1, a2 | a1 <> a2 implies a1.name <>a2.name)"
 		   });			
 		addAnnotation
@@ -1244,7 +1244,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   source, 
 		   new String[] {
 			 "NameNull", "not self.name.oclIsUndefined() and self.name <> \'\'",
-			 "noSpecialCharacters", "self.name.regexMatch(\'[\\\\w-]*\') = true"
+			 "noSpecialCharacters", "self.name.regexMatch(\'[a-zA-Z0-9-]*\') = true"
 		   });								
 		addAnnotation
 		  (enumerationEClass, 

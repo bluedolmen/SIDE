@@ -10,9 +10,10 @@
       <details key="PackageNameNull" value="not self.name.oclIsUndefined() and self.name &lt;> ''"/>
       <details key="OneStartTask" value="self.startstate -> size() = 1"/>
       <details key="atLeastOneEndTask" value="self.endstate -> size() >= 1"/>
+      <details key="invalideChars" value="self.name.regexMatch('[a-zA-Z0-9-]*') = true"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="PackageNameNull OneStartTask atLeastOneEndTask"/>
+      <details key="constraints" value="PackageNameNull OneStartTask atLeastOneEndTask invalideChars"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: The 'Process' is the root package of the workflow process."/>

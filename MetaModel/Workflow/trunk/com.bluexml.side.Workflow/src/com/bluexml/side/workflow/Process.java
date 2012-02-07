@@ -39,8 +39,8 @@ import com.bluexml.side.clazz.Clazz;
  * </p>
  *
  * @see com.bluexml.side.workflow.WorkflowPackage#getProcess()
- * @model annotation="http://www.bluexml.com/OCL PackageNameNull='not self.name.oclIsUndefined() and self.name <> \'\'' OneStartTask='self.startstate -> size() = 1' atLeastOneEndTask='self.endstate -> size() >= 1'"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='PackageNameNull OneStartTask atLeastOneEndTask'"
+ * @model annotation="http://www.bluexml.com/OCL PackageNameNull='not self.name.oclIsUndefined() and self.name <> \'\'' OneStartTask='self.startstate -> size() = 1' atLeastOneEndTask='self.endstate -> size() >= 1' invalideChars='self.name.regexMatch(\'[a-zA-Z0-9-]*\') = true'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='PackageNameNull OneStartTask atLeastOneEndTask invalideChars'"
  * @generated
  */
 public interface Process extends com.bluexml.side.common.Package {

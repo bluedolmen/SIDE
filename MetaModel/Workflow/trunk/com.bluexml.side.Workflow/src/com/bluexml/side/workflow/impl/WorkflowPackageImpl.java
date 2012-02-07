@@ -1317,7 +1317,8 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		   new String[] {
 			 "PackageNameNull", "not self.name.oclIsUndefined() and self.name <> \'\'",
 			 "OneStartTask", "self.startstate -> size() = 1",
-			 "atLeastOneEndTask", "self.endstate -> size() >= 1"
+			 "atLeastOneEndTask", "self.endstate -> size() >= 1",
+			 "invalideChars", "self.name.regexMatch(\'[a-zA-Z0-9-]*\') = true"
 		   });				
 		addAnnotation
 		  (swimlaneEClass, 
@@ -1403,7 +1404,7 @@ public class WorkflowPackageImpl extends EPackageImpl implements WorkflowPackage
 		  (processEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "PackageNameNull OneStartTask atLeastOneEndTask"
+			 "constraints", "PackageNameNull OneStartTask atLeastOneEndTask invalideChars"
 		   });				
 		addAnnotation
 		  (swimlaneEClass, 

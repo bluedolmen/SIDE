@@ -115,6 +115,14 @@ public class WorkflowValidator extends EObjectValidator {
 	private static Constraint process_atLeastOneEndTaskInvOCL;
 
 	/**
+	 * The parsed OCL expression for the definition of the '<em>invalideChars</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint process_invalideCharsInvOCL;
+
+	/**
 	 * The parsed OCL expression for the definition of the '<em>ActorNameMustBeUnique</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -351,6 +359,7 @@ public class WorkflowValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validateProcess_PackageNameNull(process, diagnostics, context);
 		if (result || diagnostics != null) result &= validateProcess_OneStartTask(process, diagnostics, context);
 		if (result || diagnostics != null) result &= validateProcess_atLeastOneEndTask(process, diagnostics, context);
+		if (result || diagnostics != null) result &= validateProcess_invalideChars(process, diagnostics, context);
 		return result;
 	}
 
@@ -464,6 +473,45 @@ public class WorkflowValidator extends EObjectValidator {
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "atLeastOneEndTask", getObjectLabel(process, context) }),
+						 new Object[] { process }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the invalideChars constraint of '<em>Process</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateProcess_invalideChars(com.bluexml.side.workflow.Process process, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (process_invalideCharsInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(WorkflowPackage.Literals.PROCESS);
+
+			EAnnotation ocl = WorkflowPackage.Literals.PROCESS.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("invalideChars");
+
+			try {
+				process_invalideCharsInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(process_invalideCharsInvOCL);
+
+		if (!query.check(process)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						((doThrowError( WorkflowPackage.Literals.PROCESS.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"invalideChars")? Diagnostic.ERROR : Diagnostic.WARNING),
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "invalideChars", getObjectLabel(process, context) }),
 						 new Object[] { process }));
 			}
 			return false;
