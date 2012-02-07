@@ -43,6 +43,7 @@
         <property name="fileFolderService" ref="FileFolderService" />
         <property name="dictionaryService" ref="DictionaryService" />
         <property name="namespaceService" ref="NamespaceService" />
+        <property name="searchService" ref="SearchService" />
         <property name="matchPattern">
             <value>type</value>
         </property>

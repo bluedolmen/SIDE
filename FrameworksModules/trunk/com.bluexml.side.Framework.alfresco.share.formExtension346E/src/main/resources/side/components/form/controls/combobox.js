@@ -43,6 +43,9 @@ if (!Array.prototype.indexOf) {
  * @class SIDE.ComboBox
  */
 (function() {
+
+	var lang = YAHOO.lang, Event = YAHOO.util.Event, Dom = YAHOO.util.Dom;
+
 	SIDE.ComboBox = function(htmlId, currentValueHtmlId, initialValue) {
 		SIDE.ComboBox.superclass.constructor.call(this, "SIDE.ComboBox", htmlId, [ "button", "menu", "container", "resize", "datasource", "datatable" ]);
 		this.htmlid = htmlId;
@@ -51,6 +54,7 @@ if (!Array.prototype.indexOf) {
 		this.removedFieldHtmlId = htmlId + "-removed";
 		this.DSSelectWidget = null;
 		this.initialValue = "";
+		this.widgets.createNew = new SIDE.CreateTarget(this.htmlid + "-createNew", currentValueHtmlId);
 		if (initialValue) {
 			this.initialValue = initialValue;
 			console.log("field :" + htmlId + " initialValue :" + initialValue);
@@ -80,8 +84,13 @@ if (!Array.prototype.indexOf) {
 			advancedQuery : "",
 			maxResults : -1,
 			selectableTypeIsAspect : false,
-			searchInSite : true
+			searchInSite : true,
+			addNewConfig : {
+				disabled : true,
+				formconfig : {}
+			}
 		},
+
 		setOptions : function(options) {
 			this.log("setOptions :" + options);
 			SIDE.ComboBox.superclass.setOptions.call(this, options);
@@ -104,10 +113,33 @@ if (!Array.prototype.indexOf) {
 					return myDataSource;
 				};
 			}
+
+			this.widgets.createNew.setOptions(this.options.addNewConfig);
+		},
+
+		setMessages : function(messages) {
+			SIDE.ComboBox.superclass.setMessages.call(this, messages);
+			this.widgets.createNew.setMessages(messages);
+		},
+		createAddNewControl : function CT_createControl() {
+			// insert button
+			var itemGroupActionsContainerEl = Dom.get(this.htmlid + "-createNew");
+			var addButtonEl = document.createElement("button");
+			itemGroupActionsContainerEl.appendChild(addButtonEl);
+			this.widgets.addButton = Alfresco.util.createYUIButton(this, null, this.onAddButtonClick, {
+				label : this.options.selectActionLabel ? this.options.selectActionLabel : "add",
+				disabled : false
+			}, addButtonEl);
+		},
+		onAddButtonClick : function(e, p_obj) {
+			// open dialog with create form in
+			this.widgets.createNew.onNewItem(e, p_obj);
 		},
 
 		load : function() {
-
+			if (!this.options.disabled && !this.options.addNewConfig.disabled) {
+				this.createAddNewControl();
+			}
 			var myDataSource = this.options.getDataSource(this);
 			if (this.options.disabled) {
 				// use object-piker instance
@@ -224,6 +256,7 @@ if (!Array.prototype.indexOf) {
 		onReady : function ComboBox_onReady() {
 			YAHOO.Bubbling.fire("/side-labs/onReady/" + this.currentValueHtmlId, this);
 			this.DSSelectWidget = this.load();
+
 			YAHOO.Bubbling.fire("/side-labs/onLoaded/" + this.currentValueHtmlId, this);
 			if (this.options.mandatory) {
 				YAHOO.Bubbling.fire("mandatoryControlValueUpdated", this);

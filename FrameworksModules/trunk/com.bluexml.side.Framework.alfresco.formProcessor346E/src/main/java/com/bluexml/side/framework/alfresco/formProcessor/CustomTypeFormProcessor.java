@@ -2,11 +2,17 @@ package com.bluexml.side.framework.alfresco.formProcessor;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.alfresco.model.ContentModel;
 import org.alfresco.repo.forms.FormData;
 import org.alfresco.repo.forms.FormData.FieldData;
+import org.alfresco.repo.forms.FormException;
 import org.alfresco.repo.forms.FormNotFoundException;
 import org.alfresco.repo.forms.Item;
 import org.alfresco.repo.forms.processor.node.FormFieldConstants;
@@ -14,13 +20,29 @@ import org.alfresco.repo.forms.processor.node.TypeFormProcessor;
 import org.alfresco.service.cmr.dictionary.TypeDefinition;
 import org.alfresco.service.cmr.repository.ContentWriter;
 import org.alfresco.service.cmr.repository.NodeRef;
+import org.alfresco.service.cmr.repository.StoreRef;
+import org.alfresco.service.cmr.search.ResultSet;
+import org.alfresco.service.cmr.search.SearchService;
 import org.alfresco.service.namespace.InvalidQNameException;
+import org.alfresco.service.namespace.NamespaceService;
 import org.alfresco.service.namespace.QName;
+import org.alfresco.util.GUID;
+import org.alfresco.util.ISO9075;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 public class CustomTypeFormProcessor extends TypeFormProcessor {
 	private static Log logger = LogFactory.getLog(CustomTypeFormProcessor.class);
+
+	SearchService searchService;
+
+	public SearchService getSearchService() {
+		return searchService;
+	}
+
+	public void setSearchService(SearchService searchService) {
+		this.searchService = searchService;
+	}
 
 	public CustomTypeFormProcessor() {
 		propertyNamePattern = Pattern.compile(FormFieldConstants.PROP_DATA_PREFIX + "([^_]*){1}?_(.*){1}?");
@@ -103,5 +125,105 @@ public class CustomTypeFormProcessor extends TypeFormProcessor {
 
 		// return the type definition object for the requested type
 		return typeDef;
+	}
+
+	/**
+	 * Creates a new instance of the given type.
+	 * <p>
+	 * If the form data has the name property present it is used as the name of
+	 * the node.
+	 * </p>
+	 * <p>
+	 * The new node is placed in the location defined by the "destination" data
+	 * item in the form data (this will usually be a hidden field), this will
+	 * also be the NodeRef representation of the parent for the new node.
+	 * </p>
+	 * This version is patched to support more flexible alf_destination, not
+	 * only nodeRef, but could be xpath too
+	 * 
+	 * @param typeDef
+	 *            The type defintion of the type to create
+	 * @param data
+	 *            The form data
+	 * @return NodeRef representing the newly created node
+	 */
+	protected NodeRef createNode(TypeDefinition typeDef, FormData data) {
+		NodeRef nodeRef = null;
+
+		if (data != null) {
+			// firstly, ensure we have a destination to create the node in
+			NodeRef parentRef = null;
+			FieldData destination = data.getFieldData(DESTINATION);
+
+			if (destination == null) {
+				throw new FormException("Failed to persist form for '" + typeDef.getName().toPrefixString(this.namespaceService) + "' as '" + DESTINATION + "' data was not provided.");
+			}
+			// create the parent NodeRef
+			String destinationString = (String) destination.getValue();
+			//.matches("([^:]*)://([^/])/(.*)")
+			if (NodeRef.isNodeRef(destinationString)) {
+				// is nodeRef
+				parentRef = new NodeRef(destinationString);
+			} else {
+				// not nodeRef try to resolve the string
+				String regexp = "/([^:]*):([^/]*)";
+				String cleanPath = "";
+				Pattern p = Pattern.compile(regexp);
+				Matcher matcher = p.matcher(destinationString);
+				while (matcher.find()) {
+					String group1 = matcher.group(1);
+					String group2 = matcher.group(2);
+					
+					cleanPath += "/" + group1 + ":" + ISO9075.encode(group2);
+				}
+				logger.debug("encoded destination XPath" + cleanPath);
+
+				ResultSet results = searchService.query(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE, SearchService.LANGUAGE_XPATH, cleanPath);
+				List<NodeRef> nodeRefs = results.getNodeRefs();
+				if (nodeRefs.size() == 1) {
+					// ok
+					parentRef = nodeRefs.get(0);
+					if (!fileFolderService.getFileInfo(parentRef).isFolder()) {
+						// error
+						throw new FormException("the destination is not a folder, please check");
+					}
+				} else {
+					// error
+					throw new FormException("unable to convert destination path to nodeRef, please check");
+				}
+			}
+
+			// remove the destination data to avoid warning during persistence,
+			// this can
+			// always be retrieved by looking up the created node's parent
+			data.removeFieldData(DESTINATION);
+
+			// TODO: determine what association to use when creating the node in
+			// the destination,
+			// defaults to ContentModel.ASSOC_CONTAINS
+
+			// if a name property is present in the form data use it as the node
+			// name,
+			// otherwise generate a guid
+			String nodeName = null;
+			FieldData nameData = data.getFieldData(NAME_PROP_DATA);
+			if (nameData != null) {
+				nodeName = (String) nameData.getValue();
+
+				// remove the name data otherwise 'rename' gets called in
+				// persistNode
+				data.removeFieldData(NAME_PROP_DATA);
+			}
+			if (nodeName == null || nodeName.length() == 0) {
+				nodeName = GUID.generate();
+			}
+
+			// create the node
+			Map<QName, Serializable> nodeProps = new HashMap<QName, Serializable>(1);
+			nodeProps.put(ContentModel.PROP_NAME, nodeName);
+			nodeRef = this.nodeService.createNode(parentRef, ContentModel.ASSOC_CONTAINS, QName.createQName(NamespaceService.CONTENT_MODEL_1_0_URI, QName.createValidLocalName(nodeName)), typeDef.getName(), nodeProps).getChildRef();
+		}
+
+		return nodeRef;
 	}
 }

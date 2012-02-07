@@ -1,3 +1,4 @@
+<#include "common/addNew.inc.ftl" />
 <#assign controlId = fieldHtmlId + "-cntrl">
 
 <#if field.value != "" >
@@ -18,6 +19,7 @@
    	 <#if form.mode == "view" || (field.disabled && !(field.control.params.forceEditable?? && field.control.params.forceEditable == "true"))>disabled: true,</#if>
      itemType: "${field.endpointType}",
      field: "${field.name}",
+  
      multipleSelectMode: <#if field.control.params.multipleSelectMode??>${field.control.params.multipleSelectMode}<#else>${field.endpointMany?string}</#if>,
      <#if field.mandatory??>
      mandatory: ${field.mandatory?string},
@@ -29,6 +31,7 @@
 	 maxResults : <#if field.control.params.maxResults??>${field.control.params.maxResults}<#else>-1</#if>,
 	 selectableTypeIsAspect : <#if field.control.params.selectableTypeIsAspect??>${field.control.params.selectableTypeIsAspect}<#else>false</#if>
 	 <#if field.control.params.getDataSource??>, getDataSource :${field.control.params.getDataSource}</#if>
+	 <#if field.control.params.addNewConfig??>, addNewConfig : <@addNewConfig field /></#if>
    });
    
    
@@ -52,7 +55,7 @@
    <#else>
       <label for="${controlId}">${field.label?html}:<#if field.endpointMandatory><span class="mandatory-indicator">${msg("form.required.fields.marker")}</span></#if></label>
       
-      
+      <div id="${controlId}-createNew" class="show-picker"></div>
       <div id="${controlId}">
          <#if field.disabled == false>
          <input type="hidden" id="${fieldHtmlId}" name="-" value="${field.value?html}" />
