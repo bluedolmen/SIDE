@@ -39,5 +39,14 @@
 		<property name="cmiswebscript" ref="webscripts.js.cmis" />
 		<property name="imageResolver" ref="webscripts.repo.imageresolver"></property>
 	</bean>
+	<bean id="side.webscripts.js.rule" parent="baseJavaScriptExtension"
+		class="com.bluexml.side.framework.alfresco.webscriptExtension.RuleScriptExtension">
+		<property name="extensionName">
+			<value>siderule</value>
+		</property>
+		<property name="serviceRegistry" ref="ServiceRegistry" />
+		<property name="actionService" ref="actionService" />
+		<property name="ruleService" ref="ruleService" />
+	</bean>
 
 </beans>
