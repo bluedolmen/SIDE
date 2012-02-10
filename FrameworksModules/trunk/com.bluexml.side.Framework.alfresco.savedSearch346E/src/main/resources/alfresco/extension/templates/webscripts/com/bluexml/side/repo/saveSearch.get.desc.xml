@@ -1,0 +1,9 @@
+<webscript>
+  <shortname>save search</shortname>
+  <description>service to persists share search query</description>
+  <url>/side/repo/saveSearch/site/{site}?saveName={saveName}&amp;site={site}&amp;term={term}&amp;tag={tag}&amp;maxResults={maxResults}&amp;sort={sort}&amp;query={query}&amp;repo={repo}</url>
+  <format default="json">argument</format>
+  <authentication>user</authentication>
+  <transaction allow="readwrite" buffersize="0">required</transaction>
+  <family>SIDE</family>
+</webscript>
