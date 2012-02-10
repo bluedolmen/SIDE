@@ -3,8 +3,9 @@
 <import resource="classpath:/alfresco/templates/webscripts/org/alfresco/slingshot/documentlibrary/parse-args.lib.js">
 
 /**
- * Main entry point: Create collection of documents and folders in the given space
- *
+ * Main entry point: Create collection of documents and folders in the given
+ * space
+ * 
  * @method getDoclist
  */
 function getDoclist()
@@ -32,12 +33,13 @@ function getDoclist()
       query = filterParams.query;
 
    // Query the nodes - passing in sort and result limit parameters
-   if (query !== "")
+   if (query !== "" | filter == "savedSearch")
    {
-	   //  SIDE override sort parameters using sort parameter (see share config Search)
+	   // SIDE override sort parameters using sort parameter (see share config
+		// Search)
 	   /**
-	    * see search.lib.js#getSearchResults
-	    */
+		 * see search.lib.js#getSearchResults
+		 */
 		if (args.sorting) 
 		{
 			
@@ -79,18 +81,24 @@ function getDoclist()
 			filterParams.sort = sortColumns;
 		}
 		
-      allNodes = search.query(
-      {
-         query: query,
-         language: filterParams.language,
-         page:
-         {
-            maxItems: (filterParams.limitResults ? parseInt(filterParams.limitResults, 10) : 0)
-         },
-         sort: filterParams.sort,
-         templates: filterParams.templates,
-         namespace: (filterParams.namespace ? filterParams.namespace : null)
-      });
+	  var queryDef = null;
+	  if (filter == "savedSearch") {
+		  queryDef = filterParams;
+	  } else {
+		  queryDef = {
+	         query: query,
+	         language: filterParams.language,
+	         page: {
+	        	 	maxItems: (filterParams.limitResults ? parseInt(filterParams.limitResults, 10) : 0)
+	         },
+	         sort: filterParams.sort,
+	         templates: filterParams.templates,
+	         namespace: (filterParams.namespace ? filterParams.namespace : null)
+		 };
+			 
+	  }
+	  logger.log("doclist queryDef :" + queryDef.toSource());
+      allNodes = search.query(queryDef);
    }
 
    // Ensure folders and folderlinks appear at the top of the list
@@ -221,10 +229,11 @@ function getDoclist()
    };
    
    /**
-    * De-duplicate orignals for any existing working copies.
-    * This can't be done in evaluator.lib.js as it has no knowledge of the current filter or UI operation.
-    * Note: This may result in pages containing less than the configured amount of items (50 by default).
-   */
+	 * De-duplicate orignals for any existing working copies. This can't be done
+	 * in evaluator.lib.js as it has no knowledge of the current filter or UI
+	 * operation. Note: This may result in pages containing less than the
+	 * configured amount of items (50 by default).
+	 */
    for each (item in items)
    {
       if (item.customObj.isWorkingCopy)

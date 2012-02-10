@@ -276,7 +276,9 @@ var Filters =
             }
             filterParams.query = "+PATH:\"/cm:generalclassifiable" + Filters.iso9075EncodePath(filterData) + "/member\"";
             break;
-
+         case "savedSearch":
+        	filterParams = getSavedSearchQueryDef(filterData);
+        	break;
          default: // "path"
             filterParams.variablePath = false;
             filterQuery = "+PATH:\"" + parsedArgs.pathNode.qnamePath + "/*\"";
@@ -285,7 +287,7 @@ var Filters =
       }
 
       // Specialise by passed-in type
-      if (filterParams.query !== "")
+      if (filterParams.query !== "" && filter != "savedSearch")
       {
          filterParams.query += " " + (Filters.TYPE_MAP[parsedArgs.type] || "");
       }

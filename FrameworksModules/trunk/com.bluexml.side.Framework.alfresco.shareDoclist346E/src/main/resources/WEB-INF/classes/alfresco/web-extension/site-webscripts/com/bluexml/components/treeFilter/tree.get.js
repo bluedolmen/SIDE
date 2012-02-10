@@ -13,13 +13,13 @@ function main() {
 	if (paramValide("rootName")) {
 		// use built-in SIDE model Aspect if not provided
 
-		model.assoType = paramValide("assoType") ? args.assoType : "buildInLibraryAlfresco:TreeFilter_AssociationTree_TreeFilter";
-		model.nodeType = paramValide("nodeType") ? args.nodeType : "buildInLibraryAlfresco:TreeFilter";
-		model.nodeTypeDocument = paramValide("nodeTypeDocument") ? args.nodeTypeDocument : "buildInLibraryAlfresco:HasTreeFilter";
-		model.assoTypeDocument = paramValide("assoTypeDocument") ? args.assoTypeDocument : "buildInLibraryAlfresco:HasTreeFilter_hasTreeFilter_TreeFiltersearch";
-		model.selectableTypeIsAspect = paramValide("selectableTypeIsAspect") ? args.selectableTypeIsAspect : "true";
-		model.rootProperty = paramValide("rootProperty") ? args.rootProperty : "buildInLibraryAlfresco:TreeFilter_root";
-		model.rootLabelId= paramValide("rootLabelId") ? args.rootLabelId : "header.library";
+		model.assoType = paramValide("assoType", "buildInLibraryAlfresco:TreeFilter_AssociationTree_TreeFilter");
+		model.nodeType = paramValide("nodeType", "buildInLibraryAlfresco:TreeFilter");
+		model.nodeTypeDocument = paramValide("nodeTypeDocument", "buildInLibraryAlfresco:HasTreeFilter");
+		model.assoTypeDocument = paramValide("assoTypeDocument", "buildInLibraryAlfresco:HasTreeFilter_hasTreeFilter_TreeFiltersearch");
+		model.selectableTypeIsAspect = paramValide("selectableTypeIsAspect", "true");
+		model.rootProperty = paramValide("rootProperty", "buildInLibraryAlfresco:TreeFilter_root");
+		model.rootLabelId = paramValide("rootLabelId", "header.library");
 		model.rootName = args.rootName;
 	} else {
 		// error
@@ -27,7 +27,7 @@ function main() {
 
 }
 
-function paramValide(param) {
-	return args[param] != undefined && args[param] != "";
+function paramValide(param, defaultValue) {
+	return (args[param] != undefined && args[param] != null && args[param] != "") ? args[param] : defaultValue;
 }
 main();
