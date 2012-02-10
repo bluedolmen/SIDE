@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.core.labs.feature" label="SIDE Core Components" version="1.0.348.v32612-20120207" provider-name="blueXML">
+<feature id="com.bluexml.side.Common.core.labs.feature" label="SIDE Core Components" version="1.0.349.v32750-20120210" provider-name="blueXML">
   <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized
 frameworks like Alfresco. This feature gathers common tools for
 SIDE modelers.</description>
@@ -639,7 +639,7 @@ copy of the Program in return for a fee.
   <plugin id="com.bluexml.side.Application.ui.newSIDEProject" download-size="0" install-size="0" version="1.0.6.v32489-20120203" unpack="false" />
   <plugin id="com.bluexml.side.Class.edit.ui" download-size="0" install-size="0" version="1.0.50.v32489-20120203" unpack="false" />
   <plugin id="com.bluexml.side.Integration.eclipse.builder" download-size="0" install-size="0" version="1.0.65.v32489-20120203" unpack="false" />
-  <plugin id="com.bluexml.side.Util.antRunner" download-size="0" install-size="0" version="1.0.33.v31485-20120104" unpack="false" />
+  <plugin id="com.bluexml.side.Util.antRunner" download-size="0" install-size="0" version="1.0.34.v32750-20120210" unpack="false" />
   <plugin id="com.bluexml.side.Util.security.enterprise" download-size="0" install-size="0" version="1.0.16.v31653-20120106" unpack="false" />
 </feature>
 
