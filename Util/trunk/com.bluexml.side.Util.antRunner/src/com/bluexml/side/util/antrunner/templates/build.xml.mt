@@ -46,13 +46,13 @@ build.xml
     <target name="<%name%>-generate" depends="">
     	<side.validate applicationfile="${application}" />    	
     	<%for (generatorConfigurations[activated(current("Configuration"))]){%>
-    	<side.generate applicationfile="${application}" configurationname="<%current("Configuration").name%>" componantid="<%id%>" />
+    	<side.generate applicationfile="${application}" configurationname="<%current("Configuration").name%>" componentid="<%id%>" />
     	<%}%>
     </target>
     
     <target name="<%name%>-deploy" depends="">
 	    <%for (deployerConfigurations[activated(current("Configuration"))]){%>
-	    <side.deploy applicationfile="${application}" configurationname="<%current("Configuration").name%>" componantid="<%id%>" />
+	    <side.deploy applicationfile="${application}" configurationname="<%current("Configuration").name%>" componentid="<%id%>" />
     	<%}%>    	
     	<side.report applicationfile="${application}" configurationname="<%name%>" />
     </target>
