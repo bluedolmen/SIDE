@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Class.generator.alfresco.sideEnterprise.feature" label="Alfresco generator" version="1.0.448.v32661-20120208" provider-name="BLUEXML">
+<feature id="com.bluexml.side.Class.generator.alfresco.sideEnterprise.feature" label="Alfresco generator" version="1.0.449.v32790-20120213" provider-name="BLUEXML">
   <description url="http://www.example.com/description">[Enter Feature Description here.]</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
-  <plugin id="com.bluexml.side.Class.generator.alfresco.extension.sideEnterprise" download-size="0" install-size="0" version="1.0.44.v32661-20120208" unpack="false" />
+  <plugin id="com.bluexml.side.Class.generator.alfresco.extension.sideEnterprise" download-size="0" install-size="0" version="1.0.45.v32790-20120213" unpack="false" />
   <plugin id="com.bluexml.side.Class.generator.alfresco" download-size="0" install-size="0" version="1.0.627.v31653-20120106" unpack="false" />
   <plugin id="com.bluexml.side.Class.generator.alfresco.api" download-size="0" install-size="0" version="1.0.17.v29723-20111108" unpack="false" />
 </feature>
