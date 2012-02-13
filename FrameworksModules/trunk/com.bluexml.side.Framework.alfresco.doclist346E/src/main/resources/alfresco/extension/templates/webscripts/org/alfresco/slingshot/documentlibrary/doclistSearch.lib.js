@@ -90,15 +90,10 @@ function getSearchQuery(term, maxResults, siteId, containerId)
 }
 
 function getSavedSearchQueryDef(filterdata) {
-	var data = eval('(' + filterdata + ')');
-	var node = search.findNode(data.nodeRef);
+	var nodeRef = filterdata;
+	var node = search.findNode(nodeRef);
+	var queryString = node.content;
 	
-	var queryString = "";
-	if (data.dataProperty == "cm:content") {
-		queryString = node.content;
-	} else {
-		queryString = node.properties[data.dataProperty];
-	}
 	logger.log("getSavedSearchQuery " + queryString);
 	
 	var savedSearch = eval('(' + queryString + ')');
