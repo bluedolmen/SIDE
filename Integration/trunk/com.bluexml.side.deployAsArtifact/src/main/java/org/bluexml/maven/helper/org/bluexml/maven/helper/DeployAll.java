@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileWriter;
+import java.io.FilenameFilter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -12,6 +13,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+
+import org.apache.commons.lang.StringUtils;
 
 public class DeployAll {
 	static String artifactFolder = "artifactFolder";
@@ -70,7 +73,8 @@ public class DeployAll {
 		String repoID = props.getProperty(repoIDKey, "thirdparty");
 		String repoSnapshotID = props.getProperty(repoSnapshotIDKey, "thirdpartysnapshot");
 
-		String classifier = props.getProperty(defaultClassifier);
+		String classifier = StringUtils.trimToNull(props.getProperty(defaultClassifier));
+		
 		String profilesString = props.getProperty(profiles);
 		List<String> profiles = null;
 		if (profilesString != null && !profilesString.equals("")) {
@@ -78,16 +82,25 @@ public class DeployAll {
 		}
 
 		try {
-			String rexexp = "(.*)-([0-9]+(\\.[0-9]+)*(\\.[^-]*)?(-SNAPSHOT)?)+(-(.*))?\\.jar";
+			final String folderType = props.getProperty("folderType");
+
+			String rexexp = "(.*)-([0-9]+(\\.[0-9]+)*(\\.[^-]*)?(-SNAPSHOT)?)+(-(.*))?\\.(.*)";
 
 			if (jarToDeploy.exists() && jarToDeploy.isDirectory()) {
-				String artifactsType = props.getProperty("folderType");
-				File[] entry = jarToDeploy.listFiles();
+
+				File[] entry = jarToDeploy.listFiles(new FilenameFilter() {
+
+					public boolean accept(File arg0, String arg1) {
+
+						return !arg1.startsWith(".");
+					}
+				});
 				for (File file : entry) {
 					String fileName = file.getName();
 					String artifactID = fileName.replaceFirst(rexexp, "$1");
 					String version = fileName.replaceFirst(rexexp, "$2");
 					String qualifier = fileName.replaceFirst(rexexp, "$7");
+					String artifactsType = fileName.replaceFirst(rexexp, "$8");
 					URL repo = repoUrl;
 					String repoIdentifier = repoID;
 					if (version.endsWith("SNAPSHOT")) {
@@ -98,7 +111,7 @@ public class DeployAll {
 
 					System.out.println("ArtifactId: " + artifactID + ", version: " + version + ", qualifier: " + qualifier);
 					String cl = "";
-					if (artifactsType.equals("pom")) {
+					if (folderType.equals("pom")) {
 						// pom location
 						File pomHomes = new File(props.getProperty("pom.homes", "poms/maven"));
 						File pomFile = null;
@@ -153,7 +166,9 @@ public class DeployAll {
 		parameters.put("version", version);
 		parameters.put("packaging", packaging);
 		parameters.put("generatePom", "true");
-		parameters.put("classifier", classifier);
+		if (classifier != null) {
+			parameters.put("classifier", classifier);
+		}
 
 		String options = " ";
 		for (Map.Entry<String, String> en : parameters.entrySet()) {
