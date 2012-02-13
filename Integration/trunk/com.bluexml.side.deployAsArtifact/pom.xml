@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.bluexml.side</groupId>
-	<artifactId>deployAsArtifact</artifactId>
-	<name>deployerAsArtifact</name>
-  <version>0.0.2</version>
-	<description>use this project to deploy jar to SIDE maven third party repositorycopy jars files into "jarToDeploy" execute main java method, execute the bash file.</description>
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-	<dependencies>
-		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>2.1</version>
-		</dependency>
-	</dependencies>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.bluexml.side</groupId>
+  <artifactId>deployAsArtifact</artifactId>
+  <name>deployerAsArtifact</name>
+  <version>0.0.3</version>
+  <description>use this project to deploy jar to SIDE maven third party repository
+copy jars files into "jarToDeploy" execute main java method, execute the bash file.</description>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <dependencies>
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>2.1</version>
+    </dependency>
+  </dependencies>
 </project>
+
