@@ -16,12 +16,14 @@
  ******************************************************************************/
 package com.bluexml.side.clazz.service.alfresco;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 
 import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.Association;
+import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.Stereotype;
@@ -96,11 +98,11 @@ public class ClassServices {
 		return resultLine.replaceAll("\\s", "");
 	}
 
-	public static boolean isFolder(AbstractClass cl2) {
+	public static boolean isFolder(AbstractClass cl2) throws Exception {
 		boolean is = false;
 		if (cl2.getGeneralizations().size() > 0) {
 			for (AbstractClass cl : cl2.getGeneralizations()) {
-				if (("cm:folder").equals("cm:" + cl.getName())) {
+				if (("cm:folder").equals(CommonServices.getPrefixedQName(cl))) {
 					return true;
 				} else {
 					return isFolder(cl);
@@ -111,10 +113,18 @@ public class ClassServices {
 	}
 
 	public static boolean isChildOfCmContent(Clazz c) throws Exception {
+		return isChildOf(c, "cm:content");
+	}
+	
+	public static boolean isChildOfDlItem(Clazz c) throws Exception {
+		return isChildOf(c, "dl:dataListItem");
+	}
+	
+	public static boolean isChildOf(Clazz c,String qname) throws Exception {
 		EList<AbstractClass> l = c.getInheritedClasses();
 		for (AbstractClass clazz : l) {
 			String prefixedname = CommonServices.getPrefixedQName(clazz);
-			if (prefixedname.equals("cm:content")) {
+			if (prefixedname.equals(qname)) {
 				return true;
 			}
 		}
@@ -131,4 +141,21 @@ public class ClassServices {
 		return false;
 	}
 
+	
+	
+	/**
+	 * only return items that is cm:content and not datalistitem
+	 * @param l
+	 * @return
+	 * @throws Exception
+	 */
+	public static List<Clazz> filterOnlyContent(ClassPackage cp) throws Exception {
+		List<Clazz> filtered= new ArrayList<Clazz>();
+		for (Clazz clazz : cp.getAllClasses()) {
+			if (!isFolder(clazz) && !clazz.isAbstract() && !isChildOfDlItem(clazz)) {
+				filtered.add(clazz);
+			}
+		}
+		return filtered;
+	}
 }
