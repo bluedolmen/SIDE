@@ -19,4 +19,12 @@ page.<%nGet("messages_name")%>.title=<%nGet("title_name")%>
 page.<%nGet("messages_name")%>.description=<%if (nGet("description_name") !=null){%><%nGet("description_name")%><%}else{%><%}%>
 <%}%>
 
+<%if (ID.toLowerCase().trim() == "documentlibrary" && portlets[associationPortlet.name.toLowerCase().trim() == "toolbar-create-content" && associationPortlet.isPortletInternal != null].nSize() > 0){%>
+<%for (portlets.associationPortlet[name.toLowerCase().trim() == "toolbar-create-content" && isPortletInternal != null]){%>
+<%for (isPortletInternal.form.forms.filter("form.FormClass")){%>
+menu.create-content.<%real_class.name%>=<%real_class.getLabel()%> ...
+<%}%>
+<%}%>
+<%}%>
+
 <%}%>

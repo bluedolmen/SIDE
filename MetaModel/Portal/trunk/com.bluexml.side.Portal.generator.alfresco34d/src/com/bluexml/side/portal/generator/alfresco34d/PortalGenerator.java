@@ -85,6 +85,7 @@ public class PortalGenerator extends PortalAlfrescoGenerator {
 		result.add(templatesRoot + "folder-details.xml.mt");
 		result.add(templatesRoot + "inline-edit.xml.mt");
 
+		result.add(templatesRoot + "toolbar.get.config.xml.mt");
 		return result;
 	}
 

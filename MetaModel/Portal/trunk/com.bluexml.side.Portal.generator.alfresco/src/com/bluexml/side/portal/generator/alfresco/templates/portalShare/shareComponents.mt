@@ -18,7 +18,7 @@ import com.bluexml.side.portal.generator.alfresco.templates.services.ClazzServic
    <url><%computeUrl()%></url>
    <properties>
    <%for (associationPortlet.isInstanceOfPortletType.instances){%>
-   <%if (instanceOf.name != "scope" && instanceOf.name != "url" && instanceOf.name != "region-id" && instanceOf.name != "source-id"){%>   
+   <%if (instanceOf.name != "scope" && instanceOf.name != "url" && instanceOf.name != "region-id" && instanceOf.name != "source-id" && value != null && value != ""){%>   
       <<%instanceOf.name%>><%value.replaceAll("\{", "%7B").replaceAll("\}", "%7D")%></<%instanceOf.name%>>
    <%}%>   	
    <%}%>
