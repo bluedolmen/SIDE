@@ -41,7 +41,7 @@ public interface PortletType extends PortalModelElement {
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see #setId(String)
 	 * @see com.bluexml.side.portal.PortalPackage#getPortletType_Id()
-	 * @model default="PortletType" id="true"
+	 * @model default="PortletType" unique="false" id="true"
 	 * @generated
 	 */
 	String getId();

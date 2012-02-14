@@ -38,7 +38,7 @@ public interface Portlet extends PortalModelElement {
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see com.bluexml.side.portal.PortalPackage#getPortlet_Name()
-	 * @model
+	 * @model unique="false"
 	 * @generated
 	 */
 	String getName();

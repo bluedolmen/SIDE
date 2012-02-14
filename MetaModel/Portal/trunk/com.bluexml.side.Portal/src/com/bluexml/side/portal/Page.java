@@ -45,7 +45,7 @@ public interface Page extends PortalModelElement {
 	 * @return the value of the '<em>ID</em>' attribute.
 	 * @see #setID(String)
 	 * @see com.bluexml.side.portal.PortalPackage#getPage_ID()
-	 * @model id="true"
+	 * @model unique="false" id="true"
 	 * @generated
 	 */
 	String getID();
