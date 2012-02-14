@@ -1,6 +1,7 @@
 <%
 metamodel http://www.kerblue.org/class/1.0
 import templates.servicesTemplates.Common
+import com.bluexml.side.clazz.service.alfresco.ClassServices
 %>
 
 <%--
@@ -33,11 +34,10 @@ var contentTypes = getContentTypes().concat(availableContentTypes);
 //--END BLUEXML-PATCH [add custom content types]
 model.contentTypes = contentTypes;
 <%script type="clazz.ClassPackage" name="getCustomContentTypesAsJSON"%>
-<%getAllClasses().nSort("name").push()%>
+<%filterOnlyContent().nSort("name").push()%>
 <%for (peek()){%>
    <%getContentTypeJSON()%> <%if (i() < peek().nSize() - 1) {%>,<%}%>
 <%}%>
 
 <%script type="clazz.Clazz" name="getContentTypeJSON"%>
 {id: "<%getFolder()%>:<%getQualifiedName()%>", value: "<%getLabel()%>"}
-
