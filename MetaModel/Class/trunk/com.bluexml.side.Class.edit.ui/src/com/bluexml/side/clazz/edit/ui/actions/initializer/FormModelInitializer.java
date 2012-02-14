@@ -35,11 +35,12 @@ public class FormModelInitializer extends ModelInitializer {
 		CompoundCommand cc = new CompoundCommand();
 
 		for (Clazz c : ((ClassPackage) root).getAllClasses()) {
-			FormClass fc = createFormClass(c);
-			Command cmd = ClassInitialization.initializeClass(fc, editingDomain);
-			cc.append(cmd);
+			if (!c.isAbstract()) {
+				FormClass fc = createFormClass(c);
+				Command cmd = ClassInitialization.initializeClass(fc, editingDomain);
+				cc.append(cmd);
+			}
 		}
-
 		return cc;
 	}
 
