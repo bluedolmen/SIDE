@@ -24,6 +24,7 @@ import com.bluexml.side.clazz.Model;
 import com.bluexml.side.clazz.TitledNamedClassModelElement;
 import com.bluexml.side.clazz.service.alfresco.CommonServices;
 import com.bluexml.side.common.ModelElement;
+import com.bluexml.side.common.NameSpace;
 import com.bluexml.side.common.NamedModelElement;
 import com.bluexml.side.form.ClassFormCollection;
 import com.bluexml.side.form.ClassReference;
@@ -52,6 +53,9 @@ public class SynchronizeWithClass {
 	boolean updateId = true;
 	boolean updateLabel = false;
 	boolean addNewFormClass = true;
+	boolean includeAlfrescoNativeClass = false;
+	boolean includeAbstract = false;
+
 	final boolean headless;
 
 	public SynchronizeWithClass(EditingDomain domain) {
@@ -79,27 +83,35 @@ public class SynchronizeWithClass {
 			// get All Class
 			Collection<AbstractClass> missing = getAllClassesFromReferedModels(fc);
 			for (AbstractClass abstractClass : missing) {
-				FormContainer formContainer = null;
-				if (fc instanceof ClassFormCollection) {
-					formContainer = FormFactory.eINSTANCE.createFormClass();
-					setFormContainer(abstractClass, formContainer);
-					formContainer.setId(abstractClass.getName());
-					formContainer.setLabel(abstractClass.getLabel());
-				} else if (fc instanceof SearchFormCollection) {
-					formContainer = FormFactory.eINSTANCE.createFormSearch();
-					setFormContainer(abstractClass, formContainer);
-					SearchInitialization.initializeFormProperties((FormSearch) formContainer);
-				} else if (fc instanceof WorkflowFormCollection) {
-					formContainer = FormFactory.eINSTANCE.createFormWorkflow();
-				}
+				
+				if (!(abstractClass instanceof Clazz) ^ !((Clazz) abstractClass).isAbstract()) {
+					FormContainer formContainer = null;
+					NameSpace logicalNameSpace = abstractClass.getLogicalNameSpace();
+					boolean isNativeAlfresco = logicalNameSpace != null && logicalNameSpace.getURI().startsWith("http://www.alfresco.org/model");
+					if (!isNativeAlfresco || includeAlfrescoNativeClass) {
 
-				if (headless) {
-					fc.getForms().add(formContainer);
-				} else {
-					cc.append(AddCommand.create(domain, fc, FormPackage.eINSTANCE.getFormCollection_Forms(), formContainer));
-				}
-				if (formContainer instanceof ClassReference) {
-					synchronizeFormContainer(formContainer);
+						if (fc instanceof ClassFormCollection) {
+							formContainer = FormFactory.eINSTANCE.createFormClass();
+							setFormContainer(abstractClass, formContainer);
+							formContainer.setId(abstractClass.getName());
+							formContainer.setLabel(abstractClass.getLabel());
+						} else if (fc instanceof SearchFormCollection) {
+							formContainer = FormFactory.eINSTANCE.createFormSearch();
+							setFormContainer(abstractClass, formContainer);
+							SearchInitialization.initializeFormProperties((FormSearch) formContainer);
+						} else if (fc instanceof WorkflowFormCollection) {
+							formContainer = FormFactory.eINSTANCE.createFormWorkflow();
+						}
+
+						if (headless) {
+							fc.getForms().add(formContainer);
+						} else {
+							cc.append(AddCommand.create(domain, fc, FormPackage.eINSTANCE.getFormCollection_Forms(), formContainer));
+						}
+						if (formContainer instanceof ClassReference) {
+							synchronizeFormContainer(formContainer);
+						}
+					}
 				}
 			}
 		}
