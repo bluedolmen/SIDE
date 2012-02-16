@@ -8,7 +8,6 @@ metamodel http://www.kerblue.org/portal/1.0
 <%getProperty("alf.share.paths.web-ext")%>/sharePortal<%name%>Extensions/messages.properties
 <%}%>
 <%script type="Portal" name="alfrescoGenerator" file="<%createMessages%>"%>
-
 ## BlueXML SIDE Custom pages keys
 <%for (pageSet){%>
 <%ID.toLowerCase().nPut("messages_name")%>
@@ -25,6 +24,10 @@ page.<%nGet("messages_name")%>.description=<%if (nGet("description_name") !=null
 menu.create-content.<%real_class.name%>=<%real_class.getLabel()%> ...
 <%}%>
 <%}%>
+<%}%>
+
+<%for (portlets){%>
+portlet.<%nGet("messages_name")%>.<%associationPortlet.name%>.header=<%associationPortlet.getLabel()%>
 <%}%>
 
 <%}%>

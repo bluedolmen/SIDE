@@ -118,7 +118,7 @@ public class PortalSwitch<T> extends Switch<T> {
 			case PortalPackage.PORTAL_LAYOUT: {
 				PortalLayout portalLayout = (PortalLayout)theEObject;
 				T result = casePortalLayout(portalLayout);
-				if (result == null) result = casePortalModelElement(portalLayout);
+				if (result == null) result = caseNamedModelElement(portalLayout);
 				if (result == null) result = caseModelElement(portalLayout);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

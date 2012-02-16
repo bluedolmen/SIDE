@@ -8,11 +8,17 @@ package com.bluexml.side.portal.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.ocl.ParserException;
+import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.OCL;
 
+import org.eclipse.ocl.expressions.OCLExpression;
 import com.bluexml.side.portal.InstanciatePortletType;
 import com.bluexml.side.portal.PortalPackage;
 import com.bluexml.side.portal.Portlet;
@@ -29,6 +35,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *   <li>{@link com.bluexml.side.portal.impl.PortletImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.bluexml.side.portal.impl.PortletImpl#getIsPortletInternal <em>Is Portlet Internal</em>}</li>
  *   <li>{@link com.bluexml.side.portal.impl.PortletImpl#getIsInstanceOfPortletType <em>Is Instance Of Portlet Type</em>}</li>
+ *   <li>{@link com.bluexml.side.portal.impl.PortletImpl#getTitle <em>Title</em>}</li>
  * </ul>
  * </p>
  *
@@ -74,6 +81,26 @@ public class PortletImpl extends PortalModelElementImpl implements Portlet {
 	 * @ordered
 	 */
 	protected InstanciatePortletType isInstanceOfPortletType;
+
+	/**
+	 * The default value of the '{@link #getTitle() <em>Title</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTitle()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String TITLE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getTitle() <em>Title</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTitle()
+	 * @generated
+	 * @ordered
+	 */
+	protected String title = TITLE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -201,6 +228,62 @@ public class PortletImpl extends PortalModelElementImpl implements Portlet {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getTitle() {
+		return title;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTitle(String newTitle) {
+		String oldTitle = title;
+		title = newTitle;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PortalPackage.PORTLET__TITLE, oldTitle, title));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getLabel() {
+		if (getLabelBodyOCL == null) {
+			EOperation eOperation = PortalPackage.Literals.PORTLET.getEOperations().get(0);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(PortalPackage.Literals.PORTLET, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getLabelBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getLabelBodyOCL);
+	
+		return (String) query.evaluate(this);
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getLabel <em>Get Label</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLabel
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getLabelBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -225,6 +308,8 @@ public class PortletImpl extends PortalModelElementImpl implements Portlet {
 				return basicGetIsPortletInternal();
 			case PortalPackage.PORTLET__IS_INSTANCE_OF_PORTLET_TYPE:
 				return getIsInstanceOfPortletType();
+			case PortalPackage.PORTLET__TITLE:
+				return getTitle();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -245,6 +330,9 @@ public class PortletImpl extends PortalModelElementImpl implements Portlet {
 				return;
 			case PortalPackage.PORTLET__IS_INSTANCE_OF_PORTLET_TYPE:
 				setIsInstanceOfPortletType((InstanciatePortletType)newValue);
+				return;
+			case PortalPackage.PORTLET__TITLE:
+				setTitle((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -267,6 +355,9 @@ public class PortletImpl extends PortalModelElementImpl implements Portlet {
 			case PortalPackage.PORTLET__IS_INSTANCE_OF_PORTLET_TYPE:
 				setIsInstanceOfPortletType((InstanciatePortletType)null);
 				return;
+			case PortalPackage.PORTLET__TITLE:
+				setTitle(TITLE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -285,6 +376,8 @@ public class PortletImpl extends PortalModelElementImpl implements Portlet {
 				return isPortletInternal != null;
 			case PortalPackage.PORTLET__IS_INSTANCE_OF_PORTLET_TYPE:
 				return isInstanceOfPortletType != null;
+			case PortalPackage.PORTLET__TITLE:
+				return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -301,6 +394,8 @@ public class PortletImpl extends PortalModelElementImpl implements Portlet {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", title: ");
+		result.append(title);
 		result.append(')');
 		return result.toString();
 	}

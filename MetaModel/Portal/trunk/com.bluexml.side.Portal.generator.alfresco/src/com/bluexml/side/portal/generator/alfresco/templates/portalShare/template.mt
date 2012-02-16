@@ -3,6 +3,7 @@ metamodel http://www.kerblue.org/portal/1.0
 import com.bluexml.side.portal.generator.alfresco.templates.services.ClazzService
 import com.bluexml.side.portal.generator.alfresco.PortalAlfrescoGenerator
 import com.bluexml.side.clazz.service.alfresco.CommonServices
+import com.bluexml.side.portal.generator.alfresco.service.ShareGeneratorServices
 %>
 
 <%-- Templates creation --%>
@@ -48,7 +49,7 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 </div>
 <%}%>
 <%script type="Page" name="view"%>
-<%for (portlets[positionGroup.onColumn == args(0).filter("Column")]){%>
+<%for (getOrderedHaveProtlets(args(0).filter("Column"))){%>
 	<%if (associationPortlet != null && associationPage != null){%>
 		<%for (associationPortlet){%>
 			<%if (isPortletInternal != null && (isPortletInternal.view != null || isPortletInternal.form != null)){%>

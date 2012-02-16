@@ -18,6 +18,7 @@ package com.bluexml.side.portal;
  *   <li>{@link com.bluexml.side.portal.Portlet#getName <em>Name</em>}</li>
  *   <li>{@link com.bluexml.side.portal.Portlet#getIsPortletInternal <em>Is Portlet Internal</em>}</li>
  *   <li>{@link com.bluexml.side.portal.Portlet#getIsInstanceOfPortletType <em>Is Instance Of Portlet Type</em>}</li>
+ *   <li>{@link com.bluexml.side.portal.Portlet#getTitle <em>Title</em>}</li>
  * </ul>
  * </p>
  *
@@ -104,5 +105,40 @@ public interface Portlet extends PortalModelElement {
 	 * @generated
 	 */
 	void setIsInstanceOfPortletType(InstanciatePortletType value);
+
+	/**
+	 * Returns the value of the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Title</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Title</em>' attribute.
+	 * @see #setTitle(String)
+	 * @see com.bluexml.side.portal.PortalPackage#getPortlet_Title()
+	 * @model
+	 * @generated
+	 */
+	String getTitle();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.portal.Portlet#getTitle <em>Title</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Title</em>' attribute.
+	 * @see #getTitle()
+	 * @generated
+	 */
+	void setTitle(String value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" required="true"
+	 *        annotation="http://www.bluexml.com/OCL body='if self.title.oclIsUndefined() or self.title.size() = 0 then\r self.name \relse\r self.title \rendif'"
+	 * @generated
+	 */
+	String getLabel();
 
 } // Portlet

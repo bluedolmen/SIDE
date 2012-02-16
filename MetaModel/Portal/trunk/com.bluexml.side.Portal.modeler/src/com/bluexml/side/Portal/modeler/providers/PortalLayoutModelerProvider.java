@@ -18,6 +18,7 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecore.EAttribute;
 import org.topcased.modeler.providers.ILabelFeatureProvider;
 
+import com.bluexml.side.common.CommonPackage;
 import com.bluexml.side.portal.PortalPackage;
 
 /**
@@ -38,9 +39,9 @@ public class PortalLayoutModelerProvider extends PortalModelElementModelerProvid
 
 	/**
 	 * @see org.topcased.modeler.providers.ILabelFeatureProvider#getLabelFeature(java.lang.Object)
-	 * @generated
+	 * @generated NOT
 	 */
 	public EAttribute getLabelFeature(Object object) {
-		return PortalPackage.eINSTANCE.getPortalLayout_Name();
+		return CommonPackage.eINSTANCE.getNamedModelElement_Name();
 	}
 }

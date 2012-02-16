@@ -9,6 +9,7 @@ package com.bluexml.side.portal.impl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EValidator;
@@ -412,17 +413,8 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPortalLayout_Name() {
-		return (EAttribute)portalLayoutEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getPortalLayout_Columns() {
-		return (EReference)portalLayoutEClass.getEStructuralFeatures().get(1);
+		return (EReference)portalLayoutEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -431,7 +423,7 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 	 * @generated
 	 */
 	public EAttribute getPortalLayout_ColumnMode() {
-		return (EAttribute)portalLayoutEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)portalLayoutEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -504,6 +496,15 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 	 */
 	public EReference getPortlet_IsInstanceOfPortletType() {
 		return (EReference)portletEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPortlet_Title() {
+		return (EAttribute)portletEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -896,7 +897,6 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 		createEAttribute(pageEClass, PAGE__GENERATE);
 
 		portalLayoutEClass = createEClass(PORTAL_LAYOUT);
-		createEAttribute(portalLayoutEClass, PORTAL_LAYOUT__NAME);
 		createEReference(portalLayoutEClass, PORTAL_LAYOUT__COLUMNS);
 		createEAttribute(portalLayoutEClass, PORTAL_LAYOUT__COLUMN_MODE);
 
@@ -909,6 +909,7 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 		createEAttribute(portletEClass, PORTLET__NAME);
 		createEReference(portletEClass, PORTLET__IS_PORTLET_INTERNAL);
 		createEReference(portletEClass, PORTLET__IS_INSTANCE_OF_PORTLET_TYPE);
+		createEAttribute(portletEClass, PORTLET__TITLE);
 
 		portletTypeEClass = createEClass(PORTLET_TYPE);
 		createEAttribute(portletTypeEClass, PORTLET_TYPE__ID);
@@ -997,7 +998,7 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 		portalModelElementEClass.getESuperTypes().add(theCommonPackage.getModelElement());
 		portalEClass.getESuperTypes().add(theCommonPackage.getPackage());
 		pageEClass.getESuperTypes().add(this.getPortalModelElement());
-		portalLayoutEClass.getESuperTypes().add(this.getPortalModelElement());
+		portalLayoutEClass.getESuperTypes().add(theCommonPackage.getNamedModelElement());
 		columnEClass.getESuperTypes().add(theCommonPackage.getNamedModelElement());
 		portletEClass.getESuperTypes().add(this.getPortalModelElement());
 		portletTypeEClass.getESuperTypes().add(this.getPortalModelElement());
@@ -1024,8 +1025,10 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 		initEAttribute(getPage_Visibility(), theCommonPackage.getVisibility(), "visibility", null, 0, 1, Page.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPage_Generate(), ecorePackage.getEBoolean(), "generate", "true", 0, 1, Page.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		EOperation op = addEOperation(pageEClass, this.getHavePortlet(), "getSortedHavePortletsInColumn", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getColumn(), "col", 1, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(portalLayoutEClass, PortalLayout.class, "PortalLayout", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPortalLayout_Name(), ecorePackage.getEString(), "name", null, 0, 1, PortalLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPortalLayout_Columns(), this.getColumn(), null, "columns", null, 0, -1, PortalLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPortalLayout_ColumnMode(), ecorePackage.getEBoolean(), "columnMode", "true", 0, 1, PortalLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1038,6 +1041,9 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 		initEAttribute(getPortlet_Name(), ecorePackage.getEString(), "name", null, 0, 1, Portlet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPortlet_IsPortletInternal(), this.getPortletInternal(), null, "isPortletInternal", null, 0, 1, Portlet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPortlet_IsInstanceOfPortletType(), this.getInstanciatePortletType(), null, "isInstanceOfPortletType", null, 0, 1, Portlet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPortlet_Title(), ecorePackage.getEString(), "title", null, 0, 1, Portlet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(portletEClass, ecorePackage.getEString(), "getLabel", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(portletTypeEClass, PortletType.class, "PortletType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPortletType_Id(), ecorePackage.getEString(), "id", "PortletType", 0, 1, PortletType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1127,11 +1133,23 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 			 "portalNameEmpty", "not (self.name.oclIsUndefined() or self.name =\'\')"
 		   });			
 		addAnnotation
+		  (pageEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "body", "self.portlets ->select(x : HavePortlet | x.positionGroup->first().onColumn = col) ->sortedBy(positionGroup->first().position)"
+		   });		
+		addAnnotation
 		  (portletEClass, 
 		   source, 
 		   new String[] {
 			 "haveType", "not (self.isPortletInternal.oclIsUndefined() and self.isInstanceOfPortletType.oclIsUndefined() and metainfo->size() = 0)"
 		   });			
+		addAnnotation
+		  (portletEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "body", "if self.title.oclIsUndefined() or self.title.size() = 0 then\r self.name \relse\r self.title \rendif"
+		   });		
 		addAnnotation
 		  (portletTypeEClass, 
 		   source, 
@@ -1173,13 +1191,13 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "portalNameEmpty"
-		   });			
+		   });				
 		addAnnotation
 		  (portletEClass, 
 		   source, 
 		   new String[] {
 			 "constraints", "haveType"
-		   });			
+		   });				
 		addAnnotation
 		  (portletTypeEClass, 
 		   source, 

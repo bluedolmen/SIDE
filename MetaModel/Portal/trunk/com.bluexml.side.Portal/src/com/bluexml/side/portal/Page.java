@@ -236,4 +236,13 @@ public interface Page extends PortalModelElement {
 	 */
 	void setGenerate(boolean value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model colRequired="true"
+	 *        annotation="http://www.bluexml.com/OCL body='self.portlets ->select(x : HavePortlet | x.positionGroup->first().onColumn = col) ->sortedBy(positionGroup->first().position)'"
+	 * @generated
+	 */
+	EList<HavePortlet> getSortedHavePortletsInColumn(Column col);
+
 } // Page

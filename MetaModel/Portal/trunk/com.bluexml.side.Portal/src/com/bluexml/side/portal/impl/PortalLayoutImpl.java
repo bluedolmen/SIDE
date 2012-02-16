@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.portal.impl;
 
+import com.bluexml.side.common.impl.NamedModelElementImpl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -30,7 +31,6 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.bluexml.side.portal.impl.PortalLayoutImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.bluexml.side.portal.impl.PortalLayoutImpl#getColumns <em>Columns</em>}</li>
  *   <li>{@link com.bluexml.side.portal.impl.PortalLayoutImpl#isColumnMode <em>Column Mode</em>}</li>
  * </ul>
@@ -38,27 +38,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *
  * @generated
  */
-public class PortalLayoutImpl extends PortalModelElementImpl implements PortalLayout {
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
+public class PortalLayoutImpl extends NamedModelElementImpl implements PortalLayout {
 	/**
 	 * The cached value of the '{@link #getColumns() <em>Columns</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -106,27 +86,6 @@ public class PortalLayoutImpl extends PortalModelElementImpl implements PortalLa
 	@Override
 	protected EClass eStaticClass() {
 		return PortalPackage.Literals.PORTAL_LAYOUT;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PortalPackage.PORTAL_LAYOUT__NAME, oldName, name));
 	}
 
 	/**
@@ -184,8 +143,6 @@ public class PortalLayoutImpl extends PortalModelElementImpl implements PortalLa
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case PortalPackage.PORTAL_LAYOUT__NAME:
-				return getName();
 			case PortalPackage.PORTAL_LAYOUT__COLUMNS:
 				return getColumns();
 			case PortalPackage.PORTAL_LAYOUT__COLUMN_MODE:
@@ -203,9 +160,6 @@ public class PortalLayoutImpl extends PortalModelElementImpl implements PortalLa
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case PortalPackage.PORTAL_LAYOUT__NAME:
-				setName((String)newValue);
-				return;
 			case PortalPackage.PORTAL_LAYOUT__COLUMNS:
 				getColumns().clear();
 				getColumns().addAll((Collection<? extends Column>)newValue);
@@ -225,9 +179,6 @@ public class PortalLayoutImpl extends PortalModelElementImpl implements PortalLa
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case PortalPackage.PORTAL_LAYOUT__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case PortalPackage.PORTAL_LAYOUT__COLUMNS:
 				getColumns().clear();
 				return;
@@ -246,8 +197,6 @@ public class PortalLayoutImpl extends PortalModelElementImpl implements PortalLa
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case PortalPackage.PORTAL_LAYOUT__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PortalPackage.PORTAL_LAYOUT__COLUMNS:
 				return columns != null && !columns.isEmpty();
 			case PortalPackage.PORTAL_LAYOUT__COLUMN_MODE:
@@ -266,9 +215,7 @@ public class PortalLayoutImpl extends PortalModelElementImpl implements PortalLa
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(", columnMode: ");
+		result.append(" (columnMode: ");
 		result.append(columnMode);
 		result.append(')');
 		return result.toString();

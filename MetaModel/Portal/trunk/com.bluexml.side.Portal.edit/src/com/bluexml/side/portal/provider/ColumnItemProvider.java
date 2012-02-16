@@ -162,11 +162,12 @@ public class ColumnItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Column)object).getName();
+		Column column = (Column)object;
+		String label = column.getName() + " ("+column.getFullName()+")";
 		return label == null || label.length() == 0 ?
 			getString("_UI_Column_type") :
 			getString("_UI_Column_type") + " " + label;

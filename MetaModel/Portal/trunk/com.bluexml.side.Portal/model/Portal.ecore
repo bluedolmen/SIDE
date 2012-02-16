@@ -24,6 +24,12 @@
         eType="#//PortletInternal" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Page" eSuperTypes="#//PortalModelElement">
+    <eOperations name="getSortedHavePortletsInColumn" upperBound="-1" eType="#//HavePortlet">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.portlets ->select(x : HavePortlet | x.positionGroup->first().onColumn = col) ->sortedBy(positionGroup->first().position)"/>
+      </eAnnotations>
+      <eParameters name="col" lowerBound="1" eType="#//Column"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -37,8 +43,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="generate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PortalLayout" eSuperTypes="#//PortalModelElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PortalLayout" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//NamedModelElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="columns" upperBound="-1"
         eType="#//Column" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="columnMode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
@@ -57,10 +62,16 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="haveType"/>
     </eAnnotations>
+    <eOperations name="getLabel" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="if self.title.oclIsUndefined() or self.title.size() = 0 then&#xD; self.name &#xD;else&#xD; self.title &#xD;endif"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="isPortletInternal" eType="#//PortletInternal"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="isInstanceOfPortletType"
         eType="#//InstanciatePortletType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PortletType" eSuperTypes="#//PortalModelElement">
     <eAnnotations source="http://www.bluexml.com/OCL">

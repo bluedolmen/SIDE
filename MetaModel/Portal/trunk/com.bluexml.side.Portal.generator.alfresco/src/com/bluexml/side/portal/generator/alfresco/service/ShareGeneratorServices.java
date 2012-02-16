@@ -3,20 +3,25 @@ package com.bluexml.side.portal.generator.alfresco.service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.InvalidPropertiesFormatException;
 import java.util.List;
 import java.util.Properties;
+import java.util.TreeMap;
 
 import org.eclipse.emf.common.util.EList;
 
 import com.bluexml.side.common.Visibility;
+import com.bluexml.side.portal.Column;
+import com.bluexml.side.portal.HavePortlet;
 import com.bluexml.side.portal.InternalPortletType;
 import com.bluexml.side.portal.Page;
 import com.bluexml.side.portal.Portal;
 import com.bluexml.side.portal.Portlet;
 import com.bluexml.side.portal.PortletInternal;
+import com.bluexml.side.portal.PositionGroup;
 
 public class ShareGeneratorServices {
 	Properties defaultShareElements;
@@ -91,5 +96,16 @@ public class ShareGeneratorServices {
 
 	public static boolean isCustomPortlet(Portlet p) {
 		return p.getIsPortletInternal() == null && p.getIsInstanceOfPortletType() != null;
+	}
+	
+	/**
+	 * Hack : acceleo mt template do not "see" the getSortedHavePortletsInColumn method
+	 * So we define a java service for acceleo mt to access to the method
+	 * @param p
+	 * @param c
+	 * @return
+	 */
+	public static List<HavePortlet> getOrderedHaveProtlets(Page p, Column c) {
+		return p.getSortedHavePortletsInColumn(c);
 	}
 }

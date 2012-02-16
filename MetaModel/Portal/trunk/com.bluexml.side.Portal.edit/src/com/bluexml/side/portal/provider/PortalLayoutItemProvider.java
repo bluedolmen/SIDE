@@ -7,11 +7,15 @@
 package com.bluexml.side.portal.provider;
 
 
+import com.bluexml.side.clazz.ClazzFactory;
+import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.provider.NamedModelElementItemProvider;
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -34,7 +38,7 @@ import com.bluexml.side.portal.PortalPackage;
  * @generated
  */
 public class PortalLayoutItemProvider
-	extends PortalModelElementItemProvider
+	extends NamedModelElementItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -62,32 +66,9 @@ public class PortalLayoutItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addNamePropertyDescriptor(object);
 			addColumnModePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Name feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_PortalLayout_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_PortalLayout_name_feature", "_UI_PortalLayout_type"),
-				 PortalPackage.Literals.PORTAL_LAYOUT__NAME,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -179,7 +160,6 @@ public class PortalLayoutItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(PortalLayout.class)) {
-			case PortalPackage.PORTAL_LAYOUT__NAME:
 			case PortalPackage.PORTAL_LAYOUT__COLUMN_MODE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
@@ -203,8 +183,29 @@ public class PortalLayoutItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
+				 ClazzFactory.eINSTANCE.createClassComment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
+				 ClazzFactory.eINSTANCE.createAssociationEnd()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(PortalPackage.Literals.PORTAL_LAYOUT__COLUMNS,
 				 PortalFactory.eINSTANCE.createColumn()));
+	}
+
+	/**
+	 * Return the resource locator for this item provider's resources.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ResourceLocator getResourceLocator() {
+		return PortalEditPlugin.INSTANCE;
 	}
 
 }
