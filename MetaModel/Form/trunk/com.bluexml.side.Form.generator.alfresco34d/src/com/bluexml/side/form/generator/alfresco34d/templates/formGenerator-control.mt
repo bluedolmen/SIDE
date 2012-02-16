@@ -276,6 +276,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 		<%getXtensionAsControlParam("targetFormMode")%>
 		<%getXtensionAsControlParam("targetFormSubmitType")%>		
 		<%getXtensionAsControlParam("targetDestination")%>
+		<%getXtensionAsControlParam("hideSelector")%>
 		<%getBehaviour()%>
 	</control>
 <%}else if (widget.toString() == "Inline"){%>
