@@ -5,7 +5,6 @@
  */
 function main() {
 	logger.log("filter componant args :" + args);
-	logger.log("filter componant template :" + template);
 	logger.log("filter componant assoType :" + args.assoType);
 	logger.log("filter componant nodeType :" + args.nodeType);
 	logger.log("filter componant selectableTypeIsAspect :" + args.selectableTypeIsAspect);
@@ -19,8 +18,10 @@ function main() {
 		model.assoTypeDocument = paramValide("assoTypeDocument", "buildInLibraryAlfresco:HasTreeFilter_hasTreeFilter_TreeFiltersearch");
 		model.selectableTypeIsAspect = paramValide("selectableTypeIsAspect", "true");
 		model.rootProperty = paramValide("rootProperty", "buildInLibraryAlfresco:TreeFilter_root");
-		model.rootLabelId = paramValide("rootLabelId", "header.library");
+		model.rootLabelId = paramValide("headerLabelId", "portlet." + page.id + "." + args["region-id"] + ".header");
+		model.documentTypeIsAspect = paramValide("documentTypeIsAspect", "false");
 		model.rootName = args.rootName;
+
 	} else {
 		// error
 	}

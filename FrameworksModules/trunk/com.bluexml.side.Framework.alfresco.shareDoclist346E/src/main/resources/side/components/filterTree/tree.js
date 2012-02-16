@@ -244,7 +244,7 @@ if (console == undefined) {
 		 */
 		_buildTreeNodeDocLibQuery : function __buildTreeNodeDocLibQuery(node) {
 			var query = {};
-			if (this.options.selectableTypeIsAspect == "true") {
+			if (this.options.documentTypeIsAspect == "true") {
 				query.aspect = this.options.nodeTypeDocument;
 			} else {
 				query.type = this.options.nodeTypeDocument;

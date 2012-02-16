@@ -6,10 +6,10 @@ function getTreeNodeChidren(params) {
 	var parentNode = null;
 	var children = null;
 	var isRoot = false;
-	var root = getRootNode(params)[0];
+	var root = getRootNode(params);
 
 	// set currentNode
-	if (params.nodeRef == null || params.nodeRef == "" ) {
+	if (params.nodeRef == null || params.nodeRef == "") {
 		isRoot = true;
 		currentNode = root;
 	} else {
@@ -19,7 +19,7 @@ function getTreeNodeChidren(params) {
 	// set parentNode and children
 	if (isRoot && params.selectableRoot) {
 		parentNode = null;
-		children = [currentNode];
+		children = [ currentNode ];
 	} else {
 		parentNode = currentNode;
 		children = currentNode.sourceAssocs[params.assoType];
@@ -60,8 +60,17 @@ function getRootNode(params) {
 	rootQuery += " @" + params.rootProperty.replace(":", "\\:") + ":true";
 	rootQuery += " AND ";
 	rootQuery += " @cm\\:name:\"" + params.rootName + "\"";
-	return search.luceneSearch(rootQuery, "@cm\\:name", false);
+	var results = search.luceneSearch(rootQuery, "@cm\\:name", false);
+	if (results.length > 0) {
+		return results[0];
+	} else {
+		// error
+		throw {
+			message : "No Root Found please create Root with name=" + params.rootName
+		};
+	}
 }
+
 /* Sort the results by case-insensitive name */
 function sortByName(a, b) {
 	return (b.node.name.toLowerCase() > a.node.name.toLowerCase() ? -1 : 1);

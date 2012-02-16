@@ -15,6 +15,7 @@
       assoType: "${assoType}",
       nodeTypeDocument: "${nodeTypeDocument}",
       assoTypeDocument: "${assoTypeDocument}",
+      documentTypeIsAspect : "${documentTypeIsAspect}",
       rootProperty: "${rootProperty}",
       rootName: "${rootName}"
    }).setMessages(

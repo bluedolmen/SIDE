@@ -26,7 +26,11 @@ function main() {
 
 	logger.log("filters :" + filters.toSource());
 	model.filters = filters;
-	model.headerLabelId = headerLabelId;
+	model.headerLabelId = paramValide("headerLabelId", "portlet." + page.id + "." + args["region-id"]+".header");
 }
 
 main();
+
+function paramValide(param, defaultValue) {
+	return (args[param] != undefined && args[param] != null && args[param] != "") ? args[param] : defaultValue;
+}

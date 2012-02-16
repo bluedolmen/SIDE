@@ -21,7 +21,7 @@ function main() {
 		var dataTemplate = paramValide("dataTemplate", escape("{nodeRef}"));
 		var query = paramValide("query", "");
 		var filterType = paramValide("filterType", "");
-		var headerLabelId = paramValide("headerLabelId", "header.documents");
+		var headerLabelId = paramValide("headerLabelId", "portlet." + page.id + "." + args["region-id"]+".header");
 		
 		url = url.replace(/\{site\}/, encodeURIComponent(site));
 		url = url.replace(/\{dataType\}/, encodeURIComponent(dataType));
