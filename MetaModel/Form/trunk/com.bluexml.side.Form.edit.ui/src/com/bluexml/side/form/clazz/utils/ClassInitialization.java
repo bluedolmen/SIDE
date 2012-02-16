@@ -29,6 +29,8 @@ import com.bluexml.side.util.libs.ui.UIUtils;
 public class ClassInitialization {
 
 	protected static boolean groupRootChildren = true;
+	protected static boolean keepEmptyGroup = false;
+	
 	public static Command initializeClass(FormClass fc, EditingDomain domain) {
 
 		CompoundCommand cc = new CompoundCommand();
@@ -151,7 +153,9 @@ public class ClassInitialization {
 
 				for (AbstractClass linked : linkedL.values()) {
 					FormGroup createFormGroup2 = initializeClassGroup(linked);
-					c.add(createFormGroup2);
+					if (createFormGroup2.getChildren().size() > 0 || keepEmptyGroup) {
+						c.add(createFormGroup2);
+					}					
 				}
 			}
 		} catch (Exception e) {

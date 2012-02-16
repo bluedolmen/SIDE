@@ -38,6 +38,9 @@ public class SearchInitialization {
 	private static final String SUFFIX_NAME = "_Search";
 	private static final String SUFFIX_LABEL = " (search)";
 
+	protected static boolean groupRootChildren = true;
+	protected static boolean keepEmptyGroup = false;
+	
 	public static void initializeFormSearch(FormSearch form) {
 		if (form.getReal_class() != null) {
 			// 
@@ -149,7 +152,9 @@ public class SearchInitialization {
 
 				for (AbstractClass linked : linkedL.values()) {
 					FormGroup createFormGroup2 = initializeClassGroup(linked);
-					c.add(createFormGroup2);
+					if (createFormGroup2.getChildren().size() > 0 || keepEmptyGroup) {
+						c.add(createFormGroup2);
+					}
 				}
 			}
 		} catch (Exception e) {
@@ -197,7 +202,7 @@ public class SearchInitialization {
 		form.getDisabled().clear();
 		form.getChildren().removeAll(form.getChildren()); // <-- this is MANDATORY !
 		AbstractClass cl = form.getReal_class();
-		Collection<FormElement> c = createChildsForClass(cl, false);
+		Collection<FormElement> c = createChildsForClass(cl, groupRootChildren);
 		return c;
 	}
 

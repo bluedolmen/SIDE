@@ -50,6 +50,7 @@ public class SynchronizeWithClass {
 	protected EditingDomain domain;
 
 	boolean createMissingGroup = true;
+
 	boolean updateId = true;
 	boolean updateLabel = false;
 	boolean addNewFormClass = true;
@@ -83,7 +84,7 @@ public class SynchronizeWithClass {
 			// get All Class
 			Collection<AbstractClass> missing = getAllClassesFromReferedModels(fc);
 			for (AbstractClass abstractClass : missing) {
-				
+
 				if (!(abstractClass instanceof Clazz) ^ !((Clazz) abstractClass).isAbstract()) {
 					FormContainer formContainer = null;
 					NameSpace logicalNameSpace = abstractClass.getLogicalNameSpace();
@@ -419,7 +420,7 @@ public class SynchronizeWithClass {
 					}
 				}
 
-				if (createMissingGroup && parent == null && !real_class.getSourceAssociations().contains(ass)) {
+				if (createMissingGroup && parent == null) {
 					AbstractClass source = null;
 					EList<AbstractClass> sources = ass.getSource();
 					if (sources.size() == 1) {
@@ -496,7 +497,7 @@ public class SynchronizeWithClass {
 						break;
 					}
 				}
-				if (createMissingGroup && parent == null && !real_class.equals(attribute.eContainer())) {
+				if (createMissingGroup && parent == null) {
 					parent = ClassInitialization.createGroup(eContainer);
 					groups.add(parent);
 					addChild(o, parent);
