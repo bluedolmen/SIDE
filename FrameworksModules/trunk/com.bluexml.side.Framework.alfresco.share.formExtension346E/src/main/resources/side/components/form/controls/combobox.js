@@ -85,6 +85,7 @@ if (!Array.prototype.indexOf) {
 			maxResults : -1,
 			selectableTypeIsAspect : false,
 			searchInSite : true,
+			hideSelector : false,
 			addNewConfig : {
 				disabled : true,
 				formconfig : {}
@@ -256,6 +257,9 @@ if (!Array.prototype.indexOf) {
 		onReady : function ComboBox_onReady() {
 			YAHOO.Bubbling.fire("/side-labs/onReady/" + this.currentValueHtmlId, this);
 			this.DSSelectWidget = this.load();
+			if (this.options.hideSelector && !this.options.disabled) {
+				this.DSSelectWidget.el.disabled = true;
+			}
 
 			YAHOO.Bubbling.fire("/side-labs/onLoaded/" + this.currentValueHtmlId, this);
 			if (this.options.mandatory) {
