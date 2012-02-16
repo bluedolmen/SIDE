@@ -58,6 +58,8 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 <%}%>
 <%}%>
 
+<%script type="FormElement" name="haveXtension" post="trim()" %>
+<%metainfo[key.toLowerCase() == args(0).toLowerCase()].nSize() > 0 || Xtension[toString().toLowerCase().startsWith(args(0).toLowerCase())].nSize() > 0%>
 
 <%-- getXtensionAsControlParam :
 	 args(0) : expected parameter name

@@ -100,7 +100,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 <%script type="FormContainer" name="generate_templateForClass"%>
 <!--<%Xtension%>-->
 <!-- <%Xtension[toString().startsWith("template")].nSize()%>-->
-<%if (metainfo[key == "template"] || Xtension[toString().startsWith("template")].nSize() > 0){%>
+<%if (haveXtension("template")){%>
 	<edit-form <%getXtensionAsXMLAttribute("template")%> />
 	<create-form <%getXtensionAsXMLAttribute("template")%> />
 	<view-form <%getXtensionAsXMLAttribute("template")%> />
@@ -173,12 +173,12 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 	
 >
 
-<%if (Xtension[toString().startsWith("template")].nSize() > 0) {%>
+<%if (haveXtension("template")) {%>
 <control <%getXtensionAsXMLAttribute("template")%>>
 	<%for (Xtension[!toString().startsWith("template")]){%>
 	<%current("FormElement").getXtensionAsControlParam(toString().substring(0, toString().indexOf("=")))%>
 	<%}%>
-	<%for (metainfo){%>
+	<%for (metainfo[key.toLowerCase() != "template"]){%>
 	<%current("FormElement").getXtensionAsControlParam(key)%>
 	<%}%>
 </control>
