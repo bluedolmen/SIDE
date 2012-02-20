@@ -23,7 +23,7 @@
     
     <bean id="associationSynchronizationPolicy" class="com.bluexml.side.framework.alfresco.searchassociation.AssociationSearchablePolicy" init-method="init">
 		<property name="policyComponent" ref="policyComponent" />
-		<property name="nodeService" ref="nodeService" />
-		<property name="dictionaryService" ref="dictionaryService" />
+		<property name="nodeService" ref="NodeService" />
+		<property name="dictionaryService" ref="DictionaryService" />
 	</bean>
 </beans>

@@ -17,17 +17,7 @@ import org.alfresco.service.namespace.NamespaceService;
 import org.alfresco.service.namespace.QName;
 import org.apache.log4j.Logger;
 
-/*
- * This implementation uses Alfresco policies to trigger the duplication of the association.
- * A first implementation tried to use NodeDAOService to check for an existing opposite association, resulting in 
- * non-explained null pointer exceptions (commented lines).
- * The current implementation uses Alfresco transaction support to store the current association being duplicated.
- * If a preceding context cannot be found, we create one and call the nodeService to create the opposite association
- * (this process triggering the call of this policy).
- */
-
 public class AssociationSearchablePolicy implements OnCreateAssociationPolicy, OnDeleteAssociationPolicy {
-	private static final String CONTEXT_KEY_SEPARATOR = "/";
 
 	// Behaviours
 	private Behaviour onCreateAssociation;
@@ -40,10 +30,11 @@ public class AssociationSearchablePolicy implements OnCreateAssociationPolicy, O
 		logger.debug("[init] Initializing association synchronisation");
 
 		// Create behaviours
-		//		this.onCreateAssociation = new JavaBehaviour(this, "onCreateAssociation", NotificationFrequency.TRANSACTION_COMMIT);
-		//		this.onDeleteAssociation = new JavaBehaviour(this, "onDeleteAssociation", NotificationFrequency.TRANSACTION_COMMIT); 
-		this.onCreateAssociation = new JavaBehaviour(this, "onCreateAssociation", NotificationFrequency.FIRST_EVENT);
-		this.onDeleteAssociation = new JavaBehaviour(this, "onDeleteAssociation", NotificationFrequency.FIRST_EVENT);
+		this.onCreateAssociation = new JavaBehaviour(this, "onCreateAssociation", NotificationFrequency.TRANSACTION_COMMIT);
+		this.onDeleteAssociation = new JavaBehaviour(this, "onDeleteAssociation", NotificationFrequency.TRANSACTION_COMMIT);
+
+		//this.onCreateAssociation = new JavaBehaviour(this, "onCreateAssociation", NotificationFrequency.FIRST_EVENT);
+		//this.onDeleteAssociation = new JavaBehaviour(this, "onDeleteAssociation", NotificationFrequency.FIRST_EVENT);
 
 		// Bind behaviours to node policies
 		policyComponent.bindAssociationBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onCreateAssociation"), this, this.onCreateAssociation);
@@ -61,7 +52,6 @@ public class AssociationSearchablePolicy implements OnCreateAssociationPolicy, O
 		}
 		if (dictionaryService.getProperty(hiddenSearchablePropertyQName) != null) {
 			// Register the association in the transaction
-
 
 			NodeRef sourceRef = associationRef.getSourceRef();
 			NodeRef targetRef = associationRef.getTargetRef();
@@ -105,9 +95,6 @@ public class AssociationSearchablePolicy implements OnCreateAssociationPolicy, O
 			logger.debug("Association synchronisation policy, CREATE ASSOCIATION '" + associationRef.toString() + "'");
 		}
 
-		
-		
-
 		NodeRef sourceRef = associationRef.getSourceRef();
 		NodeRef targetRef = associationRef.getTargetRef();
 
@@ -123,7 +110,7 @@ public class AssociationSearchablePolicy implements OnCreateAssociationPolicy, O
 				if (logger.isDebugEnabled()) {
 					logger.debug("Association Searchable policy, before removed refs :" + l.size());
 				}
-				boolean remove = l.remove(targetRef.toString());
+				l.remove(targetRef.toString());
 				if (logger.isDebugEnabled()) {
 					logger.debug("Association Searchable policy, removed refs :" + l.size());
 				}
@@ -132,9 +119,6 @@ public class AssociationSearchablePolicy implements OnCreateAssociationPolicy, O
 		}
 	}
 
-	
-
-	
 	/*
 	 * Spring IoC/DI material
 	 */

@@ -25,7 +25,7 @@ public abstract class  AbstractUnicityChecker implements UnicityChecker {
 	}
 	
 	public List<QName> getUnicityKeysFor(QName type) throws Exception {
-		return getUnicityDescriptorReader().getUnicityDictionary().get(type);
+		return getUnicityDescriptorReader().getValue(type);
 	}
 	
 	
