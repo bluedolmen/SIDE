@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Alfresco generator extension
 Bundle-SymbolicName: com.bluexml.side.Class.generator.alfresco.extension.sideEnterprise;singleton:=true
-Bundle-Version: 1.0.45.v32790-20120213
+Bundle-Version: 1.0.46.v32990-20120220
 Bundle-Activator: com.bluexml.side.clazz.generator.alfresco.extension.sideenterprise.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.core.runtime,
