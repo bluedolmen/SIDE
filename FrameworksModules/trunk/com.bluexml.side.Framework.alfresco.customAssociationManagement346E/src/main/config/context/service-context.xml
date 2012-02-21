@@ -29,11 +29,12 @@
 	<!--  Association synchronization -->
 	<bean id="associationSynchronizationResolver" class="com.bluexml.side.Integration.alfresco.customAssociationManagement.associationSynchronization.PropertyFileAssociationSynchronizationResolverImpl" >
 		<property name="resourcePattern" value="classpath*:alfresco/module/*/association-synchronization.properties" />
+		<property name="serviceRegistry" ref="ServiceRegistry" />
 	</bean>
 
  	<bean id="associationSynchronizationPolicy" class="com.bluexml.side.Integration.alfresco.customAssociationManagement.associationSynchronization.AssociationSynchronizationPolicy" init-method="init">
 		<property name="policyComponent" ref="policyComponent" />
-		<property name="nodeService" ref="nodeService" />
+		<property name="serviceRegistry" ref="ServiceRegistry" />
 		<property name="resolver" ref="associationSynchronizationResolver" />
 	</bean>
 	
