@@ -2,7 +2,6 @@ package com.bluexml.side.clazz.generator.alfresco;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +13,8 @@ import com.bluexml.side.util.generator.XMLConflictResolver;
 import com.bluexml.side.util.generator.alfresco.AbstractAlfrescoGenerator;
 
 public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
+	public static String templateBase = "/com.bluexml.side.Class.generator.alfresco/templates";
+	
 	protected static final String ALFRESCO_SEARCH_ASSOCIATION = "alfresco.model.association.searchable";
 	/*
 	 * final fields used in generation too
@@ -41,14 +42,14 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	@Override
 	protected List<String> getMainTemplates() {
 		List<String> result = new ArrayList<String>();
-		result.add("/com.bluexml.side.Class.generator.alfresco/templates/Model/alfrescoGenerator_model.mt"); //$NON-NLS-1$
-		result.add("/com.bluexml.side.Class.generator.alfresco/templates/Model/alfrescoGenerator_model_properties.mt"); //$NON-NLS-1$
+		result.add(templateBase + "/Model/alfrescoGenerator_model.mt"); //$NON-NLS-1$
+		result.add(templateBase + "/Model/alfrescoGenerator_model_properties.mt"); //$NON-NLS-1$
 		// Association synchronisation
-		result.add("/com.bluexml.side.Class.generator.alfresco/templates/Model/association_synchronization.mt"); //$NON-NLS-1$
+		result.add(templateBase + "/Model/association_synchronization.mt"); //$NON-NLS-1$
 
-		result.add("/com.bluexml.side.Class.generator.alfresco/templates/webClient/alfrescoGenerator_web_client_config.mt"); //$NON-NLS-1$
+		result.add(templateBase + "/webClient/alfrescoGenerator_web_client_config.mt"); //$NON-NLS-1$
 
-		result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoGenerator_context.mt"); //$NON-NLS-1$
+		result.add(templateBase + "/alfrescoGenerator_context.mt"); //$NON-NLS-1$
 
 		// standard alfresco services :
 		monitor.getLog().addServiceLog("Alfresco", Activator.Messages.getString("ClassAlfrescoGenerator_4"), getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_URL)); //$NON-NLS-1$ //$NON-NLS-2$
@@ -61,16 +62,16 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	protected List<String> getOptionalTemplates() {
 		List<String> result = new ArrayList<String>();
 		if (getGeneratorOptionValue(GENERATOR_OPTIONS_SQL_EXTENSION)) {
-			result.add("/com.bluexml.side.Class.generator.alfresco/templates/sqlTemplates/database_dictionary.mt"); //$NON-NLS-1$
+			result.add(templateBase + "/sqlTemplates/database_dictionary.mt"); //$NON-NLS-1$
 			monitor.getLog().addServiceLog(Activator.Messages.getString("ClassAlfrescoGenerator_0"), Activator.Messages.getString("ClassAlfrescoGenerator_1"), getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_URL) + "/service/index/package/extension/com/bluexml/side/sql"); //$NON-NLS-1$ //$NON-NLS-2$//$NON-NLS-3$
 		}
 
 		// DefaultdocListView add custom version of docList webScript
 		// used by AlfrescoShare to render Document list
 		//if (getGeneratorOptionValue(GENERATOR_OPTIONS_PORTAL_doclist)) {
-		//result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/DefaultdocListView/customViews.ftl.mt"); //$NON-NLS-1$
+		//result.add(templateBase+ "/shareExtentions/DefaultdocListView/customViews.ftl.mt"); //$NON-NLS-1$
 		// default view
-		//result.add("/com.bluexml.side.Class.generator.alfresco/templates/shareExtentions/DefaultdocListView/defaultdoclistView_ftl.mt"); //$NON-NLS-1$
+		//result.add(templateBase+ "/shareExtentions/DefaultdocListView/defaultdoclistView_ftl.mt"); //$NON-NLS-1$
 		//}
 
 		if (getGeneratorOptionValue(GENERATOR_OPTIONS_SHARE_EXTENSION)) {
@@ -78,37 +79,37 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 		}
 
 		if (getGeneratorOptionValue(GENERATOR_OPTIONS_WEBSCRIPT_REPORT)) {
-			result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/alfrescoGenerator_template_def_get.mt"); //$NON-NLS-1$
-			result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/alfrescoGenerator_template_def_post.mt"); //$NON-NLS-1$
-			result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/alfrescoGenerator_template_js_get.mt"); //$NON-NLS-1$
-			result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/alfrescoGenerator_template_js_post.mt"); //$NON-NLS-1$
+			result.add(templateBase + "/webscript/alfrescoGenerator_template_def_get.mt"); //$NON-NLS-1$
+			result.add(templateBase + "/webscript/alfrescoGenerator_template_def_post.mt"); //$NON-NLS-1$
+			result.add(templateBase + "/webscript/alfrescoGenerator_template_js_get.mt"); //$NON-NLS-1$
+			result.add(templateBase + "/webscript/alfrescoGenerator_template_js_post.mt"); //$NON-NLS-1$
 			// Templates html
-			// result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/html/alfrescoGenerator_template_html.mt");
-			// result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/html/alfrescoGenerator_template_result_post.mt");
-			// result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/html/alfrescoGenerator_template_result_get.mt");
+			// result.add(templateBase+ "/webscript/html/alfrescoGenerator_template_html.mt");
+			// result.add(templateBase+ "/webscript/html/alfrescoGenerator_template_result_post.mt");
+			// result.add(templateBase+ "/webscript/html/alfrescoGenerator_template_result_get.mt");
 
 			// Template Json
-			result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/json/alfrescoGenerator_template_json.mt");
-			result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/json/alfrescoGenerator_template_result_post.mt");
-			result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/json/alfrescoGenerator_template_result_get.mt");
+			result.add(templateBase + "/webscript/json/alfrescoGenerator_template_json.mt");
+			result.add(templateBase + "/webscript/json/alfrescoGenerator_template_result_post.mt");
+			result.add(templateBase + "/webscript/json/alfrescoGenerator_template_result_get.mt");
 
 			// Templates RSS
-			// result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/rss/alfrescoGenerator_template_rss.mt");
-			// result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/rss/alfrescoGenerator_template_result_post.mt");
-			// result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/rss/alfrescoGenerator_template_result_get.mt");
+			// result.add(templateBase+ "/webscript/rss/alfrescoGenerator_template_rss.mt");
+			// result.add(templateBase+ "/webscript/rss/alfrescoGenerator_template_result_post.mt");
+			// result.add(templateBase+ "/webscript/rss/alfrescoGenerator_template_result_get.mt");
 
-			result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/xml/alfrescoGenerator_template_xml.mt"); //$NON-NLS-1$
-			result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/xml/alfrescoGenerator_template_result_post.mt"); //$NON-NLS-1$
-			result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/xml/alfrescoGenerator_template_result_get.mt"); //$NON-NLS-1$
+			result.add(templateBase + "/webscript/xml/alfrescoGenerator_template_xml.mt"); //$NON-NLS-1$
+			result.add(templateBase + "/webscript/xml/alfrescoGenerator_template_result_post.mt"); //$NON-NLS-1$
+			result.add(templateBase + "/webscript/xml/alfrescoGenerator_template_result_get.mt"); //$NON-NLS-1$
 
-			result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/all/alfrescoGenerator_template_def_get.mt"); //$NON-NLS-1$
-			result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/all/alfrescoGenerator_template_def_post.mt"); //$NON-NLS-1$
-			result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/all/alfrescoGenerator_template_js_get.mt"); //$NON-NLS-1$
-			result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/all/alfrescoGenerator_template_js_post.mt"); //$NON-NLS-1$
+			result.add(templateBase + "/webscript/all/alfrescoGenerator_template_def_get.mt"); //$NON-NLS-1$
+			result.add(templateBase + "/webscript/all/alfrescoGenerator_template_def_post.mt"); //$NON-NLS-1$
+			result.add(templateBase + "/webscript/all/alfrescoGenerator_template_js_get.mt"); //$NON-NLS-1$
+			result.add(templateBase + "/webscript/all/alfrescoGenerator_template_js_post.mt"); //$NON-NLS-1$
 
-			result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/all/xml/alfrescoGenerator_template_xml.mt"); //$NON-NLS-1$
-			result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/all/xml/alfrescoGenerator_template_result_post.mt"); //$NON-NLS-1$
-			result.add("/com.bluexml.side.Class.generator.alfresco/templates/webscript/all/xml/alfrescoGenerator_template_result_get.mt"); //$NON-NLS-1$
+			result.add(templateBase + "/webscript/all/xml/alfrescoGenerator_template_xml.mt"); //$NON-NLS-1$
+			result.add(templateBase + "/webscript/all/xml/alfrescoGenerator_template_result_post.mt"); //$NON-NLS-1$
+			result.add(templateBase + "/webscript/all/xml/alfrescoGenerator_template_result_get.mt"); //$NON-NLS-1$
 			monitor.getLog().addServiceLog(Activator.Messages.getString("ClassAlfrescoGenerator_2"), //$NON-NLS-1$
 					Activator.Messages.getString("ClassAlfrescoGenerator_3"), //$NON-NLS-1$
 					getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_URL) + WEBSCRIPT_SIDE_FAMILY);
@@ -117,7 +118,7 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 			monitor.getLog().addServiceLog(Activator.Messages.getString("ClassAlfrescoGenerator_9"), Activator.Messages.getString("ClassAlfrescoGenerator_10"), getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCO_URL) + "/service/data/form/fillparameters"); //$NON-NLS-3$
 		}
 		if (getGeneratorOptionValue(GENERATOR_OPTIONS_UNICITY)) {
-			result.add("/com.bluexml.side.Class.generator.alfresco/templates/unicity/alfrescoGenerator_unicity.mt"); //$NON-NLS-1$
+			result.add(templateBase + "/unicity/alfrescoGenerator_unicity.mt"); //$NON-NLS-1$
 		}
 		return result;
 	}
@@ -126,16 +127,16 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 		List<String> result = new ArrayList<String>();
 		// generator for alfresco Share web application
 		// upload configuration
-		result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/uploadForm/flash-upload-js-get-patch.mt"); //$NON-NLS-1$
-		result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/uploadForm/html-upload-js-get-patch.mt"); //$NON-NLS-1$
-		result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/uploadForm/flash-upload.get.html.ftl.mt"); //$NON-NLS-1$
-		result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/defaultdocListView/documentlist.get.properties.mt"); //$NON-NLS-1$
+		result.add(templateBase + "/alfrescoshare/uploadForm/flash-upload-js-get-patch.mt"); //$NON-NLS-1$
+		result.add(templateBase + "/alfrescoshare/uploadForm/html-upload-js-get-patch.mt"); //$NON-NLS-1$
+		result.add(templateBase + "/alfrescoshare/uploadForm/flash-upload.get.html.ftl.mt"); //$NON-NLS-1$
+		result.add(templateBase + "/alfrescoshare/defaultdocListView/documentlist.get.properties.mt"); //$NON-NLS-1$
 
 		// add forms/details management
 		// provided by sharePortalExtension module 
-		//		result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/DefaultEditForms/custom-web-framework-application-context.mt"); //$NON-NLS-1$
+		//		result.add(templateBase+ "/alfrescoshare/DefaultEditForms/custom-web-framework-application-context.mt"); //$NON-NLS-1$
 		// defaults forms
-		result.add("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/DefaultEditForms/web-framework-config-defaults.mt"); //$NON-NLS-1$
+		result.add(templateBase + "/alfrescoshare/DefaultEditForms/web-framework-config-defaults.mt"); //$NON-NLS-1$
 		return result;
 	}
 
@@ -187,7 +188,7 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 
 	@Override
 	protected List<Map<String, String>> getTemplatesSubstitution() {
-		return new ArrayList<Map<String,String>>();
+		return new ArrayList<Map<String, String>>();
 	}
 
 	/**

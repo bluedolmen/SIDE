@@ -66,6 +66,7 @@ public class MetaInfoItemProvider
 			addConstraintTypePropertyDescriptor(object);
 			addValueSetPropertyDescriptor(object);
 			addMultilineValuePropertyDescriptor(object);
+			addEObjectValuePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -198,6 +199,28 @@ public class MetaInfoItemProvider
 				 true,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the EObject Value feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addEObjectValuePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_MetaInfo_EObjectValue_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_MetaInfo_EObjectValue_feature", "_UI_MetaInfo_type"),
+				 CommonPackage.Literals.META_INFO__EOBJECT_VALUE,
+				 true,
+				 false,
+				 true,
+				 null,
 				 null,
 				 null));
 	}

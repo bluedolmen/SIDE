@@ -119,13 +119,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 
 <%script type="FormContainer" name="generate_visibilityForClass"%>
 <%for (getAllKindFields()){%>
-<%if (ref.filter("clazz.Attribute")){%>
-<show id="<%ref.getPrefixedQName()%>" force="true" />
-<%}%>
-
-<%for (ref.filter("clazz.Association")){%>
-<show id="<%getPrefixedAssociationQName(getOppositeAssociationEnd(current("ClassReference").real_class))%>" force="true" />
-<%}%>
+<show id="<%getFieldId()%>" force="true" />
 <%}%>
 
 <%script type="FormContainer" name="generate_appearanceForClass"%>

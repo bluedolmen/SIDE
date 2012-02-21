@@ -8,11 +8,14 @@ package com.bluexml.side.common.impl;
 
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.ocl.EvaluationEnvironment;
 import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.Query;
@@ -23,6 +26,7 @@ import com.bluexml.side.common.CommonPackage;
 import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
+import java.util.Collection;
 
 /**
  * <!-- begin-user-doc -->
@@ -37,6 +41,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *   <li>{@link com.bluexml.side.common.impl.MetaInfoImpl#getConstraintType <em>Constraint Type</em>}</li>
  *   <li>{@link com.bluexml.side.common.impl.MetaInfoImpl#getValueSet <em>Value Set</em>}</li>
  *   <li>{@link com.bluexml.side.common.impl.MetaInfoImpl#getMultilineValue <em>Multiline Value</em>}</li>
+ *   <li>{@link com.bluexml.side.common.impl.MetaInfoImpl#getEObjectValue <em>EObject Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -154,6 +159,16 @@ public class MetaInfoImpl extends MetaDataImpl implements MetaInfo {
 	 * @ordered
 	 */
 	protected String multilineValue = MULTILINE_VALUE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getEObjectValue() <em>EObject Value</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEObjectValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<EObject> eObjectValue;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -305,6 +320,18 @@ public class MetaInfoImpl extends MetaDataImpl implements MetaInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<EObject> getEObjectValue() {
+		if (eObjectValue == null) {
+			eObjectValue = new EObjectResolvingEList<EObject>(EObject.class, this, CommonPackage.META_INFO__EOBJECT_VALUE);
+		}
+		return eObjectValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean equalsForMerge(MetaInfo other) {
 		if (equalsForMergeBodyOCL == null) {
 			EOperation eOperation = CommonPackage.Literals.META_INFO.getEOperations().get(0);
@@ -358,6 +385,8 @@ public class MetaInfoImpl extends MetaDataImpl implements MetaInfo {
 				return getValueSet();
 			case CommonPackage.META_INFO__MULTILINE_VALUE:
 				return getMultilineValue();
+			case CommonPackage.META_INFO__EOBJECT_VALUE:
+				return getEObjectValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -367,6 +396,7 @@ public class MetaInfoImpl extends MetaDataImpl implements MetaInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -387,6 +417,10 @@ public class MetaInfoImpl extends MetaDataImpl implements MetaInfo {
 				return;
 			case CommonPackage.META_INFO__MULTILINE_VALUE:
 				setMultilineValue((String)newValue);
+				return;
+			case CommonPackage.META_INFO__EOBJECT_VALUE:
+				getEObjectValue().clear();
+				getEObjectValue().addAll((Collection<? extends EObject>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -418,6 +452,9 @@ public class MetaInfoImpl extends MetaDataImpl implements MetaInfo {
 			case CommonPackage.META_INFO__MULTILINE_VALUE:
 				setMultilineValue(MULTILINE_VALUE_EDEFAULT);
 				return;
+			case CommonPackage.META_INFO__EOBJECT_VALUE:
+				getEObjectValue().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -442,6 +479,8 @@ public class MetaInfoImpl extends MetaDataImpl implements MetaInfo {
 				return VALUE_SET_EDEFAULT == null ? valueSet != null : !VALUE_SET_EDEFAULT.equals(valueSet);
 			case CommonPackage.META_INFO__MULTILINE_VALUE:
 				return MULTILINE_VALUE_EDEFAULT == null ? multilineValue != null : !MULTILINE_VALUE_EDEFAULT.equals(multilineValue);
+			case CommonPackage.META_INFO__EOBJECT_VALUE:
+				return eObjectValue != null && !eObjectValue.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -36,6 +36,20 @@
             <option defaultOption="false" documentation="this option must be used in conjuction with the 'searchable' meta on associations, this create an attribute that store associated nodes" hidden="false" key="alfresco.model.association.searchable" label="Searchable association">
               <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.searchAssociation346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.2" versionMin="1.0.2" />
             </option>
+            <option
+                  defaultOption="false"
+                  documentation="allow to define pattern to apply on a property computed from other property value"
+                  hidden="false"
+                  key="option.properties.synchro"
+                  label="properties value synchronization">
+               <moduleDependence
+                     moduleId="com.bluexml.side.Framework.alfresco.documentNameUpdater346E"
+                     moduleType="amp"
+                     technologyVersion="alfresco_3.4.6E"
+                     versionMax="1.0.0"
+                     versionMin="1.0.0">
+               </moduleDependence>
+            </option>
           </generatorVersion>
         </technologyVersion>
       </technology>

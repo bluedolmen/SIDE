@@ -104,11 +104,7 @@ form.set.label.<%getPrefixedQualifiedName()%>
 	<%ref.getPrefixedQName()%>
 <%}%>
 <%for (ref.filter("clazz.Association")){%>
-	<%if (firstEnd.linkedClass == current("Clazz")){%>
-		<%getPrefixedAssociationQName(secondEnd)%>
-	<%}else{%>
-		<%getPrefixedAssociationQName(firstEnd)%>
-	<%}%>
+	<%getPrefixedAssociationQName(getOppositeAssociationEnd(current("ClassReference").real_class))%>
 <%}%>
 <%script type="FormElement" name="isSearchForm"%>
 <%service::getRootContainer().filter("SearchFormCollection").nSize() > 0%>

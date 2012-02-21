@@ -23,16 +23,15 @@ import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.EnumerationLiteral;
-import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.OperationComponent;
-import com.bluexml.side.common.Stereotype;
 import com.bluexml.side.form.CharField;
 import com.bluexml.side.form.ChoiceField;
-import com.bluexml.side.form.ChoiceSearchField;
+import com.bluexml.side.form.ClassReference;
 import com.bluexml.side.form.Field;
+import com.bluexml.side.form.FormElement;
 import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.ModelChoiceField;
 import com.bluexml.side.form.ModelChoiceSearchField;
@@ -145,21 +144,55 @@ public class ClassDiagramUtils {
 	 */
 	public static ModelChoiceField getModelChoiceFieldForAssociation(Association ass, AbstractClass srcClazz) {
 		ModelChoiceField f = FormFactory.eINSTANCE.createModelChoiceField();
+
+		AssociationEnd target = setModelChoiceField(ass, srcClazz, f);
+
+		//		if (useSource) {
+		//			f.setMin_bound(Integer.parseInt(ass.getFirstEnd().getCardMin()));
+		//			f.setMax_bound(Integer.parseInt(ass.getFirstEnd().getCardMax()));
+		//		} else {
+		f.setMin_bound(Integer.parseInt(target.getCardMin()));
+		f.setMax_bound(Integer.parseInt(target.getCardMax()));
+		//		}
+		//		if (useSource) {
+		//			f.setMandatory(ass.getFirstEnd().isMandatory());
+		//		} else {
+		f.setMandatory(target.isMandatory());
+		//		}
+		return f;
+	}
+
+	public static AssociationEnd setModelChoiceField(Association ass, AbstractClass srcClazz, FormElement f) {
 		// we needs to get the target type
+		AssociationEnd source = null;
+		AssociationEnd target = null;
 
-		// if useSource = true, FirstEnd is used as destination (target) 
-		boolean useSource = false;
-		AbstractClass first_linkedClass = ass.getFirstEnd().getLinkedClass();
-		AbstractClass second_linkedClass = ass.getSecondEnd().getLinkedClass();
-
-		EList<AbstractClass> descendants = first_linkedClass.getAllSubTypes();
-		boolean equals = first_linkedClass.equals(srcClazz);
-		boolean contains = descendants.contains(srcClazz);
-		if (!(contains || equals)) {
-			useSource = true;
+		EList<AbstractClass> sourceClass = ass.getSource();
+		boolean twoWay = sourceClass.size() > 1;
+		if (twoWay) {
+			AssociationEnd firstEnd = ass.getFirstEnd();
+			AssociationEnd secondEnd = ass.getSecondEnd();
+			AbstractClass firstlinkedClass = firstEnd.getLinkedClass();
+			if (firstlinkedClass.getAllSubTypes().contains(srcClazz) || firstlinkedClass.equals(srcClazz)) {
+				source = firstEnd;
+			} else {
+				AbstractClass secondlinkedClass = secondEnd.getLinkedClass();
+				if (secondlinkedClass.getAllSubTypes().contains(srcClazz) || secondlinkedClass.equals(srcClazz)) {
+					source = secondEnd;
+				} else {
+					// error the given srcClazz is not in association ends hierarchy 
+					throw new RuntimeException("the given srcClazz is not in association ends hierarchy, please validate your model");
+				}
+			}
+		} else {
+			EList<AssociationEnd> associationEnd = ass.getAssociationEnd(srcClazz);
+			source = associationEnd.get(0);
 		}
 
-		String id = getAssociationName(ass, useSource);
+		target = source.getOpposite();
+		AbstractClass second_linkedClass = target.getLinkedClass();
+
+		String id = getAssociationName(ass, target);
 
 		f.setId(id);
 		f.setRef(ass);
@@ -169,75 +202,17 @@ public class ClassDiagramUtils {
 		} else {
 			f.setLabel(ass.getName());
 		}
-		if (useSource) {
-			AbstractClass linkedClass = first_linkedClass;
-			f.setReal_class(linkedClass);
-			f.setFormat_pattern(getViewForClass(linkedClass));
-		} else {
-			AbstractClass linkedClass = second_linkedClass;
-			f.setReal_class(linkedClass);
-			f.setFormat_pattern(getViewForClass(linkedClass));
-		}
 
-		if (useSource) {
-			f.setMin_bound(Integer.parseInt(ass.getFirstEnd().getCardMin()));
-			f.setMax_bound(Integer.parseInt(ass.getFirstEnd().getCardMax()));
-		} else {
-			f.setMin_bound(Integer.parseInt(ass.getSecondEnd().getCardMin()));
-			f.setMax_bound(Integer.parseInt(ass.getSecondEnd().getCardMax()));
-		}
-		if (useSource) {
-			f.setMandatory(ass.getFirstEnd().isMandatory());
-		} else {
-			f.setMandatory(ass.getSecondEnd().isMandatory());
-		}
-		return f;
+		AbstractClass linkedClass = second_linkedClass;
+		((ClassReference) f).setReal_class(linkedClass);
+
+		return target;
 	}
 
 	public static ModelChoiceSearchField transformAssociationIntoModelChoiceSearchField(Association ass, AbstractClass srcClazz) {
 		ModelChoiceSearchField f = FormFactory.eINSTANCE.createModelChoiceSearchField();
-		// we needs to get the target type
 
-		// if useSource = true, FirstEnd is used as destination (target) 
-		boolean useSource = false;
-		AbstractClass first_linkedClass = ass.getFirstEnd().getLinkedClass();
-		AbstractClass second_linkedClass = ass.getSecondEnd().getLinkedClass();
-
-		EList<AbstractClass> descendants = first_linkedClass.getAllSubTypes();
-		boolean equals = first_linkedClass.equals(srcClazz);
-		boolean contains = descendants.contains(srcClazz);
-		if (!(contains || equals)) {
-			useSource = true;
-		}
-
-		String id = getAssociationName(ass, useSource);
-
-		f.setId(id);
-		f.setRef(ass);
-
-		if (ass.getTitle() != null && ass.getTitle().length() > 0) {
-			f.setLabel(ass.getTitle());
-		} else {
-			f.setLabel(ass.getName());
-		}
-		if (useSource) {
-			AbstractClass linkedClass = first_linkedClass;
-
-			f.setReal_class(linkedClass);
-			//			f.setFormat_pattern(getViewForClass(linkedClass));
-		} else {
-			AbstractClass linkedClass = second_linkedClass;
-			f.setReal_class(linkedClass);
-			//			f.setFormat_pattern(getViewForClass(linkedClass));
-		}
-
-		if (useSource) {
-			//			f.setMin_bound(Integer.parseInt(ass.getFirstEnd().getCardMin()));
-			//			f.setMax_bound(Integer.parseInt(ass.getFirstEnd().getCardMax()));
-		} else {
-			//			f.setMin_bound(Integer.parseInt(ass.getSecondEnd().getCardMin()));
-			//			f.setMax_bound(Integer.parseInt(ass.getSecondEnd().getCardMax()));
-		}
+		AssociationEnd target = setModelChoiceField(ass, srcClazz, f);
 
 		return f;
 	}
@@ -249,14 +224,8 @@ public class ClassDiagramUtils {
 	 * @param useSource
 	 * @return
 	 */
-	public static String getAssociationName(Association ass, boolean useSource) {
+	public static String getAssociationName(Association ass, AssociationEnd target) {
 		String id = ass.getName();
-		AssociationEnd target;
-		if (useSource) {
-			target = ass.getFirstEnd();
-		} else {
-			target = ass.getSecondEnd();
-		}
 
 		id += StringUtils.trimToEmpty(target.getName());
 
@@ -453,11 +422,13 @@ public class ClassDiagramUtils {
 				}
 			}
 			for (Association ass : cl.getAllSourceAssociations()) {
-				if (ass.getFirstEnd().getLinkedClass().equals(cl) && ass.getSecondEnd().isNavigable()) {
-					listChild.put(ClassDiagramUtils.getAssociationName(ass, false), ass);
+				AssociationEnd firstEnd = ass.getFirstEnd();
+				AssociationEnd secondEnd = ass.getSecondEnd();
+				if (firstEnd.getLinkedClass().equals(cl) && secondEnd.isNavigable()) {
+					listChild.put(ClassDiagramUtils.getAssociationName(ass, secondEnd), ass);
 				}
-				if (ass.getSecondEnd().getLinkedClass().equals(cl) && ass.getFirstEnd().isNavigable()) {
-					listChild.put(ClassDiagramUtils.getAssociationName(ass, true), ass);
+				if (secondEnd.getLinkedClass().equals(cl) && firstEnd.isNavigable()) {
+					listChild.put(ClassDiagramUtils.getAssociationName(ass, firstEnd), ass);
 				}
 			}
 			for (Attribute att : cl.getAllAttributes()) {
@@ -470,19 +441,4 @@ public class ClassDiagramUtils {
 		return listChild;
 	}
 
-	public static String getViewForClass(AbstractClass clazz) {
-		String result = null;
-		for (Object o : clazz.getComments()) {
-			Comment c = (Comment) o;
-			for (Object obj : c.getStereotypes()) {
-				if (obj instanceof Stereotype) {
-					Stereotype s = (Stereotype) obj;
-					if (s.getName().equalsIgnoreCase("view")) {
-						result = c.getValue();
-					}
-				}
-			}
-		}
-		return result;
-	}
 }

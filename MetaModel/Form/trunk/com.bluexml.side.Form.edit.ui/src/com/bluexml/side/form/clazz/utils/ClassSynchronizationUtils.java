@@ -16,6 +16,7 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
+import com.bluexml.side.clazz.AssociationEnd;
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.common.OperationComponent;
@@ -150,8 +151,10 @@ public class ClassSynchronizationUtils {
 	private static void getCommandsForAssociation(FormClass fc, EditingDomain domain, HashMap<String, FormElement> formChild, AbstractClass clazz, Association ass) {
 		// SOURCE
 		String associationId = "";
-		if (ass.getFirstEnd().getLinkedClass().equals(clazz) && ass.getSecondEnd().isNavigable()) {
-			associationId = ClassDiagramUtils.getAssociationName(ass, false);
+		AssociationEnd secondEnd = ass.getSecondEnd();
+		AssociationEnd firstEnd = ass.getFirstEnd();
+		if (firstEnd.getLinkedClass().equals(clazz) && secondEnd.isNavigable()) {
+			associationId = ClassDiagramUtils.getAssociationName(ass, secondEnd);
 		}
 
 		// Add
@@ -160,17 +163,17 @@ public class ClassSynchronizationUtils {
 		} else {
 			// Modification
 			Field mcf = (ModelChoiceField) formChild.get(associationId);
-			if (ass.getSecondEnd().isNavigable() && ass.getFirstEnd().getLinkedClass().equals(clazz) && (mcf != null)) {
-				if ((((ModelChoiceField) mcf).getMax_bound() > Integer.parseInt(ass.getSecondEnd().getCardMax())) && (Integer.parseInt(ass.getSecondEnd().getCardMax()) != -1)) {
-					cc.append(SetCommand.create(domain, mcf, FormPackage.eINSTANCE.getModelChoiceField_Max_bound(), Integer.parseInt(ass.getSecondEnd().getCardMax())));
+			if (secondEnd.isNavigable() && firstEnd.getLinkedClass().equals(clazz) && (mcf != null)) {
+				if ((((ModelChoiceField) mcf).getMax_bound() > Integer.parseInt(secondEnd.getCardMax())) && (Integer.parseInt(secondEnd.getCardMax()) != -1)) {
+					cc.append(SetCommand.create(domain, mcf, FormPackage.eINSTANCE.getModelChoiceField_Max_bound(), Integer.parseInt(secondEnd.getCardMax())));
 				}
 			}
 		}
 
 		// TARGET
 		associationId = "";
-		if (ass.getSecondEnd().getLinkedClass().equals(clazz) && ass.getFirstEnd().isNavigable()) {
-			associationId = ClassDiagramUtils.getAssociationName(ass, true);
+		if (secondEnd.getLinkedClass().equals(clazz) && firstEnd.isNavigable()) {
+			associationId = ClassDiagramUtils.getAssociationName(ass, firstEnd);
 		}
 
 		// Add
@@ -179,9 +182,9 @@ public class ClassSynchronizationUtils {
 		} else {
 			// Modification
 			Field mcf = (ModelChoiceField) formChild.get(associationId);
-			if (ass.getFirstEnd().isNavigable() && ass.getFirstEnd().getLinkedClass().equals(clazz) && (mcf != null)) {
-				if ((((ModelChoiceField) mcf).getMax_bound() > Integer.parseInt(ass.getFirstEnd().getCardMax())) && (Integer.parseInt(ass.getFirstEnd().getCardMax()) != -1)) {
-					cc.append(SetCommand.create(domain, mcf, FormPackage.eINSTANCE.getModelChoiceField_Max_bound(), Integer.parseInt(ass.getFirstEnd().getCardMax())));
+			if (firstEnd.isNavigable() && firstEnd.getLinkedClass().equals(clazz) && (mcf != null)) {
+				if ((((ModelChoiceField) mcf).getMax_bound() > Integer.parseInt(firstEnd.getCardMax())) && (Integer.parseInt(firstEnd.getCardMax()) != -1)) {
+					cc.append(SetCommand.create(domain, mcf, FormPackage.eINSTANCE.getModelChoiceField_Max_bound(), Integer.parseInt(firstEnd.getCardMax())));
 				}
 			}
 		}

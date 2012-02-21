@@ -6,6 +6,9 @@
  */
 package com.bluexml.side.common;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -21,6 +24,7 @@ package com.bluexml.side.common;
  *   <li>{@link com.bluexml.side.common.MetaInfo#getConstraintType <em>Constraint Type</em>}</li>
  *   <li>{@link com.bluexml.side.common.MetaInfo#getValueSet <em>Value Set</em>}</li>
  *   <li>{@link com.bluexml.side.common.MetaInfo#getMultilineValue <em>Multiline Value</em>}</li>
+ *   <li>{@link com.bluexml.side.common.MetaInfo#getEObjectValue <em>EObject Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -187,6 +191,22 @@ public interface MetaInfo extends MetaData {
 	 * @generated
 	 */
 	void setMultilineValue(String value);
+
+	/**
+	 * Returns the value of the '<em><b>EObject Value</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.emf.ecore.EObject}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>EObject Value</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>EObject Value</em>' reference list.
+	 * @see com.bluexml.side.common.CommonPackage#getMetaInfo_EObjectValue()
+	 * @model
+	 * @generated
+	 */
+	EList<EObject> getEObjectValue();
 
 	/**
 	 * <!-- begin-user-doc -->

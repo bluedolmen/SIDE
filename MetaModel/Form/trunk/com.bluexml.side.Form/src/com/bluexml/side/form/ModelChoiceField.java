@@ -37,7 +37,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see com.bluexml.side.form.FormPackage#getModelChoiceField()
- * @model
+ * @model annotation="http://www.bluexml.com/OCL valideAssociationRef='self.real_class.getAllTargetAssociations()->includes(self.ref)'"
  * @generated
  */
 public interface ModelChoiceField extends Field, ClassReference {

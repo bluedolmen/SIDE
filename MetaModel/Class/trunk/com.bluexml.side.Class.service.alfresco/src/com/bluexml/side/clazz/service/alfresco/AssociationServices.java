@@ -38,13 +38,15 @@ public class AssociationServices {
 	 * editor (known limitation) thus defined them in Java services (known
 	 * workaround)
 	 */
-	public static AssociationEnd getAssociationEnd(Association a, Clazz c) {
+	public static AssociationEnd getAssociationEnd(Association a, AbstractClass c) {
 		return a.getAssociationEnd(c).get(0); // if empty, generate an exception
 
 	}
 
-	public static AssociationEnd getOppositeAssociationEnd(Association a, Clazz c) {
-		return a.getAssociationEnd(c).get(0).getOpposite();
+	public static AssociationEnd getOppositeAssociationEnd(Association a, AbstractClass c) {
+		EList<AssociationEnd> associationEnd2 = a.getAssociationEnd(c);
+		AssociationEnd associationEnd = associationEnd2.get(0);
+		return associationEnd.getOpposite();
 	}
 
 	/**
@@ -316,6 +318,9 @@ public class AssociationServices {
 	}
 
 	public static String getPrefixedAssociationQName(Association a, AssociationEnd source) throws Exception {
+		if (CommonServices.isNativeModel(a)) {
+			return CommonServices.getPrefix(a) + ":" + a.getName();
+		}
 		return CommonServices.getPrefix(a) + ":" + getAssociationQName(a, source);
 	}
 

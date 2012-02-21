@@ -182,6 +182,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="constraintType" eType="#//DataType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="valueSet" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="multilineValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="EObjectValue" upperBound="-1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MetaInfoGroup" eSuperTypes="#//MetaData #//NamedModelElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"

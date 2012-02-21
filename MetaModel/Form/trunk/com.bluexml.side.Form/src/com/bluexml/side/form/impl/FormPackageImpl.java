@@ -2217,7 +2217,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "MinSuperiorToMax"
-		   });																																																	
+		   });																																																		
 		addAnnotation
 		  (classReferenceEClass, 
 		   source, 
@@ -2312,7 +2312,13 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "MinSuperiorToMax", "self.min_length <= self.max_length"
-		   });																																															
+		   });																						
+		addAnnotation
+		  (modelChoiceFieldEClass, 
+		   source, 
+		   new String[] {
+			 "valideAssociationRef", "self.real_class.getAllTargetAssociations()->includes(self.ref)"
+		   });																											
 		addAnnotation
 		  (classReferenceEClass, 
 		   source, 
@@ -2340,7 +2346,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "name", "presentation"
-		   });																																																																																											
+		   });																																																																																												
 	}
 
 	public FormFactory getFormsFactory() {

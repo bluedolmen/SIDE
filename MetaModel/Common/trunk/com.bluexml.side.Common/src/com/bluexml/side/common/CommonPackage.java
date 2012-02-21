@@ -1163,13 +1163,22 @@ public interface CommonPackage extends EPackage {
 	int META_INFO__MULTILINE_VALUE = META_DATA_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>EObject Value</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int META_INFO__EOBJECT_VALUE = META_DATA_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>Meta Info</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int META_INFO_FEATURE_COUNT = META_DATA_FEATURE_COUNT + 6;
+	int META_INFO_FEATURE_COUNT = META_DATA_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.common.impl.MetaInfoGroupImpl <em>Meta Info Group</em>}' class.
@@ -2003,6 +2012,17 @@ public interface CommonPackage extends EPackage {
 	EAttribute getMetaInfo_MultilineValue();
 
 	/**
+	 * Returns the meta object for the reference list '{@link com.bluexml.side.common.MetaInfo#getEObjectValue <em>EObject Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>EObject Value</em>'.
+	 * @see com.bluexml.side.common.MetaInfo#getEObjectValue()
+	 * @see #getMetaInfo()
+	 * @generated
+	 */
+	EReference getMetaInfo_EObjectValue();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.common.MetaInfoGroup <em>Meta Info Group</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2503,6 +2523,14 @@ public interface CommonPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute META_INFO__MULTILINE_VALUE = eINSTANCE.getMetaInfo_MultilineValue();
+
+		/**
+		 * The meta object literal for the '<em><b>EObject Value</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference META_INFO__EOBJECT_VALUE = eINSTANCE.getMetaInfo_EObjectValue();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.common.impl.MetaInfoGroupImpl <em>Meta Info Group</em>}' class.

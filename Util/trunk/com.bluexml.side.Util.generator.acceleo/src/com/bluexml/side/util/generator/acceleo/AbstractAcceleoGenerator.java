@@ -266,7 +266,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 
 		for (String templateFile : getTemplates()) {
 
-			// System.out.println("Templates: " + templateFile);
+			 System.out.println("Templates: " + templateFile);
 			// Generator
 			Generator generator = ChainFactory.eINSTANCE.createGenerator();
 			EFactory.eAdd(repository, "files", generator); //$NON-NLS-1$
