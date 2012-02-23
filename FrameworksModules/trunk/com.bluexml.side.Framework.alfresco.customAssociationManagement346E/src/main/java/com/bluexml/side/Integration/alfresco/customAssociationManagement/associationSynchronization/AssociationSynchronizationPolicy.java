@@ -14,6 +14,8 @@ import org.alfresco.service.namespace.NamespaceService;
 import org.alfresco.service.namespace.QName;
 import org.apache.log4j.Logger;
 
+import com.bluexml.side.framework.alfresco.commons.configurations.IConfigurationFile;
+
 /*
  * This implementation uses Alfresco policies to trigger the duplication of the association.
  * A first implementation tried to use NodeDAOService to check for an existing opposite association, resulting in 
@@ -35,14 +37,15 @@ public class AssociationSynchronizationPolicy implements OnCreateAssociationPoli
 	public void init() {
 
 		logger.debug("[init] Initializing association synchronisation");
+		if (((IConfigurationFile) resolver).getDictionary().size() > 0) {
+			// Create behaviours
+			this.onCreateAssociation = new JavaBehaviour(this, "onCreateAssociation", NotificationFrequency.FIRST_EVENT);
+			this.onDeleteAssociation = new JavaBehaviour(this, "onDeleteAssociation", NotificationFrequency.FIRST_EVENT);
 
-		// Create behaviours
-		this.onCreateAssociation = new JavaBehaviour(this, "onCreateAssociation", NotificationFrequency.FIRST_EVENT);
-		this.onDeleteAssociation = new JavaBehaviour(this, "onDeleteAssociation", NotificationFrequency.FIRST_EVENT);
-
-		// Bind behaviours to node policies
-		policyComponent.bindAssociationBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onCreateAssociation"), this, this.onCreateAssociation);
-		policyComponent.bindAssociationBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onDeleteAssociation"), this, this.onDeleteAssociation);
+			// Bind behaviours to node policies
+			policyComponent.bindAssociationBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onCreateAssociation"), this, this.onCreateAssociation);
+			policyComponent.bindAssociationBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onDeleteAssociation"), this, this.onDeleteAssociation);
+		}
 	}
 
 	public void onCreateAssociation(AssociationRef associationRef) {
@@ -152,5 +155,4 @@ public class AssociationSynchronizationPolicy implements OnCreateAssociationPoli
 		resolver = resolver_;
 	}
 
-	
 }

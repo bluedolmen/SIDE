@@ -9,7 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
-public abstract class AbstractConfigurationFile<K, V> {
+public abstract class AbstractConfigurationFile<K, V> implements IConfigurationFile<K, V> {
 	/** The logger. */
 	protected Log logger = LogFactory.getLog(getClass());
 
@@ -52,29 +52,22 @@ public abstract class AbstractConfigurationFile<K, V> {
 	 * Service Methods
 	 */
 
-	/**
-	 * get the value for the given key
-	 * 
-	 * @param key
-	 * @return
+	/* (non-Javadoc)
+	 * @see com.bluexml.side.framework.alfresco.commons.configurations.IConfigurationFile#getValue(K)
 	 */
 	public V getValue(K key) {
 		return dictionary.get(key);
 	}
 
-	/**
-	 * true if value exists for this key
-	 * 
-	 * @param key
-	 * @return
+	/* (non-Javadoc)
+	 * @see com.bluexml.side.framework.alfresco.commons.configurations.IConfigurationFile#hasValue(K)
 	 */
 	public boolean hasValue(K key) {
 		return dictionary.containsKey(key);
 	}
 
-	/**
-	 * get read only access to dictionary Map
-	 * @return
+	/* (non-Javadoc)
+	 * @see com.bluexml.side.framework.alfresco.commons.configurations.IConfigurationFile#getDictionary()
 	 */
 	public Map<K, V> getDictionary() {
 		return Collections.unmodifiableMap(dictionary);

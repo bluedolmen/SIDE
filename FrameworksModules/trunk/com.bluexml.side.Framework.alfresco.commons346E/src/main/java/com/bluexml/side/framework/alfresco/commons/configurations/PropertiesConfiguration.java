@@ -30,4 +30,7 @@ public class PropertiesConfiguration extends AbstractConfigurationFile<String, S
 		}
 	}
 
+	public boolean getAsBooleanValue(String key) {
+		return Boolean.parseBoolean(getValue(key).trim());
+	}
 }
