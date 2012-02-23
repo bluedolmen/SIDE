@@ -17,7 +17,7 @@
    combo.setOptions(
    {
    	 <#if form.mode == "view" || (field.disabled && !(field.control.params.forceEditable?? && field.control.params.forceEditable == "true"))>disabled: true,</#if>
-     itemType: "${field.endpointType}",
+     itemType: "<#if field.control.params.itemType??>${field.control.params.itemType}<#else>${field.endpointType}</#if>",
      field: "${field.name}",
   	 searchInSite: <#if field.control.params.searchInSite??>${field.control.params.searchInSite}<#else>true</#if>,
      multipleSelectMode: <#if field.control.params.multipleSelectMode??>${field.control.params.multipleSelectMode}<#else>${field.endpointMany?string}</#if>,
