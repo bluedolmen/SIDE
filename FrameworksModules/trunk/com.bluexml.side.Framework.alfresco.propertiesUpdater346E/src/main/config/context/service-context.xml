@@ -14,7 +14,9 @@
 	<bean id="side.nameUpdater"
 		class="com.bluexml.side.Framework.alfresco.propertiesUpdater346E.PropertiesUpdaterPolicy"
 		singleton="true" init-method="init">
-		<property name="serviceRegistry" ref="ServiceRegistry" />
+		<property name="nodeService" ref="nodeService" />
+		<property name="namespaceService" ref="namespaceService" />
+		<property name="dictionaryService" ref="dictionaryService" />
 		<property name="nameUpdaterConfig" ref="nameUpdaterConfig" />
 		<property name="policyComponent" ref="policyComponent" />
 	</bean>

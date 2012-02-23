@@ -16,29 +16,20 @@ public abstract class MultiValuesConfigurationXMLFile<K, V> extends AbstractConf
 	protected String entryTag;
 	protected String entryKeyAttribute;
 	protected String valueTag;
-	protected String valueContentId;
-	protected ContentType valueContentType;
 
-	public MultiValuesConfigurationXMLFile(String entryTag, String keyAttributeId, String valueTag, ContentType valueContentType, String valueContentId) throws Exception {
+	public MultiValuesConfigurationXMLFile(String entryTag, String keyAttributeId, String valueTag) throws Exception {
 		super();
 		this.entryTag = entryTag;
 		this.entryKeyAttribute = keyAttributeId;
 		this.valueTag = valueTag;
-		this.valueContentType = valueContentType;
-		this.valueContentId = valueContentId;
 
-		if (this.valueContentType.equals(ContentType.ATTRIBUTE)) {
-			if (this.valueContentId == null) {
-				throw new Exception("valueContentId must be provided !");
-			}
-		}
 	}
 
 	public enum ContentType {
 		ATTRIBUTE, TEXTNODE
 	}
 
-	protected abstract V getValueObject(String valueString);
+	protected abstract V getValueObject(Element value);
 
 	protected abstract K getKeyObject(String keyString);
 
@@ -85,14 +76,8 @@ public abstract class MultiValuesConfigurationXMLFile<K, V> extends AbstractConf
 	protected void readValues(Element type, String key) {
 		for (Object attribute : type.getChildren(valueTag)) {
 			Element attribute2 = (Element) attribute;
-			String attqn = null;
-			if (this.valueContentType.equals(ContentType.ATTRIBUTE)) {
-				attqn = attribute2.getAttributeValue(valueContentId);
-			} else {
-				attqn = attribute2.getTextNormalize();
-			}
 
-			dictionary.get(getKeyObject(key)).add(getValueObject(attqn));
+			dictionary.get(getKeyObject(key)).add(getValueObject(attribute2));
 		}
 	}
 

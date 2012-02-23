@@ -16,7 +16,6 @@ import org.alfresco.repo.policy.Behaviour;
 import org.alfresco.repo.policy.Behaviour.NotificationFrequency;
 import org.alfresco.repo.policy.JavaBehaviour;
 import org.alfresco.repo.policy.PolicyComponent;
-import org.alfresco.service.ServiceRegistry;
 import org.alfresco.service.cmr.dictionary.ConstraintDefinition;
 import org.alfresco.service.cmr.dictionary.ConstraintException;
 import org.alfresco.service.cmr.dictionary.DictionaryService;
@@ -27,6 +26,8 @@ import org.alfresco.service.namespace.NamespaceService;
 import org.alfresco.service.namespace.QName;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.bluexml.side.Framework.alfresco.propertiesUpdater346E.ConfigurationReader.PropertyPattern;
 
 public class PropertiesUpdaterPolicy implements OnCreateNodePolicy, OnUpdatePropertiesPolicy {
 	private static Log logger = LogFactory.getLog(PropertiesUpdaterPolicy.class);
@@ -40,14 +41,26 @@ public class PropertiesUpdaterPolicy implements OnCreateNodePolicy, OnUpdateProp
 
 	protected String alfrescoFileNameToFix = "([\\\"\\*\\\\\\>\\<\\?\\/\\:\\|]+)|([\\.]?.*[\\.]+$)|([ ]+$)";
 
-	protected ServiceRegistry serviceRegistry;
+	protected NamespaceService namespaceService;
 
-	public ServiceRegistry getServiceRegistry() {
-		return serviceRegistry;
+	public NamespaceService getNamespaceService() {
+		return namespaceService;
 	}
 
-	public void setServiceRegistry(ServiceRegistry serviceRegistry) {
-		this.serviceRegistry = serviceRegistry;
+	public void setNamespaceService(NamespaceService namespaceService) {
+		this.namespaceService = namespaceService;
+	}
+
+	protected NodeService nodeService;
+
+	protected DictionaryService dictionaryService;
+
+	public NodeService getNodeService() {
+		return nodeService;
+	}
+
+	public void setNodeService(NodeService nodeService) {
+		this.nodeService = nodeService;
 	}
 
 	public ConfigurationReader getNameUpdaterConfig() {
@@ -56,6 +69,14 @@ public class PropertiesUpdaterPolicy implements OnCreateNodePolicy, OnUpdateProp
 
 	public void setNameUpdaterConfig(ConfigurationReader nameUpdaterConfig) {
 		this.nameUpdaterConfig = nameUpdaterConfig;
+	}
+
+	public DictionaryService getDictionaryService() {
+		return dictionaryService;
+	}
+
+	public void setDictionaryService(DictionaryService dictionaryService) {
+		this.dictionaryService = dictionaryService;
 	}
 
 	/**
@@ -73,28 +94,20 @@ public class PropertiesUpdaterPolicy implements OnCreateNodePolicy, OnUpdateProp
 		this.policyComponent = policyComponent;
 	}
 
-	public DictionaryService getDictionaryService() {
-		return serviceRegistry.getDictionaryService();
-	}
-
 	public void init() {
 		logger.debug("[init] Initializing NameUpdaterPolicy");
+		if (nameUpdaterConfig.getDictionary().size() > 0) {
+			// Create behaviours using NotificationFrequency.TRANSACTION_COMMIT cause to have nodeRef that can't be founded by nodeService
+			onCreateNode = new JavaBehaviour(this, "onCreateNode", NotificationFrequency.FIRST_EVENT);
+			onUpdateProperties = new JavaBehaviour(this, "onUpdateProperties", NotificationFrequency.FIRST_EVENT);
 
-		// Create behaviours using NotificationFrequency.TRANSACTION_COMMIT cause to have nodeRef that can't be founded by nodeService
-		onCreateNode = new JavaBehaviour(this, "onCreateNode", NotificationFrequency.FIRST_EVENT);
-		onUpdateProperties = new JavaBehaviour(this, "onUpdateProperties", NotificationFrequency.TRANSACTION_COMMIT);
-
-		// Bind behaviours to node policies
-		policyComponent.bindClassBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onCreateNode"), this, onCreateNode);
-		policyComponent.bindClassBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onUpdateProperties"), this, onUpdateProperties);
-
-	}
-
-	/**
-	 * @return the nodeService
-	 */
-	public NodeService getNodeService() {
-		return serviceRegistry.getNodeService();
+			// Bind behaviours to node policies
+			policyComponent.bindClassBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onCreateNode"), this, onCreateNode);
+			policyComponent.bindClassBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onUpdateProperties"), this, onUpdateProperties);
+		} else {
+			// no configuration so disable policy
+			logger.debug("Policy disabled ! (no configuration found)");
+		}
 	}
 
 	public void onUpdateProperties(NodeRef nodeRef, Map<QName, Serializable> before, Map<QName, Serializable> after) {
@@ -104,13 +117,13 @@ public class PropertiesUpdaterPolicy implements OnCreateNodePolicy, OnUpdateProp
 		Map<String, String> oldValues = new HashMap<String, String>();
 		Map<String, String> newValues = new HashMap<String, String>();
 		for (Map.Entry<QName, Serializable> beforeEntry : before.entrySet()) {
-			String prefixString = beforeEntry.getKey().toPrefixString(serviceRegistry.getNamespaceService());
+			String prefixString = beforeEntry.getKey().toPrefixString(getNamespaceService());
 			String value = beforeEntry.getValue() != null ? beforeEntry.getValue().toString() : "";
 			oldValues.put(prefixString, value);
 		}
 		for (Map.Entry<QName, Serializable> afterEntry : after.entrySet()) {
 			QName key = afterEntry.getKey();
-			String prefixString = key.toPrefixString(serviceRegistry.getNamespaceService());
+			String prefixString = key.toPrefixString(getNamespaceService());
 			String value = afterEntry.getValue() != null ? afterEntry.getValue().toString() : "";
 			newValues.put(prefixString, value);
 		}
@@ -160,7 +173,7 @@ public class PropertiesUpdaterPolicy implements OnCreateNodePolicy, OnUpdateProp
 	 * @param qnameType
 	 * @return
 	 */
-	public List<String> getNamePatternForType(QName qnameType) {
+	public List<PropertyPattern> getNamePatternForType(QName qnameType) {
 		return nameUpdaterConfig.getValue(getconfigKey(qnameType));
 	}
 
@@ -170,14 +183,14 @@ public class PropertiesUpdaterPolicy implements OnCreateNodePolicy, OnUpdateProp
 
 	public List<Modification> getModification(QName type, PatternPropertiesUpdater updater) {
 		List<Modification> modifs = new ArrayList<PropertiesUpdaterPolicy.Modification>();
-		List<String> patterns = getNamePatternForType(type);
+		List<PropertyPattern> patterns = getNamePatternForType(type);
 		if (patterns != null) {
-			for (String pattern : patterns) {
+			for (PropertyPattern pattern : patterns) {
 				if (pattern != null) {
 					Modification modif = new Modification(pattern);
 					modifs.add(modif);
 
-					String prefixString = modif.getPropertyToUpdate().toPrefixString(serviceRegistry.getNamespaceService());
+					String prefixString = modif.getPropertyToUpdate().toPrefixString(getNamespaceService());
 					String newValue = updater.getNewValue(prefixString, modif.getPattern());
 
 					modif.setNewValue(newValue);
@@ -237,10 +250,10 @@ public class PropertiesUpdaterPolicy implements OnCreateNodePolicy, OnUpdateProp
 		String pattern;
 		QName propertyToUpdate;
 
-		public Modification(String fullPattern) {
-			String[] split = fullPattern.split("=");
-			this.propertyToUpdate = QName.createQName(split[0], serviceRegistry.getNamespaceService());
-			this.pattern = split[1];
+		public Modification(PropertyPattern fullPattern) {
+
+			this.propertyToUpdate = QName.createQName(fullPattern.propertyQname, getNamespaceService());
+			this.pattern = fullPattern.pattern;
 		}
 
 		public Serializable getOldValue() {
@@ -297,17 +310,17 @@ public class PropertiesUpdaterPolicy implements OnCreateNodePolicy, OnUpdateProp
 	public boolean hasCycleAndTreeSort() {
 
 		boolean cycle = false;
-		Set<Entry<String, List<String>>> entrySet = nameUpdaterConfig.getDictionary().entrySet();
-		for (Entry<String, List<String>> entry : entrySet) {
+		Set<Entry<String, List<PropertyPattern>>> entrySet = nameUpdaterConfig.getDictionary().entrySet();
+		for (Entry<String, List<PropertyPattern>> entry : entrySet) {
 
 			String key = entry.getKey();
-			List<String> value = entry.getValue();
+			List<PropertyPattern> value = entry.getValue();
 			//			Map<String, List<String>> dependencies = new HashMap<String, List<String>>();
 			//			CollectionHelper<String, String> h = new CollectionHelper<String, String>(dependencies);
 
 			logger.debug("[hasCycle] key :" + key);
 
-			for (String fullPattern : value) {
+			for (PropertyPattern fullPattern : value) {
 
 				Modification mod = new Modification(fullPattern);
 				//				QName propertyToUpdate = mod.getPropertyToUpdate();

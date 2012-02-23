@@ -4,19 +4,26 @@ import java.io.File;
 import java.io.FileInputStream;
 
 import org.jdom.Document;
+import org.jdom.Element;
 
+import com.bluexml.side.Framework.alfresco.propertiesUpdater346E.ConfigurationReader.PropertyPattern;
 import com.bluexml.side.framework.alfresco.commons.configurations.MultiValuesConfigurationXMLFile;
 
-public class ConfigurationReader extends MultiValuesConfigurationXMLFile<String, String> {
+public class ConfigurationReader extends MultiValuesConfigurationXMLFile<String, PropertyPattern> {
+
+	private static final String QNAME = "qname";
 
 	public ConfigurationReader() throws Exception {
-		super("type", "qname", "property", ContentType.TEXTNODE, null);
+		super("type", QNAME, "property");
 	}
 
+
 	@Override
-	protected String getValueObject(String valueString) {
-		return valueString;
+	protected PropertyPattern getValueObject(Element value) {
+		// TODO Auto-generated method stub
+		return new PropertyPattern(value.getAttributeValue(QNAME), value.getTextNormalize());
 	}
+	
 
 	@Override
 	protected String getKeyObject(String keyString) {
@@ -34,6 +41,17 @@ public class ConfigurationReader extends MultiValuesConfigurationXMLFile<String,
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
+
+	class PropertyPattern {
+		final public String propertyQname;
+		final public String pattern;
+
+		public PropertyPattern(String propertyQname, String pattern) {
+			this.propertyQname = propertyQname;
+			this.pattern = pattern;
+
+		}
+	}
+
 }
