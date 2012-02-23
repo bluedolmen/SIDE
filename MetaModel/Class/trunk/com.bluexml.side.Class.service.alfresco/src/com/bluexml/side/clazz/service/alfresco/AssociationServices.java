@@ -323,6 +323,23 @@ public class AssociationServices {
 		}
 		return CommonServices.getPrefix(a) + ":" + getAssociationQName(a, source);
 	}
+	
+	public static String getPrefixedAssociationQNameForSource(Association a) throws Exception {
+		if (a.isTwoWay()) {
+			throw new UnsupportedOperationException("Two Way Association not supported !");
+		}
+		AbstractClass source = a.getSource().get(0);
+		return getPrefixedAssociationQName(a, a.getAssociationEnd(source).get(0));
+	}
+	
+	
+	public static String getPrefixedAssociationQNameForTarget(Association a) throws Exception {
+		if (a.isTwoWay()) {
+			throw new UnsupportedOperationException("Two Way Association not supported !");
+		}
+		AbstractClass target = a.getTarget().get(0);
+		return getPrefixedAssociationQName(a, a.getAssociationEnd(target).get(0));
+	}
 
 	public static String getPrefixedURIAssociationQName(Association a, AssociationEnd source) throws Exception {
 		return "{" + CommonServices.getNamespaceURI(a) + "}" + getAssociationQName(a, source);
