@@ -34,16 +34,10 @@ public class AlfrescoGenerator346e extends AlfrescoGenerator {
 		templates.add(templateBase346e + "/alfrescoshare/changetype/change-type.get_en" + i18nFileExt); //$NON-NLS-1$
 		templates.add(templateBase346e + "/alfrescoshare/changetype/change-type.get_ja" + i18nFileExt); //$NON-NLS-1$
 
-		return templates;
-	}
+		templates.add(templateBase346e + "/Model/single-child-associations.properties.mt");
+		templates.add(templateBase346e + "/Model/properties_synchronization.mt");
 
-	@Override
-	protected List<String> getOptionalTemplates() {
-		List<String> optionalTemplates = super.getOptionalTemplates();
-		if (getGeneratorOptionValue(OPTION_ALFRESCO_PROPERTIES_SYNCHRONISATION)) {
-			optionalTemplates.add(templateBase346e + "/Model/properties_synchronization.mt");
-		}
-		return optionalTemplates;
+		return templates;
 	}
 
 	@Override
@@ -66,14 +60,13 @@ public class AlfrescoGenerator346e extends AlfrescoGenerator {
 
 		String string8 = "/alfrescoshare/changetype/change-type.get_fr" + i18nFileExt;
 		map.put(AlfrescoGenerator.templateBase34d + string8, templateBase346e + string8); //$NON-NLS-1$
-		
+
 		String string9 = "/alfrescoshare/changetype/change-type.get" + i18nFileExt;
 		map.put(AlfrescoGenerator.templateBase34d + string9, templateBase346e + string9); //$NON-NLS-1$
-		
-		String string10 = ClassAlfrescoGenerator.templateBase + "/Model/association_synchronization.mt";
+
+		String string10 = "/Model/association_synchronization.mt";
 		map.put(ClassAlfrescoGenerator.templateBase + string10, templateBase346e + string10); //$NON-NLS-1$
-		
-		
+
 		templatesSubstitution.add(map);
 		return templatesSubstitution;
 	}
