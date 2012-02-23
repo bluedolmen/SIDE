@@ -29,7 +29,7 @@
             <configurationParameter dataType="String" key="com.bluexml.side.Class.generator.alfresco.module.version" defaultValue="1.0" label="Class Module version" />
             <configurationParameter dataType="String" documentation="Set this value to the URL of the Alfresco instance on which you want to generate and deploy this new content model from the SIDE data model." key="alfresco.url" defaultValue="http://localhost:8080/alfresco" label="Alfresco URL" />
             <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.model" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.27" versionMax="1.0.27" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.customAssociationManagement" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.1.36" versionMax="1.1.36" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.customAssociationManagement" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.1.37" versionMax="1.1.37" />
             <option defaultOption="false" documentation="this api use alfresco web-services-client to contact alfresco and do CRUD actions" key="com.bluexml.side.Class.generator.alfresco.enterprise.webserviceJavaAPI" label="Java webservice API" />
             <option defaultOption="false" documentation="this api use alfresco Embedded SDK, and allow webscript to use it" key="com.bluexml.side.Class.generator.alfresco.enterprise.embeddedJavaAPI" label="Java Embedded API" />
             <option defaultOption="false" key="com.bluexml.side.Class.generator.alfresco.enterprise.extJS" label="extJS (sample)" />
