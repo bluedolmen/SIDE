@@ -444,6 +444,41 @@ public class AssociationImpl extends TitledNamedClassModelElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isTwoWay() {
+		if (isTwoWayBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.ASSOCIATION.getEOperations().get(5);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.ASSOCIATION, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				isTwoWayBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(isTwoWayBodyOCL);
+	
+		return ((Boolean) query.evaluate(this)).booleanValue();
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #isTwoWay <em>Is Two Way</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isTwoWay
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> isTwoWayBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {

@@ -189,5 +189,14 @@ public interface Association extends TitledNamedClassModelElement {
 	 * @generated
 	 */
 	EList<AssociationEnd> getAssociationEnd(AbstractClass clazz);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" required="true"
+	 *        annotation="http://www.bluexml.com/OCL body='self.firstEnd.navigable and self.secondEnd.navigable'"
+	 * @generated
+	 */
+	boolean isTwoWay();
 		
 } // Association

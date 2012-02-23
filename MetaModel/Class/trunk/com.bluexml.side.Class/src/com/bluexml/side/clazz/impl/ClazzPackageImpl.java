@@ -883,6 +883,8 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		op = addEOperation(associationEClass, this.getAssociationEnd(), "getAssociationEnd", 0, 2, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getAbstractClass(), "clazz", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		addEOperation(associationEClass, ecorePackage.getEBoolean(), "isTwoWay", 1, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAttribute_Typ(), theCommonPackage.getDataType(), "typ", "String", 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttribute_InitialValue(), ecorePackage.getEString(), "initialValue", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1238,6 +1240,12 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   new String[] {
 			 "body", "Sequence{self.firstEnd,self.secondEnd} -> select(ae | ae.linkedClass = clazz)\n",
 			 "description", "returns the association end for which the parameter class (clazz) is linked to"
+		   });		
+		addAnnotation
+		  (associationEClass.getEOperations().get(5), 
+		   source, 
+		   new String[] {
+			 "body", "self.firstEnd.navigable and self.secondEnd.navigable"
 		   });				
 		addAnnotation
 		  (attributeEClass, 
@@ -1307,7 +1315,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * @generated
 	 */
 	protected void createInternalDocAnnotations() {
-		String source = "InternalDoc";																																																																													
+		String source = "InternalDoc";																																																																														
 		addAnnotation
 		  (classCommentEClass, 
 		   source, 
@@ -1348,7 +1356,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   new String[] {
 			 "constraints", "reflexiveAssociationMustHaveRole MinAndMaxTarget MinAndMaxSource NameNull SourceNull TargetNull AtLeastOneNavigableEdge ClassCantBeReferencedbyTwoSameNameAssociation IfAggregationOrCompositionThenUnidirectionalAssociation doubleNavigable noSpecialChracters",
 			 "warning", "twoWayNavigation"
-		   });											
+		   });												
 		addAnnotation
 		  (attributeEClass, 
 		   source, 

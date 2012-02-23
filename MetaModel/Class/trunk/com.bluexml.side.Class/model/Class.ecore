@@ -309,6 +309,11 @@
       </eAnnotations>
       <eParameters name="clazz" eType="#//AbstractClass"/>
     </eOperations>
+    <eOperations name="isTwoWay" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.firstEnd.navigable and self.secondEnd.navigable"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="associationType" eType="#//AssociationType">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: an association may be of various type according to the relationship which must be established between two types of data:&#xD;&#xA;- Simple: this indicates that there are links between associated data instanes.&#xD;&#xA;- Aggregation: this indicates a stronger relation between data types which is usually a relation of inclusion; for instance, an association between a wiki and a page.&#xD;&#xA;- Composition: this indicates a composite aggregation and that if a container data type instance is suppressed, the associated contained data type instances must also be suppressed; for instance, if a wiki is suppressed, all its pages must be suppressed."/>
