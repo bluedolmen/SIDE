@@ -71,7 +71,6 @@ public class AssociationSynchronizationPolicy implements OnCreateAssociationPoli
 				removeContext(associationRef);
 			}
 		}
-
 	}
 
 	public void onDeleteAssociation(AssociationRef associationRef) {
