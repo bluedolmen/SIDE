@@ -6,8 +6,10 @@
     <files xsi:type="chain:Log" path="/com.bluexml.side.Class.generator.alfresco346E/src/com/bluexml/side/clazz/generator/alfresco346e/templates/Model/default.log.txt"/>
     <files xsi:type="chain:EmfMetamodel" path="http://www.kerblue.org/class/1.0"/>
     <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco346E/src/com/bluexml/side/clazz/generator/alfresco346e/templates/Model/single-child-associations.properties.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Class.generator.alfresco346E/src/com/bluexml/side/clazz/generator/alfresco346e/templates/Model/properties_synchronization.mt"/>
   </repository>
   <actions>
     <actions xsi:type="chain:Generate" documentation="single-child-associations.properties" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.4" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="properties_synchronization.mt" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.5" folder="//@repository/@files.1"/>
   </actions>
 </chain:Chain>

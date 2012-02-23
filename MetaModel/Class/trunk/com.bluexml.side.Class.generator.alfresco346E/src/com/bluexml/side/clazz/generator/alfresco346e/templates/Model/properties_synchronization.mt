@@ -10,18 +10,17 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 <%script type="clazz.ClassPackage" name="generator" file="<%validatedFilename%>"%>
 <propertiesSynchronization>
 <%for (getAllClasses().nSort("name")){%>
-<%if (metainfo[key == "autoUpdate"].nSize() > 0){%>
-<%generateConfigForType(current())%>
-<%for (getAllSubTypes()[metainfo[key == "autoUpdate"].nSize() == 0].filter("clazz.Clazz")){%>
-<%generateConfigForType(current(1))%>
-<%}%>
+<%if (getAllAttributes().metainfo[key == "autoUpdate"].nSize() > 0){%>
+	<%generateConfigForType()%>
 <%}%>
 <%}%>
 </propertiesSynchronization>
 
 <%script type="clazz.Clazz" name="generateConfigForType"%>
 	<type qname="<%getPrefixedNamespaceQName()%>">
-<%for (args(0).metainfo[key == "autoUpdate"]){%>
-		<property><%value%></property>
+<%for (getAllAttributes()){%>
+<%if (metainfo[key == "autoUpdate"].nSize() == 1){%>
+		<property qname="<%getPrefixedQualifiedName()%>"><%metainfo[key == "autoUpdate"].value%></property>
+<%}%>
 <%}%>
 	</type>
