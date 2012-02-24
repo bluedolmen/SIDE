@@ -34,7 +34,7 @@ public class SinglePrimaryChildAssociationPolicy implements OnCreateChildAssocia
 
 		logger.debug("[init] Initializing SinglePrimaryChildAssociationPolicy");
 		String key = "policy.enabled";
-		if (configuration.getAsBooleanValue(key)) {
+		if (configuration.hasValue(key) && configuration.getAsBooleanValue(key)) {
 
 			// Create behaviours
 			this.onCreateChildAssociation = new JavaBehaviour(this, "onCreateChildAssociation", NotificationFrequency.FIRST_EVENT);
@@ -67,8 +67,8 @@ public class SinglePrimaryChildAssociationPolicy implements OnCreateChildAssocia
 		if (!isNewNode && hasValue && typeQName.equals(ContentModel.ASSOC_CONTAINS)) {
 
 			if (!childAssocRef.isPrimary()) {
-				ChildAssociationRef primaryParent = getNodeService().getPrimaryParent(childRef);
-				
+				logger.debug("Policy move primary to the new child-association ...");
+				ChildAssociationRef primaryParent = getNodeService().getPrimaryParent(childRef);				
 
 				// to avoid constraints error (two same association between parent -> child) wee need to remove the current childAssociation before to move
 				getNodeService().removeChildAssociation(childAssocRef);
