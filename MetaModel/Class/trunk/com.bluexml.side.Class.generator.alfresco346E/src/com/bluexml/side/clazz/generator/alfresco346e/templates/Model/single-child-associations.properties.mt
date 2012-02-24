@@ -9,15 +9,18 @@ import templates.servicesTemplates.Common
 <%script type="clazz.ClassPackage" name="generator" file="<%validatedFilename%>"%>
 # configuration file for com.bluexml.side.Framework.alfresco.singlePrimaryChildAssociation module
 # the default value is false for all types not in configuration, only Class with metainfo "single-child" is included in this file
-<%if (getAllClasses()[!abstract && metainfo.key == "single-child"].nSize() > 0) {%>
+<%if (getAllClasses()[metainfo.key == "single-child"].nSize() > 0) {%>
 policy.enabled=true
 <%}else{%>
 policy.enabled=false
 <%}%>
-<%for (getAllClasses()[!abstract]){%>
-<%if (metainfo[key == "single-child"]) {%>
+<%for (getAllClasses()[metainfo[key == "single-child"].nSize() == 1].nSort("name")){%>
+<%if (!abstract){%>
+<%generateEntry%>
+<%}%>
+<%for (getAllSubTypes()[!aspects].filter("clazz.Clazz")){%>
+<%generateEntry%>
+<%}%>
+<%}%>
+<%script type="Clazz" name="generateEntry"%>
 <%getPrefixedQualifiedName().replaceFirst(":", "\\\\:")%>=true
-<%}%>
-
-<%}%>
-
