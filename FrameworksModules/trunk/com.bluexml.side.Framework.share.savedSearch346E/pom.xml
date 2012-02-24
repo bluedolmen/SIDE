@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.bluexml.side.Framework.share</groupId>
   <artifactId>savedSearch346E</artifactId>
-  <name>com.bluexml.side.Framework.share.saveSearch</name>
+  <name>com.bluexml.side.Framework.share.savedSearch</name>
   <version>1.0.2</version>
   <packaging>zip</packaging>
   <parent>

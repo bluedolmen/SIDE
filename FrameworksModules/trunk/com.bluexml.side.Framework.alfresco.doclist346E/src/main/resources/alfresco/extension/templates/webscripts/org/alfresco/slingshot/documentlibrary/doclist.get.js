@@ -47,7 +47,7 @@ function getDoclist()
 			var sortParam = args.sorting;
 			if (sortParam != null && sortParam.length != 0)
 			{
-				var sort = sortArg;
+				var sort = sortParam;
 				var asc = true;
 				var separator = sort.indexOf("|");
 				if (separator != -1)

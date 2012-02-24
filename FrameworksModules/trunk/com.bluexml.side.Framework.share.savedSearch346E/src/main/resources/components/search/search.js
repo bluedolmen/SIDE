@@ -900,36 +900,37 @@
       onSaveSearchClick: function Search_onSaveSearchClick(e, obj)
       {
     	// open dialog to let user choose a name for the saved search and the visibility public/private default private
-    	  var saveName = prompt("Give a name to your seaved Search :","");
+    	var saveName = prompt(this.msg("search.save"),"");
     	  
-    	  
-      	var queryString = this._buildSearchParams(this.searchRepository, this.searchAllSites, this.searchTerm, this.searchTag, this.searchSort);
-    	var url = Alfresco.constants.PROXY_URI + 'side/repo/saveSearch/site/' + Alfresco.constants.SITE + '?dataType='+this.options.savedSearchDataType+'&saveName=' + saveName + "&" + queryString;
-    	var responseConfig = {
-    		successMessage : this.msg("OK"),
-    	    successCallback : function(e, obj) {
-    	    	
-    	    },
-    	    failureCallback : function (e, obj) {
-		 
-    	    },
-    	    failureMessage : this.msg("Fail"),
-    	    noReloadOnAuthFailure : false
-         };
-    	  
-    	  
-         // call the remote service to persists query
-    	Alfresco.util.Ajax.jsonRequest(
-	      {
-	         method: Alfresco.util.Ajax.GET,
-	         url: url,
-	         dataObj: {},
-	         successCallback: responseConfig.successCallback,
-	         successMessage: responseConfig.successMessage,
-	         failureCallback: responseConfig.failureCallback,
-	         failureMessage: responseConfig.failureMessage,
-	         noReloadOnAuthFailure: responseConfig.noReloadOnAuthFailure || false
-	      });
+    	if (saveName != null && saveName != "") {
+	      	var queryString = this._buildSearchParams(this.searchRepository, this.searchAllSites, this.searchTerm, this.searchTag, this.searchSort);
+	    	var url = Alfresco.constants.PROXY_URI + 'side/repo/saveSearch/site/' + Alfresco.constants.SITE + '?dataType='+this.options.savedSearchDataType+'&saveName=' + saveName + "&" + queryString;
+	    	var responseConfig = {
+	    	  successMessage : this.msg("search.save.ok"),
+	    	  successCallback : function(e, obj) {
+	    	   	
+	    	  },
+	    	  failureCallback : function (e, obj) {
+			 
+	    	  },
+	    	  failureMessage : this.msg("search.save.fail"),
+	    	  noReloadOnAuthFailure : false
+	        };
+	    	  
+	    	  
+	         // call the remote service to persists query
+	    	Alfresco.util.Ajax.jsonRequest(
+			{
+			  method: Alfresco.util.Ajax.GET,
+			  url: url,
+			  dataObj: {},
+			  successCallback: responseConfig.successCallback,
+			  successMessage: responseConfig.successMessage,
+			  failureCallback: responseConfig.failureCallback,
+			  failureMessage: responseConfig.failureMessage,
+			  noReloadOnAuthFailure: responseConfig.noReloadOnAuthFailure || false
+			});
+    	}
       },
       
       /**
