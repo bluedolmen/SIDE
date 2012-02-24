@@ -49,18 +49,26 @@ public class SinglePrimaryChildAssociationPolicy implements OnCreateChildAssocia
 
 	public void onCreateChildAssociation(ChildAssociationRef childAssocRef, boolean isNewNode) {
 		NodeRef childRef = childAssocRef.getChildRef();
-		QName type = getNodeService().getType(childRef);
-		boolean hasValue = configuration.hasValue(type.toPrefixString(this.getNamespaceService()));
-		if (hasValue) {
-			// check value 
-			hasValue = configuration.getAsBooleanValue(type.toPrefixString(this.getNamespaceService()));
+		NodeRef parentRef = childAssocRef.getParentRef();
+		QName typeC = getNodeService().getType(childRef);
+		QName typeP = getNodeService().getType(parentRef);
+		boolean hasValue = false;
+		boolean hasValueC = configuration.hasValue(typeC.toPrefixString(this.getNamespaceService()));
+		boolean hasValueP = configuration.hasValue(typeP.toPrefixString(this.getNamespaceService()));
+		if (hasValueC || hasValueP) {
+			// check value
+			if (hasValueC) {
+				hasValue = configuration.getAsBooleanValue(typeC.toPrefixString(this.getNamespaceService()));
+			} else {
+				hasValue = configuration.getAsBooleanValue(typeP.toPrefixString(this.getNamespaceService()));
+			}
 		}
 		QName typeQName = childAssocRef.getTypeQName();
 		if (!isNewNode && hasValue && typeQName.equals(ContentModel.ASSOC_CONTAINS)) {
 
 			if (!childAssocRef.isPrimary()) {
 				ChildAssociationRef primaryParent = getNodeService().getPrimaryParent(childRef);
-				NodeRef parentRef = childAssocRef.getParentRef();
+				
 
 				// to avoid constraints error (two same association between parent -> child) wee need to remove the current childAssociation before to move
 				getNodeService().removeChildAssociation(childAssocRef);
