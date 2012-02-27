@@ -21,48 +21,6 @@ public class PatternPropertiesUpdater {
 		this.newValues = newValues;
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		try {
-			String tokenPropName = "cm:name";
-			String tokenProp1 = "ifremer:prop1";
-			String tokenProp2 = "ifremer:prop2";
-			String template = "${" + tokenProp2 + "} " + "'${" + tokenPropName + "}'" + " " + " toto (${" + tokenProp1 + "} name:" + "'${" + tokenPropName + "}'" + ")";
-
-			Map<String, String> oldValues = new HashMap<String, String>();
-			Map<String, String> newValues = new HashMap<String, String>();
-
-			PatternPropertiesUpdater test = new PatternPropertiesUpdater(oldValues, newValues);
-			oldValues.put(tokenPropName, "");
-			oldValues.put(tokenProp1, "");
-			oldValues.put(tokenProp2, "");
-
-			newValues.put(tokenPropName, "Name U J");
-			newValues.put(tokenProp1, "Prop1");
-			newValues.put(tokenProp2, "Prop2");
-
-			String newValue = test.getNewValue(tokenPropName, template);
-
-			System.out.println(" newValue pattern :" + newValue);
-			oldValues.clear();
-			oldValues.put(tokenPropName, newValue);
-			oldValues.put(tokenProp1, "Prop1");
-			oldValues.put(tokenProp2, "Prop2");
-
-			newValues.clear();
-			newValues.put(tokenPropName, newValue);
-			newValues.put(tokenProp1, "Prop1 T NV");
-			newValues.put(tokenProp2, "Prop2_NV");
-
-			newValue = test.getNewValue(tokenPropName, template);
-			System.out.println("newValue 2 pattern :" + newValue);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	public String getNewValue(String currentKey, String template) {
 		logger.debug("[getNewValue] currentProperty :" + currentKey);
 		logger.debug("[getNewValue] template :" + template);

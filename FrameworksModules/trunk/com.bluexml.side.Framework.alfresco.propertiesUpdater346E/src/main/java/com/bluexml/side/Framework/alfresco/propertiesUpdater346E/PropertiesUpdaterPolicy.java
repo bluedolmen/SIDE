@@ -22,6 +22,7 @@ import org.alfresco.service.cmr.dictionary.DictionaryService;
 import org.alfresco.service.cmr.repository.ChildAssociationRef;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.NodeService;
+import org.alfresco.service.cmr.security.AuthenticationService;
 import org.alfresco.service.namespace.NamespaceService;
 import org.alfresco.service.namespace.QName;
 import org.apache.commons.logging.Log;
@@ -30,6 +31,8 @@ import org.apache.commons.logging.LogFactory;
 import com.bluexml.side.Framework.alfresco.propertiesUpdater346E.ConfigurationReader.PropertyPattern;
 
 public class PropertiesUpdaterPolicy implements OnCreateNodePolicy, OnUpdatePropertiesPolicy {
+	private static final NotificationFrequency EVENT_FREQUENCY = NotificationFrequency.TRANSACTION_COMMIT;
+
 	private static Log logger = LogFactory.getLog(PropertiesUpdaterPolicy.class);
 
 	protected ConfigurationReader nameUpdaterConfig;
@@ -39,7 +42,7 @@ public class PropertiesUpdaterPolicy implements OnCreateNodePolicy, OnUpdateProp
 	private Behaviour onCreateNode;
 	private Behaviour onUpdateProperties;
 
-	protected String alfrescoFileNameToFix = "([\\\"\\*\\\\\\>\\<\\?\\/\\:\\|]+)|([\\.]?.*[\\.]+$)|([ ]+$)";
+	public static String alfrescoFileNameToFix = "([\\\"\\*\\\\\\>\\<\\?\\/\\:\\|]+)|([\\.]+$)|([ ]+$)";
 
 	protected NamespaceService namespaceService;
 
@@ -49,6 +52,16 @@ public class PropertiesUpdaterPolicy implements OnCreateNodePolicy, OnUpdateProp
 
 	public void setNamespaceService(NamespaceService namespaceService) {
 		this.namespaceService = namespaceService;
+	}
+
+	protected AuthenticationService authenticationService;
+
+	public AuthenticationService getAuthenticationService() {
+		return authenticationService;
+	}
+
+	public void setAuthenticationService(AuthenticationService authenticationService) {
+		this.authenticationService = authenticationService;
 	}
 
 	protected NodeService nodeService;
@@ -98,8 +111,8 @@ public class PropertiesUpdaterPolicy implements OnCreateNodePolicy, OnUpdateProp
 		logger.debug("[init] Initializing NameUpdaterPolicy");
 		if (nameUpdaterConfig.getDictionary().size() > 0) {
 			// Create behaviours using NotificationFrequency.TRANSACTION_COMMIT cause to have nodeRef that can't be founded by nodeService
-			onCreateNode = new JavaBehaviour(this, "onCreateNode", NotificationFrequency.FIRST_EVENT);
-			onUpdateProperties = new JavaBehaviour(this, "onUpdateProperties", NotificationFrequency.FIRST_EVENT);
+			onCreateNode = new JavaBehaviour(this, "onCreateNode", EVENT_FREQUENCY);
+			onUpdateProperties = new JavaBehaviour(this, "onUpdateProperties", EVENT_FREQUENCY);
 
 			// Bind behaviours to node policies
 			policyComponent.bindClassBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onCreateNode"), this, onCreateNode);
@@ -108,57 +121,68 @@ public class PropertiesUpdaterPolicy implements OnCreateNodePolicy, OnUpdateProp
 			// no configuration so disable policy
 			logger.debug("Policy disabled ! (no configuration found)");
 		}
+
 	}
 
 	public void onUpdateProperties(NodeRef nodeRef, Map<QName, Serializable> before, Map<QName, Serializable> after) {
-		QName type = getNodeService().getType(nodeRef);
 
-		// filter and prepare propertyValues map only String values are managed
-		Map<String, String> oldValues = new HashMap<String, String>();
-		Map<String, String> newValues = new HashMap<String, String>();
-		for (Map.Entry<QName, Serializable> beforeEntry : before.entrySet()) {
-			String prefixString = beforeEntry.getKey().toPrefixString(getNamespaceService());
-			String value = beforeEntry.getValue() != null ? beforeEntry.getValue().toString() : "";
-			oldValues.put(prefixString, value);
-		}
-		for (Map.Entry<QName, Serializable> afterEntry : after.entrySet()) {
-			QName key = afterEntry.getKey();
-			String prefixString = key.toPrefixString(getNamespaceService());
-			String value = afterEntry.getValue() != null ? afterEntry.getValue().toString() : "";
-			newValues.put(prefixString, value);
-		}
+		String currentUserName = authenticationService.getCurrentUserName();
+		logger.debug("Current User :" + currentUserName);
+		if (currentUserName != null && !currentUserName.equals("null")) {
 
-		PatternPropertiesUpdater updater = new PatternPropertiesUpdater(oldValues, newValues);
-		if (hasNamePattern(type)) {
-			boolean changes = false;
-			List<Modification> modifications = getModification(type, updater);
-			for (Modification modification : modifications) {
-				logger.debug("current Modification :" + modification);
-				QName propName = modification.getPropertyToUpdate();
+			QName type = getNodeService().getType(nodeRef);
 
-				Serializable oldValue = before.get(propName);
-				logger.debug("Old value :" + oldValue);
-				logger.debug("configuration exists for " + nodeRef + " type :" + type);
-
-				String newValue = (String) modification.getNewValue();
-
-				logger.debug("new computed Value :" + newValue);
-
-				// validate the newName against constraints			
-				String validateNewValue = validateNewValue(newValue, propName);
-
-				if (!newValue.equals(oldValue)) {
-					after.put(propName, validateNewValue);
-					changes = true;
+			if (hasNamePattern(type)) {
+				// filter and prepare propertyValues map only String values are managed
+				Map<String, String> oldValues = new HashMap<String, String>();
+				Map<String, String> newValues = new HashMap<String, String>();
+				for (Map.Entry<QName, Serializable> beforeEntry : before.entrySet()) {
+					String prefixString = beforeEntry.getKey().toPrefixString(getNamespaceService());
+					String value = beforeEntry.getValue() != null ? beforeEntry.getValue().toString() : "";
+					oldValues.put(prefixString, value);
 				}
-				logger.debug("New Value :" + after.get(propName));
+				for (Map.Entry<QName, Serializable> afterEntry : after.entrySet()) {
+					QName key = afterEntry.getKey();
+					String prefixString = key.toPrefixString(getNamespaceService());
+					String value = afterEntry.getValue() != null ? afterEntry.getValue().toString() : "";
+					newValues.put(prefixString, value);
+				}
+
+				PatternPropertiesUpdater updater = new PatternPropertiesUpdater(oldValues, newValues);
+
+				boolean changes = false;
+				List<Modification> modifications = getModification(type, updater);
+				for (Modification modification : modifications) {
+					logger.debug("current Modification :" + modification);
+					QName propName = modification.getPropertyToUpdate();
+
+					Serializable oldValue = before.get(propName);
+					logger.debug("Old value :" + oldValue);
+					logger.debug("configuration exists for " + nodeRef + " type :" + type);
+
+					String newValue = (String) modification.getNewValue();
+
+					logger.debug("new computed Value :" + newValue);
+
+					// validate the newName against constraints			
+					String validateNewValue = validateNewValue(newValue, propName);
+
+					if (!newValue.equals(oldValue)) {
+						after.put(propName, validateNewValue);
+						changes = true;
+					}
+					logger.debug("New Value :" + after.get(propName));
+				}
+				if (changes) {
+					logger.debug("some changes exists apply new properties values ...");
+					getNodeService().setProperties(nodeRef, after);
+				}
+			} else {
+				logger.trace("no configuration for node :" + nodeRef);
 			}
-			if (changes) {
-				logger.debug("some changes exists apply new properties values ...");
-				getNodeService().setProperties(nodeRef, after);
-			}
+
 		} else {
-			logger.trace("no configuration for node :" + nodeRef);
+			logger.debug("This transaction is run without using any user context ...");
 		}
 	}
 
@@ -215,7 +239,9 @@ public class PropertiesUpdaterPolicy implements OnCreateNodePolicy, OnUpdateProp
 			try {
 				constraintDefinition.getConstraint().evaluate(newName);
 			} catch (ConstraintException e) {
+				logger.debug("new value is not valide try to Fix > " + newName);
 				newName = fixNewValue(newName, constraintDefinition);
+				logger.debug("Fixed value :" + newName);
 			}
 		}
 		return newName;
@@ -230,7 +256,9 @@ public class PropertiesUpdaterPolicy implements OnCreateNodePolicy, OnUpdateProp
 	 */
 	private String fixNewValue(String newName, ConstraintDefinition constraintDefinition) {
 		QName createQName = QName.createQName(NamespaceService.CONTENT_MODEL_1_0_URI, "filename");
-		if (constraintDefinition.getName().toPrefixString().equals(createQName)) {
+		String shortName = constraintDefinition.getConstraint().getShortName();
+		String prefixString = createQName.toPrefixString(getNamespaceService());
+		if (shortName.equals(prefixString)) {
 			return newName.replaceAll(alfrescoFileNameToFix, "_");
 		}
 		return null;
@@ -301,6 +329,7 @@ public class PropertiesUpdaterPolicy implements OnCreateNodePolicy, OnUpdateProp
 	}
 
 	/**
+	 * TODO
 	 * Need to Sort and Order Rules if rules have dependencies to other, need to
 	 * detect loops too
 	 * see http://en.wikipedia.org/wiki/Topological_sorting for algorithm
@@ -346,4 +375,5 @@ public class PropertiesUpdaterPolicy implements OnCreateNodePolicy, OnUpdateProp
 
 		return cycle;
 	}
+
 }
