@@ -185,7 +185,7 @@ public class ClassDiagramUtils {
 				}
 			}
 		} else {
-			EList<AssociationEnd> associationEnd = ass.getAssociationEnd(srcClazz);
+			EList<AssociationEnd> associationEnd = ass.getAssociationEnd(sourceClass.get(0));
 			source = associationEnd.get(0);
 		}
 
