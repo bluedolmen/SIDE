@@ -25,8 +25,8 @@ function main() {
 		
 		url = url.replace(/\{site\}/, encodeURIComponent(site));
 		url = url.replace(/\{dataType\}/, encodeURIComponent(dataType));
-		// dataTemplate is already escaped by generator since Alfresco component.properties are interpreted ( '\{.*\}' string are replaced ) 
-		url = url.replace(/\{dataTemplate\}/, dataTemplate);
+		// dataTemplate is already escaped by generator since Alfresco component.properties are interpreted ( '\{.*\}' string are replaced ) 		
+		url = url.replace(/\{dataTemplate\}/, encodeURIComponent(decodeURIComponent(dataTemplate)));
 		url = url.replace(/\{query\}/, encodeURIComponent(query));
 		url = url.replace(/\{filterType\}/, encodeURIComponent(filterType));
 		
