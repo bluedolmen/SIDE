@@ -250,7 +250,7 @@ if (console == undefined) {
 				query.type = this.options.nodeTypeDocument;
 			}
 			query.fields = {};
-			query.fields[this.options.assoTypeDocument.replace(":", "\\:")+"search"] = {
+			query.fields[this.options.assoTypeDocument+"search"] = {
 				type : "String",
 				operator : "is",
 				values : [ node.data.nodeRef ]
