@@ -142,11 +142,11 @@
 		<!-- make final tomcat patch -->
 		<zip destfile="${tomcatPatch}" comment="Build date: ${NOW_FR} \nunzip in tomcat home directory, delete alfresco and shared explosed webapps">
 			<zipfileset dir="${configPath}">
-				<exclude name="${tomcat.webapps.target}/**" />
+				<exclude name="webapps/**" />
 			</zipfileset>
 			<zipfileset dir="${commonConfigPath}">
 				<exclude name="**" if="shared_configConf.disable" />
-				<exclude name="webapps" />
+				<exclude name="webapps/**" />
 			</zipfileset>
 			<zipfileset dir="${buildPath}" prefix="${tomcat.webapps.target}">
 				<include name="*.war" />
@@ -165,7 +165,7 @@
 	<!-- ================================= 
           target: buildAll              
          ================================= -->
-	<target name="buildAll" depends="clean, build, copyForSideDeployer" description="project to build zip contening all needs">
+	<target name="buildAll" depends="clean, build" description="project to build zip contening all needs">
 		<antcall target="side-generate" />
 	</target>
 
@@ -226,65 +226,72 @@
           target: patchWars              
          ================================= -->
 	<target name="patchWars" depends="buildAll">
-		<!-- Beware deployer must to patch war file not exploded directory -->
+		<!-- Beware deployer must to patch war file not exploded directory of set isDirectDeployer property -->
 		<antcall target="side-deploy" />
+		<antcall target="makeWarsFromExplodedWar" />
 		<eclipse.refreshLocal resource="${ant.project.name}" depth="infinite" />
 	</target>
 
 	<!-- - - - - - - - - - - - - - - - - - 
-          target: update-alfresco.war                      
+          target: makeWars                      
          - - - - - - - - - - - - - - - - - -->
-	<target name="update-alfresco.war" if="alfresco-war-exists">
-		<zip destfile="${buildPath}/alfresco.war" update="true" whenempty="skip">
-			<zipfileset dir="${configPath}/${tomcat.webapps.target}/alfresco">
-				<include name="**" />
-			</zipfileset>
-			<zipfileset dir="${commonConfigPath}/webapps/alfresco" >
+	<target name="makeWarsFromExplodedWar" if="isDirectDeployer">
+		<zip destfile="${tomcat.home}/webapps/alfresco.war" update="false" whenempty="skip">
+			<zipfileset dir="${tomcat.home}/webapps/alfresco">
 				<include name="**" />
 			</zipfileset>
 		</zip>
+		<zip destfile="${tomcat.home}/webapps/share.war" update="false" whenempty="skip">
+			<zipfileset dir="${tomcat.home}/webapps/share">
+				<include name="**" />
+			</zipfileset>
+		</zip>
+	</target>
+	
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: update-alfresco.war                      
+           Note: as zip command take into account modification date for updating its content (if newer, update; if older does not update),
+          a copy is made of the config to have a newer modification date and then war is updated through zip command.                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="update-alfresco.war" if="alfresco-war-exists">
+		<echo message="Process Alfresco war with config" level="info" />
+		<delete file="${buildPath}/config" failonerror="false" />
+		<copy todir="${buildPath}/config" failonerror="true">
+			<fileset dir="${commonConfigPath}/webapps/alfresco">
+				<include name="**" />
+			</fileset>
+			<fileset dir="${configPath}/webapps/alfresco">
+				<include name="**" />
+			</fileset>
+		</copy>
+		<zip destfile="${buildPath}/alfresco.war" update="true" whenempty="skip">
+			<zipfileset dir="${buildPath}/config">
+				<include name="**" />
+			</zipfileset>
+		</zip>
+		<delete file="${buildPath}/config" failonerror="false" />
 	</target>
 
 	<!-- - - - - - - - - - - - - - - - - - 
           target: update-share.war                      
          - - - - - - - - - - - - - - - - - -->
 	<target name="update-share.war" if="share-war-exists">
+		<echo message="Process Share war with config" level="info" />
+		<delete file="${buildPath}/config" failonerror="false" />
+		<copy todir="${buildPath}/config" failonerror="true">
+			<fileset dir="${commonConfigPath}/webapps/share">
+				<include name="**" />
+			</fileset>
+			<fileset dir="${configPath}/webapps/share">
+				<include name="**" />
+			</fileset>
+		</copy>
 		<zip destfile="${buildPath}/share.war" update="true" whenempty="skip">
-			<zipfileset dir="${configPath}/${tomcat.webapps.target}/share">
-				<include name="**" />
-			</zipfileset>
-			<zipfileset dir="${commonConfigPath}/webapps/share">
+			<zipfileset dir="${buildPath}/config">
 				<include name="**" />
 			</zipfileset>
 		</zip>
-	</target>
-
-	<!-- - - - - - - - - - - - - - - - - - 
-          target: update-xforms.war                      
-         - - - - - - - - - - - - - - - - - -->
-	<target name="update-xforms.war" if="xforms-war-exists">
-		<zip destfile="${buildPath}/xforms.war" update="true" whenempty="skip">
-			<zipfileset dir="${configPath}/${tomcat.webapps.target}/xforms">
-				<include name="**" />
-			</zipfileset>
-			<zipfileset dir="${commonConfigPath}/webapps/xforms">
-				<include name="**" />
-			</zipfileset>
-		</zip>
-	</target>
-
-	<!-- - - - - - - - - - - - - - - - - - 
-          target: update-side-demo.war                      
-         - - - - - - - - - - - - - - - - - -->
-	<target name="update-side-demo.war" if="side-demo-war-exists">
-		<zip destfile="${buildPath}/side-demo.war" update="true" whenempty="skip">
-			<zipfileset dir="${configPath}/${tomcat.webapps.target}/side-demo">
-				<include name="**" />
-			</zipfileset>
-			<zipfileset dir="${commonConfigPath}/webapps/side-demo">
-				<include name="**" />
-			</zipfileset>
-		</zip>
+		<delete file="${buildPath}/config" failonerror="false" />
 	</target>
 
 	<!-- - - - - - - - - - - - - - - - - - 
