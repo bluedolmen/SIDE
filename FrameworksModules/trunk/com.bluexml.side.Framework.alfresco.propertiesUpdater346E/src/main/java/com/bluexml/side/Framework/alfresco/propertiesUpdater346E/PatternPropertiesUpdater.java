@@ -42,7 +42,7 @@ public class PatternPropertiesUpdater {
 		while (matcher.find()) {
 			String key = matcher.group(1);
 
-			String newPropertyValue = newValues.get(key) != null ? newValues.get(key) : "";
+			String newPropertyValue = getNewValue(key);
 			logger.debug("** replace " + key + " by :" + newPropertyValue);
 
 			newValue = newValue.replaceAll(Pattern.quote(matcher.group()), newPropertyValue);
@@ -52,11 +52,19 @@ public class PatternPropertiesUpdater {
 		return newValue;
 	}
 
+	protected String getNewValue(String key) {
+		return newValues.get(key) != null ? newValues.get(key) : "";
+	}
+
+	protected String getOldValue(String key) {
+		return oldValues.get(key) != null ? oldValues.get(key) : "";
+	}
+
 	protected void extractCurrentPropertyValue(String currentKey, String template, Pattern p, String expressionProperty) {
-		String oldPropertyValue = oldValues.get(currentKey);
+		String oldPropertyValue = getOldValue(currentKey);
 		logger.debug("[getNewValue] oldProperty Value :" + oldPropertyValue);
 
-		String currentPropertyValue = newValues.get(currentKey);
+		String currentPropertyValue = getNewValue(currentKey);
 		logger.debug("[getNewValue] Property Value :" + currentPropertyValue);
 
 		if (currentPropertyValue != null && currentPropertyValue.equals(oldPropertyValue)) {
@@ -71,7 +79,7 @@ public class PatternPropertiesUpdater {
 			while (matcher.find()) {
 				String key = matcher.group(1);
 				if (!key.equals(currentKey)) {
-					String oldValue = oldValues.get(key);
+					String oldValue = getOldValue(key);
 					newValue = newValue.replaceAll(Pattern.quote(matcher.group()), oldValue);
 				}
 			}
