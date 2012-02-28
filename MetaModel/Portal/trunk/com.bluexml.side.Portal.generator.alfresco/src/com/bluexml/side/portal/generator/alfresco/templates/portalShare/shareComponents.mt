@@ -7,7 +7,7 @@ import com.bluexml.side.portal.generator.alfresco.templates.services.ClazzServic
 <%-- Navigation component templates creation --%>
 <%script type="HavePortlet" name="createNavigationComponentTemplate"%>
 <%if (associationPortlet.isPortletInternal == null && !(associationPortlet.metainfo[key == "rawContent"].nSize() > 0 || associationPortlet.metainfo[key == "rawContentFilePath"].nSize() > 0)){%>
-<%getProperty("alf.share.paths.web-ext.components")%><%computeScope()%>.<%associationPortlet.name%><%if (computeScope() == "template"){%>.<%associationPage.ID.toLowerCase()%><%}%>.xml
+<%getProperty("alf.share.paths.web-ext.components")%><%computeScope()%>.<%associationPortlet.name%>.<%associationPage.ID.toLowerCase()%>.xml
 <%}%>
 <%script type="HavePortlet" name="alfrescoGenerator" file="<%createNavigationComponentTemplate%>" post="trim()"%>
 <?xml version='1.0' encoding='UTF-8'?>
