@@ -118,7 +118,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 
 
 <%script type="FormContainer" name="generate_visibilityForClass"%>
-<%for (getAllKindFields()){%>
+<%for (getAllKindFields()[ref.filter("clazz.Attribute") || ref.filter("clazz.Association")]){%>
 <show id="<%getFieldId()%>" force="true" />
 <%}%>
 
