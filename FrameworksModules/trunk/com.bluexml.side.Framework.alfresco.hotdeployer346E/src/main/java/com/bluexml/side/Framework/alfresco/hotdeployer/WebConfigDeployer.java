@@ -48,7 +48,9 @@ public class WebConfigDeployer extends AbstractWebScript {
 		res.setContentEncoding(contentEncoding);
 		OutputStream outputStream = res.getOutputStream();
 		byte[] bytes = response.getBytes("UTF-8");
-		logger.debug("result :" + response);
+		if (logger.isDebugEnabled()) {
+			logger.debug("result :" + response);
+		}
 		outputStream.write(bytes);
 	}
 

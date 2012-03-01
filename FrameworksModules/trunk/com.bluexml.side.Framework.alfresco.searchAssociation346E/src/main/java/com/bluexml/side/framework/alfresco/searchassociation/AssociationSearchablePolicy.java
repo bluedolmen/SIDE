@@ -27,7 +27,7 @@ public class AssociationSearchablePolicy implements OnCreateAssociationPolicy, O
 
 	public void init() {
 
-		logger.debug("[init] Initializing association synchronisation");
+		logger.info("[init] Initializing association synchronisation");
 
 		// Create behaviours
 		this.onCreateAssociation = new JavaBehaviour(this, "onCreateAssociation", NotificationFrequency.TRANSACTION_COMMIT);
@@ -78,10 +78,8 @@ public class AssociationSearchablePolicy implements OnCreateAssociationPolicy, O
 					nodeService.setProperty(sourceRef, hiddenSearchablePropertyQName, l);
 				}
 			}
-		} else {
-			if (logger.isDebugEnabled()) {
-				logger.debug(" property " + hiddenSearchablePropertyQName + " not found in dictionary ...");
-			}
+		} else if (logger.isDebugEnabled()) {
+			logger.debug(" property " + hiddenSearchablePropertyQName + " not found in dictionary ...");
 		}
 
 	}

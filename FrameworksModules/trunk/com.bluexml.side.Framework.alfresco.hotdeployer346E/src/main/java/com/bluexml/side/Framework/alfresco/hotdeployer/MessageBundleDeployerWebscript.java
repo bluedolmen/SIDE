@@ -37,16 +37,18 @@ public class MessageBundleDeployerWebscript extends AbstractWebScript {
 	public void execute(WebScriptRequest req, WebScriptResponse res) throws IOException {
 		String bundleBasePath = req.getParameter("bundleBasePath");
 
-		List<String> messageBundles = repoAdminService.getMessageBundles();
-		for (String string : messageBundles) {
-			System.out.println("MessageBundleDeployerWebscript.execute() bundle :" + string);
+		if (logger.isDebugEnabled()) {
+			List<String> messageBundles = repoAdminService.getMessageBundles();
+			for (String string : messageBundles) {
+				logger.debug("MessageBundleDeployerWebscript.execute() bundle :" + string);
+			}
+
+			Set<String> registeredBundles = messageService.getRegisteredBundles();
+			for (String string : registeredBundles) {
+				logger.debug("MessageBundleDeployerWebscript.execute() registered :" + string);
+			}
 		}
 
-		Set<String> registeredBundles = messageService.getRegisteredBundles();
-		for (String string : registeredBundles) {
-			System.out.println("MessageBundleDeployerWebscript.execute() registered :"+string);
-		}
-		
 		String bundleBaseName = repoAdminService.deployMessageBundle(bundleBasePath);
 		String result = bundleBaseName;
 
@@ -59,7 +61,9 @@ public class MessageBundleDeployerWebscript extends AbstractWebScript {
 		res.setContentEncoding(contentEncoding);
 		OutputStream outputStream = res.getOutputStream();
 		byte[] bytes = response.getBytes("UTF-8");
-		logger.debug("result :" + response);
+		if (logger.isDebugEnabled()) {
+			logger.debug("result :" + response);
+		}
 		outputStream.write(bytes);
 	}
 

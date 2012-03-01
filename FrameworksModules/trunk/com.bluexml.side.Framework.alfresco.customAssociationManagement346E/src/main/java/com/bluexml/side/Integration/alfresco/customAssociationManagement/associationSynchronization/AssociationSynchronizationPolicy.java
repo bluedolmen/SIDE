@@ -36,7 +36,7 @@ public class AssociationSynchronizationPolicy implements OnCreateAssociationPoli
 
 	public void init() {
 
-		logger.debug("[init] Initializing association synchronisation");
+		logger.info("[init] Initializing association synchronisation");
 		if (((IConfigurationFile) resolver).getDictionary().size() > 0) {
 			// Create behaviours
 			this.onCreateAssociation = new JavaBehaviour(this, "onCreateAssociation", NotificationFrequency.FIRST_EVENT);
@@ -45,6 +45,8 @@ public class AssociationSynchronizationPolicy implements OnCreateAssociationPoli
 			// Bind behaviours to node policies
 			policyComponent.bindAssociationBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onCreateAssociation"), this, this.onCreateAssociation);
 			policyComponent.bindAssociationBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onDeleteAssociation"), this, this.onDeleteAssociation);
+		} else {
+			logger.info("[init] Policy disabled, no configuration founded");
 		}
 	}
 

@@ -22,11 +22,12 @@ public class PatternPropertiesUpdater {
 	}
 
 	public String getNewValue(String currentKey, String template) {
-		logger.debug("[getNewValue] currentProperty :" + currentKey);
-		logger.debug("[getNewValue] template :" + template);
-		logger.debug("[getNewValue] oldValues:" + oldValues);
-		logger.debug("[getNewValue] newValues:" + newValues);
-
+		if (logger.isDebugEnabled()) {
+			logger.debug("[getNewValue] currentProperty :" + currentKey);
+			logger.debug("[getNewValue] template :" + template);
+			logger.debug("[getNewValue] oldValues:" + oldValues);
+			logger.debug("[getNewValue] newValues:" + newValues);
+		}
 		Pattern p = Pattern.compile(EXPRESSION_PATTERN);
 
 		String expressionProperty = getExpressionProperty(currentKey);
@@ -43,12 +44,15 @@ public class PatternPropertiesUpdater {
 			String key = matcher.group(1);
 
 			String newPropertyValue = getNewValue(key);
-			logger.debug("** replace " + key + " by :" + newPropertyValue);
-
+			if (logger.isDebugEnabled()) {
+				logger.debug("** replace " + key + " by :" + newPropertyValue);
+			}
 			newValue = newValue.replaceAll(Pattern.quote(matcher.group()), newPropertyValue);
 
 		}
-		logger.debug("* Computed new value :" + newValue);
+		if (logger.isDebugEnabled()) {
+			logger.debug("* Computed new value :" + newValue);
+		}
 		return newValue;
 	}
 
@@ -62,13 +66,17 @@ public class PatternPropertiesUpdater {
 
 	protected void extractCurrentPropertyValue(String currentKey, String template, Pattern p, String expressionProperty) {
 		String oldPropertyValue = getOldValue(currentKey);
-		logger.debug("[getNewValue] oldProperty Value :" + oldPropertyValue);
-
+		if (logger.isDebugEnabled()) {
+			logger.debug("[getNewValue] oldProperty Value :" + oldPropertyValue);
+		}
 		String currentPropertyValue = getNewValue(currentKey);
-		logger.debug("[getNewValue] Property Value :" + currentPropertyValue);
-
+		if (logger.isDebugEnabled()) {
+			logger.debug("[getNewValue] Property Value :" + currentPropertyValue);
+		}
 		if (currentPropertyValue != null && currentPropertyValue.equals(oldPropertyValue)) {
-			logger.debug("[getNewValue] currentValue not changed, need to compute the real propertyValue");
+			if (logger.isDebugEnabled()) {
+				logger.debug("[getNewValue] currentValue not changed, need to compute the real propertyValue");
+			}
 			Matcher matcher = p.matcher(template);
 			// need to extract from name value the matching value from template
 			// before compute new value
@@ -94,16 +102,20 @@ public class PatternPropertiesUpdater {
 					currentValueMAtchedRegExp += "(.*)";
 				}
 			}
-
-			logger.debug("*** matched old currentKeyvalueRegExp :" + currentValueMAtchedRegExp);
-
+			if (logger.isDebugEnabled()) {
+				logger.debug("*** matched old currentKeyvalueRegExp :" + currentValueMAtchedRegExp);
+			}
 			Pattern compile = Pattern.compile(currentValueMAtchedRegExp);
-			logger.debug("*** oldValue to match, search currentKeyvalue :" + oldPropertyValue);
+			if (logger.isDebugEnabled()) {
+				logger.debug("*** oldValue to match, search currentKeyvalue :" + oldPropertyValue);
+			}
 			Matcher matcher2 = compile.matcher(oldPropertyValue);
 
 			matcher2.find();
 			String currentValueMAtched = matcher2.group(1);
-			logger.debug("*** identified value (pattern matching) :" + currentValueMAtched);
+			if (logger.isDebugEnabled()) {
+				logger.debug("*** identified value (pattern matching) :" + currentValueMAtched);
+			}
 			// change the newValue to be able to apply template
 			newValues.put(currentKey, currentValueMAtched);
 		}

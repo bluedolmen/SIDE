@@ -108,7 +108,7 @@ public class PropertiesUpdaterPolicy implements OnCreateNodePolicy, OnUpdateProp
 	}
 
 	public void init() {
-		logger.debug("[init] Initializing NameUpdaterPolicy");
+		logger.info("[init] Initializing NameUpdaterPolicy");
 		if (nameUpdaterConfig.getDictionary().size() > 0) {
 			// Create behaviours using NotificationFrequency.TRANSACTION_COMMIT cause to have nodeRef that can't be founded by nodeService
 			onCreateNode = new JavaBehaviour(this, "onCreateNode", EVENT_FREQUENCY);
@@ -119,7 +119,7 @@ public class PropertiesUpdaterPolicy implements OnCreateNodePolicy, OnUpdateProp
 			policyComponent.bindClassBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onUpdateProperties"), this, onUpdateProperties);
 		} else {
 			// no configuration so disable policy
-			logger.debug("Policy disabled ! (no configuration found)");
+			logger.info("Policy disabled ! (no configuration found)");
 		}
 
 	}
@@ -127,7 +127,9 @@ public class PropertiesUpdaterPolicy implements OnCreateNodePolicy, OnUpdateProp
 	public void onUpdateProperties(NodeRef nodeRef, Map<QName, Serializable> before, Map<QName, Serializable> after) {
 
 		String currentUserName = authenticationService.getCurrentUserName();
-		logger.debug("Current User :" + currentUserName);
+		if (logger.isDebugEnabled()) {
+			logger.debug("Current User :" + currentUserName);
+		}
 		if (currentUserName != null && !currentUserName.equals("null")) {
 
 			QName type = getNodeService().getType(nodeRef);
@@ -153,17 +155,20 @@ public class PropertiesUpdaterPolicy implements OnCreateNodePolicy, OnUpdateProp
 				boolean changes = false;
 				List<Modification> modifications = getModification(type, updater);
 				for (Modification modification : modifications) {
-					logger.debug("current Modification :" + modification);
+					if (logger.isDebugEnabled()) {
+						logger.debug("current Modification :" + modification);
+					}
 					QName propName = modification.getPropertyToUpdate();
 
 					Serializable oldValue = before.get(propName);
-					logger.debug("Old value :" + oldValue);
-					logger.debug("configuration exists for " + nodeRef + " type :" + type);
-
+					if (logger.isDebugEnabled()) {
+						logger.debug("Old value :" + oldValue);
+						logger.debug("configuration exists for " + nodeRef + " type :" + type);
+					}
 					String newValue = (String) modification.getNewValue();
-
-					logger.debug("new computed Value :" + newValue);
-
+					if (logger.isDebugEnabled()) {
+						logger.debug("new computed Value :" + newValue);
+					}
 					// validate the newName against constraints			
 					String validateNewValue = validateNewValue(newValue, propName);
 
@@ -171,18 +176,23 @@ public class PropertiesUpdaterPolicy implements OnCreateNodePolicy, OnUpdateProp
 						after.put(propName, validateNewValue);
 						changes = true;
 					}
-					logger.debug("New Value :" + after.get(propName));
+					if (logger.isDebugEnabled()) {
+						logger.debug("New Value :" + after.get(propName));
+					}
 				}
 				if (changes) {
-					logger.debug("some changes exists apply new properties values ...");
+					if (logger.isDebugEnabled()) {
+						logger.debug("some changes exists apply new properties values ...");
+					}
 					getNodeService().setProperties(nodeRef, after);
 				}
-			} else {
-				logger.trace("no configuration for node :" + nodeRef);
+			} else if (logger.isDebugEnabled()) {
+				logger.debug("no configuration for node :" + nodeRef);
+
 			}
 
-		} else {
-			logger.debug("This transaction is run without using any user context ...");
+		} else if (logger.isTraceEnabled()) {
+			logger.trace("This transaction is run without using any user context ...");
 		}
 	}
 

@@ -34,9 +34,9 @@ public class WorkflowHotDeployWebScript extends AbstractWebScript {
 
 		// get process definition file
 		String parameter = req.getParameter("filepath");
-
-		logger.debug("workflowhot deployer called for :" + parameter);
-
+		if (logger.isDebugEnabled()) {
+			logger.debug("workflowhot deployer called for :" + parameter);
+		}
 		File file = null;
 		try {
 			file = new File(new URI(parameter));
@@ -49,7 +49,7 @@ public class WorkflowHotDeployWebScript extends AbstractWebScript {
 
 		String result = "";
 		String workflowName = null;
-		// need to open the XMLDocument to read process name
+		//TODO need to open the XMLDocument to read process name
 
 		if (workflowName != null) {
 			// undeploy all instance and workflow definition for the given workflow name
@@ -70,7 +70,9 @@ public class WorkflowHotDeployWebScript extends AbstractWebScript {
 		res.setContentEncoding(contentEncoding);
 		OutputStream outputStream = res.getOutputStream();
 		byte[] bytes = response.getBytes("UTF-8");
-		logger.debug("result :" + response);
+		if (logger.isDebugEnabled()) {
+			logger.debug("result :" + response);
+		}
 		outputStream.write(bytes);
 		outputStream.close();
 		fis.close();

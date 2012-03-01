@@ -42,7 +42,7 @@ public class LuceneUnicityCheckerImpl extends AbstractUnicityChecker {
 						filterClause += buildAttributeClause(colQname, colomnValue);
 						clauseNb++;
 					}
-				} else {
+				} else if (logger.isDebugEnabled()) {
 					logger.debug("Property not found:" + colQname);
 				}
 			}

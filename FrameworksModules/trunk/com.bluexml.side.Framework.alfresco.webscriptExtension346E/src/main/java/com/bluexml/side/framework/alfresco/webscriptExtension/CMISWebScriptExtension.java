@@ -127,9 +127,9 @@ public class CMISWebScriptExtension extends BaseScopableProcessorExtension {
 		String clauseFolder = "IN_FOLDER('" + folder + "')";
 		String clauses = " WHERE " + clauseFolder;
 		String statement = cmisQuerySelect + tables + clauses;
-		
-		logger.debug("queryChildren :" + statement);
-		
+		if (logger.isDebugEnabled()) {
+			logger.debug("queryChildren :" + statement);
+		}
 		Page p = this.paging.createUnlimitedPage();
 		PagedResults paged = cmiswebscript.query(statement, p);
 		return paged;
@@ -156,7 +156,9 @@ public class CMISWebScriptExtension extends BaseScopableProcessorExtension {
 		for (NodeRef nodeRef : resultSet.getNodeRefs()) {
 			TemplateNode tnode = new TemplateNode(nodeRef, serviceRegistry, imageResolver.getImageResolver());
 			if (tnode.getIsDocument()) {
-				logger.debug("add result :" + tnode.getNodeRef());
+				if (logger.isDebugEnabled()) {
+					logger.debug("add result :" + tnode.getNodeRef());
+				}
 				results.add(tnode);
 			}
 		}
@@ -165,7 +167,9 @@ public class CMISWebScriptExtension extends BaseScopableProcessorExtension {
 		CMISResultSet resultSetFolders = (CMISResultSet) pagedFolders.getResult();
 		for (NodeRef nodeRef : resultSetFolders.getNodeRefs()) {
 			// folder
-			logger.debug("search in folder ..." + nodeRef);
+			if (logger.isDebugEnabled()) {
+				logger.debug("search in folder ..." + nodeRef);
+			}
 			List<TemplateNode> tmp = getChildren(nodeRef, types);
 			results.addAll(tmp);
 		}
