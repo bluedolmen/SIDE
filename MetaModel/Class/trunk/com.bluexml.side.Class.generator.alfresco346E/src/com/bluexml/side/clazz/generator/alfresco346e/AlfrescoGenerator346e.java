@@ -1,5 +1,6 @@
 package com.bluexml.side.clazz.generator.alfresco346e;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +41,18 @@ public class AlfrescoGenerator346e extends AlfrescoGenerator {
 		return templates;
 	}
 
+	protected List<String> getShareExtensionTemplates() {
+		/*
+		 * remove from base generator generation of upload components, now provided by modules and setup by portal generator
+		 */
+		List<String> result = new ArrayList<String>();
+		// generator for alfresco Share web application
+		
+		result.add(templateBase + "/alfrescoshare/defaultdocListView/documentlist.get.properties.mt"); //$NON-NLS-1$
+
+		result.add(templateBase + "/alfrescoshare/DefaultEditForms/web-framework-config-defaults.mt"); //$NON-NLS-1$
+		return result;
+	}
 	@Override
 	protected List<Map<String, String>> getTemplatesSubstitution() {
 		List<Map<String, String>> templatesSubstitution = super.getTemplatesSubstitution();
