@@ -99,39 +99,30 @@ public class ClassServices {
 	}
 
 	public static boolean isFolder(AbstractClass cl2) throws Exception {
-		boolean is = false;
-		if (cl2.getGeneralizations().size() > 0) {
-			for (AbstractClass cl : cl2.getGeneralizations()) {
-				if (("cm:folder").equals(CommonServices.getPrefixedQName(cl))) {
-					return true;
-				} else {
-					return isFolder(cl);
-				}
-			}
-		}
-		return is;
+		return isChildOf(cl2, "cm:folder");
+		
 	}
 
-	public static boolean isChildOfCmContent(Clazz c) throws Exception {
+	public static boolean isChildOfCmContent(AbstractClass c) throws Exception {
 		return isChildOf(c, "cm:content");
 	}
 	
-	public static boolean isChildOfDlItem(Clazz c) throws Exception {
+	public static boolean isChildOfDlItem(AbstractClass c) throws Exception {
 		return isChildOf(c, "dl:dataListItem");
 	}
 	
-	public static boolean isChildOf(Clazz c,String qname) throws Exception {
+	public static boolean isChildOf(AbstractClass c,String qname) throws Exception {
 		EList<AbstractClass> l = c.getInheritedClasses();
 		for (AbstractClass clazz : l) {
 			String prefixedname = CommonServices.getPrefixedQName(clazz);
-			if (prefixedname.equals(qname)) {
+			if (qname.equals(prefixedname)) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public static boolean isChildOfAlfrescoClazz(Clazz c) throws Exception {
+	public static boolean isChildOfAlfrescoClazz(AbstractClass c) throws Exception {
 		EList<AbstractClass> l = c.getInheritedClasses();
 		for (AbstractClass clazz : l) {
 			if (CommonServices.isNativeModel(clazz)) {
