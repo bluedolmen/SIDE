@@ -110,7 +110,7 @@ public class PropertiesUpdaterPolicy implements OnCreateNodePolicy, OnUpdateProp
 	public void init() {
 		logger.info("[init] Initializing NameUpdaterPolicy");
 		if (nameUpdaterConfig.getDictionary().size() > 0) {
-			// Create behaviours using NotificationFrequency.TRANSACTION_COMMIT cause to have nodeRef that can't be founded by nodeService
+			// Create behaviours using NotificationFrequency.TRANSACTION_COMMIT
 			onCreateNode = new JavaBehaviour(this, "onCreateNode", EVENT_FREQUENCY);
 			onUpdateProperties = new JavaBehaviour(this, "onUpdateProperties", EVENT_FREQUENCY);
 
@@ -130,7 +130,8 @@ public class PropertiesUpdaterPolicy implements OnCreateNodePolicy, OnUpdateProp
 		if (logger.isDebugEnabled()) {
 			logger.debug("Current User :" + currentUserName);
 		}
-		if (currentUserName != null && !currentUserName.equals("null")) {
+		// sometime nodeRef that can't be founded by nodeService
+		if (currentUserName != null && !currentUserName.equals("null") && nodeService.exists(nodeRef)) {
 
 			QName type = getNodeService().getType(nodeRef);
 
