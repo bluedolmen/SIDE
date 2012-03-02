@@ -7,6 +7,7 @@
 package com.bluexml.side.view.provider;
 
 
+import com.bluexml.side.common.CommonPackage;
 import java.util.Collection;
 import java.util.List;
 
@@ -71,6 +72,16 @@ public class ComposedViewItemProvider
 	@Override
 	public Object getImage(Object object) {
 		return overlayImage(object, getResourceLocator().getImage("full/obj16/ComposedView"));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected boolean shouldComposeCreationImage() {
+		return true;
 	}
 
 	/**
@@ -143,6 +154,8 @@ public class ComposedViewItemProvider
 		Object childObject = child;
 
 		boolean qualify =
+			childFeature == ViewPackage.Literals.STYLABLE__STYLING ||
+			childFeature == CommonPackage.Literals.MODEL_ELEMENT__METAINFO_GROUP ||
 			childFeature == ViewPackage.Literals.FIELD_CONTAINER__CHILDREN ||
 			childFeature == ViewPackage.Literals.FIELD_CONTAINER__DISABLED;
 

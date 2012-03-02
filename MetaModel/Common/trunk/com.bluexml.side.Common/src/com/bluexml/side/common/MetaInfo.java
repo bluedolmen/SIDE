@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.bluexml.side.common.MetaInfo#getKey <em>Key</em>}</li>
  *   <li>{@link com.bluexml.side.common.MetaInfo#getValue <em>Value</em>}</li>
  *   <li>{@link com.bluexml.side.common.MetaInfo#getValueType <em>Value Type</em>}</li>
  *   <li>{@link com.bluexml.side.common.MetaInfo#getConstraintType <em>Constraint Type</em>}</li>
@@ -33,32 +32,6 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface MetaInfo extends MetaData {
-	/**
-	 * Returns the value of the '<em><b>Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Key</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Key</em>' attribute.
-	 * @see #setKey(String)
-	 * @see com.bluexml.side.common.CommonPackage#getMetaInfo_Key()
-	 * @model
-	 * @generated
-	 */
-	String getKey();
-
-	/**
-	 * Sets the value of the '{@link com.bluexml.side.common.MetaInfo#getKey <em>Key</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Key</em>' attribute.
-	 * @see #getKey()
-	 * @generated
-	 */
-	void setKey(String value);
-
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->

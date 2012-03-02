@@ -7,6 +7,7 @@
 package com.bluexml.side.view.provider;
 
 
+import com.bluexml.side.common.CommonPackage;
 import java.util.Collection;
 import java.util.List;
 
@@ -99,6 +100,16 @@ public class FieldContainerItemProvider
 		// adding (see {@link AddCommand}) it as a child.
 
 		return super.getChildFeature(object, child);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected boolean shouldComposeCreationImage() {
+		return true;
 	}
 
 	/**
@@ -349,6 +360,8 @@ public class FieldContainerItemProvider
 		Object childObject = child;
 
 		boolean qualify =
+			childFeature == ViewPackage.Literals.STYLABLE__STYLING ||
+			childFeature == CommonPackage.Literals.MODEL_ELEMENT__METAINFO_GROUP ||
 			childFeature == ViewPackage.Literals.FIELD_CONTAINER__CHILDREN ||
 			childFeature == ViewPackage.Literals.FIELD_CONTAINER__DISABLED;
 

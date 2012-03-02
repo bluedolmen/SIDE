@@ -22,6 +22,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.bluexml.side.common.CommonFactory;
+import com.bluexml.side.common.CommonPackage;
 import com.bluexml.side.view.ActionField;
 import com.bluexml.side.view.ViewPackage;
 
@@ -106,6 +107,16 @@ public class ActionFieldItemProvider
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected boolean shouldComposeCreationImage() {
+		return true;
+	}
+
+	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -158,6 +169,29 @@ public class ActionFieldItemProvider
 			(createChildParameter
 				(ViewPackage.Literals.ACTION_FIELD__OPERATIONS,
 				 CommonFactory.eINSTANCE.createOperationGroup()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == ViewPackage.Literals.STYLABLE__STYLING ||
+			childFeature == CommonPackage.Literals.MODEL_ELEMENT__METAINFO_GROUP;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

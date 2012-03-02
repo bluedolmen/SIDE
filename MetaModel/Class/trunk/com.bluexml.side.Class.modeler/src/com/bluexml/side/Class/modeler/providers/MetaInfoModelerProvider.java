@@ -32,6 +32,6 @@ public class MetaInfoModelerProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	public EAttribute getLabelFeature(Object object) {
-		return CommonPackage.eINSTANCE.getMetaInfo_Key();
+		return CommonPackage.eINSTANCE.getMetaData_Key();
 	}
 }

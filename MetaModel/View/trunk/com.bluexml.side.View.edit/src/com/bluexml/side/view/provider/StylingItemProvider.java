@@ -23,7 +23,6 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import com.bluexml.side.clazz.ClazzFactory;
 import com.bluexml.side.common.CommonPackage;
 import com.bluexml.side.common.provider.MetaInfoGroupItemProvider;
 import com.bluexml.side.view.Styling;
@@ -150,6 +149,16 @@ public class StylingItemProvider
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected boolean shouldComposeCreationImage() {
+		return true;
+	}
+
+	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -157,7 +166,7 @@ public class StylingItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Styling)object).getName();
+		String label = ((Styling)object).getKey();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Styling_type") :
 			label;
@@ -197,41 +206,8 @@ public class StylingItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
-				 ClazzFactory.eINSTANCE.createClassComment()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
-				 ClazzFactory.eINSTANCE.createAssociationEnd()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(CommonPackage.Literals.META_INFO_GROUP__CHILDREN,
 				 ViewFactory.eINSTANCE.createStyling()));
-	}
-
-	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify =
-			childFeature == CommonPackage.Literals.MODEL_ELEMENT__METAINFO ||
-			childFeature == CommonPackage.Literals.META_INFO_GROUP__CHILDREN;
-
-		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 	/**

@@ -24,6 +24,7 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.bluexml.side.common.CommonFactory;
+import com.bluexml.side.common.CommonPackage;
 import com.bluexml.side.view.Col;
 import com.bluexml.side.view.ViewFactory;
 import com.bluexml.side.view.ViewPackage;
@@ -157,6 +158,16 @@ public class ColItemProvider
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected boolean shouldComposeCreationImage() {
+		return true;
+	}
+
+	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -244,6 +255,8 @@ public class ColItemProvider
 		Object childObject = child;
 
 		boolean qualify =
+			childFeature == ViewPackage.Literals.STYLABLE__STYLING ||
+			childFeature == CommonPackage.Literals.MODEL_ELEMENT__METAINFO_GROUP ||
 			childFeature == ViewPackage.Literals.FIELD_CONTAINER__CHILDREN ||
 			childFeature == ViewPackage.Literals.FIELD_CONTAINER__DISABLED;
 

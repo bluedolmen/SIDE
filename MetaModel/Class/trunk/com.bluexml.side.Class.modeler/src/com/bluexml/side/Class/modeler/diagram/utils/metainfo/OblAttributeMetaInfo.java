@@ -128,7 +128,7 @@ public class OblAttributeMetaInfo extends OblTypeMetaInfo {
 //		cg.getChildren().add(c);
 
 		cg = fact.createMetaInfoGroup();
-		cg.setName("length");
+		cg.setKey("length");
 		allMetaInfos.add(cg);
 
 		c = fact.createMetaInfo();
@@ -169,7 +169,7 @@ public class OblAttributeMetaInfo extends OblTypeMetaInfo {
 		 */
 
 		cg = fact.createMetaInfoGroup();
-		cg.setName("bounds");
+		cg.setKey("bounds");
 		allMetaInfos.add(cg);
 
 		c = fact.createMetaInfo();

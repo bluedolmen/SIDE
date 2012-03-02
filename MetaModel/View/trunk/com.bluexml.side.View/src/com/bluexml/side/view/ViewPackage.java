@@ -145,6 +145,15 @@ public interface ViewPackage extends EPackage {
 	int VIEW_COLLECTION__NAMESPACE = CommonPackage.PACKAGE__NAMESPACE;
 
 	/**
+	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIEW_COLLECTION__METAINFO_GROUP = CommonPackage.PACKAGE__METAINFO_GROUP;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -327,13 +336,22 @@ public interface ViewPackage extends EPackage {
 	int FIELD_ELEMENT__NAMESPACE = STYLABLE_FEATURE_COUNT + 7;
 
 	/**
+	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD_ELEMENT__METAINFO_GROUP = STYLABLE_FEATURE_COUNT + 8;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_ELEMENT__NAME = STYLABLE_FEATURE_COUNT + 8;
+	int FIELD_ELEMENT__NAME = STYLABLE_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Map To</b></em>' reference.
@@ -342,7 +360,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_ELEMENT__MAP_TO = STYLABLE_FEATURE_COUNT + 9;
+	int FIELD_ELEMENT__MAP_TO = STYLABLE_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
@@ -351,7 +369,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_ELEMENT__PREFIX = STYLABLE_FEATURE_COUNT + 10;
+	int FIELD_ELEMENT__PREFIX = STYLABLE_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
@@ -360,7 +378,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_ELEMENT__SUFFIX = STYLABLE_FEATURE_COUNT + 11;
+	int FIELD_ELEMENT__SUFFIX = STYLABLE_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
@@ -369,7 +387,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_ELEMENT__HIDDEN = STYLABLE_FEATURE_COUNT + 12;
+	int FIELD_ELEMENT__HIDDEN = STYLABLE_FEATURE_COUNT + 13;
 
 	/**
 	 * The number of structural features of the '<em>Field Element</em>' class.
@@ -378,7 +396,7 @@ public interface ViewPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_ELEMENT_FEATURE_COUNT = STYLABLE_FEATURE_COUNT + 13;
+	int FIELD_ELEMENT_FEATURE_COUNT = STYLABLE_FEATURE_COUNT + 14;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.view.impl.FieldContainerImpl <em>Field Container</em>}' class.
@@ -470,6 +488,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int FIELD_CONTAINER__NAMESPACE = FIELD_ELEMENT__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD_CONTAINER__METAINFO_GROUP = FIELD_ELEMENT__METAINFO_GROUP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -633,6 +660,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int ABSTRACT_VIEW__NAMESPACE = FIELD_CONTAINER__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_VIEW__METAINFO_GROUP = FIELD_CONTAINER__METAINFO_GROUP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1148,6 +1184,15 @@ public interface ViewPackage extends EPackage {
 	int ABSTRACT_VIEW_OF__NAMESPACE = ABSTRACT_VIEW__NAMESPACE;
 
 	/**
+	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_VIEW_OF__METAINFO_GROUP = ABSTRACT_VIEW__METAINFO_GROUP;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1308,6 +1353,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int ABSTRACT_DATA_TABLE__NAMESPACE = ABSTRACT_VIEW_OF__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DATA_TABLE__METAINFO_GROUP = ABSTRACT_VIEW_OF__METAINFO_GROUP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1508,6 +1562,15 @@ public interface ViewPackage extends EPackage {
 	int COL__NAMESPACE = FIELD_CONTAINER__NAMESPACE;
 
 	/**
+	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COL__METAINFO_GROUP = FIELD_CONTAINER__METAINFO_GROUP;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1706,85 +1769,13 @@ public interface ViewPackage extends EPackage {
 	int FILTERING_FEATURE_COUNT = 1;
 
 	/**
-	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * The feature id for the '<em><b>Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STYLING__STEREOTYPES = CommonPackage.META_INFO_GROUP__STEREOTYPES;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STYLING__TAGS = CommonPackage.META_INFO_GROUP__TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STYLING__COMMENTS = CommonPackage.META_INFO_GROUP__COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STYLING__DOCUMENTATION = CommonPackage.META_INFO_GROUP__DOCUMENTATION;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STYLING__DESCRIPTION = CommonPackage.META_INFO_GROUP__DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STYLING__METAINFO = CommonPackage.META_INFO_GROUP__METAINFO;
-
-	/**
-	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STYLING__CONSTRAINTS = CommonPackage.META_INFO_GROUP__CONSTRAINTS;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STYLING__NAMESPACE = CommonPackage.META_INFO_GROUP__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STYLING__NAME = CommonPackage.META_INFO_GROUP__NAME;
+	int STYLING__KEY = CommonPackage.META_INFO_GROUP__KEY;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -1920,6 +1911,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int DATA_LIST__NAMESPACE = ABSTRACT_DATA_TABLE__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_LIST__METAINFO_GROUP = ABSTRACT_DATA_TABLE__METAINFO_GROUP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2165,6 +2165,15 @@ public interface ViewPackage extends EPackage {
 	int DATA_TABLE__NAMESPACE = ABSTRACT_DATA_TABLE__NAMESPACE;
 
 	/**
+	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TABLE__METAINFO_GROUP = ABSTRACT_DATA_TABLE__METAINFO_GROUP;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2381,6 +2390,15 @@ public interface ViewPackage extends EPackage {
 	int FACET_MAP__NAMESPACE = ABSTRACT_VIEW_OF__NAMESPACE;
 
 	/**
+	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACET_MAP__METAINFO_GROUP = ABSTRACT_VIEW_OF__METAINFO_GROUP;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2577,6 +2595,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int TREE__NAMESPACE = ABSTRACT_VIEW_OF__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TREE__METAINFO_GROUP = ABSTRACT_VIEW_OF__METAINFO_GROUP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2822,6 +2849,15 @@ public interface ViewPackage extends EPackage {
 	int COMPOSED_VIEW__NAMESPACE = ABSTRACT_VIEW__NAMESPACE;
 
 	/**
+	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSED_VIEW__METAINFO_GROUP = ABSTRACT_VIEW__METAINFO_GROUP;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2973,6 +3009,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int FIELD__NAMESPACE = FIELD_ELEMENT__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD__METAINFO_GROUP = FIELD_ELEMENT__METAINFO_GROUP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3135,6 +3180,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int TEXT_FIELD__NAMESPACE = FIELD__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXT_FIELD__METAINFO_GROUP = FIELD__METAINFO_GROUP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3308,6 +3362,15 @@ public interface ViewPackage extends EPackage {
 	int BOOLEAN_FIELD__NAMESPACE = FIELD__NAMESPACE;
 
 	/**
+	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_FIELD__METAINFO_GROUP = FIELD__METAINFO_GROUP;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3479,6 +3542,15 @@ public interface ViewPackage extends EPackage {
 	int PASSWORD_FIELD__NAMESPACE = FIELD__NAMESPACE;
 
 	/**
+	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PASSWORD_FIELD__METAINFO_GROUP = FIELD__METAINFO_GROUP;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3641,6 +3713,15 @@ public interface ViewPackage extends EPackage {
 	int FLOAT_FIELD__NAMESPACE = FIELD__NAMESPACE;
 
 	/**
+	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_FIELD__METAINFO_GROUP = FIELD__METAINFO_GROUP;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3801,6 +3882,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int ACTION_FIELD__NAMESPACE = FIELD__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FIELD__METAINFO_GROUP = FIELD__METAINFO_GROUP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3974,6 +4064,15 @@ public interface ViewPackage extends EPackage {
 	int DATE_FIELD__NAMESPACE = FIELD__NAMESPACE;
 
 	/**
+	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_FIELD__METAINFO_GROUP = FIELD__METAINFO_GROUP;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4134,6 +4233,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int TIME_FIELD__NAMESPACE = FIELD__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_FIELD__METAINFO_GROUP = FIELD__METAINFO_GROUP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4298,6 +4406,15 @@ public interface ViewPackage extends EPackage {
 	int DATE_TIME_FIELD__NAMESPACE = FIELD__NAMESPACE;
 
 	/**
+	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATE_TIME_FIELD__METAINFO_GROUP = FIELD__METAINFO_GROUP;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4458,6 +4575,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int PHONE_NUMBER_FIELD__NAMESPACE = FIELD__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHONE_NUMBER_FIELD__METAINFO_GROUP = FIELD__METAINFO_GROUP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4622,6 +4748,15 @@ public interface ViewPackage extends EPackage {
 	int EMAIL_FIELD__NAMESPACE = FIELD__NAMESPACE;
 
 	/**
+	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMAIL_FIELD__METAINFO_GROUP = FIELD__METAINFO_GROUP;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4782,6 +4917,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int INTEGER_FIELD__NAMESPACE = FIELD__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_FIELD__METAINFO_GROUP = FIELD__METAINFO_GROUP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4946,6 +5090,15 @@ public interface ViewPackage extends EPackage {
 	int FILE_FIELD__NAMESPACE = FIELD__NAMESPACE;
 
 	/**
+	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FIELD__METAINFO_GROUP = FIELD__METAINFO_GROUP;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5106,6 +5259,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int SELECT_FIELD__NAMESPACE = FIELD__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SELECT_FIELD__METAINFO_GROUP = FIELD__METAINFO_GROUP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -5279,6 +5441,15 @@ public interface ViewPackage extends EPackage {
 	int HTML_FIELD__NAMESPACE = FIELD__NAMESPACE;
 
 	/**
+	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HTML_FIELD__METAINFO_GROUP = FIELD__METAINFO_GROUP;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5441,6 +5612,15 @@ public interface ViewPackage extends EPackage {
 	int URL_FIELD__NAMESPACE = FIELD__NAMESPACE;
 
 	/**
+	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int URL_FIELD__METAINFO_GROUP = FIELD__METAINFO_GROUP;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5601,6 +5781,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int IMAGE_FIELD__NAMESPACE = FILE_FIELD__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE_FIELD__METAINFO_GROUP = FILE_FIELD__METAINFO_GROUP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -5881,6 +6070,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int FIELD_GROUP__NAMESPACE = FIELD_CONTAINER__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD_GROUP__METAINFO_GROUP = FIELD_CONTAINER__METAINFO_GROUP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.

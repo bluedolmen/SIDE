@@ -19,6 +19,8 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
+import com.bluexml.side.common.CommonFactory;
+import com.bluexml.side.common.CommonPackage;
 import com.bluexml.side.form.ClassFormCollection;
 import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.FormPackage;
@@ -115,6 +117,12 @@ public class ClassFormCollectionItemProvider
 		(createChildParameter
 			(FormPackage.Literals.FORM_COLLECTION__FORMS,
 			 FormFactory.eINSTANCE.createFormClass()));
+		
+		newChildDescriptors.add
+		(createChildParameter
+			(CommonPackage.Literals.MODEL_ELEMENT__METAINFO_GROUP,
+			 CommonFactory.eINSTANCE.createMetaInfoGroup()));
+		
 	}
 
 }

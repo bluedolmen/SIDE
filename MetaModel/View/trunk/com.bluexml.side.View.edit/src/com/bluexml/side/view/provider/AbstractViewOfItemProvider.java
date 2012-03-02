@@ -7,6 +7,7 @@
 package com.bluexml.side.view.provider;
 
 
+import com.bluexml.side.common.CommonPackage;
 import java.util.Collection;
 import java.util.List;
 
@@ -97,6 +98,16 @@ public class AbstractViewOfItemProvider
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected boolean shouldComposeCreationImage() {
+		return true;
+	}
+
+	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -147,6 +158,8 @@ public class AbstractViewOfItemProvider
 		Object childObject = child;
 
 		boolean qualify =
+			childFeature == ViewPackage.Literals.STYLABLE__STYLING ||
+			childFeature == CommonPackage.Literals.MODEL_ELEMENT__METAINFO_GROUP ||
 			childFeature == ViewPackage.Literals.FIELD_CONTAINER__CHILDREN ||
 			childFeature == ViewPackage.Literals.FIELD_CONTAINER__DISABLED;
 

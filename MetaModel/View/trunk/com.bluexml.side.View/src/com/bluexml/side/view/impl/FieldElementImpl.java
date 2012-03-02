@@ -31,6 +31,7 @@ import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.CommonPackage;
 import com.bluexml.side.common.Constraint;
 import com.bluexml.side.common.MetaInfo;
+import com.bluexml.side.common.MetaInfoGroup;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NameSpace;
 import com.bluexml.side.common.NamedModelElement;
@@ -56,6 +57,7 @@ import com.bluexml.side.view.ViewPackage;
  *   <li>{@link com.bluexml.side.view.impl.FieldElementImpl#getMetainfo <em>Metainfo</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.FieldElementImpl#getConstraints <em>Constraints</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.FieldElementImpl#getNamespace <em>Namespace</em>}</li>
+ *   <li>{@link com.bluexml.side.view.impl.FieldElementImpl#getMetainfoGroup <em>Metainfo Group</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.FieldElementImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.FieldElementImpl#getMapTo <em>Map To</em>}</li>
  *   <li>{@link com.bluexml.side.view.impl.FieldElementImpl#getPrefix <em>Prefix</em>}</li>
@@ -166,6 +168,16 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 	 * @ordered
 	 */
 	protected NameSpace namespace;
+
+	/**
+	 * The cached value of the '{@link #getMetainfoGroup() <em>Metainfo Group</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMetainfoGroup()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<MetaInfoGroup> metainfoGroup;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -435,6 +447,18 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 		namespace = newNamespace;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.FIELD_ELEMENT__NAMESPACE, oldNamespace, namespace));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<MetaInfoGroup> getMetainfoGroup() {
+		if (metainfoGroup == null) {
+			metainfoGroup = new EObjectContainmentEList<MetaInfoGroup>(MetaInfoGroup.class, this, ViewPackage.FIELD_ELEMENT__METAINFO_GROUP);
+		}
+		return metainfoGroup;
 	}
 
 	/**
@@ -729,6 +753,8 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 				return ((InternalEList<?>)getComments()).basicRemove(otherEnd, msgs);
 			case ViewPackage.FIELD_ELEMENT__METAINFO:
 				return ((InternalEList<?>)getMetainfo()).basicRemove(otherEnd, msgs);
+			case ViewPackage.FIELD_ELEMENT__METAINFO_GROUP:
+				return ((InternalEList<?>)getMetainfoGroup()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -758,6 +784,8 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 			case ViewPackage.FIELD_ELEMENT__NAMESPACE:
 				if (resolve) return getNamespace();
 				return basicGetNamespace();
+			case ViewPackage.FIELD_ELEMENT__METAINFO_GROUP:
+				return getMetainfoGroup();
 			case ViewPackage.FIELD_ELEMENT__NAME:
 				return getName();
 			case ViewPackage.FIELD_ELEMENT__MAP_TO:
@@ -811,6 +839,10 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 			case ViewPackage.FIELD_ELEMENT__NAMESPACE:
 				setNamespace((NameSpace)newValue);
 				return;
+			case ViewPackage.FIELD_ELEMENT__METAINFO_GROUP:
+				getMetainfoGroup().clear();
+				getMetainfoGroup().addAll((Collection<? extends MetaInfoGroup>)newValue);
+				return;
 			case ViewPackage.FIELD_ELEMENT__NAME:
 				setName((String)newValue);
 				return;
@@ -862,6 +894,9 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 			case ViewPackage.FIELD_ELEMENT__NAMESPACE:
 				setNamespace((NameSpace)null);
 				return;
+			case ViewPackage.FIELD_ELEMENT__METAINFO_GROUP:
+				getMetainfoGroup().clear();
+				return;
 			case ViewPackage.FIELD_ELEMENT__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -905,6 +940,8 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 				return constraints != null && !constraints.isEmpty();
 			case ViewPackage.FIELD_ELEMENT__NAMESPACE:
 				return namespace != null;
+			case ViewPackage.FIELD_ELEMENT__METAINFO_GROUP:
+				return metainfoGroup != null && !metainfoGroup.isEmpty();
 			case ViewPackage.FIELD_ELEMENT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ViewPackage.FIELD_ELEMENT__MAP_TO:
@@ -936,6 +973,7 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 				case ViewPackage.FIELD_ELEMENT__METAINFO: return CommonPackage.MODEL_ELEMENT__METAINFO;
 				case ViewPackage.FIELD_ELEMENT__CONSTRAINTS: return CommonPackage.MODEL_ELEMENT__CONSTRAINTS;
 				case ViewPackage.FIELD_ELEMENT__NAMESPACE: return CommonPackage.MODEL_ELEMENT__NAMESPACE;
+				case ViewPackage.FIELD_ELEMENT__METAINFO_GROUP: return CommonPackage.MODEL_ELEMENT__METAINFO_GROUP;
 				default: return -1;
 			}
 		}
@@ -965,6 +1003,7 @@ public abstract class FieldElementImpl extends StylableImpl implements FieldElem
 				case CommonPackage.MODEL_ELEMENT__METAINFO: return ViewPackage.FIELD_ELEMENT__METAINFO;
 				case CommonPackage.MODEL_ELEMENT__CONSTRAINTS: return ViewPackage.FIELD_ELEMENT__CONSTRAINTS;
 				case CommonPackage.MODEL_ELEMENT__NAMESPACE: return ViewPackage.FIELD_ELEMENT__NAMESPACE;
+				case CommonPackage.MODEL_ELEMENT__METAINFO_GROUP: return ViewPackage.FIELD_ELEMENT__METAINFO_GROUP;
 				default: return -1;
 			}
 		}

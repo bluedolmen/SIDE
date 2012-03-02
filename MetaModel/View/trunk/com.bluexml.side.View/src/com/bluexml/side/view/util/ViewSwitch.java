@@ -224,8 +224,6 @@ public class ViewSwitch<T> extends Switch<T> {
 				T result = caseStyling(styling);
 				if (result == null) result = caseMetaInfoGroup(styling);
 				if (result == null) result = caseMetaData(styling);
-				if (result == null) result = caseNamedModelElement(styling);
-				if (result == null) result = caseModelElement(styling);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

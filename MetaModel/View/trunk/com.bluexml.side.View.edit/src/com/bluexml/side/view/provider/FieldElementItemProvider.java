@@ -27,6 +27,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 import com.bluexml.side.common.CommonFactory;
 import com.bluexml.side.common.CommonPackage;
 import com.bluexml.side.view.FieldElement;
+import com.bluexml.side.view.ViewFactory;
 import com.bluexml.side.view.ViewPackage;
 
 /**
@@ -313,6 +314,7 @@ public class FieldElementItemProvider
 			childrenFeatures.add(CommonPackage.Literals.MODEL_ELEMENT__TAGS);
 			childrenFeatures.add(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS);
 			childrenFeatures.add(CommonPackage.Literals.MODEL_ELEMENT__METAINFO);
+			childrenFeatures.add(CommonPackage.Literals.MODEL_ELEMENT__METAINFO_GROUP);
 		}
 		return childrenFeatures;
 	}
@@ -328,6 +330,16 @@ public class FieldElementItemProvider
 		// adding (see {@link AddCommand}) it as a child.
 
 		return super.getChildFeature(object, child);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected boolean shouldComposeCreationImage() {
+		return true;
 	}
 
 	/**
@@ -367,6 +379,7 @@ public class FieldElementItemProvider
 			case ViewPackage.FIELD_ELEMENT__TAGS:
 			case ViewPackage.FIELD_ELEMENT__COMMENTS:
 			case ViewPackage.FIELD_ELEMENT__METAINFO:
+			case ViewPackage.FIELD_ELEMENT__METAINFO_GROUP:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -388,6 +401,29 @@ public class FieldElementItemProvider
 		(createChildParameter
 			(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
 			 CommonFactory.eINSTANCE.createComment()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == ViewPackage.Literals.STYLABLE__STYLING ||
+			childFeature == CommonPackage.Literals.MODEL_ELEMENT__METAINFO_GROUP;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }
