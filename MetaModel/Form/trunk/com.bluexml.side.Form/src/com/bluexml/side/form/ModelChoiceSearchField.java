@@ -20,7 +20,8 @@ package com.bluexml.side.form;
  * </p>
  *
  * @see com.bluexml.side.form.FormPackage#getModelChoiceSearchField()
- * @model
+ * @model annotation="http://www.bluexml.com/OCL valideAssociationRef='self.ref.oclAsType(clazz::Association).getTarget()->includes(self.real_class)'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='valideAssociationRef'"
  * @generated
  */
 public interface ModelChoiceSearchField extends SearchField, ClassReference {

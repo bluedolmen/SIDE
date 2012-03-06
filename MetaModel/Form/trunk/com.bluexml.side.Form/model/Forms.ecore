@@ -314,7 +314,10 @@
       <details key="documentation" value="Definition: The 'ModelChoiceField' makes reference to the associations of classes. An association is, by default seen as a select list with all elements of the targeted class. This association can be expanded in order to have a form of the targeted elements in the form itself.&#xD;&#xA;Operations:&#xD;&#xA;- 'Relation / Expand to reference': Available on association, this action allows having the form of the linked class inside the actual form. It creates another form under the same form collection that can be personalized too: this form is directly inserted in the uniting form; we say the form is ‘inline’ instead of ‘Select’.&#xD;&#xA;- 'Relation / Collapse to Model Choice Field’: when an association has been expanded, this operation allows coming back to the Select mode.&#xD;&#xA;- ‘Relation / Add Reference': Available after an ‘expand’ operation, it works the same way. It will add a form to the original form. Only available on associations with max cardinality set to more than one.&#xD;&#xA;Inherits: ClassReference, Field."/>
     </eAnnotations>
     <eAnnotations source="http://www.bluexml.com/OCL">
-      <details key="valideAssociationRef" value="self.real_class.getAllTargetAssociations()->includes(self.ref)"/>
+      <details key="valideAssociationRef" value="self.ref.oclAsType(clazz::Association).getTarget()->includes(self.real_class)"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="valideAssociationRef"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="min_bound" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -659,6 +662,12 @@
     <eLiterals name="isNot" value="2" literal="isNot"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ModelChoiceSearchField" eSuperTypes="#//SearchField #//ClassReference">
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="valideAssociationRef" value="self.ref.oclAsType(clazz::Association).getTarget()->includes(self.real_class)"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="valideAssociationRef"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="widget" eType="#//ModelChoiceWidgetType">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Definition: The 'widget' attributes provides the layout for model choice field."/>

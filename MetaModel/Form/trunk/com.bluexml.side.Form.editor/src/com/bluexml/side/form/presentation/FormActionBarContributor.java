@@ -61,6 +61,7 @@ import com.bluexml.side.form.clazz.InitializeFormClassAction;
 import com.bluexml.side.form.clazz.MoveSiblingDown;
 import com.bluexml.side.form.clazz.MoveSiblingUp;
 import com.bluexml.side.form.clazz.ShowLinkedClassAction;
+import com.bluexml.side.form.clazz.SynchonizeWithAClassAction;
 import com.bluexml.side.form.clazz.SynchonizeWithClassDiagramAction;
 import com.bluexml.side.form.clazz.utils.ClassDiagramUtils;
 import com.bluexml.side.form.common.CopyFormAction;
@@ -150,6 +151,7 @@ public class FormActionBarContributor extends EditingDomainActionBarContributor 
 	protected CollapseReferenceAction collapseReferenceAction = new CollapseReferenceAction();
 	protected CopyFormAction copyFormAction = new CopyFormAction();
 	protected SynchonizeWithClassDiagramAction synchronizeWithClassDiagram = new SynchonizeWithClassDiagramAction();
+	protected SynchonizeWithAClassAction synchonizeWithAClassAction = new SynchonizeWithAClassAction();
 	protected SynchonizeWithWorkflowDiagramAction synchronizeWithWorkflowDiagram = new SynchonizeWithWorkflowDiagramAction();
 	protected MoveSiblingUp moveSiblingUp = new MoveSiblingUp();
 	protected MoveSiblingDown moveSiblingDown = new MoveSiblingDown();
@@ -561,6 +563,9 @@ public class FormActionBarContributor extends EditingDomainActionBarContributor 
 					restoreMenu.addMenuListener(restoreListener);
 				}
 				menuManager.insertAfter("ui-actions", restoreMenu);
+				
+				synchonizeWithAClassAction.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/synchronizeWithClassDiagram.png"));
+				menuManager.insertAfter("ui-actions", synchonizeWithAClassAction);
 			}
 
 			refreshOutlineAction.setImageDescriptor(ImageDescriptor.createFromFile(this.getClass(), "/icons/menu/refreshOutline.png"));
@@ -696,6 +701,7 @@ public class FormActionBarContributor extends EditingDomainActionBarContributor 
 		copyFormAction.setActiveWorkbenchPart(activeEditor);
 		synchronizeWithClassDiagram.setActiveWorkbenchPart(activeEditor);
 		synchronizeWithWorkflowDiagram.setActiveWorkbenchPart(activeEditor);
+		synchonizeWithAClassAction.setActiveWorkbenchPart(activeEditor);
 		moveSiblingUp.setActiveWorkbenchPart(activeEditor);
 		moveSiblingDown.setActiveWorkbenchPart(activeEditor);
 		ISelectionProvider selectionProvider = activeEditor instanceof ISelectionProvider ? (ISelectionProvider) activeEditor : activeEditor.getEditorSite().getSelectionProvider();
@@ -709,6 +715,7 @@ public class FormActionBarContributor extends EditingDomainActionBarContributor 
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) collapseReferenceAction);
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) copyFormAction);
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) synchronizeWithClassDiagram);
+		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) synchonizeWithAClassAction);		
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) synchronizeWithWorkflowDiagram);
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) moveSiblingUp);
 		selectionProvider.addSelectionChangedListener((ISelectionChangedListener) moveSiblingDown);

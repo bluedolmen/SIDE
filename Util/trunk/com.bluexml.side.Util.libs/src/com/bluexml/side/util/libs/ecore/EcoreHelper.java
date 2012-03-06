@@ -42,7 +42,8 @@ public class EcoreHelper {
 		if (diagnostics.getSeverity() == Diagnostic.ERROR) {
 			List<Diagnostic> children = getAllDiag(diagnostics);
 			for (Diagnostic diagnostic : children) {
-				
+				String message = diagnostic.getMessage();
+				boolean invalideMessage = message.contains("constraint is violated");
 				System.out.println("data of " + diagnostic);
 				int code = diagnostic.getCode();
 				System.out.println("Code :"+code);
@@ -51,7 +52,7 @@ public class EcoreHelper {
 				List<?> data = diagnostic.getData();
 				for (Object object : data) {
 					System.out.println("EcoreHelper.getValidationErrors() " + object);
-					if (object instanceof EObject && code == Diagnostic.ERROR) {
+					if (object instanceof EObject && (code == Diagnostic.ERROR || invalideMessage)) {
 						errors.add((EObject) object);
 					}
 				}

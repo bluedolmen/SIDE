@@ -172,6 +172,14 @@ public class FormValidator extends EObjectValidator {
 	private static Constraint charField_MinSuperiorToMaxInvOCL;
 
 	/**
+	 * The parsed OCL expression for the definition of the '<em>valideAssociationRef</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint modelChoiceField_valideAssociationRefInvOCL;
+
+	/**
 	 * The parsed OCL expression for the definition of the '<em>mustReferenceClass</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -186,6 +194,14 @@ public class FormValidator extends EObjectValidator {
 	 * @generated
 	 */
 	private static Constraint virtualField_NoLinkForVirtualFieldInvOCL;
+
+	/**
+	 * The parsed OCL expression for the definition of the '<em>valideAssociationRef</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint modelChoiceSearchField_valideAssociationRefInvOCL;
 
 	private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
 
@@ -730,7 +746,47 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(modelChoiceField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateField_validRef(modelChoiceField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateClassReference_mustReferenceClass(modelChoiceField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateModelChoiceField_valideAssociationRef(modelChoiceField, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the valideAssociationRef constraint of '<em>Model Choice Field</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateModelChoiceField_valideAssociationRef(ModelChoiceField modelChoiceField, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (modelChoiceField_valideAssociationRefInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(FormPackage.Literals.MODEL_CHOICE_FIELD);
+
+			EAnnotation ocl = FormPackage.Literals.MODEL_CHOICE_FIELD.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("valideAssociationRef");
+
+			try {
+				modelChoiceField_valideAssociationRefInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(modelChoiceField_valideAssociationRefInvOCL);
+
+		if (!query.check(modelChoiceField)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						((doThrowError( FormPackage.Literals.MODEL_CHOICE_FIELD.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"valideAssociationRef")? Diagnostic.ERROR : Diagnostic.WARNING),
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "valideAssociationRef", getObjectLabel(modelChoiceField, context) }),
+						 new Object[] { modelChoiceField }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -922,6 +978,7 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validateField_mandatoryHiddenAndNoDefaultValue(reference, diagnostics, context);
 		if (result || diagnostics != null) result &= validateField_validRef(reference, diagnostics, context);
 		if (result || diagnostics != null) result &= validateClassReference_mustReferenceClass(reference, diagnostics, context);
+		if (result || diagnostics != null) result &= validateModelChoiceField_valideAssociationRef(reference, diagnostics, context);
 		return result;
 	}
 
@@ -1382,7 +1439,47 @@ public class FormValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(modelChoiceSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFormElement_noSpecialCharacters(modelChoiceSearchField, diagnostics, context);
 		if (result || diagnostics != null) result &= validateClassReference_mustReferenceClass(modelChoiceSearchField, diagnostics, context);
+		if (result || diagnostics != null) result &= validateModelChoiceSearchField_valideAssociationRef(modelChoiceSearchField, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the valideAssociationRef constraint of '<em>Model Choice Search Field</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateModelChoiceSearchField_valideAssociationRef(ModelChoiceSearchField modelChoiceSearchField, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (modelChoiceSearchField_valideAssociationRefInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(FormPackage.Literals.MODEL_CHOICE_SEARCH_FIELD);
+
+			EAnnotation ocl = FormPackage.Literals.MODEL_CHOICE_SEARCH_FIELD.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("valideAssociationRef");
+
+			try {
+				modelChoiceSearchField_valideAssociationRefInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(modelChoiceSearchField_valideAssociationRefInvOCL);
+
+		if (!query.check(modelChoiceSearchField)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						((doThrowError( FormPackage.Literals.MODEL_CHOICE_SEARCH_FIELD.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"valideAssociationRef")? Diagnostic.ERROR : Diagnostic.WARNING),
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "valideAssociationRef", getObjectLabel(modelChoiceSearchField, context) }),
+						 new Object[] { modelChoiceSearchField }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**

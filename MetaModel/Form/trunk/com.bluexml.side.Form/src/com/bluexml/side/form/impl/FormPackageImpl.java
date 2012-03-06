@@ -2217,7 +2217,13 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "MinSuperiorToMax"
-		   });																																																		
+		   });																								
+		addAnnotation
+		  (modelChoiceFieldEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "valideAssociationRef"
+		   });																												
 		addAnnotation
 		  (classReferenceEClass, 
 		   source, 
@@ -2229,7 +2235,13 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "NoLinkForVirtualField"
-		   });																						
+		   });																								
+		addAnnotation
+		  (modelChoiceSearchFieldEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "valideAssociationRef"
+		   });	
 	}
 
 	/**
@@ -2317,8 +2329,8 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		  (modelChoiceFieldEClass, 
 		   source, 
 		   new String[] {
-			 "valideAssociationRef", "self.real_class.getAllTargetAssociations()->includes(self.ref)"
-		   });																											
+			 "valideAssociationRef", "self.ref.oclAsType(clazz::Association).getTarget()->includes(self.real_class)"
+		   });																												
 		addAnnotation
 		  (classReferenceEClass, 
 		   source, 
@@ -2330,7 +2342,13 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "NoLinkForVirtualField", "not self.link.oclIsUndefined()"
-		   });																					
+		   });																						
+		addAnnotation
+		  (modelChoiceSearchFieldEClass, 
+		   source, 
+		   new String[] {
+			 "valideAssociationRef", "self.ref.oclAsType(clazz::Association).getTarget()->includes(self.real_class)"
+		   });		
 	}
 
 	/**
@@ -2346,7 +2364,7 @@ public class FormPackageImpl extends EPackageImpl implements FormPackage {
 		   source, 
 		   new String[] {
 			 "name", "presentation"
-		   });																																																																																												
+		   });																																																																																															
 	}
 
 	public FormFactory getFormsFactory() {
