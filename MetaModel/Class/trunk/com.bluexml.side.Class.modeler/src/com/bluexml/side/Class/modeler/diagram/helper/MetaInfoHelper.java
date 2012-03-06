@@ -50,7 +50,7 @@ public class MetaInfoHelper {
 	public static void drawConstraintGroup(Composite composite, MetaInfoGroup group, Map drawConstraint, EObject object) {
 		if (group != null) {
 			if (group.getChildren().size() > 0) {
-				Group constraintGroup = createConstraintsGroup(composite, group.getKey());
+				Group constraintGroup = createConstraintsGroup(composite, group.getName());
 
 				for (Object o : group.getChildren()) {
 					if (o instanceof MetaInfo) {

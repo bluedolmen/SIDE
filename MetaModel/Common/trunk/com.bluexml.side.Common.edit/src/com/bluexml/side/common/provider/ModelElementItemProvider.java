@@ -198,7 +198,6 @@ public class ModelElementItemProvider
 			childrenFeatures.add(CommonPackage.Literals.MODEL_ELEMENT__TAGS);
 			childrenFeatures.add(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS);
 			childrenFeatures.add(CommonPackage.Literals.MODEL_ELEMENT__METAINFO);
-			childrenFeatures.add(CommonPackage.Literals.MODEL_ELEMENT__METAINFO_GROUP);
 		}
 		return childrenFeatures;
 	}
@@ -270,7 +269,6 @@ public class ModelElementItemProvider
 			case CommonPackage.MODEL_ELEMENT__TAGS:
 			case CommonPackage.MODEL_ELEMENT__COMMENTS:
 			case CommonPackage.MODEL_ELEMENT__METAINFO:
-			case CommonPackage.MODEL_ELEMENT__METAINFO_GROUP:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -302,11 +300,6 @@ public class ModelElementItemProvider
 			(createChildParameter
 				(CommonPackage.Literals.MODEL_ELEMENT__METAINFO,
 				 CommonFactory.eINSTANCE.createMetaInfo()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(CommonPackage.Literals.MODEL_ELEMENT__METAINFO_GROUP,
-				 CommonFactory.eINSTANCE.createMetaInfoGroup()));
 	}
 
 	/**

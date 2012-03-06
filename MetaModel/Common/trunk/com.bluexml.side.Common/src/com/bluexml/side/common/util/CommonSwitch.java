@@ -175,6 +175,8 @@ public class CommonSwitch<T> extends Switch<T> {
 				MetaInfoGroup metaInfoGroup = (MetaInfoGroup)theEObject;
 				T result = caseMetaInfoGroup(metaInfoGroup);
 				if (result == null) result = caseMetaData(metaInfoGroup);
+				if (result == null) result = caseNamedModelElement(metaInfoGroup);
+				if (result == null) result = caseModelElement(metaInfoGroup);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

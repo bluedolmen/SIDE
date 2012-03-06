@@ -29,7 +29,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.bluexml.side.common.ModelElement#getMetainfo <em>Metainfo</em>}</li>
  *   <li>{@link com.bluexml.side.common.ModelElement#getConstraints <em>Constraints</em>}</li>
  *   <li>{@link com.bluexml.side.common.ModelElement#getNamespace <em>Namespace</em>}</li>
- *   <li>{@link com.bluexml.side.common.ModelElement#getMetainfoGroup <em>Metainfo Group</em>}</li>
  * </ul>
  * </p>
  *
@@ -203,22 +202,6 @@ public interface ModelElement extends EObject {
 	 * @generated
 	 */
 	void setNamespace(NameSpace value);
-
-	/**
-	 * Returns the value of the '<em><b>Metainfo Group</b></em>' containment reference list.
-	 * The list contents are of type {@link com.bluexml.side.common.MetaInfoGroup}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Metainfo Group</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Metainfo Group</em>' containment reference list.
-	 * @see com.bluexml.side.common.CommonPackage#getModelElement_MetainfoGroup()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<MetaInfoGroup> getMetainfoGroup();
 
 	/**
 	 * <!-- begin-user-doc -->

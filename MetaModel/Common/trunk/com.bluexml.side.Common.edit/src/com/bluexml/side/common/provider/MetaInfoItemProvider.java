@@ -60,6 +60,7 @@ public class MetaInfoItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addKeyPropertyDescriptor(object);
 			addValuePropertyDescriptor(object);
 			addValueTypePropertyDescriptor(object);
 			addConstraintTypePropertyDescriptor(object);
@@ -68,6 +69,28 @@ public class MetaInfoItemProvider
 			addEObjectValuePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Key feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addKeyPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_MetaInfo_key_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_MetaInfo_key_feature", "_UI_MetaInfo_type"),
+				 CommonPackage.Literals.META_INFO__KEY,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -249,6 +272,7 @@ public class MetaInfoItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(MetaInfo.class)) {
+			case CommonPackage.META_INFO__KEY:
 			case CommonPackage.META_INFO__VALUE:
 			case CommonPackage.META_INFO__VALUE_TYPE:
 			case CommonPackage.META_INFO__CONSTRAINT_TYPE:

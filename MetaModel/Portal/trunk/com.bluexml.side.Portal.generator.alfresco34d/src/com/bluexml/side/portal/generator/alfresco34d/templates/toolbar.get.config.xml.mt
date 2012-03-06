@@ -16,16 +16,19 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
       <content mimetype="text/html" icon="html" label="menu.create-content.html" itemid="cm:content"/>
       <content mimetype="text/xml" icon="xml" label="menu.create-content.xml" itemid="cm:content"/>
       <%}%>
+      <%-- disabled since MM back before adding metainfoGroup
       <%if (metainfoGroup[key == 'mimetypes'].nSize() > 0){%>
       	<%for (metainfoGroup[key == 'mimetypes']){%>
       <content mimetype="<%if (children[key == 'mimetype']){%><%children[key == 'mimetype'].filter("common.metaInfo").value%><%}%>" icon="plain-text" label="menu.create-content.<%children[key == 'form'].filter("common.metaInfo").EObjectValue.filter("form.ClassReference").real_class.name%>" itemid="<%children[key == 'form'].filter("common.metaInfo").EObjectValue.filter("form.ClassReference").real_class.getPrefixedQName()%>"<%if (children[key == 'form'].filter("common.metaInfo").EObjectValue.eContainer("FormCollection").name != "default"){%> formid="<%children[key == 'form'].filter("common.metaInfo").EObjectValue.eContainer("FormCollection").name%>"<%}%>/>
       	<%}%>
       <%}else{%>
+      --%>
       	<%for (isPortletInternal.form.forms.filter("form.FormClass")){%>
       <content mimetype="" icon="plain-text" label="menu.create-content.<%real_class.name%>" itemid="<%real_class.getPrefixedQName()%>"<%if (eContainer("form.FormCollection").name != "default"){%> formid="<%eContainer("form.FormCollection").name%>"<%}%>/>
       	<%}%>
+      <%--
       <%}%>
-      
+      --%>
       
             
    </createContent>

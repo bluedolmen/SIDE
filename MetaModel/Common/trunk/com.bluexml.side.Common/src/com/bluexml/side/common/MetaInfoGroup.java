@@ -24,7 +24,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface MetaInfoGroup extends MetaData {
+public interface MetaInfoGroup extends MetaData, NamedModelElement {
 	/**
 	 * Returns the value of the '<em><b>Children</b></em>' containment reference list.
 	 * The list contents are of type {@link com.bluexml.side.common.MetaData}.

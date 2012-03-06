@@ -324,15 +324,6 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getModelElement_MetainfoGroup() {
-		return (EReference)modelElementEClass.getEStructuralFeatures().get(8);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getNamedModelElement() {
 		return namedModelElementEClass;
 	}
@@ -549,7 +540,7 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMetaInfo_Value() {
+	public EAttribute getMetaInfo_Key() {
 		return (EAttribute)metaInfoEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -558,7 +549,7 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMetaInfo_ValueType() {
+	public EAttribute getMetaInfo_Value() {
 		return (EAttribute)metaInfoEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -567,7 +558,7 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMetaInfo_ConstraintType() {
+	public EAttribute getMetaInfo_ValueType() {
 		return (EAttribute)metaInfoEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -576,7 +567,7 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMetaInfo_ValueSet() {
+	public EAttribute getMetaInfo_ConstraintType() {
 		return (EAttribute)metaInfoEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -585,7 +576,7 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMetaInfo_MultilineValue() {
+	public EAttribute getMetaInfo_ValueSet() {
 		return (EAttribute)metaInfoEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -594,8 +585,17 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getMetaInfo_MultilineValue() {
+		return (EAttribute)metaInfoEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getMetaInfo_EObjectValue() {
-		return (EReference)metaInfoEClass.getEStructuralFeatures().get(5);
+		return (EReference)metaInfoEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -623,15 +623,6 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 	 */
 	public EClass getMetaData() {
 		return metaDataEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getMetaData_Key() {
-		return (EAttribute)metaDataEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -770,7 +761,6 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		createEReference(modelElementEClass, MODEL_ELEMENT__METAINFO);
 		createEReference(modelElementEClass, MODEL_ELEMENT__CONSTRAINTS);
 		createEReference(modelElementEClass, MODEL_ELEMENT__NAMESPACE);
-		createEReference(modelElementEClass, MODEL_ELEMENT__METAINFO_GROUP);
 
 		namedModelElementEClass = createEClass(NAMED_MODEL_ELEMENT);
 		createEAttribute(namedModelElementEClass, NAMED_MODEL_ELEMENT__NAME);
@@ -805,6 +795,7 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		operationComponentEClass = createEClass(OPERATION_COMPONENT);
 
 		metaInfoEClass = createEClass(META_INFO);
+		createEAttribute(metaInfoEClass, META_INFO__KEY);
 		createEAttribute(metaInfoEClass, META_INFO__VALUE);
 		createEAttribute(metaInfoEClass, META_INFO__VALUE_TYPE);
 		createEAttribute(metaInfoEClass, META_INFO__CONSTRAINT_TYPE);
@@ -816,7 +807,6 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		createEReference(metaInfoGroupEClass, META_INFO_GROUP__CHILDREN);
 
 		metaDataEClass = createEClass(META_DATA);
-		createEAttribute(metaDataEClass, META_DATA__KEY);
 
 		containerEClass = createEClass(CONTAINER);
 
@@ -874,6 +864,7 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		operationComponentEClass.getESuperTypes().add(this.getNamedModelElement());
 		metaInfoEClass.getESuperTypes().add(this.getMetaData());
 		metaInfoGroupEClass.getESuperTypes().add(this.getMetaData());
+		metaInfoGroupEClass.getESuperTypes().add(this.getNamedModelElement());
 		constraintEClass.getESuperTypes().add(this.getNamedModelElement());
 		constraintParamEClass.getESuperTypes().add(this.getNamedModelElement());
 
@@ -887,7 +878,6 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		initEReference(getModelElement_Metainfo(), this.getMetaInfo(), null, "metainfo", null, 0, -1, ModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModelElement_Constraints(), this.getConstraint(), null, "constraints", null, 0, -1, ModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModelElement_Namespace(), this.getNameSpace(), null, "namespace", null, 0, 1, ModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getModelElement_MetainfoGroup(), this.getMetaInfoGroup(), null, "metainfoGroup", null, 0, -1, ModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(modelElementEClass, this.getNameSpace(), "getLogicalNameSpace", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -951,6 +941,7 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		addEOperation(operationComponentEClass, this.getOperationComponent(), "getOperations", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(metaInfoEClass, MetaInfo.class, "MetaInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMetaInfo_Key(), ecorePackage.getEString(), "key", null, 0, 1, MetaInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMetaInfo_Value(), ecorePackage.getEString(), "value", null, 0, 1, MetaInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		EGenericType g1 = createEGenericType(ecorePackage.getEJavaClass());
 		EGenericType g2 = createEGenericType();
@@ -968,7 +959,6 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		initEReference(getMetaInfoGroup_Children(), this.getMetaData(), null, "children", null, 0, -1, MetaInfoGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(metaDataEClass, MetaData.class, "MetaData", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getMetaData_Key(), ecorePackage.getEString(), "key", null, 0, 1, MetaData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(containerEClass, com.bluexml.side.common.Container.class, "Container", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

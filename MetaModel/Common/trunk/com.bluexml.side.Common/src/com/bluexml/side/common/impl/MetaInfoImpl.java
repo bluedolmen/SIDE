@@ -35,6 +35,7 @@ import java.util.Collection;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link com.bluexml.side.common.impl.MetaInfoImpl#getKey <em>Key</em>}</li>
  *   <li>{@link com.bluexml.side.common.impl.MetaInfoImpl#getValue <em>Value</em>}</li>
  *   <li>{@link com.bluexml.side.common.impl.MetaInfoImpl#getValueType <em>Value Type</em>}</li>
  *   <li>{@link com.bluexml.side.common.impl.MetaInfoImpl#getConstraintType <em>Constraint Type</em>}</li>
@@ -47,6 +48,26 @@ import java.util.Collection;
  * @generated
  */
 public class MetaInfoImpl extends MetaDataImpl implements MetaInfo {
+	/**
+	 * The default value of the '{@link #getKey() <em>Key</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String KEY_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getKey() <em>Key</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected String key = KEY_EDEFAULT;
+
 	private boolean defaultValueBoolean = false;
 	
 	/**
@@ -166,6 +187,27 @@ public class MetaInfoImpl extends MetaDataImpl implements MetaInfo {
 	@Override
 	protected EClass eStaticClass() {
 		return CommonPackage.Literals.META_INFO;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getKey() {
+		return key;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setKey(String newKey) {
+		String oldKey = key;
+		key = newKey;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonPackage.META_INFO__KEY, oldKey, key));
 	}
 
 	/**
@@ -331,6 +373,8 @@ public class MetaInfoImpl extends MetaDataImpl implements MetaInfo {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case CommonPackage.META_INFO__KEY:
+				return getKey();
 			case CommonPackage.META_INFO__VALUE:
 				return getValue();
 			case CommonPackage.META_INFO__VALUE_TYPE:
@@ -356,6 +400,9 @@ public class MetaInfoImpl extends MetaDataImpl implements MetaInfo {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case CommonPackage.META_INFO__KEY:
+				setKey((String)newValue);
+				return;
 			case CommonPackage.META_INFO__VALUE:
 				setValue((String)newValue);
 				return;
@@ -387,6 +434,9 @@ public class MetaInfoImpl extends MetaDataImpl implements MetaInfo {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case CommonPackage.META_INFO__KEY:
+				setKey(KEY_EDEFAULT);
+				return;
 			case CommonPackage.META_INFO__VALUE:
 				setValue(VALUE_EDEFAULT);
 				return;
@@ -417,6 +467,8 @@ public class MetaInfoImpl extends MetaDataImpl implements MetaInfo {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case CommonPackage.META_INFO__KEY:
+				return KEY_EDEFAULT == null ? key != null : !KEY_EDEFAULT.equals(key);
 			case CommonPackage.META_INFO__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 			case CommonPackage.META_INFO__VALUE_TYPE:
@@ -443,7 +495,9 @@ public class MetaInfoImpl extends MetaDataImpl implements MetaInfo {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (value: ");
+		result.append(" (key: ");
+		result.append(key);
+		result.append(", value: ");
 		result.append(value);
 		result.append(", valueType: ");
 		result.append(valueType);

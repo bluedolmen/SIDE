@@ -52,7 +52,6 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *   <li>{@link com.bluexml.side.common.impl.ModelElementImpl#getMetainfo <em>Metainfo</em>}</li>
  *   <li>{@link com.bluexml.side.common.impl.ModelElementImpl#getConstraints <em>Constraints</em>}</li>
  *   <li>{@link com.bluexml.side.common.impl.ModelElementImpl#getNamespace <em>Namespace</em>}</li>
- *   <li>{@link com.bluexml.side.common.impl.ModelElementImpl#getMetainfoGroup <em>Metainfo Group</em>}</li>
  * </ul>
  * </p>
  *
@@ -158,16 +157,6 @@ public class ModelElementImpl extends EObjectImpl implements ModelElement {
 	 * @ordered
 	 */
 	protected NameSpace namespace;
-
-	/**
-	 * The cached value of the '{@link #getMetainfoGroup() <em>Metainfo Group</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMetainfoGroup()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<MetaInfoGroup> metainfoGroup;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -333,18 +322,6 @@ public class ModelElementImpl extends EObjectImpl implements ModelElement {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<MetaInfoGroup> getMetainfoGroup() {
-		if (metainfoGroup == null) {
-			metainfoGroup = new EObjectContainmentEList<MetaInfoGroup>(MetaInfoGroup.class, this, CommonPackage.MODEL_ELEMENT__METAINFO_GROUP);
-		}
-		return metainfoGroup;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public NameSpace getLogicalNameSpace() {
 		if (getLogicalNameSpaceBodyOCL == null) {
 			EOperation eOperation = CommonPackage.Literals.MODEL_ELEMENT.getEOperations().get(0);
@@ -389,8 +366,6 @@ public class ModelElementImpl extends EObjectImpl implements ModelElement {
 				return ((InternalEList<?>)getComments()).basicRemove(otherEnd, msgs);
 			case CommonPackage.MODEL_ELEMENT__METAINFO:
 				return ((InternalEList<?>)getMetainfo()).basicRemove(otherEnd, msgs);
-			case CommonPackage.MODEL_ELEMENT__METAINFO_GROUP:
-				return ((InternalEList<?>)getMetainfoGroup()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -420,8 +395,6 @@ public class ModelElementImpl extends EObjectImpl implements ModelElement {
 			case CommonPackage.MODEL_ELEMENT__NAMESPACE:
 				if (resolve) return getNamespace();
 				return basicGetNamespace();
-			case CommonPackage.MODEL_ELEMENT__METAINFO_GROUP:
-				return getMetainfoGroup();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -464,10 +437,6 @@ public class ModelElementImpl extends EObjectImpl implements ModelElement {
 			case CommonPackage.MODEL_ELEMENT__NAMESPACE:
 				setNamespace((NameSpace)newValue);
 				return;
-			case CommonPackage.MODEL_ELEMENT__METAINFO_GROUP:
-				getMetainfoGroup().clear();
-				getMetainfoGroup().addAll((Collection<? extends MetaInfoGroup>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -504,9 +473,6 @@ public class ModelElementImpl extends EObjectImpl implements ModelElement {
 			case CommonPackage.MODEL_ELEMENT__NAMESPACE:
 				setNamespace((NameSpace)null);
 				return;
-			case CommonPackage.MODEL_ELEMENT__METAINFO_GROUP:
-				getMetainfoGroup().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -535,8 +501,6 @@ public class ModelElementImpl extends EObjectImpl implements ModelElement {
 				return constraints != null && !constraints.isEmpty();
 			case CommonPackage.MODEL_ELEMENT__NAMESPACE:
 				return namespace != null;
-			case CommonPackage.MODEL_ELEMENT__METAINFO_GROUP:
-				return metainfoGroup != null && !metainfoGroup.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

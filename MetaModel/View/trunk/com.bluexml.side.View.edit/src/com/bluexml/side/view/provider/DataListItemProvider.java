@@ -260,8 +260,6 @@ public class DataListItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == ViewPackage.Literals.STYLABLE__STYLING ||
-			childFeature == CommonPackage.Literals.MODEL_ELEMENT__METAINFO_GROUP ||
 			childFeature == ViewPackage.Literals.FIELD_CONTAINER__CHILDREN ||
 			childFeature == ViewPackage.Literals.FIELD_CONTAINER__DISABLED ||
 			childFeature == ViewPackage.Literals.ABSTRACT_DATA_TABLE__HAVE_ROW_ACTIONS ||

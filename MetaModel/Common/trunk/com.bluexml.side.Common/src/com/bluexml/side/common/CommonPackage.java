@@ -143,22 +143,13 @@ public interface CommonPackage extends EPackage {
 	int MODEL_ELEMENT__NAMESPACE = 7;
 
 	/**
-	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_ELEMENT__METAINFO_GROUP = 8;
-
-	/**
 	 * The number of structural features of the '<em>Model Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_ELEMENT_FEATURE_COUNT = 9;
+	int MODEL_ELEMENT_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.common.impl.NamedModelElementImpl <em>Named Model Element</em>}' class.
@@ -241,15 +232,6 @@ public interface CommonPackage extends EPackage {
 	 * @ordered
 	 */
 	int NAMED_MODEL_ELEMENT__NAMESPACE = MODEL_ELEMENT__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_MODEL_ELEMENT__METAINFO_GROUP = MODEL_ELEMENT__METAINFO_GROUP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -350,15 +332,6 @@ public interface CommonPackage extends EPackage {
 	 * @ordered
 	 */
 	int COMMENT__NAMESPACE = MODEL_ELEMENT__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMMENT__METAINFO_GROUP = MODEL_ELEMENT__METAINFO_GROUP;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -498,15 +471,6 @@ public interface CommonPackage extends EPackage {
 	int STEREOTYPE__NAMESPACE = NAMED_MODEL_ELEMENT__NAMESPACE;
 
 	/**
-	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STEREOTYPE__METAINFO_GROUP = NAMED_MODEL_ELEMENT__METAINFO_GROUP;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -605,15 +569,6 @@ public interface CommonPackage extends EPackage {
 	 * @ordered
 	 */
 	int PACKAGE__NAMESPACE = NAMED_MODEL_ELEMENT__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE__METAINFO_GROUP = NAMED_MODEL_ELEMENT__METAINFO_GROUP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -744,15 +699,6 @@ public interface CommonPackage extends EPackage {
 	int OPERATION_COMPONENT__NAMESPACE = NAMED_MODEL_ELEMENT__NAMESPACE;
 
 	/**
-	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION_COMPONENT__METAINFO_GROUP = NAMED_MODEL_ELEMENT__METAINFO_GROUP;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -851,15 +797,6 @@ public interface CommonPackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION__NAMESPACE = OPERATION_COMPONENT__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION__METAINFO_GROUP = OPERATION_COMPONENT__METAINFO_GROUP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1007,15 +944,6 @@ public interface CommonPackage extends EPackage {
 	int PARAMETER__NAMESPACE = NAMED_MODEL_ELEMENT__NAMESPACE;
 
 	/**
-	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER__METAINFO_GROUP = NAMED_MODEL_ELEMENT__METAINFO_GROUP;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1125,15 +1053,6 @@ public interface CommonPackage extends EPackage {
 	int OPERATION_GROUP__NAMESPACE = OPERATION_COMPONENT__NAMESPACE;
 
 	/**
-	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION_GROUP__METAINFO_GROUP = OPERATION_COMPONENT__METAINFO_GROUP;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1171,22 +1090,13 @@ public interface CommonPackage extends EPackage {
 	int META_DATA = 12;
 
 	/**
-	 * The feature id for the '<em><b>Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int META_DATA__KEY = 0;
-
-	/**
 	 * The number of structural features of the '<em>Meta Data</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int META_DATA_FEATURE_COUNT = 1;
+	int META_DATA_FEATURE_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.common.impl.MetaInfoImpl <em>Meta Info</em>}' class.
@@ -1205,7 +1115,7 @@ public interface CommonPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int META_INFO__KEY = META_DATA__KEY;
+	int META_INFO__KEY = META_DATA_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1214,7 +1124,7 @@ public interface CommonPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int META_INFO__VALUE = META_DATA_FEATURE_COUNT + 0;
+	int META_INFO__VALUE = META_DATA_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Value Type</b></em>' attribute.
@@ -1223,7 +1133,7 @@ public interface CommonPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int META_INFO__VALUE_TYPE = META_DATA_FEATURE_COUNT + 1;
+	int META_INFO__VALUE_TYPE = META_DATA_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Constraint Type</b></em>' attribute.
@@ -1232,7 +1142,7 @@ public interface CommonPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int META_INFO__CONSTRAINT_TYPE = META_DATA_FEATURE_COUNT + 2;
+	int META_INFO__CONSTRAINT_TYPE = META_DATA_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Value Set</b></em>' attribute.
@@ -1241,7 +1151,7 @@ public interface CommonPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int META_INFO__VALUE_SET = META_DATA_FEATURE_COUNT + 3;
+	int META_INFO__VALUE_SET = META_DATA_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Multiline Value</b></em>' attribute.
@@ -1250,7 +1160,7 @@ public interface CommonPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int META_INFO__MULTILINE_VALUE = META_DATA_FEATURE_COUNT + 4;
+	int META_INFO__MULTILINE_VALUE = META_DATA_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>EObject Value</b></em>' reference list.
@@ -1259,7 +1169,7 @@ public interface CommonPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int META_INFO__EOBJECT_VALUE = META_DATA_FEATURE_COUNT + 5;
+	int META_INFO__EOBJECT_VALUE = META_DATA_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Meta Info</em>' class.
@@ -1268,7 +1178,7 @@ public interface CommonPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int META_INFO_FEATURE_COUNT = META_DATA_FEATURE_COUNT + 6;
+	int META_INFO_FEATURE_COUNT = META_DATA_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.common.impl.MetaInfoGroupImpl <em>Meta Info Group</em>}' class.
@@ -1281,13 +1191,85 @@ public interface CommonPackage extends EPackage {
 	int META_INFO_GROUP = 11;
 
 	/**
-	 * The feature id for the '<em><b>Key</b></em>' attribute.
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int META_INFO_GROUP__KEY = META_DATA__KEY;
+	int META_INFO_GROUP__STEREOTYPES = META_DATA_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int META_INFO_GROUP__TAGS = META_DATA_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int META_INFO_GROUP__COMMENTS = META_DATA_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int META_INFO_GROUP__DOCUMENTATION = META_DATA_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int META_INFO_GROUP__DESCRIPTION = META_DATA_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int META_INFO_GROUP__METAINFO = META_DATA_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int META_INFO_GROUP__CONSTRAINTS = META_DATA_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int META_INFO_GROUP__NAMESPACE = META_DATA_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int META_INFO_GROUP__NAME = META_DATA_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -1296,7 +1278,7 @@ public interface CommonPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int META_INFO_GROUP__CHILDREN = META_DATA_FEATURE_COUNT + 0;
+	int META_INFO_GROUP__CHILDREN = META_DATA_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of structural features of the '<em>Meta Info Group</em>' class.
@@ -1305,7 +1287,7 @@ public interface CommonPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int META_INFO_GROUP_FEATURE_COUNT = META_DATA_FEATURE_COUNT + 1;
+	int META_INFO_GROUP_FEATURE_COUNT = META_DATA_FEATURE_COUNT + 10;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.common.impl.ContainerImpl <em>Container</em>}' class.
@@ -1407,15 +1389,6 @@ public interface CommonPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONSTRAINT__NAMESPACE = NAMED_MODEL_ELEMENT__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRAINT__METAINFO_GROUP = NAMED_MODEL_ELEMENT__METAINFO_GROUP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1534,15 +1507,6 @@ public interface CommonPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONSTRAINT_PARAM__NAMESPACE = NAMED_MODEL_ELEMENT__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Metainfo Group</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRAINT_PARAM__METAINFO_GROUP = NAMED_MODEL_ELEMENT__METAINFO_GROUP;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1726,17 +1690,6 @@ public interface CommonPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getModelElement_Namespace();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.common.ModelElement#getMetainfoGroup <em>Metainfo Group</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Metainfo Group</em>'.
-	 * @see com.bluexml.side.common.ModelElement#getMetainfoGroup()
-	 * @see #getModelElement()
-	 * @generated
-	 */
-	EReference getModelElement_MetainfoGroup();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.common.NamedModelElement <em>Named Model Element</em>}'.
@@ -1993,6 +1946,17 @@ public interface CommonPackage extends EPackage {
 	EClass getMetaInfo();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.common.MetaInfo#getKey <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Key</em>'.
+	 * @see com.bluexml.side.common.MetaInfo#getKey()
+	 * @see #getMetaInfo()
+	 * @generated
+	 */
+	EAttribute getMetaInfo_Key();
+
+	/**
 	 * Returns the meta object for the attribute '{@link com.bluexml.side.common.MetaInfo#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2088,17 +2052,6 @@ public interface CommonPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getMetaData();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.bluexml.side.common.MetaData#getKey <em>Key</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Key</em>'.
-	 * @see com.bluexml.side.common.MetaData#getKey()
-	 * @see #getMetaData()
-	 * @generated
-	 */
-	EAttribute getMetaData_Key();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.common.Container <em>Container</em>}'.
@@ -2310,14 +2263,6 @@ public interface CommonPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MODEL_ELEMENT__NAMESPACE = eINSTANCE.getModelElement_Namespace();
-
-		/**
-		 * The meta object literal for the '<em><b>Metainfo Group</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MODEL_ELEMENT__METAINFO_GROUP = eINSTANCE.getModelElement_MetainfoGroup();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.common.impl.NamedModelElementImpl <em>Named Model Element</em>}' class.
@@ -2532,6 +2477,14 @@ public interface CommonPackage extends EPackage {
 		EClass META_INFO = eINSTANCE.getMetaInfo();
 
 		/**
+		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute META_INFO__KEY = eINSTANCE.getMetaInfo_Key();
+
+		/**
 		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2606,14 +2559,6 @@ public interface CommonPackage extends EPackage {
 		 * @generated
 		 */
 		EClass META_DATA = eINSTANCE.getMetaData();
-
-		/**
-		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute META_DATA__KEY = eINSTANCE.getMetaData_Key();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.common.impl.ContainerImpl <em>Container</em>}' class.
