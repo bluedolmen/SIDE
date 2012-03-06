@@ -223,7 +223,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 			<%}%>
 		<%}%>
 
-		<%--for (ref.filter("clazz.Attribute")){%>
+		<%for (ref.filter("clazz.Attribute")){%>
 			<%if (getShareSearchFormControl() != ""){%>
 			<control template="<%getShareSearchFormControl()%>" >
 				<control-param name="forceEditable">true</control-param>
@@ -233,7 +233,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 				<control-param name="forceEditable">true</control-param>
 			</control>
 			<%}%> 
-		<%}--%>
+		<%}%>
 		<%if (filter("ModelChoiceSearchField")){%>
 		<%getModelChoiceFieldControl("multiple")%>
 		<%}%>
