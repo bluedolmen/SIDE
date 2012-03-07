@@ -272,6 +272,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 		<%}else{%>
 		<%getXtensionAsControlParam("addNewConfig")%>
 		<%getXtensionAsControlParam("targetFormId")%>
+		<%getXtensionAsControlParam("itemType")%>
 		<%}%>
 		<%getXtensionAsControlParam("targetItemKind")%>
 		<%getXtensionAsControlParam("targetFormMode")%>
