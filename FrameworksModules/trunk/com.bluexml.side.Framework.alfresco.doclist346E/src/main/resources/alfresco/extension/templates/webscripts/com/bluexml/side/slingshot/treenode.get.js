@@ -19,21 +19,16 @@ function getTreeNode() {
 		params.nodeType = args["nodeType"];
 		params.rootProperty = args["rootProperty"];
 		params.rootName = args["rootName"];
-		
 		params.nodeRef = args["nodeRef"];
 		params.selectableRoot = args["selectableRoot"] == "true";
-
 		
-		
-		var items = new Array();
-		
+		var items = new Array();		
 		var resultsTrimmed = false;
 		var argMax = parseInt(args["max"], 10);
 		var maxItems = isNaN(argMax) ? -1 : argMax;
-		
-		
 		var result = getTreeNodeChidren(params);
 		var children = result.children;
+		
 		if (children) {
 			// get Nodes
 			for ( var c = 0; c < children.length; c++) {
