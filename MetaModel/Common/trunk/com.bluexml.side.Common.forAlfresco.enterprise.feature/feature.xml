@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.forAlfresco.enterprise.feature" label="SIDE Generators For Alfresco 3.2.0r Enterprise" version="1.0.569.v33565-20120307" provider-name="BlueXML">
+<feature id="com.bluexml.side.Common.forAlfresco.enterprise.feature" label="SIDE Generators For Alfresco 3.2.0r Enterprise" version="1.0.570.v33622-20120307" provider-name="BlueXML">
   <description url="http://www.example.com/description">[Enter Feature Description here.]</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
-  <includes id="com.bluexml.side.Common.forAlfresco34d.sideenterprise.feature" version="1.0.55.v33565-20120307" />
+  <includes id="com.bluexml.side.Common.forAlfresco34d.sideenterprise.feature" version="1.0.56.v33622-20120307" />
   <includes id="com.bluexml.side.Deployer.xforms.feature" version="1.0.37.v28467-20111005" />
   <includes id="com.bluexml.side.Deployer.xformsDirectCopy.feature" version="1.0.30.v28467-20111005" />
   <includes id="com.bluexml.side.Deployer.demoWebApplication.feature" version="1.0.2.v28467-20111005" />
   <includes id="com.bluexml.side.Common.forAlfresco320rE.sideenterprise.feature" version="1.0.7.v33382-20120301" />
-  <includes id="com.bluexml.side.Common.forAlfresco32r2CE.sideenterprise.feature" version="1.0.43.v33565-20120307" />
+  <includes id="com.bluexml.side.Common.forAlfresco32r2CE.sideenterprise.feature" version="1.0.44.v33622-20120307" />
   <includes id="com.bluexml.side.Common.forAlfresco333E.sideenterprise.feature" version="1.0.18.v31653-20120106" />
   <includes id="com.bluexml.side.Common.forBirtReport.sideenterprise.feature" version="1.0.3.v31653-20120106" />
   <includes id="com.bluexml.side.Common.forFacetMap.sideenterprise.feature" version="1.0.8.v33382-20120301" />
-  <includes id="com.bluexml.side.Common.forAlfresco346E.sideenterprise.feature" version="1.0.27.v33565-20120307" />
+  <includes id="com.bluexml.side.Common.forAlfresco346E.sideenterprise.feature" version="1.0.28.v33622-20120307" />
   <requires>
     <import plugin="org.eclipse.ui" />
     <import plugin="org.eclipse.core.runtime" />
