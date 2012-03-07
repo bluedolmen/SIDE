@@ -13,8 +13,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 <%if (eContainer() == null) {%><%getProperty("alf.paths.extension.client.webscripts")%>/org/alfresco/slingshot/documentlibrary/customViews.ftl<%}%>
 
 <%script type="Portal" name="alfrescoGenerator" file="<%validatedFilename%>"%>
-<%for (portletSet){%>
-<%if (name.toLowerCase() == "documentlibrary" && isPortletInternal != null && isPortletInternal.view != null) {%>
+<%for (pageSet[ID.toLowerCase().trim() == "documentlibrary"].portlets.associationPortlet[(name.toLowerCase().trim() == "documentlibrary" || name.toLowerCase().trim() == "doclist") && isPortletInternal != null && isPortletInternal.view != null]){%>
 <%for (isPortletInternal.view.getInnerView()){%>
 <%if (filter("view.AbstractViewOf").viewOf.filter("clazz.Clazz")){%>
 <#if node.type == "<%filter("view.AbstractViewOf").viewOf.filter("clazz.AbstractClass").getPrefixedNamespaceQName()%>">
@@ -23,6 +22,5 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 <%}%>
 	<#include "doclist_views/doclist_<%filter("view.AbstractViewOf").name%>.ftl">
 </#if>
-<%}%>
 <%}%>
 <%}%>

@@ -31,10 +31,10 @@ import com.bluexml.side.portal.generator.alfresco34d.templates.custom-share-conf
 	</config>
 <%}%>	
 <%for (pageSet[ID.toLowerCase().trim() == "documentlibrary"].portlets.associationPortlet[name.toLowerCase().trim() == "subtypes" && isPortletInternal != null].isPortletInternal.form){%>
-	<%generateAvailableTypeHierachy%>
-<%}%>
-<%for (pageSet[ID.toLowerCase().trim() == "documentlibrary"].portlets.associationPortlet[name.toLowerCase().trim() == "subtypes" && isPortletInternal != null].isPortletInternal.form){%>
 	<%generateAvailableTypeHierachy2(forms.filter("form.ClassReference").real_class)%>
+<%}%>
+<%for (pageSet[ID.toLowerCase().trim() == "documentlibrary"].portlets.associationPortlet[name.toLowerCase().trim() == "subtypes" && isPortletInternal != null].isPortletInternal.view){%>
+	<%generateAvailableTypeHierachy2(getInnerView().filter("view.AbstractViewOf").viewOf)%>
 <%}%>
 
 </alfresco-config>

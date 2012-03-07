@@ -37,7 +37,7 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 	<types>
 		<type name="cm:content">
 		<%for (forms.filter("form.ClassReference").real_class.filter("clazz.Clazz")[generalizations.nSize() == 0 && !abstract]){%>
-			<%-- class that inerite from cm:content by default --%>			
+			<%-- class that inherit from cm:content by default --%>			
 			<subtype name="<%getPrefixedQName()%>" />	
 		<%}%>
 		</type>
