@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.core.enterprise.feature" label="SIDE Enterprise Core Components" version="1.0.619.v33525-20120306" provider-name="BlueXML" plugin="com.bluexml.side.Integration.eclipse.branding.enterprise">
+<feature id="com.bluexml.side.Common.core.enterprise.feature" label="SIDE Enterprise Core Components" version="1.0.620.v33565-20120307" provider-name="BlueXML" plugin="com.bluexml.side.Integration.eclipse.branding.enterprise">
   <description url="http://www.example.com/description">[Enter Feature Description here.]</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
   <includes id="com.bluexml.side.Application.feature" version="1.0.184.v32264-20120125" />
-  <includes id="com.bluexml.side.Class.modeler.feature" version="1.0.147.v33525-20120306" />
-  <includes id="com.bluexml.side.Common.feature" version="1.0.48.v33525-20120306" />
+  <includes id="com.bluexml.side.Class.modeler.feature" version="1.0.148.v33565-20120307" />
+  <includes id="com.bluexml.side.Common.feature" version="1.0.49.v33565-20120307" />
   <includes id="com.bluexml.side.Deployer.documentation.feature" version="1.0.42.v28467-20111005" />
-  <includes id="com.bluexml.side.Form.feature" version="1.0.159.v33525-20120306" />
+  <includes id="com.bluexml.side.Form.feature" version="1.0.160.v33565-20120307" />
   <includes id="com.bluexml.side.Portal.modeler.feature" version="1.0.63.v32894-20120216" />
   <includes id="com.bluexml.side.Requirements.feature" version="1.0.120.v31653-20120106" />
-  <includes id="com.bluexml.side.Util.feature" version="1.0.314.v33027-20120222" />
-  <includes id="com.bluexml.side.View.feature" version="1.0.87.v33525-20120306" />
+  <includes id="com.bluexml.side.Util.feature" version="1.0.315.v33565-20120307" />
+  <includes id="com.bluexml.side.View.feature" version="1.0.88.v33565-20120307" />
   <includes id="com.bluexml.side.Workflow.modeler.feature" version="1.0.111.v32612-20120207" />
   <requires>
     <import plugin="org.eclipse.ui" />
@@ -20,7 +20,7 @@
     <import plugin="org.eclipse.ui.forms" />
     <import plugin="com.bluexml.side.Util.security" />
   </requires>
-  <plugin id="com.bluexml.side.Integration.eclipse.branding.enterprise" download-size="0" install-size="0" version="1.0.620.v33525-20120306" unpack="false" />
+  <plugin id="com.bluexml.side.Integration.eclipse.branding.enterprise" download-size="0" install-size="0" version="1.0.621.v33565-20120307" unpack="false" />
   <plugin id="com.bluexml.side.Integration.standAlone.enterprise" download-size="0" install-size="0" version="1.0.8.v30447-20111125" unpack="false" />
   <plugin id="com.bluexml.side.Class.alfresco.reverse" download-size="0" install-size="0" version="1.0.7.v32489-20120203" unpack="false" />
   <plugin id="com.bluexml.side.Application.ui.newSIDEProject" download-size="0" install-size="0" version="1.0.7.v33339-20120228" unpack="false" />
