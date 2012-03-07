@@ -31,6 +31,7 @@
      advancedQuery :<#if field.control.params.advancedQuery??>"${field.control.params.advancedQuery?url}"<#else>""</#if>,
 	 maxResults : <#if field.control.params.maxResults??>${field.control.params.maxResults}<#else>-1</#if>,
 	 selectableTypeIsAspect : <#if field.control.params.selectableTypeIsAspect??>${field.control.params.selectableTypeIsAspect}<#else>false</#if>
+	 <#if field.control.params.startLocation??>, startLocation : ${field.control.params.startLocation}</#if>
    });
    
    

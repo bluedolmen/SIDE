@@ -257,17 +257,17 @@ function main()
 	         
 	         if (argsSelectableType == "cm:person")
 	         {
-	            findUsers(argsSearchTerm, maxResults, results);
+	            findUsers(argsSearchTerm, maxResults, results, argsXPath);
 	         }
 	         else if (argsSelectableType == "cm:authorityContainer")
 	         {
-	            findGroups(argsSearchTerm, maxResults, results);
+	            findGroups(argsSearchTerm, maxResults, results, argsXPath);
 	         }
 	         else
 	         {
 	            // combine groups and users
-	            findGroups(argsSearchTerm, maxResults, results);
-	            findUsers(argsSearchTerm, maxResults, results);
+	            findGroups(argsSearchTerm, maxResults, results, argsXPath);
+	            findUsers(argsSearchTerm, maxResults, results, argsXPath);
 	         }
 	      } else if (url.templateArgs.type == "search"){
 	    	  // search in given path of the given type
@@ -279,23 +279,21 @@ function main()
 	    	  }
 	    	  
 	    	  var path = null;
-	    	  
-	    	  if (argsSite) {
-	    		  path = SITES_SPACE_QNAME_PATH;
-	              if (argsSite !== null && argsSite.length > 0)
-	              {
-	                 path += "cm:" + search.ISO9075Encode(argsSite) + "//*";
-	                 
-	              }
-	              path = "PATH:\"" + path + "\"";
+	    	   if (argsXPath) {
+	    		  path = argsXPath;
+	    	  } else if (argsSite) {
+	    		  path = SITES_SPACE_QNAME_PATH + "{site}//*";
 	    	  }
-	    	 
 	    	  
-	    	  var query = type ;
 	    	  if (path != null) {
+	    		  if (argsSite !== null && argsSite.length > 0) {
+	                 path = path.replace(/\{site\}/g,"cm:" + search.ISO9075Encode(argsSite));
+	              }
+	    		  path = "PATH:\"" + path + "\"";
 	    		  query += " AND " + path;
 	    	  }
 	    	  
+	    	  var query = type;
 	    	  var advancedQuery = argsAdvancedQuery && argsAdvancedQuery != "";
 	    	  
 	    	  if (argsSearchTerm != undefined && argsSearchTerm != '') {
@@ -303,6 +301,8 @@ function main()
 	    	  }
 	    	  
 	    	  if (advancedQuery) {
+	    		  // TODO this parser is very simple, too simple !, value with
+					// space is not allowed here
 	    		  query += " AND ";
 	    		  var queryArray = argsAdvancedQuery.split(' ');
 	    		  
@@ -313,7 +313,7 @@ function main()
 				         var part= v.split("=");
 				         var key=part[0];
 				         var value=part[1];
-				         q_part += "@" + key.replace(":","\\:") + ":" + value;
+				         q_part += "@" + key.replace(":","\\:") + ":'" + value + "'";
 				      } else {
 				    	 q_part += " " + v + " ";
 				      }
@@ -384,7 +384,7 @@ function sortByName(a, b)
    return (b.properties.name.toLowerCase() > a.properties.name.toLowerCase() ? -1 : 1);
 }
 
-function findUsers(searchTerm, maxResults, results)
+function findUsers(searchTerm, maxResults, results, xpath)
 {
    // construct query string
    var query = '+TYPE:"cm:person"';
@@ -395,6 +395,9 @@ function findUsers(searchTerm, maxResults, results)
          
       query += ' AND (@cm\\:firstName:"' + searchTerm + '*" @cm\\:lastName:"' + searchTerm +
          '*" @cm\\:userName:"' + searchTerm + '*" )';
+   }
+   if (xpath != null && xpath.length >0) {
+	   query += ' AND PATH:"' + xpath + '"';
    }
    
    if (logger.isLoggingEnabled())
@@ -433,7 +436,7 @@ function findUsers(searchTerm, maxResults, results)
    }
 }
 
-function findGroups(searchTerm, maxResults, results)
+function findGroups(searchTerm, maxResults, results, xpath)
 {
    var searchTermPattern = "*";
    
@@ -450,6 +453,10 @@ function findGroups(searchTerm, maxResults, results)
    {
       // find the actual node that represents the group
       var query = '+TYPE:"cm:authorityContainer" AND @cm\\:authorityName:' + node.fullName;
+      
+      if (xpath != null && xpath.length > 0) {
+   	     query += ' AND PATH:"' + xpath + '"';
+      }
       
       if (logger.isLoggingEnabled())
          logger.log("group query = " + query);
