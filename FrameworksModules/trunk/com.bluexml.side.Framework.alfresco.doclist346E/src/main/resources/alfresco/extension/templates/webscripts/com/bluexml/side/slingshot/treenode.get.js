@@ -23,10 +23,10 @@ function getTreeNode() {
 		params.nodeRef = args["nodeRef"];
 		params.selectableRoot = args["selectableRoot"] == "true";
 
-		var evalChildFolders = args["children"] !== "false";
+		
 		
 		var items = new Array();
-		var hasSubfolders = true;
+		
 		var resultsTrimmed = false;
 		var argMax = parseInt(args["max"], 10);
 		var maxItems = isNaN(argMax) ? -1 : argMax;
@@ -37,10 +37,14 @@ function getTreeNode() {
 		if (children) {
 			// get Nodes
 			for ( var c = 0; c < children.length; c++) {
+				var hasSubfolders = true;
 				var item = children[c];
-				if (evalChildFolders) {
-					if (item.assocs[params.assoType]) {
-						hasSubfolders = item.assocs[params.assoType].length > 0;
+				if (params.evalChildFolders) {
+					if (item.sourceAssocs[params.assoType]) {
+						hasSubfolders = item.sourceAssocs[params.assoType].length > 0;
+					} else {
+						// this happen if no target have been selected
+						hasSubfolders = false;
 					}
 				}
 
