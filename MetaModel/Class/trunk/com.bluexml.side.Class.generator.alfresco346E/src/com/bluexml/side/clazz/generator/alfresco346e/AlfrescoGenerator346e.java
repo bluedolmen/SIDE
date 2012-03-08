@@ -43,22 +43,22 @@ public class AlfrescoGenerator346e extends AlfrescoGenerator {
 
 	protected List<String> getShareExtensionTemplates() {
 		/*
-		 * remove from base generator generation of upload components, now provided by modules and setup by portal generator
+		 * remove from base generator generation of upload components, now
+		 * provided by modules and setup by portal generator
 		 */
 		List<String> result = new ArrayList<String>();
 		// generator for alfresco Share web application
-		
+
 		result.add(templateBase + "/alfrescoshare/defaultdocListView/documentlist.get.properties.mt"); //$NON-NLS-1$
 
-		result.add(templateBase + "/alfrescoshare/DefaultEditForms/web-framework-config-defaults.mt"); //$NON-NLS-1$
 		return result;
 	}
+
 	@Override
 	protected List<Map<String, String>> getTemplatesSubstitution() {
 		List<Map<String, String>> templatesSubstitution = super.getTemplatesSubstitution();
 		Map<String, String> map = new HashMap<String, String>();
 
-		//Template /com.bluexml.side.Class.generator.alfresco346E/com/bluexml/side/clazz/generator/alfresco346e/template/alfrescoshare/doclist/documentlist.get_de.properties.mt does not exist
 		String string = "/alfrescoshare/doclist/documentlist.get_de" + i18nFileExt;
 		map.put(AlfrescoGenerator.templateBase34d + string, templateBase346e + string); //$NON-NLS-1$
 

@@ -28,11 +28,10 @@ public class AlfrescoGenerator extends com.bluexml.side.clazz.generator.alfresco
 	@Override
 	protected List<String> getMainTemplates() {
 		List<String> templates = super.getMainTemplates();
-		// let form processor build default alfresco forms
-		templates.remove("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/DefaultEditForms/web-framework-config-defaults.mt"); //$NON-NLS-1$
 
 		// define configuration for advancedSearch
-		templates.add(templateBase34d + "/alfrescoshare/custom-share-config.xml.mt"); //$NON-NLS-1$
+		// replaced by portal generation page.advsearch.search.form page.documentlibrary.subtypes.form
+		//		templates.add(templateBase34d + "/alfrescoshare/custom-share-config.xml.mt"); //$NON-NLS-1$
 
 		// i18n messages
 
@@ -57,12 +56,15 @@ public class AlfrescoGenerator extends com.bluexml.side.clazz.generator.alfresco
 		List<Map<String, String>> templatesSubstitution = super.getTemplatesSubstitution();
 		Map<String, String> map = new HashMap<String, String>();
 		// 3.4.d specific
-		map.put("/com.bluexml.side.Class.generator.alfresco/templates/Model/alfrescoGenerator_model.mt", templateBase34d + "/model/alfrescoGenerator_model.mt");
+		map.put(templateBase + "/Model/alfrescoGenerator_model.mt", templateBase34d + "/model/alfrescoGenerator_model.mt");
 
-		map.put("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/uploadForm/flash-upload.get.html.ftl.mt", templateBase34d + "/alfrescoshare/upload/flash-upload.get.html.ftl.mt");
+		map.put(templateBase + "alfrescoshare/uploadForm/flash-upload.get.html.ftl.mt", templateBase34d + "/alfrescoshare/upload/flash-upload.get.html.ftl.mt");
 
 		// i18n messages
-		map.put("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/defaultdocListView/documentlist.get.properties.mt", templateBase34d + "/alfrescoshare/doclist/documentlist.get.properties.mt"); //$NON-NLS-1$
+		map.put(templateBase + "/alfrescoshare/defaultdocListView/documentlist.get.properties.mt", templateBase34d + "/alfrescoshare/doclist/documentlist.get.properties.mt"); //$NON-NLS-1$
+
+		// remove default config since form/portal generator do the job
+		map.put(templateBase + "/alfrescoshare/DefaultEditForms/web-framework-config-defaults.mt", null); //$NON-NLS-1$
 
 		templatesSubstitution.add(map);
 		return templatesSubstitution;
