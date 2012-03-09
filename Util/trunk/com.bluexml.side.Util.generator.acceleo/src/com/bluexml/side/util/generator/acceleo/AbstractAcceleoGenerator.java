@@ -102,11 +102,15 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 				if (remove) {
 					// so only add the template if the template to replace exists and have been removed
 					// this avoid to add optional template even if the option is not selected 
-					alltemplates.add(entry.getValue());
+					String value = entry.getValue();
+					// if null the template is removed without replacement
+					if (value != null) {
+						alltemplates.add(value);
+					}					
 				}
 			}
 		}
-
+		
 		return alltemplates;
 	}
 
