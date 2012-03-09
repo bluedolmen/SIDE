@@ -159,8 +159,8 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 	<%}%>
 	<%if (filter("Field")){%>
 	mandatory="<%filter("Field").mandatory%>"
+	read-only="<%filter("Field").disabled%>"	
 	<%}%>
-	
 >
 
 <%if (haveXtension("template")) {%>
