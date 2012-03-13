@@ -110,6 +110,7 @@ if (Alfresco == undefined) {
 		 * Callback for request success
 		 */
 		onDatasourceSuccess : function(oRequest, oParsedResponse, oPayload) {
+			this.choicesList = [];
 			this.populateSelect(oParsedResponse.results);
 			this.addChoice({
 				value : '',

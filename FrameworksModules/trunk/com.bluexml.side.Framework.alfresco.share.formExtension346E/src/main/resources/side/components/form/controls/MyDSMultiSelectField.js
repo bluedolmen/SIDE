@@ -34,7 +34,7 @@ if (console == undefined) {
 	 */
 	SIDE.MyDSMultiSelectField = function(options, initialValue) {
 		this.initialValue = initialValue;
-
+		this.currentValueHtmlId = options.currentValueHtmlId;
 		SIDE.MyDSMultiSelectField.superclass.constructor.call(this, options);
 
 		this.log("initialValue DSMulti :" + initialValue);
@@ -57,7 +57,8 @@ if (console == undefined) {
 
 			this.ddlist = new SIDE.MyDDList({
 				parentEl : this.fieldContainer,
-				editConfig : this.options.editConfig
+				editConfig : this.options.editConfig,
+				currentValueHtmlId : this.currentValueHtmlId
 			});
 
 		},
@@ -286,7 +287,7 @@ if (console == undefined) {
 				li.appendChild(editLink);
 				var me = this;
 				Event.addListener(editLink, 'click', function(e) {
-					var editTarget = new SIDE.CreateTarget(me.id + "-dialog", me.options.currentValueHtmlId);
+					var editTarget = new SIDE.CreateTarget(me.id, me.options.currentValueHtmlId);
 					editTarget.setOptions(me.options.editConfig);
 					editTarget.options.formconfig.itemId = item.value;
 					editTarget.onNewItem(e, me);
