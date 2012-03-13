@@ -33,6 +33,7 @@
 	 selectableTypeIsAspect : <#if field.control.params.selectableTypeIsAspect??>${field.control.params.selectableTypeIsAspect}<#else>false</#if>
 	 <#if field.control.params.getDataSource??>, getDataSource :${field.control.params.getDataSource}</#if>
 	 <#if field.control.params.addNewConfig??>, addNewConfig : <@addNewConfig field /></#if>
+	 <#if field.control.params.addNewConfig??>, editConfig : <@editConfig field /></#if>
 	 <#if field.control.params.startLocation??>, startLocation : ${field.control.params.startLocation}</#if>
    });
    
@@ -57,7 +58,7 @@
    <#else>
       <label for="${controlId}">${field.label?html}:<#if field.endpointMandatory><span class="mandatory-indicator">${msg("form.required.fields.marker")}</span></#if></label>
       
-      <div id="${controlId}-createNew" class="show-picker"></div>
+      <div id="${controlId}-actions" class="show-picker"></div>
       <div id="${controlId}">
          <#if field.disabled == false>
          <input type="hidden" id="${fieldHtmlId}" name="-" value="${field.value?html}" />

@@ -30,7 +30,7 @@ if (console == undefined) {
 		SIDE.CreateTarget.superclass.constructor.call(this, "SIDE.CreateTarget", htmlId, [ "button", "menu", "container", "resize", "datasource", "datatable" ]);
 		this.currentValueHtmlId = currentValueHtmlId;
 
-		YAHOO.Bubbling.on("/side-labs/CreateTarget/openDialog" + this.htmlId, this.onNewItem, this);
+		YAHOO.Bubbling.on("/side-labs/CreateTarget/openDialog" + this.id, this.onNewItem, this);
 	};
 	YAHOO.extend(SIDE.CreateTarget, Alfresco.component.Base, {
 
@@ -45,8 +45,8 @@ if (console == undefined) {
 		 */
 		options : {
 			formconfig : {
-				itemKind : null, /* node */
-				itemId : null, /* cm:content, cm:folder ... */
+				itemKind : null, /* node, type */
+				itemId : null, /* cm:content, cm:folder ... or nodeRef to edit */
 				destination : null, /*
 									 * container noderef only needed in create
 									 * mode
@@ -79,18 +79,18 @@ if (console == undefined) {
 
 			// Intercept before dialog show
 			var doBeforeDialogShow = function DLTB_onNewFolder_doBeforeDialogShow(p_form, p_dialog) {
-				Dom.get(p_dialog.id + "-dialogTitle").innerHTML = this.msg("label.new-folder.title");
-				Dom.get(p_dialog.id + "-dialogHeader").innerHTML = this.msg("label.new-folder.header");
+//				Dom.get(p_dialog.id + "-dialogTitle").innerHTML = this.msg("label.new-folder.title");
+//				Dom.get(p_dialog.id + "-dialogHeader").innerHTML = this.msg("label.new-folder.header");
 			};
 
 			var templateUrl = YAHOO.lang.substitute(Alfresco.constants.URL_SERVICECONTEXT
-					+ "components/form?itemKind={itemKind}&itemId={itemId}&destination={destination}&mode={mode}&submitType={submitType}&formId={formId}&showCancelButton=true",
+					+ "components/form?itemKind={itemKind}&itemId={itemId}&destination={destination}&mode={mode}&submitType={submitType}&formId={formId}&showCancelButton={showCancelButton}",
 					this.options.formconfig);
 			templateUrl = YAHOO.lang.substitute(templateUrl, {
 				site : "cm:" + Alfresco.constants.SITE
 			});
 			// Using Forms Service, so always create new instance
-			var createFolder = new Alfresco.module.SimpleDialog(this.id + "-createFolder");
+			var createFolder = new Alfresco.module.SimpleDialog(this.id + "-dialog-" + Alfresco.util.generateDomId());
 			var me = this;
 			createFolder.setOptions({
 				width : "33em",
@@ -103,29 +103,36 @@ if (console == undefined) {
 				},
 				onSuccess : {
 					fn : function DLTB_onNewFolder_success(response) {
-						var folderName = response.config.dataObj["prop_cm_name"];
-						YAHOO.Bubbling.fire("/side-labs/onCreateNewItem/" + this.currentValueHtmlId, {
-							mode : "add",
-							values : [ response.json.persistedObject ]
-						});
+						var folderName = "";
+						if (me.options.formconfig.mode == "create") {
+							folderName = response.config.dataObj["prop_cm_name"];
+							YAHOO.Bubbling.fire("/side-labs/onCreateNewItem/" + this.currentValueHtmlId, {
+								mode : "add",
+								values : [ response.json.persistedObject ]
+							});
+						} else if (me.options.formconfig.mode == "edit") {
+							
+							YAHOO.Bubbling.fire("/side-labs/onCreateNewItem/" + this.currentValueHtmlId, {
+								mode : "keep",
+								values : []
+							});
+						}
 						Alfresco.util.PopupManager.displayMessage({
-							text : this.msg("message.new-folder.success", folderName)
+							text : this.msg("message." + me.options.formconfig.mode + ".success", folderName)
 						});
+						
 					},
 					scope : this
 				},
 				onFailure : {
 					fn : function DLTB_onNewFolder_failure(response) {
+						var folderName = "";
 						if (response) {
-							var folderName = response.config.dataObj["prop_cm_name"];
-							Alfresco.util.PopupManager.displayMessage({
-								text : this.msg("message.new-folder.failure", folderName)
-							});
-						} else {
-							Alfresco.util.PopupManager.displayMessage({
-								text : this.msg("message.failure")
-							});
+							folderName = response.config.dataObj["prop_cm_name"];
 						}
+						Alfresco.util.PopupManager.displayMessage({
+							text : this.msg("message." + me.options.formconfig.mode + ".failure", folderName)
+						});
 					},
 					scope : this
 				}

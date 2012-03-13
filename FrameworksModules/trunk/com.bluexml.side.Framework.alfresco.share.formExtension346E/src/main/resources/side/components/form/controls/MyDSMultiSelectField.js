@@ -18,6 +18,7 @@ if (console == undefined) {
 
 (function() {
 
+	var lang = YAHOO.lang, Event = YAHOO.util.Event, Dom = YAHOO.util.Dom;
 	/**
 	 * Create a multi select field
 	 * 
@@ -32,14 +33,20 @@ if (console == undefined) {
 	 *            </ul>
 	 */
 	SIDE.MyDSMultiSelectField = function(options, initialValue) {
-		SIDE.MyDSMultiSelectField.superclass.constructor.call(this, options);
 		this.initialValue = initialValue;
+
+		SIDE.MyDSMultiSelectField.superclass.constructor.call(this, options);
+
 		this.log("initialValue DSMulti :" + initialValue);
 	};
 
 	YAHOO.lang.extend(SIDE.MyDSMultiSelectField, inputEx.DSSelectField, {
 		log : function(msg) {
 			console.log("[SIDE.MyDSMultiSelectField] " + msg);
+		},
+		setOptions : function(options) {
+			SIDE.MyDSMultiSelectField.superclass.setOptions.call(this, options);
+			this.options.editConfig = options.editConfig;
 		},
 		/**
 		 * Build the DDList
@@ -48,8 +55,9 @@ if (console == undefined) {
 
 			SIDE.MyDSMultiSelectField.superclass.renderComponent.call(this);
 
-			this.ddlist = new inputEx.widget.DDList({
-				parentEl : this.fieldContainer
+			this.ddlist = new SIDE.MyDDList({
+				parentEl : this.fieldContainer,
+				editConfig : this.options.editConfig
 			});
 
 		},
@@ -228,4 +236,68 @@ if (console == undefined) {
 	// Register this class as "multiselect" type
 	inputEx.registerType("dsmultiselect", SIDE.MyDSMultiSelectField);
 
+}());
+
+(function() {
+
+	var lang = YAHOO.lang, Event = YAHOO.util.Event, Dom = YAHOO.util.Dom;
+	/**
+	 * DDList extension to add edit action
+	 */
+	SIDE.MyDDList = function(options) {
+		this.editLinksTarget = [];
+		SIDE.MyDDList.superclass.constructor.call(this, options);
+	};
+	YAHOO.lang.extend(SIDE.MyDDList, inputEx.widget.DDList, {
+		log : function(msg) {
+			console.log("[SIDE.MyDDList] " + msg);
+		},
+		setOptions : function(options) {
+			SIDE.MyDDList.superclass.setOptions.call(this, options);
+			this.options.editConfig = options.editConfig;
+			this.options.currentValueHtmlId = options.currentValueHtmlId;
+		},
+		/**
+		 * Add an item to the list
+		 * 
+		 * @param {String|Object}
+		 *            item Either a string with the given value or an object
+		 *            with "label" and "value" attributes
+		 */
+		addItem : function(item) {
+			var li = inputEx.cn('li', {
+				className : 'inputEx-DDList-item'
+			});
+			li.appendChild(inputEx.cn('span', null, null, (typeof item == "object") ? item.label : item));
+
+			// Option for the "remove" link (default: true)
+			if (!!this.options.allowDelete) {
+				var removeLink = inputEx.cn('a', null, null, "remove");
+				li.appendChild(removeLink);
+				Event.addListener(removeLink, 'click', function(e) {
+					var a = Event.getTarget(e);
+					var li = a.parentNode;
+					this.removeItem(inputEx.indexOf(li, this.ul.childNodes));
+				}, this, true);
+			}
+
+			if (!lang.isUndefined(this.options.editConfig) && !this.options.editConfig.disabled) {
+				var editLink = inputEx.cn('a', null, null, "edit");
+				li.appendChild(editLink);
+				var me = this;
+				Event.addListener(editLink, 'click', function(e) {
+					var editTarget = new SIDE.CreateTarget(me.id + "-dialog", me.options.currentValueHtmlId);
+					editTarget.setOptions(me.options.editConfig);
+					editTarget.options.formconfig.itemId = item.value;
+					editTarget.onNewItem(e, me);
+				}, this, true);
+			}
+			var dditem = new inputEx.widget.DDListItem(li);
+			dditem._list = this;
+
+			this.items.push((typeof item == "object") ? item.value : item);
+
+			this.ul.appendChild(li);
+		}
+	});
 }());

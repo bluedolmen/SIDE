@@ -54,7 +54,7 @@ if (!Array.prototype.indexOf) {
 		this.removedFieldHtmlId = htmlId + "-removed";
 		this.DSSelectWidget = null;
 		this.initialValue = "";
-		this.widgets.createNew = new SIDE.CreateTarget(this.htmlid + "-createNew", currentValueHtmlId);
+		this.widgets.createNew = new SIDE.CreateTarget(this.htmlid, currentValueHtmlId);
 		if (initialValue) {
 			this.initialValue = initialValue;
 			console.log("field :" + htmlId + " initialValue :" + initialValue);
@@ -87,6 +87,10 @@ if (!Array.prototype.indexOf) {
 			searchInSite : true,
 			hideSelector : false,
 			addNewConfig : {
+				disabled : true,
+				formconfig : {}
+			},
+			editConfig : {
 				disabled : true,
 				formconfig : {}
 			}
@@ -128,7 +132,7 @@ if (!Array.prototype.indexOf) {
 		},
 		createAddNewControl : function CT_createControl() {
 			// insert button
-			var itemGroupActionsContainerEl = Dom.get(this.htmlid + "-createNew");
+			var itemGroupActionsContainerEl = Dom.get(this.htmlid + "-actions");
 			var addButtonEl = document.createElement("button");
 			itemGroupActionsContainerEl.appendChild(addButtonEl);
 			this.widgets.addButton = Alfresco.util.createYUIButton(this, null, this.onAddButtonClick, {
@@ -145,6 +149,7 @@ if (!Array.prototype.indexOf) {
 			if (!this.options.disabled && !this.options.addNewConfig.disabled) {
 				this.createAddNewControl();
 			}
+			
 			var myDataSource = this.options.getDataSource(this);
 			if (this.options.disabled) {
 				// use object-piker instance
@@ -161,7 +166,9 @@ if (!Array.prototype.indexOf) {
 					datasource : myDataSource,
 					valueKey : "nodeRef",
 					labelKey : "name",
-					parentEl : this.htmlid
+					parentEl : this.htmlid,
+					currentValueHtmlId : this.currentValueHtmlId,					
+					editConfig : this.options.editConfig					
 				}, this.initialValue);
 				var me = this;
 				multiselect.updatedEvt.subscribe(function(e, params) {
@@ -211,7 +218,9 @@ if (!Array.prototype.indexOf) {
 					datasource : myDataSource,
 					valueKey : "nodeRef",
 					labelKey : "name",
-					parentEl : this.htmlid
+					parentEl : this.htmlid,
+					currentValueHtmlId : this.currentValueHtmlId,
+					editConfig : this.options.editConfig
 				}, this.initialValue);
 
 				var me = this;
@@ -245,6 +254,16 @@ if (!Array.prototype.indexOf) {
 						}
 					}
 					YAHOO.util.Dom.get(me.currentValueHtmlId).value = value.toString();
+					// update the edit action
+					if (DSSelectWidget.editTarget) {
+						if (value != "") {
+							DSSelectWidget.editTarget.options.formconfig.itemId = value;
+
+							DSSelectWidget.widgets.editButton.set("disabled", false, false);
+						} else {
+							DSSelectWidget.widgets.editButton.set("disabled", true, false);
+						}
+					}
 					if (me.options.mandatory) {
 						YAHOO.Bubbling.fire("mandatoryControlValueUpdated", me);
 					}

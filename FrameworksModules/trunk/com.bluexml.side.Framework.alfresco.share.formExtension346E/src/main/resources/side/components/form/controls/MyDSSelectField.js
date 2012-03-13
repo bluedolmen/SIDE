@@ -15,9 +15,17 @@ if (console == undefined) {
 		}
 	};
 }
-
+if (Alfresco == undefined) {
+	var Alfresco = {
+		logger : {
+			debug : function(msg) {
+			}
+		}
+	}
+}
 (function() {
 
+	var Dom = YAHOO.util.Dom;
 	/**
 	 * Create a select field from a datasource
 	 * 
@@ -37,15 +45,47 @@ if (console == undefined) {
 	 * 
 	 */
 	SIDE.MyDSSelectField = function(options, initialValue) {
-		SIDE.MyDSSelectField.superclass.constructor.call(this, options);
+		this.widgets = {};
 		this.initialValue = initialValue;
+		if (typeof options.editConfig == "object") {
+			this.parentEl = options.parentEl;
+			this.currentValueHtmlId = options.currentValueHtmlId;
+			this.editTarget = new SIDE.CreateTarget(this.parentEl, this.currentValueHtmlId);
+			this.editTarget.setOptions(options.editConfig);
+		}
+		SIDE.MyDSSelectField.superclass.constructor.call(this, options);
 		this.log("DSS initial value :" + initialValue);
 	};
 
 	YAHOO.lang.extend(SIDE.MyDSSelectField, inputEx.DSSelectField, {
 		log : function(msg) {
-			console.log("[SIDE.MyDSSelectField] " + msg);
+			var logHeader = "[SIDE.MyDSSelectField] ";
+			var logmsg = logHeader + msg;
+			console.log(logmsg);
+			Alfresco.logger.debug(logmsg);
 		},
+		/**
+		 * Build a select tag with options
+		 */
+		renderComponent : function() {
+			SIDE.MyDSSelectField.superclass.renderComponent.call(this);
+			if (this.editTarget) {
+				var itemGroupActionsContainerEl = Dom.get(this.parentEl + "-actions");
+				var editButtonEl = document.createElement("button");
+				itemGroupActionsContainerEl.appendChild(editButtonEl);
+				this.widgets.editButton = Alfresco.util.createYUIButton(this, null, this.onEditButtonClick, {
+					label : this.options.selectActionLabel ? this.options.selectActionLabel : "edit",
+					disabled : true
+				}, editButtonEl);
+			}
+		},
+
+		onEditButtonClick : function(e, p_obj) {
+			// open dialog with edit form in
+			this.editTarget.onNewItem(e, p_obj);
+		},
+
+		
 		/**
 		 * Send the datasource request for reload and preserve selected value
 		 */
@@ -88,6 +128,7 @@ if (console == undefined) {
 			}
 
 			this.log("dataloaded init old: (value setted by populateSelect)" + this.getValue());
+			this.log("dataloaded init new proposed value" + value);
 			this.setValue(value);
 			this.log("dataloaded init new:" + this.getValue());
 			this.log("force previousState to 'valid'");

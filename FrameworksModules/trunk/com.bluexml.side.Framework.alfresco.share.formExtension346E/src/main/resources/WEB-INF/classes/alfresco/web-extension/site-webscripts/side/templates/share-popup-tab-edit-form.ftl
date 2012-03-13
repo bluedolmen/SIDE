@@ -50,7 +50,11 @@
 			})();
 			//]]></script>
 
-
+		<#if args.showCancelButton?exists && args.showCancelButton != "true">
+		<#-- hack create a cancel button for simple-dialog when  showCancelButton == true, simple-dialog always search for cancel button even if showCancelButton == "true" -->
+		<div style="display:none;"> <input id="${formId}-cancel" type="button" value="${msg("form.button.cancel.label")}" style="display:none;"/></div>
+		
+		</#if>
             <!--<div class="bdft">
                <input id="${formId}-submit" type="submit" value="${msg("form.button.submit.label")}" />
                &nbsp;<input id="${formId}-cancel" type="button" value="${msg("form.button.cancel.label")}" />
