@@ -310,9 +310,9 @@ function main()
 					  var q_part = " ";
 				      var v = queryArray[x];	
 				      if (v.indexOf(":") != -1) {
-				         var part= v.split("=");
-				         var key=part[0];
-				         var value=part[1];
+				         var part = v.split("=");
+				         var key = part[0];
+				         var value = part[1];
 				         q_part += "@" + key.replace(":","\\:") + ":'" + value + "'";
 				      } else {
 				    	 q_part += " " + v + " ";
