@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Community module repository
 Bundle-SymbolicName: com.bluexml.side.Util.dependencies.repository;singleton:=true
-Bundle-Version: 1.0.160.v33682-20120308
+Bundle-Version: 1.0.161.v33790-20120313
 Bundle-Activator: com.bluexml.side.util.dependencies.repository.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.core.runtime,
