@@ -33,7 +33,7 @@
 	 selectableTypeIsAspect : <#if field.control.params.selectableTypeIsAspect??>${field.control.params.selectableTypeIsAspect}<#else>false</#if>
 	 <#if field.control.params.getDataSource??>, getDataSource :${field.control.params.getDataSource}</#if>
 	 <#if field.control.params.addNewConfig??>, addNewConfig : <@addNewConfig field /></#if>
-	 <#if field.control.params.addNewConfig??>, editConfig : <@editConfig field /></#if>
+	 <#if field.control.params.editConfig??>, editConfig : <@editConfig field /></#if>
 	 <#if field.control.params.startLocation??>, startLocation : ${field.control.params.startLocation}</#if>
    });
    
