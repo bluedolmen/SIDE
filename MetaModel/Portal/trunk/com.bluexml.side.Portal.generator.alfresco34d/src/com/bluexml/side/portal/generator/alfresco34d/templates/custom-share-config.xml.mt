@@ -5,7 +5,7 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 import com.bluexml.side.portal.generator.alfresco34d.templates.custom-share-config-lib
 %>
 <%script type="Portal" name="validatedFilename" post="trim()" %>
-<%getProperty("alf.share.paths.web-ext")%>/custom-share-config.xml
+<%getProperty("alf.share.paths.web-ext")%>/share-config-custom.xml
 
 <%script type="Portal" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 <alfresco-config>
