@@ -61,6 +61,11 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 <%script type="FormElement" name="haveXtension" post="trim()" %>
 <%metainfo[key.toLowerCase() == args(0).toLowerCase()].nSize() > 0 || Xtension[toString().toLowerCase().startsWith(args(0).toLowerCase())].nSize() > 0%>
 
+<%script type="FormElement" name="getXtensionValue" post="trim()" %>
+<%metainfo[key.toLowerCase() == args(0).toLowerCase()].value%>
+<%metainfo[key.toLowerCase() == args(0).toLowerCase()].multilineValue%>
+<%Xtension[toString().toLowerCase().startsWith(args(0).toLowerCase())]%>
+
 <%-- getXtensionAsControlParam :
 	 args(0) : expected parameter name
 	 returns the value of the expected parameter stored in Xtension and create control-param element

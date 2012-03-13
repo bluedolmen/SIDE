@@ -263,12 +263,17 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 		<%getXtensionAsControlParam("maxResults")%>
 		<%getXtensionAsControlParam("getDataSource")%>
 		
-		<%if (filter("ModelChoiceField").association_formClass.nSize() == 1){%>
+		<%if (filter("ModelChoiceField").association_formClass.nSize() == 1){%>		
+			<%if (getXtensionValue("allowToCreate") != "false"){%>
 		<control-param name="addNewConfig">true</control-param>
-		<%if (filter("ModelChoiceField").association_formClass.nGet(0).eContainer().filter("FormCollection").name != "default"){%>
+			<%}%>
+			<%if (getXtensionValue("allowToEdit") != "false"){%>
+		<control-param name="editConfig">true</control-param>
+			<%}%>
+			<%if (filter("ModelChoiceField").association_formClass.nGet(0).eContainer().filter("FormCollection").name != "default"){%>
 		<control-param name="targetFormId"><%filter("ModelChoiceField").association_formClass.nGet(0).eContainer().filter("FormCollection").name%></control-param>		
 		<control-param name="itemType"><%filter("ModelChoiceField").association_formClass.nGet(0).real_class.getPrefixedQName()%></control-param>		
-		<%}%>
+			<%}%>
 		<%}else{%>
 		<%getXtensionAsControlParam("addNewConfig")%>
 		<%getXtensionAsControlParam("targetFormId")%>
