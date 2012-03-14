@@ -47,7 +47,7 @@ if (Alfresco == undefined) {
 	SIDE.MyDSSelectField = function(options, initialValue) {
 		this.widgets = {};
 		this.initialValue = initialValue;
-		if (typeof options.editConfig == "object") {
+		if (!options.editConfig.disabled) {
 			this.parentEl = options.parentEl;
 			this.currentValueHtmlId = options.currentValueHtmlId;
 			this.editTarget = new SIDE.CreateTarget(this.parentEl, this.currentValueHtmlId);
