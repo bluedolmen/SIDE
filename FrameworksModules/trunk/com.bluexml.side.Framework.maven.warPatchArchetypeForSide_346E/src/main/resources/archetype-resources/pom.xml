@@ -18,12 +18,6 @@
 	</dependencies>
 	<description>project description</description>
 	<build>
-		<resources>
-			<resource>
-				<directory>resources</directory>
-				<filtering>true</filtering>
-			</resource>
-		</resources>
 		<plugins>
 			<plugin>
 				<groupId>com.bluexml.side.Integration.m2</groupId>
