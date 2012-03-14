@@ -29,7 +29,8 @@ import com.bluexml.side.portal.generator.alfresco34d.templates.custom-share-conf
 			</forms>
 		</advanced-search>
 	</config>
-<%}%>	
+<%}%>
+
 <%for (pageSet[ID.toLowerCase().trim() == "documentlibrary"].portlets.associationPortlet[name.toLowerCase().trim() == "subtypes" && isPortletInternal != null].isPortletInternal.form){%>
 	<%generateAvailableTypeHierachy2(forms.filter("form.ClassReference").real_class)%>
 <%}%>
