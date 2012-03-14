@@ -3,6 +3,7 @@ package com.bluexml.side.clazz.service.alfresco;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
@@ -15,6 +16,7 @@ import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.Enumeration;
 import com.bluexml.side.clazz.Model;
 import com.bluexml.side.common.Constraint;
+import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NameSpace;
 import com.bluexml.side.common.NamedModelElement;
@@ -184,4 +186,45 @@ public class CommonServices {
 		return OCLEvaluator.eval(context, body);
 	}
 
+	public static boolean hasMetadata(ModelElement element, String key) {
+		return getFirstMetainfo(element, key) != null;
+	}
+
+	public static MetaInfo getFirstMetainfo(ModelElement element, String key) {
+		EList<MetaInfo> metainfo = element.getMetainfo();
+		for (MetaInfo metaInfo2 : metainfo) {
+			if (key.equals(metaInfo2.getKey())) {
+				return metaInfo2;
+			}
+		}
+		return null;
+	}
+
+	public static Object getFirstMetainfoValue(ModelElement element, String key, String defaultValue) {
+		MetaInfo firstMetainfo = getFirstMetainfo(element, key);
+		if (firstMetainfo != null) {
+			String multilineValue = StringUtils.trimToNull(firstMetainfo.getMultilineValue());
+			String value = StringUtils.trimToNull(firstMetainfo.getValue());
+			EList<EObject> eObjectValue = firstMetainfo.getEObjectValue();
+			if (multilineValue != null) {
+				return multilineValue;
+			} else if (value != null) {
+				return value;
+			} else if (eObjectValue != null && eObjectValue.size() > 0) {
+				return eObjectValue;
+			}
+		}
+		return defaultValue;
+	}
+
+	public static List<MetaInfo> getAllMetaInfo(ModelElement element, String key) {
+		EList<MetaInfo> metainfo = element.getMetainfo();
+		ArrayList<MetaInfo> filtered = new ArrayList<MetaInfo>();
+		for (MetaInfo metaInfo2 : metainfo) {
+			if (key.equals(metaInfo2.getKey())) {
+				filtered.add(metaInfo2);
+			}
+		}
+		return filtered;
+	}
 }

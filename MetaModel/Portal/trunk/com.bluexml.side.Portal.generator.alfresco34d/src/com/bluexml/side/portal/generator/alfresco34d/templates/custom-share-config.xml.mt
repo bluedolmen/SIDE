@@ -10,7 +10,7 @@ import com.bluexml.side.portal.generator.alfresco34d.templates.custom-share-conf
 <%script type="Portal" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 <alfresco-config>
 <%for (pageSet[ID.toLowerCase().trim() == "advsearch"].portlets.associationPortlet[name.toLowerCase().trim() == "search" && isPortletInternal != null]){%>
-	<config evaluator="string-compare" condition="AdvancedSearch">
+	<config evaluator="string-compare" condition="AdvancedSearch"<%if (getFirstMetainfoValue("replace","false") == "true"){%> replace="true"<%}%>>
 		<advanced-search>
 			<!-- Forms for the advanced search type list -->
 			<forms>
@@ -31,11 +31,11 @@ import com.bluexml.side.portal.generator.alfresco34d.templates.custom-share-conf
 	</config>
 <%}%>
 
-<%for (pageSet[ID.toLowerCase().trim() == "documentlibrary"].portlets.associationPortlet[name.toLowerCase().trim() == "subtypes" && isPortletInternal != null].isPortletInternal.form){%>
-	<%generateAvailableTypeHierachy2(forms.filter("form.ClassReference").real_class)%>
+<%for (pageSet[ID.toLowerCase().trim() == "documentlibrary"].portlets.associationPortlet[name.toLowerCase().trim() == "subtypes" && isPortletInternal != null && isPortletInternal.form != null]){%>
+	<%generateDocumentLibraryConfiguration(isPortletInternal.form.forms.filter("form.ClassReference").real_class)%>
 <%}%>
-<%for (pageSet[ID.toLowerCase().trim() == "documentlibrary"].portlets.associationPortlet[name.toLowerCase().trim() == "subtypes" && isPortletInternal != null].isPortletInternal.view){%>
-	<%generateAvailableTypeHierachy2(getInnerView().filter("view.AbstractViewOf").viewOf)%>
+<%for (pageSet[ID.toLowerCase().trim() == "documentlibrary"].portlets.associationPortlet[name.toLowerCase().trim() == "subtypes" && isPortletInternal != null && isPortletInternal.view != null]){%>
+	<%generateDocumentLibraryConfiguration(isPortletInternal.view.getInnerView().filter("view.AbstractViewOf").viewOf)%>
 <%}%>
 
 </alfresco-config>
