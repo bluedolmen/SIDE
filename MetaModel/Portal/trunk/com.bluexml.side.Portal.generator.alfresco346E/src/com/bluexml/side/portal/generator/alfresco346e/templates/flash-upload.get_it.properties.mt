@@ -38,6 +38,6 @@ label.comments=Commenti
 type.cm_content=Contenuto
 <%for (pageSet[ID.toLowerCase().trim() == "documentlibrary"].portlets.associationPortlet[name.toLowerCase().trim() == "uploadabletypes" && isPortletInternal != null]){%>
 <%for (isPortletInternal.form.forms){%>
-type.<%filter("form.ClassReference").real_class.getPrefixedQName("_")%>=<%filter("form.ClassReference").real_class.getLabel()%>"
+type.<%filter("form.ClassReference").real_class.getPrefixedQName("_")%><%filter("form.ClassReference").real_class.getLabel()%>
 <%}%>
 <%}%>
