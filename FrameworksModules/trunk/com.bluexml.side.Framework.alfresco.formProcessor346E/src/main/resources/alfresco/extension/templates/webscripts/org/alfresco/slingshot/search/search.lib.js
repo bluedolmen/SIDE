@@ -861,7 +861,8 @@ function makeQueryFor(formJson, p, operator, first) {
 					formQuery += (first ? '' : ' ' + operator + ' ') + 'cm:content.' + propName + ':"' + propValue + '"';
 				}
 			} else if (p.indexOf("assoc_") === 0 && p.match("_added$") == "_added") {
-				var propName = p.substring(6, p.indexOf('_added')) + "search";
+				var regexp= new RegExp("assoc_([^_]+)_(.*)_added");
+				var propName = '@' + p.replace(regexp,"$1:$2") + "search";
 				if (propValue.indexOf(',') != -1) {
 					var values = propValue.split(',');
 					formQuery += (first ? '' : ' ' + operator + ' ');
@@ -982,7 +983,14 @@ function getSearchPath(formJson) {
 	var pathFieldId = "path_added";
 	var searchPath = formJson[pathFieldId];
 	if (searchPath != null && searchPath != undefined && searchPath != '') {
-		return search.findNode(searchPath).qnamePath;
+		if (searchPath.match("^[^:]+://[^/]+/.+$") != null) {
+			// is a nodeRef need to convert to xpath
+			return search.findNode(searchPath).qnamePath;
+		} else {
+			// assume that the parameter is a xpath
+			return searchPath;
+		}
+		
 	}
 	return null;
 }
