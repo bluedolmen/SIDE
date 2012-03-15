@@ -280,7 +280,7 @@
          // search YUI button
          this.widgets.searchButton = Alfresco.util.createYUIButton(this, "search-button", this.onSearchClick);
          
-         this.widgets.searchButton = Alfresco.util.createYUIButton(this, "save-search-button", this.onSaveSearchClick);
+         this.widgets.savedSearchButton = Alfresco.util.createYUIButton(this, "save-search-button", this.onSaveSearchClick);
          
          // menu button for sort options
          this.widgets.sortButton = new YAHOO.widget.Button(this.id + "-sort-menubutton",
@@ -904,7 +904,7 @@
     	  
     	if (saveName != null && saveName != "") {
 	      	var queryString = this._buildSearchParams(this.searchRepository, this.searchAllSites, this.searchTerm, this.searchTag, this.searchSort);
-	    	var url = Alfresco.constants.PROXY_URI + 'side/repo/saveSearch/site/' + Alfresco.constants.SITE + '?dataType='+this.options.savedSearchDataType+'&saveName=' + saveName + "&" + queryString;
+	    	var url = Alfresco.constants.PROXY_URI + 'side/repo/saveSearch/site/' + Alfresco.constants.SITE + '?dataType=' + this.options.savedSearchDataType + '&saveName=' + saveName + "&" + queryString;
 	    	var responseConfig = {
 	    	  successMessage : this.msg("search.save.ok"),
 	    	  successCallback : function(e, obj) {

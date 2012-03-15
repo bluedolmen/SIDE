@@ -18,6 +18,12 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+    	<groupId>com.bluexml.side.Framework.alfresco</groupId>
+    	<artifactId>savedSearch346E</artifactId>
+    	<version>1.0.3</version>
+    	<type>amp</type>
+    </dependency>
   </dependencies>
   <description>project description</description>
   <build>
