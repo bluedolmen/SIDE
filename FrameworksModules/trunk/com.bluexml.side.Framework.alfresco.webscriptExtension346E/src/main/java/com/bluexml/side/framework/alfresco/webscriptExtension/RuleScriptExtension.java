@@ -21,8 +21,8 @@ import org.apache.log4j.Logger;
 
 /**
  * Extend Alfresco Javascript API with rule service
- * siderule.addScriptRule(scriptFileNode, targetedSpace) to add a javascript-based script rule to a targeted space
- *
+ * siderule.addScriptRule(scriptFileNode, targetedSpace) to add a
+ * javascript-based script rule to a targeted space
  */
 public class RuleScriptExtension extends BaseScopableProcessorExtension {
 
@@ -61,7 +61,7 @@ public class RuleScriptExtension extends BaseScopableProcessorExtension {
 		this.ruleService = ruleService;
 	}
 
-		/**
+	/**
 	 * @return the actionService
 	 */
 	public ActionService getActionService() {
@@ -76,13 +76,16 @@ public class RuleScriptExtension extends BaseScopableProcessorExtension {
 		this.actionService = actionService;
 	}
 
-
 	/**
 	 * Method to add a script-based rule on a space to apply on children space
 	 * 
-	 * @param script the javascript script file containing the code of the rule to apply on the targeted space
-	 * @param targetSpace the targeted space
-	 * @param ruleType the rule type: either "inbound", "outbound" or "update"
+	 * @param script
+	 *            the javascript script file containing the code of the rule to
+	 *            apply on the targeted space
+	 * @param targetSpace
+	 *            the targeted space
+	 * @param ruleType
+	 *            the rule type: either "inbound", "outbound" or "update"
 	 */
 	public void addScriptRule(ScriptNode script, ScriptNode targetSpace, String ruleType) {
 		addScriptRuleWithTypeCondition(script, targetSpace, ruleType, null, null);
@@ -91,32 +94,61 @@ public class RuleScriptExtension extends BaseScopableProcessorExtension {
 	/**
 	 * Method to add a script-based rule on a space to apply on children space
 	 * 
-	 * @param script the javascript script file containing the code of the rule to apply on the targeted space
-	 * @param targetSpace the targeted space
-	 * @param ruleType the rule type: either "inbound", "outbound" or "update"
+	 * @param script
+	 *            the javascript script file containing the code of the rule to
+	 *            apply on the targeted space
+	 * @param targetSpace
+	 *            the targeted space
+	 * @param ruleType
+	 *            the rule type: either "inbound", "outbound" or "update"
+	 * @param applyToChildren
+	 * @param setExecuteAsynchronously
+	 * @param setRuleDisabled
 	 */
 	public void addScriptRuleWithTypeCondition(ScriptNode script, ScriptNode targetSpace, String ruleType, String contentType, String uri) {
-	    if (logger.isDebugEnabled())
-	            logger.debug("Add the script rule " + script + " on the space " +targetSpace);
+		String title = "rule_script_execution";
+		String description = "Run a script when an event occurs on the targetSpace";
+		boolean setExecuteAsynchronously = true;
+		boolean applyToChildren = false;
+		boolean setRuleDisabled = false;
+		addScriptRuleWithTypeCondition(script, targetSpace, ruleType, contentType, uri, applyToChildren, setExecuteAsynchronously, setRuleDisabled, title, description);
+	}
+
+	/**
+	 * Method to add a script-based rule with full setting
+	 * 
+	 * @param script
+	 * @param targetSpace
+	 * @param ruleType
+	 * @param contentType
+	 * @param uri
+	 * @param applyToChildren
+	 * @param setExecuteAsynchronously
+	 * @param setRuleDisabled
+	 * @param title
+	 * @param description
+	 */
+	public void addScriptRuleWithTypeCondition(ScriptNode script, ScriptNode targetSpace, String ruleType, String contentType, String uri, boolean applyToChildren, boolean setExecuteAsynchronously, boolean setRuleDisabled, String title, String description) {
+		if (logger.isDebugEnabled())
+			logger.debug("Add the script rule " + script + " on the space " + targetSpace);
 		Rule rule = new Rule();
-		rule.setTitle("rule_script_execution");
-		rule.setDescription("Run a script when an event occurs on the targetSpace");
-		rule.applyToChildren(true);
-		rule.setExecuteAsynchronously(false);
-		rule.setRuleDisabled(false);
-		if (ruleType.equals("update")){
+
+		rule.setTitle(title);
+		rule.setDescription(description);
+		rule.applyToChildren(applyToChildren);
+		rule.setExecuteAsynchronously(setExecuteAsynchronously);
+		rule.setRuleDisabled(setRuleDisabled);
+		if (ruleType.equals("update")) {
 			rule.setRuleType(RuleType.UPDATE);
-		} else { 
-			if (ruleType.equals("outbound")){
-				rule.setRuleType(RuleType.OUTBOUND);
-			} else { 
-				rule.setRuleType(RuleType.INBOUND);
-			}
+		} else if (ruleType.equals("outbound")) {
+			rule.setRuleType(RuleType.OUTBOUND);
+		} else {
+			rule.setRuleType(RuleType.INBOUND);
 		}
-		
+
 		CompositeAction compositeAction = actionService.createCompositeAction();
 		rule.setAction(compositeAction);
-		
+
 		ActionCondition condition = actionService.createActionCondition(IsSubTypeEvaluator.NAME);
 		Map<String, Serializable> conditionParameters = new HashMap<String, Serializable>(1);
 		if (contentType != null) {
@@ -126,14 +158,14 @@ public class RuleScriptExtension extends BaseScopableProcessorExtension {
 		}
 		condition.setParameterValues(conditionParameters);
 		compositeAction.addActionCondition(condition);
-		
+
 		Action action = actionService.createAction("script");
 		action.setParameterValue("script-ref", script.getNodeRef());
 		compositeAction.addAction(action);
-		
+
 		// save the rule on the node only if the node has no rule
 		if (!this.getRuleService().hasRules(targetSpace.getNodeRef())) {
-			this.getRuleService().saveRule(targetSpace.getNodeRef(), rule);			
+			this.getRuleService().saveRule(targetSpace.getNodeRef(), rule);
 		}
 	}
 
