@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.View.generator.facetmap.enterprise.feature" label="SIDE Enterprise Facet Navigation View Generator" version="1.0.43.v33382-20120301" provider-name="BlueXML">
+<feature id="com.bluexml.side.View.generator.facetmap.enterprise.feature" label="SIDE Enterprise Facet Navigation View Generator" version="1.0.44.v33947-20120315" provider-name="BlueXML">
   <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature is the generator of Facet Navigation based view models for content type facet display.</description>
   <copyright>[Enter Copyright Description here.]</copyright>
   <license>[Enter License Description here.]</license>
-  <includes id="com.bluexml.side.View.generator.facetmap.feature" version="1.0.89.v33382-20120301" />
+  <includes id="com.bluexml.side.View.generator.facetmap.feature" version="1.0.90.v33947-20120315" />
   <requires>
     <import plugin="org.eclipse.ui" />
     <import plugin="org.eclipse.core.runtime" />
