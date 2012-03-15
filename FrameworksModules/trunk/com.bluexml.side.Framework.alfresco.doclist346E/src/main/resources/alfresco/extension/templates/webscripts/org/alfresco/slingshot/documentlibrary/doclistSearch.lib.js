@@ -89,8 +89,7 @@ function getSearchQuery(term, maxResults, siteId, containerId)
    return luceneQuery;
 }
 
-function getSavedSearchQueryDef(filterdata) {
-	var nodeRef = filterdata;
+function getSavedSearchQueryDef(nodeRef) {
 	var node = search.findNode(nodeRef);
 	var queryString = node.content;
 	
