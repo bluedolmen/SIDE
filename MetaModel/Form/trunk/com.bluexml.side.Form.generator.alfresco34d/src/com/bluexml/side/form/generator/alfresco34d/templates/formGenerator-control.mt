@@ -261,6 +261,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 		<%getXtensionAsControlParam("filterTerm")%>
 		<%getXtensionAsControlParam("advancedQuery")%>
 		<%getXtensionAsControlParam("maxResults")%>
+		<%getXtensionAsControlParam("startLocation")%>
 		<%getXtensionAsControlParam("getDataSource")%>
 		
 		<%if (filter("ModelChoiceField").association_formClass.nSize() == 1){%>		
