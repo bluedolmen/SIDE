@@ -33,7 +33,7 @@ function getDoclist()
       query = filterParams.query;
 
    // Query the nodes - passing in sort and result limit parameters
-   if (query !== "" | filter == "savedSearch")
+   if (query !== "" || filter == "savedSearch")
    {
 	   // SIDE override sort parameters using sort parameter (see share config
 		// Search)
