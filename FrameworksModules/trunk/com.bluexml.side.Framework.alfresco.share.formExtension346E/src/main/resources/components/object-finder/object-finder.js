@@ -1094,11 +1094,13 @@
        */
       onFormContainerDestroyed: function ObjectFinder_onFormContainerDestroyed(layer, args)
       {
-         // need to valide that the current event is for this instance         
+         //SIDE need to valide that the current event is for this instance when many simpleDialog is opened          
          var currentFormId = YAHOO.util.Dom.getAncestorByTagName(this.id,"form").id;
          var eventFormId = args[1].form.formId;
-         Alfresco.logger.debug("onFormContainerDestroyed currentId :" + currentFormId);
-         Alfresco.logger.debug("onFormContainerDestroyed eventId :" + eventFormId);
+         if (Alfresco.logger.isDebugEnabled()) {
+            Alfresco.logger.debug("onFormContainerDestroyed currentId :" + currentFormId);
+            Alfresco.logger.debug("onFormContainerDestroyed eventId :" + eventFormId);
+         }
          if (currentFormId == eventFormId) {
             if (this.widgets.dialog)
             {
@@ -2766,7 +2768,8 @@
          
          // if an XPath start location has been provided and it has not been resolved 
          // yet, pass it to the pickerchildren script as a parameter
-         if (!this.startLocationResolved && this.options.startLocation &&
+         // SIDE add support of startLocation when authorityMode is activated
+         if ( (!this.startLocationResolved || this._inAuthorityMode()) && this.options.startLocation &&
               this.options.startLocation.charAt(0) == "/")
          {
             params += "&xpath=" + encodeURIComponent(this.options.startLocation);
