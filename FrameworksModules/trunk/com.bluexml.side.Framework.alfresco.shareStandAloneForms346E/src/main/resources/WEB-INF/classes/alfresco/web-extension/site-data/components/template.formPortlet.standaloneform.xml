@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<component>
+	<scope>template</scope>
+	<region-id>formPortlet</region-id>
+	<source-id>standaloneform</source-id>
+	<url>/components/form?mimeType={mimeType}&amp;destination={destination}&amp;redirect={redirect}&amp;formId={formId}&amp;css={css}&amp;js={js}
+	</url>
+	<properties>
+		<itemKind>{itemKind}</itemKind>
+		<itemId>{itemId}</itemId>
+		<mode>{mode}</mode>
+		<submitType>{submitType}</submitType>
+		<showCaption>{showCaption}</showCaption>
+		<showCancelButton>{showCancelButton}</showCancelButton>
+		<editInline>{editInline}</editInline>
+		<googleEditable>{googleEditable}</googleEditable>
+	</properties>
+</component>
