@@ -506,8 +506,33 @@
          }
          
          this._loadSelectedItems();
+         if (this._inAuthorityMode()) {
+            this._loadSearchTermResults();  
+         }
       },
-      
+      /**
+       * load items list according to initial searchTerm 
+       */
+      _loadSearchTermResults : function ObjectFinder_loadSearchTermResults() {
+         // get the current search term
+         var searchTerm = this.options.searchTerm ? this.options.searchTerm : null;
+         var searchTermInput = Dom.get(this.pickerId + "-searchText");
+         searchTermInput.value = searchTerm;
+         if (Alfresco.logger.isDebugEnabled()) {
+            Alfresco.logger.debug("_loadSearchTermResults field:" + this.id + " searchTerm :" + searchTerm);
+         }
+         /*
+         if (searchTerm != null && searchTerm.length >= this.options.minSearchTermLength)
+         {
+            // refresh the previous search
+            YAHOO.Bubbling.fire("refreshItemList",
+            {
+               eventGroup: this,
+               searchTerm: searchTerm
+            });
+         }
+         */
+      },
       /**
        * Add button click handler, shows picker
        *

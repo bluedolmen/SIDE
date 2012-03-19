@@ -1,5 +1,3 @@
-
-
 <#assign controlId = fieldHtmlId + "-cntrl">
 
 <#if field.value != "" >
@@ -9,8 +7,6 @@
 </#if>
 
 <script type="text/javascript">//<![CDATA[
-
-
 (function()
 {
    var selectBox = new SIDE.SelectBox("${controlId}", "${fieldHtmlId}",${value});

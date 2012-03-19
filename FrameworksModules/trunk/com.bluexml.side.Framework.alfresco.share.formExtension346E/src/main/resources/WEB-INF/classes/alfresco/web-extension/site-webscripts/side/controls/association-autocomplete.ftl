@@ -1,5 +1,3 @@
-
-
 <#assign controlId = fieldHtmlId + "-cntrl">
 
 <#if field.value != "" >

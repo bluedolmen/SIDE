@@ -1,5 +1,4 @@
 <#include "common/picker.inc.ftl" />
-
 <#assign controlId = fieldHtmlId + "-cntrl">
 
 <script type="text/javascript">//<![CDATA[
