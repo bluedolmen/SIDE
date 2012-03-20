@@ -8,27 +8,34 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-util
 %>
 
 <%script type="form.FormCollection" name="generateWorkflowForms"%>
-<%for (forms.filter("FormWorkflow")){%>
-	<config evaluator="<%computeEvaluator()%>" condition="<%computeformWorkflowCondition()%>">
-		<forms>
-            <form>
-            	<%generateFormDefinition()%>
-            </form>
-            <%if (ref.filter("workflow.StartState") == null){%>
-            <form id="workflow-details">
-            	<%generateFormDefinition()%>
-            </form>
-            <%}%>
-        </forms>
-	</config>
+<%for (forms.filter("FormWorkflow")){%>	
+	<%generateWorklowConfig("normal")%>
+	<%if (ref.filter("workflow.StartState")){%>
+	<%-- generate form config to be able to edit startWorkflow nodes --%>
+	<%generateWorklowConfig("asUserTask")%>
+	<%}%>
 <%}%>
+
+<%script type="FormWorkflow" name="generateWorklowConfig"%>
+<config evaluator="<%computeEvaluator()%>" condition="<%computeformWorkflowCondition(args(0))%>">
+	<forms>
+        <form>
+        	<%generateFormDefinition()%>
+        </form>
+        <%if (ref.filter("workflow.StartState") == null){%>
+        <form id="workflow-details">
+        	<%generateFormDefinition()%>
+        </form>
+        <%}%>
+    </forms>
+</config>
 
 <%script type="FormWorkflow" name="generateFormDefinition"%>
 <%if (presentation.toString() == "tabbed" || presentation.toString() == "auto"){%>
 <edit-form template="/fdk/templates/tab-edit-form.ftl" />
 <create-form template="/fdk/templates/tab-edit-form.ftl" />
 <view-form template="/fdk/templates/tab-edit-form.ftl" />
-<%}%>        	
+<%}%>
 <field-visibility>
 	<%getDefaultWorkflowFields()%>
 <%if (ref.filter("workflow.UserTask").advancedTaskDefinition != null){%>
@@ -43,7 +50,6 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-util
 <appearance>
 	
 <%if (ref.filter("workflow.UserTask").advancedTaskDefinition != null){%>
-
 	<%if (children.filter("Field")[ref.filter("clazz.Attribute") || ref.filter("clazz.Association")].nSize() > 0){%>
 	<set id="" label-id="form.set.label.<%getPrefixedQualifiedName()%>" />
 	<set id="<%getPrefixedQualifiedName()%>" appearance="" parent="" />
@@ -94,7 +100,7 @@ task-type
 <%}%>
 
 <%script type="FormWorkflow" name="computeformWorkflowCondition" post="trim()" %>
-<%if (ref.filter("workflow.StartState")){%>
+<%if (ref.filter("workflow.StartState") && args(0) != "asUserTask"){%>
 jbpm$wfbx<%ref.eContainer().filter("workflow.Process").name%>:<%ref.eContainer().filter("workflow.Process").name%>
 <%}else{%>
 <%if (ref.filter("workflow.UserTask").advancedTaskDefinition != null){%>
