@@ -142,10 +142,12 @@ if (console == undefined) {
 						}
 
 						if (results.resultsTrimmed) {
-							tempNode = new YAHOO.widget.TextNode({
-								label : "&lt;" + this.msg("message.folders-trimmed") + "&gt;",
-								style : "folders-trimmed"
-							}, node, false);
+						   tempNode = new YAHOO.widget.TextNode(
+                     {
+                        label: this.msg("message.folders-trimmed"),
+                        style: "folders-trimmed"
+                     }, node, false);
+                     tempNode.isLeaf = true;
 						}
 
 						/**
