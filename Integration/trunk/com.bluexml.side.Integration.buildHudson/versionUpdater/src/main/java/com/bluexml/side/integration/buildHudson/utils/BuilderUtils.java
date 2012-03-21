@@ -297,13 +297,21 @@ public class BuilderUtils {
 					logger.debug("Updated at rev :" + revisionNumber);
 				}
 
+				// check svn log for file that can be in conflict
 				boolean badCaseChar1 = ligne.charAt(0) == 'M' || ligne.charAt(0) == 'G' || ligne.charAt(0) == ' ';
 				boolean badCaseChar2 = ligne.charAt(1) == 'M' || ligne.charAt(1) == 'G' || ligne.charAt(1) == ' ';
 				if (badCaseChar1 && badCaseChar2) {
-					throw new UnsupportedOperationException("SVN have conflict, M or G state detected, a commit have been done after SIDE build start\n relaunch the build should Fix errors");
+					int lastIndexOf = ligne.trim().lastIndexOf("/");
+					if (lastIndexOf != -1) {
+
+					}
+					String fileName = ligne.substring(lastIndexOf);
+					// MANIFEST.MF pom.xml feature.xml plugin.xml category.xml *.product
+					if (fileName.endsWith("category.xml") || fileName.endsWith(".product") || fileName.endsWith("feature.xml") || fileName.endsWith("plugin.xml") || fileName.endsWith("MANIFEST.MF") || fileName.endsWith("pom.xml")) {
+						throw new UnsupportedOperationException("SVN have conflict, M or G state detected, a commit have been done after SIDE build start\n relaunch the build should Fix errors line :\n" + ligne);
+					}
 				}
-				
-				
+
 				boolean char1 = ligne.charAt(0) == 'A' || ligne.charAt(0) == 'U' || ligne.charAt(0) == 'D' || ligne.charAt(0) == ' ';
 				boolean char2 = ligne.charAt(1) == 'A' || ligne.charAt(1) == 'U' || ligne.charAt(1) == 'D' || ligne.charAt(1) == ' ';
 				if (char1 && char2) {
