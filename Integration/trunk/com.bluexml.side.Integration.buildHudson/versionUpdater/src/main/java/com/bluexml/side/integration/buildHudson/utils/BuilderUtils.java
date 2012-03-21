@@ -31,7 +31,6 @@ public class BuilderUtils {
 	private Properties buildProperties;
 	// properties
 	private static final String buildDir = "buildDir";
-	private static final String codeName = "codeName";
 	private static final String project = "project";
 	private static final String project_enterprise = "project.enterprise";
 	private static final String forceNumberVersion = "forceNumberVersion";
@@ -270,22 +269,23 @@ public class BuilderUtils {
 	 * 
 	 * @param listeProjetPomsAll
 	 * @param listeProjetPomsModif
-	 * @param end
 	 * @param listeProjetModif
-	 * @param update
+	 * @param log
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public void readSvnLog(List<String> listeProjetPomsAll, List<String> listeProjetPomsModif, List<String> listeProjetModif) throws FileNotFoundException, IOException {
+	public void readSvnLog(List<String> listeProjetPomsAll, List<String> listeProjetPomsModif, List<String> listeProjetModif, File log) throws FileNotFoundException, IOException {
 		String ligne;
 		String modif;
 		// this file contains only svn command output
-		File log = new File(getPathToLog());
+		if (log == null) {
+			log = new File(getPathToLog());
+		}
+		if (!log.exists()) {
+			throw new FileNotFoundException("svn log file :" + log + " not founded");
+		}
 		BufferedReader ficTexte = new BufferedReader(new FileReader(log));
 		logger.debug("###### search for updated project from svn log " + log);
-		if (ficTexte == null) {
-			throw new FileNotFoundException("Fichier non trouvé");
-		}
 
 		// Analyse et copie de chaque ligne
 		while ((ligne = ficTexte.readLine()) != null) {
@@ -297,14 +297,23 @@ public class BuilderUtils {
 					logger.debug("Updated at rev :" + revisionNumber);
 				}
 
-				if ((ligne.charAt(0) == 'A' || ligne.charAt(0) == 'U' || ligne.charAt(0) == 'D' || ligne.charAt(0) == ' ') && (ligne.charAt(1) == ' ' || ligne.charAt(1) == 'U' || ligne.charAt(1) == 'A' || ligne.charAt(1) == 'D')) {
-
+				boolean badCaseChar1 = ligne.charAt(0) == 'M' || ligne.charAt(0) == 'G' || ligne.charAt(0) == ' ';
+				boolean badCaseChar2 = ligne.charAt(1) == 'M' || ligne.charAt(1) == 'G' || ligne.charAt(1) == ' ';
+				if (badCaseChar1 && badCaseChar2) {
+					throw new UnsupportedOperationException("SVN have conflict, M or G state detected, a commit have been done after SIDE build start\n relaunch the build should Fix errors");
+				}
+				
+				
+				boolean char1 = ligne.charAt(0) == 'A' || ligne.charAt(0) == 'U' || ligne.charAt(0) == 'D' || ligne.charAt(0) == ' ';
+				boolean char2 = ligne.charAt(1) == 'A' || ligne.charAt(1) == 'U' || ligne.charAt(1) == 'D' || ligne.charAt(1) == ' ';
+				if (char1 && char2) {
+					System.out.println("ligneChar 1,2 :" + ligne.substring(0, 2));
 					if (ligne.indexOf("Integration") > -1 || ligne.indexOf("FrameworksModules") > -1) {
 						for (String id : listeProjetPomsAll) {
-							String valeurf = id;
-							String[] tab = valeurf.split("/" + sourceSVNName + "/");
-							String[] tab2 = tab[1].split("/pom.xml");
-							if (ligne.indexOf(tab2[0]) > -1) {
+							String projectNameRegExp = "^.*(/[^/]*/)pom\\.xml$";
+							String pName = id.replaceAll("\\\\", "/").replaceAll(projectNameRegExp, "$1");
+							if (ligne.indexOf(pName) != -1) {
+
 								if (!listeProjetPomsModif.contains(id)) {
 									listeProjetPomsModif.add(id);
 									logger.debug("found an updated maven project : " + id);
@@ -570,4 +579,41 @@ public class BuilderUtils {
 		}
 	}
 
+	public static void main(String[] args) {
+		try {
+			String workspace_p = null;
+			String revisionNumber_p = null;
+
+			Properties buildProperties_p = new Properties();
+			//			buildProperties_p.load(new FileInputStream(new File("")));
+
+			String build_number_p = null;
+			boolean useRepositoryCopy_p = false;
+
+			BuilderUtils bu = new BuilderUtils(buildProperties_p, workspace_p, build_number_p, revisionNumber_p, useRepositoryCopy_p);
+			bu.setSourceSVNName(ProjectVersionUpdater.SIDE_Core);
+
+			List<String> listeProjetPomsAll = BuilderUtils.findFile(new File("/Volumes/Data/SVN/side/HEAD/S-IDE/FrameworksModules/trunk"), "pom.xml");
+			List<String> listeProjetModif = new ArrayList<String>();
+
+			List<String> listeProjetPomsModif = new ArrayList<String>();
+
+			bu.readSvnLog(listeProjetPomsAll, listeProjetPomsModif, listeProjetModif, new File("/Volumes/Data/SVN/side/HEAD/S-IDE/Integration/trunk/com.bluexml.side.Integration.buildHudson/versionUpdater/svnUpdate.log"));
+			System.out.println("list projects modif :");
+			for (String string : listeProjetModif) {
+				System.out.println(string);
+			}
+			System.out.println("list listeProjetPomsAll :");
+			for (String string : listeProjetPomsAll) {
+				System.out.println(string);
+			}
+			System.out.println("list listeProjetPomsModif :");
+			for (String string : listeProjetPomsModif) {
+				System.out.println(string);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

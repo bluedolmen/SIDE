@@ -201,7 +201,7 @@ public class ProjectVersionUpdater {
 
 		} else {
 			// read svn log to list modified projects
-			bu.readSvnLog(projetPomsList, projectPoms2Update, projectList);
+			bu.readSvnLog(projetPomsList, projectPoms2Update, projectList, null);
 		}
 		// dispatch modified project according to project type (plugin or
 		// feature)
