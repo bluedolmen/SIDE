@@ -11,7 +11,6 @@ import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.Aspect;
 import com.bluexml.side.clazz.Association;
 import com.bluexml.side.clazz.Attribute;
-import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.Enumeration;
 import com.bluexml.side.clazz.Model;
@@ -67,14 +66,11 @@ public class CommonServices {
 		// compute default prefix
 		String prefix = "";
 		EObject root = CommonServices.getRootContainer(node);
-		if (root instanceof Model) {
-			prefix = ((Model) root).getName();
-		} else if (root instanceof ClassPackage) {
-			// ensure retro compatibility
-			prefix = ((ClassPackage) root).getName();
+		if (root instanceof NamedModelElement) {
+			prefix = ((NamedModelElement) root).getName();
 		} else {
 			// prefix="Missing_RootPackage";
-			throw new Exception("Missing RootPackage object !!" + node);
+			throw new Exception("Bad RootPackage object !!" + root + "for " + node);
 		}
 
 		return prefix;
