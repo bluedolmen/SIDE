@@ -1,0 +1,1 @@
+<#include "${viewTemplate}/${viewName}.get.csv.ftl"><#t>

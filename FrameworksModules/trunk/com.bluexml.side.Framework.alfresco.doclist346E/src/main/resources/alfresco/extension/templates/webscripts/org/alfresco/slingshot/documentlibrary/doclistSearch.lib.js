@@ -96,12 +96,12 @@ function getSavedSearchQueryDef(nodeRef) {
 	logger.log("getSavedSearchQuery " + queryString);
 	
 	var savedSearch = eval('(' + queryString + ')');
-	var filterNodetype = node.typeShort; 
-	return getSearchDef(savedSearch, filterNodetype);
+	 
+	return getSearchDef(savedSearch);
 }
 
 
-function getSearchDef(params, filterNodetype)
+function getSearchDef(params)
 {
    var ftsQuery = "",
       term = params.term,
