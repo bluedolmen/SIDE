@@ -23,8 +23,7 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 import com.bluexml.side.clazz.service.alfresco.AttributeServices
 import com.bluexml.side.clazz.service.alfresco.AssociationServices
 %>
-
 <%script type="view.AbstractViewOf" name="validatedFilename"%>
-<%if (eContainer() == getRootContainer()){%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/webscript/data/<%viewOf.getPrefixedQName("_")%>/<%name%>/<%name%>.post.js<%}%>
+<%if (eContainer() == getRootContainer()){%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/webscript/data/<%viewOf.getPrefixedQName("_")%>/<%name%>/<%name%>.post.text.ftl<%}%>
 <%script type="view.AbstractViewOf" name="alfrescoGenerator" file="<%validatedFilename%>"%>
-<import resource="<%name%>.get.js">
+<#include "<%name%>.get.csv.ftl">

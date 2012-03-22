@@ -25,22 +25,52 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 %>
 
 <%script type="view.AbstractViewOf" name="validatedFilename"%>
-<%if (eContainer() == getRootContainer()){%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/webscript/data/<%name%>/<%name%>.get.js<%}%>
+<%if (eContainer() == getRootContainer()){%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/webscript/data/<%viewOf.getPrefixedQName("_")%>/<%name%>/<%name%>.get.js<%}%>
 <%script type="view.AbstractViewOf" name="alfrescoGenerator" file="<%validatedFilename%>"%>
-var myNode = null;
-if (argsM["nodeRef"] != null) {
-	var myNodeRef="workspace://SpacesStore/"+argsM["nodeRef"][0];
-	myNode = search.findNode(myNodeRef);
-	var xpath = "./*[subtypeOf('<%viewOf.getFolder()%>:<%viewOf.getQualifiedName()%>')]";
-	model.records = myNode.childrenByXPath(xpath);
+<import resource="classpath:/alfresco/extension/templates/webscripts/org/alfresco/slingshot/documentlibrary/doclistSearch.lib.js">
+
+model.csvSeparator = ";";
+
+if (args.q || args.t) {
+	// use search parameters
+	var params = {};
+	if (args.savedSearchNodeRef) {
+		params = getSavedSearchQueryDef(args.savedSearchNodeRef);
+	} else {
+		// get search args
+		params = {
+			siteId : (args.site !== null) ? args.site : null,
+			containerId : (args.container !== null) ? args.container : null,
+			repo : (args.repo !== null) ? (args.repo == "true") : false,
+			term : (args.term !== null) ? args.term : null,
+			tag : (args.tag !== null) ? args.tag : null,
+			query : (args.query !== null) ? args.query : null,
+			sort : (args.sort !== null) ? args.sort : null,
+			maxResults : -1
+		};
+
+	}
+	var queryDef = getSearchDef(params);
+	model.nse_DocumentEmis_list = search.query(queryDef);
+
 } else {
-	var lucene="TYPE:\"{<%viewOf.getNameSpace()%>}<%viewOf.getQualifiedName()%>\"";
-    model.records = search.luceneSearch(lucene);
+	var myNode = null;
+	if (argsM["nodeRef"] != null) {
+		var myNodeRef="workspace://SpacesStore/"+argsM["nodeRef"][0];
+		myNode = search.findNode(myNodeRef);
+		var xpath = "./*[subtypeOf('<%viewOf.getPrefixedQName()%>')]";
+		model.records = myNode.childrenByXPath(xpath);
+	} else {
+		var lucene="TYPE:\"<%viewOf.getPrefixedNamespaceQName()%>\"";
+    	model.records = search.luceneSearch(lucene);
+	}
+	
+	if (myNode != null) {
+  		model.<%viewOf.getPrefixedQName("_")%>_list = myNode.childrenByXPath("./*[subtypeOf('<%viewOf.getPrefixedQName()%>')]");
+	} else {
+  		var lucene="TYPE:\"<%viewOf.getPrefixedNamespaceQName()%>\"";
+  		model.<%viewOf.getPrefixedQName("_")%>_list = search.luceneSearch(lucene);
+	}
+
 }
 
-if (myNode != null) {
-  model.<%viewOf.getQualifiedName()%>_list = myNode.childrenByXPath("./*[subtypeOf('<%viewOf.getFolder()%>:<%viewOf.getQualifiedName()%>')]");
-} else {
-  var lucene="TYPE:\"{<%viewOf.getNameSpace()%>}<%viewOf.getQualifiedName()%>\"";
-  model.<%viewOf.getQualifiedName()%>_list = search.luceneSearch(lucene);
-}

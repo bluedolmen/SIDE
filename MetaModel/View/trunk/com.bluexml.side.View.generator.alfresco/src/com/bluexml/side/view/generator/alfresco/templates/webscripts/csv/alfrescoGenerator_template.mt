@@ -18,13 +18,14 @@ Foundation, Inc., 59 Temple Place, Boston, MA 02111.
 metamodel http://www.kerblue.org/view/1.0
 
 import com.bluexml.side.view.generator.alfresco.templates.services.common
-
+import templates.servicesTemplates.Association
 import com.bluexml.side.clazz.service.alfresco.CommonServices
 import com.bluexml.side.clazz.service.alfresco.AttributeServices
 import com.bluexml.side.clazz.service.alfresco.AssociationServices
 %>
-
 <%script type="view.AbstractViewOf" name="validatedFilename"%>
-<%if (eContainer() == getRootContainer()){%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/webscript/data/<%viewOf.getPrefixedQName("_")%>/<%name%>/<%name%>.post.js<%}%>
+<%if (eContainer() == getRootContainer()){%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/webscript/data/<%viewOf.getPrefixedQName("_")%>/<%name%>/csv/<%name%>.ftl<%}%>
 <%script type="view.AbstractViewOf" name="alfrescoGenerator" file="<%validatedFilename%>"%>
-<import resource="<%name%>.get.js">
+<%for (getFields()){%><%generateLine()%><%if (i() < current(1).getFields().nSize() -1){%>${csvSeparator}<%}%><%}%>
+<%script type="Field" name="generateLine" post="trim()" %>
+<%if (mapTo.filter("clazz.Attribute") != null){%><%mapTo.filter("clazz.Attribute").generateAttributeStatement_csv("child")%><%}else{%><%-- TODO : manage view.path --%><%}%>

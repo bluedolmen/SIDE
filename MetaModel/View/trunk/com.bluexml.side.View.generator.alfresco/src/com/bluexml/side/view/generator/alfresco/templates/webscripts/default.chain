@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ASCII"?>
 <chain:Chain xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:chain="http://www.obeo.fr/acceleo/chain">
   <repository>
-    <files xsi:type="chain:Model" path="/abs/src/models/view/absenceManagement.view"/>
-    <files xsi:type="chain:Folder" path="/com.bluexml.side.View.generator.alfresco/src/com/bluexml/side/view/generator/alfresco/templates/webscripts"/>
+    <files xsi:type="chain:Model" path="/Ifremer_NSE_V1/src/models/view/Ifremer_NSE_V1.view"/>
+    <files xsi:type="chain:Folder" path="/com.bluexml.side.View.generator.alfresco/generation"/>
     <files xsi:type="chain:Log" path="/com.bluexml.side.View.generator.alfresco/src/com/bluexml/side/view/generator/alfresco/templates/webscripts/default.log.txt"/>
     <files xsi:type="chain:EmfMetamodel" path="http://www.kerblue.org/view/1.0"/>
     <files xsi:type="chain:Generator" path="/com.bluexml.side.View.generator.alfresco/src/com/bluexml/side/view/generator/alfresco/templates/webscripts/alfrescoGenerator_template_def_get.mt"/>
@@ -18,6 +18,9 @@
     <files xsi:type="chain:Generator" path="/com.bluexml.side.View.generator.alfresco/src/com/bluexml/side/view/generator/alfresco/templates/webscripts/xml/alfrescoGenerator_template_result_get.mt"/>
     <files xsi:type="chain:Generator" path="/com.bluexml.side.View.generator.alfresco/src/com/bluexml/side/view/generator/alfresco/templates/webscripts/xml/alfrescoGenerator_template_result_post.mt"/>
     <files xsi:type="chain:Generator" path="/com.bluexml.side.View.generator.alfresco/src/com/bluexml/side/view/generator/alfresco/templates/webscripts/xml/alfrescoGenerator_template_xml.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.View.generator.alfresco/src/com/bluexml/side/view/generator/alfresco/templates/webscripts/csv/alfrescoGenerator_template.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.View.generator.alfresco/src/com/bluexml/side/view/generator/alfresco/templates/webscripts/csv/alfrescoGenerator_template_result_get.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.View.generator.alfresco/src/com/bluexml/side/view/generator/alfresco/templates/webscripts/csv/alfrescoGenerator_template_result_post.mt"/>
   </repository>
   <actions>
     <actions xsi:type="chain:Generate" documentation="alfrescoGenerator_template_def_get" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.4" folder="//@repository/@files.1"/>
@@ -33,5 +36,8 @@
     <actions xsi:type="chain:Generate" documentation="alfrescoGenerator_template_result_get" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.14" folder="//@repository/@files.1"/>
     <actions xsi:type="chain:Generate" documentation="alfrescoGenerator_template_result_post" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.15" folder="//@repository/@files.1"/>
     <actions xsi:type="chain:Generate" documentation="alfrescoGenerator_template_xml" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.16" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="alfrescoGenerator_template" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.17" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="alfrescoGenerator_template_result_get" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.18" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="alfrescoGenerator_template_result_post" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.19" folder="//@repository/@files.1"/>
   </actions>
 </chain:Chain>

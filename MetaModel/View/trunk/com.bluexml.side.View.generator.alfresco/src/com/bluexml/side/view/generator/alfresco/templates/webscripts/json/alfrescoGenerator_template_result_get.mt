@@ -24,7 +24,7 @@ import com.bluexml.side.clazz.service.alfresco.AttributeServices
 import com.bluexml.side.clazz.service.alfresco.AssociationServices
 %>
 <%script type="view.AbstractViewOf" name="validatedFilename"%>
-<%if (eContainer() == getRootContainer()){%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/webscript/data/<%name%>/<%name%>.get.json.ftl<%}%>
+<%if (eContainer() == getRootContainer()){%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/webscript/data/<%viewOf.getPrefixedQName("_")%>/<%name%>/<%name%>.get.json.ftl<%}%>
 <%script type="view.AbstractViewOf" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 
 <#assign recordsCount=records?size>
@@ -77,18 +77,18 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 
 {
 	"name":"<%name%>",
-	"viewOf":"<%viewOf.getFolder()%>:<%viewOf.getQualifiedName()%>",
+	"viewOf":"<%viewOf.getPrefixedQName()%>",
 	"totalCount":${recordsCount},
 	"records":[
-						<#assign index=0>
-						<#list records as child>
-							<#if maxBound < index><#break/></#if>
-							<#if ((time==0) || (dateCompare(child.properties["cm:modified"], date, time) == 1) || (dateCompare(child.properties["cm:created"], date, time) == 1))>
-								<#if minBound<=index>
-								<#include "json/<%name%>.ftl">
-								</#if>
-								<#assign index=index+1>
-							</#if>
-						</#list>
-					]
+		<#assign index=0>
+		<#list records as child>
+			<#if maxBound < index><#break/></#if>
+			<#if ((time==0) || (dateCompare(child.properties["cm:modified"], date, time) == 1) || (dateCompare(child.properties["cm:created"], date, time) == 1))>
+				<#if minBound<=index>
+				<#include "json/<%name%>.ftl">
+				</#if>
+				<#assign index=index+1>
+			</#if>
+		</#list>
+	]
 }

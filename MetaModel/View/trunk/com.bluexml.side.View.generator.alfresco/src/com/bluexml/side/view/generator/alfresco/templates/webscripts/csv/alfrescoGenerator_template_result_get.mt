@@ -24,8 +24,8 @@ import com.bluexml.side.clazz.service.alfresco.AttributeServices
 import com.bluexml.side.clazz.service.alfresco.AssociationServices
 %>
 <%script type="view.AbstractViewOf" name="validatedFilename"%>
-<%if (eContainer() == getRootContainer()){%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/webscript/data/<%viewOf.getPrefixedQName("_")%>/<%name%>/<%name%>.post.xml.ftl<%}%>
-<%script type="view.AbstractViewOf" name="alfrescoGenerator" file="<%validatedFilename%>"%>
+<%if (eContainer() == getRootContainer()){%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/webscript/data/<%viewOf.getPrefixedQName("_")%>/<%name%>/<%name%>.get.csv.ftl<%}%>
+<%script type="view.AbstractViewOf" name="alfrescoGenerator_csv" file="<%validatedFilename%>"%>
 <#assign recordsCount=records?size>
 <#if argsM["start"]?exists><#assign start=argsM["start"][0]></#if>
 <#if (start?exists)>
@@ -73,21 +73,14 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	<#assign minutes=0>
 </#if>
 <#assign time=1000*60*(minutes+hours*60+days*24*60+months*30*24*60+years*12*30*24*60)>
-
-<records>
-	<name><%name%></name>
-	<viewOf><%viewOf.getPrefixedQName()%></viewOf>
-	<totalCount>${recordsCount}</totalCount>
-	<items>
-		<#assign index=0>
-		<#list records as child>
-			<#if maxBound < index><#break/></#if>
-			<#if ((time==0) || (dateCompare(child.properties["cm:modified"], date, time) == 1) || (dateCompare(child.properties["cm:created"], date, time) == 1))>
-				<#if minBound<=index>
-				<#include "xml/<%name%>.ftl">
-				</#if>
-				<#assign index=index+1>
-			</#if>
-		</#list>
-	</items>
-</records>
+<#assign index=0>
+<%for (getFields()){%><%name%><%if (i() < current(1).getFields().nSize()){%>${csvSeparator}<%}%><%}%>
+<#list records as child>
+	<#if maxBound < index><#break/></#if>
+	<#if ((time==0) || (dateCompare(child.properties["cm:modified"], date, time) == 1) || (dateCompare(child.properties["cm:created"], date, time) == 1))>
+		<#if minBound<=index>
+		<#include "csv/<%name%>.ftl">
+		</#if>
+		<#assign index=index+1>
+	</#if>
+</#list>

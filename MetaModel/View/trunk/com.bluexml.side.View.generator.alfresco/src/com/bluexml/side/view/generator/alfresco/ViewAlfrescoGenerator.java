@@ -43,6 +43,9 @@ public class ViewAlfrescoGenerator extends AbstractAlfrescoGenerator {
 		// result.add("/com.bluexml.side.View.generator.alfresco/com/bluexml/side/view/generator/alfresco/templates/webscripts/rss/alfrescoGenerator_template_result_get.mt");
 		// result.add("/com.bluexml.side.View.generator.alfresco/com/bluexml/side/view/generator/alfresco/templates/webscripts/rss/alfrescoGenerator_template_result_post.mt");
 
+		result.add("/com.bluexml.side.View.generator.alfresco/com/bluexml/side/view/generator/alfresco/templates/webscripts/csv/alfrescoGenerator_template_result_get.mt");
+		result.add("/com.bluexml.side.View.generator.alfresco/com/bluexml/side/view/generator/alfresco/templates/webscripts/csv/alfrescoGenerator_template_result_post.mt");
+		result.add("/com.bluexml.side.View.generator.alfresco/com/bluexml/side/view/generator/alfresco/templates/webscripts/csv/alfrescoGenerator_template.mt");
 		// services :
 		monitor.getLog().addServiceLog("Alfresco Share Views", "Share Document Library", getGenerationParameter(CONFIGURATION_PARAMETER_ALFRESCOSHARE_URL) + "/page/site/yourSiteUrl/documentlibrary");
 

@@ -25,7 +25,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 %>
 
 <%script type="view.AbstractViewOf" name="validatedFilename"%>
-webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/webscript/data/<%name%>/<%name%>.get.rss.ftl
+<%if (eContainer() == getRootContainer()){%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/webscript/data/<%viewOf.getPrefixedQName("_")%>/<%name%>/<%name%>.get.rss.ftl<%}%>
 <%script type="view.AbstractViewOf" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 <#assign recordsCount=records?size>
 <#if argsM["start"]?exists><#assign start=argsM["start"][0]></#if>
@@ -79,7 +79,7 @@ webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/
 	<channel>
 		<title><%viewOf.name%></title>
 		<description><%getDescriptionOrName()%></description>
-		<link>${absurl(url.serviceContext)}/<%getQualifiedName()%>.rss</link>
+		<link>${absurl(url.serviceContext)}/<%getNamedModelElementQName()%>.rss</link>
 		<generator>Alfresco</generator>
 		<#assign index=0>
 		<#list records as child>
