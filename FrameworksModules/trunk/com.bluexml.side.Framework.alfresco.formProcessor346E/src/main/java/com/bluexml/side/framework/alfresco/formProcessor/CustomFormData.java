@@ -17,7 +17,8 @@ public class CustomFormData extends FormData {
 
 	class FieldData extends org.alfresco.repo.forms.FormData.FieldData {
 		String mimetype = null;
-
+		String fileName = null;
+		
 		/**
 		 * Constructs a FieldData object from a WebScript FormField object
 		 * 
@@ -28,6 +29,7 @@ public class CustomFormData extends FormData {
 			super(field);
 
 			if (isFile) {
+				fileName = field.getFilename();
 				logger.debug("isFile");
 				mimetype = field.getMimetype();
 				logger.debug("mineType :" + this.mimetype);
@@ -38,5 +40,10 @@ public class CustomFormData extends FormData {
 			return mimetype;
 		}
 
+		public String getFileName() {
+			return fileName;
+		}
+
+		
 	}
 }

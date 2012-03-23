@@ -54,8 +54,7 @@ public class CustomTypeFormProcessor extends TypeFormProcessor {
 	@Override
 	protected void persistNode(NodeRef nodeRef, FormData data) {
 
-		// let superclass persist properties
-		super.persistNode(nodeRef, data);
+		boolean nameFieldData = data.hasFieldData(NAME_PROP_DATA);
 
 		// implements FileField persistence
 		int fileFieldCount = 0;
@@ -80,12 +79,23 @@ public class CustomTypeFormProcessor extends TypeFormProcessor {
 					} catch (IOException e) {
 						logger.error("trying to close inputStream fail", e);
 					}
+					if (nameFieldData) {
+						String fileName = cfd.getFileName();
+						logger.debug("fill cm:name using fileName :" + fileName);
+						// add fieldData to put fileName into cm:name properties
+						data.addFieldData(NAME_PROP_DATA, fileName);
+
+					}
+
 				} else {
 					// TODO multi file upload not implemented yet
 				}
 				fileFieldCount++;
 			}
 		}
+
+		// let superclass persist properties
+		super.persistNode(nodeRef, data);
 	}
 
 	@Override
@@ -173,10 +183,10 @@ public class CustomTypeFormProcessor extends TypeFormProcessor {
 				while (matcher.find()) {
 					String group1 = matcher.group(1);
 					String group2 = matcher.group(2);
-					
+
 					cleanPath += "/" + group1 + ":" + ISO9075.encode(group2);
 				}
-				logger.debug("encoded destination XPath" + cleanPath);
+				logger.debug("encoded destination XPath :" + cleanPath);
 
 				ResultSet results = searchService.query(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE, SearchService.LANGUAGE_XPATH, cleanPath);
 				List<NodeRef> nodeRefs = results.getNodeRefs();
