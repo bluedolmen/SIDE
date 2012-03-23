@@ -13,7 +13,11 @@
       searchQuery: "${searchQuery?js_string}",
       minSearchTermLength: ${args.minSearchTermLength!searchconfig.getChildValue('min-search-term-length')},
       maxSearchResults: ${args.maxSearchResults!searchconfig.getChildValue('max-search-results')},
-      savedSearchDataType: "${args.savedSearchDataType!searchconfig.getChildValue('savedSearchDataType')}"
+      enableSavedSearch: ${args.enableSavedSearch!"false"},
+      savedSearchDataType: "${args.savedSearchDataType!""}",
+      enableExport: ${args.enableExport!"false"},
+      exportType: "${args.exportType!""}",
+      exportViewName: "${args.exportViewName!""}"
    }).setMessages(
       ${messages}
    );
@@ -38,14 +42,8 @@
             </span>
          </span>
       </div>
-      <div style="float:right">
-      	<#if page.url.templateArgs.site??>
-      	<span id="${el}-save-search-button" class="yui-button yui-push-button save-search-icon">
-            <span class="first-child">
-               <button type="button">${msg('button.save-search')}</button>
-            </span>
-         </span>
-         </#if>
+      <div style="float:right" id="${el}-right-buttons">
+      	
       </div>
    </div>
    

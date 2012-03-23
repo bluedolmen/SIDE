@@ -157,9 +157,29 @@
          minSearchTermLength: 1,
          
          /**
-          * 
+          * enable button to save current search in DataListItem
           */
-         savedSearchDataType: ""
+         enableSavedSearch: false,
+         
+         /**
+          * the DataType to use to store the savedSearch
+          */
+         savedSearchDataType: "",
+                  
+         /**
+          * export
+          */
+         exportType: null,
+         
+         /**
+          * the view to use to export results
+          */
+         exportViewName: null,
+         
+         /**
+          * enable/disable export button
+          */
+         enableExport: false
       },
       
       /**
@@ -201,6 +221,8 @@
        * True if there are more results than the ones listed in the table.
        */
       hasMoreResults: false,
+      
+      
       
       /**
        * Fired by YUI when parent element is available for scripting.
@@ -280,7 +302,27 @@
          // search YUI button
          this.widgets.searchButton = Alfresco.util.createYUIButton(this, "search-button", this.onSearchClick);
          
-         this.widgets.savedSearchButton = Alfresco.util.createYUIButton(this, "save-search-button", this.onSaveSearchClick);
+         // button to save search
+         if (this.options.enableSavedSearch && this.options.siteId.length !== 0) {
+            this.widgets.savedSearchButton = new YAHOO.widget.Button({
+               id: this.id + "_save-search-button",
+               type: "push",
+               label: this.msg("button.save-search"),
+               container: this.id + "-right-buttons"
+           });
+           this.widgets.savedSearchButton.on("click", this.onSaveSearchClick, this.widgets.savedSearchButton, this);
+         }
+         
+         // button to export search result
+         if (this.options.enableExport) {
+            this.widgets.exportCSVButton = new YAHOO.widget.Button({
+               id: this.id + "_export",
+               type: "push",
+               label: this.msg("button.search-export"),
+               container: this.id + "-right-buttons"
+           });
+           this.widgets.exportCSVButton.on("click", this.onExport2csv, this.widgets.exportCSVButton, this);
+         }
          
          // menu button for sort options
          this.widgets.sortButton = new YAHOO.widget.Button(this.id + "-sort-menubutton",
@@ -933,6 +975,51 @@
     	}
       },
       
+      onExport2csv : function Search_onExport2csv(e, args) {
+    	  var queryString = this._buildSearchParams(this.searchRepository, this.searchAllSites, this.searchTerm, this.searchTag, this.searchSort, -1);
+
+    	  var downloadUrl = Alfresco.constants.PROXY_URI + "/com/bluexml/side/views.csv?viewName=" + this.options.exportViewName + "&" + queryString;
+    	  var displayName = "exported search.csv";
+          if (YAHOO.env.ua.ie > 6)
+          {
+             // MSIE7 blocks the download and gets the wrong URL in the "manual download bar"
+             Alfresco.util.PopupManager.displayPrompt(
+             {
+                title: this.msg("message.edit-offline.success", displayName),
+                text: this.msg("message.edit-offline.success.ie7"),
+                buttons: [
+                {
+                   text: this.msg("button.download"),
+                   handler: function DocumentActions_oAEO_success_download()
+                   {
+                      window.location = downloadUrl;
+                      this.destroy();
+                   },
+                   isDefault: true
+                },
+                {
+                   text: this.msg("button.close"),
+                   handler: function DocumentActions_oAEO_success_close()
+                   {
+                      this.destroy();
+                   }
+                }]
+             });
+          }
+          else
+          {
+             Alfresco.util.PopupManager.displayMessage(
+             {
+                text: this.msg("message.edit-offline.success", displayName)
+             });
+             // Kick off the download 3 seconds after the confirmation message
+             YAHOO.lang.later(3000, this, function()
+             {
+                window.location = downloadUrl;
+             });
+          }
+      },
+      
       /**
        * Click event for Current Site search link
        * 
@@ -1114,7 +1201,7 @@
        *
        * @method _buildSearchParams
        */
-      _buildSearchParams: function Search__buildSearchParams(searchRepository, searchAllSites, searchTerm, searchTag, searchSort)
+      _buildSearchParams: function Search__buildSearchParams(searchRepository, searchAllSites, searchTerm, searchTag, searchSort, maxResults)
       {
          var site = searchAllSites ? "" : this.options.siteId;
          var params = YAHOO.lang.substitute("site={site}&term={term}&tag={tag}&maxResults={maxResults}&sort={sort}&query={query}&repo={repo}",
@@ -1125,7 +1212,7 @@
             tag: encodeURIComponent(searchTag),
             sort: encodeURIComponent(searchSort),
             query: encodeURIComponent(this.options.searchQuery),
-            maxResults: this.options.maxSearchResults + 1 // to calculate whether more results were available
+            maxResults: maxResults != null ? maxResults : this.options.maxSearchResults + 1 // to calculate whether more results were available
          });
          
          return params;
