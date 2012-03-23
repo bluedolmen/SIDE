@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.forAlfresco34d.sideenterprise.feature" label="SIDE Alfresco community 3.4.b support" version="1.0.65.v34273-20120322" provider-name="BLUEXML">
+<feature id="com.bluexml.side.Common.forAlfresco34d.sideenterprise.feature" label="SIDE Alfresco community 3.4.b support" version="1.0.66.v34322-20120323" provider-name="BLUEXML">
   <description url="http://www.example.com/description">[Enter Feature Description here.]</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
   <includes id="com.bluexml.side.Deployer.alfresco34d.feature" version="1.0.14.v31209-20111220" />
   <includes id="com.bluexml.side.Workflow.generator.alfresco34d.feature" version="1.0.23.v31980-20120111" />
-  <includes id="com.bluexml.side.View.generator.alfresco34d.feature" version="1.0.12.v34273-20120322" />
+  <includes id="com.bluexml.side.View.generator.alfresco34d.feature" version="1.0.13.v34322-20120323" />
   <includes id="com.bluexml.side.View.generator.facetmap34d.feature" version="1.0.11.v31653-20120106" />
   <includes id="com.bluexml.side.Class.generator.alfresco34d.sideenterprise.feature" version="1.0.13.v34116-20120319" />
   <includes id="com.bluexml.side.Portal.generator.alfresco34d.sideenterprise.feature" version="1.0.30.v33854-20120314" />
