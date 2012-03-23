@@ -108,6 +108,13 @@ public class RuleScriptExtension extends BaseScopableProcessorExtension {
 	public void addScriptRuleWithTypeCondition(ScriptNode script, ScriptNode targetSpace, String ruleType, String contentType, String uri) {
 		String title = "rule_script_execution";
 		String description = "Run a script when an event occurs on the targetSpace";
+	    String scriptName = (String) serviceRegistry.getNodeService().getProperty(script.getNodeRef(), ContentModel.PROP_NAME);
+	    String targetSpaceName = (String) serviceRegistry.getNodeService().getProperty(targetSpace.getNodeRef(), ContentModel.PROP_NAME);
+		title = scriptName+"_"+ruleType+"_"+targetSpaceName;
+	    if (serviceRegistry.getNodeService().getProperty(script.getNodeRef(), ContentModel.PROP_TITLE) != null) {
+			if (contentType != null) description = serviceRegistry.getNodeService().getProperty(script.getNodeRef(), ContentModel.PROP_TITLE)+" for type "+contentType+" on space "+targetSpaceName;
+			else description = (String) serviceRegistry.getNodeService().getProperty(script.getNodeRef(), ContentModel.PROP_TITLE)+" for all types on space "+targetSpaceName;
+		}
 		boolean setExecuteAsynchronously = true;
 		boolean applyToChildren = false;
 		boolean setRuleDisabled = false;
@@ -163,10 +170,8 @@ public class RuleScriptExtension extends BaseScopableProcessorExtension {
 		action.setParameterValue("script-ref", script.getNodeRef());
 		compositeAction.addAction(action);
 
-		// save the rule on the node only if the node has no rule
-		if (!this.getRuleService().hasRules(targetSpace.getNodeRef())) {
-			this.getRuleService().saveRule(targetSpace.getNodeRef(), rule);
-		}
+		// save the rule on the node
+		this.getRuleService().saveRule(targetSpace.getNodeRef(), rule);
 	}
 
 }
