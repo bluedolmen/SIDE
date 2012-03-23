@@ -34,7 +34,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 <#if argsM["start"]?exists><#assign start=argsM["start"][0]></#if>
 <#if (start?exists)>
 	<#assign minBound=start?number>
-<#else/>
+<#else>
 	<#assign minBound=0>
 </#if>
 <#if argsM["limit"]?exists><#assign limit=argsM["limit"][0]></#if>
@@ -43,7 +43,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	<#if (maxBound>recordsCount-1)>
 		<#assign maxBound=recordsCount-1>
 	</#if>
-<#else/>
+<#else>
 	<#assign maxBound=recordsCount-1>
 </#if>
 	

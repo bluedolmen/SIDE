@@ -41,10 +41,10 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	<#if (child.properties["<%getRootContainer().name%>:<%getQualifiedName()%>"]?exists)>
 		<#if child.properties["<%getRootContainer().name%>:<%getQualifiedName()%>"]?is_sequence>
 	<li><%getQualifiedName()%>:<#list child.properties["<%getRootContainer().name%>:<%getQualifiedName()%>"] as key>${key} </#list></li>
-		<#else/>
+		<#else>
 	<li><%getQualifiedName()%>:${child.properties["<%getRootContainer().name%>:<%getQualifiedName()%>"]<%if (typ.toString().equalsIgnoreCase("date")){%>?date<%}%>!""}</li>
 		</#if>
-	<#else/>
+	<#else>
 	<li><%getQualifiedName()%>:</li>
 	</#if>
 	<%}%>

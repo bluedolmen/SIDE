@@ -44,7 +44,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	<#if (child.properties["<%current(1).getFolder()%>:<%getQualifiedName()%>"]?exists)>
 		<#if child.properties["<%current(1).getFolder()%>:<%getQualifiedName()%>"]?is_sequence>
 	<<%getQualifiedName()%>><#list child.properties["<%current(1).getFolder()%>:<%getQualifiedName()%>"] as key>${key} </#list></<%getQualifiedName()%>>
-		<#else/>
+		<#else>
 		<%if (typ.toString().equalsIgnoreCase("date")){%>
 		<<%getQualifiedName()%>>${child.properties["<%current(1).getFolder()%>:<%getQualifiedName()%>"]?string("yyyy-MM-dd")!""}</<%getQualifiedName()%>>
 		<%}else if (typ.toString().equalsIgnoreCase("datetime")){%>
@@ -53,7 +53,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 		<<%getQualifiedName()%>>${child.properties["<%current(1).getFolder()%>:<%getQualifiedName()%>"]?string!""}</<%getQualifiedName()%>>
 		<%}%>
 		</#if>
-	<#else/>
+	<#else>
 	<<%getQualifiedName()%>/>
 	</#if>
 	<%}%>

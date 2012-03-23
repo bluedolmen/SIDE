@@ -10,10 +10,10 @@ import com.bluexml.side.clazz.service.alfresco.AttributeServices
 <#if (item.asset.properties["<%getPrefixedQualifiedName()%>"])??>	
 	<#if (item.asset.properties["<%getPrefixedQualifiedName()%>"])?is_sequence>
 	"<%getPrefixedQualifiedName()%>":"<#list item.asset.properties["<%getPrefixedQualifiedName()%>"] as key>${key<%getFtlTypeConverter()%>} </#list>"<%if (i() < current("DataList").children.nSize() -1){%>,<%}%>
-	<#else/>
+	<#else>
 	"<%getPrefixedQualifiedName()%>":"${item.asset.properties["<%getPrefixedQualifiedName()%>"]<%getFtlTypeConverter()%>}"<%if (i() < current("DataList").children.nSize() -1){%>,<%}%>
 	</#if>
-<#else/>
+<#else>
 "<%getPrefixedQualifiedName()%>":""<%if (i() < current("DataList").children.nSize() -1){%>,<%}%>
 </#if>
 <%}%>
