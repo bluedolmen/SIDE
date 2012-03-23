@@ -12,10 +12,10 @@ import com.bluexml.side.view.generator.alfresco.templates.services.common
 	<#if (item.asset.properties["<%mapTo.filter("clazz.Attribute").getPrefixedQualifiedName()%>"])??>	
 		<#if (item.asset.properties["<%mapTo.filter("clazz.Attribute").getPrefixedQualifiedName()%>"])?is_sequence>
 		"<%mapTo.filter("clazz.Attribute").getPrefixedQualifiedName()%>":"<#list item.asset.properties["<%mapTo.filter("clazz.Attribute").getPrefixedQualifiedName()%>"] as key>${key<%mapTo.filter("clazz.Attribute").getFtlTypeConverter()%>} </#list>"<%if (i() < current("DataList").children.nSize() -1){%>,<%}%>
-		<#else/>
+		<#else>
 		"<%mapTo.filter("clazz.Attribute").getPrefixedQualifiedName()%>":"${item.asset.properties["<%mapTo.filter("clazz.Attribute").getPrefixedQualifiedName()%>"]<%mapTo.filter("clazz.Attribute").getFtlTypeConverter()%>}"<%if (i() < current("DataList").children.nSize() -1){%>,<%}%>
 		</#if>
-	<#else/>
+	<#else>
 	"<%mapTo.filter("clazz.Attribute").getPrefixedQualifiedName()%>":""<%if (i() < current("DataList").children.nSize() -1){%>,<%}%>
 	</#if>
 	<%}%>

@@ -24,7 +24,9 @@ import com.bluexml.side.clazz.service.alfresco.AttributeServices
 import com.bluexml.side.clazz.service.alfresco.AssociationServices
 %>
 <%script type="view.AbstractViewOf" name="validatedFilename"%>
-<%if (eContainer() == getRootContainer()){%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/webscript/data/<%viewOf.getPrefixedQName("_")%>/<%name%>/xml/<%name%>.ftl<%}%>
+<%if (eContainer() == getRootContainer()){%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/data/<%viewOf.getPrefixedQName("_")%>/<%name%>/xml/<%name%>.ftl
+<%}else if (eContainer().filter("ComposedView") != null){%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/data/<%viewOf.getPrefixedQName("_")%>/<%eContainer().filter("ComposedView").name%>/xml/<%eContainer().filter("ComposedView").name%>.ftl
+<%}%>
 <%script type="view.AbstractViewOf" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 <item>
 	<id>${child.id}</id>
@@ -44,7 +46,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	<#if (child.properties["<%get("modelId")%>:<%get("qName")%>"]?exists)>
 		<#if child.properties["<%get("modelId")%>:<%get("qName")%>"]?is_sequence>
 		<<%getPrefixedQName("_")%>><#list child.properties["<%get("modelId")%>:<%get("qName")%>"] as key>${key} </#list></<%getPrefixedQName("_")%>>
-		<#else/>
+		<#else>
 		<%if (typ.toString().equalsIgnoreCase("date")){%>
 		<<%getPrefixedQName("_")%>>${child.properties["<%get("modelId")%>:<%get("qName")%>"]?string("yyyy-MM-dd'T'HH:mm:ss.SSSZ")!""}</<%getPrefixedQName("_")%>>
 		<%}else if (typ.toString().equalsIgnoreCase("datetime")){%>
@@ -53,7 +55,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 		<<%getPrefixedQName("_")%>>${child.properties["<%get("modelId")%>:<%get("qName")%>"]?string!""}</<%getPrefixedQName("_")%>>
 		<%}%>
 		</#if>
-	<#else/>
+	<#else>
 	<<%getPrefixedQName("_")%>/>
 	</#if>
 	<%}%>
@@ -69,7 +71,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 		<#if (item.properties["<%getPrefixedQName()%>"]?exists)>
 			<#if item.properties["<%getPrefixedQName()%>"]?is_sequence>
 			<<%getPrefixedQName("_")%>><#list item.properties["<%getPrefixedQName()%>"] as key>${key} </#list></<%getPrefixedQName("_")%>>
-			<#else/>
+			<#else>
 			<%if (typ.toString().equalsIgnoreCase("date")){%>
 			<<%getPrefixedQName("_")%>>${item.properties["<%getPrefixedQName()%>"]?string("yyyy-MM-dd'T'HH:mm:ss.SSSZ")!""}</<%getPrefixedQName("_")%>>
 			<%}else if (typ.toString().equalsIgnoreCase("datetime")){%>
@@ -78,7 +80,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 			<<%getPrefixedQName("_")%>>${item.properties["<%getPrefixedQName()%>"]?string!""}</<%getPrefixedQName("_")%>>
 			<%}%>
 			</#if>
-		<#else/>
+		<#else>
 			<<%getPrefixedQName("_")%>></<%getPrefixedQName("_")%>>
 		</#if>
 		<%}%>

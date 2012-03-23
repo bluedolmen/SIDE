@@ -24,14 +24,16 @@ import com.bluexml.side.clazz.service.alfresco.AttributeServices
 import com.bluexml.side.clazz.service.alfresco.AssociationServices
 %>
 
-<%script type="view.AbstractViewOf" name="validatedFilename"%>
-<%if (eContainer() == getRootContainer()){%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/webscript/data/<%viewOf.getPrefixedQName("_")%>/<%name%>/<%name%>.get.desc.xml<%}%>
+<%script type="view.AbstractViewOf" name="validatedFilename" post="trim()" %>
+<%if (eContainer() == getRootContainer()){%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/data/<%viewOf.getPrefixedQName("_")%>/<%name%>/<%name%>.get.desc.xml
+<%}else if (eContainer().filter("ComposedView") != null){%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/data/<%viewOf.getPrefixedQName("_")%>/<%eContainer().filter("ComposedView").name%>/<%eContainer().filter("ComposedView").name%>.get.desc.xml
+<%}%>
 <%script type="view.AbstractViewOf" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <webscript>
-  <shortname><%name%></shortname>
+  <shortname><%if (eContainer().filter("ComposedView") != null){%><%eContainer().filter("ComposedView").name%><%}else{%><%name%><%}%></shortname>
   <description><![CDATA[
-Data access linked to the view called <%name%><br/>
+Data access linked to the view called <%if (eContainer().filter("ComposedView") != null){%><%eContainer().filter("ComposedView").name%><%}else{%><%name%><%}%><br/>
 <br/>
 Parameters :<br/>
 nodeRef : <br/>
@@ -42,7 +44,7 @@ hours 	:<br/>
 minutes	:<br/>
 ]]>
   </description>
-  <url>/com/bluexml/side/view/<%getRootContainer().name%>/<%name%>?nodeRef={nodeRef}&amp;years={years}&amp;months={months}&amp;days={days}&amp;hours={hours}&amp;minutes={minutes}</url>
+  <url>/com/bluexml/side/view/<%if (eContainer().filter("ComposedView") != null){%><%viewOf.getPrefixedQName("_")%>/<%eContainer().filter("ComposedView").name%><%}else{%><%getRootContainer().name%>/<%name%><%}%>?nodeRef={nodeRef}&amp;years={years}&amp;months={months}&amp;days={days}&amp;hours={hours}&amp;minutes={minutes}</url>
   <format default="json">any</format>
   <authentication>guest</authentication>
   <family>SIDE</family>

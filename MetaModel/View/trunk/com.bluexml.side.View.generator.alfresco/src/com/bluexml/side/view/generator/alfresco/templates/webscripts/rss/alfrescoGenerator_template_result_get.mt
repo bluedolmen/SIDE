@@ -25,13 +25,15 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 %>
 
 <%script type="view.AbstractViewOf" name="validatedFilename"%>
-<%if (eContainer() == getRootContainer()){%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/webscript/data/<%viewOf.getPrefixedQName("_")%>/<%name%>/<%name%>.get.rss.ftl<%}%>
+<%if (eContainer() == getRootContainer()){%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/data/<%viewOf.getPrefixedQName("_")%>/<%name%>/<%name%>.get.rss.ftl
+<%}else if (eContainer().filter("ComposedView") != null){%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/data/<%viewOf.getPrefixedQName("_")%>/<%eContainer().filter("ComposedView").name%>/<%eContainer().filter("ComposedView").name%>.get.rss.ftl
+<%}%>
 <%script type="view.AbstractViewOf" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 <#assign recordsCount=records?size>
 <#if argsM["start"]?exists><#assign start=argsM["start"][0]></#if>
 <#if (start?exists)>
 	<#assign minBound=start?number>
-<#else/>
+<#else>
 	<#assign minBound=0>
 </#if>
 <#if argsM["limit"]?exists><#assign limit=argsM["limit"][0]></#if>
@@ -40,37 +42,37 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	<#if (maxBound>recordsCount-1)>
 		<#assign maxBound=recordsCount-1>
 	</#if>
-<#else/>
+<#else>
 	<#assign maxBound=recordsCount-1>
 </#if>
 <#if argsM["years"]?exists><#assign years=argsM["years"][0]></#if>
 <#if years?exists>
 	<#assign years=years?number>
-<#else/>
+<#else>
 	<#assign years=0>
 </#if>
 <#if argsM["months"]?exists><#assign months=argsM["months"][0]></#if>
 <#if months?exists>
 	<#assign months=months?number>
-<#else/>
+<#else>
 	<#assign months=0>
 </#if>
 <#if argsM["days"]?exists><#assign days=argsM["days"][0]></#if>
 <#if days?exists>
 	<#assign days=days?number>
-<#else/>
+<#else>
 	<#assign days=0>
 </#if>
 <#if argsM["hours"]?exists><#assign hours=argsM["hours"][0]></#if>
 <#if hours?exists>
 	<#assign hours=hours?number>
-<#else/>
+<#else>
 	<#assign hours=0>
 </#if>
 <#if argsM["minutes"]?exists><#assign minutes=argsM["minutes"][0]></#if>
 <#if minutes?exists>
 	<#assign minutes=minutes?number>
-<#else/>
+<#else>
 	<#assign minutes=0>
 </#if>
 <#assign time=1000*60*(minutes+hours*60+days*24*60+months*30*24*60+years*12*30*24*60)>
@@ -86,7 +88,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 			<#if maxBound < index><#break/></#if>
 			<#if ((time==0) || (dateCompare(child.properties["cm:modified"], date, time) == 1) || (dateCompare(child.properties["cm:created"], date, time) == 1))>
 				<#if minBound<=index>
-				<#include "rss/<%name%>.ftl">
+				<#include "rss/<%if (eContainer().filter("ComposedView") != null){%><%eContainer().filter("ComposedView").name%><%}else{%><%name%><%}%>.ftl">
 				</#if>
 				<#assign index=index+1>
 			</#if>

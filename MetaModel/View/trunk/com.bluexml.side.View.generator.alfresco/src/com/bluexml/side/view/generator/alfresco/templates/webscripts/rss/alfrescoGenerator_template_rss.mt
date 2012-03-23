@@ -24,7 +24,9 @@ import com.bluexml.side.clazz.service.alfresco.AttributeServices
 import com.bluexml.side.clazz.service.alfresco.AssociationServices
 %>
 <%script type="view.AbstractViewOf" name="validatedFilename"%>
-<%if (eContainer() == getRootContainer()){%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/webscript/data/<%viewOf.getPrefixedQName("_")%>/<%name%>/rss/<%name%>.ftl<%}%>
+<%if (eContainer() == getRootContainer()){%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/data/<%viewOf.getPrefixedQName("_")%>/<%name%>/rss/<%name%>.ftl
+<%}else if (eContainer().filter("ComposedView") != null){%>webapps/alfresco/WEB-INF/classes/alfresco/webscripts/extension/com/bluexml/side/data/<%viewOf.getPrefixedQName("_")%>/<%eContainer().filter("ComposedView").name%>/rss/<%eContainer().filter("ComposedView").name%>.ftl
+<%}%>
 <%script type="view.AbstractViewOf" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 <item>
 	<title><%name%></title>
@@ -36,7 +38,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 		<#if (child.properties["<%getPrefixedQName()%>"]?exists)>
 			<#if child.properties["<%getPrefixedQName()%>"]?is_sequence>
 		<%getLabel()%>:<#list child.properties["<%getPrefixedQName()%>"] as key>${key},</#list>;
-			<#else/>
+			<#else>
 		<%getLabel()%>:${child.properties["<%getPrefixedQName()%>"]<%if (typ.toString().equalsIgnoreCase("date")){%>?date<%}%>!""};
 			</#if>
 		</#if>
