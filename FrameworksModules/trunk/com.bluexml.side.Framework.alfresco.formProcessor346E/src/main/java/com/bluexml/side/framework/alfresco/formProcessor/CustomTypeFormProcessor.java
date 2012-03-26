@@ -53,12 +53,17 @@ public class CustomTypeFormProcessor extends TypeFormProcessor {
 
 	@Override
 	protected void persistNode(NodeRef nodeRef, FormData data) {
-
-		boolean nameFieldData = data.hasFieldData(NAME_PROP_DATA);
+		boolean isFileNameIsGenerated = false;
+		if (data instanceof CustomFormData) {
+			isFileNameIsGenerated = ((CustomFormData) data).isFileNameIsGenerated();
+		}
 
 		// implements FileField persistence
 		int fileFieldCount = 0;
 		for (FieldData fieldData : data) {
+			logger.debug("current fieldData :" + fieldData.getName());
+			logger.debug("current fieldData isFile :" + fieldData.isFile());
+			logger.debug("current fieldData Type :" + fieldData.getClass().getName());
 
 			if (fieldData.isFile() == true && fieldData instanceof CustomFormData.FieldData) {
 				CustomFormData.FieldData cfd = (CustomFormData.FieldData) fieldData;
@@ -79,7 +84,8 @@ public class CustomTypeFormProcessor extends TypeFormProcessor {
 					} catch (IOException e) {
 						logger.error("trying to close inputStream fail", e);
 					}
-					if (nameFieldData) {
+
+					if (isFileNameIsGenerated) {
 						String fileName = cfd.getFileName();
 						logger.debug("fill cm:name using fileName :" + fileName);
 						// add fieldData to put fileName into cm:name properties
@@ -226,6 +232,12 @@ public class CustomTypeFormProcessor extends TypeFormProcessor {
 			}
 			if (nodeName == null || nodeName.length() == 0) {
 				nodeName = GUID.generate();
+				if (data instanceof CustomFormData) {
+					((CustomFormData) data).setFileNameIsGenerated(true);
+					logger.debug("nodeName is generated :" + nodeName);
+				}
+			} else {
+				logger.debug("nodeName found in FormData :" + nodeName);
 			}
 
 			// create the node

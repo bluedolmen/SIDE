@@ -29,6 +29,8 @@ function main()
     }
    
     var repoFormData = new Packages.com.bluexml.side.framework.alfresco.formProcessor.CustomFormData();
+    logger.log("repoFormData :" + repoFormData);
+    
     var jsonKeys = json.keys();
     for ( ; jsonKeys.hasNext(); )
     {
@@ -85,8 +87,13 @@ function main()
     
     model.persistedObject = persistedObject.toString();
     if (model.redirect) {
-       // add current nodeRef in redirect url in model    
-       model.redirect = model.redirect + "?nodeRef=" + persistedObject.toString();
+       // add current nodeRef in redirect url in model
+       if (model.redirect.indexOf("?") != -1) {
+          model.redirect += "&";  
+       } else {
+          model.redirect += "?";
+       }
+       model.redirect += "nodeRef=" + persistedObject.toString();
     }
     model.message = "Successfully persisted form for item [" + itemKind + "]" + itemId;
 }

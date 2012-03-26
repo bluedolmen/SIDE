@@ -515,9 +515,15 @@
             // Cancel button
             this.widgets.cancelButton = Alfresco.util.createYUIButton(this, "cancel", this.onCancel);
 
+            
             // Form definition
             this.isFormOwner = true;
             this.form = new Alfresco.forms.Form(this.id + "-form");
+            
+            if (this.options.doBeforeFormSubmit) {
+               this.form.doBeforeFormSubmit = this.options.doBeforeFormSubmit;
+            }
+            
             this.form.setSubmitElements(this.widgets.okButton);
             this.form.setAJAXSubmit(true,
             {
