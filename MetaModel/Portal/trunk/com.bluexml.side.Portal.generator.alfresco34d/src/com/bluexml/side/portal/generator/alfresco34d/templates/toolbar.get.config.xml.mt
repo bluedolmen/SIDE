@@ -2,6 +2,7 @@
 metamodel http://www.kerblue.org/portal/1.0
 import com.bluexml.side.portal.generator.alfresco.templates.services.ClazzService
 import com.bluexml.side.clazz.service.alfresco.CommonServices
+import com.bluexml.side.clazz.service.alfresco.ClassServices
 %>
 <%script type="Portal" name="validatedFilename" post="trim()" %>
 <%if (pageSet[ID.toLowerCase().trim() == "documentlibrary"].nSize() > 0 &&
@@ -24,7 +25,7 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
       <%}else{%>
       --%>
       	<%for (isPortletInternal.form.forms.filter("form.FormClass")){%>
-      <content mimetype="" icon="plain-text" label="menu.create-content.<%real_class.name%>" itemid="<%real_class.getPrefixedQName()%>"<%if (eContainer("form.FormCollection").name != "default"){%> formid="<%eContainer("form.FormCollection").name%>"<%}%>/>
+      <content mimetype="" icon="plain-text" label="menu.create-content.<%real_class.name%>" itemid="<%real_class.getPrefixedQName()%>"<%if (eContainer("form.FormCollection").name != "default"){%> formid="<%eContainer("form.FormCollection").name%>"<%}%> nodetype="<%if (real_class.isFolder()){%>folder<%}else{%>document<%}%>"/>
       	<%}%>
       <%--
       <%}%>
