@@ -80,7 +80,7 @@
     <webapp.log.level>error</webapp.log.level>
     <!--  End of testing webapp specific properties -->
     <!--  Module specific build time properties -->
-    <module.log.level>info</module.log.level>
+    <module.log.level>debug</module.log.level>
   </properties>
   <!-- 
 		need to list these as a provided so that Maven doesn't download them

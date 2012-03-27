@@ -22,6 +22,7 @@ public interface IConfigurationFile<K, V> {
 
 	/**
 	 * get read only access to dictionary Map
+	 * 
 	 * @return
 	 */
 	public abstract Map<K, V> getDictionary();

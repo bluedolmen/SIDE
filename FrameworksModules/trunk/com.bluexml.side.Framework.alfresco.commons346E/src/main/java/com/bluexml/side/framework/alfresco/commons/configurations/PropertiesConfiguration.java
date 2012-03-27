@@ -7,7 +7,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.core.io.Resource;
 
-public class PropertiesConfiguration extends AbstractConfigurationFile<String, String> {
+public abstract class PropertiesConfiguration extends AbstractConfigurationFile<String, String> {
 	/** The logger. */
 	protected Log logger = LogFactory.getLog(getClass());
 
@@ -22,15 +22,18 @@ public class PropertiesConfiguration extends AbstractConfigurationFile<String, S
 		} catch (IOException e) {
 			logger.error("Unexpected error loading property file \"" + r.getFilename() + "\" ", e);
 		}
-
-		for (Object property : properties.keySet()) {
-			String key = (String) property;
-			String value = (String) properties.getProperty(key);
-			dictionary.put(key, value);			
+		if (isValidePropertiesResource(properties)) {
+			for (Object property : properties.keySet()) {
+				String key = (String) property;
+				String value = (String) properties.getProperty(key);
+				dictionary.put(key, value);
+			}
 		}
 	}
 
 	public boolean getAsBooleanValue(String key) {
 		return Boolean.parseBoolean(getValue(key).trim());
 	}
+
+	public abstract boolean isValidePropertiesResource(Properties props);
 }

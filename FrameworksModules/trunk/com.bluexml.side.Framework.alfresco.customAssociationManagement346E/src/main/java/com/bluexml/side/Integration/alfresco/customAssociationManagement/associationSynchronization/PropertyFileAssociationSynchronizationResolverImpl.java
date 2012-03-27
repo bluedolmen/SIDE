@@ -3,9 +3,9 @@ package com.bluexml.side.Integration.alfresco.customAssociationManagement.associ
 import org.alfresco.service.ServiceRegistry;
 import org.alfresco.service.namespace.QName;
 
-import com.bluexml.side.framework.alfresco.commons.configurations.PropertiesConfiguration;
+import com.bluexml.side.framework.alfresco.commons.configurations.PolicyPropertiesConfiguration;
 
-public class PropertyFileAssociationSynchronizationResolverImpl extends PropertiesConfiguration implements AssociationSynchronizationResolver {
+public class PropertyFileAssociationSynchronizationResolverImpl extends PolicyPropertiesConfiguration implements AssociationSynchronizationResolver {
 
 	ServiceRegistry serviceRegistry;
 

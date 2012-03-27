@@ -33,8 +33,7 @@ public class SinglePrimaryChildAssociationPolicy implements OnCreateChildAssocia
 	public void init() {
 
 		logger.info("[init] Initializing SinglePrimaryChildAssociationPolicy");
-		String key = "policy.enabled";
-		if (configuration.hasValue(key) && configuration.getAsBooleanValue(key)) {
+		if (configuration.getDictionary().size() > 0) {
 
 			// Create behaviours
 			this.onCreateChildAssociation = new JavaBehaviour(this, "onCreateChildAssociation", NotificationFrequency.FIRST_EVENT);
@@ -42,7 +41,7 @@ public class SinglePrimaryChildAssociationPolicy implements OnCreateChildAssocia
 			// Bind behaviours to node policies
 			policyComponent.bindAssociationBehaviour(QName.createQName(NamespaceService.ALFRESCO_URI, "onCreateChildAssociation"), this, this.onCreateChildAssociation);
 		} else if (logger.isDebugEnabled()) {
-			logger.info("Policy DISABLED : policy.enabled=" + configuration.getValue(key));
+			logger.info("Policy DISABLED !! no entries in dictionary");
 		}
 
 	}

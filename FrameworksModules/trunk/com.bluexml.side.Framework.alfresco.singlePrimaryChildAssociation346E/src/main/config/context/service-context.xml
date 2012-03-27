@@ -13,7 +13,7 @@
 <beans>
 
 	<bean id="singlePrimaryChildAssociationConfiguration"
-		class="com.bluexml.side.framework.alfresco.commons.configurations.PropertiesConfiguration">
+		class="com.bluexml.side.framework.alfresco.commons.configurations.PolicyPropertiesConfiguration">
 		<property name="resourcePattern"
 			value="classpath*:alfresco/module/*/single-child-associations.properties" />
 	</bean>

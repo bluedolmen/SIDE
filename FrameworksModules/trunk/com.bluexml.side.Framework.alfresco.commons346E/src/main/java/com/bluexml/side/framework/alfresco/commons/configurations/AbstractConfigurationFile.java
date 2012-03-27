@@ -52,26 +52,34 @@ public abstract class AbstractConfigurationFile<K, V> implements IConfigurationF
 	 * Service Methods
 	 */
 
-	/* (non-Javadoc)
-	 * @see com.bluexml.side.framework.alfresco.commons.configurations.IConfigurationFile#getValue(K)
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.bluexml.side.framework.alfresco.commons.configurations.IConfigurationFile
+	 * #getValue(K)
 	 */
 	public V getValue(K key) {
 		return dictionary.get(key);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.bluexml.side.framework.alfresco.commons.configurations.IConfigurationFile#hasValue(K)
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.bluexml.side.framework.alfresco.commons.configurations.IConfigurationFile
+	 * #hasValue(K)
 	 */
 	public boolean hasValue(K key) {
 		return dictionary.containsKey(key);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.bluexml.side.framework.alfresco.commons.configurations.IConfigurationFile#getDictionary()
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.bluexml.side.framework.alfresco.commons.configurations.IConfigurationFile
+	 * #getDictionary()
 	 */
 	public Map<K, V> getDictionary() {
 		return Collections.unmodifiableMap(dictionary);
 	}
-	
-	
+
 }
