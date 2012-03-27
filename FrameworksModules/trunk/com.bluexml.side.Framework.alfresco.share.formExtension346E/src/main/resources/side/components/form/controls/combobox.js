@@ -110,7 +110,7 @@ if (!Array.prototype.indexOf) {
 						url += "&site=" + Alfresco.constants.SITE;
 					}
 					if (me.options.startLocation) {
-						url += "&xpath=" + me.options.xpath;
+						url += "&xpath=" + me.options.startLocation;
 					}
 					
 					var myDataSource = new YAHOO.util.XHRDataSource(url);

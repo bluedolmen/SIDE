@@ -89,7 +89,7 @@ if (!Array.prototype.indexOf) {
 				url += "&site=" + Alfresco.constants.SITE;
 			}
 			if (this.options.startLocation) {
-				url += "&xpath=" + this.options.xpath;
+				url += "&xpath=" + this.options.startLocation;
 			}
 			var myDataSource = new YAHOO.util.XHRDataSource(url);
 			myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
