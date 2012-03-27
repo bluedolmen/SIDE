@@ -28,6 +28,8 @@ function main()
       logger.log("argsAdvancedQuery = " + argsAdvancedQuery);      
       logger.log("argsMaxResults = " + argsMaxResults);
       logger.log("argsXPath = " + argsXPath);
+      logger.log("argsSite = " + argsSite);
+      
    }
          
    try
@@ -277,7 +279,8 @@ function main()
 	    	  } else {
 	    		  type = "TYPE:\"" + argsSelectableType + "\"";  
 	    	  }
-	    	  
+	    	  var query = type;
+	    	 
 	    	  var path = null;
 	    	   if (argsXPath) {
 	    		  path = argsXPath;
@@ -293,7 +296,7 @@ function main()
 	    		  query += " AND " + path;
 	    	  }
 	    	  
-	    	  var query = type;
+	    	  
 	    	  var advancedQuery = argsAdvancedQuery && argsAdvancedQuery != "";
 	    	  
 	    	  if (argsSearchTerm != undefined && argsSearchTerm != '') {
