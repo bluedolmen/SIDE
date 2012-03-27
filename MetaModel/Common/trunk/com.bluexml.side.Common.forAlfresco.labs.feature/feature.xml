@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.forAlfresco.labs.feature" label="SIDE Labs For Alfresco" version="1.0.203.v34445-20120326" provider-name="BLUEXML" plugin="com.bluexml.side.Integration.eclipse.branding.labs">
+<feature id="com.bluexml.side.Common.forAlfresco.labs.feature" label="SIDE Labs For Alfresco" version="1.0.204.v34468-20120327" provider-name="BLUEXML" plugin="com.bluexml.side.Integration.eclipse.branding.labs">
   <description url="http://www.example.com/description">[Enter Feature Description here.]</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
   <includes id="com.bluexml.side.Common.forAlfresco34d.labs.feature" version="1.0.57.v34377-20120323" />
-  <plugin id="com.bluexml.side.Integration.eclipse.branding.labs" download-size="0" install-size="0" version="1.0.736.v34445-20120326" unpack="false" />
+  <plugin id="com.bluexml.side.Integration.eclipse.branding.labs" download-size="0" install-size="0" version="1.0.737.v34468-20120327" unpack="false" />
 </feature>
 
