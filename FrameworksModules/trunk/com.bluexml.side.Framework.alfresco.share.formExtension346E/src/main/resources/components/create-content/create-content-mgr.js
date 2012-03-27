@@ -198,7 +198,8 @@
          /* Have we been given a nodeRef from the Forms Service? */
          if (YAHOO.lang.isObject(nodeRef))
          {
-            window.location.href = $siteURL("document-details?nodeRef=" + nodeRef.toString());
+            var page = this.options.nodeType + "-details"; 
+            window.location.href = $siteURL(page + "?nodeRef=" + nodeRef.toString());
          }
          /* Did we come from the document library? If so, then direct the user back there */
          else if (document.referrer.match(/documentlibrary([?]|$)/) || document.referrer.match(/repository([?]|$)/))
