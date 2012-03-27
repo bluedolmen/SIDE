@@ -35,11 +35,9 @@ public class MavenProjectUpdater {
 		return pomsNewsVersion;
 	}
 
-	
 	public List<String> getPomUpdated() {
 		return pomUpdated;
 	}
-
 
 	// all project with version (updated or not)
 	Map<String, String> pomsVersions = new HashMap<String, String>();
@@ -77,7 +75,7 @@ public class MavenProjectUpdater {
 		return currentmodule;
 	}
 
-	public void checkAndUpdateAllPoms() throws Exception {
+	public List<String> checkAndUpdateAllPoms() throws Exception {
 		// mark features
 		// use fixed point algorithm to check end condition
 		// some feature could be forgotten so search one more time
@@ -95,6 +93,14 @@ public class MavenProjectUpdater {
 
 		updateMarkedModules();
 		updateDone = true;
+
+		// return path of updated poms
+		List<String> updatedPomPath = new ArrayList<String>();
+		for (String id : this.pomUpdated) {
+			String pomPath = getPomPath(id);
+			updatedPomPath.add(pomPath);
+		}
+		return updatedPomPath;
 	}
 
 	private void markProjects() throws Exception {
@@ -195,7 +201,7 @@ public class MavenProjectUpdater {
 			String newVersion = updatepom(number, pattern);
 			version.setText(newVersion);
 			logger.debug("\tMavenProjectUpdater.updateMarkedModules() update version " + oldVersionNumber + " -> " + newVersion);
-			
+
 			// update dependencies
 			Element dependencies = root.getChild("dependencies", ns);
 			if (dependencies != null) {

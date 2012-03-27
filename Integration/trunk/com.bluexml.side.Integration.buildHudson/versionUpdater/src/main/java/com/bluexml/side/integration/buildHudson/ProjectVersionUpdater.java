@@ -273,7 +273,7 @@ public class ProjectVersionUpdater {
 			projetPomsList.addAll(corePoms);
 		}
 		MavenProjectUpdater mpu = new MavenProjectUpdater(projetPomsList, projectPoms2Update, corePoms, bu);
-		mpu.checkAndUpdateAllPoms();
+		projectPoms2Update = mpu.checkAndUpdateAllPoms();
 		System.out.println("Updated Maven2 projects :" + mpu.getPomsNewsVersion().size());
 		for (Map.Entry<String, String> entry : mpu.getPomsNewsVersion().entrySet()) {
 			System.out.println("\t- " + entry.getKey() + " : " + entry.getValue());
@@ -379,6 +379,7 @@ public class ProjectVersionUpdater {
 
 		if (generateSVNCommit) {
 			// generate ant script to commit changes
+			
 			SVNCommandGenerator svnCg = new SVNCommandGenerator(bu, launchDate, projectPoms2Update, plugins2UpdateList, features2UpdateList);
 			svnCg.createAntFile();
 		}
