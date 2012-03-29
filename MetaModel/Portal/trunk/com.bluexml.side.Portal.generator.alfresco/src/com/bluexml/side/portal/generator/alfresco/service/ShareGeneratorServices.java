@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.InvalidPropertiesFormatException;
 import java.util.List;
 import java.util.Properties;
@@ -106,6 +107,25 @@ public class ShareGeneratorServices {
 	 * @return
 	 */
 	public static List<HavePortlet> getOrderedHaveProtlets(Page p, Column c) {
-		return p.getSortedHavePortletsInColumn(c);
+		System.out.println("ShareGeneratorServices.getOrderedHaveProtlets()");
+		System.out.println("\tpage :"+p.getID());
+		System.out.println("\tcolumn :"+c.getFullName());
+		List<Integer> li = new ArrayList<Integer>();
+		List<HavePortlet> l = new ArrayList<HavePortlet>();
+		EList<HavePortlet> sortedHavePortletsInColumn = p.getSortedHavePortletsInColumn(c);
+		for (HavePortlet havePortlet : sortedHavePortletsInColumn) {
+			int position = havePortlet.getPositionGroup().get(0).getPosition();
+			if (!li.contains(position)) {
+				l.add(havePortlet);
+				li.add(position);
+			} else {
+				System.out.println("ShareGeneratorServices.getOrderedHaveProtlets() same position :");
+				System.out.println("\tportlet :"+havePortlet.getAssociationPortlet().getName());
+			}
+		}
+		
+		
+		System.out.println("");
+		return l;
 	}
 }

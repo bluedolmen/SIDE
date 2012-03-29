@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.portal;
 
+import com.bluexml.side.common.ModelElement;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -25,7 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface PortletAttributeInstance extends EObject {
+public interface PortletAttributeInstance extends ModelElement {
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.
 	 * The default value is <code>""</code>.

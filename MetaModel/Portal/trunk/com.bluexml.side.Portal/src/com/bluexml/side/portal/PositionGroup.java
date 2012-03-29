@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.portal;
 
+import com.bluexml.side.common.ModelElement;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -23,10 +24,11 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see com.bluexml.side.portal.PortalPackage#getPositionGroup()
- * @model
+ * @model annotation="http://www.bluexml.com/OCL unicPosition='PositionGroup.allInstances() -> select(x : PositionGroup | self.position = x.position and self.onColumn = x.onColumn and self.onLayout = x.onLayout) -> size() < 2 or self.getContainer().oclAsType(HavePortlet).metainfo -> select(x | x.key = \'region-id\') -> size() > 0'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='unicPosition'"
  * @generated
  */
-public interface PositionGroup extends EObject {
+public interface PositionGroup extends ModelElement {
 	/**
 	 * Returns the value of the '<em><b>Position</b></em>' attribute.
 	 * <!-- begin-user-doc -->

@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.portal.impl;
 
+import com.bluexml.side.common.impl.ModelElementImpl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.ocl.ecore.OCL;
@@ -23,7 +24,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *
  * @generated
  */
-public abstract class AbstractPortletAttributesImpl extends EObjectImpl implements AbstractPortletAttributes {
+public abstract class AbstractPortletAttributesImpl extends ModelElementImpl implements AbstractPortletAttributes {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -1,5 +1,5 @@
 <%
-metamodel http://www.kerblue.org/form/1.0
+metamodel http://www.kerblue.org/portal/1.0
 import com.bluexml.side.portal.generator.alfresco.templates.services.ClazzService
 import com.bluexml.side.clazz.service.alfresco.CommonServices
 %>

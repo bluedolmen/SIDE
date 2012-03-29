@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.portal.impl;
 
+import com.bluexml.side.common.impl.ModelElementImpl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -32,7 +33,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *
  * @generated
  */
-public class isChildPageImpl extends EObjectImpl implements isChildPage {
+public class isChildPageImpl extends ModelElementImpl implements isChildPage {
 	/**
 	 * The default value of the '{@link #isInherit() <em>Inherit</em>}' attribute.
 	 * <!-- begin-user-doc -->

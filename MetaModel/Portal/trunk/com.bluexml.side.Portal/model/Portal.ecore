@@ -101,7 +101,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="view" eType="ecore:EClass ../../com.bluexml.side.View/model/View.ecore#//AbstractView"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="form" eType="ecore:EClass ../../com.bluexml.side.Form/model/Forms.ecore#//FormCollection"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractPortletAttributes" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractPortletAttributes" abstract="true"
+      eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//ModelElement"/>
   <eClassifiers xsi:type="ecore:EEnum" name="widthUnit">
     <eLiterals name="Percent" literal="Percent"/>
     <eLiterals name="Pixel" value="1" literal="Pixel"/>
@@ -110,7 +111,7 @@
     <eLiterals name="View" value="1" literal="View"/>
     <eLiterals name="Form" value="3" literal="Form"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Group">
+  <eClassifiers xsi:type="ecore:EClass" name="Group" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//ModelElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="usePage" eType="#//Page"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -121,7 +122,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiValued" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="HavePortlet">
+  <eClassifiers xsi:type="ecore:EClass" name="HavePortlet" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//ModelElement">
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="isvalide" value="not (self.associationPage.oclIsUndefined() or self.associationPortlet.oclIsUndefined())"/>
     </eAnnotations>
@@ -133,7 +134,13 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="positionGroup" upperBound="-1"
         eType="#//PositionGroup" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PositionGroup">
+  <eClassifiers xsi:type="ecore:EClass" name="PositionGroup" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//ModelElement">
+    <eAnnotations source="http://www.bluexml.com/OCL">
+      <details key="unicPosition" value="PositionGroup.allInstances() -> select(x : PositionGroup | self.position = x.position and self.onColumn = x.onColumn and self.onLayout = x.onLayout) -> size() &lt; 2 or self.getContainer().oclAsType(HavePortlet).metainfo -> select(x | x.key = 'region-id') -> size() > 0"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="unicPosition"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="position" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="onColumn" eType="#//Column"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="onLayout" eType="#//PortalLayout"/>
@@ -147,7 +154,7 @@
     <eLiterals name="DateTime" value="5"/>
     <eLiterals name="multiline" value="6" literal="multiline"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="InstanciatePortletType">
+  <eClassifiers xsi:type="ecore:EClass" name="InstanciatePortletType" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//ModelElement">
     <eAnnotations source="http://www.bluexml.com/OCL">
       <details key="haveType" value="not self.portletType.oclIsUndefined()"/>
     </eAnnotations>
@@ -158,12 +165,12 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="instances" upperBound="-1"
         eType="#//PortletAttributeInstance" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PortletAttributeInstance">
+  <eClassifiers xsi:type="ecore:EClass" name="PortletAttributeInstance" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//ModelElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="instanceOf" eType="#//PortletAttribute"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="isChildPage">
+  <eClassifiers xsi:type="ecore:EClass" name="isChildPage" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//ModelElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="inherit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="isChildPageOf" eType="#//Page"/>
   </eClassifiers>

@@ -1003,7 +1003,14 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 		portletEClass.getESuperTypes().add(this.getPortalModelElement());
 		portletTypeEClass.getESuperTypes().add(this.getPortalModelElement());
 		portletInternalEClass.getESuperTypes().add(this.getPortalModelElement());
+		abstractPortletAttributesEClass.getESuperTypes().add(theCommonPackage.getModelElement());
+		groupEClass.getESuperTypes().add(theCommonPackage.getModelElement());
 		portletAttributeEClass.getESuperTypes().add(this.getAbstractPortletAttributes());
+		havePortletEClass.getESuperTypes().add(theCommonPackage.getModelElement());
+		positionGroupEClass.getESuperTypes().add(theCommonPackage.getModelElement());
+		instanciatePortletTypeEClass.getESuperTypes().add(theCommonPackage.getModelElement());
+		portletAttributeInstanceEClass.getESuperTypes().add(theCommonPackage.getModelElement());
+		isChildPageEClass.getESuperTypes().add(theCommonPackage.getModelElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(portalModelElementEClass, PortalModelElement.class, "PortalModelElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1171,6 +1178,12 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 			 "isvalide", "not (self.associationPage.oclIsUndefined() or self.associationPortlet.oclIsUndefined())"
 		   });			
 		addAnnotation
+		  (positionGroupEClass, 
+		   source, 
+		   new String[] {
+			 "unicPosition", "PositionGroup.allInstances() -> select(x : PositionGroup | self.position = x.position and self.onColumn = x.onColumn and self.onLayout = x.onLayout) -> size() < 2 or self.getContainer().oclAsType(HavePortlet).metainfo -> select(x | x.key = \'region-id\') -> size() > 0"
+		   });			
+		addAnnotation
 		  (instanciatePortletTypeEClass, 
 		   source, 
 		   new String[] {
@@ -1215,6 +1228,12 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "isvalide"
+		   });			
+		addAnnotation
+		  (positionGroupEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "unicPosition"
 		   });			
 		addAnnotation
 		  (instanciatePortletTypeEClass, 

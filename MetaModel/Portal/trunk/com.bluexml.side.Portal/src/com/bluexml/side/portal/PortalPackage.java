@@ -1116,13 +1116,85 @@ public interface PortalPackage extends EPackage {
 	int ABSTRACT_PORTLET_ATTRIBUTES = 8;
 
 	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_PORTLET_ATTRIBUTES__STEREOTYPES = CommonPackage.MODEL_ELEMENT__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_PORTLET_ATTRIBUTES__TAGS = CommonPackage.MODEL_ELEMENT__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_PORTLET_ATTRIBUTES__COMMENTS = CommonPackage.MODEL_ELEMENT__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_PORTLET_ATTRIBUTES__DOCUMENTATION = CommonPackage.MODEL_ELEMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_PORTLET_ATTRIBUTES__DESCRIPTION = CommonPackage.MODEL_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_PORTLET_ATTRIBUTES__METAINFO = CommonPackage.MODEL_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_PORTLET_ATTRIBUTES__CONSTRAINTS = CommonPackage.MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_PORTLET_ATTRIBUTES__NAMESPACE = CommonPackage.MODEL_ELEMENT__NAMESPACE;
+
+	/**
 	 * The number of structural features of the '<em>Abstract Portlet Attributes</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_PORTLET_ATTRIBUTES_FEATURE_COUNT = 0;
+	int ABSTRACT_PORTLET_ATTRIBUTES_FEATURE_COUNT = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.portal.impl.GroupImpl <em>Group</em>}' class.
@@ -1135,13 +1207,85 @@ public interface PortalPackage extends EPackage {
 	int GROUP = 9;
 
 	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GROUP__STEREOTYPES = CommonPackage.MODEL_ELEMENT__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GROUP__TAGS = CommonPackage.MODEL_ELEMENT__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GROUP__COMMENTS = CommonPackage.MODEL_ELEMENT__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GROUP__DOCUMENTATION = CommonPackage.MODEL_ELEMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GROUP__DESCRIPTION = CommonPackage.MODEL_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GROUP__METAINFO = CommonPackage.MODEL_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GROUP__CONSTRAINTS = CommonPackage.MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GROUP__NAMESPACE = CommonPackage.MODEL_ELEMENT__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Use Page</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GROUP__USE_PAGE = 0;
+	int GROUP__USE_PAGE = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1150,7 +1294,7 @@ public interface PortalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GROUP__NAME = 1;
+	int GROUP__NAME = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Group</em>' class.
@@ -1159,7 +1303,7 @@ public interface PortalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GROUP_FEATURE_COUNT = 2;
+	int GROUP_FEATURE_COUNT = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.portal.impl.PortletAttributeImpl <em>Portlet Attribute</em>}' class.
@@ -1170,6 +1314,78 @@ public interface PortalPackage extends EPackage {
 	 * @generated
 	 */
 	int PORTLET_ATTRIBUTE = 10;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET_ATTRIBUTE__STEREOTYPES = ABSTRACT_PORTLET_ATTRIBUTES__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET_ATTRIBUTE__TAGS = ABSTRACT_PORTLET_ATTRIBUTES__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET_ATTRIBUTE__COMMENTS = ABSTRACT_PORTLET_ATTRIBUTES__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET_ATTRIBUTE__DOCUMENTATION = ABSTRACT_PORTLET_ATTRIBUTES__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET_ATTRIBUTE__DESCRIPTION = ABSTRACT_PORTLET_ATTRIBUTES__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET_ATTRIBUTE__METAINFO = ABSTRACT_PORTLET_ATTRIBUTES__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET_ATTRIBUTE__CONSTRAINTS = ABSTRACT_PORTLET_ATTRIBUTES__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET_ATTRIBUTE__NAMESPACE = ABSTRACT_PORTLET_ATTRIBUTES__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1227,13 +1443,85 @@ public interface PortalPackage extends EPackage {
 	int HAVE_PORTLET = 11;
 
 	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HAVE_PORTLET__STEREOTYPES = CommonPackage.MODEL_ELEMENT__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HAVE_PORTLET__TAGS = CommonPackage.MODEL_ELEMENT__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HAVE_PORTLET__COMMENTS = CommonPackage.MODEL_ELEMENT__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HAVE_PORTLET__DOCUMENTATION = CommonPackage.MODEL_ELEMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HAVE_PORTLET__DESCRIPTION = CommonPackage.MODEL_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HAVE_PORTLET__METAINFO = CommonPackage.MODEL_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HAVE_PORTLET__CONSTRAINTS = CommonPackage.MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HAVE_PORTLET__NAMESPACE = CommonPackage.MODEL_ELEMENT__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Association Portlet</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int HAVE_PORTLET__ASSOCIATION_PORTLET = 0;
+	int HAVE_PORTLET__ASSOCIATION_PORTLET = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Association Page</b></em>' reference.
@@ -1242,7 +1530,7 @@ public interface PortalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int HAVE_PORTLET__ASSOCIATION_PAGE = 1;
+	int HAVE_PORTLET__ASSOCIATION_PAGE = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Position Group</b></em>' containment reference list.
@@ -1251,7 +1539,7 @@ public interface PortalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int HAVE_PORTLET__POSITION_GROUP = 2;
+	int HAVE_PORTLET__POSITION_GROUP = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Have Portlet</em>' class.
@@ -1260,7 +1548,7 @@ public interface PortalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int HAVE_PORTLET_FEATURE_COUNT = 3;
+	int HAVE_PORTLET_FEATURE_COUNT = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.portal.impl.PositionGroupImpl <em>Position Group</em>}' class.
@@ -1273,13 +1561,85 @@ public interface PortalPackage extends EPackage {
 	int POSITION_GROUP = 12;
 
 	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSITION_GROUP__STEREOTYPES = CommonPackage.MODEL_ELEMENT__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSITION_GROUP__TAGS = CommonPackage.MODEL_ELEMENT__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSITION_GROUP__COMMENTS = CommonPackage.MODEL_ELEMENT__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSITION_GROUP__DOCUMENTATION = CommonPackage.MODEL_ELEMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSITION_GROUP__DESCRIPTION = CommonPackage.MODEL_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSITION_GROUP__METAINFO = CommonPackage.MODEL_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSITION_GROUP__CONSTRAINTS = CommonPackage.MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSITION_GROUP__NAMESPACE = CommonPackage.MODEL_ELEMENT__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Position</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int POSITION_GROUP__POSITION = 0;
+	int POSITION_GROUP__POSITION = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>On Column</b></em>' reference.
@@ -1288,7 +1648,7 @@ public interface PortalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int POSITION_GROUP__ON_COLUMN = 1;
+	int POSITION_GROUP__ON_COLUMN = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>On Layout</b></em>' reference.
@@ -1297,7 +1657,7 @@ public interface PortalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int POSITION_GROUP__ON_LAYOUT = 2;
+	int POSITION_GROUP__ON_LAYOUT = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Position Group</em>' class.
@@ -1306,7 +1666,7 @@ public interface PortalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int POSITION_GROUP_FEATURE_COUNT = 3;
+	int POSITION_GROUP_FEATURE_COUNT = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.portal.impl.InstanciatePortletTypeImpl <em>Instanciate Portlet Type</em>}' class.
@@ -1319,13 +1679,85 @@ public interface PortalPackage extends EPackage {
 	int INSTANCIATE_PORTLET_TYPE = 13;
 
 	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCIATE_PORTLET_TYPE__STEREOTYPES = CommonPackage.MODEL_ELEMENT__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCIATE_PORTLET_TYPE__TAGS = CommonPackage.MODEL_ELEMENT__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCIATE_PORTLET_TYPE__COMMENTS = CommonPackage.MODEL_ELEMENT__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCIATE_PORTLET_TYPE__DOCUMENTATION = CommonPackage.MODEL_ELEMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCIATE_PORTLET_TYPE__DESCRIPTION = CommonPackage.MODEL_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCIATE_PORTLET_TYPE__METAINFO = CommonPackage.MODEL_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCIATE_PORTLET_TYPE__CONSTRAINTS = CommonPackage.MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCIATE_PORTLET_TYPE__NAMESPACE = CommonPackage.MODEL_ELEMENT__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Portlet Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCIATE_PORTLET_TYPE__PORTLET_TYPE = 0;
+	int INSTANCIATE_PORTLET_TYPE__PORTLET_TYPE = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Instances</b></em>' containment reference list.
@@ -1334,7 +1766,7 @@ public interface PortalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCIATE_PORTLET_TYPE__INSTANCES = 1;
+	int INSTANCIATE_PORTLET_TYPE__INSTANCES = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Instanciate Portlet Type</em>' class.
@@ -1343,7 +1775,7 @@ public interface PortalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCIATE_PORTLET_TYPE_FEATURE_COUNT = 2;
+	int INSTANCIATE_PORTLET_TYPE_FEATURE_COUNT = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.portal.impl.PortletAttributeInstanceImpl <em>Portlet Attribute Instance</em>}' class.
@@ -1356,13 +1788,85 @@ public interface PortalPackage extends EPackage {
 	int PORTLET_ATTRIBUTE_INSTANCE = 14;
 
 	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET_ATTRIBUTE_INSTANCE__STEREOTYPES = CommonPackage.MODEL_ELEMENT__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET_ATTRIBUTE_INSTANCE__TAGS = CommonPackage.MODEL_ELEMENT__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET_ATTRIBUTE_INSTANCE__COMMENTS = CommonPackage.MODEL_ELEMENT__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET_ATTRIBUTE_INSTANCE__DOCUMENTATION = CommonPackage.MODEL_ELEMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET_ATTRIBUTE_INSTANCE__DESCRIPTION = CommonPackage.MODEL_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET_ATTRIBUTE_INSTANCE__METAINFO = CommonPackage.MODEL_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET_ATTRIBUTE_INSTANCE__CONSTRAINTS = CommonPackage.MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET_ATTRIBUTE_INSTANCE__NAMESPACE = CommonPackage.MODEL_ELEMENT__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PORTLET_ATTRIBUTE_INSTANCE__VALUE = 0;
+	int PORTLET_ATTRIBUTE_INSTANCE__VALUE = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Instance Of</b></em>' reference.
@@ -1371,7 +1875,7 @@ public interface PortalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PORTLET_ATTRIBUTE_INSTANCE__INSTANCE_OF = 1;
+	int PORTLET_ATTRIBUTE_INSTANCE__INSTANCE_OF = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Portlet Attribute Instance</em>' class.
@@ -1380,7 +1884,7 @@ public interface PortalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PORTLET_ATTRIBUTE_INSTANCE_FEATURE_COUNT = 2;
+	int PORTLET_ATTRIBUTE_INSTANCE_FEATURE_COUNT = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.portal.impl.isChildPageImpl <em>is Child Page</em>}' class.
@@ -1393,13 +1897,85 @@ public interface PortalPackage extends EPackage {
 	int IS_CHILD_PAGE = 15;
 
 	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IS_CHILD_PAGE__STEREOTYPES = CommonPackage.MODEL_ELEMENT__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IS_CHILD_PAGE__TAGS = CommonPackage.MODEL_ELEMENT__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IS_CHILD_PAGE__COMMENTS = CommonPackage.MODEL_ELEMENT__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IS_CHILD_PAGE__DOCUMENTATION = CommonPackage.MODEL_ELEMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IS_CHILD_PAGE__DESCRIPTION = CommonPackage.MODEL_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IS_CHILD_PAGE__METAINFO = CommonPackage.MODEL_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IS_CHILD_PAGE__CONSTRAINTS = CommonPackage.MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IS_CHILD_PAGE__NAMESPACE = CommonPackage.MODEL_ELEMENT__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Inherit</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IS_CHILD_PAGE__INHERIT = 0;
+	int IS_CHILD_PAGE__INHERIT = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Is Child Page Of</b></em>' reference.
@@ -1408,7 +1984,7 @@ public interface PortalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IS_CHILD_PAGE__IS_CHILD_PAGE_OF = 1;
+	int IS_CHILD_PAGE__IS_CHILD_PAGE_OF = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>is Child Page</em>' class.
@@ -1417,7 +1993,7 @@ public interface PortalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IS_CHILD_PAGE_FEATURE_COUNT = 2;
+	int IS_CHILD_PAGE_FEATURE_COUNT = CommonPackage.MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.portal.widthUnit <em>width Unit</em>}' enum.

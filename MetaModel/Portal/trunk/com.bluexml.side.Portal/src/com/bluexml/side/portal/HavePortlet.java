@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.portal;
 
+import com.bluexml.side.common.ModelElement;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
@@ -28,7 +29,7 @@ import org.eclipse.emf.ecore.EObject;
  *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='isvalide'"
  * @generated
  */
-public interface HavePortlet extends EObject {
+public interface HavePortlet extends ModelElement {
 	/**
 	 * Returns the value of the '<em><b>Association Portlet</b></em>' reference.
 	 * <!-- begin-user-doc -->

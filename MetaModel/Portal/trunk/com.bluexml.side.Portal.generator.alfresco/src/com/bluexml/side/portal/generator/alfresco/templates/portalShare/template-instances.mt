@@ -14,4 +14,10 @@ import com.bluexml.side.portal.generator.alfresco.templates.services.ClazzServic
 <?xml version='1.0' encoding='UTF-8'?>
 <template-instance>
    <template-type>com/bluexml/<%nGet("ti_name")%></template-type>
+   <properties>
+   <%-- need to skep metainfo like rawcontent ... --%>
+   <%for (metainfo[key.toLowerCase().indexOf("raw") == -1]){%>
+   		<<%key%>><%value%></<%key%>>
+   <%}%>
+   </properties>
 </template-instance>

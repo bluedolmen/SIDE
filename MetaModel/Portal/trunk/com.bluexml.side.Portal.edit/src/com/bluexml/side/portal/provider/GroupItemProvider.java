@@ -7,6 +7,9 @@
 package com.bluexml.side.portal.provider;
 
 
+import com.bluexml.side.clazz.ClazzFactory;
+import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.provider.ModelElementItemProvider;
 import java.util.Collection;
 import java.util.List;
 
@@ -34,7 +37,7 @@ import com.bluexml.side.portal.PortalPackage;
  * @generated
  */
 public class GroupItemProvider
-	extends ItemProviderAdapter
+	extends ModelElementItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -166,6 +169,16 @@ public class GroupItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
+				 ClazzFactory.eINSTANCE.createClassComment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
+				 ClazzFactory.eINSTANCE.createAssociationEnd()));
 	}
 
 	/**

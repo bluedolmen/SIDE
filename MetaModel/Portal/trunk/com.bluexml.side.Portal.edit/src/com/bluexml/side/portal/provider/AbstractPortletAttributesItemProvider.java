@@ -7,6 +7,10 @@
 package com.bluexml.side.portal.provider;
  
 
+import com.bluexml.side.clazz.ClazzFactory;
+import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.provider.ModelElementItemProvider;
+import com.bluexml.side.portal.AbstractPortletAttributes;
 import java.util.Collection;
 import java.util.List;
 
@@ -28,7 +32,7 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
  * @generated
  */
 public class AbstractPortletAttributesItemProvider
-	extends ItemProviderAdapter
+	extends ModelElementItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -68,7 +72,10 @@ public class AbstractPortletAttributesItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_AbstractPortletAttributes_type");
+		String label = crop(((AbstractPortletAttributes)object).getDocumentation());
+		return label == null || label.length() == 0 ?
+			getString("_UI_AbstractPortletAttributes_type") :
+			getString("_UI_AbstractPortletAttributes_type") + " " + label;
 	}
 
 	/**
@@ -94,6 +101,16 @@ public class AbstractPortletAttributesItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
+				 ClazzFactory.eINSTANCE.createClassComment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
+				 ClazzFactory.eINSTANCE.createAssociationEnd()));
 	}
 
 	/**

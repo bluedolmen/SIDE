@@ -7,6 +7,9 @@
 package com.bluexml.side.portal.provider;
 
 
+import com.bluexml.side.clazz.ClazzFactory;
+import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.provider.ModelElementItemProvider;
 import java.util.Collection;
 import java.util.List;
 
@@ -35,7 +38,7 @@ import com.bluexml.side.portal.PortalPackage;
  * @generated
  */
 public class InstanciatePortletTypeItemProvider
-	extends ItemProviderAdapter
+	extends ModelElementItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -139,7 +142,10 @@ public class InstanciatePortletTypeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_InstanciatePortletType_type");
+		String label = crop(((InstanciatePortletType)object).getDocumentation());
+		return label == null || label.length() == 0 ?
+			getString("_UI_InstanciatePortletType_type") :
+			getString("_UI_InstanciatePortletType_type") + " " + label;
 	}
 
 	/**
@@ -171,6 +177,16 @@ public class InstanciatePortletTypeItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
+				 ClazzFactory.eINSTANCE.createClassComment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CommonPackage.Literals.MODEL_ELEMENT__COMMENTS,
+				 ClazzFactory.eINSTANCE.createAssociationEnd()));
 
 		newChildDescriptors.add
 			(createChildParameter

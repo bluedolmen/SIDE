@@ -12,7 +12,7 @@ import com.bluexml.side.clazz.service.alfresco.ClassServices
 <%for (pageSet[ID.toLowerCase().trim() == "documentlibrary"].portlets.associationPortlet[name.toLowerCase().trim() == "toolbar-create-content" && isPortletInternal != null]){%>
 <toolbar>
    <createContent>
-   	  <%if (metainfo[key == 'default-create-content'].nSize() == 1 && metainfo[key == 'default-create-content'].nGet(0).value.trim() == 'true'){%>
+   	  <%if (metainfo[key == "default-create-content"].nSize() == 1 && metainfo[key == "default-create-content"].nGet(0).value.trim() == "true"){%>
       <content mimetype="text/plain" icon="plain-text" label="menu.create-content.text" itemid="cm:content"/>
       <content mimetype="text/html" icon="html" label="menu.create-content.html" itemid="cm:content"/>
       <content mimetype="text/xml" icon="xml" label="menu.create-content.xml" itemid="cm:content"/>

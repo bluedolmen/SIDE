@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.portal;
  
+import com.bluexml.side.common.ModelElement;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -18,5 +19,5 @@ import org.eclipse.emf.ecore.EObject;
  * @model abstract="true"
  * @generated
  */
-public interface AbstractPortletAttributes extends EObject {
+public interface AbstractPortletAttributes extends ModelElement {
 } // AbstractPortletAttributes

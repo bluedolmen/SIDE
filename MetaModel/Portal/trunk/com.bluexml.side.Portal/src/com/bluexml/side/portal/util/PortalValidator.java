@@ -133,6 +133,14 @@ public class PortalValidator extends EObjectValidator {
 	 */
 	private static Constraint havePortlet_isvalideInvOCL;
 	/**
+	 * The parsed OCL expression for the definition of the '<em>unicPosition</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint positionGroup_unicPositionInvOCL;
+
+	/**
 	 * The parsed OCL expression for the definition of the '<em>haveType</em>' invariant constraint.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -610,7 +618,56 @@ public class PortalValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validatePositionGroup(PositionGroup positionGroup, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(positionGroup, diagnostics, context);
+		boolean result = validate_NoCircularContainment(positionGroup, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(positionGroup, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(positionGroup, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(positionGroup, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(positionGroup, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(positionGroup, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(positionGroup, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(positionGroup, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(positionGroup, diagnostics, context);
+		if (result || diagnostics != null) result &= validatePositionGroup_unicPosition(positionGroup, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the unicPosition constraint of '<em>Position Group</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatePositionGroup_unicPosition(PositionGroup positionGroup, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (positionGroup_unicPositionInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(PortalPackage.Literals.POSITION_GROUP);
+
+			EAnnotation ocl = PortalPackage.Literals.POSITION_GROUP.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("unicPosition");
+
+			try {
+				positionGroup_unicPositionInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(positionGroup_unicPositionInvOCL);
+
+		if (!query.check(positionGroup)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						((doThrowError( PortalPackage.Literals.POSITION_GROUP.getEAnnotation("http://www.eclipse.org/emf/2002/Ecore"),"unicPosition")? Diagnostic.ERROR : Diagnostic.WARNING),
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "unicPosition", getObjectLabel(positionGroup, context) }),
+						 new Object[] { positionGroup }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**

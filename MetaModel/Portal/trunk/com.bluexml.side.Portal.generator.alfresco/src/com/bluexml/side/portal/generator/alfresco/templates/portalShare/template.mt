@@ -49,7 +49,7 @@ import com.bluexml.side.portal.generator.alfresco.service.ShareGeneratorServices
 </div>
 <%}%>
 <%script type="Page" name="view"%>
-<%for (getOrderedHaveProtlets(args(0).filter("Column"))){%>
+<%for (getOrderedHaveProtlets(args(0).filter("Column")).filter("HavePortlet")){%>
 	<%if (associationPortlet != null && associationPage != null){%>
 		<%for (associationPortlet){%>
 			<%if (isPortletInternal != null && (isPortletInternal.view != null || isPortletInternal.form != null)){%>
@@ -78,9 +78,10 @@ import com.bluexml.side.portal.generator.alfresco.service.ShareGeneratorServices
 					<%instanceOf.name%>="<%value%>" 
 					<%}%>
 				<%}%>
-					id=<%if (name.indexOf("\"") == -1){%>"<%name%>"<%}else{%><%name%><%}%>
+					id=<%if (current("HavePortlet").metainfo[key == "region-id"].nSize() > 0){%><%current("HavePortlet").metainfo[key == "region-id"].value%><%}else{%><%if (name.indexOf("\"") == -1){%>"<%name%>"<%}else{%><%name%><%}%><%}%>
 				 	protected=true />
 			<%}%>
 		<%}%>
+		
 	<%}%>
 <%}%>

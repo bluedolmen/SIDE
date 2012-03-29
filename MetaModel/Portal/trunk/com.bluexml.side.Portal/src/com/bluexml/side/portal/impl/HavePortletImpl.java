@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.portal.impl;
 
+import com.bluexml.side.common.impl.ModelElementImpl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -41,7 +42,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *
  * @generated
  */
-public class HavePortletImpl extends EObjectImpl implements HavePortlet {
+public class HavePortletImpl extends ModelElementImpl implements HavePortlet {
 	/**
 	 * The cached value of the '{@link #getAssociationPortlet() <em>Association Portlet</em>}' reference.
 	 * <!-- begin-user-doc -->

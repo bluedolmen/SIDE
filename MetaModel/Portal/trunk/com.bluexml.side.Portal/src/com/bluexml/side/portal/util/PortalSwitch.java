@@ -158,12 +158,14 @@ public class PortalSwitch<T> extends Switch<T> {
 			case PortalPackage.ABSTRACT_PORTLET_ATTRIBUTES: {
 				AbstractPortletAttributes abstractPortletAttributes = (AbstractPortletAttributes)theEObject;
 				T result = caseAbstractPortletAttributes(abstractPortletAttributes);
+				if (result == null) result = caseModelElement(abstractPortletAttributes);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case PortalPackage.GROUP: {
 				Group group = (Group)theEObject;
 				T result = caseGroup(group);
+				if (result == null) result = caseModelElement(group);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -171,36 +173,42 @@ public class PortalSwitch<T> extends Switch<T> {
 				PortletAttribute portletAttribute = (PortletAttribute)theEObject;
 				T result = casePortletAttribute(portletAttribute);
 				if (result == null) result = caseAbstractPortletAttributes(portletAttribute);
+				if (result == null) result = caseModelElement(portletAttribute);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case PortalPackage.HAVE_PORTLET: {
 				HavePortlet havePortlet = (HavePortlet)theEObject;
 				T result = caseHavePortlet(havePortlet);
+				if (result == null) result = caseModelElement(havePortlet);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case PortalPackage.POSITION_GROUP: {
 				PositionGroup positionGroup = (PositionGroup)theEObject;
 				T result = casePositionGroup(positionGroup);
+				if (result == null) result = caseModelElement(positionGroup);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case PortalPackage.INSTANCIATE_PORTLET_TYPE: {
 				InstanciatePortletType instanciatePortletType = (InstanciatePortletType)theEObject;
 				T result = caseInstanciatePortletType(instanciatePortletType);
+				if (result == null) result = caseModelElement(instanciatePortletType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case PortalPackage.PORTLET_ATTRIBUTE_INSTANCE: {
 				PortletAttributeInstance portletAttributeInstance = (PortletAttributeInstance)theEObject;
 				T result = casePortletAttributeInstance(portletAttributeInstance);
+				if (result == null) result = caseModelElement(portletAttributeInstance);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case PortalPackage.IS_CHILD_PAGE: {
 				isChildPage isChildPage = (isChildPage)theEObject;
 				T result = caseisChildPage(isChildPage);
+				if (result == null) result = caseModelElement(isChildPage);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

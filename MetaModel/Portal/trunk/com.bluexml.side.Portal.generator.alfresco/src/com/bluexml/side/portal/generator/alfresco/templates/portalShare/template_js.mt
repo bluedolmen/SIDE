@@ -17,7 +17,7 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 <%if (metainfo[key == "rawContentJsFilePath"]){%>
 <%getFileContent(metainfo[key == "rawContentJsFilePath"].value)%>
 <%}else if (metainfo[key == "rawContentJs"]){%>
-<%metainfo[key == "rawContentJs"]%>
+<%metainfo[key == "rawContentJs"].multilineValue%>
 <%}else{%>
 script: {
 	var connector = remote.connect("alfresco");

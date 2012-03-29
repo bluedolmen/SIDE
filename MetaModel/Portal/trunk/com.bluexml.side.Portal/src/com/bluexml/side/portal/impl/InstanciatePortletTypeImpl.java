@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.portal.impl;
 
+import com.bluexml.side.common.impl.ModelElementImpl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -39,7 +40,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *
  * @generated
  */
-public class InstanciatePortletTypeImpl extends EObjectImpl implements InstanciatePortletType {
+public class InstanciatePortletTypeImpl extends ModelElementImpl implements InstanciatePortletType {
 	/**
 	 * The cached value of the '{@link #getPortletType() <em>Portlet Type</em>}' reference.
 	 * <!-- begin-user-doc -->
