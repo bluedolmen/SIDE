@@ -636,6 +636,11 @@ function getSearchResults(params) {
 			}
 		} else if (searchPath != undefined && searchPath != '') {
 			path = searchPath;
+			// interprate {site} token
+			if (params.siteId !== null && params.siteId.length > 0) {
+			   path = path.replace(/\{site\}/,"cm:" + search.ISO9075Encode(params.siteId));
+			}
+			
 			if (getSearchSubdirectories(formJson)) {
 				path += "/";
 			}
@@ -850,7 +855,27 @@ function makeQueryFor(formJson, p, operator, first) {
 
 						} else {
 							// normal propValue
-							queryTerm = propName + ':"' + propValue + '"';
+						   // special case of enumeration value like v1,v2,v3 must be converted in composed request
+						   // we make the assumption that field other than cm:content with pattern like v1,v2 is enumeration
+						   // the only sure test is to request the dictionary service about the field type this will degrade reponse time
+						   
+						   // so if field is not cm:content (cm:content is not an enum and can contains ',')
+						   // value contains ',' but never match  the regExp : "(, )|( ,)|( , )", we make the assumption that the field is a Enum value list
+						   
+						   var isNotEnum = new RegExp("(, )|( ,)|( , )","g");
+						   var m = propValue.match(isNotEnum);
+						   if (propValue.indexOf(",") != -1 && propName != "cm:content" && m == null) {
+						      var terms = propValue.split(",");						      
+						      for (var tc=0; tc < terms.length; tc++) {
+						         var cterm  = terms[tc];
+						         var enumterm = propName + ':"' + cterm + '"';
+						         queryTerm += (tc == 0 ? '' : ' ' + operator + ' ') + enumterm;
+						      }
+						      queryTerm = addSubQueryParenthesis(queryTerm);
+						   } else {
+						      queryTerm = propName + ':"' + propValue + '"';
+						   }
+							
 						}
 						formQuery += (first ? '' : ' ' + operator + ' ') + queryTerm;
 						
