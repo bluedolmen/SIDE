@@ -40,7 +40,7 @@ public class DocumentationDeployer extends Deployer {
 	}
 
 
-	protected void deployProcess(File fileToDeploy) throws Exception {
+	protected void deployProcess(File fileToDeploy, DeployMode mode) throws Exception {
 		IContainer src = IFileHelper.getIFolder(fileToDeploy);
 		if (src != null) {
 			IFolder dest = IFileHelper.createFolder(getConfigurationParameters().get(StaticConfigurationParameters.GENERATIONOPTIONSLOG_PATH.getLiteral()) + File.separator
