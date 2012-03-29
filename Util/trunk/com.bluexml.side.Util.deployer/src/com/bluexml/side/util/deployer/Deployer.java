@@ -124,9 +124,9 @@ public abstract class Deployer implements Checkable {
 		}
 		// addInfoLog("Processing ...", "", null);
 		// monitor.customSubTask("main deploy process start");
-		deployProcess(fileToDeploy);
+		deployProcess(fileToDeploy, DeployMode.GENERATED);
 		if (getFileWhereToDeployCustom().exists()) {
-			deployProcess(getFileWhereToDeployCustom());
+			deployProcess(getFileWhereToDeployCustom(), DeployMode.CUSTOM);
 		}
 		monitor.taskDone(null);
 
@@ -182,9 +182,10 @@ public abstract class Deployer implements Checkable {
 	 * the main deploy process
 	 * 
 	 * @param fileToDeploy
+	 * @param mode
 	 * @throws Exception
 	 */
-	protected abstract void deployProcess(File fileToDeploy) throws Exception;
+	protected abstract void deployProcess(File fileToDeploy, DeployMode mode) throws Exception;
 
 	/**
 	 * method that clean the target before deploy resources into
@@ -278,4 +279,7 @@ public abstract class Deployer implements Checkable {
 		return null;
 	}
 
+	public enum DeployMode {
+		GENERATED, CUSTOM
+	}
 }

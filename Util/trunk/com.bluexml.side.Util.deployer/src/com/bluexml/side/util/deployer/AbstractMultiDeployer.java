@@ -20,7 +20,7 @@ public abstract class AbstractMultiDeployer extends Deployer {
 	}
 
 	@Override
-	protected void deployProcess(File fileToDeploy) throws Exception {
+	protected void deployProcess(File fileToDeploy, DeployMode mode) throws Exception {
 
 		for (Deployer wd : deployers) {
 			wd.deploy();

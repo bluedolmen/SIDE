@@ -71,7 +71,7 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 		monitor.taskDone(Activator.Messages.getString("DirectWebAppsDeployer.2")); //$NON-NLS-1$
 	}
 
-	public FileFilter getFileFilter() {
+	public FileFilter getFileFilter(final DeployMode mode) {
 		FileFilter incrementalFileFilter = new FileFilter() {
 
 			public boolean accept(File pathname) {
@@ -79,7 +79,7 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 					String fileExt = FileHelper.getFileExt(pathname);
 					if (fileExt.equals(packageExt)) {
 						// test if package is newer than the deployed webapp
-						if (cleanned || !incremental) {
+						if (cleanned || !incremental || mode.equals(DeployMode.CUSTOM)) {
 							return true;
 						} else {
 							// incremental allowed
@@ -101,7 +101,9 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 						}
 					}
 				} catch (Exception e) {
+					System.out.println("fileName :" + pathname);
 					e.printStackTrace();
+
 				}
 
 				return false;
@@ -112,9 +114,9 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 	}
 
 	@Override
-	protected void deployProcess(File fileToDeploy) throws Exception {
+	protected void deployProcess(File fileToDeploy, DeployMode mode) throws Exception {
 		System.out.println("DirectWebAppsDeployer.deployProcess() :" + this);
-		FileFilter fileFilter = getFileFilter();
+		FileFilter fileFilter = getFileFilter(mode);
 		File deployedWebbAppFolder = getDeployedWebbAppFolder();
 		if (!deployedWebbAppFolder.exists()) {
 			this.clean(fileToDeploy);

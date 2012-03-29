@@ -113,7 +113,7 @@ public abstract class WarDeployer extends Deployer {
 	}
 
 	@Override
-	protected void deployProcess(java.io.File fileToDeploy) throws Exception {
+	protected void deployProcess(java.io.File fileToDeploy, DeployMode mode) throws Exception {
 		boolean succes = true;
 		// copy all files in the package into the WAR
 		TrueZipHelper fh = new TrueZipHelper("zip"); //$NON-NLS-1$

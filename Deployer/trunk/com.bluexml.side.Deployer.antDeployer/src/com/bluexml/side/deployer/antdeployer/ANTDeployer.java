@@ -30,7 +30,7 @@ public class ANTDeployer extends Deployer {
 	}
 
 	@Override
-	protected void deployProcess(File fileToDeploy) throws Exception {
+	protected void deployProcess(File fileToDeploy, DeployMode mode) throws Exception {
 		String antFile = getGenerationParameters().get(KEY_ANTFILE);
 		if (antFile != null) {
 			File f = new File(antFile);

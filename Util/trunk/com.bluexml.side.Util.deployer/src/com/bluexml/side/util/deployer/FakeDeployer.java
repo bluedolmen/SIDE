@@ -14,7 +14,7 @@ public class FakeDeployer extends Deployer {
 	}
 
 	@Override
-	protected void deployProcess(File fileToDeploy) throws Exception {
+	protected void deployProcess(File fileToDeploy, DeployMode mode) throws Exception {
 		// nothing to do
 	}
 
