@@ -6,10 +6,15 @@ import com.bluexml.side.clazz.service.alfresco.ClassServices
 %>
 <%script type="Portal" name="validatedFilename" post="trim()" %>
 <%if (pageSet[ID.toLowerCase().trim() == "documentlibrary"].nSize() > 0 &&
- pageSet[ID.toLowerCase().trim() == "documentlibrary"].portlets[associationPortlet.name.toLowerCase().trim() == "toolbar-create-content" && associationPortlet.isPortletInternal != null].nSize() > 0){%><%getProperty("alf.share.paths.web-ext.alf.components")%>/documentlibrary/toolbar.get.config.xml<%}%>
+ pageSet[ID.toLowerCase().trim() == "documentlibrary"].portlets[associationPortlet.name.toLowerCase().trim() == "toolbar-create-content" && associationPortlet.isPortletInternal != null].nSize() > 0){%>
+ <%getProperty("alf.share.paths.web-ext.alf.components")%>/documentlibrary/toolbar.get.config.xml
+ <%}else if(pageSet[ID.toLowerCase().trim() == "documentlibrary"].nSize() > 0 &&
+ pageSet[ID.toLowerCase().trim() == "documentlibrary"].portlets[associationPortlet.name.toLowerCase().trim() == "repo-toolbar-create-content" && associationPortlet.isPortletInternal != null].nSize() > 0){%>
+ <%getProperty("alf.share.paths.web-ext.alf.components")%>/documentlibrary/repo-toolbar.get.config.xml
+ <%}%>
 
 <%script type="Portal" name="alfrescoGenerator" file="<%validatedFilename%>"%>
-<%for (pageSet[ID.toLowerCase().trim() == "documentlibrary"].portlets.associationPortlet[name.toLowerCase().trim() == "toolbar-create-content" && isPortletInternal != null]){%>
+<%for (pageSet[ID.toLowerCase().trim() == "documentlibrary"].portlets.associationPortlet[(name.toLowerCase().trim() == "toolbar-create-content" || name.toLowerCase().trim() == "repo-toolbar-create-content") && isPortletInternal != null]){%>
 <toolbar>
    <createContent>
    	  <%if (metainfo[key == "default-create-content"].nSize() == 1 && metainfo[key == "default-create-content"].nGet(0).value.trim() == "true"){%>
