@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Alfresco Enterprise 3.4.6
 Bundle-SymbolicName: com.bluexml.side.Util.framework.tools.alfresco346E;singleton:=true
-Bundle-Version: 1.0.9.v34610-20120330
+Bundle-Version: 1.0.10.v34660-20120330
 Bundle-Activator: com.bluexml.side.util.framework.tools.alfresco346e.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.ui,
