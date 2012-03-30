@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Integration.eclipse.allFeatures.feature" label="AllFeatures (only used in build process)" version="1.0.194.v34660-20120330" provider-name="BLUEXML" plugin="com.bluexml.side.Integration.eclipse.branding.allFeatures">
+<feature id="com.bluexml.side.Integration.eclipse.allFeatures.feature" label="AllFeatures (only used in build process)" version="1.0.195.v34712-20120330" provider-name="BLUEXML" plugin="com.bluexml.side.Integration.eclipse.branding.allFeatures">
   <description url="http://www.example.com/description">[Enter Feature Description here.]</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
-  <plugin id="com.bluexml.side.Integration.eclipse.branding.allFeatures" download-size="0" install-size="0" version="1.0.194.v34660-20120330" unpack="false" />
+  <plugin id="com.bluexml.side.Integration.eclipse.branding.allFeatures" download-size="0" install-size="0" version="1.0.195.v34712-20120330" unpack="false" />
 </feature>
 
