@@ -24,6 +24,7 @@
 		<property name="policyComponent" ref="policyComponent" />
 		<property name="nodeService" ref="nodeService" />
 		<property name="namespaceService" ref="namespaceService" />
+		<property name="serviceRegistry" ref="ServiceRegistry" />
 		<property name="configuration" ref="singlePrimaryChildAssociationConfiguration" />
 	</bean>
 
