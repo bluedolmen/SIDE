@@ -25,6 +25,7 @@
      <#elseif field.endpointMandatory??>
      mandatory: ${field.endpointMandatory?string},
      </#if>
+     itemId : "<#if args.itemId??>${args.itemId}</#if>",
      filterTerm : <#if field.control.params.filterTerm??>"${field.control.params.filterTerm}"<#else>"*"</#if>,
 	 maxResults : <#if field.control.params.maxResults??>${field.control.params.maxResults}<#else>-1</#if>,
 	 selectableTypeIsAspect : <#if field.control.params.selectableTypeIsAspect??>${field.control.params.selectableTypeIsAspect}<#else>false</#if>

@@ -110,9 +110,9 @@ if (!Array.prototype.indexOf) {
 						url += "&site=" + Alfresco.constants.SITE;
 					}
 					if (me.options.startLocation) {
-						url += "&xpath=" + me.options.startLocation;
+						url += "&xpath=" + YAHOO.lang.substitute(me.options.startLocation, me.options);
 					}
-					
+					url = encodeURI(url);
 					var myDataSource = new YAHOO.util.XHRDataSource(url);
 					myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
 					myDataSource.responseSchema = {
@@ -157,7 +157,7 @@ if (!Array.prototype.indexOf) {
 					disabled : true,
 					field : this.options.field,
 					compactMode : true,
-					currentValue : this.initialValue,
+					currentValue : this.initialValue
 				});
 			} else if (this.options.multipleSelectMode) {
 				// cardinality n-n
