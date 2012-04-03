@@ -15,7 +15,7 @@ function main() {
 		model.assoType = paramValide("assoType", "buildInLibraryAlfresco:TreeFilter_AssociationTree_TreeFilter");
 		model.nodeType = paramValide("nodeType", "buildInLibraryAlfresco:TreeFilter");
 		model.nodeTypeDocument = paramValide("nodeTypeDocument", "buildInLibraryAlfresco:HasTreeFilter");
-		model.assoTypeDocument = paramValide("assoTypeDocument", "buildInLibraryAlfresco:HasTreeFilter_hasTreeFilter_TreeFiltersearch");
+		model.assoTypeDocument = paramValide("assoTypeDocument", "buildInLibraryAlfresco:HasTreeFilter_hasTreeFilter_TreeFilter");
 		model.selectableTypeIsAspect = paramValide("selectableTypeIsAspect", "true");
 		model.rootProperty = paramValide("rootProperty", "buildInLibraryAlfresco:TreeFilter_root");
 		model.rootLabelId = paramValide("headerLabelId", "portlet." + page.id + "." + args["region-id"] + ".header");
