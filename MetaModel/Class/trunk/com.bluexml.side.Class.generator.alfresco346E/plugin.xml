@@ -36,7 +36,7 @@
             <option defaultOption="false" documentation="this option must be used in conjuction with the 'searchable' meta on associations, this create an attribute that store associated nodes" hidden="false" key="alfresco.model.association.searchable" label="Searchable association">
               <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.searchAssociation346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.4" versionMin="1.0.4" />
             </option>
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.singlePrimaryChildAssociation346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.5" versionMin="1.0.5" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.singlePrimaryChildAssociation346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.6" versionMin="1.0.6" />
             <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.propertiesUpdater346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.8" versionMin="1.0.8" />
           </generatorVersion>
         </technologyVersion>
