@@ -49,7 +49,10 @@
 
 	<bean id="namespacePrefixFilterer" class="com.bluexml.side.Integration.alfresco.sql.synchronization.common.NamespacePrefixFilterer" parent="abstractFilterer">
 	 	<!-- This property can be externalized into the synchronization.properties enabling a more flexible parametrization -->
-	 	<property name="namespacePrefix" value="http://www.bluexml.com/model/content/" />
+	 	<property name="namespacePrefix" value="${synchrodb.namespacePrefix}" />
+	 	<property name="externalTypesMapping" value="${synchrodb.externalTypesMapping}" />
+		<property name="namespaceService" ref="namespaceService" />
+		<property name="databaseDictionary" ref="databaseDictionary" />
 	</bean>
 
 	<bean id="synchronizationFilterer" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">

@@ -88,22 +88,22 @@ public class JdbcTransactionListener implements TransactionListener {
 		int rowCount = -1;
 		try {
 			if (logger.isDebugEnabled())
-				logger.debug("[executeSQLQuery] " + sqlQuery);
-			st = connection.createStatement();
+				logger.debug("[executeSelectQuery] " + sqlQuery);
+			st = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
 			ResultSet results = st.executeQuery(sqlQuery);
 			results.last();
 			rowCount = results.getRow();
 			if (logger.isDebugEnabled())
-				logger.debug("[executeSQLQuery] Row count: " + rowCount);
+				logger.debug("[executeSelectQuery] Row count: " + rowCount);
 		} catch (SQLException e) {
-			logger.error("[executeSQLQuery]", e);
+			logger.error("[executeSelectQuery]", e);
 			throw(e);
 		} finally {
 			if (st != null) {
 				try {
 					st.close();
 				} catch (SQLException e) {
-					logger.error("[executeSQLQuery]", e);
+					logger.error("[executeSelectQuery]", e);
 				}
 				st = null;
 			}

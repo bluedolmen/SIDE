@@ -5,8 +5,10 @@ import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +22,7 @@ import org.alfresco.repo.dictionary.DictionaryDAO;
 import org.alfresco.repo.dictionary.DictionaryListener;
 import org.alfresco.service.cmr.dictionary.AspectDefinition;
 import org.alfresco.service.cmr.dictionary.ClassDefinition;
+import org.alfresco.service.cmr.dictionary.DataTypeDefinition;
 import org.alfresco.service.cmr.dictionary.DictionaryService;
 import org.alfresco.service.cmr.dictionary.PropertyDefinition;
 import org.alfresco.service.cmr.dictionary.TypeDefinition;
@@ -63,16 +66,24 @@ public class SchemaCreation implements DictionaryListener {
 	
 	private void createFromModel(QName modelName) {
 
+		if (logger.isDebugEnabled())
+			logger.debug("===============================start createFromModel");
 		if (ready) {
 			Connection connection = DataSourceUtils.getConnection(dataSource);
 			
 			List<CreateTableStatement> createStatements = doCreateStatement(modelName);
 			
+			if (logger.isDebugEnabled())
+				logger.debug("Do check status ");
 			CheckTableStatus checkTableStatus = doCheckStatus(createStatements, connection);
 			statusByModel.put(modelName, checkTableStatus);
 			
+			if (logger.isDebugEnabled())
+				logger.debug(" checkTableStatus= "+checkTableStatus+ " - CheckTableStatus.CREATE_TABLES="+CheckTableStatus.CREATE_TABLES);
 			if (checkTableStatus == CheckTableStatus.CREATE_TABLES) {
 		
+				if (logger.isDebugEnabled())
+					logger.debug("Do doExecuteCreateStatements ");
 				boolean creationSuccess = doExecuteCreateStatements(createStatements, connection);
 				if (! creationSuccess) {
 					logger.error("Creation of tables failed");
@@ -88,10 +99,69 @@ public class SchemaCreation implements DictionaryListener {
 			
 		}
 		
+		if (logger.isDebugEnabled())
+			logger.debug("===============================end createFromModel");
 	}
+
+	// BEGIN RB - to take into account not bluexml type whihc are target of association, process of the list synchrodb.externalTypesMapping of the synchronization.properties file
+	private void createFromExternalTypeMapping() {
+		// externalTypesMappingArray contains the types external to the namespaces prefix which must be equally mapped in database as they are target of association
+		// this types and an associated attributes (the unique identifier) are given by the parameter synchrodb.externalTypesMapping of the synchronization.properties file
+		// Ex : synchrodb.externalTypesMapping=cm:person,cm:authorityContainer,cm:authority
+		if (logger.isDebugEnabled())
+			logger.debug("===============================start createFromExternalTypeMapping");
+		if (ready) {
+			Connection connection = DataSourceUtils.getConnection(dataSource);
+			
+			HashMap<QName, ArrayList<QName>> externalTypesMappingArray = filterer.getExternalTypesMappingArray();		
+			Iterator<QName> iterator = externalTypesMappingArray.keySet().iterator();
+			List<CreateTableStatement> createStatements = new ArrayList<CreateTableStatement>();;  
+			if (logger.isDebugEnabled())
+				logger.debug("External Types size="+externalTypesMappingArray.size());
+	        while(iterator.hasNext()){        
+	            QName externalType = (QName) iterator.next();
+				if (logger.isDebugEnabled())
+					logger.debug("create statement on external type "+externalType);
+				CreateTableStatement currentCreateStatement = createClass(externalType); 								
+				createStatements.add(currentCreateStatement);
+	        }	
+			
+			if (logger.isDebugEnabled())
+				logger.debug("Do check status ");
+			CheckTableStatus checkTableStatus = doCheckStatus(createStatements, connection);
+			
+			if (logger.isDebugEnabled())
+				logger.debug(" checkTableStatus= "+checkTableStatus+ " - CheckTableStatus.CREATE_TABLES="+CheckTableStatus.CREATE_TABLES);
+			if (checkTableStatus == CheckTableStatus.CREATE_TABLES) {
+		
+				if (logger.isDebugEnabled())
+					logger.debug("Do doExecuteCreateStatements ");
+				boolean creationSuccess = doExecuteCreateStatements(createStatements, connection);
+				if (logger.isDebugEnabled())
+					logger.debug("  creationSuccess= "+creationSuccess);
+				if (! creationSuccess) {
+					logger.error("Creation of tables failed");
+					ready = false;
+				}
+				
+				DataSourceUtils.releaseConnection(connection, dataSource);
+				
+			} else {
+				if (logger.isDebugEnabled())
+					logger.debug("Creation of externalType was not performed since the previous process marked the schema as not ready or creation has yet be done");
+			}
+			
+		}
+		if (logger.isDebugEnabled())
+			logger.debug("===============================end createFromExternalTypeMapping");
+    }
+	// END RB - to take into account not bluexml type whihc are target of association, process of the list synchrodb.externalTypesMapping of the synchronization.properties file
 	
+
 	private void replicateFromModel(QName modelName){
 		
+		if (logger.isDebugEnabled())
+			logger.debug("===============================start replicateFromModel");
 		CheckTableStatus checkTableStatus = statusByModel.get(modelName);
 
 		if (ready && CheckTableStatus.CREATE_TABLES.equals(checkTableStatus)) {
@@ -108,6 +178,8 @@ public class SchemaCreation implements DictionaryListener {
 		}
 		
 		replicatedModels.add(modelName);
+		if (logger.isDebugEnabled())
+			logger.debug("===============================end replicateFromModel");
 	}
 	
 	public boolean isReady() {
@@ -118,6 +190,8 @@ public class SchemaCreation implements DictionaryListener {
 	private void executeCreateStatement(CreateTableStatement createStatement, Connection connection) throws SQLException {
 		Statement sqlStatement = connection.createStatement();
 		try {			
+			if (logger.isDebugEnabled())
+				logger.debug("create statement : "+createStatement.toSQLString());
 			sqlStatement.executeUpdate(createStatement.toSQLString());
 		} catch (SQLException e) {
 			logger.error("Cannot create table due to the following error: ", e);
@@ -130,24 +204,71 @@ public class SchemaCreation implements DictionaryListener {
 	
 	private List<CreateTableStatement> doCreateStatement(QName modelName) {
 		List<CreateTableStatement> createStatements = new ArrayList<CreateTableStatement>();
-		
 		for (QName type : dictionaryService.getTypes(modelName)) {
+			if (logger.isDebugEnabled())
+				logger.debug("type loop - process type : "+type.getLocalName());
 			if (filterer.acceptTypeQName(type)) {
-				CreateTableStatement currentCreateStatement = createClass(type); 								
-				createStatements.add(currentCreateStatement);
+				// only create table for final leaf type
+				if (dictionaryService.getSubTypes(type, true).size()==1) {
+					CreateTableStatement currentCreateStatement = createClass(type); 								
+					createStatements.add(currentCreateStatement);
+				}
 			}
 		}
-
+		
 		for (QName associationName : dictionaryService.getAssociations(modelName)) {
+			if (logger.isDebugEnabled())
+				logger.debug("association loop - process association : "+associationName.getLocalName());
 			if (filterer.acceptAssociationQName(associationName)) {
 				ClassDefinition sourceClassDefinition = dictionaryService.getAssociation(associationName).getSourceClass();
 				ClassDefinition targetClassDefinition = dictionaryService.getAssociation(associationName).getTargetClass();
-				
-				CreateTableStatement currentCreateStatement = createAssociation(associationName, sourceClassDefinition.getName(), targetClassDefinition.getName());
-				createStatements.add(currentCreateStatement);
+				// BEGIN RB - to take into account association in aspect and from parent class, the association name has been prefixed with the type name in the synchonization-database-mapping.properties file
+				if (filterer.acceptTypeQName(sourceClassDefinition.getName())) {
+					if (sourceClassDefinition.isAspect()) {
+						if (logger.isDebugEnabled())
+							logger.debug("association loop - source class is aspect");
+						for (QName type : dictionaryService.getTypes(modelName)) {
+							// look at type having the aspect and no subtypes 
+							if (filterer.acceptTypeQName(type) && dictionaryService.getSubTypes(type, false).size()==0) {
+							TypeDefinition typeDefinition = dictionaryService.getType(type);
+							// for each types in the model, found the type who have the current aspect
+								for (QName aspect : typeDefinition.getDefaultAspectNames()) {
+									if (aspect.isMatch(sourceClassDefinition.getName())) {
+										// this type has the aspect => in the synchronisation-database-mapping.properties a key is "association.name.<type name><association name>=<value>"
+										if (logger.isDebugEnabled())
+											logger.debug("association loop - find source class type="+type.getLocalName());	
+										// the target class may have subtypes and in that case association table must be created for each accepted subtypes
+										String newAssocName = associationName.getLocalName().replaceFirst(sourceClassDefinition.getName().getLocalName(), type.getLocalName());
+										// a particular case to consider: if the current type is a subtype of the target class, replace the target class by the the current type to avoid to create association with other subtypes considering it is a loopback
+										ArrayList<QName> children = getLeafSubTypes(targetClassDefinition.getName());
+										if (children.contains(type)) {
+											newAssocName = newAssocName.replaceFirst(targetClassDefinition.getName().getLocalName(), type.getLocalName());
+											if (logger.isDebugEnabled())
+												logger.debug("association loop - new assocNAme="+newAssocName);	
+											QName newAssocQname = QName.createQName(associationName.getNamespaceURI(), newAssocName);
+											createStatements.addAll(createStatementsWithSubTypes(newAssocQname, type, type));
+										} else {
+											if (logger.isDebugEnabled())
+												logger.debug("association loop - new assocNAme="+newAssocName);	
+											QName newAssocQname = QName.createQName(associationName.getNamespaceURI(), newAssocName);
+											createStatements.addAll(createStatementsWithSubTypes(newAssocQname, type, targetClassDefinition.getName()));
+										}
+									}
+								}
+							}
+						}
+					} else {
+						if (logger.isDebugEnabled())
+							logger.debug("association loop - source class is "+sourceClassDefinition.getTitle());
+						createStatements.addAll(createStatementsWithSubTypes(associationName, sourceClassDefinition.getName(), targetClassDefinition.getName()));
+						// END RB - to take into account association in aspect and from parent class, the association name has been prefixed with the type name in the synchonization-database-mapping.properties file
+					}
+				}
 			}
 		}
 		
+		if (logger.isDebugEnabled())
+			logger.debug("=== doCreateStatement createStatements.size: "+createStatements.size());
 		return createStatements;
 	}
 		
@@ -156,8 +277,12 @@ public class SchemaCreation implements DictionaryListener {
 		List<String> unmatchedTables = new ArrayList<String>();
 		List<String> nonExistingTables = new ArrayList<String>();
 		
+		if (logger.isDebugEnabled())
+			logger.debug("  start doCheckStatus");
 		for (CreateTableStatement createStatement : createStatements) {
 			TableStatus tableStatus = createStatement.checkStatus(connection);
+			if (logger.isDebugEnabled())
+				logger.debug("  tableStatus="+tableStatus);
 			if (tableStatus.equals(TableStatus.EXISTS_MATCHED)) {
 				matchedTables.add(createStatement.getTableName());
 			} else if (tableStatus.equals(TableStatus.NOT_EXISTS)) {
@@ -173,6 +298,8 @@ public class SchemaCreation implements DictionaryListener {
 		}
 		
 		CheckTableStatus status = null;
+		if (logger.isDebugEnabled())
+			logger.debug("  matchedTables.isEmpty="+matchedTables.isEmpty()+" & unmatchedTables.isEmpty="+unmatchedTables.isEmpty());
 		if (matchedTables.isEmpty() && unmatchedTables.isEmpty()) {
 			status = CheckTableStatus.CREATE_TABLES;
 		} else if (unmatchedTables.isEmpty() && nonExistingTables.isEmpty()) {
@@ -199,6 +326,8 @@ public class SchemaCreation implements DictionaryListener {
 	
 	private boolean doExecuteCreateStatements(List<CreateTableStatement> createStatements, Connection connection) {
 		boolean creationSuccess = true;
+		if (logger.isDebugEnabled())
+			logger.debug("  start doExecuteCreateStatements");
 		try {
 			for (CreateTableStatement createStatement : createStatements) {
 				if (logger.isDebugEnabled())
@@ -235,6 +364,8 @@ public class SchemaCreation implements DictionaryListener {
 	private CreateTableStatement createClass(QName classQName) {
 		String className = classQName.getLocalName();
 		String tableName = databaseDictionary.resolveClassAsTableName(className);
+		if (logger.isDebugEnabled())
+			logger.debug("  start createClass on tableNAme "+tableName);
 		
 		Map<String, List<String>> columns = new LinkedHashMap<String, List<String>>();
 		TypeDefinition typeDefinition = dictionaryService.getType(classQName);
@@ -258,6 +389,8 @@ public class SchemaCreation implements DictionaryListener {
 				String originalName = propertyName.getLocalName();
 				String resolvedColumnName = databaseDictionary.resolveAttributeAsColumnName(originalName, className); 
 				columns.put((resolvedColumnName != null ? resolvedColumnName : originalName), options);
+				if (logger.isDebugEnabled())
+					logger.debug("  accept property : "+originalName+"-"+resolvedColumnName);
 			}
 		}
 		
@@ -280,17 +413,34 @@ public class SchemaCreation implements DictionaryListener {
 	private CreateTableStatement createAssociation(QName associationQName, QName sourceClassQName, QName targetClassQName) {
 		final String associationName = associationQName.getLocalName();
 		String tableName = databaseDictionary.resolveAssociationAsTableName(associationName);
+		if (logger.isDebugEnabled())
+			logger.debug("createAssociation - tableName ="+tableName);	
 
 		Map<String, List<String>> columns = new LinkedHashMap<String, List<String>>();
 		columns.put(ASSOCIATION_ID_COLUMN_NAME, new ArrayList<String>() {{add("INTEGER");}});
-		
-		columns.put(databaseDictionary.getSourceAlias(associationName), new ArrayList<String>() {{add("INTEGER"); }});
-		columns.put(databaseDictionary.getTargetAlias(associationName), new ArrayList<String>() {{add("INTEGER"); }});
-
 		final String sourceIdColumnName = databaseDictionary.resolveAttributeAsColumnName(ALFRESCO_DBID_COLUMN_NAME, sourceClassQName.getLocalName());
 		final String targetIdColumnName = databaseDictionary.resolveAttributeAsColumnName(ALFRESCO_DBID_COLUMN_NAME, targetClassQName.getLocalName());
+		CreateTableStatement.Builder builder;
+		
 
-		CreateTableStatement.Builder builder = 
+		if (databaseDictionary.getSourceAlias(associationName).equals(databaseDictionary.getTargetAlias(associationName))) {
+			// special case for loop
+			columns.put(databaseDictionary.getSourceAlias(associationName)+"1", new ArrayList<String>() {{add("INTEGER"); }});
+			columns.put(databaseDictionary.getTargetAlias(associationName)+"2", new ArrayList<String>() {{add("INTEGER"); }});
+
+			builder = 
+			synchronizationDialect.newCreateTableStatementBuilder(tableName)
+			.columns(columns)
+			.tableType(TableType.TABLE_ASSOCIATION)
+			.pkConstraint(databaseDictionary.getSourceAlias(associationName)+"1")
+			.pkConstraint(databaseDictionary.getTargetAlias(associationName)+"2")
+			.fkConstraint(databaseDictionary.getSourceAlias(associationName)+"1", databaseDictionary.getSourceClass(associationName), sourceIdColumnName)
+			.fkConstraint(databaseDictionary.getTargetAlias(associationName)+"2", databaseDictionary.getTargetClass(associationName), targetIdColumnName);			
+		} else {
+			columns.put(databaseDictionary.getSourceAlias(associationName), new ArrayList<String>() {{add("INTEGER"); }});
+			columns.put(databaseDictionary.getTargetAlias(associationName), new ArrayList<String>() {{add("INTEGER"); }});
+
+			builder = 
 			synchronizationDialect.newCreateTableStatementBuilder(tableName)
 			.columns(columns)
 			.tableType(TableType.TABLE_ASSOCIATION)
@@ -298,7 +448,7 @@ public class SchemaCreation implements DictionaryListener {
 			.pkConstraint(databaseDictionary.getTargetAlias(associationName))
 			.fkConstraint(databaseDictionary.getSourceAlias(associationName), databaseDictionary.getSourceClass(associationName), sourceIdColumnName)
 			.fkConstraint(databaseDictionary.getTargetAlias(associationName), databaseDictionary.getTargetClass(associationName), targetIdColumnName);
-		
+		}
 		customActionManager.doInCreateAssociation(associationQName, builder);
 
 		return builder.build();
@@ -331,13 +481,18 @@ public class SchemaCreation implements DictionaryListener {
 		acceptableModelNames.removeAll(replicatedModels);
 		if (logger.isDebugEnabled())
 			logger.debug("New models: [" + StringUtils.join(acceptableModelNames.iterator(),",") + "]");
-		
+
+		createFromExternalTypeMapping();
+
 		for (QName modelName : acceptableModelNames) {
 			createFromModel(modelName);
 		}
+
+
 		for (QName modelName : acceptableModelNames) {
 			replicateFromModel(modelName);
 		}
+		
 	}
 
 
@@ -348,7 +503,7 @@ public class SchemaCreation implements DictionaryListener {
 	
 	
 	private void checkMetaData() {
-		logger.debug("Checking meta-data");
+		if (logger.isDebugEnabled()) logger.debug("Checking meta-data");
 		DatabaseMetaData dmd = null;
 
 		Connection connection = DataSourceUtils.getConnection(dataSource);	
@@ -368,6 +523,112 @@ public class SchemaCreation implements DictionaryListener {
 		}
 	}
 
+	/**
+	 * create the statements for assocation according to the following synopsis:
+	 * - if source is an aspect, create a statement for each type which has this aspect:
+	 *   in this case, the associationName of each statement is prefixed with the corresponding found type having this aspect
+	 * - if source or target have subtypes, create a statement for each final leaf subtypes:
+	 *   in this case, the parent source type in the associationName of each statement is replaced with the corresponding source subtypes if any and the parent target type is replaced with the corresponding target subtypes if any
+	 *   in the case where the source = target, there is no combination of subtypes of source/target and the parent source and target of the associationName are replaced by the same subtype
+	 * @param associationName the association name
+	 * @param source the source type of the association
+	 * @param target the target type of the association
+	 * @return the list of table create statement
+	 */
+	private List<CreateTableStatement> createStatementsWithSubTypes(QName associationName, QName source, QName target) {
+		List<CreateTableStatement> createStatements = new ArrayList<CreateTableStatement>();
+		if (filterer.acceptTypeQName(associationName) && filterer.acceptTypeQName(source) && filterer.acceptTypeQName(target) ) {
+			ArrayList<QName> sources = getLeafSubTypes(source);
+			ArrayList<QName> targets = getLeafSubTypes(target);
+			if (sources.size()>1) {
+				for (int i=0; i < sources.size();i++) {	
+					QName s = sources.get(i);
+					if (filterer.acceptTypeQName(s) && !s.equals(source)) {
+						if (source.equals(target)) {
+							String newAssocName = associationName.getLocalName().replaceAll(source.getLocalName(), s.getLocalName());
+							QName newAssocQname = QName.createQName(associationName.getNamespaceURI(), newAssocName);
+							if (logger.isDebugEnabled())
+								logger.debug(" source has subtype and equal target - create assoc with subtype ="+newAssocQname.getLocalName());	
+							CreateTableStatement currentCreateStatement = createAssociation(newAssocQname, s, targets.get(i));
+							createStatements.add(currentCreateStatement);
+							
+						} else {
+							if (targets.size()>1) {
+								for (int j=0; j < targets.size();j++) {										
+									QName t = targets.get(j);
+									if (filterer.acceptTypeQName(t) && !t.equals(target)) {
+										String newAssocName = associationName.getLocalName().replaceFirst(source.getLocalName(), s.getLocalName()).replaceFirst(target.getLocalName(), t.getLocalName());
+										QName newAssocQname = QName.createQName(associationName.getNamespaceURI(), newAssocName);
+										if (logger.isDebugEnabled())
+											logger.debug(" target has subtype - create assoc with subtype ="+newAssocQname.getLocalName());	
+										CreateTableStatement currentCreateStatement = createAssociation(newAssocQname, s, t);
+										createStatements.add(currentCreateStatement);
+									}
+								}
+							} else {
+								if (filterer.acceptTypeQName(target)) {
+									String newAssocName = associationName.getLocalName().replaceFirst(source.getLocalName(), s.getLocalName());
+									QName newAssocQname = QName.createQName(associationName.getNamespaceURI(), newAssocName);
+									if (logger.isDebugEnabled())
+										logger.debug(" source has subtype but not target - create assoc with ="+newAssocQname.getLocalName());	
+									CreateTableStatement currentCreateStatement = createAssociation(newAssocQname, s, target);
+									createStatements.add(currentCreateStatement);
+								}
+							}
+							
+						}
+					}
+				}
+			} else {
+				if (targets.size()>1) {
+					for (int i=0; i < targets.size();i++) {															
+						QName t = targets.get(i);
+						if (filterer.acceptTypeQName(t) && !t.equals(target)) {
+							String newAssocName = associationName.getLocalName().replaceFirst(target.getLocalName(), t.getLocalName());
+							QName newAssocQname = QName.createQName(associationName.getNamespaceURI(), newAssocName);
+							if (logger.isDebugEnabled())
+								logger.debug(" source has no subtype but target has - create assoc with subtype ="+newAssocQname.getLocalName());	
+							CreateTableStatement currentCreateStatement = createAssociation(newAssocQname, source, targets.get(i));
+							createStatements.add(currentCreateStatement);
+						}
+					}
+				} else {
+					if (filterer.acceptTypeQName(target)) {
+						if (logger.isDebugEnabled())
+							logger.debug(" source and target have no subtype - create assoc with ="+associationName.getLocalName());	
+						CreateTableStatement currentCreateStatement = createAssociation(associationName, source, target);
+						createStatements.add(currentCreateStatement);
+					}
+				}
+			}
+		}
+		return createStatements;
+	}
+
+	/**
+	 * Get the final leaf subtypes of type
+	 * @param type the type to get the leaf subtypes
+	 * @return the list of leaf subtypes if any or a list containing just the type has it has no subtype
+	 */
+	private ArrayList<QName> getLeafSubTypes(QName type) {
+		ArrayList<QName> leafSubTypes = new ArrayList<QName>();
+		Collection<QName> subTypes = dictionaryService.getSubTypes(type, true);
+		if (subTypes.size()>1) {
+			Iterator<QName> it = subTypes.iterator();
+			while (it.hasNext()) {
+				QName subtype = (QName) it.next();
+				if (!subtype.equals(type)) {
+					Collection<QName> st = dictionaryService.getSubTypes(subtype, false);
+					if (st.size()==0) {
+						leafSubTypes.add(subtype);
+					}
+				}
+			}
+		} else {
+			leafSubTypes.add(type);
+		}
+		return leafSubTypes;
+	}
 	
 	//
 	// IoC/DI Spring

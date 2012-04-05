@@ -1,5 +1,7 @@
 package com.bluexml.side.Integration.alfresco.sql.synchronization.dictionary;
 
+import java.util.List;
+
 public interface DatabaseDictionary {
 
 	/**
@@ -57,4 +59,13 @@ public interface DatabaseDictionary {
 
 	public abstract String getTargetAlias(String association_name);
 
+	
+	/**
+	 * Gets the mapped attributes of a class.
+	 * 
+	 * @param class_name the class_name
+	 * 
+	 * @return the list of attribute names
+	 */
+	public List<String> getAttributesOfClass (String class_name);
 }

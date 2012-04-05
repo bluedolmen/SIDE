@@ -1,5 +1,8 @@
 package com.bluexml.side.Integration.alfresco.sql.synchronization.common;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.alfresco.service.cmr.repository.AssociationRef;
 import org.alfresco.service.cmr.repository.ChildAssociationRef;
 import org.alfresco.service.cmr.repository.NodeRef;
@@ -53,6 +56,17 @@ public abstract class AbstractFilterer implements Filterer {
 		return acceptQName(qname);
 	}
 	
+	
+	private String externalTypesMapping;
+	private HashMap<QName, ArrayList<QName>> externalTypesMappingArray;
+	public void setExternalTypesMapping(String externalTypesMapping_) {
+		this.externalTypesMapping = externalTypesMapping_;
+	}
+
+	public HashMap<QName, ArrayList<QName>> getExternalTypesMappingArray() {
+		return externalTypesMappingArray;
+	}
+
 	//
 	// IoC/DI Spring
 	//

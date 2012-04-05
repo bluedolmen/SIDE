@@ -20,6 +20,7 @@ import org.alfresco.model.ContentModel;
 import org.alfresco.repo.transaction.AlfrescoTransactionSupport;
 import org.alfresco.repo.transaction.TransactionListener;
 import org.alfresco.service.cmr.dictionary.AspectDefinition;
+import org.alfresco.service.cmr.dictionary.ClassDefinition;
 import org.alfresco.service.cmr.dictionary.DataTypeDefinition;
 import org.alfresco.service.cmr.dictionary.DictionaryService;
 import org.alfresco.service.cmr.dictionary.PropertyDefinition;
@@ -77,15 +78,16 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 		List<QName> parentNames = nodeHelper.getParentAndSelfQNames(nodeRef);
 		Map<QName, Serializable> nodeProperties = nodeService.getProperties(nodeRef);
 		
-		for (QName type_qname : parentNames) {
-			type_name = type_qname.getLocalName();
+		//for (QName type_qname : parentNames) {
+		//	type_name = type_qname.getLocalName();
 
 			String simplified_type_name = databaseDictionary.resolveClassAsTableName(type_name);
 
 			Map<String, String> properties = new LinkedHashMap<String, String>();
 			// We will only process the properties which are related
 			// to the current type
-			TypeDefinition currentTypeDefinition = dictionaryService.getType(type_qname);
+			//TypeDefinition currentTypeDefinition = dictionaryService.getType(type_qname);
+			TypeDefinition currentTypeDefinition = dictionaryService.getType(nodeType);
 			Map<QName, PropertyDefinition> currentTypeProperties = new HashMap<QName, PropertyDefinition>();
 			currentTypeProperties.putAll(currentTypeDefinition.getProperties());
 			for (AspectDefinition ad : currentTypeDefinition.getDefaultAspects()) {
@@ -117,7 +119,7 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 			} else {
 				logger.error("You must accept at least the node id in the definition of the node filterer");
 			}			
-		}
+		//}
 		
 		executeSQLQuery(sqlQueries);		
 	}
@@ -154,15 +156,17 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 		List<QName> parentNames = nodeHelper.getParentAndSelfQNames(nodeRef);
 		List<String> sqlQueries = new ArrayList<String>(parentNames.size());
 		
-		for (QName type_qname : parentNames) {
-			String type_name = type_qname.getLocalName();
+		QName nodeType = nodeService.getType(nodeRef);
+		String type_name = nodeType.getLocalName();
+		//for (QName type_qname : parentNames) {
+		//	String type_name = type_qname.getLocalName();
 
 			String simplified_type_name = databaseDictionary.resolveClassAsTableName(type_name);
 			Serializable dbid = getDbId(nodeRef);
 
 			String sql_query = String.format("DELETE FROM %1$s WHERE id = %2$s", simplified_type_name, dbid);
 			sqlQueries.add(sql_query);
-		}
+		//}
 
 		executeSQLQuery(sqlQueries);
 
@@ -171,19 +175,20 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 	
 	
 	public void updateProperties(NodeRef nodeRef, Collection<QName> changes) { 
-		String type_name = nodeService.getType(nodeRef).getLocalName();
+		QName nodeType = nodeService.getType(nodeRef);
+		String type_name = nodeType.getLocalName();
 		List<String> sqlQueries = new ArrayList<String>();
 
 		List<QName> parentNames = nodeHelper.getParentAndSelfQNames(nodeRef);
 		Map<QName, Serializable> nodeProperties = nodeService.getProperties(nodeRef);
 
-		for (QName type_qname : parentNames) {
-			type_name = type_qname.getLocalName();
+		//for (QName type_qname : parentNames) {
+		//	type_name = type_qname.getLocalName();
 
 			String simplified_type_name = databaseDictionary.resolveClassAsTableName(type_name);
 			Serializable dbid = getDbId(nodeRef);
 
-			TypeDefinition currentTypeDefinition = dictionaryService.getType(type_qname);
+			TypeDefinition currentTypeDefinition = dictionaryService.getType(nodeType);
 			Map<QName, PropertyDefinition> currentTypeProperties = new HashMap<QName, PropertyDefinition>();
 			currentTypeProperties.putAll(currentTypeDefinition.getProperties());
 			for (AspectDefinition ad : currentTypeDefinition.getDefaultAspects()) {
@@ -209,7 +214,7 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 						simplified_type_name, (resolvedColumnName != null ? resolvedColumnName : originalName), value, dbid);
 				sqlQueries.add(sql_query);
 			}
-		}
+		//}
 		
 		executeSQLQuery(sqlQueries);
 
@@ -228,8 +233,10 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 			createCore(targetNodeRef);
 			synchronizedNodes.add(targetNodeRef);
 		}
-		
-		String associationName = typeQName.getLocalName();
+		// BEGIN RB - to take into account association in aspect and from parent class, the association name has been prefixed with the type name in the synchonization-database-mapping.properties file
+		//String associationName = typeQName.getLocalName();
+		String associationName = getAssociationName(typeQName, sourceNodeRef, targetNodeRef );
+		// END RB - to take into account association in aspect and from parent class, the association name has been prefixed with the type name in the synchonization-database-mapping.properties file
 		
 		Serializable sourceId = getDbId(sourceNodeRef);
 		Serializable targetId = getDbId(targetNodeRef);
@@ -237,9 +244,13 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 		String databaseAssociationName = databaseDictionary.resolveAssociationAsTableName(associationName);
 		String sourceClassName = databaseDictionary.getSourceAlias(associationName);
 		String targetClassName = databaseDictionary.getTargetAlias(associationName);
-
-		String sql_query = String.format("INSERT %1$s ( %2$s , %3$s ) VALUES ( %4$s , %5$s )", databaseAssociationName, sourceClassName, targetClassName, sourceId, targetId);
-		
+		String sql_query;
+		if (sourceClassName.equals(targetClassName)) {
+			// special case of loop association
+			sql_query = String.format("INSERT INTO %1$s ( %2$s , %3$s ) VALUES ( %4$s , %5$s )", databaseAssociationName, sourceClassName+"1", targetClassName+"2", sourceId, targetId);
+		} else {
+			sql_query = String.format("INSERT INTO %1$s ( %2$s , %3$s ) VALUES ( %4$s , %5$s )", databaseAssociationName, sourceClassName, targetClassName, sourceId, targetId);
+		}
 		if (executeSQLQuery(sql_query) > 0) {
 			invokeOnCreateAssociation(sourceNodeRef, targetNodeRef, typeQName);
 			AssociationRef assocRef = new AssociationRef(null, sourceNodeRef, typeQName, targetNodeRef);
@@ -249,7 +260,10 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 
 	public void deleteAssociation(NodeRef sourceNodeRef, NodeRef targetNodeRef, QName typeQName)  {
 		
-		String associationName = typeQName.getLocalName();
+		// BEGIN RB - to take into account association in aspect and from parent class, the association name has been prefixed with the type name in the synchonization-database-mapping.properties file
+		//String associationName = typeQName.getLocalName();
+		String associationName = getAssociationName(typeQName, sourceNodeRef, targetNodeRef );
+		// END RB - to take into account association in aspect and from parent class, the association name has been prefixed with the type name in the synchonization-database-mapping.properties file
 
 		Serializable sourceId = getDbId(sourceNodeRef);
 		Serializable targetId = getDbId(targetNodeRef);
@@ -258,8 +272,14 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 		String sourceClassName = databaseDictionary.getSourceAlias(associationName);
 		String targetClassName = databaseDictionary.getTargetAlias(associationName);
 		
-		String sql_query = String.format("DELETE FROM %1$s WHERE %2$s = %3$s AND %4$s = %5$s", databaseAssociationName, sourceClassName, sourceId, targetClassName, targetId);
-		
+		String sql_query;
+		if (sourceClassName.equals(targetClassName)) {
+			// special case of loop association
+			sql_query = String.format("DELETE FROM %1$s WHERE %2$s = %3$s AND %4$s = %5$s", databaseAssociationName, sourceClassName+"1", sourceId, targetClassName+"2", targetId);
+		} else {
+			sql_query = String.format("DELETE FROM %1$s WHERE %2$s = %3$s AND %4$s = %5$s", databaseAssociationName, sourceClassName, sourceId, targetClassName, targetId);
+
+		}
 		if (executeSQLQuery(sql_query) > 0) {		
 			invokeOnDeleteAssociation(sourceNodeRef, targetNodeRef, typeQName);
 		}
@@ -278,7 +298,8 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 		
 		for (AssociationRef assoc : assocs) {
 			if (	
-					filterer.acceptAssociationQName(assoc.getTypeQName()) && 
+					filterer.accept(assoc) && 
+//					filterer.acceptAssociationQName(assoc.getTypeQName()) && 
 					StoreRef.STORE_REF_WORKSPACE_SPACESSTORE.equals(assoc.getSourceRef().getStoreRef()) &&
 					StoreRef.STORE_REF_WORKSPACE_SPACESSTORE.equals(assoc.getTargetRef().getStoreRef())
 				) {
@@ -325,7 +346,8 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 		assocs.removeAll(getProcessedAssociations());
 		
 		for (AssociationRef assoc : assocs) {
-			if (filterer.acceptAssociationQName(assoc.getTypeQName()) ) {
+			if (filterer.accept(assoc) ) {
+//			if (filterer.acceptAssociationQName(assoc.getTypeQName()) ) {
 				deleteAssociation(assoc.getSourceRef(), assoc.getTargetRef(), assoc.getTypeQName());
 			}
 		}
@@ -476,6 +498,22 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 		String sql_query = String.format("SELECT id FROM %1$s WHERE id = %2$s", table, id);
 
 		return executeSelectQuery(sql_query) == 1;
+	}
+
+	
+	private String getAssociationName(QName association, NodeRef sourceNodeRef, NodeRef targetNodeRef ) {
+	String associationName = association.getLocalName();
+	// BEGIN RB - to take into account association in aspect and from parent class, the association name has been prefixed with the type name in the synchonization-database-mapping.properties file
+	ClassDefinition sourceClassDefinition = dictionaryService.getAssociation(association).getSourceClass();
+	ClassDefinition targetClassDefinition = dictionaryService.getAssociation(association).getTargetClass();
+	if (sourceClassDefinition.isAspect() || dictionaryService.getSubTypes(sourceClassDefinition.getName(), false).size()>0) {
+		QName qnSource = nodeService.getType(sourceNodeRef);
+		if (dictionaryService.getSubTypes(targetClassDefinition.getName(), false).size()>0) {
+			QName qnTarget = nodeService.getType(targetNodeRef);
+			associationName=associationName.replaceFirst(sourceClassDefinition.getName().getLocalName(),qnSource.getLocalName()).replaceFirst(targetClassDefinition.getName().getLocalName(),qnTarget.getLocalName());						
+		} else associationName=associationName.replaceFirst(sourceClassDefinition.getName().getLocalName(),qnSource.getLocalName());
+	}
+	return associationName;
 	}
 
 	//

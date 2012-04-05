@@ -30,8 +30,10 @@ public class PathServiceImpl implements PathService {
 		
 		List<QName> parentNames = nodeHelper.getParentAndSelfQNames(nodeRef);
 
-		for (QName type_qname : parentNames) {
-			String type_name = type_qname.getLocalName();
+		QName nodeType = nodeService.getType(nodeRef);
+		String type_name = nodeType.getLocalName();
+		//for (QName type_qname : parentNames) {
+		//	String type_name = type_qname.getLocalName();
 
 			String simplified_type_name = databaseDictionary.resolveClassAsTableName(type_name);
 			Serializable dbid = nodeService.getProperty(nodeRef, ContentModel.PROP_NODE_DBID);
@@ -44,7 +46,7 @@ public class PathServiceImpl implements PathService {
 			);
 			sqlQueries.add(sqlQuery);
 
-		}
+		//}
 
 		executeSQLQuery(sqlQueries);
 

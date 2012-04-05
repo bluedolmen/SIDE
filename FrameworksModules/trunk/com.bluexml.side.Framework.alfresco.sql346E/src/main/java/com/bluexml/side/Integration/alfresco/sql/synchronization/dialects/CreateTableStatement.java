@@ -153,10 +153,10 @@ public class CreateTableStatement {
 				do {
 					String columnName = rs.getString("COLUMN_NAME");
 					Integer dataType = rs.getInt("DATA_TYPE");
-					if (logger.isDebugEnabled()) {
+					/*if (logger.isDebugEnabled()) {
 						String dataTypeDepName = rs.getString("TYPE_NAME");
 						logger.debug("Column '" + columnName + "' with type '" + dataTypeDepName + "'(" + dataType + ")");
-					}
+					}*/
 					tableColumns.put(columnName, dataType);
 				} while (rs.next());
 				rs.close();

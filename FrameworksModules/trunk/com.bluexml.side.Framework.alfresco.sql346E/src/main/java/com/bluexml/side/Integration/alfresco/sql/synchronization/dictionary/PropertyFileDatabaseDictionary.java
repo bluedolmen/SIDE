@@ -1,15 +1,21 @@
 package com.bluexml.side.Integration.alfresco.sql.synchronization.dictionary;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
 import org.alfresco.error.AlfrescoRuntimeException;
+import org.alfresco.service.namespace.QName;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+
+import com.bluexml.side.Integration.alfresco.sql.synchronization.dialects.CreateTableStatement;
 
 /**
  * The Class DatabaseDictionary.
@@ -124,6 +130,28 @@ public class PropertyFileDatabaseDictionary implements BidirectionalDatabaseDict
 		}
 		
 		return getDictionaryValue(key);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.bluexml.alfresco.modules.sql.synchronization.dictionary.IDatabaseDictionary#getSourceClass(java.lang.String)
+	 */
+	public List<String> getAttributesOfClass (String class_name) {
+		//if (logger.isDebugEnabled())
+		//	logger.debug("getAttributesOfClass on class_name="+class_name);
+		String startkey = StringUtils.join(new String[] {CLASS_PREFIX, ATTRIBUTE_PREFIX, NAME_PREFIX, class_name}, KEY_SEPARATOR);
+		//if (logger.isDebugEnabled())
+		//	logger.debug(" start key="+startkey);
+		List<String> attributeNames = new ArrayList<String>();
+		Iterator<String> iterator = _dictionary.keySet().iterator();
+        while(iterator.hasNext()){        
+            String key = (String) iterator.next();
+            if (key.startsWith(startkey)) {            	
+            	attributeNames.add(key.replace(startkey+KEY_SEPARATOR, ""));
+        		if (logger.isDebugEnabled())
+        			logger.debug(" add attributes="+key.replace(startkey+KEY_SEPARATOR, ""));
+            }
+        }
+		return attributeNames;
 	}
 
 	public String resolveTableAsAssociationName(String tableName) {
