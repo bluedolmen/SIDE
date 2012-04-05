@@ -25,6 +25,7 @@
 <input id="${fieldHtmlId}" type="hidden" name="${field.name}" value="${field.value?html}" />
 <label for="${fieldHtmlId}">${field.label?html}:<#if field.mandatory><span class="mandatory-indicator">${msg("form.required.fields.marker")}</span></#if></label>
 <span id="${controlId}">
+<span id="${fieldHtmlId}-day-label">${msg("form.control.date.select.list.day")}</span>
 <select id="${fieldHtmlId}-day" name="-">
 <option value="1">1</option>
 <option value="2">2</option>
@@ -58,7 +59,7 @@
 <option value="30">30</option>
 <option value="31">31</option>
 </select>
-
+<span id="${fieldHtmlId}-month-label">${msg("form.control.date.select.list.month")}</span>
 <select id="${fieldHtmlId}-month" name="-">
 <option value="1">1</option>
 <option value="2">2</option>
@@ -74,7 +75,7 @@
 <option value="12">12</option>
 </select>
 
-
+<span id="${fieldHtmlId}-year-label">${msg("form.control.date.select.list.year")}</span>
 <select id="${fieldHtmlId}-year" name="-">
 
 </select>
