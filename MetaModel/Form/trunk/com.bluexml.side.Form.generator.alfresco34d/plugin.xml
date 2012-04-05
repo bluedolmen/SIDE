@@ -7,7 +7,7 @@
         <technologyVersion description="Check this to generate on the major release 3.4 of Alfresco.&lt;br&gt;Alfresco 3.4.d is the leading open source collaborative ECM solution.&lt;br&gt;Additionally to content generation, SIDE provides useful server components to enhance some features of this release." id="alfresco_3.4d" version="Alfresco3.4d Community">
           <generatorVersion class="com.bluexml.side.form.generator.alfresco34d.FormGenerator" description="This generator generate configuration from Forms Models for Alfresco Share" hidden="visible" id="com.bluexml.side.Form.generator.alfresco34d" version="Alfresco Share Forms Generator">
             <configurationParameter dataType="String" defaultValue="1.0" key="com.bluexml.side.Form.generator.alfresco34d.module.version" label="Form Module version" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.share.formExtension34d" moduleType="zip" technologyVersion="alfresco_3.4d" versionMax="1.0.42" versionMin="1.0.42" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.share.formExtension34d" moduleType="zip" technologyVersion="alfresco_3.4d" versionMax="1.0.43" versionMin="1.0.43" />
             <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.sharePortalExtension34d" moduleType="zip" technologyVersion="alfresco_3.4d" versionMax="1.0.10" versionMin="1.0.10" />
             <option defaultOption="true" documentation="this must be hidden" hidden="true" key="generator.main" label="main generation" />
             <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.share.Inputex" moduleType="zip" technologyVersion="alfresco_3.4d" versionMax="1.0.3" versionMin="1.0.3" />
