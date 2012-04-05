@@ -42,7 +42,7 @@
 				<js src="/side/components/form/controls/selectbox.js" />
 				<js src="/side/components/form/controls/autocomplete.js" />
 
-
+				<js src="/side/components/form/controls/dateSelectList.js" />
 
 
 				<js src="/side/components/object-finder/object-finder.js" />

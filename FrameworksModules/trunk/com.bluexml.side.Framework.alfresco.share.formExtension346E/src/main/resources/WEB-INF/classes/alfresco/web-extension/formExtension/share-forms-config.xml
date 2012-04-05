@@ -44,7 +44,7 @@
 
 				<js src="/side/components/form/controls/createTarget.js" />
 				<js src="/modules/simple-dialog.js" />
-
+				<js src="/side/components/form/controls/dateSelectList.js" />
 
 
 				<js src="/side/components/object-finder/object-finder.js" />
