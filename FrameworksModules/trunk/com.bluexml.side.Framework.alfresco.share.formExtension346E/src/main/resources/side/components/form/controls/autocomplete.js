@@ -88,7 +88,7 @@ if (!Array.prototype.indexOf) {
 			} else {
 				var me = this;
 				this.options.getDataSource = function _getDataSource(me) {
-					var url = "/share/proxy/alfresco/api/forms/picker/search/children?selectableType=" + me.options.itemType + "&size=" + me.options.maxResults + "&selectableTypeIsAspect="
+					var url = Alfresco.constants.PROXY_URI + "api/forms/picker/search/children?selectableType=" + me.options.itemType + "&size=" + me.options.maxResults + "&selectableTypeIsAspect="
 							+ me.options.selectableTypeIsAspect;
 					if (me.options.searchInSite && Alfresco.constants.SITE != "" && Alfresco.constants.SITE != undefined) {
 						url += "&site=" + Alfresco.constants.SITE;

@@ -83,7 +83,7 @@ if (!Array.prototype.indexOf) {
 			searchInSite : true
 		},
 		load : function() {
-			var url = "/share/proxy/alfresco/api/forms/picker/search/children?selectableType=" + this.options.itemType + "&searchTerm=" + this.options.filterTerm + "&size=" + this.options.maxResults
+			var url = Alfresco.constants.PROXY_URI + "api/forms/picker/search/children?selectableType=" + this.options.itemType + "&searchTerm=" + this.options.filterTerm + "&size=" + this.options.maxResults
 					+ "&advancedQuery=" + this.options.advancedQuery + "&selectableTypeIsAspect=" + this.options.selectableTypeIsAspect;
 			if (this.options.searchInSite && Alfresco.constants.SITE != "" && Alfresco.constants.SITE != undefined) {
 				url += "&site=" + Alfresco.constants.SITE;
