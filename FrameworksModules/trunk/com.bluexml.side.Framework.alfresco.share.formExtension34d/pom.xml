@@ -4,7 +4,7 @@
   <groupId>com.bluexml.side.Framework.alfresco.share</groupId>
   <artifactId>formExtension34d</artifactId>
   <name>com.bluexml.side.Framework.alfresco.share.formExtension</name>
-  <version>1.0.43</version>
+  <version>1.0.44</version>
   <packaging>zip</packaging>
   <parent>
     <groupId>org.bluexml</groupId>
