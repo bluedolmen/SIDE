@@ -139,8 +139,8 @@
             var isCached = form.htmlid != undefined && form.htmlid != null && form.htmlid != "";
             // render the appropriate form template
             me.renderFormTemplate(form, true);
-            
-         // Repopulate current form from url query data?
+
+            // Repopulate current form from url query data?
             if (isCached) {
                me.currentForm.repopulate = false;
                me.repopulateCurrentForm();
@@ -178,7 +178,7 @@
          if (this.currentForm) {
             var formData = this.currentForm.runtime.getFormData();
             this.options.savedQuery = YAHOO.lang.JSON.stringify(formData);
-            console.log("save "+this.options.savedQuery);
+            // console.log("save "+this.options.savedQuery);
          }
       },
 
@@ -283,19 +283,60 @@
          if (this.options.savedQuery.length !== 0) {
             var savedQuery = YAHOO.lang.JSON.parse(this.options.savedQuery);
             var elForm = Dom.get(this.currentForm.runtime.formId);
-            console.log("load from "+this.options.savedQuery);
+            console.log("load from " + this.options.savedQuery);
             for ( var i = 0, j = elForm.elements.length; i < j; i++) {
                var element = elForm.elements[i];
                var name = element.name;
+
                if (name != undefined && name !== "-") {
+
                   var savedValue = savedQuery[name];
                   if (savedValue !== undefined) {
-                     if (element.type === "checkbox" || element.type === "radio") {
+
+                     // search if some widget exists for this field
+                     if (name.indexOf("assoc_") == 0) {
+                        // remove last segment '_added' or '_remove'
+                        var hiddenFieldId = element.id.substring(0, element.id.lastIndexOf("-cntrl-added"));
+
+                        var hiddenField = Dom.get(hiddenFieldId);
+                        if (hiddenField != null) {
+                           if (hiddenField.widget != undefined) {
+                              console.log("name " + name);
+                              console.log("id " + element.id);
+                              console.log("hiddenFieldId " + hiddenFieldId);
+                              console.log("savedValue " + savedValue);
+                              console.log("widget name :" + hiddenField.widget.name);
+                              console.log("call reload mode replace value :" + savedValue.split(","));
+                              // we set initial value so widget can
+                              if (savedValue != "") {
+                                 hiddenField.widget.reload("replace", savedValue.split(","));
+                              } else {
+                                 hiddenField.widget.reload("replace", []);
+                              }
+                           } else {
+                              // the widget is not ready so need to reload after
+                              // 'onInitialized' event
+                              var local_savedValue = savedValue;
+                              YAHOO.Bubbling.on("/side-labs/onInitialized/" + hiddenFieldId, function(e, ob1, context) {
+                                 var widget = ob1[1];
+                                 if (local_savedValue != "") {
+                                    widget.reload("replace", savedValue.split(","));
+                                 } else {
+                                    widget.reload("replace", []);
+                                 }
+                              }, this);
+                           }
+
+                        }
+
+                     } else if (element.type === "checkbox" || element.type === "radio") {
                         element.checked = (savedValue === "true");
                      } else {
                         element.value = savedValue;
                      }
                   }
+               } else {
+
                }
             }
          }

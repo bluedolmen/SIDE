@@ -79,7 +79,7 @@ if (!Array.prototype.indexOf) {
 		},
 		load : function() {
 			var me = this;
-			var url = "/share/proxy/alfresco/api/forms/picker/search/children?selectableType=" + this.options.itemType + "&size=" + this.options.maxResults;
+			var url = Alfresco.constants.PROXY_URI + "api/forms/picker/search/children?selectableType=" + this.options.itemType + "&size=" + this.options.maxResults;
 			// url += "&advancedQuery=NOT cm:name=toto"
 			var myDataSource = new YAHOO.util.XHRDataSource(url);
 

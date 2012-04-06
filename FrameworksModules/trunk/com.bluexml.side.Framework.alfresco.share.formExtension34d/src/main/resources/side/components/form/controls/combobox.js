@@ -87,7 +87,7 @@ if (!Array.prototype.indexOf) {
 			} else {
 				var me = this;
 				this.options.getDataSource = function _getDataSource() {
-					var myDataSource = new YAHOO.util.XHRDataSource("/share/proxy/alfresco/api/forms/picker/search/children?selectableType=" + me.options.itemType + "&searchTerm="
+					var myDataSource = new YAHOO.util.XHRDataSource(Alfresco.constants.PROXY_URI + "api/forms/picker/search/children?selectableType=" + me.options.itemType + "&searchTerm="
 							+ me.options.filterTerm + "&size=" + me.options.maxResults + "&advancedQuery=" + me.options.advancedQuery);
 					myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSON;
 					myDataSource.responseSchema = {
@@ -217,11 +217,10 @@ if (!Array.prototype.indexOf) {
 			if (this.initialValue) {
 				this.setValue(this.initialValue);
 			}
-			YAHOO.Bubbling.fire("/side-labs/onInitialized/" + this.currentValueHtmlId, this);
 			// add widget reference on html element
 			var el = document.getElementById(this.currentValueHtmlId);
-			el.widget = this;
-
+			el.widget = this;			
+			YAHOO.Bubbling.fire("/side-labs/onInitialized/" + this.currentValueHtmlId, this);
 		},
 		setValue : function ComboBox_setValue(value) {
 			this.log("before setValue :" + this.getValue());
