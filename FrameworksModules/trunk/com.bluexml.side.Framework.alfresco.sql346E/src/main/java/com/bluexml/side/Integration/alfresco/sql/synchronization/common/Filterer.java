@@ -28,6 +28,13 @@ public interface Filterer {
 	
 	public void setExternalTypesMapping(String externalTypesMapping_);
 
+	/**
+	 * This method gets the list of external class (usually defined in alfresco models) which need to be defined in the SQL physical model
+	 * Externalm in the sense that they are not in the filtered namespace given by the parameter 'synchrodb.namespacePrefix'
+	 * @return an hashmap of the QName corresponding ot the list of external class to map as key and their attributes to map as values, 
+	 * 			attributes are given in the synchronization-database-mapping.properties configuration file
+	 * 
+	 */
 	public HashMap<QName, ArrayList<QName>> getExternalTypesMappingArray();
 	
 }

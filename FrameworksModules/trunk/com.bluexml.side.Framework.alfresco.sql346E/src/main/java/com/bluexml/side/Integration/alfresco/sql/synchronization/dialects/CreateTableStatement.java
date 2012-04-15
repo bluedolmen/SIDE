@@ -142,12 +142,14 @@ public class CreateTableStatement {
 		try {
 			DatabaseMetaData databaseMetaData = connection.getMetaData();
 			rs = databaseMetaData.getColumns(null, null, tableName, "%");
+			if (logger.isDebugEnabled())
+				logger.debug("Checking table '" + tableName + "'");
 
 			if (!rs.next()) {
 				status = TableStatus.NOT_EXISTS;
 			} else {
 				if (logger.isDebugEnabled())
-					logger.debug("Checking table '" + tableName + "'");
+					logger.debug("get columns of table '" + tableName + "'");
 				
 				Map<String, Integer> tableColumns = new LinkedHashMap<String, Integer>();
 				do {

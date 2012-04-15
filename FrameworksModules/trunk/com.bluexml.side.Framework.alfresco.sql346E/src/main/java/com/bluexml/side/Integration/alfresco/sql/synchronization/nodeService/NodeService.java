@@ -44,5 +44,10 @@ public interface NodeService {
 	 * of the association.
 	 */
 	public void deleteAssociation(NodeRef sourceRef, NodeRef targetRef, QName typeQName);
-	
+
+	/*
+	 * Check that the nodeRef exists in Alfresco repository
+	 */
+	public boolean exists(NodeRef nodeRef) ;
+
 }

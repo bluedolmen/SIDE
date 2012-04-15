@@ -83,9 +83,8 @@ public class SQLSynchronizationPolicy implements
 
 	public void onCreateNode(ChildAssociationRef childAssociationRef) {
 		NodeRef nodeRef = childAssociationRef.getChildRef();
-
-		// Only process bluexml nodes
-		if (filterer.accept(nodeRef)) {
+		// Only process declared mapped nodes
+		if (synchroNodeService.exists(nodeRef) && filterer.accept(nodeRef)) {
 			logger.debug("Synchronization policy, CREATE NODE");
 			/*
 			 * Here we cannot determine whether this creation originated from a creation of a new node
@@ -98,14 +97,14 @@ public class SQLSynchronizationPolicy implements
 	}
 
 	public void beforeDeleteNode(NodeRef nodeRef) {
-		if (filterer.accept(nodeRef)) {
+		if (synchroNodeService.exists(nodeRef) && filterer.accept(nodeRef)) {
 			logger.debug("Synchronization policy, DELETE NODE");
 			synchroNodeService.delete(nodeRef);
 		}
 	}
 
 	public void onUpdateProperties(NodeRef nodeRef, Map<QName, Serializable> before_properties, Map<QName, Serializable> after_properties) {
-		if (filterer.accept(nodeRef)) {
+		if (synchroNodeService.exists(nodeRef) && filterer.accept(nodeRef)) {
 			Map<QName, Serializable> changes = new HashMap<QName, Serializable>();
 			for (QName key : after_properties.keySet()) {
 				if (filterer.acceptPropertyQName(key)) {

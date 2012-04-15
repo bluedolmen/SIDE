@@ -285,6 +285,11 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 		}
 	}
 
+	public boolean exists(NodeRef nodeRef)  {		
+		return nodeService.exists(nodeRef);
+	}
+
+	
 	/*
 	 * Create associations related to a particular nodeRef.
 	 * Related associations are those source/target parent/child associations which are linked to the given node
@@ -503,16 +508,25 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 	
 	private String getAssociationName(QName association, NodeRef sourceNodeRef, NodeRef targetNodeRef ) {
 	String associationName = association.getLocalName();
+	if (logger.isDebugEnabled()) logger.debug("getAssociationName - associationName="+associationName);
 	// BEGIN RB - to take into account association in aspect and from parent class, the association name has been prefixed with the type name in the synchonization-database-mapping.properties file
 	ClassDefinition sourceClassDefinition = dictionaryService.getAssociation(association).getSourceClass();
+	if (logger.isDebugEnabled()) logger.debug("getAssociationName - sourceClassDefintion="+sourceClassDefinition.getTitle());
 	ClassDefinition targetClassDefinition = dictionaryService.getAssociation(association).getTargetClass();
+	if (logger.isDebugEnabled()) logger.debug("getAssociationName - sourceClassDefintion="+targetClassDefinition.getTitle());
 	if (sourceClassDefinition.isAspect() || dictionaryService.getSubTypes(sourceClassDefinition.getName(), false).size()>0) {
+		if (logger.isDebugEnabled()) logger.debug("getAssociationName - is Source class an Aspect="+sourceClassDefinition.isAspect());
+		if (logger.isDebugEnabled()) logger.debug("getAssociationName - is Source class parent class="+dictionaryService.getSubTypes(sourceClassDefinition.getName(), false).size());
 		QName qnSource = nodeService.getType(sourceNodeRef);
+		if (logger.isDebugEnabled()) logger.debug("getAssociationName - qnSource="+qnSource.getLocalName());
+		if (logger.isDebugEnabled()) logger.debug("getAssociationName - is target class parent class="+dictionaryService.getSubTypes(targetClassDefinition.getName(), false).size());
 		if (dictionaryService.getSubTypes(targetClassDefinition.getName(), false).size()>0) {
 			QName qnTarget = nodeService.getType(targetNodeRef);
+			if (logger.isDebugEnabled()) logger.debug("getAssociationName - qnTarget="+qnTarget.getLocalName());
 			associationName=associationName.replaceFirst(sourceClassDefinition.getName().getLocalName(),qnSource.getLocalName()).replaceFirst(targetClassDefinition.getName().getLocalName(),qnTarget.getLocalName());						
 		} else associationName=associationName.replaceFirst(sourceClassDefinition.getName().getLocalName(),qnSource.getLocalName());
 	}
+	if (logger.isDebugEnabled()) logger.debug("getAssociationName - associationName="+associationName);
 	return associationName;
 	}
 

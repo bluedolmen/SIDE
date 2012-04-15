@@ -12,7 +12,17 @@ import org.alfresco.service.transaction.TransactionService;
 import org.apache.log4j.Logger;
 
 import com.bluexml.side.Integration.alfresco.sql.synchronization.dictionary.DatabaseDictionary;
-
+/**
+ * A filter mode to limit the number of class to synchronize in the SQL Database
+ * This filter limits using :
+ * - the parameter "synchrodb.namespacePrefix" of the synchronisation.properties file:
+ * 		it gives the namepsace prefix of the classes to authorize
+ * 		Ex: synchrodb.namespacePrefix=http://www.bluexml.com/model/content/MyModel/ to authorize the types of 'MyModel'
+ * - the parameter "synchrodb.externalTypesMapping" of the synchronisation.properties file:
+ * 		it gives the list of classes which are alos authorized but which are outside the namespace prefix given by the previous parameter 
+ *  	Ex: synchrodb.externalTypesMapping=cm:person,cm:authorityContainer,cm:authority to map the alfresco person, authorithyContainer,authorithy types
+ *
+ */
 public class NamespacePrefixFilterer extends AbstractFilterer {
 
 	private Logger logger = Logger.getLogger(getClass());

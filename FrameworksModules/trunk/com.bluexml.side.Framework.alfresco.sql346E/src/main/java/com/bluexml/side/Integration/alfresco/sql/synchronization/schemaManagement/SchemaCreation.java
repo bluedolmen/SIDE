@@ -22,7 +22,6 @@ import org.alfresco.repo.dictionary.DictionaryDAO;
 import org.alfresco.repo.dictionary.DictionaryListener;
 import org.alfresco.service.cmr.dictionary.AspectDefinition;
 import org.alfresco.service.cmr.dictionary.ClassDefinition;
-import org.alfresco.service.cmr.dictionary.DataTypeDefinition;
 import org.alfresco.service.cmr.dictionary.DictionaryService;
 import org.alfresco.service.cmr.dictionary.PropertyDefinition;
 import org.alfresco.service.cmr.dictionary.TypeDefinition;
@@ -38,6 +37,23 @@ import com.bluexml.side.Integration.alfresco.sql.synchronization.dialects.Create
 import com.bluexml.side.Integration.alfresco.sql.synchronization.dialects.SynchronizationDialect;
 import com.bluexml.side.Integration.alfresco.sql.synchronization.dictionary.DatabaseDictionary;
 
+/**
+ * Create the SQL relational schema of the synchronized alfresco class
+ * The schema is defined using the database dictionary (package dictionary)
+ * The package dictionary is used to load the mapping between the class/attribute/association 
+ * and the Database model using all property files of name "synchronisation-database-mapping.properties"
+ * 
+ * The property file "synchronization.properties" is used to set up the execution parameters of the SQL module: these parameters are loaded by the various beans of the module in the spring context xml file
+ * In particular, this file defined the synchrodb.namespacePrefix parameter which gives the namespace prefix of the Alfresco model to take into account (filter by the NamespacePrefixFilterer)
+ * and the synchrodb.externalTypesMapping parameter whihc lists the type which are not in the models of the namespace prefix but whihc must be mapped (usually type of the standard alfresco model)
+ * 
+ * ATTENTION: only the final type (those having no subtypes) are mapped in the SQL model.
+ * For the association, the aspect which contains association towards type are replaced by the type which bear this aspect.
+ * 
+ * ATTENTION: if you want to map an association contained in an aspect and this aspect will be associated at runtime to the objects of a type, you must 
+ * manually add the corresponding entries in a "synchronisation-database-mapping.properties" in order this class created the mapped table and in order that the SQL module NodeService synchronizes the data in these tables.
+ *
+ */
 public class SchemaCreation implements DictionaryListener {
 	
 	public static final String ASSOCIATION_ID_COLUMN_NAME = "id";
@@ -227,32 +243,57 @@ public class SchemaCreation implements DictionaryListener {
 					if (sourceClassDefinition.isAspect()) {
 						if (logger.isDebugEnabled())
 							logger.debug("association loop - source class is aspect");
-						for (QName type : dictionaryService.getTypes(modelName)) {
+						// loop on all the type of the model
+						for (QName type : dictionaryService.getTypes(modelName) ) {
 							// look at type having the aspect and no subtypes 
 							if (filterer.acceptTypeQName(type) && dictionaryService.getSubTypes(type, false).size()==0) {
-							TypeDefinition typeDefinition = dictionaryService.getType(type);
-							// for each types in the model, found the type who have the current aspect
+								TypeDefinition typeDefinition = dictionaryService.getType(type);
+								// for each types in the model, found the type who have the current aspect
 								for (QName aspect : typeDefinition.getDefaultAspectNames()) {
 									if (aspect.isMatch(sourceClassDefinition.getName())) {
-										// this type has the aspect => in the synchronisation-database-mapping.properties a key is "association.name.<type name><association name>=<value>"
+										// this type has the aspect => in the synchronisation-database-mapping.properties a key is "association.name.<newAssocName>=<value>"
 										if (logger.isDebugEnabled())
 											logger.debug("association loop - find source class type="+type.getLocalName());	
-										// the target class may have subtypes and in that case association table must be created for each accepted subtypes
-										String newAssocName = associationName.getLocalName().replaceFirst(sourceClassDefinition.getName().getLocalName(), type.getLocalName());
+										//String newAssocName = associationName.getLocalName().replaceFirst(sourceClassDefinition.getName().getLocalName(), type.getLocalName());
 										// a particular case to consider: if the current type is a subtype of the target class, replace the target class by the the current type to avoid to create association with other subtypes considering it is a loopback
 										ArrayList<QName> children = getLeafSubTypes(targetClassDefinition.getName());
 										if (children.contains(type)) {
-											newAssocName = newAssocName.replaceFirst(targetClassDefinition.getName().getLocalName(), type.getLocalName());
+											String newAssocName = getAssociationName(associationName, type, type );
 											if (logger.isDebugEnabled())
 												logger.debug("association loop - new assocNAme="+newAssocName);	
-											QName newAssocQname = QName.createQName(associationName.getNamespaceURI(), newAssocName);
-											createStatements.addAll(createStatementsWithSubTypes(newAssocQname, type, type));
+												//newAssocName = newAssocName.replaceFirst(targetClassDefinition.getName().getLocalName(), type.getLocalName());
+												QName newAssocQname = QName.createQName(associationName.getNamespaceURI(), newAssocName);
+												createStatements.addAll(createStatementsWithSubTypes(newAssocQname, type, type));
 										} else {
-											if (logger.isDebugEnabled())
-												logger.debug("association loop - new assocNAme="+newAssocName);	
-											QName newAssocQname = QName.createQName(associationName.getNamespaceURI(), newAssocName);
-											createStatements.addAll(createStatementsWithSubTypes(newAssocQname, type, targetClassDefinition.getName()));
+											for (QName target : children) {
+												// no subtypes
+												String newAssocName = getAssociationName(associationName, type, target );
+												if (logger.isDebugEnabled())
+													logger.debug("association loop - new assocNAme="+newAssocName);	
+												// the target class may have subtypes and in that case association table must be created for each accepted subtypes
+												QName newAssocQname = QName.createQName(associationName.getNamespaceURI(), newAssocName);
+												createStatements.addAll(createStatementsWithSubTypes(newAssocQname, type, target));
+											} 
 										}
+									}
+								}
+							}
+						}
+						// loop on all the external class defined in the synchronization.properties configuration files
+						// external class may have this aspect defined in the model at runtime and then it is necessary to also define association table for this external class
+						// we know that they may have this aspect in the synchronization-database-mapping where it may have been manually added
+						for (QName type : filterer.getExternalTypesMappingArray().keySet() ) {
+							// look at type which are defined in the database dictionary as source of this association. 
+							if (dictionaryService.getSubTypes(type, false).size()==0) {
+								// check if an association has been defined in a database mapping configuration file for this type => in the synchronisation-database-mapping.properties a key will be "association.name.<newAssocName>=<value>"
+								ArrayList<QName> children = getLeafSubTypes(targetClassDefinition.getName());
+								for (QName target : children) {
+									// no subtypes
+									String newAssocName = getAssociationName(associationName, type, target );
+									if (databaseDictionary.resolveAssociationAsTableName(newAssocName) != null) {
+										QName newAssocQname = QName.createQName(associationName.getNamespaceURI(), newAssocName);
+										createStatements.addAll(createStatementsWithSubTypes(newAssocQname, type, target));
+
 									}
 								}
 							}
@@ -271,7 +312,8 @@ public class SchemaCreation implements DictionaryListener {
 			logger.debug("=== doCreateStatement createStatements.size: "+createStatements.size());
 		return createStatements;
 	}
-		
+
+	
 	private CheckTableStatus doCheckStatus (List<CreateTableStatement> createStatements, Connection connection) {
 		List<String> matchedTables = new ArrayList<String>();
 		List<String> unmatchedTables = new ArrayList<String>();
@@ -629,7 +671,23 @@ public class SchemaCreation implements DictionaryListener {
 		}
 		return leafSubTypes;
 	}
+
 	
+	private String getAssociationName(QName association, QName qnSource, QName qnTarget ) {
+		String associationName = association.getLocalName();
+		if (logger.isDebugEnabled()) logger.debug("getAssociationName - associationName="+associationName);
+		ClassDefinition sourceClassDefinition = dictionaryService.getAssociation(association).getSourceClass();
+		ClassDefinition targetClassDefinition = dictionaryService.getAssociation(association).getTargetClass();
+		if (sourceClassDefinition.isAspect() || dictionaryService.getSubTypes(sourceClassDefinition.getName(), false).size()>0) {
+			if (dictionaryService.getSubTypes(targetClassDefinition.getName(), false).size()>0) {
+				associationName=associationName.replaceFirst(sourceClassDefinition.getName().getLocalName(),qnSource.getLocalName()).replaceFirst(targetClassDefinition.getName().getLocalName(),qnTarget.getLocalName());						
+			} else associationName=associationName.replaceFirst(sourceClassDefinition.getName().getLocalName(),qnSource.getLocalName());
+		}
+		if (logger.isDebugEnabled()) logger.debug("Schema Creation - getAssociationName - associationName="+associationName);
+		return associationName;
+	}
+
+
 	//
 	// IoC/DI Spring
 	//

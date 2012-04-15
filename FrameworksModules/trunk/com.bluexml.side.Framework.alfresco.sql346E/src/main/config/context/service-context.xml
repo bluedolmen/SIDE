@@ -76,6 +76,7 @@
 	</bean>
 
 	<bean id="databaseDictionary" class="com.bluexml.side.Integration.alfresco.sql.synchronization.dictionary.PropertyFileDatabaseDictionary" init-method="init">
+		<property name="caseMode" value="${synchrodb.dialect.caseMode}" />
 		<property name="renamingStrategy">
 			<bean id="truncateRenamingStrategy" class="com.bluexml.side.Integration.alfresco.sql.synchronization.dictionary.TruncateRenamingStrategy" parent="abstractRenamingStrategy" />
 		</property>
