@@ -47,8 +47,6 @@
 
       YAHOO.Bubbling.on("beforeFormRuntimeInit", this.onBeforeFormRuntimeInit, this);
 
-      
-      
       return this;
    };
 
@@ -294,7 +292,10 @@
 
                   var savedValue = savedQuery[name];
                   if (savedValue !== undefined) {
-                     
+                     var local_savedValue = {
+                       savedValue : savedValue,
+                       name : name
+                     };
                      // search if some widget exists for this field
                      if (name.indexOf("assoc_") == 0) {
                         // remove last segment '_added' or '_remove'
@@ -320,10 +321,7 @@
                               console.log("widget is not ready use listen to onInitialized event savedValue :" + savedValue);
                               // the widget is not ready so need to reload after
                               // 'onInitialized' event
-                              var local_savedValue = {
-                                 savedValue : savedValue,
-                                 name : name
-                              };
+                              
                               YAHOO.Bubbling.on("/side-labs/onInitialized/" + hiddenFieldId, function(e, ob1, value) {
                                  console.log("@@@@@ onInitialized for " + value.name + " savedValue " + value.savedValue);
                                  var widget = ob1[1];
@@ -340,11 +338,26 @@
                      } else if (element.type === "checkbox" || element.type === "radio") {
                         element.checked = (savedValue === "true");
                      } else {
-                        element.value = savedValue;
+                        var regDate = new RegExp('[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}.*');
+                        if (savedValue.match(regDate) != null) {
+                           if (element.widget && element.widget.name == 'SIDE.DateWidget') {
+                              console.log("SIDE.DateWidget ....");
+                              element.widget.setValue(savedValue);
+                           } else {
+                              YAHOO.Bubbling.on("/side-labs/onInitialized/" + element.id, function(e, ob1, value) {
+                                 console.log("@@@@@ onInitialized for " + value.name + " savedValue " + value.savedValue);
+                                 var widget = ob1[1];
+                                 widget.setValue(value.savedValue);
+                              }, local_savedValue);
+                           }
+                        } else if (YAHOO.util.Dom.get(element.id+"-entry") != null) {
+                           YAHOO.util.Dom.get(element.id+"-entry").checked = (savedValue == "true");
+                           element.value = savedValue;
+                        } else {   
+                           element.value = savedValue;
+                        }
                      }
                   }
-               } else {
-
                }
             }
          }
