@@ -120,6 +120,9 @@ if (console == undefined) {
          Event.onContentReady(this.id, this.onReady, this, true);
       },
 
+      log : function(msg) {
+         console.log("[SIDE.DateWidget] " + msg);
+      },
       /**
        * Fired by YUI when parent element is available for scripting. Component
        * initialisation, including instantiation of YUI widgets and event
@@ -128,6 +131,7 @@ if (console == undefined) {
        * @method onReady
        */
       onReady : function DatePicker_onReady() {
+         Dom.get(this.currentValueHtmlId).widget = this;
          this.widgets.day = Dom.get(this.currentValueHtmlId + "-day");
          this.widgets.month = Dom.get(this.currentValueHtmlId + "-month");
          this.widgets.year = Dom.get(this.currentValueHtmlId + "-year");
@@ -167,7 +171,8 @@ if (console == undefined) {
 
          this.loadCurrentValue();
 
-         YAHOO.Bubbling.fire("/side-labs/onDateSelectListReady/" + this.currentValueHtmlId, this);
+         this.log("fire event :" + "/side-labs/onInitialized/" + this.currentValueHtmlId);
+         YAHOO.Bubbling.fire("/side-labs/onInitialized/" + this.currentValueHtmlId, this);
       },
       updateHiddenDate : function DatePiker_updateHiddenDate(event, context) {
          var isoValue = "";
@@ -193,14 +198,39 @@ if (console == undefined) {
             currentDate = new Date();
          }
 
-         var day = currentDate.getDate();
-         var month = currentDate.getMonth() + 1;
-         var year = currentDate.getFullYear();
+         this._selectValues(currentDate);
+
+      },
+
+      /**
+       * @method setValue
+       * @param date :
+       *           js Date Object or ISO8601 date string
+       */
+      setValue : function DatePicker_setValue(date) {
+         var parsedDate = null;
+         if (typeof date == "object") {
+            parsedDate = date;
+         } else {
+            parsedDate = Alfresco.util.fromISO8601(date);
+         }
+         this._selectValues(parsedDate);
+
+      },
+
+      /**
+       * @method _selectValues
+       * @param date :
+       *           js Date Object
+       */
+      _selectValues : function DatePicker__selectValues(date) {
+         var day = date.getDate();
+         var month = date.getMonth() + 1;
+         var year = date.getFullYear();
 
          this._selectValueFor(this.widgets.day, day);
          this._selectValueFor(this.widgets.month, month);
          this._selectValueFor(this.widgets.year, year);
-
       },
 
       /**
@@ -248,7 +278,7 @@ if (console == undefined) {
             return date;
          }
       },
-      
+
       /**
        * 
        */
