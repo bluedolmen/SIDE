@@ -47,6 +47,8 @@
 
       YAHOO.Bubbling.on("beforeFormRuntimeInit", this.onBeforeFormRuntimeInit, this);
 
+      
+      
       return this;
    };
 
@@ -292,7 +294,7 @@
 
                   var savedValue = savedQuery[name];
                   if (savedValue !== undefined) {
-
+                     
                      // search if some widget exists for this field
                      if (name.indexOf("assoc_") == 0) {
                         // remove last segment '_added' or '_remove'
@@ -300,11 +302,12 @@
 
                         var hiddenField = Dom.get(hiddenFieldId);
                         if (hiddenField != null) {
+                           console.log("name " + name);
+                           console.log("savedValue " + savedValue);
                            if (hiddenField.widget != undefined) {
-                              console.log("name " + name);
                               console.log("id " + element.id);
                               console.log("hiddenFieldId " + hiddenFieldId);
-                              console.log("savedValue " + savedValue);
+
                               console.log("widget name :" + hiddenField.widget.name);
                               console.log("call reload mode replace value :" + savedValue.split(","));
                               // we set initial value so widget can
@@ -314,17 +317,22 @@
                                  hiddenField.widget.reload("replace", []);
                               }
                            } else {
+                              console.log("widget is not ready use listen to onInitialized event savedValue :" + savedValue);
                               // the widget is not ready so need to reload after
                               // 'onInitialized' event
-                              var local_savedValue = savedValue;
-                              YAHOO.Bubbling.on("/side-labs/onInitialized/" + hiddenFieldId, function(e, ob1, context) {
+                              var local_savedValue = {
+                                 savedValue : savedValue,
+                                 name : name
+                              };
+                              YAHOO.Bubbling.on("/side-labs/onInitialized/" + hiddenFieldId, function(e, ob1, value) {
+                                 console.log("@@@@@ onInitialized for " + value.name + " savedValue " + value.savedValue);
                                  var widget = ob1[1];
-                                 if (local_savedValue != "") {
-                                    widget.reload("replace", savedValue.split(","));
+                                 if (value.savedValue != "") {
+                                    widget.reload("replace", value.savedValue.split(","));
                                  } else {
                                     widget.reload("replace", []);
                                  }
-                              }, this);
+                              }, local_savedValue);
                            }
 
                         }
