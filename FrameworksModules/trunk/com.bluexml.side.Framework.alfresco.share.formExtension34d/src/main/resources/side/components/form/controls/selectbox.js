@@ -57,6 +57,11 @@ if (!Array.prototype.indexOf) {
 		}
 
 		YAHOO.Bubbling.on("/side-labs/onCreateNewItem/" + this.currentValueHtmlId, this.reloadBehavior, this);
+		
+		YAHOO.Bubbling.on("/side-labs/onInitializedWidget/" + this.currentValueHtmlId, function() {
+         YAHOO.Bubbling.fire("/side-labs/onInitialized/" + this.currentValueHtmlId, this);
+      }, this);
+
 
 	};
 
@@ -97,7 +102,8 @@ if (!Array.prototype.indexOf) {
 					datasource : myDataSource,
 					valueKey : "nodeRef",
 					labelKey : "name",
-					parentEl : this.htmlid
+					parentEl : this.htmlid,
+               currentValueHtmlId : this.currentValueHtmlId
 				}, this.initialValue);
 				var me = this;
 
@@ -150,7 +156,8 @@ if (!Array.prototype.indexOf) {
 					mandatory : this.options.mandatory,
 					valueKey : "nodeRef",
 					labelKey : "name",
-					parentEl : this.htmlid
+					parentEl : this.htmlid,
+               currentValueHtmlId : this.currentValueHtmlId
 				}, this.initialValue);
 
 				var me = this;
@@ -210,7 +217,6 @@ if (!Array.prototype.indexOf) {
 			// add widget reference on html element
 			var el = document.getElementById(this.currentValueHtmlId);
 			el.widget = this;
-			YAHOO.Bubbling.fire("/side-labs/onInitialized/" + this.currentValueHtmlId, this);
 		},
 		setValue : function SelectBox_setValue(value) {
 			this.log("before setValue :" + this.getValue());

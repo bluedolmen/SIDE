@@ -39,6 +39,8 @@ if (console == undefined) {
 	SIDE.MyDSSelectField = function(options, initialValue) {
 		SIDE.MyDSSelectField.superclass.constructor.call(this, options);
 		this.initialValue = initialValue;
+		this.parentWidget = options.currentValueHtmlId;
+		this.initialized = false;
 		this.log("DSS initial value :" + initialValue);
 	};
 
@@ -46,6 +48,9 @@ if (console == undefined) {
 		log : function(msg) {
 			console.log("[SIDE.MyDSSelectField] " + msg);
 		},
+		
+		initialized : false,
+		
 		/**
 		 * Send the datasource request for reload and preserve selected value
 		 */
@@ -92,6 +97,11 @@ if (console == undefined) {
 			this.log("dataloaded init new:" + this.getValue());
 			this.log("force previousState to 'valid'");
 			this.previousState = 'valid';
+			if (!this.initialized) {
+			   this.initialized = true;
+			   this.log("Fire "+"/side-labs/onInitializedWidget/" + this.parentWidget);
+            YAHOO.Bubbling.fire("/side-labs/onInitializedWidget/" + this.parentWidget, this);
+         }
 		}
 	});
 

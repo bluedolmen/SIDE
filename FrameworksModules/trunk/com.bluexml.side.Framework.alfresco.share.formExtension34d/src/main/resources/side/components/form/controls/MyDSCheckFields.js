@@ -61,6 +61,7 @@ if (!Array.prototype.indexOf) {
 	SIDE.MyDSCheckFields = function(options, initialValue) {
 		SIDE.MyDSCheckFields.superclass.constructor.call(this, options);
 		this.initialValue = initialValue;
+		this.parentWidget = options.currentValueHtmlId;
 		this.checkFields = [];
 		this.value = [];
 		this.log("DSS initial value :" + initialValue);
@@ -70,6 +71,9 @@ if (!Array.prototype.indexOf) {
 		log : function(msg) {
 			console.log("[SIDE.MyDSCheckFields] " + msg);
 		},
+		
+		initialized : false,
+		
 		/**
 		 * Setup the additional options for selectfield
 		 * 
@@ -101,9 +105,7 @@ if (!Array.prototype.indexOf) {
 			choices = this.options.choices;
 
 			for (i = 0, length = choices.length; i < length; i += 1) {
-
 				this.addChoice(choices[i]);
-
 			}
 
 			// Send the data request
@@ -181,6 +183,11 @@ if (!Array.prototype.indexOf) {
 
 			this.log("force previousState to 'valid'");
 			this.previousState = 'valid';
+			if (!this.initialized) {
+            this.log("fire onInitializedWidget/" + this.parentWidget);
+            this.initialized = true;
+            YAHOO.Bubbling.fire("/side-labs/onInitializedWidget/" + this.parentWidget, this);
+         }
 		},
 
 		/**
@@ -238,10 +245,8 @@ if (!Array.prototype.indexOf) {
 		},
 
 		enableChoiceNode : function(node) {
-
 			// node.firstChild.removeAttribute("disabled");
 			node.firstChild.disabled = false;
-
 		},
 
 		/**
@@ -262,24 +267,16 @@ if (!Array.prototype.indexOf) {
 			domPosition = 0;
 
 			for (i = 0; i < position; i += 1) {
-
 				if (this.choicesList[i].visible) {
-
 					domPosition += 1;
-
 				}
-
 			}
 
 			// Insert in DOM
 			if (domPosition < this.fieldContainer.childNodes.length) {
-
 				YAHOO.util.Dom.insertBefore(node, this.fieldContainer.childNodes[domPosition]);
-
 			} else {
-
 				this.fieldContainer.appendChild(node);
-
 			}
 		},
 		/**
