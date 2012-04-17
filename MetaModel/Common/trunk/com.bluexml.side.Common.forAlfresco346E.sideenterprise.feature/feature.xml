@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.forAlfresco346E.sideenterprise.feature" label="Generator and Deployer For Alfresco 3.4.6 Enterprise" version="1.0.52.v35073-20120416" provider-name="BLUEXML">
+<feature id="com.bluexml.side.Common.forAlfresco346E.sideenterprise.feature" label="Generator and Deployer For Alfresco 3.4.6 Enterprise" version="1.0.53.v35116-20120417" provider-name="BLUEXML">
   <description url="http://www.example.com/description">[Enter Feature Description here.]</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
-  <plugin id="com.bluexml.side.Class.generator.alfresco346E" download-size="0" install-size="0" version="1.0.20.v35073-20120416" unpack="false" />
+  <plugin id="com.bluexml.side.Class.generator.alfresco346E" download-size="0" install-size="0" version="1.0.21.v35116-20120417" unpack="false" />
   <plugin id="com.bluexml.side.Deployer.alfrescoDirectCopy346E" download-size="0" install-size="0" version="1.0.2.v32264-20120125" unpack="false" />
   <plugin id="com.bluexml.side.Form.generator.alfresco.enterprise346E" download-size="0" install-size="0" version="1.0.30.v35073-20120416" unpack="false" />
   <plugin id="com.bluexml.side.Form.generator.xforms.chiba346E" download-size="0" install-size="0" version="1.0.1.v31653-20120106" unpack="false" />
