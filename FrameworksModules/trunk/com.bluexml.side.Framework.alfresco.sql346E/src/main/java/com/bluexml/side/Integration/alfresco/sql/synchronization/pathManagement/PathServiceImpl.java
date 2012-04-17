@@ -36,19 +36,21 @@ public class PathServiceImpl implements PathService {
 		//	String type_name = type_qname.getLocalName();
 
 			String simplified_type_name = databaseDictionary.resolveClassAsTableName(type_name);
-			Serializable dbid = nodeService.getProperty(nodeRef, ContentModel.PROP_NODE_DBID);
-	
-			String sqlQuery = String.format("UPDATE %1$s SET %2$s = %3$s WHERE id = %4$s", 
-					simplified_type_name, 
-					PathManagementCommon.PATH_COLUMN_NAME, 
-					escapedPathString, 
-					dbid
-			);
-			sqlQueries.add(sqlQuery);
-
-		//}
-
-		executeSQLQuery(sqlQueries);
+			if (simplified_type_name != null) {
+					Serializable dbid = nodeService.getProperty(nodeRef, ContentModel.PROP_NODE_DBID);
+			
+					String sqlQuery = String.format("UPDATE %1$s SET %2$s = %3$s WHERE id = %4$s", 
+							simplified_type_name, 
+							PathManagementCommon.PATH_COLUMN_NAME, 
+							escapedPathString, 
+							dbid
+					);
+					sqlQueries.add(sqlQuery);
+		
+				//}
+		
+				executeSQLQuery(sqlQueries);
+			}
 
 	}
 
