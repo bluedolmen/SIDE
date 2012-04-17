@@ -14,7 +14,7 @@
             </option>
             <option key="alfresco.webscript.report" label="Alfresco Report Webscripts" />
             <option documentation="Check this option to include the SIDE SQL extension module for Alfresco.&lt;br&gt;This module provides the synchronisation of alfresco data into a relational database.&lt;br&gt; Queries with joins can thus be performed." key="com.bluexml.side.Class.generator.alfresco.sql" label="Alfresco SQL">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.sql346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.4" versionMin="1.0.4" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.sql346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.5" versionMin="1.0.5" />
             </option>
             <option key="alfresco.webscripts.common" label="Alfresco Common Webscripts">
               <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.xforms346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.2" versionMin="1.0.2" />
