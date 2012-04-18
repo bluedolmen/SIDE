@@ -23,7 +23,7 @@
 				<js src="/yui/autocomplete/autocomplete-min.js" />
 				<js src="/yui/slider/slider-min.js" />
 				<js src="/fdk/accordion/accordion-min.js" />
-				<js src="/side/components/form/upload-min.js" />
+				<js src="/side/components/form/upload.js" />
 				<js src="/yui/event-delegate/event-delegate-min.js" />
 				<js src="/yui/utilities/utilities.js" />
 				<!-- js src="/inputex/inputex-min.js" /> -->
