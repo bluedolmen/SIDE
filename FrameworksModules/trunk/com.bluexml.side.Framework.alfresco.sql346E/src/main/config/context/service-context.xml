@@ -205,13 +205,13 @@
     </bean>
 		
  	<bean id="pathSynchronizationPolicy" class="com.bluexml.side.Integration.alfresco.sql.synchronization.pathManagement.PathSynchronizationPolicy" init-method="init" depends-on="synchronizationPolicy">
+		<property name="usePathManagement" value="${synchrodb.usePathManagement}" />
 		<property name="policyComponent" ref="policyComponent" />
 		<property name="namespaceService" ref="namespaceService" />
 		<property name="searchService" ref="searchService" />		
 		<property name="schemaCreation" ref="synchronizationSchemaCreator" />
 		<property name="pathService" ref="synchronizationPathService" />
 	</bean>
-	
 	<bean id="pathCustomAction" class="com.bluexml.side.Integration.alfresco.sql.synchronization.pathManagement.PathCustomAction" parent="abstractCreateCustomAction" >
 	</bean>
 	

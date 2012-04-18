@@ -32,7 +32,7 @@ public class PathSynchronizationPolicy implements
 
 		logger.debug("[init] Initializing path synchronization");
 
-		if (schemaCreation.isReady()) {
+		if (schemaCreation.isReady() && usePathManagement) {
 	
 			// Create behaviours
 			this.onCreateNode = new JavaBehaviour(this, "onCreateNode", NotificationFrequency.TRANSACTION_COMMIT);
@@ -81,6 +81,7 @@ public class PathSynchronizationPolicy implements
 	private NamespaceService namespaceService;
 	private SchemaCreation schemaCreation;
 	private PathService pathService;
+	private Boolean usePathManagement = true;
 
 	
 	public void setPolicyComponent(PolicyComponent policyComponent_) {
@@ -103,6 +104,9 @@ public class PathSynchronizationPolicy implements
 		pathService = pathService_;
 	}
 
+	public void setUsePathManagement(Boolean usePathManagement_) {
+		usePathManagement = usePathManagement_;
+	}
 
 
 }

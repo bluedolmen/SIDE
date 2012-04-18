@@ -83,7 +83,7 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 
 			String simplified_type_name = databaseDictionary.resolveClassAsTableName(type_name);
 
-			if (simplified_type_name != null) {
+			if (filterer.acceptQName(nodeType) && simplified_type_name != null) {
 				Map<String, String> properties = new LinkedHashMap<String, String>();
 				// We will only process the properties which are related
 				// to the current type
@@ -164,7 +164,7 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 		//	String type_name = type_qname.getLocalName();
 
 			String simplified_type_name = databaseDictionary.resolveClassAsTableName(type_name);
-			if (simplified_type_name != null) {
+			if (filterer.acceptQName(nodeType) && simplified_type_name != null) {
 				Serializable dbid = getDbId(nodeRef);
 	
 				String sql_query = String.format("DELETE FROM %1$s WHERE id = %2$s", simplified_type_name, dbid);
@@ -190,7 +190,7 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 		//	type_name = type_qname.getLocalName();
 
 			String simplified_type_name = databaseDictionary.resolveClassAsTableName(type_name);
-			if (simplified_type_name != null) {
+			if (filterer.acceptQName(nodeType) && simplified_type_name != null) {
 				Serializable dbid = getDbId(nodeRef);
 	
 				TypeDefinition currentTypeDefinition = dictionaryService.getType(nodeType);
