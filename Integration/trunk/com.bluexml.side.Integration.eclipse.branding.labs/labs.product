@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
-<product name="SIDE Labs" uid="sideProduct" id="com.bluexml.side.Integration.eclipse.branding.labs.product" application="org.eclipse.ui.ide.workbench" version="1.0.753" useFeatures="true" includeLaunchers="true">
+<product name="SIDE Labs" uid="sideProduct" id="com.bluexml.side.Integration.eclipse.branding.labs.product" application="org.eclipse.ui.ide.workbench" version="1.0.754" useFeatures="true" includeLaunchers="true">
   <aboutInfo>
     <image path="icons/about.gif" />
     <text>SIDE by http://www.bluexml.com</text>
@@ -351,7 +351,7 @@
     <feature id="com.bluexml.side.Integration.eclipse.dependencies.feature" version="1.0.1.v30856-20111209" />
     <feature id="org.eclipse.m2e.feature" version="1.0.0.20110607-2117" />
     <feature id="com.bluexml.side.Common.core.labs.feature" version="1.0.367.v34660-20120330" />
-    <feature id="com.bluexml.side.Common.forAlfresco.labs.feature" version="1.0.230.v35142-20120417" />
+    <feature id="com.bluexml.side.Common.forAlfresco.labs.feature" version="1.0.231.v35166-20120418" />
   </features>
   <configurations>
     <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="4" />
