@@ -140,7 +140,6 @@ if (typeof SIDE == "undefined" || !SIDE) {
          var me = this;
          YAHOO.util.Event.addListener(this.widgets.inputFile, "change", function(p_sType, p_aArgs) {
             if (cm_name_field) {
-
                var inputFileValue = me.widgets.inputFile.value;
                var index = inputFileValue.lastIndexOf('/');
                var index2 = inputFileValue.lastIndexOf('\\');
@@ -150,6 +149,8 @@ if (typeof SIDE == "undefined" || !SIDE) {
                } else {
                   cm_name_field.value = inputFileValue;
                }
+               cm_name_field.form.formRuntime.updateSubmitElements();
+
             }
          });
       },
