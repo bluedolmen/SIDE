@@ -19,7 +19,7 @@ public class DefaultDialect implements SynchronizationDialect {
 	private static final String UNSPECIFIED_TYPE_NAME = "UNSPECIFIED";
 	private static final Integer MAX_CHAR_LENGTH = 255;
 
-	private static Map<QName, String> sqlTypeMapping = new HashMap<QName, String>() {
+	protected static Map<QName, String> sqlTypeMapping = new HashMap<QName, String>() {
 
 		{
 			put(DataTypeDefinition.ANY, "BLOB"); 
@@ -42,10 +42,10 @@ public class DefaultDialect implements SynchronizationDialect {
 		QName dataTypeName = dataTypeDefinition.getName();
 		String result = UNSPECIFIED_TYPE_NAME;
 		
-		if (!sqlTypeMapping.containsKey(dataTypeName)) {
+		if (!getSqlTypeMapping().containsKey(dataTypeName)) {
 			logger.error("Do not know how to map type \"" + dataTypeName + "\" to SQL");
 		} else {
-			result = decorateCharType(sqlTypeMapping.get(dataTypeName), getMaxLength(propertyDefinition));
+			result = decorateCharType(getSqlTypeMapping().get(dataTypeName), getMaxLength(propertyDefinition));
 		}
 
 		return result;
@@ -54,10 +54,10 @@ public class DefaultDialect implements SynchronizationDialect {
 	public String getSQLMapping(QName dataTypeName) {
 		String result = "UNSPECIFIED";
 		
-		if (!sqlTypeMapping.containsKey(dataTypeName)) {
+		if (!getSqlTypeMapping().containsKey(dataTypeName)) {
 			logger.error("Do not know how to map type \"" + dataTypeName + "\" to SQL");
 		} else {
-			result = decorateCharType(sqlTypeMapping.get(dataTypeName), getXCharDefaultLength());
+			result = decorateCharType(getSqlTypeMapping().get(dataTypeName), getXCharDefaultLength());
 		}
 
 		return result;
@@ -108,11 +108,19 @@ public class DefaultDialect implements SynchronizationDialect {
 		return "'" + input + "'";
 	}
 
+	public String booleanFormat(String input) {
+		return input;
+	}
+
+
 	public CreateTableStatement.Builder newCreateTableStatementBuilder(String tableName_) {
 		return new CreateTableStatement.Builder(tableName_);
 	}
 
-
+    public Map<QName, String> getSqlTypeMapping () {
+    	return sqlTypeMapping;
+    }
+    		
 
 	
 }

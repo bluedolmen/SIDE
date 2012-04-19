@@ -38,4 +38,9 @@ public interface SynchronizationDialect {
 	 * Used on string values, returning the SQL statement with appropriate quotes
 	 */
 	public String quoteString(String input);
+
+	/*
+	 * Used on boolean values, returning the SQL statement with appropriate format
+	 */
+	public String booleanFormat(String value);
 }

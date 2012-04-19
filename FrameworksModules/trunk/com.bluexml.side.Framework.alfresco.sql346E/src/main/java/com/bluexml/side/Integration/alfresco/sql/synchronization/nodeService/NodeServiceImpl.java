@@ -439,6 +439,9 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 					dataTypeName.equals(DataTypeDefinition.NODE_REF)
 				) {
 				value = synchronizationDialect.quoteString(synchronizationDialect.escape(value));
+			} else if (dataTypeName.equals(DataTypeDefinition.BOOLEAN)) {
+				// database like Oracle does not define boolean and the dialect maps boolean on varchar
+				value = synchronizationDialect.booleanFormat(value);
 			} else if ("".equals(value)) {
 				/*
 				 * not a string quoted value and does not have a value implies a NULL value
