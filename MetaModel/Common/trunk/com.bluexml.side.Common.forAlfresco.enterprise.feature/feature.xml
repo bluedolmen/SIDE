@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.forAlfresco.enterprise.feature" label="SIDE Generators For Alfresco 3.2.0r Enterprise" version="1.0.599.v35166-20120418" provider-name="BlueXML">
+<feature id="com.bluexml.side.Common.forAlfresco.enterprise.feature" label="SIDE Generators For Alfresco 3.2.0r Enterprise" version="1.0.600.v35212-20120419" provider-name="BlueXML">
   <description url="http://www.example.com/description">[Enter Feature Description here.]</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
-  <includes id="com.bluexml.side.Common.forAlfresco34d.sideenterprise.feature" version="1.0.75.v35166-20120418" />
+  <includes id="com.bluexml.side.Common.forAlfresco34d.sideenterprise.feature" version="1.0.76.v35212-20120419" />
   <includes id="com.bluexml.side.Deployer.xforms.feature" version="1.0.37.v28467-20111005" />
   <includes id="com.bluexml.side.Deployer.xformsDirectCopy.feature" version="1.0.30.v28467-20111005" />
   <includes id="com.bluexml.side.Deployer.demoWebApplication.feature" version="1.0.2.v28467-20111005" />
@@ -12,7 +12,7 @@
   <includes id="com.bluexml.side.Common.forAlfresco333E.sideenterprise.feature" version="1.0.18.v31653-20120106" />
   <includes id="com.bluexml.side.Common.forBirtReport.sideenterprise.feature" version="1.0.3.v31653-20120106" />
   <includes id="com.bluexml.side.Common.forFacetMap.sideenterprise.feature" version="1.0.9.v33947-20120315" />
-  <includes id="com.bluexml.side.Common.forAlfresco346E.sideenterprise.feature" version="1.0.54.v35166-20120418" />
+  <includes id="com.bluexml.side.Common.forAlfresco346E.sideenterprise.feature" version="1.0.55.v35212-20120419" />
   <requires>
     <import plugin="org.eclipse.ui" />
     <import plugin="org.eclipse.core.runtime" />
