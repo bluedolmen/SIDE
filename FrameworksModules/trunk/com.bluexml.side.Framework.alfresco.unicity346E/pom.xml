@@ -22,7 +22,7 @@
 		to be able to use Maven snapshots we cannot use the <version/> below as the 
 		AMP module version. Instead we use the buildnumber-maven-plugin. This requires 
 		a scm connection. -->
-  <version>1.0.6</version>
+  <version>1.0.7</version>
   <description>module for manage unicity on side content types (see unicity attribute meta in side)</description>
   <parent>
     <groupId>org.bluexml</groupId>
@@ -138,13 +138,13 @@
     <dependency>
       <groupId>com.bluexml.side.Framework.alfresco</groupId>
       <artifactId>commons346E</artifactId>
-      <version>1.0.5</version>
+      <version>1.0.6</version>
       <type>amp</type>
     </dependency>
     <dependency>
       <groupId>com.bluexml.side.Framework.alfresco</groupId>
       <artifactId>commons346E</artifactId>
-      <version>1.0.5</version>
+      <version>1.0.6</version>
       <classifier>classes</classifier>
       <scope>provided</scope>
     </dependency>
