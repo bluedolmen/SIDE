@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.forAlfresco346E.sideenterprise.feature" label="Generator and Deployer For Alfresco 3.4.6 Enterprise" version="1.0.56.v35237-20120419" provider-name="BLUEXML">
+<feature id="com.bluexml.side.Common.forAlfresco346E.sideenterprise.feature" label="Generator and Deployer For Alfresco 3.4.6 Enterprise" version="1.0.57.v35273-20120420" provider-name="BLUEXML">
   <description url="http://www.example.com/description">[Enter Feature Description here.]</description>
   <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
   <license url="http://www.example.com/license">[Enter License Description here.]</license>
-  <plugin id="com.bluexml.side.Class.generator.alfresco346E" download-size="0" install-size="0" version="1.0.23.v35237-20120419" unpack="false" />
+  <plugin id="com.bluexml.side.Class.generator.alfresco346E" download-size="0" install-size="0" version="1.0.24.v35273-20120420" unpack="false" />
   <plugin id="com.bluexml.side.Deployer.alfrescoDirectCopy346E" download-size="0" install-size="0" version="1.0.2.v32264-20120125" unpack="false" />
-  <plugin id="com.bluexml.side.Form.generator.alfresco.enterprise346E" download-size="0" install-size="0" version="1.0.32.v35212-20120419" unpack="false" />
+  <plugin id="com.bluexml.side.Form.generator.alfresco.enterprise346E" download-size="0" install-size="0" version="1.0.33.v35273-20120420" unpack="false" />
   <plugin id="com.bluexml.side.Form.generator.xforms.chiba346E" download-size="0" install-size="0" version="1.0.1.v31653-20120106" unpack="false" />
-  <plugin id="com.bluexml.side.Portal.generator.alfresco346E" download-size="0" install-size="0" version="1.0.37.v35166-20120418" unpack="false" />
+  <plugin id="com.bluexml.side.Portal.generator.alfresco346E" download-size="0" install-size="0" version="1.0.38.v35273-20120420" unpack="false" />
   <plugin id="com.bluexml.side.View.generator.alfresco346E" download-size="0" install-size="0" version="1.0.1.v31653-20120106" unpack="false" />
   <plugin id="com.bluexml.side.Workflow.generator.alfresco346E" download-size="0" install-size="0" version="1.0.2.v33382-20120301" unpack="false" />
   <plugin id="com.bluexml.side.Deployer.alfresco346E" download-size="0" install-size="0" version="1.0.0" unpack="false" />
