@@ -19,6 +19,8 @@ public abstract class AbstractConfigurationFile<K, V> implements IConfigurationF
 	/** The Dictionary. */
 	protected Map<K, V> dictionary = new HashMap<K, V>();
 
+	Resource[] resources = null;
+	
 	/*
 	 * Helper methods
 	 */
@@ -37,14 +39,18 @@ public abstract class AbstractConfigurationFile<K, V> implements IConfigurationF
 
 	public void setResourcePattern(String resourcePattern) {
 		try {
-			Resource[] resources = resolver.getResources(resourcePattern);
-			for (Resource r : resources) {
-				logger.info("Loading resource " + r.getDescription());
-				loadResource(r);
-			}
+			resources = resolver.getResources(resourcePattern);
+			reloadResource();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("error when traying to load configuration", e);
+		}
+	}
+	
+	protected void reloadResource() throws Exception {
+		dictionary.clear();
+		for (Resource r : resources) {
+			logger.info("Loading resource " + r.getDescription());
+			loadResource(r);
 		}
 	}
 
@@ -59,7 +65,7 @@ public abstract class AbstractConfigurationFile<K, V> implements IConfigurationF
 	 * #getValue(K)
 	 */
 	public V getValue(K key) {
-		return dictionary.get(key);
+		return getDictionary().get(key);
 	}
 
 	/*
@@ -69,7 +75,7 @@ public abstract class AbstractConfigurationFile<K, V> implements IConfigurationF
 	 * #hasValue(K)
 	 */
 	public boolean hasValue(K key) {
-		return dictionary.containsKey(key);
+		return getDictionary().containsKey(key);
 	}
 
 	/*
@@ -79,6 +85,14 @@ public abstract class AbstractConfigurationFile<K, V> implements IConfigurationF
 	 * #getDictionary()
 	 */
 	public Map<K, V> getDictionary() {
+		if (logger.isDebugEnabled()) {
+			// dynamic reload so configuration can be reloaded, to work the resource path need to be an URL or local file path
+			try {
+				reloadResource();
+			} catch (Exception e) {
+				logger.error("error when traying to reload configuration", e);
+			}
+		}
 		return Collections.unmodifiableMap(dictionary);
 	}
 

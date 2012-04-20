@@ -36,8 +36,8 @@
     </bean>
     
     <bean id="typeFormProcessor" 
-          class="com.bluexml.side.framework.alfresco.formProcessor.CustomTypeFormProcessor" 
-          parent="filteredFormProcessor">
+          class="com.bluexml.side.framework.alfresco.formProcessor.CustomTypeFormProcessor"
+           parent="filteredFormProcessor" init-method="init"> 
         <property name="filterRegistry" ref="typeFilterRegistry" />
         <property name="nodeService" ref="NodeService" />
         <property name="fileFolderService" ref="FileFolderService" />
@@ -47,6 +47,13 @@
         <property name="matchPattern">
             <value>type</value>
         </property>
+        <property name="config" ref="customFormProcessorConfig" />
     </bean>
     
+    <!--  Association synchronization -->
+	<bean id="customFormProcessorConfig" class="com.bluexml.side.framework.alfresco.commons.configurations.SimplePropertiesConfiguration" >
+		<property name="resourcePattern" value="classpath*:${config.target.path}/configuration.properties" />
+		<!-- use file: prefix to enable dynamic reload -->
+<!-- 		<property name="resourcePattern" value="file:/..." /> -->
+	</bean>
 </beans>

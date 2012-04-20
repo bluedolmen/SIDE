@@ -165,7 +165,7 @@ if (console == undefined) {
                mode : "add",
                values : [ response.nodeRef ]
             });
-         } else if (me.options.formconfig.mode == "edit") {
+         } else if (this.options.formconfig.mode == "edit") {
 
             YAHOO.Bubbling.fire("/side-labs/onCreateNewItem/" + this.currentValueHtmlId, {
                mode : "keep",

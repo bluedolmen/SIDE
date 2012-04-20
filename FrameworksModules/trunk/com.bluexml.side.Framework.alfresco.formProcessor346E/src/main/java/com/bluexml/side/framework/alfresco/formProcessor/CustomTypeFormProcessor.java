@@ -19,6 +19,7 @@ import org.alfresco.repo.forms.processor.node.FormFieldConstants;
 import org.alfresco.repo.forms.processor.node.TypeFormProcessor;
 import org.alfresco.service.cmr.dictionary.TypeDefinition;
 import org.alfresco.service.cmr.repository.ContentWriter;
+import org.alfresco.service.cmr.repository.DuplicateChildNodeNameException;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.StoreRef;
 import org.alfresco.service.cmr.search.ResultSet;
@@ -31,8 +32,16 @@ import org.alfresco.util.ISO9075;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.bluexml.side.framework.alfresco.commons.configurations.SimplePropertiesConfiguration;
+
 public class CustomTypeFormProcessor extends TypeFormProcessor {
 	private static Log logger = LogFactory.getLog(CustomTypeFormProcessor.class);
+
+	protected String CREATE_BEHAVIOR_KEY = "formprocessor.creationbehavior";
+
+	CREATE_BEHAVIORS creationbehavior = CREATE_BEHAVIORS.FAIL;
+
+	SimplePropertiesConfiguration config;
 
 	SearchService searchService;
 
@@ -44,11 +53,32 @@ public class CustomTypeFormProcessor extends TypeFormProcessor {
 		this.searchService = searchService;
 	}
 
+	public SimplePropertiesConfiguration getConfig() {
+		return config;
+	}
+
+	public void setConfig(SimplePropertiesConfiguration config) {
+		this.config = config;
+	}
+
 	public CustomTypeFormProcessor() {
 		propertyNamePattern = Pattern.compile(FormFieldConstants.PROP_DATA_PREFIX + "([^_]*){1}?_(.*){1}?");
 		transientPropertyPattern = Pattern.compile(FormFieldConstants.PROP_DATA_PREFIX + "([^_]*){1}?");
 		associationNamePattern = Pattern.compile(FormFieldConstants.ASSOC_DATA_PREFIX + "([^_]*){1}?_(.*){1}?(_[a-zA-Z]+)");
 		logger.info("[X] Custom Type Processor loaded ...[X]");
+	}
+
+	public void init() {
+		this.register();
+		String value = config.getValue(CREATE_BEHAVIOR_KEY);
+		
+		if (value != null) {
+			creationbehavior = CREATE_BEHAVIORS.valueOf(value);
+			logger.info("create file behavior : " + creationbehavior);
+		} else {
+			logger.info("create file using default behavior (no configuration founded) : " + creationbehavior);
+		}
+		
 	}
 
 	@Override
@@ -164,6 +194,12 @@ public class CustomTypeFormProcessor extends TypeFormProcessor {
 	 * @return NodeRef representing the newly created node
 	 */
 	protected NodeRef createNode(TypeDefinition typeDef, FormData data) {
+		if (logger.isDebugEnabled()) {
+			String value = config.getValue(CREATE_BEHAVIOR_KEY);
+			if (value != null) {
+				creationbehavior = CREATE_BEHAVIORS.valueOf(value);
+			}
+		}
 		NodeRef nodeRef = null;
 
 		if (data != null) {
@@ -240,12 +276,46 @@ public class CustomTypeFormProcessor extends TypeFormProcessor {
 				logger.debug("nodeName found in FormData :" + nodeName);
 			}
 
-			// create the node
-			Map<QName, Serializable> nodeProps = new HashMap<QName, Serializable>(1);
-			nodeProps.put(ContentModel.PROP_NAME, nodeName);
-			nodeRef = this.nodeService.createNode(parentRef, ContentModel.ASSOC_CONTAINS, QName.createQName(NamespaceService.CONTENT_MODEL_1_0_URI, QName.createValidLocalName(nodeName)), typeDef.getName(), nodeProps).getChildRef();
+			// test if file Exists
+			NodeRef searchSimple = this.fileFolderService.searchSimple(parentRef, nodeName);
+			if (searchSimple != null) {
+				logger.debug("File exists continu with behavior :" + this.creationbehavior);
+				if (this.creationbehavior.equals(CREATE_BEHAVIORS.FAIL)) {
+					// throw exception
+					throw new DuplicateChildNodeNameException(parentRef, ContentModel.ASSOC_CONTAINS, nodeName, null);
+				} else if (this.creationbehavior.equals(CREATE_BEHAVIORS.INCREMENT_NAME)) {
+					// generate another name by adding counter
+					int c = 1;
+					String nodeName2 = null;
+					while (searchSimple != null) {
+						nodeName2 = nodeName.substring(0, nodeName.lastIndexOf(".")) + "_" + c + nodeName.substring(nodeName.lastIndexOf("."));
+						searchSimple = this.fileFolderService.searchSimple(parentRef, nodeName2);
+						c++;
+					}
+					nodeRef = createNode(typeDef, parentRef, nodeName2);
+				} else if (this.creationbehavior.equals(CREATE_BEHAVIORS.OVERRIDE)) {
+					// update existing node
+					nodeRef = searchSimple;
+				}
+			} else {
+				nodeRef = createNode(typeDef, parentRef, nodeName);
+			}
+
 		}
 
 		return nodeRef;
+	}
+
+	protected NodeRef createNode(TypeDefinition typeDef, NodeRef parentRef, String nodeName) {
+		NodeRef nodeRef;
+		// create the node
+		Map<QName, Serializable> nodeProps = new HashMap<QName, Serializable>(1);
+		nodeProps.put(ContentModel.PROP_NAME, nodeName);
+		nodeRef = this.nodeService.createNode(parentRef, ContentModel.ASSOC_CONTAINS, QName.createQName(NamespaceService.CONTENT_MODEL_1_0_URI, QName.createValidLocalName(nodeName)), typeDef.getName(), nodeProps).getChildRef();
+		return nodeRef;
+	}
+
+	public enum CREATE_BEHAVIORS {
+		INCREMENT_NAME, OVERRIDE, FAIL
 	}
 }

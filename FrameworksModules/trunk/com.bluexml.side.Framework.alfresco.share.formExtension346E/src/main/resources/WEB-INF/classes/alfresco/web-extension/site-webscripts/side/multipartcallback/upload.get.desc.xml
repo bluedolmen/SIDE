@@ -5,7 +5,4 @@
    ]]>
   </description>
   <url>/side/api/multipartcallback?nodeRef={nodeRef}&amp;successCallback={successCallback}&amp;successScope={successScope}</url>
-  <format default="html"/>
-  <authentication>user</authentication>
-  <transaction>required</transaction>
 </webscript>
