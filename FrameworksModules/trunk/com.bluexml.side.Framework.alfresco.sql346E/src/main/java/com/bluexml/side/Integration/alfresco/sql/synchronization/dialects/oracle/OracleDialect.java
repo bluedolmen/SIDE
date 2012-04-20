@@ -10,7 +10,9 @@ import com.bluexml.side.Integration.alfresco.sql.synchronization.dialects.Defaul
 
 @SuppressWarnings("serial")
 public class OracleDialect extends DefaultDialect {
-	
+
+	private static final Integer ORACLE_MAX_CHAR_LENGTH = 2048;
+
 	private static Map<QName, String> oracleSqlTypeMapping = new HashMap<QName, String>() {
 		{
 			put(DataTypeDefinition.ANY, "BLOB"); 
@@ -37,5 +39,8 @@ public class OracleDialect extends DefaultDialect {
 		return "'" + input + "'";
 	}
 
+	public Integer getXCharDefaultLength() {
+		return ORACLE_MAX_CHAR_LENGTH;
+	}
 	
 }
