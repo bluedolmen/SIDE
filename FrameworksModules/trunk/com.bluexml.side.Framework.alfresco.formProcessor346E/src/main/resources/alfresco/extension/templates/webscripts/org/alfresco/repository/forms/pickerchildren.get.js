@@ -2,8 +2,21 @@
 <import resource="classpath:/alfresco/extension/templates/webscripts/org/alfresco/repository/forms/treenode.lib.js">
 
 function main() {
-   var argsFilterType = args['filterType'], argsSelectableType = args['selectableType'], argsSite = args['site'], argsSelectableTypeIsAspect = args['selectableTypeIsAspect'], argsSearchTerm = args['searchTerm'], argsAdvancedQuery = args['advancedQuery'], argsMaxResults = args['size'], argsXPath = args['xpath'], pathElements = url.service
-         .split("/"), parent = null, rootNode = companyhome, results = [], categoryResults = null, resultObj = null, lastPathElement = null;
+   var argsFilterType = args['filterType'],
+   argsSelectableType = args['selectableType'],
+   argsSite = args['site'],
+   argsSelectableTypeIsAspect = args['selectableTypeIsAspect'],
+   argsSearchTerm = args['searchTerm'],
+   argsAdvancedQuery = args['advancedQuery'],
+   argsMaxResults = args['size'],
+   argsXPath = args['xpath'],
+   pathElements = url.service.split("/"),
+   parent = null,
+   rootNode = companyhome,
+   results = [],
+   categoryResults = null,
+   resultObj = null,
+   lastPathElement = null;
 
    if (logger.isLoggingEnabled()) {
       logger.log("children type = " + url.templateArgs.type);
@@ -64,7 +77,7 @@ function main() {
          var nodeRef = url.templateArgs.store_type + "://" + url.templateArgs.store_id + "/" + url.templateArgs.id;
          // determine if we need to resolve the parent NodeRef
 
-         if (argsXPath != null && argsXPath.match("[,\{]") == null) {
+         if (argsXPath != null && argsXPath.match("[,\{]") == null && argsXPath.indexOf("://") == -1) {
             // resolve the provided XPath to a NodeRef
             var nodes = search.xpathSearch(argsXPath);
             if (nodes.length > 0) {

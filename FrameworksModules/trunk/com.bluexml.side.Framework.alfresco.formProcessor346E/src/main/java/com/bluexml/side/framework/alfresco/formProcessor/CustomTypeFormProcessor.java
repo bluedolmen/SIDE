@@ -71,14 +71,14 @@ public class CustomTypeFormProcessor extends TypeFormProcessor {
 	public void init() {
 		this.register();
 		String value = config.getValue(CREATE_BEHAVIOR_KEY);
-		
+
 		if (value != null) {
 			creationbehavior = CREATE_BEHAVIORS.valueOf(value);
 			logger.info("create file behavior : " + creationbehavior);
 		} else {
 			logger.info("create file using default behavior (no configuration founded) : " + creationbehavior);
 		}
-		
+
 	}
 
 	@Override
@@ -257,6 +257,7 @@ public class CustomTypeFormProcessor extends TypeFormProcessor {
 			// if a name property is present in the form data use it as the node
 			// name,
 			// otherwise generate a guid
+
 			String nodeName = null;
 			FieldData nameData = data.getFieldData(NAME_PROP_DATA);
 			if (nameData != null) {
@@ -266,11 +267,29 @@ public class CustomTypeFormProcessor extends TypeFormProcessor {
 				// persistNode
 				data.removeFieldData(NAME_PROP_DATA);
 			}
+
 			if (nodeName == null || nodeName.length() == 0) {
-				nodeName = GUID.generate();
+				// no name found in fieldData, so search for a FileField
 				if (data instanceof CustomFormData) {
-					((CustomFormData) data).setFileNameIsGenerated(true);
-					logger.debug("nodeName is generated :" + nodeName);
+					// search for file name in fields
+					for (FieldData fieldData : data) {
+						if (fieldData.isFile() == true && fieldData instanceof CustomFormData.FieldData) {
+							CustomFormData.FieldData cfd = (CustomFormData.FieldData) fieldData;
+							String fileName = cfd.getFileName();
+							// add fieldData to put fileName into cm:name properties
+							nodeName = fileName;
+							logger.debug("nodeName found in fieldData :" + nodeName);
+							break;
+						}
+					}
+					// no file field so generate a GUID
+					if (nodeName == null) {
+						nodeName = GUID.generate();
+						if (data instanceof CustomFormData) {
+							((CustomFormData) data).setFileNameIsGenerated(true);
+							logger.debug("nodeName is generated :" + nodeName);
+						}
+					}
 				}
 			} else {
 				logger.debug("nodeName found in FormData :" + nodeName);
