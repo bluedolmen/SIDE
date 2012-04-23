@@ -94,7 +94,6 @@ if (console == undefined) {
        *           {object} Object passed back from addListener method
        */
       onNewItem : function DLTB_onNewFolder(e, p_obj) {
-         var destination = this.options.destination;
 
          // Intercept before dialog show
          var doBeforeDialogShow = function DLTB_onNewFolder_doBeforeDialogShow(p_form, p_dialog) {

@@ -3,6 +3,7 @@
 	disabled : false,
 	formconfig : {
 		itemKind : "type",
+		parentId : "<#if args.itemId??>${args.itemId}</#if>",
 		itemId : "<#if field.control.params.itemType??>${field.control.params.itemType}<#else>${field.endpointType}</#if>",
 		destination : "<#if field.control.params.targetDestination??>${field.control.params.targetDestination}<#else>/app:company_home</#if>",
 		mode : "create",
