@@ -8,7 +8,7 @@
 {	
 	new SIDE.DateRangeWidget("${controlId}", "${fieldHtmlId}").setOptions(
    	{	
-		currentValue: "${field.value?js_string}",
+		currentValue: "${field.control.params.value!""?js_string}",
         mandatory: ${field.mandatory?string}
         <#if field.control.params.mandatoryDay??>, mandatoryDay :${field.control.params.mandatoryDay}</#if>
         <#if field.control.params.mandatoryMonth??>, mandatoryMonth :${field.control.params.mandatoryMonth}</#if>

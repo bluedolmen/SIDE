@@ -239,8 +239,11 @@ if (console == undefined) {
                "milliseconds" : true
             });
          }
-
-         Dom.get(context.currentValueHtmlId).value = isoValueMin + "|" + isoValueMax;
+         var hidenValue = "";
+         if (isoValueMin != "" || isoValueMax != "") {
+            hidenValue = isoValueMin + "|" + isoValueMax;
+         }
+         Dom.get(context.currentValueHtmlId).value = hidenValue;
 
          YAHOO.Bubbling.fire("/side-labs/onDateSelectListChanged/" + this.currentValueHtmlId, context);
       },
@@ -254,8 +257,18 @@ if (console == undefined) {
          if (hasCurrentValue) {
             var dateMin = this.options.currentValue.split('|')[0];
             var dateMax = this.options.currentValue.split('|')[1];
-            currentDateMin = Alfresco.util.fromISO8601(dateMin);
-            currentDateMax = Alfresco.util.fromISO8601(dateMax);
+            if (dateMin != "-") {
+               currentDateMin = Alfresco.util.fromISO8601(dateMin);
+            } else {
+               currentDateMin = dateMin;
+            }
+
+            if (dateMax != "-") {
+               currentDateMax = Alfresco.util.fromISO8601(dateMax);
+            } else {
+               currentDateMax = dateMax;
+            }
+
          } else {
             currentDateMin = this._getDefaultDate(this.options.minDate);
             currentDateMax = new Date();
@@ -270,7 +283,7 @@ if (console == undefined) {
       /**
        * @method setValue
        * @param date :
-       *           js ISO8601 date string
+       *           dateMin|dateMax js ISO8601 date string
        */
       setValue : function DatePicker_setValue(date) {
          var parsedDateMin = null;
@@ -291,9 +304,15 @@ if (console == undefined) {
        *           js Date Object
        */
       _selectValues : function DatePicker__selectValues(date, rangeId) {
-         var day = date.getDate();
-         var month = date.getMonth() + 1;
-         var year = date.getFullYear();
+         var day = "-";
+         var month = "-";
+         var year = "-";
+         if (date != "-") {
+            day = date.getDate();
+            month = date.getMonth() + 1;
+            year = date.getFullYear();
+         }
+
          if (rangeId == "min") {
             this._selectValueFor(this.widgets.dayMin, day);
             this._selectValueFor(this.widgets.monthMin, month);
