@@ -134,6 +134,7 @@ if (!Array.prototype.indexOf) {
       setMessages : function(messages) {
          SIDE.ComboBox.superclass.setMessages.call(this, messages);
          this.widgets.createNew.setMessages(messages);
+         this.messages = messages;
       },
       createAddNewControl : function CT_createControl() {
          // insert button
@@ -141,7 +142,7 @@ if (!Array.prototype.indexOf) {
          var addButtonEl = document.createElement("button");
          itemGroupActionsContainerEl.appendChild(addButtonEl);
          this.widgets.addButton = Alfresco.util.createYUIButton(this, null, this.onAddButtonClick, {
-            label : this.options.selectActionLabel ? this.options.selectActionLabel : "add",
+            label : this.options.selectActionLabel ? this.options.selectActionLabel : this.msg("form.control.object-picker.add-item"),
             disabled : false
          }, addButtonEl);
       },
@@ -175,6 +176,7 @@ if (!Array.prototype.indexOf) {
                currentValueHtmlId : this.currentValueHtmlId,
                editConfig : this.options.editConfig
             }, this.initialValue);
+            multiselect.setMessages(this.messages);
             var me = this;
             multiselect.updatedEvt.subscribe(function(e, params) {
                var values = params[0];
@@ -272,7 +274,7 @@ if (!Array.prototype.indexOf) {
                if (me.options.mandatory) {
                   YAHOO.Bubbling.fire("mandatoryControlValueUpdated", me);
                }
-            });
+            });            
             return DSSelectWidget;
          }
 
@@ -287,6 +289,7 @@ if (!Array.prototype.indexOf) {
          this.DSSelectWidget = this.load();
          if (this.options.hideSelector && !this.options.disabled) {
             this.DSSelectWidget.el.disabled = true;
+            this.DSSelectWidget.el.style.display = "none";
          }
 
          YAHOO.Bubbling.fire("/side-labs/onLoaded/" + this.currentValueHtmlId, this);

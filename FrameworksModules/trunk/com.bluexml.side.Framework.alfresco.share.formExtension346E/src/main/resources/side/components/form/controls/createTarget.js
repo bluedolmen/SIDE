@@ -55,26 +55,26 @@ if (console == undefined) {
             formId : "" /* the formId to use */
          }
       },
-      
+
       computeRedirectUrl : function CreateTarget__computeRedirectUrl() {
          var scope = "window.parent.Alfresco.util.ComponentManager.get('" + this.id + "')";
          var successCallback = scope + ".onSuccess";
-         
+
          var failureCallback = scope + ".onFailure";
-         
+
          var params = {
             successCallback : successCallback,
             successScope : scope,
             failureCallback : failureCallback,
             failureScope : scope
-         }         
-         
+         }
+
          var url = Alfresco.constants.URL_SERVICECONTEXT + "side/api/multipartcallback?";
          url += "params=" + lang.JSON.stringify(params);
-         
+
          return url;
       },
-      
+
       /**
        * Fired by YUI when parent element is available for scripting
        * 
@@ -106,7 +106,7 @@ if (console == undefined) {
          var templateUrl = Alfresco.constants.URL_SERVICECONTEXT
                + "components/form?itemKind={itemKind}&itemId={itemId}&destination={destination}&mode={mode}&submitType={submitType}&formId={formId}&showCancelButton={showCancelButton}";
          templateUrl += "&redirect=" + this.computeRedirectUrl();
-         
+
          templateUrl = YAHOO.lang.substitute(templateUrl, this.options.formconfig);
 
          templateUrl = YAHOO.lang.substitute(templateUrl, {
@@ -127,7 +127,7 @@ if (console == undefined) {
             },
             doBeforeFormSubmit : {
                fn : this.doBeforeSubmit,
-               obj: null,
+               obj : null,
                scope : this
             },
             onSuccess : {
@@ -143,7 +143,7 @@ if (console == undefined) {
 
       doBeforeSubmit : function DLTB_onBeforeSubmit(ob) {
          this.widgets.feedbackMessage = Alfresco.util.PopupManager.displayMessage({
-            text : Alfresco.util.message("message.uploading", this.name),
+            text : Alfresco.util.message("form.control.upload.uploading", this.name),
             spanClass : "wait",
             displayTime : 0
          });
@@ -154,12 +154,12 @@ if (console == undefined) {
       onSuccess : function DLTB_onNewFolder_success(response) {
          this.widgets.feedbackMessage.destroy();
          this.widgets.createFolder.hide();
-         
+         var label = this.options.formconfig.mode == "create" ? this.options.formconfig.mode + "-new" : this.options.formconfig.mode;
          Alfresco.util.PopupManager.displayMessage({
-            text : this.msg("message." + this.options.formconfig.mode + ".success", "")
+            text : this.msg("form.control.object-picker." + label + ".success", "")
          });
-         
-         if (this.options.formconfig.mode == "create") {            
+
+         if (this.options.formconfig.mode == "create") {
             YAHOO.Bubbling.fire("/side-labs/onCreateNewItem/" + this.currentValueHtmlId, {
                mode : "add",
                values : [ response.nodeRef ]
@@ -170,14 +170,15 @@ if (console == undefined) {
                mode : "keep",
                values : []
             });
-         }         
+         }
       },
 
       onFailure : function DLTB_onNewFolder_failure(response) {
          this.widgets.feedbackMessage.destroy();
          this.widgets.createFolder.hide();
+         var label = this.options.formconfig.mode == "create" ? this.options.formconfig.mode + "-new" : this.options.formconfig.mode;
          Alfresco.util.PopupManager.displayMessage({
-            text : this.msg("message." + this.options.formconfig.mode + ".failure", response.message)
+            text : this.msg("form.control.object-picker." + label + ".failure", response.message)
          });
       }
    });

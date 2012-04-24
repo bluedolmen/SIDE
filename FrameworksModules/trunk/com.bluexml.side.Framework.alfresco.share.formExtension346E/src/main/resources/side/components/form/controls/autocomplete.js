@@ -155,7 +155,7 @@ if (!Array.prototype.indexOf) {
 				var mymultiautocomplete = inputEx({
 					name : "-",
 					type : "mymultiautocomplete",
-					typeInvite : "enter target name",
+					typeInvite : this.msg("form.control.association.message.instructions"),
 					parentEl : this.htmlid,
 					datasource : myDataSource,
 
@@ -229,7 +229,7 @@ if (!Array.prototype.indexOf) {
 					type : "myautocomplete",
 					parentEl : this.htmlid,
 					datasource : myDataSource,
-					typeInvite : "enter target name",
+					typeInvite : this.msg("form.control.association.message.instructions"),
 					// Format the hidden value (value returned by the form)
 					returnValue : function(oResultItem) {
 						return oResultItem[0];
