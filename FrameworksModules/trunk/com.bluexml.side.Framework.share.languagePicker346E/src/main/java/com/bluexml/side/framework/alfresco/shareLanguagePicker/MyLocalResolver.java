@@ -22,6 +22,7 @@ public class MyLocalResolver implements LocaleResolver, ApplicationContextAware 
 
 	static {
 		logger.debug("MyLocalResolver Class Loaded");
+		// TODO : need to patch org.springframework.extensions.webscripts.servlet.mvc.WebScriptView too
 	}
 
 	public Locale resolveLocale(HttpServletRequest request) {
@@ -44,9 +45,8 @@ public class MyLocalResolver implements LocaleResolver, ApplicationContextAware 
 			l = Locale.getDefault();
 			logger.warn("[resolveLocale] back to default (local is null)= " + l);
 		}
-		session.setAttribute(LanguageSetter.SHARE_LANG, l.getLanguage());
 
-		I18NUtil.setLocale(l);
+		setLocale(request, null, l);
 
 		return l;
 	}
@@ -54,6 +54,7 @@ public class MyLocalResolver implements LocaleResolver, ApplicationContextAware 
 	public void setLocale(HttpServletRequest request, HttpServletResponse response, Locale locale) {
 		logger.debug("setLocale " + locale.getLanguage());
 		request.getSession().setAttribute(LanguageSetter.SHARE_LANG, locale.getLanguage());
+		I18NUtil.setLocale(locale);
 	}
 
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {

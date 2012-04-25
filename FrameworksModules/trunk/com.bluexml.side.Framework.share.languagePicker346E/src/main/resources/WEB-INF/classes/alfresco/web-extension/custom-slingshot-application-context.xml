@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+<beans>
+
+	<!-- Override WebScript View Resolver - authenticated for admin webscripts 
+		via alfresco-feed connector -->
+	<bean id="webscriptViewResolver"
+		class="com.bluexml.side.framework.alfresco.shareLanguagePicker.CustomWebscriptViewResolver">
+		<property name="container" ref="webscripts.container" />
+		<property name="localeResolver" ref="localeResolver" />
+		<property name="authenticatorFactory" ref="webscripts.authenticator.basic" />
+	</bean>
+</beans>
