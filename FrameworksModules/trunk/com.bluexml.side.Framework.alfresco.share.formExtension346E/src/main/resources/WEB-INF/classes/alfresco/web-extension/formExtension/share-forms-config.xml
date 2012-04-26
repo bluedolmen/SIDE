@@ -16,6 +16,7 @@
 
 				<css src="/side/components/form/controls/selectbox.css" />
 				<css src="/side/components/form/controls/autocomplete.css" />
+				<css src="/side/components/form/presentation.css" />
 
 				<js src="/yui/tabview/tabview-min.js" />
 				<js src="/yui/animation/animation-min.js" />
