@@ -67,10 +67,7 @@ public class DragAndDropFormElementCommand extends DragAndDropCommand {
 			logCanExecute("o", o);
 			// If we move a field we must check :
 			if (o instanceof Field){
-				if (owner instanceof FormContainer) {
-					isExecutable &= false;
-					logCanExecute("owner instanceof FormContainer");
-				} else {
+				 {
 					Field f = (Field) o;
 					// Is it a move to the same FormClass? Move to same FormContainer is
 					// authorized
@@ -162,7 +159,7 @@ public class DragAndDropFormElementCommand extends DragAndDropCommand {
 		// We will check if the drag & drop use a reference with max cardinality equals to -1
 		boolean doWork = true;
 		if (fcTarget != fcOrigin) {
-			List<Reference> listRef = FormDiagramUtils.getReferenceBetween((FormClass)fcOrigin, (FormClass)fcTarget);
+			List<Reference> listRef = FormDiagramUtils.getReferenceBetween((FormContainer)fcOrigin, (FormContainer)fcTarget);
 			// We seek if there is a reference with a >1 max cardinality
 			for(Reference ref : listRef) {
 				if (ref.getMax_bound() == -1) {

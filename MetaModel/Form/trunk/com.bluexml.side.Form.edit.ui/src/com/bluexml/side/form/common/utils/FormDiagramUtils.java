@@ -82,7 +82,7 @@ public class FormDiagramUtils {
 		return fc;
 	}
 
-	private static List<FormClass> visited;
+	private static List<FormContainer> visited;
 	private static List<Reference> path;
 
 	/**
@@ -92,8 +92,8 @@ public class FormDiagramUtils {
 	 * @param t
 	 * @return
 	 */
-	public static boolean haveReferenceTo(FormClass o, FormGroup t) {
-		visited = new ArrayList<FormClass>();
+	public static boolean haveReferenceTo(FormContainer o, FormGroup t) {
+		visited = new ArrayList<FormContainer>();
 		path = new ArrayList<Reference>();
 		boolean referenceBetween = haveReferenceBetween(o, t);
 		return referenceBetween;
@@ -106,7 +106,7 @@ public class FormDiagramUtils {
 	 * @param t
 	 * @return
 	 */
-	private static boolean haveReferenceBetween(FormClass o, FormGroup t) {
+	private static boolean haveReferenceBetween(FormContainer o, FormGroup t) {
 		boolean haveReference = false;
 
 		if (!visited.contains(o)) {
@@ -130,7 +130,7 @@ public class FormDiagramUtils {
 							}
 						}
 					} else if (fe instanceof FormGroup
-							&& !(fe instanceof FormClass)) {
+							&& !(fe instanceof FormContainer)) {
 						haveReference = haveReferenceTo(o, (FormGroup) fe);
 					}
 				}
@@ -140,13 +140,13 @@ public class FormDiagramUtils {
 	}
 
 	/**
-	 * Return the list of reference between a FormClass and a FormGroup
+	 * Return the list of reference between a FormContainer and a FormGroup
 	 * 
 	 * @param o
 	 * @param t
 	 * @return
 	 */
-	public static List<Reference> getReferenceBetween(FormClass o, FormGroup t) {
+	public static List<Reference> getReferenceBetween(FormContainer o, FormGroup t) {
 		if (path == null || path.size() == 0) {
 			haveReferenceTo(o, t);
 		}
