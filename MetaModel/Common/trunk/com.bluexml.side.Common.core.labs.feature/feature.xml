@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.core.labs.feature" label="SIDE Core Components" version="1.0.367.v34660-20120330" provider-name="blueXML">
+<feature id="com.bluexml.side.Common.core.labs.feature" label="SIDE Core Components" version="1.0.368.v35494-20120427" provider-name="blueXML">
   <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized
 frameworks like Alfresco. This feature gathers common tools for
 SIDE modelers.</description>
@@ -628,7 +628,7 @@ copy of the Program in return for a fee.
   <includes id="com.bluexml.side.Application.feature" version="1.0.184.v32264-20120125" />
   <includes id="com.bluexml.side.Class.modeler.feature" version="1.0.151.v34322-20120323" />
   <includes id="com.bluexml.side.Common.feature" version="1.0.52.v34660-20120330" />
-  <includes id="com.bluexml.side.Form.feature" version="1.0.160.v33565-20120307" />
+  <includes id="com.bluexml.side.Form.feature" version="1.0.161.v35494-20120427" />
   <includes id="com.bluexml.side.Portal.modeler.feature" version="1.0.66.v34660-20120330" />
   <includes id="com.bluexml.side.Requirements.feature" version="1.0.120.v31653-20120106" />
   <includes id="com.bluexml.side.View.feature" version="1.0.88.v33565-20120307" />
