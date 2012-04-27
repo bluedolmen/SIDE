@@ -45,7 +45,7 @@ public class MyLocalResolver implements LocaleResolver, ApplicationContextAware 
 			l = Locale.getDefault();
 			logger.warn("[resolveLocale] back to default (local is null)= " + l);
 		}
-
+		
 		setLocale(request, null, l);
 
 		return l;

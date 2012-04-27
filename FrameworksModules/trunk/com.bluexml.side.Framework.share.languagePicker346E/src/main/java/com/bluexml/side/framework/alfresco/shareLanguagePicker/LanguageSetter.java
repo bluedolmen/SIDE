@@ -1,5 +1,6 @@
 package com.bluexml.side.framework.alfresco.shareLanguagePicker;
 
+import java.util.Locale;
 import java.util.StringTokenizer;
 
 import javax.servlet.ServletException;
@@ -67,14 +68,14 @@ public class LanguageSetter {
 					throw new ServletException(e);
 				}
 				if (language == null) {
-					// language not yet set so sue default from browser
+					// language not yet set so use default from browser
 					language = getLanguageFromBrowser(req);
 					logger.debug("Use language from browser :" + language);
 				}
 				currentSession.setAttribute(userSessionok, true);
 			}
 		} else {
-			// language not yet set so sue default from browser
+			// language not yet set so use default from browser
 			language = getLanguageFromBrowser(req);
 			logger.debug("no user or Guest, use language from browser :" + language);
 		}
@@ -91,6 +92,8 @@ public class LanguageSetter {
 			StringTokenizer t = new StringTokenizer(acceptLang, ",; ");
 			// get language and convert to java locale format
 			language = t.nextToken().replace('-', '_');
+		} else {
+			language = Locale.ENGLISH.getLanguage();
 		}
 		return language;
 	}
