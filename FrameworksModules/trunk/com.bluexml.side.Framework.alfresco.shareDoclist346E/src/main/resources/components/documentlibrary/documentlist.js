@@ -1687,7 +1687,7 @@
 							// update button label
 							var button_id = p_obj.id + "-sort-button-button";
 							var button = document.getElementById(button_id);
-							var label = button.innerHTML.replace(/:.*/, '') + ":&nbsp;" + aArgs[0].explicitOriginalTarget.textContent;
+							var label = button.innerHTML.replace(/:.*/, '') + ":&nbsp;" + aArgs[0].explicitOriginalTarget.textContent + "&nbsp;"+ (newSorting.ascendant ? "&uarr;" : "&darr;");
 							button.innerHTML = label;
 
 							this._updateDocList.call(this, {
