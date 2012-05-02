@@ -169,7 +169,7 @@ wfbx<%ref.eContainer().filter("workflow.Process").name%>:<%ref.filter("workflow.
 <field id="bpm:taskId" set="info">
 	<control template="/org/alfresco/components/form/controls/info.ftl" />
 </field>
-<field id="bpm:priority" set="info" read-only="true">
+<field id="bpm:priority" set="info">
 	<control template="/org/alfresco/components/form/controls/workflow/priority.ftl" />
 </field>
 <field id="bpm:dueDate" set="info" label-id="workflow.field.due">
