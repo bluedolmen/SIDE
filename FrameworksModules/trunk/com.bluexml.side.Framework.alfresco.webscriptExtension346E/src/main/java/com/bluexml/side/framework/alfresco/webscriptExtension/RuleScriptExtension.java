@@ -2,6 +2,7 @@ package com.bluexml.side.framework.alfresco.webscriptExtension;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.alfresco.model.ContentModel;
@@ -171,6 +172,12 @@ public class RuleScriptExtension extends BaseScopableProcessorExtension {
 		compositeAction.addAction(action);
 
 		// save the rule on the node
+		List<Rule> myRules = this.getRuleService().getRules(targetSpace.getNodeRef(), false);
+		for (Rule ruleTest : myRules) {
+			if (ruleTest.getTitle().equals(title)) {
+				this.getRuleService().removeRule(targetSpace.getNodeRef(), ruleTest);
+			}
+		}
 		this.getRuleService().saveRule(targetSpace.getNodeRef(), rule);
 	}
 
