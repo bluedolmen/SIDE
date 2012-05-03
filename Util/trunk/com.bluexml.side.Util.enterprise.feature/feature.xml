@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Util.enterprise.feature" label="SIDE Enterprise Modeler Generator Deployer MDA Utilities" version="1.0.16.v31653-20120106" provider-name="BlueXML">
+<feature id="com.bluexml.side.Util.enterprise.feature" label="SIDE Enterprise Modeler Generator Deployer MDA Utilities" version="1.0.17.v35624-20120503" provider-name="BlueXML">
   <description url="http://www.side-labs.com">SIDE lets developers who are new to Alfresco get started quickly and helps experienced developers get the job done even faster.</description>
-  <license url="http://www.side-labs.com/en/index.php/Product:License"> SIDE SOFTWARE IS LICENSED BY BLUEXML. PLEASE GO TO http://www.side-labs.com/en/index.php/Product:License. READ THIS AGREEMENT CAREFULLY BEFORE PURCHASING AND/OR USING SIDE SOFTWARE.    </license>
+  <license url="http://www.side-labs.com/en/index.php/Product:License">SIDE SOFTWARE IS LICENSED BY BLUEXML. PLEASE GO TO http://www.side-labs.com/en/index.php/Product:License. READ THIS AGREEMENT CAREFULLY BEFORE PURCHASING AND/OR USING SIDE SOFTWARE.</license>
   <requires>
     <import plugin="org.eclipse.ui" />
     <import plugin="org.eclipse.core.runtime" />
