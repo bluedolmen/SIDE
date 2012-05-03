@@ -3,8 +3,8 @@
 <plugin>
   <extension point="com.bluexml.side.util.framework.tooling">
     <modelLibrary activator="com.bluexml.side.util.framework.tools.alfresco346e.Activator" archivePath="/com/bluexml/side/util/framework/tools/alfresco346e/models/alfresco346E.zip" id="alfresco_3.4.6E" label="Alfresco Models 3.4.6 Enterprise" pluginId="com.bluexml.side.Util.framework.tools.alfresco346E" projectId="Model-library-Alfresco-3.4.6-EE">
-      <moduleDependence label="Alfresco Extension 3.4.6 Enterprise" moduleId="com.bluexml.side.Framework.maven.ampArchetypeForSide_346E" moduleType="jar" technologyVersion="internal" versionMax="1.0.2" versionMin="1.0.2" />
-      <moduleDependence label="Alfresco Share Extension 3.4.6 Enterprise" moduleId="com.bluexml.side.Framework.maven.warPatchArchetypeForSide_346E" moduleType="jar" technologyVersion="internal" versionMax="1.0.2" versionMin="1.0.2" />
+      <moduleDependence label="Alfresco Extension 3.4.6 Enterprise" moduleId="com.bluexml.side.Framework.maven.ampArchetypeForSide_346E" moduleType="jar" technologyVersion="internal" versionMax="1.0.3" versionMin="1.0.3" />
+      <moduleDependence label="Alfresco Share Extension 3.4.6 Enterprise" moduleId="com.bluexml.side.Framework.maven.warPatchArchetypeForSide_346E" moduleType="jar" technologyVersion="internal" versionMax="1.0.3" versionMin="1.0.3" />
       <generatorVersion class="com.bluexml.side.util.framework.tools.alfresco346e.Activator" hidden="visible" id="com.bluexml.side.Class.generator.alfresco346E" version="auto">
         <option defaultOption="false" hidden="false" key="alfresco.share.extension" label="alfresco.share.extension" />
       </generatorVersion>
