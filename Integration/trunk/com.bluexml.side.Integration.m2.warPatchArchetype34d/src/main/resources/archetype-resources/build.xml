@@ -12,15 +12,7 @@
 	<!-- ================================= 
 	          target: name              
 	         ================================= -->
-	<target name="patchWebapps" depends="" description="build and install in local alfresco">
-		<echo message="use maven to build package..." />
-		<maven basedir="${symbol_dollar}{basedir}" options="" goal="clean" resultproperty="maven.build.result" />
-		<maven basedir="${symbol_dollar}{basedir}" options="" goal="install" resultproperty="maven.build.result" />
-		<!--<artifact:mvn pom="pom.xml" mavenHome="${symbol_dollar}{maven.home}">
-				<arg value="clean" />
-				<arg value="package" />
-			</artifact:mvn>
-			-->
+	<target name="patchWebapps" depends="maven_install" description="build and install in local alfresco">
 		<echo message="==========" />
 		<echo message="patch the web application webapps.home=${symbol_dollar}{webapps.home}" />
 
@@ -34,13 +26,6 @@
 		</unzip>
 
 		<echo message="==========" />
-		<!--
-			<echo message="clean project" />
-			<artifact:mvn pom="pom.xml" mavenHome="${symbol_dollar}{maven.home}">
-				<arg value="clean" />
-			</artifact:mvn>
-			-->
-		<!--<maven basedir="${symbol_dollar}{basedir}" options="" goal="clean" resultproperty="maven.build.result" />-->
 	</target>
 
 
@@ -48,12 +33,8 @@
 	          target: name              
 	         ================================= -->
 	<target name="maven_install" depends="" description="do mvn install">
-		<!--<artifact:mvn pom="pom.xml" mavenHome="/usr/share/maven">
-				<arg value="clean" />
-				<arg value="install" />
-			</artifact:mvn>
-			-->
-		<maven basedir="${symbol_dollar}{basedir}" options="" goal="install" resultproperty="maven.build.result" />
+		<maven basedir="${symbol_dollar}{basedir}" options="-P public" goal="clean" resultproperty="maven.build.result" />
+		<maven basedir="${symbol_dollar}{basedir}" options="-P public" goal="install" resultproperty="maven.build.result" />
 	</target>
 
 	<target name="maven_deploy" depends="" description="do mvn deploy">
