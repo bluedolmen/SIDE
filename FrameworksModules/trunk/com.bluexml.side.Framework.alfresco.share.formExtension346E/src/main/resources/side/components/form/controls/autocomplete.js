@@ -299,6 +299,11 @@ if (!Array.prototype.indexOf) {
 			this.DSSelectWidget = this.load();
 			YAHOO.Bubbling.fire("/side-labs/onLoaded/" + this.currentValueHtmlId, this);
 
+			
+			if (this.options.mandatory && !this.options.disabled) {
+            YAHOO.Bubbling.fire("mandatoryControlValueUpdated", this);
+         }
+			
 			if (!this.options.disabled && this.initialValue) {
 				this.setValue(this.initialValue);
 			}

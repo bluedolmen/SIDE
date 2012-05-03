@@ -293,7 +293,7 @@ if (!Array.prototype.indexOf) {
          }
 
          YAHOO.Bubbling.fire("/side-labs/onLoaded/" + this.currentValueHtmlId, this);
-         if (this.options.mandatory) {
+         if (this.options.mandatory && !this.options.disabled) {
             YAHOO.Bubbling.fire("mandatoryControlValueUpdated", this);
          }
          if (!this.options.disabled && this.initialValue) {
