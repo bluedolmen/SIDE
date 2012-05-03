@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Portal.generator.alfresco34d.feature" label="Portal Generator For Alfresco Share (3.4b)" version="1.0.62.v35166-20120418" provider-name="BLUEXML">
+<feature id="com.bluexml.side.Portal.generator.alfresco34d.feature" label="Portal Generator For Alfresco Share (3.4b)" version="1.0.63.v35624-20120503" provider-name="BLUEXML">
   <description url="http://www.side-labs.com">SIDE lets developers who are new to Alfresco get started quickly and helps experienced developers get the job done even faster.</description>
-  <copyright url="http://www.bluexml.com/copyright">       Copyright 2005-2012 BlueXML SARL.    </copyright>
-  <license url="http://www.side-labs.com/en/index.php/Product:License"> SIDE SOFTWARE IS LICENSED BY BLUEXML. PLEASE GO TO http://www.side-labs.com/en/index.php/Product:License. READ THIS AGREEMENT CAREFULLY BEFORE PURCHASING AND/OR USING SIDE SOFTWARE.    </license>
+  <copyright url="http://www.bluexml.com/copyright">Copyright 2005-2012 BlueXML SARL.</copyright>
+  <license url="http://www.side-labs.com/en/index.php/Product:License">SIDE SOFTWARE IS LICENSED BY BLUEXML. PLEASE GO TO http://www.side-labs.com/en/index.php/Product:License. READ THIS AGREEMENT CAREFULLY BEFORE PURCHASING AND/OR USING SIDE SOFTWARE.</license>
   <plugin id="com.bluexml.side.Portal.generator.alfresco34d" download-size="0" install-size="0" version="1.0.46.v34660-20120330" unpack="false" />
   <plugin id="com.bluexml.side.Portal.generator.alfresco" download-size="0" install-size="0" version="1.0.81.v34660-20120330" unpack="false" />
   <plugin id="com.bluexml.side.Portal.generator.alfresco34d.ext.labs" download-size="0" install-size="0" version="1.0.13.v35166-20120418" unpack="false" />
