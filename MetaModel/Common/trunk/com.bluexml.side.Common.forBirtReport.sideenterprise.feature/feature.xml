@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature id="com.bluexml.side.Common.forBirtReport.sideenterprise.feature" label="SIDE Generator For BIRT Report" version="1.0.3.v31653-20120106" provider-name="BLUEXML">
-  <description url="http://www.example.com/description">[Enter Feature Description here.]</description>
+  <description url="http://www.side-labs.com">SIDE lets developers who are new to Alfresco get started quickly and helps experienced developers get the job done even faster.</description>
   <copyright url="http://www.bluexml.com/copyright">       Copyright 2005-2012 BlueXML SARL.    </copyright>
-  <license url="http://www.side-labs.com/wiki/index.php/SIDE4:LicenseEN"> SIDE SOFTWARE IS LICENSED BY BLUEXML. PLEASE GO TO http://www.side-labs.org/wiki/index.php/SIDE4:License. READ THIS AGREEMENT CAREFULLY BEFORE PURCHASING AND/OR USING SIDE SOFTWARE.    </license>
+  <license url="http://www.side-labs.com/en/index.php/Product:License"> SIDE SOFTWARE IS LICENSED BY BLUEXML. PLEASE GO TO http://www.side-labs.com/en/index.php/Product:License. READ THIS AGREEMENT CAREFULLY BEFORE PURCHASING AND/OR USING SIDE SOFTWARE.    </license>
   <includes id="com.bluexml.side.Deployer.report.feature" version="1.0.34.v28467-20111005" />
   <includes id="com.bluexml.side.Class.generator.report.feature" version="1.0.47.v31653-20120106" />
 </feature>
