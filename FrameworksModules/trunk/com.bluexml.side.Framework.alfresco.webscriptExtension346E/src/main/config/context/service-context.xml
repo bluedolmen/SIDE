@@ -49,4 +49,13 @@
 		<property name="ruleService" ref="ruleService" />
 	</bean>
 
+	<bean id="side.webscripts.js.workflow" parent="baseJavaScriptExtension"
+		class="com.bluexml.side.framework.alfresco.webscriptExtension.WorkflowScriptExtension">
+		<property name="extensionName">
+			<value>sideworkflow</value>
+		</property>
+		<property name="serviceRegistry" ref="ServiceRegistry" />
+		<property name="workflowService" ref="WorkflowService" />
+	</bean>
+
 </beans>
