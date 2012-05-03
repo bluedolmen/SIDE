@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Deployer.alfrescoDirectCopy.feature" label="SIDE Alfresco Direct Deployer" version="1.0.54.v31209-20111220" provider-name="BlueXML">
+<feature id="com.bluexml.side.Deployer.alfrescoDirectCopy.feature" label="SIDE Alfresco Direct Deployer" version="1.0.55.v35624-20120503" provider-name="BlueXML">
   <description url="http://www.bluexml.com">SIDE MDA environment eases the deployment of generated or developed extensions on specialized
 frameworks like Alfresco. This feature allows to deploy generated extensions on Alfresco instances using direct copy.</description>
-  <copyright url="http://www.bluexml.com/copyright">       Copyright 2005-2012 BlueXML SARL.    </copyright>
-  <license url="http://www.side-labs.com/en/index.php/Product:License"> SIDE SOFTWARE IS LICENSED BY BLUEXML. PLEASE GO TO http://www.side-labs.com/en/index.php/Product:License. READ THIS AGREEMENT CAREFULLY BEFORE PURCHASING AND/OR USING SIDE SOFTWARE.    </license>
+  <copyright url="http://www.bluexml.com/copyright">Copyright 2005-2012 BlueXML SARL.</copyright>
+  <license url="http://www.side-labs.com/en/index.php/Product:License">SIDE SOFTWARE IS LICENSED BY BLUEXML. PLEASE GO TO http://www.side-labs.com/en/index.php/Product:License. READ THIS AGREEMENT CAREFULLY BEFORE PURCHASING AND/OR USING SIDE SOFTWARE.</license>
   <requires>
     <import plugin="org.eclipse.core.runtime" />
     <import plugin="com.bluexml.side.Application" version="1.0.8" match="greaterOrEqual" />
