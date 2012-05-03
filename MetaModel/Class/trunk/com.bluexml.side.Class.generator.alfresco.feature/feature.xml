@@ -1,25 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature
-      id="com.bluexml.side.Class.generator.alfresco.feature"
-      label="SIDE Alfresco Content Type Generator"
-      version="1.0.630.v34377-20120323"
-      provider-name="BlueXML">
-
-   <description url="http://www.bluexml.com">
-      Adds Alfresco base data model generation from SIDE.
+<feature id="com.bluexml.side.Class.generator.alfresco.feature" label="SIDE Alfresco Content Type Generator" version="1.0.631.v35624-20120503" provider-name="BlueXML">
+  <description url="http://www.bluexml.com">Adds Alfresco base data model generation from SIDE.
 SIDE lets developers who are new to Alfresco get started quickly and helps experienced developers get the job done even faster.
 The Sustainable Application Repository contains a set of Alfresco
 Applications which evolve each day. Stay up-to-date with the
 most recent product announcements and updates via the @sidelabs
-twitter account.
-   </description>
-
-   <copyright url="http://www.example.com/copyright">
-      [Enter Copyright Description here.]
-   </copyright>
-
-   <license url="http://www.example.com/license">
-Contrat Client BlueXML
+twitter account.</description>
+  <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
+  <license url="http://www.example.com/license">Contrat Client BlueXML
 
 MERCI DE LIRE ATTENTIVEMENT LE PRESENT CONTRAT AVANT TOUT ACHAT ET/OU TOUTE UTILISATION DES LOGICIELS OU SERVICES BlueXML. EN UTILISANT LES LOGICIELS OU SERVICES BlueXML, LA SOCIETE MANIFESTE SON ACCEPTATION SANS RESERVE DES TERMES ET CONDITIONS DU PRESENT CONTRAT, QU’ELLE RECONNAIT AVOIR PREALABLEMENT LU ET EN AVOIR COMPRIS LE SENS ET LA PORTEE. TOUTE PERSONNE PHYSIQUE AGISSANT AU NOM ET POUR LE COMPTE D’UNE PERSONNE MORALE DECLARE AVOIR ETE DUMENT HABILITEE ET AVOIR PLEINE CAPACITE POUR CONCLURE LE PRESENT CONTRAT AU NOM ET POUR LE COMPTE DE CETTE PERSONNE MORALE. SI LA SOCIETE N’ACCEPTE PAS LES TERMES ET CONDITIONS DU PRESENT CONTRAT, ALORS ELLE NE DOIT PAS UTILISER LES LOGICIELS ET/OU SERVICES.
 
@@ -130,42 +118,33 @@ peuvent être utilisés à des fins d’interprétation du Contrat.
 
 10.14 Exemplaires originaux et signature par voie électronique. Dans l’hypothèse où ce Contrat serait signé par signatures manuscrites, ce Contrat sera conclu en autant d’exemplaires que de parties, chaque exemplaire constituant un original et tous les exemplaires constituant un seul et même document. Les parties peuvent s’échanger les pages de signatures par courrier électronique signé numériquement et ces signatures seront considérées comme liant valablement les deux parties à l’ensemble des termes et conditions du présent Contrat.
 
-10.15 Langue de reference. Le présent Contrat est à l’origine rédigé en français. La présente traduction en langue anglaise n’a qu’une valeur informative. La langue de référence demeure la langue française. Par conséquent, en cas de contradiction entre les versions de langue française et de langue anglaise, la version française doit prévaloir.
-   </license>
-
-   <url>
-      <discovery label="SIDE-Labs" url="http://www.side-labs.org"/>
-   </url>
-
-   <requires>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.ocl"/>
-      <import plugin="org.eclipse.ocl.ecore"/>
-      <import plugin="org.eclipse.core.resources"/>
-      <import plugin="com.bluexml.side.Util.ecore"/>
-      <import plugin="com.bluexml.side.Util.libs"/>
-      <import plugin="com.bluexml.side.Util.metaModel.validate"/>
-      <import plugin="com.bluexml.side.Util.generator.acceleo"/>
-      <import plugin="com.bluexml.side.Util.generator.alfresco"/>
-      <import plugin="com.bluexml.side.Util.generator"/>
-      <import plugin="com.bluexml.side.Application"/>
-      <import plugin="com.bluexml.side.Util.security"/>
-      <import plugin="com.bluexml.side.Util.log"/>
-      <import plugin="com.bluexml.side.Common"/>
-      <import plugin="com.bluexml.side.Util.componentMonitor"/>
-      <import plugin="fr.obeo.acceleo.gen"/>
-      <import plugin="com.bluexml.side.Class"/>
-      <import plugin="com.bluexml.side.Class.modeler"/>
-      <import plugin="com.bluexml.side.Util.dependencies"/>
-      <import plugin="com.bluexml.side.Class.service.alfresco"/>
-   </requires>
-
-   <plugin
-         id="com.bluexml.side.Class.generator.alfresco"
-         download-size="0"
-         install-size="0"
-         version="1.0.631.v34377-20120323"
-         unpack="false"/>
-
+10.15 Langue de reference. Le présent Contrat est à l’origine rédigé en français. La présente traduction en langue anglaise n’a qu’une valeur informative. La langue de référence demeure la langue française. Par conséquent, en cas de contradiction entre les versions de langue française et de langue anglaise, la version française doit prévaloir.</license>
+  <url>
+    <discovery label="SIDE-Labs" url="http://www.side-labs.org" />
+  </url>
+  <requires>
+    <import plugin="org.eclipse.ui" />
+    <import plugin="org.eclipse.core.runtime" />
+    <import plugin="org.eclipse.ocl" />
+    <import plugin="org.eclipse.ocl.ecore" />
+    <import plugin="org.eclipse.core.resources" />
+    <import plugin="com.bluexml.side.Util.ecore" />
+    <import plugin="com.bluexml.side.Util.libs" />
+    <import plugin="com.bluexml.side.Util.metaModel.validate" />
+    <import plugin="com.bluexml.side.Util.generator.acceleo" />
+    <import plugin="com.bluexml.side.Util.generator.alfresco" />
+    <import plugin="com.bluexml.side.Util.generator" />
+    <import plugin="com.bluexml.side.Application" />
+    <import plugin="com.bluexml.side.Util.security" />
+    <import plugin="com.bluexml.side.Util.log" />
+    <import plugin="com.bluexml.side.Common" />
+    <import plugin="com.bluexml.side.Util.componentMonitor" />
+    <import plugin="fr.obeo.acceleo.gen" />
+    <import plugin="com.bluexml.side.Class" />
+    <import plugin="com.bluexml.side.Class.modeler" />
+    <import plugin="com.bluexml.side.Util.dependencies" />
+    <import plugin="com.bluexml.side.Class.service.alfresco" />
+  </requires>
+  <plugin id="com.bluexml.side.Class.generator.alfresco" download-size="0" install-size="0" version="1.0.631.v34377-20120323" unpack="false" />
 </feature>
+
