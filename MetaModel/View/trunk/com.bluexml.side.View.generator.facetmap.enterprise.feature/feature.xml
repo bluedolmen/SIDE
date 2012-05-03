@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature id="com.bluexml.side.View.generator.facetmap.enterprise.feature" label="SIDE Enterprise Facet Navigation View Generator" version="1.0.44.v33947-20120315" provider-name="BlueXML">
   <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature is the generator of Facet Navigation based view models for content type facet display.</description>
-  <copyright>[Enter Copyright Description here.]</copyright>
-  <license>[Enter License Description here.]</license>
+  <copyright url="http://www.bluexml.com/copyright">       Copyright 2005-2012 BlueXML SARL.    </copyright>
+  <license url="http://www.side-labs.com/wiki/index.php/SIDE4:LicenseEN"> SIDE SOFTWARE IS LICENSED BY BLUEXML. PLEASE GO TO http://www.side-labs.org/wiki/index.php/SIDE4:License. READ THIS AGREEMENT CAREFULLY BEFORE PURCHASING AND/OR USING SIDE SOFTWARE.    </license>
   <includes id="com.bluexml.side.View.generator.facetmap.feature" version="1.0.90.v33947-20120315" />
   <requires>
     <import plugin="org.eclipse.ui" />

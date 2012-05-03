@@ -1,31 +1,171 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Class.generator.alfresco.feature" label="SIDE Alfresco Content Type Generator" version="1.0.630.v34377-20120323" provider-name="BlueXML">
-  <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized frameworks like Alfresco. This feature is the generator of data models on Alfresco for content type, views and forms extensions.</description>
-  <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
-  <license url="http://www.example.com/license">[Enter License Description here.]</license>
-  <requires>
-    <import plugin="org.eclipse.ui" />
-    <import plugin="org.eclipse.core.runtime" />
-    <import plugin="org.eclipse.ocl" />
-    <import plugin="org.eclipse.ocl.ecore" />
-    <import plugin="org.eclipse.core.resources" />
-    <import plugin="com.bluexml.side.Util.ecore" />
-    <import plugin="com.bluexml.side.Util.libs" />
-    <import plugin="com.bluexml.side.Util.metaModel.validate" />
-    <import plugin="com.bluexml.side.Util.generator.acceleo" />
-    <import plugin="com.bluexml.side.Util.generator.alfresco" />
-    <import plugin="com.bluexml.side.Util.generator" />
-    <import plugin="com.bluexml.side.Application" />
-    <import plugin="com.bluexml.side.Util.security" />
-    <import plugin="com.bluexml.side.Util.log" />
-    <import plugin="com.bluexml.side.Common" />
-    <import plugin="com.bluexml.side.Util.componentMonitor" />
-    <import plugin="fr.obeo.acceleo.gen" />
-    <import plugin="com.bluexml.side.Class" />
-    <import plugin="com.bluexml.side.Class.modeler" />
-    <import plugin="com.bluexml.side.Util.dependencies" />
-    <import plugin="com.bluexml.side.Class.service.alfresco" />
-  </requires>
-  <plugin id="com.bluexml.side.Class.generator.alfresco" download-size="0" install-size="0" version="1.0.631.v34377-20120323" unpack="false" />
-</feature>
+<feature
+      id="com.bluexml.side.Class.generator.alfresco.feature"
+      label="SIDE Alfresco Content Type Generator"
+      version="1.0.630.v34377-20120323"
+      provider-name="BlueXML">
 
+   <description url="http://www.bluexml.com">
+      Adds Alfresco base data model generation from SIDE.
+SIDE lets developers who are new to Alfresco get started quickly and helps experienced developers get the job done even faster.
+The Sustainable Application Repository contains a set of Alfresco
+Applications which evolve each day. Stay up-to-date with the
+most recent product announcements and updates via the @sidelabs
+twitter account.
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+Contrat Client BlueXML
+
+MERCI DE LIRE ATTENTIVEMENT LE PRESENT CONTRAT AVANT TOUT ACHAT ET/OU TOUTE UTILISATION DES LOGICIELS OU SERVICES BlueXML. EN UTILISANT LES LOGICIELS OU SERVICES BlueXML, LA SOCIETE MANIFESTE SON ACCEPTATION SANS RESERVE DES TERMES ET CONDITIONS DU PRESENT CONTRAT, QU’ELLE RECONNAIT AVOIR PREALABLEMENT LU ET EN AVOIR COMPRIS LE SENS ET LA PORTEE. TOUTE PERSONNE PHYSIQUE AGISSANT AU NOM ET POUR LE COMPTE D’UNE PERSONNE MORALE DECLARE AVOIR ETE DUMENT HABILITEE ET AVOIR PLEINE CAPACITE POUR CONCLURE LE PRESENT CONTRAT AU NOM ET POUR LE COMPTE DE CETTE PERSONNE MORALE. SI LA SOCIETE N’ACCEPTE PAS LES TERMES ET CONDITIONS DU PRESENT CONTRAT, ALORS ELLE NE DOIT PAS UTILISER LES LOGICIELS ET/OU SERVICES.
+
+Le présent Contrat Client BlueXML, y inclus les annexes et documents mis à disposition à certaines adresses Internet (le « Contrat ») est conclu entre BlueXML SARL, une société de droit français (« BlueXML »), et l’acheteur ou utilisateur des logiciels et services BlueXML qui a accepté les termes et conditions du présent Contrat (la « Société »). La date d’entrée en vigueur du présent Contrat (la « Date d’Entrée en Vigueur ») est la date la plus proche entre les deux dates suivantes : (i) la date à laquelle la Société signe ou accepte le présent Contrat ou (ii) la date à laquelle la Société utilise les logiciels ou services BlueXML.
+
+1. OBJET DU CONTRAT
+1.1 Présentation. Le Contrat définit les termes et conditions cadre régissant la fourniture par BlueXML à la Société des Logiciels et des services associés, incluant des formations, des services professionnels et prestations de conseil et des services support. « Logiciel » désigne le logiciel de BlueXML ainsi que d’autres logiciels commercialisés sous la marque de BlueXML et/ou de ses Affiliés ; étant entendu que le Logiciel n’inclut pas les logiciels tiers qui pourraient être fournis avec celui-ci ou fournis par BlueXML Community. Les services spécifiques, en ce inclus les Abonnements, (les « Services ») et/ou les Logiciels, devant être fournis par BlueXML à la Société, sont décrits dans un « Bon de Commande » signé par les parties ou autrement accepté par BlueXML, consistant en (a) un ou plusieurs bons de commandes, descriptifs des prestations, ou autres documents contractuels de même nature acceptés mutuellement, ou (b) une commande adressée par la Société à un Partenaire Commercial (tel que défini ci-après). « Abonnement » désigne certains services de supports fournis pour une période définie (en principe, un ou trois ans). Les parties conviennent que les termes et conditions du présent Contrat régiront tout achat et toute utilisation par la Société du Logiciel et des Services, à moins qu’il n’en soit décidé autrement par les parties par écrit.
+
+1.2 Sociétés Affiliées. Il est convenu que les Sociétés
+Affiliées de la Société peuvent acquérir les Logiciels et les
+Services auprès de BlueXML ou de l’une de ses Sociétés
+Affiliées, par la conclusion d’un Bon de Commande avec
+BlueXML (ou l’une de ses Sociétés Affiliées) intégrant les termes du présent Contrat. Les parties reconnaissent que certains ajustements aux stipulations du présent Contrat pourront être effectués dans un Bon de Commande spécifique (par exemple, afin de prendre en considération les disparités entre les régimes fiscaux et/ou législations applicables dans les autres zones géographiques). « Société Affiliée » désigne une entité qui détient ou contrôle ou est détenue ou contrôlée par, l’une des parties, ou se trouve sous contrôle ou propriété commune avec l’une des parties ; le terme « contrôle » désigne la détention, directe ou indirecte, d’un pouvoir de direction ou d’orientation de la direction sur la gestion et les politiques d’une entité, par l’exercice d’un droit de vote, l’effet d’un contrat ou par tout autre moyen.
+
+1.3 Partenaires Commerciaux. BlueXML a conclu des accords avec d’autres organisations (les « Partenaires Commerciaux ») aux fins d’assurer la promotion, la commercialisation, la vente et le support de certains Logiciels et Services. Lorsque la Société achète un Logiciel et des Services auprès d’un Partenaire Commercial, BlueXML demeure responsable de la fourniture du Logiciel et des Services à la Société, conformément aux termes et conditions du présent Contrat. BlueXML n’est pas responsable (a) des actions des Partenaires Commerciaux, (b) de toutes obligations additionnelles contractées par le Partenaire Commercial avec la Société, ni (c) des produits ou services fournis à la Société par le Partenaire Commercial en vertu d’un accord distinct conclu entre eux.
+
+2. OBLIGATIONS DES PARTIES
+2.1 Obligations sur site. Lorsque le personnel de BlueXML travaille dans les locaux de la Société (a) la Société assure la sûreté et la sécurité de l’environnement de travail du personnel BlueXML et (b) BlueXML se conforme à l’ensemble des normes et politiques de sécurité et de sûreté raisonnables du site telles qu’applicables aux employés de la Société, sous réserve d’en avoir été préalablement informée par écrit.
+
+2.2 Modifications des Prestations et des Délais. Toute modification des Services doit faire l’objet d’une demande de modification écrite et signée des deux parties. Dans l’hypothèse où (a) la Société ne remplirait pas ses obligations prévues au Bon de Commande dans le délai imparti, et cette inexécution compromettrait la fourniture des Services, ou (b) des évènements échappant au contrôle raisonnable de l’une quelconque des parties entra"neraient un retard ou compromettraient de quelque autre manière que ce soit la bonne exécution par BlueXML de ses obligations au titre d’un Bon de Commande, BlueXML pourra exercer tous recours appropriés, incluant la possibilité de réajuster les dates de fourniture des Services concernés.
+
+2.3 Assistance. La Société peut être amenée à fournir à BlueXML un accès aux informations de la Société, à ses systèmes et logiciels (les « Informations de la Société ») et à mettre à sa disposition des ressources telles que des espaces de travail, des accès au réseau, des connections téléphoniques, qui pourraient être raisonnablement requises par BlueXML dans un Bon de Commande pour la fourniture des Services. La Société reconna"t et accepte que (a) la fourniture des Services par BlueXML dépend de la complétude, de l’exactitude et de l’étendue de l’accès aux Informations de la Société et, (b) si un accès raisonnable aux Informations de la Société n’est pas fourni, BlueXML sera libérée de son obligation de fournir les Services dépendant de cet accès. La Société s’engage à obtenir toutes les autorisations de tiers nécessaires à la mise à disposition de cet accès auprès de BlueXML, aux Informations de la Société, qui sont l’objet de droits de propriété ou, sont détenues ou contrôlées par ces tiers, ou qui seraient soumises à tout autre type de restriction quant à leur divulgation.
+
+3. PRIX ET CONDITIONS DE PAIEMENT
+3.1 Prix et Dépenses. Les prix des Services (le(s) « Prix ») figurent dans le Bon de Commande et (a) sont dus au moment de l’acceptation par BlueXML d’un Bon de Commande ou, en cas de renouvellement des Services, au début de la période de renouvellement, et (b) sont réglés conformément à l’Article 3.2 ci-après. Les Prix sont mentionnés dans la devise figurant au Bon de Commande, doivent être réglés dans cette devise et, sauf stipulation contraire, n’incluent pas tous frais engagés ni les coûts de transport. La Société s’engage à rembourser toutes dépenses raisonnablement engagées par BlueXML en connexion avec la fourniture des Services. La Société s’engage à payer le Prix applicable à chaque Système Installé. Le terme « Système Installé » désigne une seule unité centrale (« UC ») comprenant jusqu’à quatre (4) coeurs de processeur sur lesquels le Logiciel est installé ou exécuté.
+
+3.2 Facturation. Si la Société souhaite bénéficier de conditions de règlement pour le paiement des Prix, celle-ci s’engage à coopérer raisonnablement avec BlueXML en justifiant de, et en reconfirmant régulièrement, sa solvabilité. Lorsque des conditions de règlement sont octroyées à la Société, BlueXML facturera les Prix à la Société dès acceptation par BlueXML du Bon de Commande concerné, dès acceptation de tout autre Bon de Commande futur, et trente (30) jours avant le début de toute période de renouvellement. Sauf stipulation contraire dans un Bon de Commande et sous réserve de l’acceptation par BlueXML des conditions de règlement souhaitées, la Société s’engage à régler les Prix et toutes dépenses éventuelles, dans les trente (30) jours suivant la date de chaque facture. Il est néanmoins convenu que le Prix des services professionnels et des formations est dé préalablement à leur exécution. Sauf stipulation contraire au présent Contrat,
+tous paiements effectués par la Société au titre du présent Contrat ne sont pas remboursables. BlueXML se réserve le droit de suspendre ou d’annuler la fourniture de tout ou partie des Services, de modifier ou de révoquer tout ou partie des droits de licence relatifs au Logiciel, et/ou de modifier les conditions de règlement si aucun paiement n’a été reçu dans les trente (30) jours suivant la date de facturation.
+
+3.3 Taxes. Tous les Prix sont indiqués hors Taxes. La Société s’engage à payer à BlueXML un montant égal à toutes Taxes résultant de, ou en rapport avec le Contrat ou le Bon de Commande concerné, payées ou payables par BlueXML.
+« Taxes » désigne tout type de taxes sur les ventes, l’utilisation, la valeur ajoutée ou autre type de taxes, et toute amende, pénalité, supplément compensatoire ou intérêt, à l’exception des taxes imposées sur le seul revenu net de BlueXML. Lorsque la Société est tenue de retenir ou déduire une partie des paiements dus à BlueXML, la Société augmentera la somme due à BlueXML à hauteur du montant requis afin que BlueXML reçoive un montant égal à la somme qu’elle aurait dû percevoir si la Société n’avait procédé à aucune retenue ou déduction.
+
+4. RAPPORTS ET REGISTRES
+4.1 Reporting. La Société s’engage à informer promptement BlueXML (ou le Partenaire Commercial auprès duquel la Société a acquis le Logiciel ou les Services) lorsque le nombre réel de Systèmes Installés excède le nombre de Systèmes Installés pour lesquels la Société a payé le Prix applicable. Dans la notification, la Société devra préciser le nombre de Systèmes Installés supplémentaires et la/les date(s) à laquelle/auxquelles le Logiciel a pour la première fois été utilisé sur ces Systèmes Installés. BlueXML (ou le Partenaire Commercial) facturera à la Société le Prix applicable et la Société règlera ce Prix dans les trente (30) jours suivant la date de facture.
+
+4.2 Conservation de registres. La Société devra tenir à jour un registre précis permettant de vérifier le nombre de Systèmes Installés en place. Sur demande écrite de BlueXML, la Société lui communiquera lesdits registres dans un délai de dix (10) jours ouvrés. Si la Société a plus de Systèmes Installés que le nombre pour lequel elle a payé, elle devra immédiatement régler à BlueXML le taux applicable par unité au titre de ces Systèmes Installés additionnels.
+
+5. LICENCE ET PROPRIETE
+5.1 Concession à la Société. Sous réserve du respect par la Société des dispositions du présent contrat, notamment du paiement régulier du Prix applicable à la période initiale et à toute période de renouvellement, BlueXML concède à cette dernière : (a) pour la durée légale de protection des droits d’auteur, une licence non-exclusive, non-transférable et non sous-licenciable d’utilisation, de copie et de modification du Logiciel, pour les seuls besoins internes de la Société en rapport avec l’utilisation du Logiciel et dans la limite du nombre de Systèmes Installés prévu dans le Bon de Commande ; (b) les droits afférents au logiciel tiers fourni avec le Logiciel, énoncés dans les licences applicables audit logiciel tiers ; (c) pour la durée stipulée dans le Bon de Commande, le droit de recevoir des Services sur le Logiciel et (d) une licence d’utilisation du Logiciel, pour la durée légale de protection des droits d’auteur, sur des UC supplémentaires, à des fins de tests de reprise après sinistre.
+
+5.2 Restrictions. La Société s’interdit, directement ou
+indirectement, de : (a) sous-licencier, revendre, louer, louer à
+bail, distribuer, mettre sur le marché, commercialiser ou
+transférer, de quelque manière que ce soit, les droits ou
+l’usage : (i) du Logiciel, (ii) de toute version modifiée ou toute oeuvre dérivée du Logiciel créée par ou pour la Société ou (iii) de la Communauté BlueXML (qui inclut toutes les versions non maintenues des logiciels développés par BlueXML), à quelques fins que ce soit, y inclus à des fins d’utilisation en service bureau ou en temps partagé avec des tiers ; (b) retirer ou altérer toute notice de droit d’auteur, copyright, marque ou de tout autre droit de propriété, intégrée dans le Logiciel ; (c) transférer, utiliser ou exporter le Logiciel en violation des lois ou réglementations d’un pays ou d’agence gouvernementale ; (d) utiliser l’un des Services pour l’un des logiciel de la Communauté BlueXML ou pour un Système Installé pour lequel aucun Service n’a été acheté ; ou (e) réaliser une ingénierie inversée, décompiler ou modifier toute partie cryptée ou codée du Logiciel.
+
+5.3 Droits de propriété. BlueXML et ses licenciés sont titulaires de l’ensemble des droits, titres et intérêts relatifs au Logiciel, aux technologies, aux informations et, aux codes et logiciels fournis à la Société, y inclus toutes parties, copies ou modifications des éléments précités.
+
+6. DUREE ET RESILIATION
+6.1 Durée et Résiliation du Contrat. Le présent Contrat entre en vigueur à la Date d’Entrée en Vigueur et prendra fin à l’expiration d’une période de quatre-vingt dix (90) jours à compter de la notification par écrit de la résiliation du Contrat, remise par l’une des parties à l’autre partie. La résiliation du Contrat n’entra"ne pas résiliation des Bons de Commande en cours et les termes et conditions du présent Contrat conserveront leur plein effet et demeureront applicables, dans la mesure nécessaire, à tous Bons de Commande en cours au jour de la résiliation du Contrat, jusqu’à ce que lesdits Bons de Commande expirent ou soient résiliés dans les conditions prévues à l’Article 6.2 ci-après.
+
+6.2 Durée et Résiliation d’un Bon de Commande
+6.2.1 Le Bon de Commande entre en vigueur à compter de sa date de signature (« Date d’Entrée en Vigueur du Bon de Commande ») et demeure en vigueur pour la durée mentionnée au Bon de commande. La durée de l’Abonnement est par la suite automatiquement renouvelée pour des périodes successives de un (1) an, sauf notification écrite par l’une des parties à l’autre partie de son intention de ne pas le renouveler, adressée soixante (60) jours avant le démarrage de la nouvelle période de renouvellement. La Société utilisera les Services indiqués dans le Bon de Commande pour la durée stipulée dans ce dernier ou, en l’absence de prévision, dans les 180 jours suivant la Date d’Entrée en Vigueur du Bon de Commande ; tous Services non utilisés durant cette période seront perdus.
+
+6.2.2 En cas de manquement grave par BlueXML ou la Société à ses obligations au titre d’un Bon de Commande, et si ce manquement n’est pas corrigé dans les trente (30) jours suivant la réception par la partie défaillante d’une mise en demeure écrite, la partie non-défaillante peut mettre fin au Bon de Commande concerné et/ou au présent Contrat par l’envoi d’une notification écrite à la partie défaillante ; étant entendu, cependant, qu’en cas de manquement aux obligations de l’Article 7 ci-après, le délai de réparation susvisé de 30 jours n’est pas applicable. La résiliation d’un Bon de Commande individuel n’emporte pas résiliation des autres Bons de Commande ni du présent Contrat, à moins qu’il n’en soit prévu autrement dans la lettre de résiliation. Sans préjudice des autres droits et recours de BlueXML, en cas de résiliation d’un Bon de Commande par l’une des parties, la Société reste tenue à l’égard de BlueXML (ou du Partenaire Commercial auprès duquel la Société s’est fournie), du paiement de l’ensemble des Services fournis jusqu’à la date de prise d’effet de la résiliation.
+
+6.3 Survie. En cas de résiliation du Contrat ou d’un Bon de
+Commande, pour quelque motif que ce soit, les Articles 3, 4,
+5.2, 5.3, 6.3, 7, 8.2, 9, et 10 du présent Contrat (tels
+qu’incorporés par référence également dans chaque Bon de
+Commande) restent en vigueur.
+
+7. CONFIDENTIALITE
+7.1 Obligations. Pendant toute la durée du Contrat, chaque partie accepte (a) que les Informations Confidentielles soient utilisées uniquement selon les termes et conditions du présent Contrat ; (b) de leur apporter le même degré d’attention que pour ses propres informations confidentielles et, en aucun cas avec un degré d’attention en-deçà du raisonnable ; et (c) de limiter la divulgation des Informations Confidentielles aux seuls employés, agents ou cocontractants ayant besoin de ces informations et, aux auditeurs et conseils juridiques, liés par une obligation écrite de confidentialité aussi restrictive que celle imposée par le présent Contrat. Chaque partie accepte d’être soumise à cette obligation de confidentialité pour une période de deux (2) ans courant dès la première divulgation d’une Information Confidentielle. « Information Confidentielle » désigne l’ensemble des informations divulguées par BlueXML ou par la Société (l’« Emetteur ») à l’autre partie (le « Destinataire ») pendant la durée du Contrat (y) marquées confidentielles ou (z) divulguées oralement mais indiquées comme confidentielles au moment de cette divulgation et ultérieurement mentionnées comme telles par écrit et envoyées au Destinataire dans les trente (30) jours suivant la divulgation orale.
+
+7.2 Exclusions. Ne sont pas considérées comme des Informations Confidentielles les informations qui: (a) sont ou deviennent accessibles au public autrement que par la suite d’une violation du présent Contrat, ou qui ont été divulguées par l’Emetteur sans les soumettre à une obligation de confidentialité ; (b) sont déjà connues du Destinataire au moment de leur divulgation ; (c) sont développées de façon indépendante par le Destinataire sans recourir aux Informations Confidentielles ; (d) deviennent licitement connues de, ou pleinement accessibles par le Destinataire en vertu d’une source dûment habilitée à procéder à cette divulgation ; ou (e) sont généralement connues ou facilement vérifiables par des personnes dotées de compétences usuelles dans le domaine professionnel du Destinataire. Il ne peut être interdit au Destinataire de procéder à la divulgation d’Informations Confidentielles en vertu d’une obligation légale s’il en informe préalablement l’Emetteur, dans la mesure du possible et sous réserve des dispositions légales et réglementaires qui lui sont applicables.
+
+8. GARANTIES
+8.1 Garanties. BlueXML garantit que : (a) elle apportera des compétences et un soin raisonnables à la fourniture des Services ; (b) les Services seront réalisés de manière professionnelle et soignée par un personnel qualifié ; (c) elle a le pouvoir de conclure le présent Contrat avec la Société ; et (d) à sa connaissance, le Logiciel ne contient pas, à sa date de livraison à la Société, de dispositifs ou codes informatiques malveillants ou cachés destinés à endommager ou corrompre le Logiciel.
+
+
+8.2 Exclusion de Garanties. SOUS RESERVE DE CE QUI
+EST EXPRESSEMENT STIPULE A L’ARTICLE 8.1, ET DANS LA LIMITE AUTORISEE PAR LA LOI APPLICABLE, LE LOGICIEL ET LES SERVICES FOURNIS PAR BlueXML SONT DELIVRES « EN L’ETAT » ET SANS GARANTIE D’AUCUNE SORTE, EXPRESSE OU TACITE, INCLUANT MAIS NON LIMITATIVEMENT, LES GARANTIES IMPLICITES DE QUALITE MARCHANDE, D’EVICTION ET D’ADEQUATION A UN BESOIN PARTICULIER. BlueXML NE GARANTIT PAS QUE L’UTILISATION DU LOGICIEL ET DES SERVICES SERA ININTERROMPUE, CONFORME AUX EXIGENCES REGLEMENTAIRES, OU EXEMPT D’ERREURS NI QUE TOUTES LES ERREURS DU LOGICIEL SERONT CORRIGEES. EN CAS DE VIOLATION DES GARANTIES ENONCEES A L’ARTICLE 8.1, L’UNIQUE RECOURS DE LA SOCIETE ET L’ENTIERE RESPONSABILITE de BlueXML CONSISTENT EN UNE RE-EXECUTION DES SERVICES DEFECTUEUX OU, SI BlueXML NE PEUT REPARER DE MANIERE SUBSTANTIELLE ET COMMERCIALEMENT RAISONNABLE, SON MANQUEMENT, LA SOCIETE POURRA RESILIER LES SERVICES EN CAUSE ET SE FAIRE REMBOURSER AU PRO RATA DU PRIX PAYE POUR LES SERVICES DEFECTUEUX A COMPTER DE LA DATE DE PRISE D’EFFET DE LA RESILIATION. La Société est seule responsable des résultats obtenus par l’utilisation du Logiciel et des Services.
+
+9. LIMITATION DE RESPONSABILITE ET EXCLUSIONS
+9.1 Exclusions. NONOBSTANT TOUTES
+DISPOSITIONS CONTRAIRES AU PRESENT CONTRAT OU DANS UN BON DE COMMANDE, LA RESPONSABILITE de BlueXML ET DE SES SOCIETES AFFILIEES NE PEUT EN AUCUN CAS ETRE ENGAGEE PAR LA SOCIETE OU DE L’UNE DE SES SOCIETES AFFILIEES A RAISON DE DOMMAGES AUTRES QUE DES DOMMAGES DIRECTS, INCLUANT NOTAMMENT MAIS NON LIMITATIVEMENT : TOUS DOMMAGES INDIRECTS, PARTICULIERS, ACCESSOIRES, CONSECUTIFS, EXEMPLAIRES OU PUNITIFS, RESULTANT D’UNE RESPONSABILITE DELICTUELLE, CONTRACTUELLE OU AUTRE, ET TOUS DOMMAGES RESULTANT DE OU EN RAPPORT AVEC TOUT DYSFONCTIONNEMENT, NON-CONFORMITE A LA REGLEMENTATION, RETARD, PERTE DE DONNEES, PERTE DE PROFITS, GAIN MANQUE, INTERRUPTION DE SERVICE, PERTE DE CLIENTELE OU DE BENEFICES ESCOMPTES, MEME SI BlueXML OU SES SOCIETES AFFILIEES ONT ETE INFORMEES DE LA POSSIBILITE DE TELS DOMMAGES. LA RESPONSABILITE AU TITRE DE CES DOMMAGES SERA LIMITEE ET EXCLUE MEME LORSQUE L’UN DES RECOURS EXCLUSIFS PREVU AU PRESENT CONTRAT N'ATTEINT PAS SON OBJECTIF PRINCIPAL.
+
+9.2 Limitation de responsabilité. DANS TOUS LES CAS ET EN TOUTES CIRCONSTANCES, LA RESPONSABILITE TOTALE ET CUMULEE de BlueXML ET DE SES SOCIETES AFFILIEES, RESULTANT DE OU EN RAPPORT AVEC LE PRESENT CONTRAT ET L’ENSEMBLE DES BONS DE COMMANDE, AU TITRE, NOTAMMENT MAIS NON LIMITATIVEMENT, DE L’EXECUTION OU INEXECUTION D’UNE OBLIGATION, QUELQUE SOIT LA NATURE DE L’ACTION, CONTRACTUELLE, DELICTUELLE (INCLUANT NOTAMMENT DES SUITES D’UNE NEGLIGENCE), LEGALE OU AUTRE, SERA LIMITEE AUX DOMMAGES DIRECTS ET NE POURRA DEPASSER LES MONTANTS PERCUS PAR BlueXML DE LA SOCIETE DURANT LES DOUZE (12) MOIS PRECEDANT IMMEDIATEMENT LE PREMIER EVENEMENT DOMMAGEABLE, AU TITRE DE L’ELEMENT (LOGICIEL, SERVICE OU AUTRE) AYANT SPECIFIQUEMENT DONNE LIEU A L’ACTION EN RESPONSABILITE EN VERTU DU BON DE COMMANDE APPLICABLE. AUCUNE STIPULATION DU PRESENT CONTRAT NE SAURAIT ETRE INTERPRETEE COMME EXCLUANT OU LIMITANT LA RESPONSABILITE de BlueXML EN CAS DE MORT OU DE DOMMAGES CORPORELS CAUSES PAR UNE FRAUDE OU NEGLIGENCE.
+
+10. STIPULATIONS GENERALES
+10.1 Loi applicable. La validité, l’interprétation et l’exécution du présent Contrat sont régies par et interprétées selon les règles de droit français, exclusion faite des dispositions applicables aux conflits de lois et aux dispositions contenues dans la Convention des Nations Unies sur la Vente Internationale de Marchandises. Chaque partie consent de façon irrévocable à la compétence exclusive des tribunaux français en cas de litige ou réclamation résultant de, ou en relation avec le présent Contrat et les Bons de Commande.
+
+10.2 Notifications. Les notifications doivent être adressées par écrit et en français ou en anglais et sont réputées délivrées lors de la remise en main propre ou, à l’issue d’un délai de cinq (5) jours courant après leur envoi par un procédé permettant d’obtenir confirmation écrite de leur remise aux adresses ou numéros de télécopie respectifs mentionnés dans un Bon de Commande ; étant précisé que toute notification adressée par la Société à BlueXML doit être accompagnée d’une copie envoyée à: BlueXML SARL A l’attention du Directeur Général, 40, bd Jean INGRES 44100 Nantes France ou par mél: notification@bluexml.com.
+
+10.3 Cession. Le Contrat ne peut être cédé par une partie qu’avec le consentement préalable et écrit de l'autre partie. Ce consentement ne peut être refusé, retardé ou conditionné sans motif légitime ; étant néanmoins convenu que chaque partie peut, sous réserve d’en informer préalablement l’autre partie par écrit (a) céder le présent Contrat à un Société Affiliée dès lors que cette Société Affiliée dispose d’une solvabilité suffisante pour remplir valablement les obligations contractées en vertu du présent Contrat et que le périmètre des Services n’en soit pas affecté ; et (b) céder le Contrat en vertu d’une fusion ou d’une vente totale ou partielle de ses actifs.
+
+10.4 Droit des Tiers. A l’exception des Sociétés Affiliées des parties telles que prévues au présent Contrat, et des droits conférés aux Partenaires Commerciaux par les Articles 4.1 et 6.2.2, une personne qui n'est pas partie au Contrat ne bénéficie d’aucun droit pour contraindre à l’exécution des stipulations de ce Contrat.
+
+10.5 Entrepreneur indépendant. BlueXML est un entrepreneur indépendant et rien dans ce Contrat ni dans l’exécution des Bons de Commande ne peut être interprété de manière à créer un contrat de travail ou une relation d’agence entre la Société (ou le personnel de la Société) et BlueXML (ou le personnel de BlueXML). Chaque partie est seule responsable de la supervision, la direction, le contrôle et la rémunération de son personnel, y compris du règlement des taxes applicables, des déductions, et autres paiements et prestations. BlueXML peut sous-traiter certains des Services devant être fournis en vertu d'un Bon de Commande, à des tiers ou des Sociétés Affiliées, sans avoir à requérir l’autorisation de la Société, à condition cependant que (a) le sous-traitant s'engage à protéger les Informations Confidentielles de la Société, et que (b) BlueXML demeure responsable vis-à-vis de la Société de l'exécution de ses obligations en vertu des présentes.
+
+10.6 Export et Confidentialité. La Société s’interdit de télécharger, exporter ou réexporter le Logiciel ou toute information ou technologie liée, à moins de se conformer à l’ensemble des lois et règlementations applicables en France et dans tout autre pays concerné. BlueXML peut être amenée à fournir à la Société des données techniques soumises à des restrictions d'exportation. La Société est responsable du respect des obligations ou contraintes d’exportation applicables à ces données techniques et s'engage à respecter toutes les restrictions d’exportation applicables. En cas de manquement par la Société aux dispositions du présent Article 10.6 ou à toute disposition faisant référence au présent Article, BlueXML pourra résilier le Contrat et/ou le Bon de Commande concerné sans aucune responsabilité vis-à-vis de la Société. La Société reconna"t que, dans le cadre de la fourniture des Services, il peut être nécessaire que des données de la Société soient transférées entre BlueXML, ses Sociétés Affiliées, Partenaires Commerciaux et/ou sous-traitants, ces derniers pouvant être situés dans le monde entier. La Société accepte un tel transfert.
+
+10.7 Intégralité du Contrat. Chaque Bon de Commande (a) constitue un contrat distinct et intègre, par référence, le présent Contrat et toutes ses annexes, sauf disposition contraire expressément stipulée dans ce Bon de Commande, (b) constitue les seules conditions applicables à l'objet de ce Bon de Commande, nonobstant toute clause différente ou additionnelle qui pourrait être contenue dans le modèle de bon de commande ou dans tout autre document utilisé par la Société pour passer ses commandes ou effectuer des transactions en vertu du présent Contrat, et (c) constitue l’entier et seul accord définitivement conclu entre les parties, nonobstant tout accord antérieur, écrit ou verbal, relatif à l'objet du Bon de Commande. En cas de conflit entre le présent Contrat et un Bon de Commande, le présent Contrat prévaut, sauf stipulation contraire expresse dans le Bon de Commande. Toute réclamation relative à la fourniture des Services par BlueXML, ses Sociétés Affiliées ou leur personnel respectif sera diligentée à l’encontre de BlueXML exclusivement.
+
+10.8 Force Majeure. Aucune partie ne peut être tenue responsable en cas de retard ou de manquement dans l'exécution de ses obligations résultant d’un cas de force majeure.
+
+10.9. Autonomie. Si une stipulation du Contrat est déclarée nulle, illégale ou inapplicable pour quelque raison que ce soit, mais pourrait être licite et applicable si elle était modifiée de manière appropriée, cette stipulation s'appliquera avec les modifications nécessaires à sa validité et son applicabilité. Si ladite stipulation ne peut être modifiée, les parties conviennent que cette non-validité n'affectera pas la validité des autres stipulations du Contrat.
+
+10.10 Renonciation. Le fait que l’une des Parties tarde à exercer un droit ou un pouvoir que lui donne le Contrat, ou omette de le faire, ne réduira pas ce droit ou ce pouvoir et ne sera pas interprété comme une renonciation. Aucune renonciation n’est valable à moins d'être formulée par écrit et signée par le représentant autorisé de la partie à l’encontre de laquelle la renonciation est opposée.
+
+10.11 Résolution des litiges. Chaque partie s'engage à fournir à l’autre par écrit une description de tout problème qui pourrait survenir et à s’efforcer, de bonne foi, de trouver une solution amiable audit problème avant d’engager toute procédure. Nonobstant ce qui précède, chaque partie peut prendre les mesures raisonnablement nécessaires à la protection de ses droits. Aucune réclamation ni action, quelle qu’en soit la forme, résultant du Contrat ou d’un Bon de Commande ne peut être engagée par l’une des parties plus de un (1) an après la survenance de l’évènement dommageable.
+
+10.12 Titres. Les titres du présent Contrat ne sont insérés que pour des besoins d'identification et par commodité et ne
+peuvent être utilisés à des fins d’interprétation du Contrat.
+
+10.13 Modification. Ni le Contrat, ni aucun Bon de Commande ne peut être amendé ou modifié, sauf par un avenant signé par les parties, faisant spécifiquement référence au présent Contrat ou au Bon de Commande concerné.
+
+10.14 Exemplaires originaux et signature par voie électronique. Dans l’hypothèse où ce Contrat serait signé par signatures manuscrites, ce Contrat sera conclu en autant d’exemplaires que de parties, chaque exemplaire constituant un original et tous les exemplaires constituant un seul et même document. Les parties peuvent s’échanger les pages de signatures par courrier électronique signé numériquement et ces signatures seront considérées comme liant valablement les deux parties à l’ensemble des termes et conditions du présent Contrat.
+
+10.15 Langue de reference. Le présent Contrat est à l’origine rédigé en français. La présente traduction en langue anglaise n’a qu’une valeur informative. La langue de référence demeure la langue française. Par conséquent, en cas de contradiction entre les versions de langue française et de langue anglaise, la version française doit prévaloir.
+   </license>
+
+   <url>
+      <discovery label="SIDE-Labs" url="http://www.side-labs.org"/>
+   </url>
+
+   <requires>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.ocl"/>
+      <import plugin="org.eclipse.ocl.ecore"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="com.bluexml.side.Util.ecore"/>
+      <import plugin="com.bluexml.side.Util.libs"/>
+      <import plugin="com.bluexml.side.Util.metaModel.validate"/>
+      <import plugin="com.bluexml.side.Util.generator.acceleo"/>
+      <import plugin="com.bluexml.side.Util.generator.alfresco"/>
+      <import plugin="com.bluexml.side.Util.generator"/>
+      <import plugin="com.bluexml.side.Application"/>
+      <import plugin="com.bluexml.side.Util.security"/>
+      <import plugin="com.bluexml.side.Util.log"/>
+      <import plugin="com.bluexml.side.Common"/>
+      <import plugin="com.bluexml.side.Util.componentMonitor"/>
+      <import plugin="fr.obeo.acceleo.gen"/>
+      <import plugin="com.bluexml.side.Class"/>
+      <import plugin="com.bluexml.side.Class.modeler"/>
+      <import plugin="com.bluexml.side.Util.dependencies"/>
+      <import plugin="com.bluexml.side.Class.service.alfresco"/>
+   </requires>
+
+   <plugin
+         id="com.bluexml.side.Class.generator.alfresco"
+         download-size="0"
+         install-size="0"
+         version="1.0.631.v34377-20120323"
+         unpack="false"/>
+
+</feature>

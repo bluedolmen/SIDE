@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature id="com.bluexml.side.Workflow.generator.alfresco34d.feature" label="SIDE Workflow Alfresco 3.4b Community Generator" version="1.0.23.v31980-20120111" provider-name="BLUEXML">
   <description url="http://www.example.com/description">[Enter Feature Description here.]</description>
-  <copyright url="http://www.example.com/copyright">[Enter Copyright Description here.]</copyright>
-  <license url="http://www.example.com/license">[Enter License Description here.]</license>
+  <copyright url="http://www.bluexml.com/copyright">       Copyright 2005-2012 BlueXML SARL.    </copyright>
+  <license url="http://www.side-labs.com/wiki/index.php/SIDE4:LicenseEN"> SIDE SOFTWARE IS LICENSED BY BLUEXML. PLEASE GO TO http://www.side-labs.org/wiki/index.php/SIDE4:License. READ THIS AGREEMENT CAREFULLY BEFORE PURCHASING AND/OR USING SIDE SOFTWARE.    </license>
   <plugin id="com.bluexml.side.Workflow.generator.alfresco34d" download-size="0" install-size="0" version="1.0.23.v31980-20120111" unpack="false" />
   <plugin id="com.bluexml.side.Workflow.generator.alfresco" download-size="0" install-size="0" version="1.0.82.v31653-20120106" unpack="false" />
 </feature>
