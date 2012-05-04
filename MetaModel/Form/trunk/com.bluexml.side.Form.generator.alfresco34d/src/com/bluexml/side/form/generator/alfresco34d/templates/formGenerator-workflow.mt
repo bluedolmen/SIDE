@@ -175,5 +175,5 @@ wfbx<%ref.eContainer().filter("workflow.Process").name%>:<%ref.filter("workflow.
 <field id="bpm:dueDate" set="info" label-id="workflow.field.due">
 	<control template="/org/alfresco/components/form/controls/info.ftl" />
 </field>
-<field id="bpm:status" set="progress" />
+<field id="bpm:status" set="progress"> <control template="/side/controls/workflow/workflow-status.ftl" /></field>
 <field id="packageItems" set="items" />
