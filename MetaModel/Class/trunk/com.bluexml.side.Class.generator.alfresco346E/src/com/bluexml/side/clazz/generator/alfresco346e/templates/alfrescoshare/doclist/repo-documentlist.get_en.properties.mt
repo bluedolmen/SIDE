@@ -114,7 +114,7 @@ customize.title=Customize
 customize.header.actions=Actions
 
 # SIDE sort extension
-menu.sort=Sort by : Name
+label.sortby=Sort by : Name
 search.sort.size=Size
 search.sort.mimetype=MIME Type
 search.sort.type=Type
