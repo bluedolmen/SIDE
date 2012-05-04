@@ -4,7 +4,7 @@ import com.bluexml.side.portal.generator.alfresco.templates.services.ClazzServic
 import com.bluexml.side.clazz.service.alfresco.CommonServices
 %>
 <%script type="Portal" name="validatedFilename" post="trim()" %>
-<%getProperty("alf.share.paths.web-ext.alf.components")%>/upload/flash-upload.get_en.properties
+<%getProperty("alf.share.paths.web-ext.alf.components")%>/upload/flash-upload.get_es.properties
 <%script type="Portal" name="generator" file="<%validatedFilename%>"%>
 header.singleUpload=A\u00f1adir fichero
 header.multiUpload=A\u00f1adir fichero(s)
