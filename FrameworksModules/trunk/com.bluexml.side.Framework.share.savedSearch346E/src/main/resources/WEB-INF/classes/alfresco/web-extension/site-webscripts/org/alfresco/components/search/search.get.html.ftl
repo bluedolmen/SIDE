@@ -17,7 +17,8 @@
       savedSearchDataType: "${args.savedSearchDataType!""}",
       enableExport: ${args.enableExport!"false"},
       exportType: "${args.exportType!""}",
-      exportViewName: "${args.exportViewName!""}"
+      exportViewName: "${args.exportViewName!""}",
+      savedSearchVisibility:"${args.savedSearchVisibility!"public"}"
    }).setMessages(
       ${messages}
    );
