@@ -929,7 +929,7 @@
 												customDesc += '<span class="item"><em>' + scope.msg(i18nKey) + '</em> ' + customProp[x] + '</span>';
 											}
 										}
-										if (customDesc = "") {
+										if (customDesc == "") {
 											desc += '<div class="detail"><span class="item"><em>' + scope.msg("details.modified.on") + '</em> ' + $date(record.modifiedOn) + '</span>';
 											desc += '<span class="item"><em>' + scope.msg("details.modified.by") + '</em> ' + $userProfile(record.modifiedByUser, record.modifiedBy) + '</span></div>';
 											desc += '<div class="detail"><span class="item"><em>' + scope.msg("details.description") + '</em> ' + $links($html(description)) + '</span></div>';
