@@ -61,7 +61,7 @@ public class AttributeServices {
 	public String getShareSearchFormControl(Attribute object) throws Exception {
 		String numberRange = "/org/alfresco/components/form/controls/numberrange.ftl";
 		String dateRange = "/org/alfresco/components/form/controls/daterange.ftl";
-		String minetype = "/org/alfresco/components/form/controls/mimetype.ftl";
+		
 		String selectMany = "/org/alfresco/components/form/controls/selectmany.ftl";
 		if (object.getValueList() != null) {
 			return selectMany;
@@ -125,12 +125,13 @@ public class AttributeServices {
 	public String getFtlTypeConverter(EObject node) throws Exception {
 		if (node instanceof Attribute) {
 			Attribute object = (Attribute) node;
+			String string = "?js_string";
 			if (object.getTyp() == DataType.BOOLEAN) {
-				return "?string";
+				return string;
 			} else if (object.getTyp() == DataType.BYTE) {
 				return "?int";
 			} else if (object.getTyp() == DataType.CHAR) {
-				return "?string";
+				return string;
 			} else if (object.getTyp() == DataType.DATE) {
 				return "?date";
 			} else if (object.getTyp() == DataType.DATE_TIME) {
@@ -145,11 +146,11 @@ public class AttributeServices {
 				return "?long";
 			} else if (object.getTyp() == DataType.OBJECT) {
 				//return "?content";
-				return "?string";
+				return string;
 			} else if (object.getTyp() == DataType.SHORT) {
 				return "?int";
 			} else if (object.getTyp() == DataType.STRING) {
-				return "?string";
+				return string;
 			} else if (object.getTyp() == DataType.TIME) {
 				return "?datetime";
 			}
