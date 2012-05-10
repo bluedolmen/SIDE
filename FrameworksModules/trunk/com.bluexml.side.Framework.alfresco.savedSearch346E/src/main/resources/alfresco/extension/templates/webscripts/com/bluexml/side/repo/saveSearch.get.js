@@ -55,9 +55,8 @@ function saveSearch() {
       // must create the list container
       savedSearchDataListContainer = datalistHome.createNode(datalistName, containerType);
       if (privateSavedSearch) {
-         // only siteAdmin / superadmin and this user can view the node
+         // only superadmin and this user can view the node
          savedSearchDataListContainer.setInheritsPermissions(false);
-         
       }
    }
    // create new savedSearch
