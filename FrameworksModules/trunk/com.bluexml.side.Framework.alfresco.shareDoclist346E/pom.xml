@@ -18,7 +18,7 @@
   <groupId>com.bluexml.side.Framework.alfresco</groupId>
   <artifactId>shareDoclist346E</artifactId>
   <name>SIDE integration module : Alfresco share docList</name>
-  <version>1.0.31</version>
+  <version>1.0.32</version>
   <packaging>zip</packaging>
   <description>this module contains SIDE extension to extends Alfresco to support custom type on Alfresco Share</description>
   <parent>
