@@ -4,7 +4,7 @@
   <groupId>com.bluexml.side.Framework.share</groupId>
   <artifactId>savedSearch346E</artifactId>
   <name>com.bluexml.side.Framework.share.savedSearch</name>
-  <version>1.0.5</version>
+  <version>1.0.6</version>
   <packaging>zip</packaging>
   <parent>
     <groupId>org.bluexml</groupId>
@@ -21,7 +21,7 @@
     <dependency>
       <groupId>com.bluexml.side.Framework.alfresco</groupId>
       <artifactId>savedSearch346E</artifactId>
-      <version>1.0.3</version>
+      <version>1.0.4</version>
       <type>amp</type>
     </dependency>
   </dependencies>
