@@ -29,6 +29,7 @@ import org.alfresco.service.namespace.NamespaceService;
 import org.alfresco.service.namespace.QName;
 import org.alfresco.util.GUID;
 import org.alfresco.util.ISO9075;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -87,7 +88,7 @@ public class CustomTypeFormProcessor extends TypeFormProcessor {
 		if (data instanceof CustomFormData) {
 			isFileNameIsGenerated = ((CustomFormData) data).isFileNameIsGenerated();
 		}
-
+		String fileName = null;
 		// implements FileField persistence
 		int fileFieldCount = 0;
 		for (FieldData fieldData : data) {
@@ -97,7 +98,9 @@ public class CustomTypeFormProcessor extends TypeFormProcessor {
 
 			if (fieldData.isFile() == true && fieldData instanceof CustomFormData.FieldData) {
 				CustomFormData.FieldData cfd = (CustomFormData.FieldData) fieldData;
+
 				if (fileFieldCount == 0) {
+					fileName = cfd.getFileName();
 					InputStream inputStream = cfd.getInputStream();
 
 					ContentWriter writer = this.contentService.getWriter(nodeRef, ContentModel.PROP_CONTENT, true);
@@ -115,19 +118,17 @@ public class CustomTypeFormProcessor extends TypeFormProcessor {
 						logger.error("trying to close inputStream fail", e);
 					}
 
-					if (isFileNameIsGenerated) {
-						String fileName = cfd.getFileName();
-						logger.debug("fill cm:name using fileName :" + fileName);
-						// add fieldData to put fileName into cm:name properties
-						data.addFieldData(NAME_PROP_DATA, fileName);
-
-					}
-
 				} else {
 					// TODO multi file upload not implemented yet
 				}
 				fileFieldCount++;
 			}
+		}
+
+		if (isFileNameIsGenerated && StringUtils.trimToNull(fileName) != null) {
+			logger.debug("fill cm:name using fileName :" + fileName);
+			// add fieldData to put fileName into cm:name properties
+			data.addFieldData(NAME_PROP_DATA, fileName);
 		}
 
 		// let superclass persist properties
@@ -283,7 +284,7 @@ public class CustomTypeFormProcessor extends TypeFormProcessor {
 						}
 					}
 					// no file field so generate a GUID
-					if (nodeName == null) {
+					if (StringUtils.trimToNull(nodeName) == null) {
 						nodeName = GUID.generate();
 						if (data instanceof CustomFormData) {
 							((CustomFormData) data).setFileNameIsGenerated(true);
