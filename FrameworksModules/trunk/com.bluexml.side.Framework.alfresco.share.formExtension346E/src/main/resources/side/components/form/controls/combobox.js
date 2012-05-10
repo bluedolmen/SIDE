@@ -122,8 +122,7 @@ if (!Array.prototype.indexOf) {
                return myDataSource;
             };
          }
-         
-         
+
          if (this.options.addNewConfig.formconfig.destination) {
             this.options.addNewConfig.formconfig.destination = YAHOO.lang.substitute(this.options.addNewConfig.formconfig.destination, me.options);
          }
@@ -164,7 +163,7 @@ if (!Array.prototype.indexOf) {
                field : this.options.field,
                compactMode : true,
                currentValue : this.initialValue
-            });
+            }).setMessages(this.messages);
          } else if (this.options.multipleSelectMode) {
             // cardinality n-n
             var multiselect = new SIDE.MyDSMultiSelectField({
@@ -274,7 +273,7 @@ if (!Array.prototype.indexOf) {
                if (me.options.mandatory) {
                   YAHOO.Bubbling.fire("mandatoryControlValueUpdated", me);
                }
-            });            
+            });
             return DSSelectWidget;
          }
 
