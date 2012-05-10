@@ -506,7 +506,7 @@
          }
          
          this._loadSelectedItems();
-         if (this._inAuthorityMode()) {
+         if (this._inAuthorityMode() && !this.options.disabled) {
             this._loadSearchTermResults();  
          }
       },
