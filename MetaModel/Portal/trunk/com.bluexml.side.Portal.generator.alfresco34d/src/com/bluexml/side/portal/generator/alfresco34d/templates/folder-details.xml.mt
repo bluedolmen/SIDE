@@ -4,7 +4,7 @@ import com.bluexml.side.portal.generator.alfresco.templates.services.ClazzServic
 import com.bluexml.side.clazz.service.alfresco.CommonServices
 %>
 <%script type="Portal" name="validatedFilename"%>
-<%if (pageSet[ID.toLowerCase().trim() == "folder-details" && !generate].nSize() > 0) {%><%getProperty("alf.share.paths.core.site-data")%>/template-instances/folder-details.xml<%}%>
+<%if (pageSet[ID.toLowerCase().trim() == "folder-details" && !generate].portlets.associationPortlet.nSize() > 0) {%><%getProperty("alf.share.paths.core.site-data")%>/template-instances/folder-details.xml<%}%>
 
 <%script type="Portal" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 <%for (pageSet[ID.toLowerCase().trim() == "folder-details" && !generate].portlets.associationPortlet){%>
