@@ -18,7 +18,8 @@
       enableExport: ${args.enableExport!"false"},
       exportType: "${args.exportType!""}",
       exportViewName: "${args.exportViewName!""}",
-      savedSearchVisibility:"${args.savedSearchVisibility!"public"}"
+      savedSearchVisibility:"${args.savedSearchVisibility!"public"}",
+      savedSearchAllowOverride:${args.savedSearchAllowOverride!"false"}
    }).setMessages(
       ${messages}
    );

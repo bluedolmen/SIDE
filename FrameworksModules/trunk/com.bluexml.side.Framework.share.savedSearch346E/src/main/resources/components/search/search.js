@@ -190,7 +190,12 @@
                       * set available visibility must be public, private, public&private
                       * public&private let user to choice
                       */
-                     savedSearchVisibility : 'public'
+                     savedSearchVisibility : 'public',
+                     
+                     /**
+                      * if true allow user to override existing savedSearch
+                      */
+                     savedSearchAllowOverride : false
                   },
 
                   /**
@@ -904,6 +909,10 @@
 
                         if (this.options.savedSearchVisibility.indexOf("private") != -1) {
                            url += "&userName=" + Alfresco.constants.USERNAME;
+                        }
+                        
+                        if (this.options.savedSearchAllowOverride) {
+                           url += "&overrideAllowed=" + this.options.savedSearchAllowOverride;
                         }
                         var responseConfig = {
                            successMessage : this.msg("search.save.ok"),
