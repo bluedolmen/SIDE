@@ -185,13 +185,13 @@
                       * enable/disable export button
                       */
                      enableExport : false,
-                     
+
                      /**
-                      * set available visibility must be public, private, public&private
-                      * public&private let user to choice
+                      * set available visibility must be public, private,
+                      * public&private public&private let user to choice
                       */
                      savedSearchVisibility : 'public',
-                     
+
                      /**
                       * if true allow user to override existing savedSearch
                       */
@@ -325,7 +325,7 @@
                      }
 
                      // button to export search result
-                     if (this.options.enableExport) {
+                     if (this.options.enableExport && this.options.searchQuery.length !== 0) {
                         this.widgets.exportCSVButton = new YAHOO.widget.Button({
                            id : this.id + "_export",
                            type : "push",
@@ -910,7 +910,7 @@
                         if (this.options.savedSearchVisibility.indexOf("private") != -1) {
                            url += "&userName=" + Alfresco.constants.USERNAME;
                         }
-                        
+
                         if (this.options.savedSearchAllowOverride) {
                            url += "&overrideAllowed=" + this.options.savedSearchAllowOverride;
                         }
