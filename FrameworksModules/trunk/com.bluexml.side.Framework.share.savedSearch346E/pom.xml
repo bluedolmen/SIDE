@@ -4,7 +4,7 @@
   <groupId>com.bluexml.side.Framework.share</groupId>
   <artifactId>savedSearch346E</artifactId>
   <name>com.bluexml.side.Framework.share.savedSearch</name>
-  <version>1.0.6</version>
+  <version>1.0.7</version>
   <packaging>zip</packaging>
   <parent>
     <groupId>org.bluexml</groupId>
