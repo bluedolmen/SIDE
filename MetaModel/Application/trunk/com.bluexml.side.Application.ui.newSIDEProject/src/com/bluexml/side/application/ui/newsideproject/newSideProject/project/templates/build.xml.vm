@@ -256,7 +256,7 @@
          - - - - - - - - - - - - - - - - - -->
 	<target name="update-alfresco.war" if="alfresco-war-exists">
 		<echo message="Process Alfresco war with config" level="info" />
-		<delete file="${buildPath}/config" failonerror="false" />
+		<delete dir="${buildPath}/config" failonerror="false" />
 		<copy todir="${buildPath}/config" failonerror="true" verbose="true">
 			<fileset dir="${commonConfigPath}/webapps/alfresco">
 				<include name="**" />
@@ -278,7 +278,7 @@
          - - - - - - - - - - - - - - - - - -->
 	<target name="update-share.war" if="share-war-exists">
 		<echo message="Process Share war with config" level="info" />
-		<delete file="${buildPath}/config" failonerror="false" />
+		<delete dir="${buildPath}/config" failonerror="false" />
 		<copy todir="${buildPath}/config" failonerror="true" verbose="true">
 			<fileset dir="${commonConfigPath}/webapps/share">
 				<include name="**" />
