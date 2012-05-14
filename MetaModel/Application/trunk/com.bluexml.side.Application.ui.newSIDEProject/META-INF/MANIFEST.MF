@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: New SIDE project wizard
 Bundle-SymbolicName: com.bluexml.side.Application.ui.newSIDEProject;singleton:=true
-Bundle-Version: 1.0.8.v34168-20120320
+Bundle-Version: 1.0.9.v36070-20120514
 Bundle-Activator: com.bluexml.side.application.ui.newsideproject.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.ui,
