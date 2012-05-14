@@ -15,6 +15,7 @@ public class CustomFormData extends FormData {
 		super();
 		logger.debug("create instance");
 	}
+
 	boolean fileNameIsGenerated = false;
 
 	public boolean isFileNameIsGenerated() {
@@ -25,8 +26,6 @@ public class CustomFormData extends FormData {
 		this.fileNameIsGenerated = fileNameIsGenerated;
 	}
 
-	
-	
 	@Override
 	public void addFieldData(String fieldName, Object fieldValue) {
 		// TODO Auto-generated method stub
@@ -36,39 +35,30 @@ public class CustomFormData extends FormData {
 	@Override
 	public void addFieldData(String fieldName, Object fieldValue, boolean overwrite) {
 		// check whether some data already exists
-        if (this.data.containsKey(fieldName))
-        {
-            // if we are overwriting just replace with provided data
-            if (overwrite)
-            {
-                this.data.put(fieldName, new FieldData(fieldName, fieldValue, false));
-            }
-            else
-            {
-                // pull out the existing value and create a List if necessary
-                List currentValues = null;
-                Object currentValue = this.data.get(fieldName).getValue();
-                if (currentValue instanceof List)
-                {
-                    currentValues = (List)currentValue;
-                }
-                else
-                {
-                    // a non List value is present, create the new list
-                    // and add the current value to it
-                    currentValues = new ArrayList(4);
-                    currentValues.add(currentValue);
-                    this.data.put(fieldName, new FieldData(fieldName, currentValues, false));
-                }
-                
-                // add the provided value to the list
-                currentValues.add(fieldValue);
-            }
-        }
-        else
-        {
-            this.data.put(fieldName, new FieldData(fieldName, fieldValue, false));
-        }
+		if (this.data.containsKey(fieldName)) {
+			// if we are overwriting just replace with provided data
+			if (overwrite) {
+				this.data.put(fieldName, new FieldData(fieldName, fieldValue, false));
+			} else {
+				// pull out the existing value and create a List if necessary
+				List currentValues = null;
+				Object currentValue = this.data.get(fieldName).getValue();
+				if (currentValue instanceof List) {
+					currentValues = (List) currentValue;
+				} else {
+					// a non List value is present, create the new list
+					// and add the current value to it
+					currentValues = new ArrayList(4);
+					currentValues.add(currentValue);
+					this.data.put(fieldName, new FieldData(fieldName, currentValues, false));
+				}
+
+				// add the provided value to the list
+				currentValues.add(fieldValue);
+			}
+		} else {
+			this.data.put(fieldName, new FieldData(fieldName, fieldValue, false));
+		}
 	}
 
 	@Override
@@ -78,7 +68,7 @@ public class CustomFormData extends FormData {
 		this.data.put(fieldData.getName(), fieldData);
 	}
 
-	class FieldData extends org.alfresco.repo.forms.FormData.FieldData {
+	public class FieldData extends org.alfresco.repo.forms.FormData.FieldData {
 		String mimetype = null;
 		String fileName = null;
 
@@ -106,7 +96,6 @@ public class CustomFormData extends FormData {
 			}
 		}
 
-		
 		public FieldData(String fieldName, Object fieldValue, boolean b) {
 			super(fieldName, fieldValue, b);
 		}

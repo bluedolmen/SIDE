@@ -23,7 +23,7 @@
           parent="baseFormProcessor" />
           
    <bean id="nodeFormProcessor" 
-          class="com.bluexml.side.framework.alfresco.formProcessor.CustomNodeFormProcessor" 
+          class="org.alfresco.repo.forms.processor.node.CustomNodeFormProcessor" 
           parent="filteredFormProcessor">
         <property name="filterRegistry" ref="nodeFilterRegistry" />
         <property name="nodeService" ref="NodeService" />
@@ -36,7 +36,7 @@
     </bean>
     
     <bean id="typeFormProcessor" 
-          class="com.bluexml.side.framework.alfresco.formProcessor.CustomTypeFormProcessor"
+          class="org.alfresco.repo.forms.processor.node.CustomTypeFormProcessor"
            parent="filteredFormProcessor" init-method="init"> 
         <property name="filterRegistry" ref="typeFilterRegistry" />
         <property name="nodeService" ref="NodeService" />
