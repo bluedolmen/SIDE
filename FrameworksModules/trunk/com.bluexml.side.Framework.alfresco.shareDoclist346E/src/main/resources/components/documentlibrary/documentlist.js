@@ -597,7 +597,7 @@
 								menu : "sort-menu"
 							});
 
-							if (this.widgets.fileSelect !== null) {
+							if (this.widgets.fileSort !== null) {
 								this.dynamicControls.push(this.widgets.fileSort);
 							}
 							// << SIDE end
