@@ -127,7 +127,7 @@ public class AttributeServices {
 			Attribute object = (Attribute) node;
 			String string = "?js_string";
 			if (object.getTyp() == DataType.BOOLEAN) {
-				return string;
+				return "?string";
 			} else if (object.getTyp() == DataType.BYTE) {
 				return "?int";
 			} else if (object.getTyp() == DataType.CHAR) {
