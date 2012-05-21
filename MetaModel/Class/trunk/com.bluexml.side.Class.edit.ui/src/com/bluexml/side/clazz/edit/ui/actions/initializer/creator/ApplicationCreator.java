@@ -114,8 +114,8 @@ public class ApplicationCreator extends ModelCreator {
 			List<IConfigurationElement> allToolingModelLibraryExtensions = ToolingUtils.getAllToolingModelLibraryExtensions();
 
 			for (IConfigurationElement iConfigurationElement : allToolingModelLibraryExtensions) {
-				String label = iConfigurationElement.getAttribute("label");
-				if (alfrescoVersion.equals(label)) {
+				String id = iConfigurationElement.getAttribute("id");
+				if (alfrescoVersion.equals(id)) {
 					// ok get generators
 					List<IConfigurationElement> gene = ExtensionPointUtils.getIConfigurationElementsByName(iConfigurationElement, "generatorVersion");
 					for (IConfigurationElement iConfigurationElement2 : gene) {
