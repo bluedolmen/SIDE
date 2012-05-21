@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
-<product name="SIDE Products Builder" uid="SIDEAllFeatures" id="com.bluexml.side.Integration.eclipse.branding.allFeatures.side_product_builder" application="org.eclipse.ui.ide.workbench" version="1.0.249" useFeatures="true" includeLaunchers="true">
+<product name="SIDE Products Builder" uid="SIDEAllFeatures" id="com.bluexml.side.Integration.eclipse.branding.allFeatures.side_product_builder" application="org.eclipse.ui.ide.workbench" version="1.0.250" useFeatures="true" includeLaunchers="true">
   <configIni use="default" />
   <launcherArgs>
     <vmArgs>-d32</vmArgs>
@@ -19,12 +19,12 @@
     <feature id="org.eclipse.pde" version="3.7.0.v20110504-0800-7b7qFVpFEx2XnmYtj_9RfO7" />
     <feature id="com.bluexml.side.Integration.eclipse.dependencies.feature" version="1.0.2.v35624-20120503" />
     <feature id="org.eclipse.m2e.feature" version="1.0.0.20110607-2117" />
-    <feature id="com.bluexml.side.Common.core.labs.feature" version="1.0.371.v36070-20120514" />
-    <feature id="com.bluexml.side.Common.forAlfresco.labs.feature" version="1.0.265.v36225-20120519" />
-    <feature id="com.bluexml.side.Common.sideForAlfresco.feature" version="1.0.883.v36225-20120519" />
-    <feature id="com.bluexml.side.Common.core.enterprise.feature" version="1.0.708.v36225-20120519" />
+    <feature id="com.bluexml.side.Common.core.labs.feature" version="1.0.372.v36257-20120521" />
+    <feature id="com.bluexml.side.Common.forAlfresco.labs.feature" version="1.0.266.v36257-20120521" />
+    <feature id="com.bluexml.side.Common.sideForAlfresco.feature" version="1.0.884.v36257-20120521" />
+    <feature id="com.bluexml.side.Common.core.enterprise.feature" version="1.0.709.v36257-20120521" />
     <feature id="com.bluexml.side.Common.forAlfresco.enterprise.feature" version="1.0.617.v36182-20120516" />
-    <feature id="com.bluexml.side.Integration.eclipse.allFeatures.feature" version="1.0.249.v36225-20120519" />
+    <feature id="com.bluexml.side.Integration.eclipse.allFeatures.feature" version="1.0.250.v36257-20120521" />
   </features>
 </product>
 
