@@ -1,0 +1,9 @@
+<webscript>
+  <shortname>get filters</shortname>
+  <description>service to get filters nodes</description>
+  <url>/side/getFilters?site={site}&amp;query={query}&amp;dataProperty={dataProperty}&amp;dataType={dataType}&amp;filterType={filterType}</url>
+  <format default="json">argument</format>
+  <authentication>user</authentication>
+  <lifecycle>internal</lifecycle>
+  <family>SIDE</family>
+</webscript>
