@@ -1,0 +1,31 @@
+<webapp-structure>
+  <registeredFiles>
+    <entry>
+      <string>com.bluexml.side.Framework.alfresco:model40d</string>
+      <path-set>
+        <pathsSet class="linked-hash-set"/>
+      </path-set>
+    </entry>
+    <entry>
+      <string>com.bluexml.side.Framework.alfresco:commons40d</string>
+      <path-set>
+        <pathsSet class="linked-hash-set"/>
+      </path-set>
+    </entry>
+    <entry>
+      <string>currentBuild</string>
+      <path-set>
+        <pathsSet class="linked-hash-set">
+          <string>lib/spring-core-3.0.5.RELEASE.jar</string>
+          <string>lib/spring-asm-3.0.5.RELEASE.jar</string>
+          <string>lib/jdom-1.1.jar</string>
+          <string>lib/customAssociationManagement40d-1.0.7.jar</string>
+          <string>config/alfresco/module/SIDE_customAssociationManagement40d/context/service-context.xml</string>
+          <string>config/alfresco/module/SIDE_customAssociationManagement40d/log4j.properties</string>
+          <string>config/alfresco/module/SIDE_customAssociationManagement40d/module-context.xml</string>
+          <string>module.properties</string>
+        </pathsSet>
+      </path-set>
+    </entry>
+  </registeredFiles>
+</webapp-structure>
