@@ -3,7 +3,7 @@
 
 <beans>
 
-	<bean id="unicityDescriptorReader" class="com.bluexml.side.framework.alfresco.unicity.UnicityXMLReader" singleton="true" init-method="init">
+	<bean id="unicityDescriptorReader" class="com.bluexml.side.framework.alfresco.unicity.UnicityXMLReader" singleton="true">
 		<property name="resourcePattern" value="classpath*:alfresco/module/*/unicity.xml" />
 	</bean>
 
