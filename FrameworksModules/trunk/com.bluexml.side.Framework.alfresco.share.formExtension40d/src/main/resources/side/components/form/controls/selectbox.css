@@ -1,0 +1,12 @@
+div.inputEx-RadioField-choice input[type="radio"] {
+	width: auto;
+}
+
+.inputEx-RadioField-choice .inputEx-RadioField-rightLabel {
+	display: inline;
+}
+
+.inputEx-CheckBox .inputEx-CheckBox-rightLabel {
+	display: inline;
+}
+
