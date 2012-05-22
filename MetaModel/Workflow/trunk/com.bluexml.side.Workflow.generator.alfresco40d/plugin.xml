@@ -36,7 +36,7 @@
                         label="Alfresco URL">
                   </configurationParameter>
                   <moduleDependence
-                        moduleId="com.bluexml.side.Framework.alfresco.pdfGenerator40d"
+                        moduleId="com.bluexml.side.Framework.alfresco.workflow.pdfGenerator40d"
                         moduleType="amp"
                         technologyVersion="alfresco_40d"
                         versionMax="1.0.2"
