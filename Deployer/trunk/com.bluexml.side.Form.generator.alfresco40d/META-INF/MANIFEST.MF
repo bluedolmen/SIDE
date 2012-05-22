@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SIDE Forms Generator for Alfresco 4.0.d
+Bundle-SymbolicName: com.bluexml.side.Form.generator.alfresco40d;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: com.bluexml.side.form.generator.alfresco40d.Activator
+Bundle-Vendor: BLUEXML
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ com.bluexml.side.Form.generator.alfresco34d,
+ com.bluexml.side.Application,
+ com.bluexml.side.Util.generator,
+ com.bluexml.side.Util.generator.acceleo,
+ com.bluexml.side.Util.security,
+ com.bluexml.side.Util.generator.alfresco,
+ com.bluexml.side.Util.dependencies,
+ com.bluexml.side.Util.componentMonitor,
+ com.bluexml.side.Util.log,
+ com.bluexml.side.Form,
+ com.bluexml.side.Class.service.alfresco,
+ com.bluexml.side.Class.generator.alfresco,
+ org.eclipse.core.resources
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

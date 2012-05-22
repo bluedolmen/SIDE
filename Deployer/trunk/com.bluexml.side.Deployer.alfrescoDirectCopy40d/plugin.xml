@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="com.bluexml.side.Application.com_bluexml_application_configuration">
+      <technology
+            description="Check this to deploy your generated application components on the Alfresco product line.&lt;br&gt;Alfresco is the leading open source ECM solution.&lt;br&gt;MDA-based SIDE allows to deploy MDA generated artefacts on main ALfresco releases."
+            id="alfresco"
+            name="Alfresco"
+            url="http://www.alfresco.com">
+         <technologyVersion
+               description="Check this to generate data models on the major release 3 of Alfresco.&lt;br&gt;Alfresco 3.x is the leading open source collaborative ECM solution.&lt;br&gt;Additionally to content generation, SIDE provides useful server components to enhance some features of this release."
+               id="alfresco_40d"
+               version="Alfresco 4.0.d Community">
+            <deployerVersion
+                  class="com.bluexml.side.deployer.alfresco.directcopy.AlfrescoHotDeployer"
+                  description="Check this to generate a full deployable Alfresco package containing the newly generated Alfresco artifacts."
+                  hidden="visible"
+                  id="com.bluexml.side.Deployer.alfrescoDirectCopy40d"
+                  shared="false"
+                  version="SIDE Alfresco Direct Deployer">
+               <configurationParameter
+                     dataType="Directory"
+                     documentation="Set this value to the Alfresco Tomcat directory path in order the deployer puts the packaged war file.&lt;br&gt;&lt;b&gt;This option is mandatory.&lt;/b&gt;"
+                     key="CATALINA_HOME"
+                     label="Tomcat installation directory">
+               </configurationParameter>
+               <option
+                     defaultOption="true"
+                     documentation="Check this option if you want to completely remove previous deployed packages.&lt;br&gt;May be longer but may avoid some side effects when done from time to time."
+                     key="com.bluexml.side.deployerDirect.alfresco.clean"
+                     label="clean">
+                  <mustBeUnchecked
+                        pluginId="com.bluexml.side.Deployer.alfrescoDirectCopy34d">
+                     <optionRef
+                           optionId="com.bluexml.side.hotDeployment">
+                     </optionRef>
+                  </mustBeUnchecked>
+               </option>
+               <configurationParameter
+                     dataType="String"
+                     defaultValue="http://localhost:8080/alfresco"
+                     documentation="Set this value to the URL of the Alfresco instance on which you want to generate and deploy this new content model from the SIDE data model."
+                     key="alfresco.url"
+                     label="Alfresco URL">
+               </configurationParameter>
+               <configurationParameter
+                     dataType="String"
+                     defaultValue="admin"
+                     key="alfresco.admin.login"
+                     label="Alfresco Admin login">
+               </configurationParameter>
+               <configurationParameter
+                     dataType="String"
+                     defaultValue="admin"
+                     key="alfresco.admin.pwd"
+                     label="Alfresco Admin password">
+               </configurationParameter>
+               <configurationParameter
+                     dataType="String"
+                     defaultValue="http://localhost:8080/share"
+                     documentation="Set this value to the URL of the Alfresco share instance on which you want to generate and deploy"
+                     key="share.url"
+                     label="Alfresco Share URL">
+               </configurationParameter>
+               <option
+                     defaultOption="false"
+                     documentation="select this option to allow deployment process to do the best to load changes whitout restart the web application"
+                     hidden="false"
+                     key="com.bluexml.side.hotDeployment"
+                     label="hot deployment">
+                  <mustBeUnchecked
+                        pluginId="com.bluexml.side.Deployer.alfrescoDirectCopy346e">
+                     <optionRef
+                           optionId="com.bluexml.side.Deployer.alfrescoDirectCopy346e.clean">
+                     </optionRef>
+                  </mustBeUnchecked>
+               </option>
+            </deployerVersion>
+         </technologyVersion>
+      </technology>
+   </extension>
+
+</plugin>

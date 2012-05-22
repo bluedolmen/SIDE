@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SIDE Deployer for Alfresco 4.0.d
+Bundle-SymbolicName: com.bluexml.side.Deployer.alfrescoDirectCopy40d;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: com.bluexml.side.deployer.alfrescodirectcopy40d.Activator
+Bundle-Vendor: BLUEXML
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ com.bluexml.side.Application,
+ com.bluexml.side.Util.deployer,
+ com.bluexml.side.Util.security,
+ com.bluexml.side.Util.deployer.war,
+ com.bluexml.side.Util.libs,
+ com.bluexml.side.Util.componentMonitor,
+ com.bluexml.side.Deployer.alfrescoDirectCopy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
