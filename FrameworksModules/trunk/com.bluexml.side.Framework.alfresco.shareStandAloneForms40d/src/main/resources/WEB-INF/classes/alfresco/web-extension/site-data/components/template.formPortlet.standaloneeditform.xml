@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<component>
+	<scope>template</scope>
+	<region-id>formPortlet</region-id>
+	<source-id>standaloneeditform</source-id>
+	<url>/components/form?formId={formId}&amp;redirect={redirect}&amp;css={css}&amp;js={js}</url>
+	<properties>
+		<itemKind>node</itemKind>
+		<itemId>{nodeRef}</itemId>
+		<mode>edit</mode>
+		<submitType>{submitType}</submitType>
+		<showCaption>true</showCaption>
+		<showCancelButton>true</showCancelButton>
+	</properties>
+</component>
