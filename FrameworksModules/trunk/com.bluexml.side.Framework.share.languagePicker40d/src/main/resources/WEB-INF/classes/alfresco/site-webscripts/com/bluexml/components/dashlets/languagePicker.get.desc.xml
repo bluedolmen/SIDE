@@ -1,0 +1,6 @@
+<webscript>
+   <shortname>Language Picker</shortname>
+   <description>Language Picker Dashlet</description>
+   <family>user-dashlet</family>
+   <url>/components/dashlets/languagePicker</url>
+</webscript>
