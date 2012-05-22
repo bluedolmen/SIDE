@@ -10,9 +10,4 @@ public class DirectDeployer extends AlfrescoHotDeployer {
 		this.logChangesKey = "";
 	}
 
-
-	@Override
-	public boolean check() {
-		return true;
-	}
 }

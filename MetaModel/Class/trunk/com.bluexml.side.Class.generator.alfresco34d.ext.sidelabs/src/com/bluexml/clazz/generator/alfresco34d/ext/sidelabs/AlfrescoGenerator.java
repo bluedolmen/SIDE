@@ -1,11 +1,13 @@
 package com.bluexml.clazz.generator.alfresco34d.ext.sidelabs;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class AlfrescoGenerator extends com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator {
 
-	
+	public static final String templateBase34d = com.bluexml.side.clazz.generator.alfresco34d.Activator.templateBase34d;
 
 	/*
 	 * (non-Javadoc)
@@ -15,35 +17,46 @@ public class AlfrescoGenerator extends com.bluexml.side.clazz.generator.alfresco
 	@Override
 	protected List<String> getMainTemplates() {
 		List<String> templates = super.getMainTemplates();
-		// let form processor build default alfresco forms
-		templates.remove("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/DefaultEditForms/web-framework-config-defaults.mt"); //$NON-NLS-1$
 
 		// define configuration for advancedSearch
-		templates.add("/com.bluexml.side.Class.generator.alfresco34d/com/bluexml/side/clazz/generator/alfresco34d/templates/alfrescoshare/custom-share-config.xml.mt"); //$NON-NLS-1$
-
-		// 3.4.d specific
-		templates.remove("/com.bluexml.side.Class.generator.alfresco/templates/Model/alfrescoGenerator_model.mt");
-		templates.add("/com.bluexml.side.Class.generator.alfresco34d/com/bluexml/side/clazz/generator/alfresco34d/templates/model/alfrescoGenerator_model.mt");
-
-		templates.remove("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/uploadForm/flash-upload.get.html.ftl.mt");
-		templates.add("/com.bluexml.side.Class.generator.alfresco34d/com/bluexml/side/clazz/generator/alfresco34d/templates/alfrescoshare/upload/flash-upload.get.html.ftl.mt");
+		// replaced by portal generation page.advsearch.search.form page.documentlibrary.subtypes.form
+		//		templates.add(templateBase34d + "/alfrescoshare/custom-share-config.xml.mt"); //$NON-NLS-1$
 
 		// i18n messages
-		templates.remove("/com.bluexml.side.Class.generator.alfresco/templates/alfrescoshare/defaultdocListView/documentlist.get.properties.mt"); //$NON-NLS-1$
-		templates.add("/com.bluexml.side.Class.generator.alfresco34d/com/bluexml/side/clazz/generator/alfresco34d/templates/alfrescoshare/doclist/documentlist.get_de.properties.mt"); //$NON-NLS-1$
-		templates.add("/com.bluexml.side.Class.generator.alfresco34d/com/bluexml/side/clazz/generator/alfresco34d/templates/alfrescoshare/doclist/documentlist.get_es.properties.mt"); //$NON-NLS-1$
-		templates.add("/com.bluexml.side.Class.generator.alfresco34d/com/bluexml/side/clazz/generator/alfresco34d/templates/alfrescoshare/doclist/documentlist.get_fr.properties.mt"); //$NON-NLS-1$
-		templates.add("/com.bluexml.side.Class.generator.alfresco34d/com/bluexml/side/clazz/generator/alfresco34d/templates/alfrescoshare/doclist/documentlist.get_it.properties.mt"); //$NON-NLS-1$
-		templates.add("/com.bluexml.side.Class.generator.alfresco34d/com/bluexml/side/clazz/generator/alfresco34d/templates/alfrescoshare/doclist/documentlist.get.properties.mt"); //$NON-NLS-1$
-		templates.add("/com.bluexml.side.Class.generator.alfresco34d/com/bluexml/side/clazz/generator/alfresco34d/templates/alfrescoshare/changetype/change-type.get_de.properties.mt");
-		templates.add("/com.bluexml.side.Class.generator.alfresco34d/com/bluexml/side/clazz/generator/alfresco34d/templates/alfrescoshare/changetype/change-type.get_es.properties.mt");
-		templates.add("/com.bluexml.side.Class.generator.alfresco34d/com/bluexml/side/clazz/generator/alfresco34d/templates/alfrescoshare/changetype/change-type.get_fr.properties.mt");
-		templates.add("/com.bluexml.side.Class.generator.alfresco34d/com/bluexml/side/clazz/generator/alfresco34d/templates/alfrescoshare/changetype/change-type.get_it.properties.mt");
 
-		templates.add("/com.bluexml.side.Class.generator.alfresco34d/com/bluexml/side/clazz/generator/alfresco34d/templates/alfrescoshare/messages/slingshot-context.mt");
-		templates.add("/com.bluexml.side.Class.generator.alfresco34d/com/bluexml/side/clazz/generator/alfresco34d/templates/alfrescoshare/messages/slingshot.properties.mt");
+		templates.add(templateBase34d + "/alfrescoshare/doclist/documentlist.get_de.properties.mt"); //$NON-NLS-1$
+		templates.add(templateBase34d + "/alfrescoshare/doclist/documentlist.get_es.properties.mt"); //$NON-NLS-1$
+		templates.add(templateBase34d + "/alfrescoshare/doclist/documentlist.get_fr.properties.mt"); //$NON-NLS-1$
+		templates.add(templateBase34d + "/alfrescoshare/doclist/documentlist.get_it.properties.mt"); //$NON-NLS-1$
+
+		templates.add(templateBase34d + "/alfrescoshare/changetype/change-type.get_de.properties.mt");
+		templates.add(templateBase34d + "/alfrescoshare/changetype/change-type.get_es.properties.mt");
+		templates.add(templateBase34d + "/alfrescoshare/changetype/change-type.get_fr.properties.mt");
+		templates.add(templateBase34d + "/alfrescoshare/changetype/change-type.get_it.properties.mt");
+
+		templates.add(templateBase34d + "/alfrescoshare/messages/slingshot-context.mt");
+		templates.add(templateBase34d + "/alfrescoshare/messages/slingshot.properties.mt");
 
 		return templates;
+	}
+
+	@Override
+	protected List<Map<String, String>> getTemplatesSubstitution() {
+		List<Map<String, String>> templatesSubstitution = super.getTemplatesSubstitution();
+		Map<String, String> map = new HashMap<String, String>();
+		// 3.4.d specific
+		map.put(templateBase + "/Model/alfrescoGenerator_model.mt", templateBase34d + "/model/alfrescoGenerator_model.mt");
+
+		map.put(templateBase + "alfrescoshare/uploadForm/flash-upload.get.html.ftl.mt", templateBase34d + "/alfrescoshare/upload/flash-upload.get.html.ftl.mt");
+
+		// i18n messages
+		map.put(templateBase + "/alfrescoshare/defaultdocListView/documentlist.get.properties.mt", templateBase34d + "/alfrescoshare/doclist/documentlist.get.properties.mt"); //$NON-NLS-1$
+
+		// remove default config since form/portal generator do the job
+		map.put(templateBase + "/alfrescoshare/DefaultEditForms/web-framework-config-defaults.mt", null); //$NON-NLS-1$
+
+		templatesSubstitution.add(map);
+		return templatesSubstitution;
 	}
 
 }

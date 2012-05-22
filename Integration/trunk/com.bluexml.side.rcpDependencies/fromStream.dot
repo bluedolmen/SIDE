@@ -1,0 +1,9 @@
+digraph dependencies {
+1 [label="com.bluexml.side.Common.forAlfresco.enterprise.feature(1.0.617.v36182-20120516)",color=black,shape=box];
+2 [label="com.bluexml.side.Common.forAlfresco34d.sideenterprise.feature(1.0.82.v35998-20120511)",color=black,shape=box];
+3 [label="com.bluexml.side.Util.framework.tools.alfresco34dCE(1.0.9.v32489-20120203)",color=purple,shape=ellipse];
+4 [label="com.bluexml.side.Integration.eclipse.branding.enterprise.product(SIDE Enterprise)",color=red,shape=none];
+1 -> 2[color=black];
+2 -> 3[color=red];
+4 -> 1[color=red];
+};

@@ -71,7 +71,7 @@ public class DotRenderer {
 		this.parentChildren = parentChildren;
 	}
 
-	private void writeHeader(Writer w) throws Exception {
+	private void writeHeader() throws Exception {
 		write("digraph dependencies {\n");
 		int c = 1;
 
@@ -93,7 +93,7 @@ public class DotRenderer {
 			String str = "";
 			str += c + " ";
 			str += getNodeConfiguration(id);
-			write(str);
+			writeLine(str);
 			node2id.put(id, c);
 			c++;
 		}
@@ -131,12 +131,12 @@ public class DotRenderer {
 		return shape;
 	}
 
-	private void writeTail(Writer w) throws Exception {
-		write("}");
+	private void writeTail() throws Exception {
+		writeLine("}");
 	}
 
 	public void render() throws Exception {
-		writeHeader(w);
+		writeHeader();
 		// write node declaration
 
 		for (Map.Entry<Componant, Set<Componant>> entries : parentChildren.entrySet()) {
@@ -147,11 +147,11 @@ public class DotRenderer {
 				Integer targetId = node2id.get(child);
 				if (displayNull || (sourceId != null)) {
 					String link = getLink(parent, child, sourceId, targetId);
-					write(link);
+					writeLine(link);
 				}
 			}
 		}
-		writeTail(w);
+		writeTail();
 	}
 
 	private String getLink(Componant parent, Componant child, Integer sourceId, Integer targetId) throws Exception {
@@ -182,8 +182,12 @@ public class DotRenderer {
 		return color;
 	}
 
-	private void write(String s) throws Exception {
+	private void writeLine(String s) throws Exception {
 		w.write(s + ";\n");
+	}
+	
+	private void write(String s) throws Exception {
+		w.write(s);
 	}
 
 	private String getLabel(Componant node) {

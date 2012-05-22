@@ -12,9 +12,9 @@ import com.bluexml.side.util.security.preferences.SidePreferences;
 
 public class AlfrescoGenerator346e extends AlfrescoGenerator {
 	public final static String OPTION_ALFRESCO_PROPERTIES_SYNCHRONISATION = "option.properties.synchro";
-	final static String i18nFileExt = ".properties.mt";
-	final static String templateBase346e = "/com.bluexml.side.Class.generator.alfresco346E/com/bluexml/side/clazz/generator/alfresco346e/templates";
-	final static String doclist = "/alfrescoshare/doclist";
+	protected final static String i18nFileExt = ".properties.mt";
+	protected final static String templateBase346e = "/com.bluexml.side.Class.generator.alfresco346E/com/bluexml/side/clazz/generator/alfresco346e/templates";
+	protected final static String doclist = "/alfrescoshare/doclist";
 
 	@Override
 	public String getComponentKey() {

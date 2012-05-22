@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns/graphml"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns/graphml">
+<graph edgedefault="directed">
+<node id="com.bluexml.side.Common.forAlfresco.enterprise.feature(1.0.617.v36182-20120516)"/>
+<node id="com.bluexml.side.Common.forAlfresco34d.sideenterprise.feature(1.0.82.v35998-20120511)"/>
+<node id="com.bluexml.side.Integration.eclipse.branding.enterprise.product(SIDE Enterprise)"/>
+<node id="com.bluexml.side.Util.framework.tools.alfresco34dCE(1.0.9.v32489-20120203)"/>
+<edge id="161-" source="com.bluexml.side.Common.forAlfresco.enterprise.feature(1.0.617.v36182-20120516)" target="com.bluexml.side.Common.forAlfresco34d.sideenterprise.feature(1.0.82.v35998-20120511)"/>
+<edge id="202-" source="com.bluexml.side.Common.forAlfresco34d.sideenterprise.feature(1.0.82.v35998-20120511)" target="com.bluexml.side.Util.framework.tools.alfresco34dCE(1.0.9.v32489-20120203)"/>
+<edge id="264-" source="com.bluexml.side.Integration.eclipse.branding.enterprise.product(SIDE Enterprise)" target="com.bluexml.side.Common.forAlfresco.enterprise.feature(1.0.617.v36182-20120516)"/>
+</graph>
+</graphml>

@@ -14,8 +14,8 @@ import com.bluexml.side.portal.generator.alfresco.PortalAlfrescoGenerator;
 public class PortalGenerator extends PortalAlfrescoGenerator {
 
 	protected static String GENERATOR_OPTIONS_XFORMS_34d = "com.bluexml.side.Portal.generator.alfresco.xforms34d";
-	final static String templatesRoot = "/com.bluexml.side.Portal.generator.alfresco34d/com/bluexml/side/portal/generator/alfresco34d/templates/";
-	final static String templatesRoot32r2 = "/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/";
+	protected final static String templatesRoot34d = "/com.bluexml.side.Portal.generator.alfresco34d/com/bluexml/side/portal/generator/alfresco34d/templates/";
+	protected final static String templatesRoot32r2 = "/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/";
 
 	@Override
 	public Properties buildModuleProperties(String modelId) {
@@ -41,7 +41,7 @@ public class PortalGenerator extends PortalAlfrescoGenerator {
 		if (getGeneratorOptionValue(GENERATOR_OPTIONS_XFORMS_34d)) {
 			// searchForms
 			result.add(templatesRoot32r2 + "advancedSearchIntegration/template.XformSearch.advancedSearch.xml.mt");
-			result.add(templatesRoot + "searchFormCallBack.html.mt");
+			result.add(templatesRoot34d + "searchFormCallBack.html.mt");
 			result.add(templatesRoot32r2 + "advancedSearchIntegration/XformSearch/XformSearch.get.desc.xml.mt");
 			result.add(templatesRoot32r2 + "advancedSearchIntegration/XformSearch/XformSearch.get.head.ftl.mt");
 			result.add(templatesRoot32r2 + "advancedSearchIntegration/XformSearch/XformSearch.get.html.ftl.mt");
@@ -63,9 +63,9 @@ public class PortalGenerator extends PortalAlfrescoGenerator {
 		Map<String, String> map = new HashMap<String, String>();
 
 		// replace template to be compliant with alfresco community 3.4
-		map.put(templatesRoot32r2 + "documentLibrary/DocumentLibraryPortletView.ftl.mt", templatesRoot + "customViews.ftl.mt");
+		map.put(templatesRoot32r2 + "documentLibrary/DocumentLibraryPortletView.ftl.mt", templatesRoot34d + "customViews.ftl.mt");
 
-		map.put(templatesRoot32r2 + "portalShare/create-site.get.properties.mt", templatesRoot + "create-site.get.properties.mt");
+		map.put(templatesRoot32r2 + "portalShare/create-site.get.properties.mt", templatesRoot34d + "create-site.get.properties.mt");
 		
 		templatesSubstitution.add(map);
 		return templatesSubstitution;
@@ -75,19 +75,19 @@ public class PortalGenerator extends PortalAlfrescoGenerator {
 	protected List<String> getMainTemplates() {
 		List<String> result = super.getMainTemplates();
 
-		result.add(templatesRoot + "create-site.get_de.properties.mt");
-		result.add(templatesRoot + "create-site.get_fr.properties.mt");
-		result.add(templatesRoot + "create-site.get_es.properties.mt");
-		result.add(templatesRoot + "create-site.get_it.properties.mt");
+		result.add(templatesRoot34d + "create-site.get_de.properties.mt");
+		result.add(templatesRoot34d + "create-site.get_fr.properties.mt");
+		result.add(templatesRoot34d + "create-site.get_es.properties.mt");
+		result.add(templatesRoot34d + "create-site.get_it.properties.mt");
 		// select the right formId for existing page component
-		result.add(templatesRoot + "document-details.xml.mt");
-		result.add(templatesRoot + "edit-metadata.xml.mt");
-		result.add(templatesRoot + "folder-details.xml.mt");
-		result.add(templatesRoot + "inline-edit.xml.mt");
+		result.add(templatesRoot34d + "document-details.xml.mt");
+		result.add(templatesRoot34d + "edit-metadata.xml.mt");
+		result.add(templatesRoot34d + "folder-details.xml.mt");
+		result.add(templatesRoot34d + "inline-edit.xml.mt");
 
-		result.add(templatesRoot + "toolbar.get.config.xml.mt");		
+		result.add(templatesRoot34d + "toolbar.get.config.xml.mt");		
 		
-		result.add(templatesRoot + "custom-share-config.xml.mt");
+		result.add(templatesRoot34d + "custom-share-config.xml.mt");
 		
 		return result;
 	}

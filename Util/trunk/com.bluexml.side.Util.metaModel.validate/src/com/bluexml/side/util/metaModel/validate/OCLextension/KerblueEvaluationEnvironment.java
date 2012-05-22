@@ -57,6 +57,11 @@ class KerblueEvaluationEnvironment extends EcoreEvaluationEnvironment {
 	public Object callOperation(EOperation operation, int opcode, Object source, Object[] args) {
 		if (operation.getEAnnotation(KerblueEnvironment.KERBLUEENV) == null) {
 			// not our custom regex operation
+//			System.out.println("KerblueEvaluationEnvironment.callOperation() :");
+//			System.out.println("\top :" + operation);
+//			System.out.println("\topcode :" + opcode);
+//			System.out.println("\tsource :" + source);
+//			System.out.println("\targs :" + args);
 			return super.callOperation(operation, opcode, source, args);
 		}
 
@@ -65,13 +70,13 @@ class KerblueEvaluationEnvironment extends EcoreEvaluationEnvironment {
 			//Pattern pattern = Pattern.compile("\\w*");
 			Matcher matcher = pattern.matcher((String) source);
 			//Matcher matcher = pattern.matcher("Start");
-			
+
 			return matcher.matches();
 		}
-		
+
 		if (KerblueEnvironment.OP_GETCONTENER.equals(operation.getName())) {
 			if (source instanceof EObject) {
-				return (EObject)((EObject) source).eContainer();
+				return (EObject) ((EObject) source).eContainer();
 			}
 		}
 

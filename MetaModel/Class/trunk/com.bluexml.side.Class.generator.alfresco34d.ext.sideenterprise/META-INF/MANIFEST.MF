@@ -31,7 +31,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,
  com.bluexml.side.Class.generator.alfresco.extension.sideEnterprise,
  com.bluexml.side.Util.security.enterprise,
- com.bluexml.side.Class.generator.alfresco
+ com.bluexml.side.Class.generator.alfresco,
+ com.bluexml.side.Class.generator.alfresco34d;bundle-version="1.0.32"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.bluexml.clazz.generator.alfresco34d.ext.sideenterprise

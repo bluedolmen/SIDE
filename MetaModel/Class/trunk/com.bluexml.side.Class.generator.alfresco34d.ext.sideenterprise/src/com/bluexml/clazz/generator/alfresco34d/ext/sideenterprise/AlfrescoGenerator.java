@@ -8,7 +8,7 @@ import com.bluexml.side.util.security.SecurityHelper;
 import com.bluexml.side.util.security.preferences.SidePreferences;
 
 public class AlfrescoGenerator extends com.bluexml.side.clazz.generator.alfresco.extension.sideenterprise.AlfrescoGenerator {
-	public static String templateBase34d = "/com.bluexml.side.Class.generator.alfresco34d/com/bluexml/side/clazz/generator/alfresco34d/templates";
+	public static final String templateBase34d = com.bluexml.side.clazz.generator.alfresco34d.Activator.templateBase34d;
 
 	@Override
 	public String getComponentKey() {
