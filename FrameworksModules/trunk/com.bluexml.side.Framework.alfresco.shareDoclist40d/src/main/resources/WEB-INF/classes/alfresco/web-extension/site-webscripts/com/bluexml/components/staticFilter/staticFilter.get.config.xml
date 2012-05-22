@@ -1,0 +1,7 @@
+<filters>
+   <filter id="metadata" label="sesamvitaleFilter.withoutAspects" data="{type:'cm:content',path: '/app:company_home/st:sites/cm:sesamvitale/cm:documentLibrary/cm:CAC/*', notAspects:['sesamvital:com_bluexml_Planning','sesamvital:com_bluexml_Binaire','sesamvital:com_bluexml_Architecture','sesamvital:com_bluexml_Exploitation']}"/>
+   <filter id="metadata" label="sesamvitaleFilter.planning" data="{path: '/app:company_home/st:sites/cm:sesamvitale/cm:documentLibrary/cm:CAC/*',aspect:'sesamvital:com_bluexml_Planning'}"/>
+   <filter id="metadata" label="sesamvitaleFilter.binaire" data="{path: '/app:company_home/st:sites/cm:sesamvitale/cm:documentLibrary/cm:CAC/*',aspect:'sesamvital:com_bluexml_Binaire'}"/>
+   <filter id="metadata" label="sesamvitaleFilter.architecture" data="{path: '/app:company_home/st:sites/cm:sesamvitale/cm:documentLibrary/cm:CAC/*',aspect:'sesamvital:com_bluexml_Architecture'}"/>
+   <filter id="metadata" label="sesamvitaleFilter.exploitation" data="{path: '/app:company_home/st:sites/cm:sesamvitale/cm:documentLibrary/cm:CAC/*',aspect:'sesamvital:com_bluexml_Exploitation'}"/>
+</filters>
