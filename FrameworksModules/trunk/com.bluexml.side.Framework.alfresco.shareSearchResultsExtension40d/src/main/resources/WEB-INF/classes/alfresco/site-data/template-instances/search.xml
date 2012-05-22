@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<template-instance>
+	<template-type>org/alfresco/search</template-type>
+	<components>
+		<component>
+			<region-id>title</region-id>
+			<url>/components/title/results-title</url>
+		</component>
+		<component>
+			<region-id>actions-common</region-id>
+			<url>/components/documentlibrary/actions-common</url>
+		</component>
+		<component>
+			<region-id>toolbar</region-id>
+			<url>/components/documentlibrary/toolbar</url>
+		</component>
+		<component>
+			<region-id>tree</region-id>
+			<url>/components/documentlibrary/tree</url>
+			<properties></properties>
+		</component>
+	</components>
+</template-instance>
