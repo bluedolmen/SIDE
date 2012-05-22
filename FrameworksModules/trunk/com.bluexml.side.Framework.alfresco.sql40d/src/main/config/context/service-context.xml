@@ -1,0 +1,317 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+	Licensed to the Apache Software Foundation (ASF) under one or more
+	contributor license agreements.  See the NOTICE file distributed with
+	this work for additional information regarding copyright ownership.
+	The ASF licenses this file to You under the Apache License, Version 2.0
+	(the "License"); you may not use this file except in compliance with
+	the License.  You may obtain a copy of the License at
+	
+	http://www.apache.org/licenses/LICENSE-2.0
+	
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+	
+-->
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+				http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+				http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+	<!-- ======================= -->
+    <!-- common beans            -->
+    <!-- ======================= -->
+ 
+	<bean id="synchronizationProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:${config.target.path}/synchronization.properties"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true" />
+    </bean>
+	 
+ 
+	<bean id="synchronizationDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+	    <property name="driverClassName" value="${synchrodb.driver}"/>
+	    <property name="url" value="${synchrodb.url}"/>
+	    <property name="username" value="${synchrodb.username}"/>
+	    <property name="password" value="${synchrodb.password}"/>
+	</bean>
+
+	<bean id="abstractFilterer" class="com.bluexml.side.Integration.alfresco.sql.synchronization.common.AbstractFilterer" abstract="true">
+	 	<property name="nodeService" ref="nodeService" />
+	</bean>
+
+	<bean id="namespacePrefixFilterer" class="com.bluexml.side.Integration.alfresco.sql.synchronization.common.NamespacePrefixFilterer" parent="abstractFilterer">
+	 	<!-- This property can be externalized into the synchronization.properties enabling a more flexible parametrization -->
+	 	<property name="namespacePrefix" value="${synchrodb.namespacePrefix}" />
+	 	<property name="externalTypesMapping" value="${synchrodb.externalTypesMapping}" />
+		<property name="namespaceService" ref="namespaceService" />
+		<property name="databaseDictionary" ref="databaseDictionary" />
+	</bean>
+
+	<bean id="synchronizationFilterer" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="proxyInterfaces" value="com.bluexml.side.Integration.alfresco.sql.synchronization.common.Filterer" />
+        <property name="target" ref="namespacePrefixFilterer" />
+        <property name="transactionManager" ref="transactionManager" />
+        <property name="transactionAttributes">
+        	<props>
+        		<prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+        		<prop key="acceptOnName">PROPAGATION_SUPPORTS,readOnly</prop>
+        	</props>
+        </property>
+    </bean>
+
+	<!-- ======================= -->
+    <!-- .synchronization beans  -->
+    <!-- ======================= -->
+
+	<bean id="abstractRenamingStrategy" class="com.bluexml.side.Integration.alfresco.sql.synchronization.dictionary.AbstractRenamingStrategy" abstract="true">
+		<property name="dataSource" ref="synchronizationDataSource" />
+	</bean>
+
+	<bean id="databaseDictionary" class="com.bluexml.side.Integration.alfresco.sql.synchronization.dictionary.PropertyFileDatabaseDictionary" init-method="init">
+		<property name="caseMode" value="${synchrodb.dialect.caseMode}" />
+		<property name="renamingStrategy">
+			<bean id="truncateRenamingStrategy" class="com.bluexml.side.Integration.alfresco.sql.synchronization.dictionary.TruncateRenamingStrategy" parent="abstractRenamingStrategy" />
+		</property>
+		<property name="resourcePattern" value="classpath*:alfresco/module/*/synchronization-database-mapping.properties" />
+	</bean>
+
+ 	<bean id="synchronizationPolicy" class="com.bluexml.side.Integration.alfresco.sql.synchronization.SQLSynchronizationPolicy" init-method="init">
+		<property name="policyComponent" ref="policyComponent" />
+		<property name="filterer" ref="synchronizationFilterer" />		
+		<property name="synchroNodeService" ref="synchronizationNodeService" />
+		<property name="synchroNodeServiceImpl" ref="synchronizationNodeServiceImpl" />
+		<property name="schemaCreation" ref="synchronizationSchemaCreator" />
+	</bean>
+
+	<bean name="defaultSynchronizationDialect" class="${synchrodb.dialect}" />
+
+	<bean id="synchronizationSchemaCreator" class="com.bluexml.side.Integration.alfresco.sql.synchronization.schemaManagement.SchemaCreation" init-method="init">
+		<property name="dictionaryService" ref="dictionaryService" />
+		<property name="transactionService" ref="transactionService" />
+		<property name="dataSource" ref="synchronizationDataSource" />
+		<property name="databaseDictionary" ref="databaseDictionary" />
+		<property name="filterer" ref="synchronizationFilterer" />	
+		<property name="dictionaryDAO" ref="dictionaryDAO" />
+		<property name="contentReplication" >	
+			<bean id="synchronizationContentReplicator" class="com.bluexml.side.Integration.alfresco.sql.synchronization.schemaManagement.BasicContentReplication" >
+				<property name="filterer" ref="synchronizationFilterer" />		
+				<property name="synchroNodeService" ref="synchronizationNodeService" />
+				<property name="searchService" ref="searchService" />		
+				<property name="nodeService" ref="dbNodeService" />
+				<property name="dictionaryService" ref="dictionaryService" />
+				<property name="customActionManager" ref="customActionManager" />
+			</bean>
+		</property>
+		<property name="synchronizationDialect" ref="defaultSynchronizationDialect" />
+		<property name="customActionManager" ref="customActionManager" />
+	</bean>
+		
+	<bean id="abstractCreateCustomAction" class="com.bluexml.side.Integration.alfresco.sql.synchronization.schemaManagement.AbstractCustomAction" abstract="true">
+		<property name="synchronizationDialect" ref="defaultSynchronizationDialect" />
+		<property name="synchronizationNodeService" ref="synchronizationNodeService" />
+	</bean>
+	
+	<bean id="customActionManager" class="com.bluexml.side.Integration.alfresco.sql.synchronization.schemaManagement.CustomActionManager">
+		<property name="customActions">
+			<list>
+				<ref local="pathCustomAction"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Instantiate a createTableStatement bean to inject customActionManager property ; declare it as an abstract bean to avoid Spring instantiation -->
+	<bean id="createTableStatement" class="com.bluexml.side.Integration.alfresco.sql.synchronization.dialects.CreateTableStatement" abstract="true">
+		<property name="customActionManager" ref="customActionManager" />
+	</bean>
+	
+	<bean id="nodeHelper" class="com.bluexml.side.Integration.alfresco.sql.synchronization.common.NodeHelper" >
+ 		<property name="nodeService" ref="nodeService" />
+		<property name="dictionaryService" ref="dictionaryService" />
+		<property name="filterer" ref="synchronizationFilterer" />	
+	</bean>
+	
+	<bean id="synchronizationNodeServiceImpl" class="com.bluexml.side.Integration.alfresco.sql.synchronization.nodeService.NodeServiceImpl" init-method="init">
+		<property name="nodeService" ref="nodeService" />
+		<property name="dictionaryService" ref="dictionaryService" />
+		<property name="databaseDictionary" ref="databaseDictionary" />
+		<property name="transactionListener" ref="synchronizationTransactionListener" />		
+		<property name="filterer" ref="synchronizationFilterer" />
+		<property name="nodeHelper" ref="nodeHelper" />		
+		<property name="synchronizationDialect" ref="defaultSynchronizationDialect" />
+		<property name="policyComponent" ref="policyComponent" />
+	</bean>
+	
+	<bean id="synchronizationNodeService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="proxyInterfaces">
+            <value>com.bluexml.side.Integration.alfresco.sql.synchronization.nodeService.NodeService</value>
+        </property>
+        <property name="target" ref="synchronizationNodeServiceImpl">
+			<!--<bean id="synchronizationNodeServiceImpl" class="com.bluexml.side.Integration.alfresco.sql.synchronization.nodeService.NodeServiceImpl" init-method="init">
+		 		<property name="nodeService" ref="nodeService" />
+				<property name="dictionaryService" ref="dictionaryService" />
+				<property name="databaseDictionary" ref="databaseDictionary" />
+				<property name="transactionListener" ref="synchronizationTransactionListener" />		
+				<property name="filterer" ref="synchronizationFilterer" />
+				<property name="nodeHelper" ref="nodeHelper" />		
+				<property name="synchronizationDialect" ref="defaultSynchronizationDialect" />
+				<property name="policyComponent" ref="policyComponent" />
+			</bean>
+        --></property>
+        <property name="transactionManager" ref="transactionManager" />
+        <property name="transactionAttributes">
+        	<props>
+        		<prop key="*">PROPAGATION_REQUIRED,-Exception</prop>
+        	</props>
+        </property>
+    </bean>
+	
+	<bean id="synchronizationTransactionListener" class="com.bluexml.side.Integration.alfresco.sql.synchronization.common.JdbcTransactionListener">
+		<property name="dataSource" ref="synchronizationDataSource" />		
+	</bean>
+	
+	
+	<!-- ======================================== -->
+    <!-- Path synchronization policy definition    -->
+    <!-- ======================================== -->
+
+	<bean id="synchronizationPathService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="proxyInterfaces">
+            <value>com.bluexml.side.Integration.alfresco.sql.synchronization.pathManagement.PathService</value>
+        </property>
+        <property name="target">
+			<bean id="pathServiceImpl" class="com.bluexml.side.Integration.alfresco.sql.synchronization.pathManagement.PathServiceImpl">
+		 		<property name="nodeService" ref="nodeService" />
+				<property name="databaseDictionary" ref="databaseDictionary" />
+				<property name="transactionListener" ref="synchronizationTransactionListener" />		
+				<property name="nodeHelper" ref="nodeHelper" />	
+				<property name="namespaceService" ref="namespaceService" />	
+				<property name="synchronizationDialect" ref="defaultSynchronizationDialect" />
+			</bean>
+        </property>
+        <property name="transactionManager" ref="transactionManager" />
+        <property name="transactionAttributes">
+        	<props>
+        		<prop key="*">PROPAGATION_REQUIRED,-Exception</prop>
+        	</props>
+        </property>
+    </bean>
+		
+ 	<bean id="pathSynchronizationPolicy" class="com.bluexml.side.Integration.alfresco.sql.synchronization.pathManagement.PathSynchronizationPolicy" init-method="init" depends-on="synchronizationPolicy">
+		<property name="usePathManagement" value="${synchrodb.usePathManagement}" />
+		<property name="policyComponent" ref="policyComponent" />
+		<property name="namespaceService" ref="namespaceService" />
+		<property name="searchService" ref="searchService" />		
+		<property name="schemaCreation" ref="synchronizationSchemaCreator" />
+		<property name="pathService" ref="synchronizationPathService" />
+	</bean>
+	<bean id="pathCustomAction" class="com.bluexml.side.Integration.alfresco.sql.synchronization.pathManagement.PathCustomAction" parent="abstractCreateCustomAction" >
+	</bean>
+	
+
+
+	<!-- ======================= -->
+    <!-- .searcher beans         -->
+    <!-- ======================= -->
+
+
+	<bean id="SQLSearchService" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="proxyInterfaces" value="com.bluexml.side.Integration.alfresco.sql.searcher.SQLSearchService" />
+        <property name="target" ref="sqlSearchServiceImpl" />
+        <property name="interceptorNames">
+            <list>
+                <idref local="sqlSearchIntegrationService_transaction"/>
+                <idref bean="AuditMethodInterceptor"/>
+                <idref bean="exceptionTranslator"/>            
+                <idref local="sqlSearchService_security"/>
+            </list>
+        </property>
+    </bean>
+
+	<bean id="atSignTagResolver" class="com.bluexml.side.Integration.alfresco.sql.searcher.AtSignTagResolverImpl">
+		<property name="databaseDictionary" ref="databaseDictionary" />	
+	</bean>
+
+	<bean id="searchParameterBuilderFactory" class="com.bluexml.side.Integration.alfresco.sql.searcher.SearchParameters$BuilderFactory">
+		<property name="databaseDictionary" ref="databaseDictionary" />	
+		<property name="tagResolver" ref="atSignTagResolver" />
+	</bean>
+
+	<bean id="searchQueryBuilderFactory" class="com.bluexml.side.Integration.alfresco.sql.searcher.SearchQuery$BuilderFactory">
+		<property name="databaseDictionary" ref="databaseDictionary" />	
+		<property name="dictionaryService" ref="dictionaryService" />
+	</bean>
+
+
+	<bean id="sqlSearchServiceImpl" class="com.bluexml.side.Integration.alfresco.sql.searcher.SQLSearchServiceImpl">
+		<property name="jdbcTemplate">
+			<bean id="synchronizationJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" >
+				<property name="dataSource" ref="synchronizationDataSource" />
+			</bean>
+		</property>
+		<property name="tagResolver" ref="atSignTagResolver" />
+	</bean>
+
+    <bean id="sqlSearchIntegrationService_transaction" class="org.springframework.transaction.interceptor.TransactionInterceptor">
+        <property name="transactionManager">
+            <ref bean="synchronizationTransactionManager"/>
+        </property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="*">PROPAGATION_SUPPORTS, readOnly</prop>
+            </props>
+        </property>
+    </bean>
+	
+	<bean id="synchronizationTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" >
+		<property name="dataSource" ref="synchronizationDataSource" />
+	</bean>
+	
+	<!-- ======================= -->
+    <!-- Search Service Security -->
+    <!-- ======================= -->
+
+    <!-- All search results are filtered to exclude nodes that the current user can not        -->
+    <!-- read. Other methods restrict queries to those nodes the user can read                 -->
+
+    <bean id="sqlSearchService_security" class="net.sf.acegisecurity.intercept.method.aopalliance.MethodSecurityInterceptor">
+        <property name="authenticationManager"><ref bean="authenticationManager"/></property>
+    	<property name="accessDecisionManager"><ref bean="accessDecisionManager"/></property>
+        <property name="afterInvocationManager"><ref bean="afterInvocationManager"/></property>
+        <property name="objectDefinitionSource">
+            <value>
+            	<!--
+            	com.bluexml.side.Integration.alfresco.sql.searcher.SearchService.query=ACL_METHOD.ROLE_AUTHENTICATED
+              	-->
+                com.bluexml.side.Integration.alfresco.sql.searcher.SQLSearchService.selectNodes=AFTER_ACL_NODE.sys:base.Read
+            
+            </value>
+        </property>
+    </bean>
+
+	<!-- ======================= -->
+    <!-- Webscript definitions   -->
+    <!-- ======================= -->
+	<bean id="webscript.extension.com.bluexml.side.sql.selectnodes.get" class="com.bluexml.side.Integration.alfresco.sql.webscript.SelectNodesWebscript" parent="webscript">
+	    <property name="SQLSearchService" ref="SQLSearchService" />
+	</bean>
+
+	<bean id="webscript.extension.com.bluexml.side.sql.selectnodeswithjoin.get" class="com.bluexml.side.Integration.alfresco.sql.webscript.SelectNodesWithJoinWebscript" parent="webscript">
+	    <property name="SQLSearchService" ref="SQLSearchService" />
+	</bean>
+
+	<bean id="webscript.extension.com.bluexml.side.sql.selectnodeproperties.get" class="com.bluexml.side.Integration.alfresco.sql.webscript.SelectNodesWebscript" parent="webscript">
+	    <property name="SQLSearchService" ref="SQLSearchService" />
+	    <!-- 
+	    <property name="searchService" ref="searchService" />
+	    --> 
+	</bean>
+
+</beans>
