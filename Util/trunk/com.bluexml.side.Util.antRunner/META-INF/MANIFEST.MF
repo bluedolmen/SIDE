@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE AntRunner
 Bundle-SymbolicName: com.bluexml.side.Util.antRunner;singleton:=true
-Bundle-Version: 1.0.35.v32790-20120213
+Bundle-Version: 1.0.36.v36382-20120523
 Bundle-Activator: com.bluexml.side.util.antrunner.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: com.bluexml.side.Util.libs,
