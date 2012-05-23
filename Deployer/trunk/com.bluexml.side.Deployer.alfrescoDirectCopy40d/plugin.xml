@@ -31,7 +31,7 @@
                      key="com.bluexml.side.deployerDirect.alfresco.clean"
                      label="clean">
                   <mustBeUnchecked
-                        pluginId="com.bluexml.side.Deployer.alfrescoDirectCopy34d">
+                        pluginId="com.bluexml.side.Deployer.alfrescoDirectCopy40d">
                      <optionRef
                            optionId="com.bluexml.side.hotDeployment">
                      </optionRef>
@@ -70,9 +70,9 @@
                      key="com.bluexml.side.hotDeployment"
                      label="hot deployment">
                   <mustBeUnchecked
-                        pluginId="com.bluexml.side.Deployer.alfrescoDirectCopy346e">
+                        pluginId="com.bluexml.side.Deployer.alfrescoDirectCopy40d">
                      <optionRef
-                           optionId="com.bluexml.side.Deployer.alfrescoDirectCopy346e.clean">
+                           optionId="com.bluexml.side.deployerDirect.alfresco.clean">
                      </optionRef>
                   </mustBeUnchecked>
                </option>

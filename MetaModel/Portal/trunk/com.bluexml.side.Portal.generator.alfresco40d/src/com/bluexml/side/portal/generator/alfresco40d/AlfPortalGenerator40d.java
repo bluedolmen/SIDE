@@ -14,8 +14,10 @@ public class AlfPortalGenerator40d extends PortalGenerator {
 	protected static final String UPLOAD = template40d + "upload/";
 
 	protected static final String CREATE_SITE = template40d + "create-site/";
-	
+
 	protected static final String PORTAL = template40d + "portal/";
+
+	protected static final String CONFIGS = template40d + "configs/";
 
 	@Override
 	public String getXFORMURL(EObject o) {
@@ -57,11 +59,10 @@ public class AlfPortalGenerator40d extends PortalGenerator {
 		mainTemplates.add(UPLOAD + "html-upload.get_nl.properties.mt");
 		mainTemplates.add(UPLOAD + "html-upload.get.properties.mt");
 
-		
 		mainTemplates.add(CREATE_SITE + "create-site.get_ja.properties.mt");
 		mainTemplates.add(CREATE_SITE + "create-site.get_nl.properties.mt");
 		mainTemplates.add(CREATE_SITE + "create-site.get.properties.mt");
-		
+
 		return mainTemplates;
 	}
 
@@ -74,10 +75,11 @@ public class AlfPortalGenerator40d extends PortalGenerator {
 		templatesSubstitutionMap.put(templatesRoot34d + "create-site.get_fr.properties.mt", CREATE_SITE + "create-site.get_fr.properties.mt");
 		templatesSubstitutionMap.put(templatesRoot34d + "create-site.get_es.properties.mt", CREATE_SITE + "create-site.get_es.properties.mt");
 		templatesSubstitutionMap.put(templatesRoot34d + "create-site.get_it.properties.mt", CREATE_SITE + "create-site.get_it.properties.mt");
-		
+
 		templatesSubstitutionMap.put(templatesRoot32r2 + "portalShare/presets.mt", PORTAL + "presets.mt");
 
-		
+		templatesSubstitutionMap.put(templatesRoot34d + "custom-share-config.xml.mt", CONFIGS + "custom-share-config.xml.mt");
+
 		templatesSubstitution.add(templatesSubstitutionMap);
 		return templatesSubstitution;
 	}
