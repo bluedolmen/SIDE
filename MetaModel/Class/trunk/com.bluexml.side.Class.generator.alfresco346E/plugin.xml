@@ -20,10 +20,10 @@
               <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.xforms346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.2" versionMin="1.0.2" />
             </option>
             <option documentation="Generates random data regarding the current Alfresco model. The generated ACP can be imported and reused accross various Alfresco installations." key="com.bluexml.side.Class.generator.alfresco.randomDataGenerator" label="Alfresco Random Data Generator">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.dataGenerator346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.6" versionMin="1.0.6" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.dataGenerator346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.7" versionMin="1.0.7" />
             </option>
             <option defaultOption="false" documentation="additional module to check if created/updated items already exist; in this case the update or creation is forbidden" key="alfresco.unicity" label="Content Uniqueness">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.unicity346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.7" versionMin="1.0.7" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.unicity346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.8" versionMin="1.0.8" />
             </option>
             <option defaultOption="false" key="com.bluexml.side.Class.generator.alfresco.facetMapWebscript" label="Alfresco FacetMap Extension" />
             <option defaultOption="false" documentation="this api use alfresco web-services-client to contact alfresco and do CRUD actions" key="com.bluexml.side.Class.generator.alfresco.enterprise.webserviceJavaAPI" label="Java webservice API" />
