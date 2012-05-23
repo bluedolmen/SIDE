@@ -216,9 +216,9 @@ public class DependencyTree {
 
 		List<String[]> list3 = compReg.getAnomaly().bundleNotFoundInConf;
 		if (list3.size() > 0) {
-			logger.warn("Bundle not found in conf file :");
+			logger.error("Bundle not found in conf file :");
 			for (String[] string : list3) {
-				logger.warn(string[0] + " from " + string[1]);
+				logger.error(string[0] + " from " + string[1]);
 			}
 		}
 
@@ -232,12 +232,19 @@ public class DependencyTree {
 
 		List<String> list5 = compReg.getAnomaly().missingPluginsInFeatures;
 		if (list5.size() > 0) {
-			logger.warn("Missing required plugin in features");
+			logger.error("Missing required plugin in features");
 			for (String string : list5) {
-				logger.warn(string);
+				logger.error(string);
 			}
 		}
 
+		List<String> list6 = compReg.getAnomaly().moduleNotFound;
+		if (list6.size() > 0) {
+			logger.error("Missing Module :");
+			for (String string : list6) {
+				logger.error(string);
+			}
+		}
 	}
 
 	public static void filterGraphAndSave(Properties properties, Graph<Componant, String> g, String outputFileName) throws IOException, Exception {

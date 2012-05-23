@@ -14,6 +14,8 @@ public class Anomaly {
 	List<String[]> bundleNotFoundInConf = new ArrayList<String[]>();
 	
 	List<String> invalideEntryInConf = new ArrayList<String>();
+	
+	List<String> moduleNotFound = new ArrayList<String>();
 
 	public void addNotTree(String notTree) {
 		this.notTree.add(notTree);
@@ -29,6 +31,10 @@ public class Anomaly {
 	
 	public void addInvalideEntryInConf(String notTree) {
 		this.invalideEntryInConf.add(notTree);
+	}
+	
+	public void addModuleNotFound(String moduleId) {
+		this.moduleNotFound.add(moduleId);
 	}
 	
 	public void addMissingPluginsInFeatures(String notTree) {

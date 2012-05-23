@@ -11,7 +11,7 @@ import java.util.jar.Manifest;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.log4j.Logger;
 
-import com.bluexml.side.build.tools.componants.Configuration;
+import com.bluexml.side.build.tools.componants.LinkedWithModule;
 import com.bluexml.side.build.tools.componants.Plugin;
 
 public class PluginReader extends Reader {
@@ -102,9 +102,9 @@ public class PluginReader extends Reader {
 			if (filePluginXMLPath.exists()) {
 				logger.debug("extension found :" + filePluginXMLPath);
 				BlxExtensionPointReader extR = new BlxExtensionPointReader(registries, props);
-				List<Configuration> lext = extR.read(filePluginXMLPath, p.getId());
+				List<LinkedWithModule> lext = extR.read(filePluginXMLPath, p.getId());
 				p.setExtensions(lext);
-				for (Configuration extension : lext) {
+				for (LinkedWithModule extension : lext) {
 					Utils.add(registries.tree, p, extension);
 				}
 			} else {

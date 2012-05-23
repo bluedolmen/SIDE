@@ -13,7 +13,9 @@ import org.jdom.xpath.XPath;
 import com.bluexml.side.build.tools.componants.Configuration;
 import com.bluexml.side.build.tools.componants.Constraint;
 import com.bluexml.side.build.tools.componants.Generator;
+import com.bluexml.side.build.tools.componants.LinkedWithModule;
 import com.bluexml.side.build.tools.componants.MetaModel;
+import com.bluexml.side.build.tools.componants.ModelLibrary;
 import com.bluexml.side.build.tools.componants.Module;
 import com.bluexml.side.build.tools.componants.Option;
 import com.bluexml.side.build.tools.componants.Plugin;
@@ -31,8 +33,8 @@ public class BlxExtensionPointReader extends Reader {
 		addAll = getBooleanPropertyValueFor("addAll", addAll);
 	}
 
-	public List<Configuration> read(File filePluginXML, String bundle) throws Exception {
-		List<Configuration> lext = new ArrayList<Configuration>();
+	public List<LinkedWithModule> read(File filePluginXML, String bundle) throws Exception {
+		List<LinkedWithModule> lext = new ArrayList<LinkedWithModule>();
 		// get XML doc
 		Document pluginXML = Utils.buildJdomDocument(filePluginXML);
 
@@ -42,7 +44,8 @@ public class BlxExtensionPointReader extends Reader {
 		for (Object object : exts) {
 			Element extXML = (Element) object;
 
-			if (extXML.getAttributeValue("point").equals("com.bluexml.side.Application.com_bluexml_application_configuration")) {
+			String attributeValue = extXML.getAttributeValue("point");
+			if (attributeValue.equals("com.bluexml.side.Application.com_bluexml_application_configuration")) {
 				// SIDE Ext
 				logger.debug("Extension found, extracting data");
 
@@ -147,6 +150,17 @@ public class BlxExtensionPointReader extends Reader {
 					}
 
 				}
+			} else if (attributeValue.equals("com.bluexml.side.util.framework.tooling")) {
+				// some maven module can be declared on plugins directly (archetype for exemples)
+				List<?> children = extXML.getChildren("modelLibrary");
+				for (Object modelLibraryE : children) {
+					ModelLibrary conf = new ModelLibrary();
+					readModules((Element) modelLibraryE, conf);
+					if (conf.getModules().size() > 0) {
+						lext.add(conf);
+					}
+				}
+
 			}
 
 		}
@@ -169,6 +183,12 @@ public class BlxExtensionPointReader extends Reader {
 			logger.error("Error while register check/uncheck constraints", e);
 		}
 		// get Modules
+		readModules(context, conf);
+		logger.debug("END");
+		return conf;
+	}
+
+	public void readModules(Element context, LinkedWithModule conf) throws Exception {
 		List<?> modules = context.getChildren("moduleDependence");
 		for (Object object : modules) {
 			Element moduleE = (Element) object;
@@ -180,12 +200,15 @@ public class BlxExtensionPointReader extends Reader {
 			if (module == null) {
 				File pom = registries.getProjectFolder(moduleId, context.toString());
 
-				if (pom.exists() && addAll) {
+				if (pom != null && pom.exists() && addAll) {
 					// use maven to get all dependencies
 					MavenProjectReader mpr = new MavenProjectReader(registries, props);
 					module = mpr.read(pom);
 				} else {
-					logger.error("add module without read pom (no dependencies added):" + moduleId);
+					if (pom == null || !pom.exists()) {
+						registries.anomaly.addModuleNotFound(moduleId);
+					}
+					logger.warn("add module without read pom (no transitive/direct dependencies added):" + moduleId);
 					module = new Module();
 					module.setModuleID(moduleId);
 					module.setType(moduleE.getAttributeValue("moduleType"));
@@ -199,8 +222,6 @@ public class BlxExtensionPointReader extends Reader {
 			Utils.add(registries.tree, conf, module);
 
 		}
-		logger.debug("END");
-		return conf;
 	}
 
 	/**

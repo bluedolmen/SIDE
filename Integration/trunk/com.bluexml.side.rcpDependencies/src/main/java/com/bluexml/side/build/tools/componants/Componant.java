@@ -1,6 +1,6 @@
 package com.bluexml.side.build.tools.componants;
 
-public class Componant implements Comparable<Componant> {
+public abstract class Componant implements Comparable<Componant> {
 	boolean filterMatch = false;
 
 	public int compareTo(Componant o) {

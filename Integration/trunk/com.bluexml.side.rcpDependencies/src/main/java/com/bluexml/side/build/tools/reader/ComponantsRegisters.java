@@ -91,7 +91,10 @@ public class ComponantsRegisters {
 		// if not found try to search in file system
 		if (path == null) {
 			logger.warn("Bundle " + id + " not found try to locate from file system");
-			getAnomaly().addBundleNotFoundInConf(new String[] { id, from });
+			if (!id.contains("Framework")) {
+				getAnomaly().addBundleNotFoundInConf(new String[] { id, from });
+			}
+			
 			for (File f : repositoryLocation) {
 				logger.warn("search in :" + f);
 				path = Utils.find(id, f);
@@ -109,7 +112,7 @@ public class ComponantsRegisters {
 			logger.debug("••• Bundle " + id + " founded from build configuration");
 		}
 
-		if (!path.getParentFile().getName().equals("trunk")) {
+		if (path != null && !path.getParentFile().getName().equals("trunk")) {
 			return null;
 		}
 		return path;
