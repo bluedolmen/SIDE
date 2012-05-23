@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Workflow (jbpm) Generator for Alfresco 4.0.d
 Bundle-SymbolicName: com.bluexml.side.Workflow.generator.alfresco40d;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.1.v36382-20120523
 Bundle-Activator: com.bluexml.side.workflow.generator.alfresco40d.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: com.bluexml.side.Application,
