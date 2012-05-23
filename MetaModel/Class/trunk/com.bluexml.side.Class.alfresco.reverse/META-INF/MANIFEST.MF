@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Reverse From Alfresco content models
 Bundle-SymbolicName: com.bluexml.side.Class.alfresco.reverse;singleton:=true
-Bundle-Version: 1.0.7.v32489-20120203
+Bundle-Version: 1.0.8.v36382-20120523
 Bundle-Activator: com.bluexml.side.clazz.alfresco.reverse.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.ui,
