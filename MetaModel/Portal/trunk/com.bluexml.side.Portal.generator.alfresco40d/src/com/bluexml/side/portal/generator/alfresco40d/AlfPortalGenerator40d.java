@@ -14,6 +14,8 @@ public class AlfPortalGenerator40d extends PortalGenerator {
 	protected static final String UPLOAD = template40d + "upload/";
 
 	protected static final String CREATE_SITE = template40d + "create-site/";
+	
+	protected static final String PORTAL = template40d + "portal/";
 
 	@Override
 	public String getXFORMURL(EObject o) {
@@ -60,15 +62,19 @@ public class AlfPortalGenerator40d extends PortalGenerator {
 
 	@Override
 	protected List<Map<String, String>> getTemplatesSubstitution() {
+		List<Map<String, String>> templatesSubstitution = super.getTemplatesSubstitution();
 		Map<String, String> templatesSubstitutionMap = new HashMap<String, String>();
 
 		templatesSubstitutionMap.put(templatesRoot34d + "create-site.get_de.properties.mt", CREATE_SITE + "create-site.get_de.properties.mt");
 		templatesSubstitutionMap.put(templatesRoot34d + "create-site.get_fr.properties.mt", CREATE_SITE + "create-site.get_fr.properties.mt");
 		templatesSubstitutionMap.put(templatesRoot34d + "create-site.get_es.properties.mt", CREATE_SITE + "create-site.get_es.properties.mt");
 		templatesSubstitutionMap.put(templatesRoot34d + "create-site.get_it.properties.mt", CREATE_SITE + "create-site.get_it.properties.mt");
+		
+		templatesSubstitutionMap.put(templatesRoot32r2 + "portalShare/presets.mt", PORTAL + "presets.mt");
 
-		super.getTemplatesSubstitution().add(templatesSubstitutionMap);
-		return super.getTemplatesSubstitution();
+		
+		templatesSubstitution.add(templatesSubstitutionMap);
+		return templatesSubstitution;
 	}
 
 }
