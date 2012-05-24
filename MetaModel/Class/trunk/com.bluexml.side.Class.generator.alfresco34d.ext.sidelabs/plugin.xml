@@ -22,7 +22,7 @@
             <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.model34d" moduleType="amp" technologyVersion="alfresco_3.4d" versionMax="1.0.9" versionMin="1.0.9" />
             <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.customAssociationManagement34d" moduleType="amp" technologyVersion="alfresco_3.4d" versionMax="1.0.10" versionMin="1.0.10" />
             <option defaultOption="false" documentation="this option must be used in conjuction with the 'searchable' meta on associations, this create an attribute that store associated nodes" hidden="false" key="alfresco.model.association.searchable" label="Searchable association">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.searchAssociation34d" moduleType="amp" technologyVersion="alfresco_3.4d" versionMax="0.0.9" versionMin="0.0.9" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.searchAssociation34d" moduleType="amp" technologyVersion="alfresco_3.4d" versionMax="0.0.10" versionMin="0.0.10" />
             </option>
             <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.hotdeployer34d" moduleType="amp" technologyVersion="alfresco_3.4d" versionMax="1.0.9" versionMin="1.0.9" />
           </generatorVersion>
