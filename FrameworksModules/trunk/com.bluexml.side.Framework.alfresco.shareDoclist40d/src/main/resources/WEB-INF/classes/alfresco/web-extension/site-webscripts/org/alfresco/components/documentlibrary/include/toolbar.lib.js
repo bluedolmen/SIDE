@@ -74,7 +74,8 @@ function getCreateContent()
                permission: attr["permission"] ? attr["permission"].toString() : null,
                itemid: attr["itemid"] ? attr["itemid"].toString() : null,
                formid: attr["formid"] ? attr["formid"].toString() : null,
-               label: attr["label"] ? attr["label"].toString() : attr["id"] ? "create-content." + attr["id"].toString() : null
+               label: attr["label"] ? attr["label"].toString() : attr["id"] ? "create-content." + attr["id"].toString() : null,
+               isContainer : attr["isContainer"] ? attr["isContainer"].toString() : null
             });
          }
       }
