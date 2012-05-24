@@ -32,6 +32,7 @@ public abstract class PropertiesConfiguration extends AbstractConfigurationFile<
 				for (Object property : properties.keySet()) {
 					String key = (String) property;
 					String value = (String) properties.getProperty(key);
+					logger.debug("add in dictionary :["+key+", value :"+value+"]");
 					dictionary.put(key, value);
 				}
 			}
