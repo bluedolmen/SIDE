@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Enterprise
 Bundle-SymbolicName: com.bluexml.side.Class.generator.alfresco40d.ext.enterprise;singleton:=true
-Bundle-Version: 1.0.1.v36382-20120523
+Bundle-Version: 1.0.2.v36515-20120524
 Bundle-Activator: com.bluexml.side.clazz.generator.alfresco40d.ext.enterprise.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.ui,
