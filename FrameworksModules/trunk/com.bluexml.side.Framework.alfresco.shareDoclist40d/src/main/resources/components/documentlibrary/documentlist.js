@@ -25,7 +25,7 @@
  */
 (function() {
 	/*
-	 * TODO : SIDE @migration@ Use Alfresco view template (generate configuration)
+	 * SIDE Fix cell description rendering to manage custom Date fields and some other object
 	 */
 	
 	/**
@@ -1615,9 +1615,22 @@
 										if (scope.renderers.hasOwnProperty(p_key) && typeof scope.renderers[p_key] === "function") {
 											value = scope.renderers[p_key].call(scope, record, label);
 										} else {
-											value = '<span class="item">' + label + $html(jsNode.properties[p_key]) + '</span>';
+										   value = jsNode.properties[p_key];
+										   if (value != null && typeof value == "object") {
+	                                 // SIDE FIX to manage date without using renderer
+	                                 if (value.iso8601) {
+	                                    // format the date
+	                                    value = Alfresco.util.friendlyDate(Alfresco.util.fromISO8601(value.iso8601));
+	                                 } else if (value.displayName) {
+	                                    value = value.displayName;
+	                                 } else {
+	                                    value = '<span style="color:red;">' + (typeof value) + '</span>';
+	                                 }
+										   }
+	                              value = '<span class="item">' + label + $html(value) + '</span>';	
 										}
-
+										
+										
 										return value;
 									};
 
