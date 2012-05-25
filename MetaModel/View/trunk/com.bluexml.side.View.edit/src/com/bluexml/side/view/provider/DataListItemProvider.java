@@ -215,7 +215,7 @@ public class DataListItemProvider
 	 */
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-		//super.collectNewChildDescriptors(newChildDescriptors, object);
+//		super.collectNewChildDescriptors(newChildDescriptors, object);
 		
 		newChildDescriptors.add
 		(createChildParameter
@@ -246,6 +246,8 @@ public class DataListItemProvider
 			(createChildParameter
 				(ViewPackage.Literals.ACTIONABLE__OPERATIONS,
 				 CommonFactory.eINSTANCE.createOperationGroup()));
+		
+		newChildDescriptors.add(createChildParameter(CommonPackage.Literals.MODEL_ELEMENT__METAINFO, CommonFactory.eINSTANCE.createMetaInfo()));
 	}
 
 	/**

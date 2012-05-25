@@ -48,7 +48,7 @@ import com.bluexml.side.view.generator.alfresco.templates.services.common
          <%for (getInnerView()){%>
          <template id="<%getFullName()%>">
             <evaluator>evaluator.doclib.metadata.side.<%filter("view.AbstractViewOf").viewOf.filter("clazz.Clazz").getPrefixedQName()%>_<%filter("view.AbstractViewOf").name%></evaluator>
-            <%if (metainfo[key.toLowerCase() == "sharedefault" && value =="true"]){%>
+            <%if (metainfo[key.toLowerCase() == "sharedefault" && value =="true"] || current("ComposedView").metainfo[key.toLowerCase() == "sharedefault" && value =="true"]){%>
 			<%defaultView%>
             <%}%>
             
