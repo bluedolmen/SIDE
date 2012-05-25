@@ -54,17 +54,17 @@ function main() {
 			logger.log(msg);
 
 		// if a redirect URL was provided send a redirect response
-		if (redirect !== null) {
+		if (model.redirect !== null) {
 
 			status.redirect = true;
 			status.code = 301;
-			if (redirect.indexOf("?") != -1) {
-				redirect += "&";
+			if (model.redirect.indexOf("?") != -1) {
+			   model.redirect += "&";
 			} else {
-				redirect += "?";
+			   model.redirect += "?";
 			}
 
-			redirect += "error=" + msg;
+			model.redirect += "error=" + msg;
 			status.location = redirect;
 			if (logger.isLoggingEnabled())
 				logger.log("Returning 301 status code to redirect to: " + status.location);
