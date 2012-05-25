@@ -11,13 +11,13 @@ import com.bluexml.side.portal.generator.alfresco34d.PortalGenerator;
 public class AlfPortalGenerator40d extends PortalGenerator {
 	protected static final String template40d = "/com.bluexml.side.Portal.generator.alfresco40d/com/bluexml/side/portal/generator/alfresco40d/templates/";
 
-	protected static final String UPLOAD = template40d + "upload/";
+	protected static final String UPLOAD40d = template40d + "upload/";
 
-	protected static final String CREATE_SITE = template40d + "create-site/";
+	protected static final String CREATE_SITE40d = template40d + "create-site/";
 
-	protected static final String PORTAL = template40d + "portal/";
+	protected static final String PORTAL40d = template40d + "portal/";
 
-	protected static final String CONFIGS = template40d + "configs/";
+	protected static final String CONFIGS40d = template40d + "configs/";
 
 	@Override
 	public String getXFORMURL(EObject o) {
@@ -39,29 +39,29 @@ public class AlfPortalGenerator40d extends PortalGenerator {
 
 		List<String> mainTemplates = super.getMainTemplates();
 
-		mainTemplates.add(UPLOAD + "flash-upload.get.config.xml.mt");
-		mainTemplates.add(UPLOAD + "flash-upload.get_en.properties.mt");
-		mainTemplates.add(UPLOAD + "flash-upload.get_fr.properties.mt");
-		mainTemplates.add(UPLOAD + "flash-upload.get_de.properties.mt");
-		mainTemplates.add(UPLOAD + "flash-upload.get_es.properties.mt");
-		mainTemplates.add(UPLOAD + "flash-upload.get_it.properties.mt");
-		mainTemplates.add(UPLOAD + "flash-upload.get_ja.properties.mt");
-		mainTemplates.add(UPLOAD + "flash-upload.get_nl.properties.mt");
-		mainTemplates.add(UPLOAD + "flash-upload.get.properties.mt");
+		mainTemplates.add(UPLOAD40d + "flash-upload.get.config.xml.mt");
+		mainTemplates.add(UPLOAD40d + "flash-upload.get_en.properties.mt");
+		mainTemplates.add(UPLOAD40d + "flash-upload.get_fr.properties.mt");
+		mainTemplates.add(UPLOAD40d + "flash-upload.get_de.properties.mt");
+		mainTemplates.add(UPLOAD40d + "flash-upload.get_es.properties.mt");
+		mainTemplates.add(UPLOAD40d + "flash-upload.get_it.properties.mt");
+		mainTemplates.add(UPLOAD40d + "flash-upload.get_ja.properties.mt");
+		mainTemplates.add(UPLOAD40d + "flash-upload.get_nl.properties.mt");
+		mainTemplates.add(UPLOAD40d + "flash-upload.get.properties.mt");
 
-		mainTemplates.add(UPLOAD + "html-upload.get.config.xml.mt");
-		mainTemplates.add(UPLOAD + "html-upload.get_en.properties.mt");
-		mainTemplates.add(UPLOAD + "html-upload.get_fr.properties.mt");
-		mainTemplates.add(UPLOAD + "html-upload.get_de.properties.mt");
-		mainTemplates.add(UPLOAD + "html-upload.get_es.properties.mt");
-		mainTemplates.add(UPLOAD + "html-upload.get_it.properties.mt");
-		mainTemplates.add(UPLOAD + "html-upload.get_ja.properties.mt");
-		mainTemplates.add(UPLOAD + "html-upload.get_nl.properties.mt");
-		mainTemplates.add(UPLOAD + "html-upload.get.properties.mt");
+		mainTemplates.add(UPLOAD40d + "html-upload.get.config.xml.mt");
+		mainTemplates.add(UPLOAD40d + "html-upload.get_en.properties.mt");
+		mainTemplates.add(UPLOAD40d + "html-upload.get_fr.properties.mt");
+		mainTemplates.add(UPLOAD40d + "html-upload.get_de.properties.mt");
+		mainTemplates.add(UPLOAD40d + "html-upload.get_es.properties.mt");
+		mainTemplates.add(UPLOAD40d + "html-upload.get_it.properties.mt");
+		mainTemplates.add(UPLOAD40d + "html-upload.get_ja.properties.mt");
+		mainTemplates.add(UPLOAD40d + "html-upload.get_nl.properties.mt");
+		mainTemplates.add(UPLOAD40d + "html-upload.get.properties.mt");
 
-		mainTemplates.add(CREATE_SITE + "create-site.get_ja.properties.mt");
-		mainTemplates.add(CREATE_SITE + "create-site.get_nl.properties.mt");
-		mainTemplates.add(CREATE_SITE + "create-site.get.properties.mt");
+		mainTemplates.add(CREATE_SITE40d + "create-site.get_ja.properties.mt");
+		mainTemplates.add(CREATE_SITE40d + "create-site.get_nl.properties.mt");
+		mainTemplates.add(CREATE_SITE40d + "create-site.get.properties.mt");
 
 		return mainTemplates;
 	}
@@ -71,16 +71,21 @@ public class AlfPortalGenerator40d extends PortalGenerator {
 		List<Map<String, String>> templatesSubstitution = super.getTemplatesSubstitution();
 		Map<String, String> templatesSubstitutionMap = new HashMap<String, String>();
 
-		templatesSubstitutionMap.put(templatesRoot34d + "create-site.get_de.properties.mt", CREATE_SITE + "create-site.get_de.properties.mt");
-		templatesSubstitutionMap.put(templatesRoot34d + "create-site.get_fr.properties.mt", CREATE_SITE + "create-site.get_fr.properties.mt");
-		templatesSubstitutionMap.put(templatesRoot34d + "create-site.get_es.properties.mt", CREATE_SITE + "create-site.get_es.properties.mt");
-		templatesSubstitutionMap.put(templatesRoot34d + "create-site.get_it.properties.mt", CREATE_SITE + "create-site.get_it.properties.mt");
+		templatesSubstitutionMap.put(templatesRoot34d + "create-site.get_de.properties.mt", CREATE_SITE40d + "create-site.get_de.properties.mt");
+		templatesSubstitutionMap.put(templatesRoot34d + "create-site.get_fr.properties.mt", CREATE_SITE40d + "create-site.get_fr.properties.mt");
+		templatesSubstitutionMap.put(templatesRoot34d + "create-site.get_es.properties.mt", CREATE_SITE40d + "create-site.get_es.properties.mt");
+		templatesSubstitutionMap.put(templatesRoot34d + "create-site.get_it.properties.mt", CREATE_SITE40d + "create-site.get_it.properties.mt");
 
-		templatesSubstitutionMap.put(templatesRoot32r2 + "portalShare/presets.mt", PORTAL + "presets.mt");
+		templatesSubstitutionMap.put(templatesRoot32r2 + "portalShare/presets.mt", PORTAL40d + "presets.mt");
 
-		templatesSubstitutionMap.put(templatesRoot34d + "custom-share-config.xml.mt", CONFIGS + "custom-share-config.xml.mt");
+		templatesSubstitutionMap.put(templatesRoot34d + "custom-share-config.xml.mt", CONFIGS40d + "custom-share-config.xml.mt");
 
-		templatesSubstitutionMap.put(TEMPLATE_PATH_32R2_portalShare + "messages-context.mt", CONFIGS + "portal-context.mt");
+		templatesSubstitutionMap.put(templatesRoot34d + "document-details.xml.mt", PORTAL40d + "document-details.xml.mt");
+		templatesSubstitutionMap.put(templatesRoot34d + "edit-metadata.xml.mt", PORTAL40d + "edit-metadata.xml.mt");
+		templatesSubstitutionMap.put(templatesRoot34d + "folder-details.xml.mt", PORTAL40d + "folder-details.xml.mt");
+		templatesSubstitutionMap.put(templatesRoot34d + "inline-edit.xml.mt", PORTAL40d + "inline-edit.xml.mt");
+
+		templatesSubstitutionMap.put(TEMPLATE_PATH_32R2_portalShare + "messages-context.mt", CONFIGS40d + "portal-context.mt");
 
 		templatesSubstitution.add(templatesSubstitutionMap);
 		return templatesSubstitution;
