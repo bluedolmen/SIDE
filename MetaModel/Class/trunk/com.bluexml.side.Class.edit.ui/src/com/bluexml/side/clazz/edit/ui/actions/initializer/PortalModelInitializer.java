@@ -2,6 +2,7 @@ package com.bluexml.side.clazz.edit.ui.actions.initializer;
 
 import java.io.IOException;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.command.Command;
@@ -54,37 +55,35 @@ public class PortalModelInitializer extends ModelAndDiagramInitializer {
 		portal.getLayoutSet().add(layout);
 
 		// create pages
+
 		// blog-postlist
-		Page blogpostlist = createPage(layout, false, "blog-postlist", Visibility.PUBLIC); //$NON-NLS-1$
+		Page blogpostlist = createPage(portal, layout, false, "blog-postlist", Visibility.PUBLIC); //$NON-NLS-1$
 		blogpostlist.setPosition(0);
 
 		blogpostlist.getPortlets();
+
 		// discussions-topiclist
-		Page discussionstopiclist = createPage(layout, false, "discussions-topiclist", Visibility.PUBLIC); //$NON-NLS-1$
+		createPage(portal, layout, false, "discussions-topiclist", Visibility.PUBLIC); //$NON-NLS-1$
 
 		// links
-		Page links = createPage(layout, false, "links", Visibility.PUBLIC); //$NON-NLS-1$
+		createPage(portal, layout, false, "links", Visibility.PUBLIC); //$NON-NLS-1$
 
 		// wiki-page
-		Page wikipage = createPage(layout, false, "wiki-page", Visibility.PUBLIC); //$NON-NLS-1$
+		createPage(portal, layout, false, "wiki-page", Visibility.PUBLIC); //$NON-NLS-1$
 
 		// data-lists
-		Page datalists = createPage(layout, false, "data-lists", Visibility.PUBLIC); //$NON-NLS-1$
+		createPage(portal, layout, false, "data-lists", Visibility.PUBLIC); //$NON-NLS-1$
 
 		// calendar
-		Page calendar = createPage(layout, false, "calendar", Visibility.PUBLIC); //$NON-NLS-1$
-
-		portal.getPageSet().add(calendar);
-		portal.getPageSet().add(datalists);
-		portal.getPageSet().add(wikipage);
-		portal.getPageSet().add(links);
-		portal.getPageSet().add(discussionstopiclist);
-		portal.getPageSet().add(blogpostlist);
+		createPage(portal, layout, false, "calendar", Visibility.PUBLIC); //$NON-NLS-1$
 
 		// document library
 		createDocumentLibraryPage(portal, layout, createColumn);
-
+		// document details
 		createDocumentDetailsPage(portal, layout, createColumn);
+
+		// advanced search page
+		createAdvsearchPage(portal, layout, createColumn);
 	}
 
 	@Override
@@ -98,23 +97,30 @@ public class PortalModelInitializer extends ModelAndDiagramInitializer {
 		String pageId = "documentlibrary"; //$NON-NLS-1$
 		int index = 0;
 		String initializerIndex = InitializerRegister.DEFAULT_INITIALIZER_KEY;
-		create_page_internal_portlet(portal, layout, createColumn, pageId, index, initializerIndex, InternalPortletType.VIEW, Visibility.PUBLIC);
+		create_page_docLib_internal_portlet(portal, layout, createColumn, pageId, index, initializerIndex, InternalPortletType.VIEW, Visibility.PUBLIC, null);
 	}
 
 	private void createDocumentDetailsPage(Portal portal, PortalLayout layout, Column createColumn) throws Exception {
 		String pageId = "document-details"; //$NON-NLS-1$
-		int index = 1;
-		String initializerIndex = "anotherFormCollection.form"; //$NON-NLS-1$
-		create_page_internal_portlet(portal, layout, createColumn, pageId, index, initializerIndex, InternalPortletType.FORM, Visibility.PRIVATE);
+		int index = 0;
+		String initializerIndex = InitializerRegister.DEFAULT_ANOTHER_FORM_COLLECTION; //$NON-NLS-1$
+		create_page_internal_portlet(portal, layout, createColumn, pageId, index, initializerIndex, InternalPortletType.FORM, Visibility.PRIVATE, null);
 	}
 
-	private Page createPage(PortalLayout layout, boolean generate, String id, Visibility visibility) {
+	private void createAdvsearchPage(Portal portal, PortalLayout layout, Column createColumn) throws Exception {
+		String pageId = "advsearch"; //$NON-NLS-1$
+		int index = 0;
+		String initializerIndex = InitializerRegister.DEFAULT_INITIALIZER_KEY; //$NON-NLS-1$
+		create_page_internal_portlet(portal, layout, createColumn, pageId, index, initializerIndex, InternalPortletType.FORM, Visibility.PRIVATE, "search");
+	}
+
+	private Page createPage(Portal portal, PortalLayout layout, boolean generate, String id, Visibility visibility) {
 		Page p = PortalFactory.eINSTANCE.createPage();
 		p.setUseLayout(layout);
 		p.setID(id);
 		p.setGenerate(generate);
 		p.setVisibility(visibility);
-
+		portal.getPageSet().add(p);
 		return p;
 	}
 
@@ -125,27 +131,37 @@ public class PortalModelInitializer extends ModelAndDiagramInitializer {
 		return ob;
 	}
 
-	private void create_page_internal_portlet(Portal portal, PortalLayout layout, Column createColumn, String pageId, int eobjectIndex, String initializerIndex, InternalPortletType type, Visibility visibility) throws Exception {
-		Page page = createPage(layout, false, pageId, visibility);
+	private Page create_page_internal_portlet(Portal portal, PortalLayout layout, Column createColumn, String pageId, int eobjectIndex, String initializerIndex, InternalPortletType type, Visibility visibility, String subtype) throws Exception {
+		Page page = createPage(portal, layout, false, pageId, visibility);
 		// set HavePortlets
-		PortletInternal portletInternal = PortalFactory.eINSTANCE.createPortletInternal();
-		portletInternal.setType(type);
-		// get initialized View
-
-		if (type.equals(InternalPortletType.FORM)) {
-			setForm(eobjectIndex, initializerIndex, portletInternal);
-		} else {
-			setView(eobjectIndex, initializerIndex, portletInternal);
-		}
+		PortletInternal portletInternal = createPortletInternal(portal, eobjectIndex, initializerIndex, type, subtype);
 
 		// set Portlet - HavePortlet
-		Portlet portletView = PortalFactory.eINSTANCE.createPortlet();
-		portletView.setIsPortletInternal(portletInternal);
-		portletView.setName(pageId);
+		createHavePortlet(portal, layout, createColumn, pageId, eobjectIndex, page, portletInternal);
+		return page;
+	}
+
+	private Page create_page_docLib_internal_portlet(Portal portal, PortalLayout layout, Column createColumn, String pageId, int eobjectIndex, String initializerIndex, InternalPortletType type, Visibility visibility, String subtype) throws Exception {
+		Page page = create_page_internal_portlet(portal, layout, createColumn, pageId, eobjectIndex, initializerIndex, type, visibility, subtype);
+
+		// create internalProtlet on default form
+		PortletInternal portletInternal2 = createPortletInternal(portal, eobjectIndex, initializerIndex, InternalPortletType.FORM, subtype);
+		// create "uploadableTypes" portlet
+		createHavePortlet(portal, layout, createColumn, "uploadableTypes", 1, page, portletInternal2);
+		createHavePortlet(portal, layout, createColumn, "toolbar-create-content", 2, page, portletInternal2);
+		return page;
+	}
+
+	public void createHavePortlet(Portal portal, PortalLayout layout, Column createColumn, String pageId, int eobjectIndex, Page page, PortletInternal portletInternal) {
+		Portlet portletView = createPortletInstance_Internal(portal, pageId, portletInternal);
+
+		createHavePortlet_(layout, createColumn, eobjectIndex, page, portletView);
+	}
+
+	public void createHavePortlet_(PortalLayout layout, Column createColumn, int eobjectIndex, Page page, Portlet portletView) {
 		HavePortlet haveProtView = PortalFactory.eINSTANCE.createHavePortlet();
 		haveProtView.setAssociationPage(page);
 		haveProtView.setAssociationPortlet(portletView);
-		portal.getPageSet().add(page);
 
 		PositionGroup createPositionGroup = PortalFactory.eINSTANCE.createPositionGroup();
 		createPositionGroup.setOnColumn(createColumn);
@@ -153,12 +169,46 @@ public class PortalModelInitializer extends ModelAndDiagramInitializer {
 		createPositionGroup.setPosition(eobjectIndex);
 		haveProtView.getPositionGroup().add(createPositionGroup);
 		page.getPortlets().add(haveProtView);
-		portal.getInternalPortletSet().add(portletInternal);
+	}
+
+	public Portlet createPortletInstance_Internal(Portal portal, String pageId, PortletInternal portletInternal) {
+		Portlet portletView = PortalFactory.eINSTANCE.createPortlet();
+		portletView.setIsPortletInternal(portletInternal);
+		portletView.setName(pageId);
 		portal.getPortletSet().add(portletView);
+		return portletView;
+	}
+
+	public PortletInternal createPortletInternal(Portal portal, int eobjectIndex, String initializerIndex, InternalPortletType type, String subType) throws Exception {
+		PortletInternal portletInternal = PortalFactory.eINSTANCE.createPortletInternal();
+		portletInternal.setType(type);
+		portal.getInternalPortletSet().add(portletInternal);
+		// get initialized View
+
+		if (type.equals(InternalPortletType.FORM)) {
+			if (StringUtils.trimToEmpty(subType).equals("search")) {
+				setSearchForm(eobjectIndex, initializerIndex, portletInternal);
+			} else {
+				setForm(eobjectIndex, initializerIndex, portletInternal);
+			}
+
+		} else if (type.equals(InternalPortletType.VIEW)) {
+			setView(eobjectIndex, initializerIndex, portletInternal);
+		}
+		return portletInternal;
 	}
 
 	private void setForm(int objectIndex, String initializerIndex, PortletInternal portletInternal) throws Exception {
 		IPath newModelPath2 = register.getInitializers(FormModelInitializer.class).get(initializerIndex).newModelPath;
+		setForm(objectIndex, portletInternal, newModelPath2);
+	}
+
+	private void setSearchForm(int objectIndex, String initializerIndex, PortletInternal portletInternal) throws Exception {
+		IPath newModelPath2 = register.getInitializers(FormSearchModelInitializer.class).get(initializerIndex).newModelPath;
+		setForm(objectIndex, portletInternal, newModelPath2);
+	}
+
+	private void setForm(int objectIndex, PortletInternal portletInternal, IPath newModelPath2) throws Exception {
 		IFile iFile = IFileHelper.getIFile(newModelPath2);
 		FormCollection form = getFirstExtrenalFormCollection(iFile, objectIndex);
 		portletInternal.setForm(form);
