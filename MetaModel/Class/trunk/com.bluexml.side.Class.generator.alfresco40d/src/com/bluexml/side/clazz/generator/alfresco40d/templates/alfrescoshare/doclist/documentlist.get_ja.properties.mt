@@ -3,6 +3,7 @@ metamodel http://www.kerblue.org/class/1.0
 
 import templates.alfrescoshare.uploadForm.file-upload-js-get-lib
 import templates.servicesTemplates.Common
+import com.bluexml.side.clazz.service.alfresco.CommonServices
 %>
 
 <%--
@@ -83,6 +84,6 @@ dnd.upload.tooltip=<p>\u30c7\u30b9\u30af\u30c8\u30c3\u30d7\u304b\u3089\u30d5\u30
 <%for (getAllAbstractClasses().nSort("name")){%>
 ### <%getFullName()%>
 <%for (getSortedAttibutes()){%>
-<%getQualifiedName%>=<%getLabel()%>
+<%getPrefixedQName("_")%>=<%getLabel()%>
 <%}%>
 <%}%>

@@ -80,6 +80,8 @@ public class AlfPortalGenerator40d extends PortalGenerator {
 
 		templatesSubstitutionMap.put(templatesRoot34d + "custom-share-config.xml.mt", CONFIGS + "custom-share-config.xml.mt");
 
+		templatesSubstitutionMap.put(TEMPLATE_PATH_32R2_portalShare + "messages-context.mt", CONFIGS + "portal-context.mt");
+
 		templatesSubstitution.add(templatesSubstitutionMap);
 		return templatesSubstitution;
 	}

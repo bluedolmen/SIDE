@@ -3,6 +3,7 @@ metamodel http://www.kerblue.org/class/1.0
 
 import templates.alfrescoshare.uploadForm.file-upload-js-get-lib
 import templates.servicesTemplates.Common
+import com.bluexml.side.clazz.service.alfresco.CommonServices
 %>
 
 <%--
@@ -83,6 +84,6 @@ dnd.upload.tooltip=<p>Tambi\u00e9n puede arrastrar y soltar ficheros desde el es
 <%for (getAllAbstractClasses().nSort("name")){%>
 ### <%getFullName()%>
 <%for (getSortedAttibutes()){%>
-<%getQualifiedName%>=<%getLabel()%>
+<%getPrefixedQName("_")%>=<%getLabel()%>
 <%}%>
 <%}%>
