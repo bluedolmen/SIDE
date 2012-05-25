@@ -22,6 +22,9 @@ public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	protected static String GENERATOR_OPTIONS_FACETMAP = "com.bluexml.side.Portal.generator.alfresco.facetmap";
 	protected static String GENERATOR_OPTIONS_XFORMS = "com.bluexml.side.Portal.generator.alfresco.xforms";
 
+	protected static String TEMPLATE_PATH_32R2 = "/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/";
+	protected static String TEMPLATE_PATH_32R2_portalShare = TEMPLATE_PATH_32R2 + "portalShare/";
+
 	public PortalAlfrescoGenerator() {
 		versionProperty = "com.bluexml.side.Portal.generator.alfresco.module.version"; //$NON-NLS-1$
 	}
@@ -52,20 +55,20 @@ public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	protected List<String> getMainTemplates() {
 		List<String> result = new ArrayList<String>();
 		// general templates, pages, navigation component
-		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/presets.mt");
-		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/page.mt");
-		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/css.mt");
-		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/template-instances.mt");
-		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/title.mt");
-		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/navigation.mt");
-		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/shareComponents.mt");
-		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/template.mt");
-		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/template_js.mt");
-		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/messages-context.mt");
-		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/messages.mt");
-		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/create-site.get.properties.mt");
+		result.add(TEMPLATE_PATH_32R2_portalShare + "presets.mt");
+		result.add(TEMPLATE_PATH_32R2_portalShare + "page.mt");
+		result.add(TEMPLATE_PATH_32R2_portalShare + "css.mt");
+		result.add(TEMPLATE_PATH_32R2_portalShare + "template-instances.mt");
+		result.add(TEMPLATE_PATH_32R2_portalShare + "title.mt");
+		result.add(TEMPLATE_PATH_32R2_portalShare + "navigation.mt");
+		result.add(TEMPLATE_PATH_32R2_portalShare + "shareComponents.mt");
+		result.add(TEMPLATE_PATH_32R2_portalShare + "template.mt");
+		result.add(TEMPLATE_PATH_32R2_portalShare + "template_js.mt");
+		result.add(TEMPLATE_PATH_32R2_portalShare + "messages-context.mt");
+		result.add(TEMPLATE_PATH_32R2_portalShare + "messages.mt");
+		result.add(TEMPLATE_PATH_32R2_portalShare + "create-site.get.properties.mt");
 
-		result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/shared/web-framework-config-custom.mt");
+		result.add(TEMPLATE_PATH_32R2 + "shared/web-framework-config-custom.mt");
 		return result;
 	}
 
@@ -73,46 +76,46 @@ public class PortalAlfrescoGenerator extends AbstractAlfrescoGenerator {
 	protected List<String> getOptionalTemplates() {
 		List<String> result = new ArrayList<String>();
 		if (getGeneratorOptionValue(GENERATOR_OPTIONS_DOCLIST)) {
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/documentLibrary/DocumentLibraryPortletView.ftl.mt");
+			result.add(TEMPLATE_PATH_32R2 + "documentLibrary/DocumentLibraryPortletView.ftl.mt");
 		}
 		// if (getGeneratorOptionValue(GENERATOR_OPTIONS_FORMS)) {
 		// see web-framework-config-custom.mt
 		// }
 
 		if (getGeneratorOptionValue(GENERATOR_OPTIONS_FACETMAP)) {
-			// result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/portalShare/web-framework-config-custom.mt");
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/facetMapIntegration/template.facetMap.xml.mt");
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/facetMapIntegration/facetMap/facetMap.get.desc.xml.mt");
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/facetMapIntegration/facetMap/facetMap.get.head.ftl.mt");
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/facetMapIntegration/facetMap/facetMap.get.html.ftl.mt");
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/facetMapIntegration/facetMap/facetMap.get.js.mt");
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/facetMapIntegration/facetMap/facetMap.css.mt");
+			// result.add(TEMPLATE_PATH_32R2_portalShare +"web-framework-config-custom.mt");
+			result.add(TEMPLATE_PATH_32R2 + "facetMapIntegration/template.facetMap.xml.mt");
+			result.add(TEMPLATE_PATH_32R2 + "facetMapIntegration/facetMap/facetMap.get.desc.xml.mt");
+			result.add(TEMPLATE_PATH_32R2 + "facetMapIntegration/facetMap/facetMap.get.head.ftl.mt");
+			result.add(TEMPLATE_PATH_32R2 + "facetMapIntegration/facetMap/facetMap.get.html.ftl.mt");
+			result.add(TEMPLATE_PATH_32R2 + "facetMapIntegration/facetMap/facetMap.get.js.mt");
+			result.add(TEMPLATE_PATH_32R2 + "facetMapIntegration/facetMap/facetMap.css.mt");
 		}
 		if (getGeneratorOptionValue(GENERATOR_OPTIONS_XFORMS)) {
 			// XForm portlet
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/xformsIntegration/Xform/Xform.get.desc.xml.mt");
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/xformsIntegration/Xform/Xform.get.head.ftl.mt");
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/xformsIntegration/Xform/Xform.get.html.ftl.mt");
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/xformsIntegration/Xform/Xform.get.js.mt");
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/xformsIntegration/Xform/Xform.get.properties.mt");
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/xformsIntegration/Xform/Xform.css.mt");
+			result.add(TEMPLATE_PATH_32R2 + "xformsIntegration/Xform/Xform.get.desc.xml.mt");
+			result.add(TEMPLATE_PATH_32R2 + "xformsIntegration/Xform/Xform.get.head.ftl.mt");
+			result.add(TEMPLATE_PATH_32R2 + "xformsIntegration/Xform/Xform.get.html.ftl.mt");
+			result.add(TEMPLATE_PATH_32R2 + "xformsIntegration/Xform/Xform.get.js.mt");
+			result.add(TEMPLATE_PATH_32R2 + "xformsIntegration/Xform/Xform.get.properties.mt");
+			result.add(TEMPLATE_PATH_32R2 + "xformsIntegration/Xform/Xform.css.mt");
 			// callback page (redirect to share page after editing)
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/xformsIntegration/edit-metadataCallBack.html.mt");
+			result.add(TEMPLATE_PATH_32R2 + "xformsIntegration/edit-metadataCallBack.html.mt");
 			// override edit-metadata page template
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/xformsIntegration/templates-edit-metadataXForm.ftl.mt");
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/xformsIntegration/edit-metadata.xml.mt");
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/xformsIntegration/template.edit-metadata-XForm.edit-metadata.xml.mt");
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/xformsIntegration/edit-metadata-mgr.get.html.ftl.mt");
+			result.add(TEMPLATE_PATH_32R2 + "xformsIntegration/templates-edit-metadataXForm.ftl.mt");
+			result.add(TEMPLATE_PATH_32R2 + "xformsIntegration/edit-metadata.xml.mt");
+			result.add(TEMPLATE_PATH_32R2 + "xformsIntegration/template.edit-metadata-XForm.edit-metadata.xml.mt");
+			result.add(TEMPLATE_PATH_32R2 + "xformsIntegration/edit-metadata-mgr.get.html.ftl.mt");
 
 			// searchForms
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/advancedSearchIntegration/template.XformSearch.advancedSearch.xml.mt");
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/advancedSearchIntegration/searchFormCallBack.html.mt");
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/advancedSearchIntegration/XformSearch/XformSearch.get.desc.xml.mt");
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/advancedSearchIntegration/XformSearch/XformSearch.get.head.ftl.mt");
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/advancedSearchIntegration/XformSearch/XformSearch.get.html.ftl.mt");
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/advancedSearchIntegration/XformSearch/XformSearch.get.js.mt");
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/advancedSearchIntegration/XformSearch/XformSearch.get.properties.mt");
-			result.add("/com.bluexml.side.Portal.generator.alfresco/com/bluexml/side/portal/generator/alfresco/templates/advancedSearchIntegration/XformSearch/XformSearch.css.mt");
+			result.add(TEMPLATE_PATH_32R2 + "advancedSearchIntegration/template.XformSearch.advancedSearch.xml.mt");
+			result.add(TEMPLATE_PATH_32R2 + "advancedSearchIntegration/searchFormCallBack.html.mt");
+			result.add(TEMPLATE_PATH_32R2 + "advancedSearchIntegration/XformSearch/XformSearch.get.desc.xml.mt");
+			result.add(TEMPLATE_PATH_32R2 + "advancedSearchIntegration/XformSearch/XformSearch.get.head.ftl.mt");
+			result.add(TEMPLATE_PATH_32R2 + "advancedSearchIntegration/XformSearch/XformSearch.get.html.ftl.mt");
+			result.add(TEMPLATE_PATH_32R2 + "advancedSearchIntegration/XformSearch/XformSearch.get.js.mt");
+			result.add(TEMPLATE_PATH_32R2 + "advancedSearchIntegration/XformSearch/XformSearch.get.properties.mt");
+			result.add(TEMPLATE_PATH_32R2 + "advancedSearchIntegration/XformSearch/XformSearch.css.mt");
 		}
 		return result;
 	}
