@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.View.feature" label="SIDE View Modeler" version="1.0.89.v35624-20120503" provider-name="BlueXML">
+<feature id="com.bluexml.side.View.feature" label="SIDE View Modeler" version="1.0.90.v36589-20120525" provider-name="BlueXML">
   <description url="http://www.side-labs.com">SIDE lets developers who are new to Alfresco get started quickly and helps experienced developers get the job done even faster.</description>
   <copyright url="http://www.bluexml.com/copyright">Copyright 2005-2012 BlueXML SARL.</copyright>
   <license url="http://www.side-labs.com/en/index.php/Product:License">SIDE SOFTWARE IS LICENSED BY BLUEXML. PLEASE GO TO http://www.side-labs.com/en/index.php/Product:License. READ THIS AGREEMENT CAREFULLY BEFORE PURCHASING AND/OR USING SIDE SOFTWARE.</license>
@@ -40,7 +40,7 @@
     <import plugin="com.bluexml.side.Util.componentMonitor" />
   </requires>
   <plugin id="com.bluexml.side.View" download-size="0" install-size="0" version="1.0.58.v33565-20120307" unpack="false" />
-  <plugin id="com.bluexml.side.View.edit" download-size="0" install-size="0" version="1.0.48.v33565-20120307" unpack="false" />
+  <plugin id="com.bluexml.side.View.edit" download-size="0" install-size="0" version="1.0.49.v36589-20120525" unpack="false" />
   <plugin id="com.bluexml.side.View.edit.ui" download-size="0" install-size="0" version="1.0.54.v29723-20111108" unpack="false" />
   <plugin id="com.bluexml.side.View.editor" download-size="0" install-size="0" version="1.0.34.v33455-20120302" unpack="false" />
   <plugin id="com.bluexml.side.View.generator.documentation" download-size="0" install-size="0" version="1.0.25.v29723-20111108" unpack="false" />
