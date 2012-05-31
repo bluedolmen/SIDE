@@ -17,12 +17,22 @@
   </xs:element>
   <xs:element name="id" type="xs:NCName"/>
   <xs:element name="page-type" type="xs:NCName"/>
-  <xs:element name="title" type="xs:string"/>
   <xs:element name="title-id" type="xs:NCName"/>
-  <xs:element name="description" type="xs:string"/>
+  <xs:element name="description" type="xs:NCName"/>
   <xs:element name="description-id" type="xs:NCName"/>
-  <xs:element name="template-instance" type="xs:NCName"/>
+  <xs:element name="template-instance">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="components"/>
+        <xs:element ref="properties"/>
+        <xs:element ref="template-type"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="template-type" type="xs:string"/>
   <xs:element name="authentication" type="xs:NCName"/>
+  
+  <xs:element name="title" type="xs:NCName"/>
   <xs:element name="components">
     <xs:complexType>
       <xs:sequence>
@@ -33,25 +43,29 @@
   <xs:element name="component">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" ref="scope"/>
         <xs:element ref="region-id"/>
-        <xs:element minOccurs="0" ref="sub-components"/>
+        <xs:element minOccurs="0" ref="source-id"/>
         <xs:element minOccurs="0" ref="url"/>
         <xs:element minOccurs="0" ref="properties"/>
+        <xs:element minOccurs="0" ref="sub-components"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="scope" type="xs:NCName"/>
   <xs:element name="region-id" type="xs:NCName"/>
+  <xs:element name="source-id" type="xs:NCName"/>
   <xs:element name="sub-components">
     <xs:complexType>
-      <xs:sequence maxOccurs="unbounded" minOccurs="0">
-        <xs:element ref="sub-component"/>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="sub-component"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="sub-component">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="evaluations"/>
+        <xs:element minOccurs="0" ref="evaluations"/>
       </xs:sequence>
       <xs:attribute name="id" use="required" type="xs:NCName"/>
     </xs:complexType>
@@ -76,7 +90,7 @@
   <xs:element name="evaluators">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="evaluator"/>
+        <xs:element maxOccurs="unbounded" ref="evaluator"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -103,5 +117,14 @@
             </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="subtitle" type="xs:NCName"/>
+  <xs:element name="nodeRef" type="xs:string"/>
+  <xs:element name="activityType" type="xs:NCName"/>
+  <xs:element name="eventName" type="xs:NCName"/>
+  <xs:element name="eventData" type="xs:NCName"/>
+  <xs:element name="pageFamily" type="xs:NCName"/>
+  <xs:element name="container" type="xs:NCName"/>
+  <xs:element name="rootPage" type="xs:NCName"/>
+  <xs:element name="rootLabelId" type="xs:NCName"/>
   <xs:element name="url" type="xs:string"/>
 </xs:schema>

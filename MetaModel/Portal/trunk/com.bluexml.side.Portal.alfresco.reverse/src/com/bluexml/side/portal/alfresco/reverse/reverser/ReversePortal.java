@@ -3,28 +3,36 @@ package com.bluexml.side.portal.alfresco.reverse.reverser;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.util.List;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.namespace.QName;
 
-import com.bluexml.side.alfresco.share.page.binding.Page;
+import com.bluexml.side.alfresco.share.all.binding.Components;
+import com.bluexml.side.alfresco.share.all.binding.Page;
+import com.bluexml.side.alfresco.share.all.binding.Properties;
 import com.bluexml.side.portal.Portal;
 import com.bluexml.side.portal.PortalFactory;
 import com.bluexml.side.portal.PortalLayout;
+import com.bluexml.side.portal.alfresco.reverse.reverser.data.Region;
 import com.bluexml.side.portal.helper.PortalHelper;
 import com.bluexml.side.util.libs.ecore.EResourceUtils;
 
 public class ReversePortal {
 
-	String PATH_SITE_DATA = "site-data";
-	String PATH_PAGES = PATH_SITE_DATA + File.separator + "pages";
-	String PATH_INSTANCES = PATH_SITE_DATA + File.separator + "template-instances";
-	String PATH_TEMPLATE_TYPES = PATH_SITE_DATA + File.separator + "template-types";
-	String PATH_PAGE_TEMPLATES = "templates";
+	public final static String PATH_SITE_DATA = "site-data";
+	public final static String PATH_PAGES = PATH_SITE_DATA + File.separator + "pages";
+	public final static String PATH_COMPONENTS = PATH_SITE_DATA + File.separator + "components";
+	public final static String PATH_INSTANCES = PATH_SITE_DATA + File.separator + "template-instances";
+	public final static String PATH_TEMPLATE_TYPES = PATH_SITE_DATA + File.separator + "template-types";
+	public final static String PATH_PAGE_TEMPLATES = "templates";
 
 	File pages;
 	File instances;
+	File components;
 	File outputDir;
 	Portal portal;
 	String portalName = "alfrescoShare";
@@ -35,12 +43,13 @@ public class ReversePortal {
 
 	public ReversePortal(File home, File outputDir) throws JAXBException {
 		pages = new File(home, PATH_PAGES);
+		components = new File(home, PATH_COMPONENTS);
 		instances = new File(home, PATH_INSTANCES);
 		templates = new File(home, PATH_PAGE_TEMPLATES);
 		templates_types = new File(home, PATH_TEMPLATE_TYPES);
 		this.outputDir = outputDir;
 
-		jaxbContext = JAXBContext.newInstance("com.bluexml.side.alfresco.share.page.binding", EclipseReverser.class.getClassLoader());
+		jaxbContext = JAXBContext.newInstance("com.bluexml.side.alfresco.share.all.binding", EclipseReverser.class.getClassLoader());
 		unm = jaxbContext.createUnmarshaller();
 	}
 
@@ -62,20 +71,30 @@ public class ReversePortal {
 			String name = page.getName().replace(".xml", "");
 			// extract page information
 			Page p = loadPage(page);
+			List<Object> content = p.getTemplateInstance().getContent();
 
-			String templateInstance = p.getTemplateInstance();
+			String templateInstance = getValueString(content);
 
 			File templateInstanceFile = getTemplateInstanceFile(templateInstance);
-			EclipseReverser er = new EclipseReverser(templateInstanceFile, portal, name);
-			String templateType = er.model.getTemplateType();
+			EclipseReverser er = new EclipseReverser(templateInstanceFile, portal, name, components);
+			//er.model.getTemplateType()
+			String templateType = getValueJaxBE(er.model.getContent(), "template-type");
+
 			File templateFile = getTemplateFile(templateType);
 
 			if (templateInstanceFile.exists() && templateFile.exists()) {
 				// revert pages layouts
 				LayoutReverser lr = new LayoutReverser(templateFile, portal, name);
-				PortalLayout parse = lr.parse();
-				// reverse pages instances				
-				com.bluexml.side.portal.Page reverse = er.reverse(parse, p.getComponents());
+				PortalLayout layout = lr.parse();
+
+				// each region must match to a component
+				// components can be defined in tree places ... hum
+				// SIDE-DATA/components, into page definition and into template-instance definition
+				List<Region> regions = lr.getRegions();
+
+				// reverse pages instances
+
+				com.bluexml.side.portal.Page reverse = er.reverse(layout, p.getComponents(), regions);
 				// search for existing js file
 				String jsFileName = templateFile.getName().replace(".ftl", ".js");
 				File file = new File(templateFile.getParentFile(), jsFileName);
@@ -88,6 +107,48 @@ public class ReversePortal {
 		}
 
 		return portal;
+	}
+
+	public static Components getValueComponents(List<Object> content) {
+
+		for (Object object : content) {
+			if (object instanceof Components) {
+				return (Components) object;
+			}
+		}
+		return null;
+	}
+
+	public static String getValueString(List<Object> content) {
+		for (Object object : content) {
+			if (object instanceof String) {
+				return (String) object;
+			}
+		}
+		return null;
+	}
+
+	public static Properties getValueProperties(List<Object> content) {
+		for (Object object : content) {
+			if (object instanceof Properties) {
+				return (Properties) object;
+			}
+		}
+		return null;
+	}
+
+	public static String getValueJaxBE(List<Object> content, String tagName) {
+		for (Object object : content) {
+			if (object instanceof JAXBElement) {
+				JAXBElement<String> jaxbE = (JAXBElement<String>) object;
+				QName name = jaxbE.getName();
+				if (name.getLocalPart().equals(tagName)) {
+					return jaxbE.getValue();
+				}
+
+			}
+		}
+		return null;
 	}
 
 	public File getTemplateFile(String templateType) {

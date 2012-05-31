@@ -8,7 +8,6 @@
 	</taskdef>
 	<target name="prepare-compile" description="Compilation du schéma pour obtenir les classes nécessaires à la production du fichier mapping.xml">
 		<mkdir dir="${sources.out}" />
-		<xjc schema="${xsd.inTemplateInstances}" destdir="${sources.out}" package="${sources.packageTemplateInstances}" removeOldOutput="yes" header="false"/>
-		<xjc schema="${xsd.inPage}" destdir="${sources.out}" package="${sources.packagePage}" removeOldOutput="no" header="false"/>
+		<xjc schema="${xsd.inAll}" destdir="${sources.out}" package="${sources.packageAll}" removeOldOutput="true" header="false"/>
 	</target>
 </project>

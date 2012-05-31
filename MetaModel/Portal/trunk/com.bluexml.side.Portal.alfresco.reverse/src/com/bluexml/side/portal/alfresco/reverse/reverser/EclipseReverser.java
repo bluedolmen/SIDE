@@ -12,23 +12,24 @@ import javax.xml.bind.Unmarshaller;
 import org.eclipse.emf.common.util.EList;
 import org.w3c.dom.Element;
 
-import com.bluexml.side.alfresco.share.instances.binding.Component;
-import com.bluexml.side.alfresco.share.instances.binding.Components;
-import com.bluexml.side.alfresco.share.instances.binding.Evaluation;
-import com.bluexml.side.alfresco.share.instances.binding.Evaluations;
-import com.bluexml.side.alfresco.share.instances.binding.Evaluator;
-import com.bluexml.side.alfresco.share.instances.binding.Evaluators;
-import com.bluexml.side.alfresco.share.instances.binding.Params;
-import com.bluexml.side.alfresco.share.instances.binding.Properties;
-import com.bluexml.side.alfresco.share.instances.binding.SubComponent;
-import com.bluexml.side.alfresco.share.instances.binding.SubComponents;
-import com.bluexml.side.alfresco.share.instances.binding.TemplateInstance;
+import com.bluexml.side.alfresco.share.all.binding.Component;
+import com.bluexml.side.alfresco.share.all.binding.Components;
+import com.bluexml.side.alfresco.share.all.binding.Evaluation;
+import com.bluexml.side.alfresco.share.all.binding.Evaluations;
+import com.bluexml.side.alfresco.share.all.binding.Evaluator;
+import com.bluexml.side.alfresco.share.all.binding.Evaluators;
+import com.bluexml.side.alfresco.share.all.binding.Params;
+import com.bluexml.side.alfresco.share.all.binding.Properties;
+import com.bluexml.side.alfresco.share.all.binding.SubComponent;
+import com.bluexml.side.alfresco.share.all.binding.SubComponents;
+import com.bluexml.side.alfresco.share.all.binding.TemplateInstance;
 import com.bluexml.side.common.Visibility;
 import com.bluexml.side.portal.Column;
 import com.bluexml.side.portal.Page;
 import com.bluexml.side.portal.Portal;
 import com.bluexml.side.portal.PortalLayout;
 import com.bluexml.side.portal.Portlet;
+import com.bluexml.side.portal.alfresco.reverse.reverser.data.Region;
 import com.bluexml.side.portal.helper.PortalHelper;
 import com.bluexml.side.util.libs.FileHelper;
 
@@ -41,14 +42,16 @@ public class EclipseReverser {
 	TemplateInstance model = null;
 	String pageName;
 	PortalLayout portalLayout;
+	File components = null;
 
-	public EclipseReverser(File templateInstance, Portal portal, String pageName) throws Exception {
+	public EclipseReverser(File templateInstance, Portal portal, String pageName, File components) throws Exception {
 		this.rootObject = portal;
+		this.components = components;
 
 		if (templateInstance.exists() && templateInstance.isFile() && FileHelper.getFileExt(templateInstance).equals("xml")) {
 			System.out.println("open :" + templateInstance.getName());
 			this.pageName = pageName;
-			jaxbContext = JAXBContext.newInstance("com.bluexml.side.alfresco.share.instances.binding", EclipseReverser.class.getClassLoader());
+			jaxbContext = JAXBContext.newInstance("com.bluexml.side.alfresco.share.all.binding", EclipseReverser.class.getClassLoader());
 			Unmarshaller unm = jaxbContext.createUnmarshaller();
 			Object root = unm.unmarshal(templateInstance);
 			model = (TemplateInstance) root;
@@ -58,7 +61,7 @@ public class EclipseReverser {
 		}
 	}
 
-	public Page reverse(PortalLayout layout, Components fromPage) throws Exception {
+	public Page reverse(PortalLayout layout, Components fromPage, List<Region> regions) throws Exception {
 		this.portalLayout = layout;
 		String id = pageName;
 
@@ -66,41 +69,45 @@ public class EclipseReverser {
 		boolean generate = true;
 		Page page = PortalHelper.createPage(rootObject, portalLayout, generate, id, visibility);
 
-		Properties properties = model.getProperties();
+		Properties properties = ReversePortal.getValueProperties(model.getContent());
 
 		Map<String, String> props = new HashMap<String, String>();
 		handleProperties(props, properties);
 
 		PortalHelper.createMetaInfos(props, page, false, "prop_");
 
-		Components components2 = model.getComponents();
-		reverseComponents(page, fromPage);
-		reverseComponents(page, components2);
+		Components fromInstance = ReversePortal.getValueComponents(model.getContent());
+
+		for (Region region : regions) {
+			Component component = getComponent(region, fromInstance, fromPage);
+			if (component != null) {
+				handleComponent(page, component);
+			} else {
+				System.err.println("Missing component for region :" + region.getRegionId() + " scope:" + region.getScope());
+			}
+		}
+
 		return page;
 	}
 
-	public void reverseComponents(Page page, Components components2) throws Exception {
-		if (components2 != null) {
-			List<Component> components = components2.getComponent();
-			for (Component component : components) {
-				String portletName = component.getRegionId();
-				String componentURL = component.getUrl();
+	public void handleComponent(Page page, Component component) throws Exception {
+		String portletName = component.getRegionId();
+		String componentURL = component.getUrl();
+		String sourceId = component.getSourceId();
+		String scope = component.getScope() != null ? component.getScope() : "template";
+		Map<String, String> props = new TreeMap<String, String>();
+		props.put("url", componentURL);
+		props.put("scope", scope);
 
-				Map<String, String> props = new TreeMap<String, String>();
-				props.put("url", componentURL);
-				props.put("scope", "template");
+		Properties properties = component.getProperties();
 
-				Properties properties = component.getProperties();
+		handleProperties(props, properties);
 
-				handleProperties(props, properties);
+		Portlet createPortlet = PortalHelper.createPortlet(rootObject, portletName, props);
 
-				Portlet createPortlet = PortalHelper.createPortlet(rootObject, portletName, props);
+		handleSubComponents(component, portletName, createPortlet);
 
-				handleSubComponents(component, portletName, createPortlet);
-
-				PortalHelper.createHavePortlet(portalLayout, getMatchingColumn(portletName), 1, page, createPortlet);
-			}
-		}
+		PortalHelper.createHavePortlet(portalLayout, getMatchingColumn(portletName), 1, page, createPortlet);
 	}
 
 	public void handleSubComponents(Component component, String portletName, Portlet createPortlet) throws Exception {
@@ -139,22 +146,24 @@ public class EclipseReverser {
 						subPortelt_props.put("url", url);
 						handleProperties(subPortelt_props, properties2);
 						Portlet subcreatePortlet = PortalHelper.createPortlet(rootObject, portletName, subPortelt_props);
-
-						String evaluator_id = evaluation.getId(); // Meta-info
-						PortalHelper.createMetaInfo(subcreatePortlet, "evaluator_id", evaluator_id, false);
 						PortalHelper.createMetaInfo(subcreatePortlet, "subComponent_id", id2, false);
+						String evaluation_id = evaluation.getId(); // Meta-info
+						PortalHelper.createMetaInfo(subcreatePortlet, "evaluation_id", evaluation_id, false);
+
 						Evaluators evaluatorsE = evaluation.getEvaluators(); // Meta-info
 						if (evaluatorsE != null) {
-							Evaluator evaluator = evaluatorsE.getEvaluator();
-							String evaluator_type = evaluator.getType();
-							PortalHelper.createMetaInfo(subcreatePortlet, "evaluator_type", evaluator_type, false);
-							Params params = evaluator.getParams();
-							if (params != null) {
-								System.out.println("EclipseReverser.handleSubComponents() params");
-								String element = params.getElement();
-								PortalHelper.createMetaInfo(subcreatePortlet, "params-element", element, false);
-							}
+							List<Evaluator> evaluators = evaluatorsE.getEvaluator();
+							for (Evaluator evaluator : evaluators) {
+								String evaluator_type = evaluator.getType();
 
+								PortalHelper.createMetaInfo(subcreatePortlet, "evaluator_type", evaluator_type, false);
+								Params params = evaluator.getParams();
+								if (params != null) {
+									System.out.println("EclipseReverser.handleSubComponents() params");
+									String element = params.getElement();
+									PortalHelper.createMetaInfo(subcreatePortlet, "params-element#" + evaluator_type, element, false);
+								}
+							}
 						}
 
 						createPortlet.getSubPortlets().add(subcreatePortlet);
@@ -189,5 +198,61 @@ public class EclipseReverser {
 		}
 
 		return null;
+	}
+
+	public Component getComponent(Region region, Components fromInstance, Components fromPage) throws Exception {
+		Component com = null;
+		// maybe in page components or template-instances components or finally in SIDE-DATA/component directory
+
+		com = searchComponent(region, fromInstance);
+
+		if (com == null) {
+			com = searchComponent(region, fromPage);
+		}
+
+		if (com == null) {
+			String regionId = region.getRegionId();
+			String scope = region.getScope();
+			String fileName = "";
+			if (scope.equals("global")) {
+				fileName = scope + "." + regionId + ".xml";
+			} else {
+				fileName = scope + "." + this.pageName + "." + regionId + ".xml";
+			}
+			// need to search in site-data/components
+			File componentFile = null;
+			File[] listFiles = components.listFiles();
+			for (File file : listFiles) {
+				if (file.getName().equals(fileName)) {
+					componentFile = file;
+				}
+			}
+
+			if (componentFile != null && componentFile.exists()) {
+				// read component configuration
+				Unmarshaller createUnmarshaller = jaxbContext.createUnmarshaller();
+				com = (Component) createUnmarshaller.unmarshal(componentFile);
+			}
+		}
+
+		return com;
+	}
+
+	protected Component searchComponent(Region region, Components fromInstance) throws Exception {
+		Component com = null;
+		if (fromInstance != null) {
+			List<Component> components = fromInstance.getComponent();
+			for (Component component : components) {
+				String regionId = region.getRegionId();
+				if (regionId.equals(component.getRegionId())) {
+					if (com == null) {
+						com = component;
+					} else {
+						throw new Exception("hum more than one component found for this id :" + regionId);
+					}
+				}
+			}
+		}
+		return com;
 	}
 }

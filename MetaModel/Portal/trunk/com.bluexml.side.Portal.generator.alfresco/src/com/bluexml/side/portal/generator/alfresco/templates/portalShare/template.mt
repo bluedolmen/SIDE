@@ -33,11 +33,11 @@ import com.bluexml.side.portal.generator.alfresco.service.ShareGeneratorServices
 	<%if (metainfo[key == "tag"].value != null && metainfo[key == "tag"].value != ""){%>
 		<%if (metainfo[key == "tag"].value.startsWith("@")){%>
 <<%metainfo[key == "tag"].value%>>
-<%generateLayout_sub()%>
+	<%generateLayout_sub()%>
 </@>
 		<%}else{%>
 <<%metainfo[key == "tag"].value%><%for (metainfo){%> <%key%>="<%value%>"<%}%>>
-<%generateLayout_sub()%>
+	<%generateLayout_sub()%>
 </<%metainfo[key == "tag"].value%>>
 		<%}%>
 	<%}else{%>
@@ -47,23 +47,23 @@ import com.bluexml.side.portal.generator.alfresco.service.ShareGeneratorServices
 <%metainfo[key == "rawContent"].multilineValue%>
 <%}else{%>
 <div id="<%name%>"<%for (metainfo){%> <%key%>="<%value%>"<%}%>>
-<%generateLayout_sub()%>
+	<%generateLayout_sub()%>
 </div>
 <%}%>
-<%script type="Page" name="view"%>
+<%script type="Page" name="view" post="trim()" %>
 <%for (getOrderedHaveProtlets(args(0).filter("Column")).filter("HavePortlet")){%>
 	<%if (associationPortlet != null && associationPage != null){%>
 		<%for (associationPortlet){%>
 			<%if (isPortletInternal != null && (isPortletInternal.view != null || isPortletInternal.form != null)){%>
 				<%for (isPortletInternal.view){%>
 						<%if (current("view.FacetMap")){%>
-			<@region scope="template" id="<%current("portal.Portlet").name%>" protected=true/>
+            <@region scope="template" id="<%current("portal.Portlet").name%>" protected=true/>
 						<%}%>
 				<%}%>
 				<%for (isPortletInternal.form){%>
 					<%if (current("Portlet").name.toLowerCase() =="advanced-search"){%>
 						<%if (current("form.SearchFormCollection")){%>
-			<@region scope="template" id="advanced-search" protected=true/>
+            <@region scope="template" id="advanced-search" protected=true/>
 						<%}%>
 					<%}%>
 				<%}%>
@@ -72,18 +72,16 @@ import com.bluexml.side.portal.generator.alfresco.service.ShareGeneratorServices
 <%getFileContent(metainfo[key == "rawContentFilePath"].value)%>
 			<%}else if (metainfo[key == "rawContent"]){%>
 			<%metainfo[key == "rawContent"].multilineValue%>
-			<%}else{%>
-				<%-- use default share components --%>
-			<@region 
+			<%}else{%><%-- use default share components --%>
+            <@region 
 				<%for (isInstanceOfPortletType.instances){%>
 					<%if (instanceOf.name == "scope"){%>
-					<%instanceOf.name%>="<%value%>" 
+               <%instanceOf.name%>="<%value%>" 
 					<%}%>
 				<%}%>
-					id=<%if (current("HavePortlet").metainfo[key == "region-id"].nSize() > 0){%><%current("HavePortlet").metainfo[key == "region-id"].value%><%}else{%><%if (name.indexOf("\"") == -1){%>"<%name%>"<%}else{%><%name%><%}%><%}%>
-				 	protected=true />
+               id=<%if (current("HavePortlet").metainfo[key == "region-id"].nSize() > 0){%><%current("HavePortlet").metainfo[key == "region-id"].value%><%}else{%><%if (name.indexOf("\"") == -1){%>"<%name%>"<%}else{%><%name%><%}%><%}%>
+               protected=true />
 			<%}%>
 		<%}%>
-		
 	<%}%>
 <%}%>

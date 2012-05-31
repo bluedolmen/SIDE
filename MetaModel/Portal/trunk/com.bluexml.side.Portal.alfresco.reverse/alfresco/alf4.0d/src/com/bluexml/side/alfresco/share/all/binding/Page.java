@@ -1,5 +1,5 @@
 
-package com.bluexml.side.alfresco.share.page.binding;
+package com.bluexml.side.alfresco.share.all.binding;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -9,8 +9,6 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import com.bluexml.side.alfresco.share.instances.binding.Components;
 
 
 /**
@@ -64,21 +62,23 @@ public class Page {
     @XmlSchemaType(name = "NCName")
     protected String pageType;
     @XmlElement(required = true)
+    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+    @XmlSchemaType(name = "NCName")
     protected String title;
     @XmlElement(name = "title-id", required = true)
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlSchemaType(name = "NCName")
     protected String titleId;
     @XmlElement(required = true)
+    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+    @XmlSchemaType(name = "NCName")
     protected String description;
     @XmlElement(name = "description-id", required = true)
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlSchemaType(name = "NCName")
     protected String descriptionId;
     @XmlElement(name = "template-instance", required = true)
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    @XmlSchemaType(name = "NCName")
-    protected String templateInstance;
+    protected TemplateInstance templateInstance;
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlSchemaType(name = "NCName")
@@ -235,10 +235,10 @@ public class Page {
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link TemplateInstance }
      *     
      */
-    public String getTemplateInstance() {
+    public TemplateInstance getTemplateInstance() {
         return templateInstance;
     }
 
@@ -247,10 +247,10 @@ public class Page {
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link TemplateInstance }
      *     
      */
-    public void setTemplateInstance(String value) {
+    public void setTemplateInstance(TemplateInstance value) {
         this.templateInstance = value;
     }
 

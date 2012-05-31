@@ -1,6 +1,8 @@
 
-package com.bluexml.side.alfresco.share.instances.binding;
+package com.bluexml.side.alfresco.share.all.binding;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -18,7 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{}evaluator"/>
+ *         &lt;element ref="{}evaluator" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,30 +37,35 @@ import javax.xml.bind.annotation.XmlType;
 public class Evaluators {
 
     @XmlElement(required = true)
-    protected Evaluator evaluator;
+    protected List<Evaluator> evaluator;
 
     /**
      * Gets the value of the evaluator property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Evaluator }
-     *     
-     */
-    public Evaluator getEvaluator() {
-        return evaluator;
-    }
-
-    /**
-     * Sets the value of the evaluator property.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the evaluator property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Evaluator }
-     *     
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getEvaluator().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Evaluator }
+     * 
+     * 
      */
-    public void setEvaluator(Evaluator value) {
-        this.evaluator = value;
+    public List<Evaluator> getEvaluator() {
+        if (evaluator == null) {
+            evaluator = new ArrayList<Evaluator>();
+        }
+        return this.evaluator;
     }
 
 }

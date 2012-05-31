@@ -1,5 +1,5 @@
 
-package com.bluexml.side.alfresco.share.instances.binding;
+package com.bluexml.side.alfresco.share.all.binding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{}evaluation" maxOccurs="unbounded"/>
+ *         &lt;element ref="{}component" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -31,41 +31,41 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "evaluation"
+    "component"
 })
-@XmlRootElement(name = "evaluations")
-public class Evaluations {
+@XmlRootElement(name = "components")
+public class Components {
 
     @XmlElement(required = true)
-    protected List<Evaluation> evaluation;
+    protected List<Component> component;
 
     /**
-     * Gets the value of the evaluation property.
+     * Gets the value of the component property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the evaluation property.
+     * This is why there is not a <CODE>set</CODE> method for the component property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getEvaluation().add(newItem);
+     *    getComponent().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Evaluation }
+     * {@link Component }
      * 
      * 
      */
-    public List<Evaluation> getEvaluation() {
-        if (evaluation == null) {
-            evaluation = new ArrayList<Evaluation>();
+    public List<Component> getComponent() {
+        if (component == null) {
+            component = new ArrayList<Component>();
         }
-        return this.evaluation;
+        return this.component;
     }
 
 }

@@ -1,5 +1,5 @@
 
-package com.bluexml.side.alfresco.share.instances.binding;
+package com.bluexml.side.alfresco.share.all.binding;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

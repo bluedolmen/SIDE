@@ -2,6 +2,8 @@ package com.bluexml.side.portal.alfresco.reverse.reverser;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +17,7 @@ import com.bluexml.side.portal.Column;
 import com.bluexml.side.portal.Portal;
 import com.bluexml.side.portal.PortalFactory;
 import com.bluexml.side.portal.PortalLayout;
+import com.bluexml.side.portal.alfresco.reverse.reverser.data.Region;
 import com.bluexml.side.portal.helper.PortalHelper;
 
 public class LayoutReverser {
@@ -35,8 +38,14 @@ public class LayoutReverser {
 	File pageFile = null;
 	int generatedId = 0;
 
+	List<Region> regions = new ArrayList<Region>();
+
 	String regexpAttributes = "(([^ =]*)=\"([^\"]*)\")";
 	FreemarkerTags currentOpenedTag = null;
+
+	public List<Region> getRegions() {
+		return Collections.unmodifiableList(regions);
+	}
 
 	public LayoutReverser(File page, Portal p, String layoutName) throws IOException {
 		this.pageFile = page;
@@ -150,7 +159,11 @@ public class LayoutReverser {
 		Map<String, String> atts = new HashMap<String, String>();
 		readAttributes(atts, regexpAttributes, groupId, groupValue);
 
-		createColumn(atts.get("id"), properties);
+		String regionId = atts.get("id");
+		String scope = atts.get("scope");
+		createColumn(regionId, properties);
+		Region r = new Region(regionId, scope);
+		regions.add(r);
 		// auto close
 		handle_region_end();
 	}
@@ -158,7 +171,7 @@ public class LayoutReverser {
 	protected void handle_include() {
 		System.out.println("LayoutReverser.handle_include()");
 		Map<String, String> properties = new HashMap<String, String>();
-		properties.put("tag", "");
+		
 		createColumn("includes", properties);
 		// auto close
 		handle_include_end();
