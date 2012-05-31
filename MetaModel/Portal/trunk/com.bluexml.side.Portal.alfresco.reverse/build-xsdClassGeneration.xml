@@ -1,0 +1,14 @@
+<project name="XForms Generator Worker" default="prepare-compile" basedir=".">
+	<property file="build.${user.name}.properties" />
+	<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
+		<classpath>
+			<!-- Modifier le chemin d'accès -->
+			<fileset dir="${lib.xjc}" />
+		</classpath>
+	</taskdef>
+	<target name="prepare-compile" description="Compilation du schéma pour obtenir les classes nécessaires à la production du fichier mapping.xml">
+		<mkdir dir="${sources.out}" />
+		<xjc schema="${xsd.inTemplateInstances}" destdir="${sources.out}" package="${sources.packageTemplateInstances}" removeOldOutput="yes" header="false"/>
+		<xjc schema="${xsd.inPage}" destdir="${sources.out}" package="${sources.packagePage}" removeOldOutput="no" header="false"/>
+	</target>
+</project>

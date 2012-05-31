@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="template-instance">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="template-type"/>
+        <xs:element ref="properties"/>
+        <xs:element ref="components"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="template-type" type="xs:string"/>
+  <xs:element name="components">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="component"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="component">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="region-id"/>
+        <xs:element minOccurs="0" ref="sub-components"/>
+        <xs:element minOccurs="0" ref="url"/>
+        <xs:element minOccurs="0" ref="properties"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="region-id" type="xs:NCName"/>
+  <xs:element name="sub-components">
+    <xs:complexType>
+      <xs:sequence maxOccurs="unbounded" minOccurs="0">
+        <xs:element ref="sub-component"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="sub-component">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="evaluations"/>
+      </xs:sequence>
+      <xs:attribute name="id" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="evaluations">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="evaluation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="evaluation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="evaluators"/>
+        <xs:element ref="url"/>
+        <xs:element minOccurs="0" ref="properties"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="evaluators">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="evaluator"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="evaluator">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="params"/>
+      </xs:sequence>
+      <xs:attribute name="type" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="params">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="element"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="element" type="xs:string"/>
+  <xs:element name="properties">
+    <xs:complexType>
+            <xs:sequence>
+            	<xs:any minOccurs="0" maxOccurs="unbounded"></xs:any>
+            </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="url" type="xs:string"/>
+</xs:schema>
