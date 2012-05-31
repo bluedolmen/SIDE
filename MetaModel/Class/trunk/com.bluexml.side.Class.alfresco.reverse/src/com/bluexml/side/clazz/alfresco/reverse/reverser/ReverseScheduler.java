@@ -40,7 +40,7 @@ public class ReverseScheduler {
 	boolean verbose = false;
 
 	public static void main(String[] args) {
-		File alfrescoModelRepository = new File("/Users/davidabad/workspaces/Workspace2.0/S-IDE/Extension/MetaModel/Class/trunk/Alfresco/Reverse/src/models/Alfresco/3.2r2");
+		File alfrescoModelRepository = new File("/Volumes/Data/SVN/side/HEAD/S-IDE/MetaModel/Class/trunk/com.bluexml.side.Class.alfresco.reverse/models");
 		ReverseScheduler rev;
 		try {
 			List<File> listAll = FileHelper.listAll(alfrescoModelRepository);
