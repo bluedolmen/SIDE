@@ -439,7 +439,9 @@ public class EResourceUtils {
 	public static void saveModel(File file, EObject rootObject) throws IOException {
 		FileOutputStream os = new FileOutputStream(file);
 		ResourceSetImpl set = new ResourceSetImpl();
-		Resource outputResource = set.createResource(URI.createFileURI(file.getCanonicalPath()));
+		String canonicalPath = file.getCanonicalPath();
+		URI createFileURI = URI.createFileURI(canonicalPath);
+		Resource outputResource = set.createResource(createFileURI);
 		outputResource.getContents().add(rootObject);
 		outputResource.save(os, null);
 		os.close();
