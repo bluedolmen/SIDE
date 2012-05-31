@@ -132,7 +132,7 @@ public class DotRenderer {
 	}
 
 	private void writeTail() throws Exception {
-		writeLine("}");
+		write("}");
 	}
 
 	public void render() throws Exception {
