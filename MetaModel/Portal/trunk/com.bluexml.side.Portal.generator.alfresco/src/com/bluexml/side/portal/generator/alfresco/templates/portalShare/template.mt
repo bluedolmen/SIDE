@@ -30,19 +30,21 @@ import com.bluexml.side.portal.generator.alfresco.service.ShareGeneratorServices
 <%}%>
 <%script type="Column" name="generateLayout"%>
 <%if (metainfo[key == "tag"]){%>
-<%if (metainfo[key == "tag"].value != null && metainfo[key == "tag"].value != ""){%>
-<%if (metainfo[key == "tag"].value.startsWith("@")){%>
+	<%if (metainfo[key == "tag"].value != null && metainfo[key == "tag"].value != ""){%>
+		<%if (metainfo[key == "tag"].value.startsWith("@")){%>
 <<%metainfo[key == "tag"].value%>>
 <%generateLayout_sub()%>
 </@>
-<%}else{%>
+		<%}else{%>
 <<%metainfo[key == "tag"].value%><%for (metainfo){%> <%key%>="<%value%>"<%}%>>
 <%generateLayout_sub()%>
 </<%metainfo[key == "tag"].value%>>
-<%}%>
-<%}else{%>
+		<%}%>
+	<%}else{%>
 <%generateLayout_sub()%>
-<%}%>
+	<%}%>
+<%}else if(metainfo[key == "rawContent"].nSize() > 0){%>
+<%metainfo[key == "rawContent"].multilineValue%>
 <%}else{%>
 <div id="<%name%>"<%for (metainfo){%> <%key%>="<%value%>"<%}%>>
 <%generateLayout_sub()%>

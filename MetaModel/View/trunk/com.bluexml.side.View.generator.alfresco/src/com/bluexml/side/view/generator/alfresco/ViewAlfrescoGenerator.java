@@ -41,9 +41,9 @@ public class ViewAlfrescoGenerator extends AbstractAlfrescoGenerator {
 		result.add(TEMPLATE_HOME + "/webscripts/xml/alfrescoGenerator_template_xml.mt");
 		result.add(TEMPLATE_HOME + "/webscripts/xml/alfrescoGenerator_template_result_get.mt");
 		result.add(TEMPLATE_HOME + "/webscripts/xml/alfrescoGenerator_template_result_post.mt");
-		// result.add(TEMPLATE_HOME + "/webscripts/rss/alfrescoGenerator_template_rss.mt");
-		// result.add(TEMPLATE_HOME + "/webscripts/rss/alfrescoGenerator_template_result_get.mt");
-		// result.add(TEMPLATE_HOME + "/webscripts/rss/alfrescoGenerator_template_result_post.mt");
+		result.add(TEMPLATE_HOME + "/webscripts/rss/alfrescoGenerator_template_rss.mt");
+		result.add(TEMPLATE_HOME + "/webscripts/rss/alfrescoGenerator_template_result_get.mt");
+		result.add(TEMPLATE_HOME + "/webscripts/rss/alfrescoGenerator_template_result_post.mt");
 
 		result.add(TEMPLATE_HOME + "/webscripts/csv/alfrescoGenerator_template_result_get.mt");
 		result.add(TEMPLATE_HOME + "/webscripts/csv/alfrescoGenerator_template_result_post.mt");

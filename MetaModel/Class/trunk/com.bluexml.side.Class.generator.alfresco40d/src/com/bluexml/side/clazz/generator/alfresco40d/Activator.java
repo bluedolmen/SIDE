@@ -8,7 +8,7 @@ import org.osgi.framework.BundleContext;
  */
 public class Activator extends AbstractUIPlugin {
 
-	public final static String templateBase40d = "/com.bluexml.side.Class.generator.alfresco40d/com/bluexml/side/clazz/generator/alfresco40d/templates";
+	public final static String templateBase40d = "/com.bluexml.side.Class.generator.alfresco40d/com/bluexml/side/clazz/generator/alfresco40d/templates/";
 	
 	// The plug-in ID
 	public static final String PLUGIN_ID = "com.bluexml.side.Class.generator.alfresco40"; //$NON-NLS-1$

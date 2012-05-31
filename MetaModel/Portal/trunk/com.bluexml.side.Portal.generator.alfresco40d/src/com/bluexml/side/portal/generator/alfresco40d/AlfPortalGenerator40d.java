@@ -71,21 +71,26 @@ public class AlfPortalGenerator40d extends PortalGenerator {
 		List<Map<String, String>> templatesSubstitution = super.getTemplatesSubstitution();
 		Map<String, String> templatesSubstitutionMap = new HashMap<String, String>();
 
+		// remove some templates
+		templatesSubstitutionMap.put(TEMPLATE_PATH_32R2_portalShare + "title.mt", null);
+		templatesSubstitutionMap.put(TEMPLATE_PATH_32R2_portalShare + "navigation.mt", null);
+
+		// overrides 32r2 templates
+		templatesSubstitutionMap.put(TEMPLATE_PATH_32R2_portalShare + "presets.mt", PORTAL40d + "presets.mt");
+		templatesSubstitutionMap.put(TEMPLATE_PATH_32R2_portalShare + "template_js.mt", PORTAL40d + "template_js.mt");
+		templatesSubstitutionMap.put(TEMPLATE_PATH_32R2_portalShare + "shareComponents.mt", PORTAL40d + "template-instance.mt");
+		templatesSubstitutionMap.put(TEMPLATE_PATH_32R2_portalShare + "messages-context.mt", CONFIGS40d + "portal-context.mt");
+
+		// overrides 34d templates 
 		templatesSubstitutionMap.put(templatesRoot34d + "create-site.get_de.properties.mt", CREATE_SITE40d + "create-site.get_de.properties.mt");
 		templatesSubstitutionMap.put(templatesRoot34d + "create-site.get_fr.properties.mt", CREATE_SITE40d + "create-site.get_fr.properties.mt");
 		templatesSubstitutionMap.put(templatesRoot34d + "create-site.get_es.properties.mt", CREATE_SITE40d + "create-site.get_es.properties.mt");
 		templatesSubstitutionMap.put(templatesRoot34d + "create-site.get_it.properties.mt", CREATE_SITE40d + "create-site.get_it.properties.mt");
-
-		templatesSubstitutionMap.put(templatesRoot32r2 + "portalShare/presets.mt", PORTAL40d + "presets.mt");
-
 		templatesSubstitutionMap.put(templatesRoot34d + "custom-share-config.xml.mt", CONFIGS40d + "custom-share-config.xml.mt");
-
 		templatesSubstitutionMap.put(templatesRoot34d + "document-details.xml.mt", PORTAL40d + "document-details.xml.mt");
 		templatesSubstitutionMap.put(templatesRoot34d + "edit-metadata.xml.mt", PORTAL40d + "edit-metadata.xml.mt");
 		templatesSubstitutionMap.put(templatesRoot34d + "folder-details.xml.mt", PORTAL40d + "folder-details.xml.mt");
 		templatesSubstitutionMap.put(templatesRoot34d + "inline-edit.xml.mt", PORTAL40d + "inline-edit.xml.mt");
-
-		templatesSubstitutionMap.put(TEMPLATE_PATH_32R2_portalShare + "messages-context.mt", CONFIGS40d + "portal-context.mt");
 
 		templatesSubstitution.add(templatesSubstitutionMap);
 		return templatesSubstitution;

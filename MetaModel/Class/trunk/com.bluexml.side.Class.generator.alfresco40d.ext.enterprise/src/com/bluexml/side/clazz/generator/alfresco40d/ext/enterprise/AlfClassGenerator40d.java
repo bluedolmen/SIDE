@@ -13,8 +13,8 @@ public class AlfClassGenerator40d extends AlfrescoGenerator346e {
 	protected List<String> getMainTemplates() {
 		List<String> templates = super.getMainTemplates();
 
-		templates.add(templateBase40d + doclist + "/documentlist.get_nl" + i18nFileExt); //$NON-NLS-1$
-		templates.add(templateBase40d + "/alfrescoshare/changetype/change-type.get_nl" + i18nFileExt); //$NON-NLS-1$
+		templates.add(templateBase40d + doclist + "documentlist.get_nl" + i18nFileExt); //$NON-NLS-1$
+		templates.add(templateBase40d + "alfrescoshare/changetype/change-type.get_nl" + i18nFileExt); //$NON-NLS-1$
 
 		return templates;
 	}
@@ -25,27 +25,27 @@ public class AlfClassGenerator40d extends AlfrescoGenerator346e {
 		Map<String, String> map = new HashMap<String, String>();
 
 		// replace doclib i18n message
-		String string = doclist + "/documentlist.get_de" + i18nFileExt;
+		String string = doclist + "documentlist.get_de" + i18nFileExt;
 		map.put(templateBase346e + string, templateBase40d + string); //$NON-NLS-1$
-		string = doclist + "/documentlist.get_en" + i18nFileExt;
+		string = doclist + "documentlist.get_en" + i18nFileExt;
 		map.put(templateBase346e + string, templateBase40d + string); //$NON-NLS-1$
-		string = doclist + "/documentlist.get_es" + i18nFileExt;
+		string = doclist + "documentlist.get_es" + i18nFileExt;
 		map.put(templateBase346e + string, templateBase40d + string); //$NON-NLS-1$
-		string = doclist + "/documentlist.get_fr" + i18nFileExt;
+		string = doclist + "documentlist.get_fr" + i18nFileExt;
 		map.put(templateBase346e + string, templateBase40d + string); //$NON-NLS-1$
-		string = doclist + "/documentlist.get_it" + i18nFileExt;
+		string = doclist + "documentlist.get_it" + i18nFileExt;
 		map.put(templateBase346e + string, templateBase40d + string); //$NON-NLS-1$
-		string = doclist + "/documentlist.get_ja" + i18nFileExt;
+		string = doclist + "documentlist.get_ja" + i18nFileExt;
 		map.put(templateBase346e + string, templateBase40d + string); //$NON-NLS-1$
 		
 		
 		// remove
-		map.put(templateBase346e + doclist + "/repo-documentlist.get_de" + i18nFileExt, null); //$NON-NLS-1$
-		map.put(templateBase346e + doclist + "/repo-documentlist.get_en" + i18nFileExt, null); //$NON-NLS-1$
-		map.put(templateBase346e + doclist + "/repo-documentlist.get_es" + i18nFileExt, null); //$NON-NLS-1$
-		map.put(templateBase346e + doclist + "/repo-documentlist.get_fr" + i18nFileExt, null); //$NON-NLS-1$
-		map.put(templateBase346e + doclist + "/repo-documentlist.get_it" + i18nFileExt, null); //$NON-NLS-1$
-		map.put(templateBase346e + doclist + "/repo-documentlist.get_ja" + i18nFileExt, null); //$NON-NLS-1$
+		map.put(templateBase346e + doclist + "repo-documentlist.get_de" + i18nFileExt, null); //$NON-NLS-1$
+		map.put(templateBase346e + doclist + "repo-documentlist.get_en" + i18nFileExt, null); //$NON-NLS-1$
+		map.put(templateBase346e + doclist + "repo-documentlist.get_es" + i18nFileExt, null); //$NON-NLS-1$
+		map.put(templateBase346e + doclist + "repo-documentlist.get_fr" + i18nFileExt, null); //$NON-NLS-1$
+		map.put(templateBase346e + doclist + "repo-documentlist.get_it" + i18nFileExt, null); //$NON-NLS-1$
+		map.put(templateBase346e + doclist + "repo-documentlist.get_ja" + i18nFileExt, null); //$NON-NLS-1$
 
 		templatesSubstitution.add(map);
 		return templatesSubstitution;

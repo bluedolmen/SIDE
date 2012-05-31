@@ -15,7 +15,7 @@ public class Activator extends Plugin {
 	private static Activator plugin;
 	
 	// generator template location
-	public static final String templateBase34d = "/com.bluexml.side.Class.generator.alfresco34d/com/bluexml/side/clazz/generator/alfresco34d/templates";
+	public static final String templateBase34d = "/com.bluexml.side.Class.generator.alfresco34d/com/bluexml/side/clazz/generator/alfresco34d/templates/";
 	
 	/**
 	 * The constructor
