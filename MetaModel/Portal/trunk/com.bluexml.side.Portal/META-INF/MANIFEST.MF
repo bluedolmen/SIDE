@@ -8,6 +8,7 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: com.bluexml.side.portal,
+ com.bluexml.side.portal.helper,
  com.bluexml.side.portal.impl,
  com.bluexml.side.portal.util
 Require-Bundle: org.eclipse.core.runtime,

@@ -11,14 +11,21 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.ocl.ParserException;
+import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.OCL;
 
+import org.eclipse.ocl.expressions.OCLExpression;
 import com.bluexml.side.portal.Column;
 import com.bluexml.side.portal.PortalLayout;
 import com.bluexml.side.portal.PortalPackage;
@@ -120,6 +127,43 @@ public class PortalLayoutImpl extends NamedModelElementImpl implements PortalLay
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PortalPackage.PORTAL_LAYOUT__COLUMN_MODE, oldColumnMode, columnMode));
 	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Column> getAllColumns() {
+		if (getAllColumnsBodyOCL == null) {
+			EOperation eOperation = PortalPackage.Literals.PORTAL_LAYOUT.getEOperations().get(0);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(PortalPackage.Literals.PORTAL_LAYOUT, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getAllColumnsBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllColumnsBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<Column> result = (Collection<Column>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Column>(result.size(), result.toArray());
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getAllColumns <em>Get All Columns</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAllColumns
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getAllColumnsBodyOCL;
 
 	/**
 	 * <!-- begin-user-doc -->

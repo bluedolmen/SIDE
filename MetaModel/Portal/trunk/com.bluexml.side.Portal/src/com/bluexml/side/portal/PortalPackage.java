@@ -852,13 +852,22 @@ public interface PortalPackage extends EPackage {
 	int PORTLET__TITLE = PORTAL_MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Sub Portlets</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORTLET__SUB_PORTLETS = PORTAL_MODEL_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Portlet</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PORTLET_FEATURE_COUNT = PORTAL_MODEL_ELEMENT_FEATURE_COUNT + 4;
+	int PORTLET_FEATURE_COUNT = PORTAL_MODEL_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.portal.impl.PortletTypeImpl <em>Portlet Type</em>}' class.
@@ -2329,6 +2338,17 @@ public interface PortalPackage extends EPackage {
 	EAttribute getPortlet_Title();
 
 	/**
+	 * Returns the meta object for the reference list '{@link com.bluexml.side.portal.Portlet#getSubPortlets <em>Sub Portlets</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Sub Portlets</em>'.
+	 * @see com.bluexml.side.portal.Portlet#getSubPortlets()
+	 * @see #getPortlet()
+	 * @generated
+	 */
+	EReference getPortlet_SubPortlets();
+
+	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.portal.PortletType <em>Portlet Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2990,6 +3010,14 @@ public interface PortalPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PORTLET__TITLE = eINSTANCE.getPortlet_Title();
+
+		/**
+		 * The meta object literal for the '<em><b>Sub Portlets</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PORTLET__SUB_PORTLETS = eINSTANCE.getPortlet_SubPortlets();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.portal.impl.PortletTypeImpl <em>Portlet Type</em>}' class.

@@ -6,6 +6,8 @@
  */
 package com.bluexml.side.portal;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -19,11 +21,12 @@ package com.bluexml.side.portal;
  *   <li>{@link com.bluexml.side.portal.Portlet#getIsPortletInternal <em>Is Portlet Internal</em>}</li>
  *   <li>{@link com.bluexml.side.portal.Portlet#getIsInstanceOfPortletType <em>Is Instance Of Portlet Type</em>}</li>
  *   <li>{@link com.bluexml.side.portal.Portlet#getTitle <em>Title</em>}</li>
+ *   <li>{@link com.bluexml.side.portal.Portlet#getSubPortlets <em>Sub Portlets</em>}</li>
  * </ul>
  * </p>
  *
  * @see com.bluexml.side.portal.PortalPackage#getPortlet()
- * @model annotation="http://www.bluexml.com/OCL haveType='not (self.isPortletInternal.oclIsUndefined() and self.isInstanceOfPortletType.oclIsUndefined() and metainfo->size() = 0)'"
+ * @model annotation="http://www.bluexml.com/OCL haveType='not (self.isPortletInternal.oclIsUndefined() and self.isInstanceOfPortletType.oclIsUndefined() and self.subPortlets.oclIsUndefined() and metainfo->size() = 0)'"
  *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='haveType'"
  * @generated
  */
@@ -131,6 +134,22 @@ public interface Portlet extends PortalModelElement {
 	 * @generated
 	 */
 	void setTitle(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Sub Portlets</b></em>' reference list.
+	 * The list contents are of type {@link com.bluexml.side.portal.Portlet}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Sub Portlets</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Sub Portlets</em>' reference list.
+	 * @see com.bluexml.side.portal.PortalPackage#getPortlet_SubPortlets()
+	 * @model
+	 * @generated
+	 */
+	EList<Portlet> getSubPortlets();
 
 	/**
 	 * <!-- begin-user-doc -->

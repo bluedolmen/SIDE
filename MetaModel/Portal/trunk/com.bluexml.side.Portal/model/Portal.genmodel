@@ -24,6 +24,7 @@
       <genEnumLiterals ecoreEnumLiteral="Portal.ecore#//PortletTypeAttributeType/double"/>
       <genEnumLiterals ecoreEnumLiteral="Portal.ecore#//PortletTypeAttributeType/Date"/>
       <genEnumLiterals ecoreEnumLiteral="Portal.ecore#//PortletTypeAttributeType/DateTime"/>
+      <genEnumLiterals ecoreEnumLiteral="Portal.ecore#//PortletTypeAttributeType/multiline"/>
     </genEnums>
     <genClasses image="false" ecoreClass="Portal.ecore#//PortalModelElement"/>
     <genClasses ecoreClass="Portal.ecore#//Portal">
@@ -42,11 +43,14 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Portal.ecore#//Page/isChildPageOf"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Portal.ecore#//Page/visibility"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Portal.ecore#//Page/generate"/>
+      <genOperations ecoreOperation="Portal.ecore#//Page/getSortedHavePortletsInColumn">
+        <genParameters ecoreParameter="Portal.ecore#//Page/getSortedHavePortletsInColumn/col"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="Portal.ecore#//PortalLayout">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Portal.ecore#//PortalLayout/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Portal.ecore#//PortalLayout/columns"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Portal.ecore#//PortalLayout/columnMode"/>
+      <genOperations ecoreOperation="Portal.ecore#//PortalLayout/getAllColumns"/>
     </genClasses>
     <genClasses ecoreClass="Portal.ecore#//Column">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Portal.ecore#//Column/width"/>
@@ -57,6 +61,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Portal.ecore#//Portlet/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Portal.ecore#//Portlet/isPortletInternal"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Portal.ecore#//Portlet/isInstanceOfPortletType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Portal.ecore#//Portlet/title"/>
+      <genOperations ecoreOperation="Portal.ecore#//Portlet/getLabel"/>
     </genClasses>
     <genClasses ecoreClass="Portal.ecore#//PortletType" labelFeature="#//portal/PortletType/id">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Portal.ecore#//PortletType/id"/>

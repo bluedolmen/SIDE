@@ -44,6 +44,11 @@
         defaultValueLiteral="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PortalLayout" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//NamedModelElement">
+    <eOperations name="getAllColumns" upperBound="-1" eType="#//Column">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="self.columns -> union(self.columns->closure(subColumns)) ->sortedBy(x:Column|x.name)"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="columns" upperBound="-1"
         eType="#//Column" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="columnMode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
@@ -57,7 +62,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Portlet" eSuperTypes="#//PortalModelElement">
     <eAnnotations source="http://www.bluexml.com/OCL">
-      <details key="haveType" value="not (self.isPortletInternal.oclIsUndefined() and self.isInstanceOfPortletType.oclIsUndefined() and metainfo->size() = 0)"/>
+      <details key="haveType" value="not (self.isPortletInternal.oclIsUndefined() and self.isInstanceOfPortletType.oclIsUndefined() and self.subPortlets.oclIsUndefined() and metainfo->size() = 0)"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="haveType"/>
@@ -72,6 +77,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="isInstanceOfPortletType"
         eType="#//InstanciatePortletType" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subPortlets" upperBound="-1"
+        eType="#//Portlet"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PortletType" eSuperTypes="#//PortalModelElement">
     <eAnnotations source="http://www.bluexml.com/OCL">

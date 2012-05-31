@@ -70,4 +70,13 @@ public interface PortalLayout extends NamedModelElement {
 	 */
 	void setColumnMode(boolean value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='self.columns.subColumns->closure(subColumns)'"
+	 * @generated
+	 */
+	EList<Column> getAllColumns();
+
 } // PortalLayout

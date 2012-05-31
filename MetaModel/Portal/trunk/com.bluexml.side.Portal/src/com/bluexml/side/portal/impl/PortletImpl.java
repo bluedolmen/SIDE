@@ -8,12 +8,14 @@ package com.bluexml.side.portal.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.OCL;
@@ -24,6 +26,7 @@ import com.bluexml.side.portal.PortalPackage;
 import com.bluexml.side.portal.Portlet;
 import com.bluexml.side.portal.PortletInternal;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
+import java.util.Collection;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,6 +39,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *   <li>{@link com.bluexml.side.portal.impl.PortletImpl#getIsPortletInternal <em>Is Portlet Internal</em>}</li>
  *   <li>{@link com.bluexml.side.portal.impl.PortletImpl#getIsInstanceOfPortletType <em>Is Instance Of Portlet Type</em>}</li>
  *   <li>{@link com.bluexml.side.portal.impl.PortletImpl#getTitle <em>Title</em>}</li>
+ *   <li>{@link com.bluexml.side.portal.impl.PortletImpl#getSubPortlets <em>Sub Portlets</em>}</li>
  * </ul>
  * </p>
  *
@@ -101,6 +105,16 @@ public class PortletImpl extends PortalModelElementImpl implements Portlet {
 	 * @ordered
 	 */
 	protected String title = TITLE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getSubPortlets() <em>Sub Portlets</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSubPortlets()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Portlet> subPortlets;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -249,6 +263,18 @@ public class PortletImpl extends PortalModelElementImpl implements Portlet {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Portlet> getSubPortlets() {
+		if (subPortlets == null) {
+			subPortlets = new EObjectResolvingEList<Portlet>(Portlet.class, this, PortalPackage.PORTLET__SUB_PORTLETS);
+		}
+		return subPortlets;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getLabel() {
 		if (getLabelBodyOCL == null) {
 			EOperation eOperation = PortalPackage.Literals.PORTLET.getEOperations().get(0);
@@ -310,6 +336,8 @@ public class PortletImpl extends PortalModelElementImpl implements Portlet {
 				return getIsInstanceOfPortletType();
 			case PortalPackage.PORTLET__TITLE:
 				return getTitle();
+			case PortalPackage.PORTLET__SUB_PORTLETS:
+				return getSubPortlets();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -319,6 +347,7 @@ public class PortletImpl extends PortalModelElementImpl implements Portlet {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -333,6 +362,10 @@ public class PortletImpl extends PortalModelElementImpl implements Portlet {
 				return;
 			case PortalPackage.PORTLET__TITLE:
 				setTitle((String)newValue);
+				return;
+			case PortalPackage.PORTLET__SUB_PORTLETS:
+				getSubPortlets().clear();
+				getSubPortlets().addAll((Collection<? extends Portlet>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -358,6 +391,9 @@ public class PortletImpl extends PortalModelElementImpl implements Portlet {
 			case PortalPackage.PORTLET__TITLE:
 				setTitle(TITLE_EDEFAULT);
 				return;
+			case PortalPackage.PORTLET__SUB_PORTLETS:
+				getSubPortlets().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -378,6 +414,8 @@ public class PortletImpl extends PortalModelElementImpl implements Portlet {
 				return isInstanceOfPortletType != null;
 			case PortalPackage.PORTLET__TITLE:
 				return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
+			case PortalPackage.PORTLET__SUB_PORTLETS:
+				return subPortlets != null && !subPortlets.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
