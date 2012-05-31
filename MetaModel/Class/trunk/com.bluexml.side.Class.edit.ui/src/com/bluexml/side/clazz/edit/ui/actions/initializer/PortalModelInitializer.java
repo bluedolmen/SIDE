@@ -16,7 +16,6 @@ import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.common.Visibility;
 import com.bluexml.side.form.FormCollection;
 import com.bluexml.side.portal.Column;
-import com.bluexml.side.portal.HavePortlet;
 import com.bluexml.side.portal.InternalPortletType;
 import com.bluexml.side.portal.Page;
 import com.bluexml.side.portal.Portal;
@@ -24,7 +23,7 @@ import com.bluexml.side.portal.PortalFactory;
 import com.bluexml.side.portal.PortalLayout;
 import com.bluexml.side.portal.Portlet;
 import com.bluexml.side.portal.PortletInternal;
-import com.bluexml.side.portal.PositionGroup;
+import com.bluexml.side.portal.helper.PortalHelper;
 import com.bluexml.side.util.libs.IFileHelper;
 import com.bluexml.side.util.libs.ecore.EResourceUtils;
 import com.bluexml.side.view.ComposedView;
@@ -44,12 +43,9 @@ public class PortalModelInitializer extends ModelAndDiagramInitializer {
 	@Override
 	protected void headLessInitialize() throws Exception {
 
+		
 		// create layout
-		PortalLayout layout = PortalFactory.eINSTANCE.createPortalLayout();
-		layout.setName("defaultLayout"); //$NON-NLS-1$
-		Column createColumn = PortalFactory.eINSTANCE.createColumn();
-		createColumn.setName("defaultColumn"); //$NON-NLS-1$
-		layout.getColumns().add(createColumn);
+		PortalLayout layout = createDefaultPortalLayout();
 
 		Portal portal = (Portal) newRootObject;
 		portal.getLayoutSet().add(layout);
@@ -78,12 +74,22 @@ public class PortalModelInitializer extends ModelAndDiagramInitializer {
 		createPage(portal, layout, false, "calendar", Visibility.PUBLIC); //$NON-NLS-1$
 
 		// document library
-		createDocumentLibraryPage(portal, layout, createColumn);
+		Column column = layout.getColumns().get(0);
+		createDocumentLibraryPage(portal, layout, column);
 		// document details
-		createDocumentDetailsPage(portal, layout, createColumn);
+		createDocumentDetailsPage(portal, layout, column);
 
 		// advanced search page
-		createAdvsearchPage(portal, layout, createColumn);
+		createAdvsearchPage(portal, layout, column);
+	}
+
+	private PortalLayout createDefaultPortalLayout() {
+		PortalLayout layout = PortalFactory.eINSTANCE.createPortalLayout();
+		layout.setName("defaultLayout"); //$NON-NLS-1$
+		Column createColumn = PortalFactory.eINSTANCE.createColumn();
+		createColumn.setName("defaultColumn"); //$NON-NLS-1$
+		layout.getColumns().add(createColumn);
+		return layout;
 	}
 
 	@Override
@@ -152,26 +158,13 @@ public class PortalModelInitializer extends ModelAndDiagramInitializer {
 		return page;
 	}
 
-	public void createHavePortlet(Portal portal, PortalLayout layout, Column createColumn, String pageId, int eobjectIndex, Page page, PortletInternal portletInternal) {
+	private void createHavePortlet(Portal portal, PortalLayout layout, Column createColumn, String pageId, int eobjectIndex, Page page, PortletInternal portletInternal) {
 		Portlet portletView = createPortletInstance_Internal(portal, pageId, portletInternal);
-
-		createHavePortlet_(layout, createColumn, eobjectIndex, page, portletView);
+		
+		PortalHelper.createHavePortlet(layout, createColumn, eobjectIndex, page, portletView);
 	}
 
-	public void createHavePortlet_(PortalLayout layout, Column createColumn, int eobjectIndex, Page page, Portlet portletView) {
-		HavePortlet haveProtView = PortalFactory.eINSTANCE.createHavePortlet();
-		haveProtView.setAssociationPage(page);
-		haveProtView.setAssociationPortlet(portletView);
-
-		PositionGroup createPositionGroup = PortalFactory.eINSTANCE.createPositionGroup();
-		createPositionGroup.setOnColumn(createColumn);
-		createPositionGroup.setOnLayout(layout);
-		createPositionGroup.setPosition(eobjectIndex);
-		haveProtView.getPositionGroup().add(createPositionGroup);
-		page.getPortlets().add(haveProtView);
-	}
-
-	public Portlet createPortletInstance_Internal(Portal portal, String pageId, PortletInternal portletInternal) {
+	private Portlet createPortletInstance_Internal(Portal portal, String pageId, PortletInternal portletInternal) {
 		Portlet portletView = PortalFactory.eINSTANCE.createPortlet();
 		portletView.setIsPortletInternal(portletInternal);
 		portletView.setName(pageId);
@@ -179,7 +172,7 @@ public class PortalModelInitializer extends ModelAndDiagramInitializer {
 		return portletView;
 	}
 
-	public PortletInternal createPortletInternal(Portal portal, int eobjectIndex, String initializerIndex, InternalPortletType type, String subType) throws Exception {
+	private PortletInternal createPortletInternal(Portal portal, int eobjectIndex, String initializerIndex, InternalPortletType type, String subType) throws Exception {
 		PortletInternal portletInternal = PortalFactory.eINSTANCE.createPortletInternal();
 		portletInternal.setType(type);
 		portal.getInternalPortletSet().add(portletInternal);
