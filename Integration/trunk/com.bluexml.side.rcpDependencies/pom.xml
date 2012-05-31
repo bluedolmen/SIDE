@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.bluexml.side</groupId>
   <artifactId>com.bluexml.side.rcpDependencies</artifactId>
-  <version>0.0.21</version>
+  <version>0.0.22</version>
   <name>rcpDependencies</name>
   <description>project that scan product file and build all dependency graph</description>
   <parent>
