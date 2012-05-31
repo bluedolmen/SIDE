@@ -1,142 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension
-         point="com.bluexml.side.Application.com_bluexml_application_configuration">
-      <metamodel
-            description="Check this to generate data models on leading frameworks.&lt;br&gt; This Data Metamodel allows to model Application Object structure and persistence.&lt;br&gt;SIDE provides the modeler to graphically produce data models and various generators to instantiate these models on leading frameworks."
-            id="http://www.kerblue.org/class/1.0"
-            name="KSR500 Data"
-            url="http://www.kerblue.org/v2/ksr500-class/">
-         <technology
-               description="Check this to generate your Data models on the Alfresco product line.&lt;br&gt;Alfresco is the leading open source ECM solution.&lt;br&gt;SIDE allows to optimize the configuration of the Alfresco content model, views, forms and reports."
-               id="alfresco"
-               name="Alfresco"
-               url="http://www.alfresco.com">
-            <technologyVersion
-                  description="Check this to generate data models on the major release 4 of Alfresco.&lt;br&gt;Alfresco 3.4.b is the leading open source collaborative ECM solution.&lt;br&gt;Additionally to content generation, SIDE provides useful server components to enhance some features of this release."
-                  id="alfresco_40d"
-                  version="Alfresco 4.0.d Community">
-               <generatorVersion
-                     class="com.bluexml.side.clazz.generator.alfresco40d.ext.labs.AlfClassGenerator40d"
-                     hidden="visible"
-                     id="com.bluexml.side.Class.generator.alfresco40d"
-                     version="SIDE Content Model Generator for Alfresco community">
-                  <configurationParameter
-                        dataType="String"
-                        defaultValue="1.0"
-                        key="com.bluexml.side.Class.generator.alfresco.module.version"
-                        label="Class Module version">
-                  </configurationParameter>
-                  <configurationParameter
-                        dataType="String"
-                        defaultValue="http://localhost:8080/alfresco"
-                        documentation="Set this value to the URL of the Alfresco instance on which you want to generate and deploy this new content model from the SIDE data model."
-                        key="alfresco.url"
-                        label="Alfresco URL">
-                  </configurationParameter>
-                  <configurationParameter
-                        dataType="String"
-                        documentation="account to use when getting documents from alfresco"
-                        key="alfresco.report.runas"
-                        label="report as">
-                  </configurationParameter>
-                  <option
-                        defaultOption="true"
-                        key="alfresco.share.extension"
-                        label="Alfresco Share Extension">
-                     <moduleDependence
-                           moduleId="com.bluexml.side.Framework.alfresco.shareStandAloneForms40d"
-                           moduleType="zip"
-                           technologyVersion="alfresco_40d"
-                           versionMax="1.0.2"
-                           versionMin="1.0.2">
-                     </moduleDependence>
-                  </option>
-                  <option
-                        key="alfresco.webscripts.common"
-                        label="Alfresco Common Webscripts">
-                     <moduleDependence
-                           moduleId="com.bluexml.side.Framework.alfresco.xforms40d"
-                           moduleType="amp"
-                           technologyVersion="alfresco_40d"
-                           versionMax="1.0.2"
-                           versionMin="1.0.2">
-                     </moduleDependence>
-                  </option>
-                  <moduleDependence
-                        moduleId="com.bluexml.side.Framework.alfresco.model40d"
-                        moduleType="amp"
-                        technologyVersion="alfresco_40d"
-                        versionMax="1.0.3"
-                        versionMin="1.0.3">
-                  </moduleDependence>
-                  <moduleDependence
-                        moduleId="com.bluexml.side.Framework.alfresco.customAssociationManagement40d"
-                        moduleType="amp"
-                        technologyVersion="alfresco_40d"
-                        versionMax="1.0.7"
-                        versionMin="1.0.7">
-                  </moduleDependence>
-                  <moduleDependence
-                        moduleId="com.bluexml.side.Framework.alfresco.hotdeployer40d"
-                        moduleType="amp"
-                        technologyVersion="alfresco_40d"
-                        versionMax="1.0.2"
-                        versionMin="1.0.2">
-                  </moduleDependence>
-                  <option
-                        defaultOption="true"
-                        documentation="this must be hidden"
-                        hidden="true"
-                        key="generator.main"
-                        label="main generation">
-                  </option>
-                  <option
-                        defaultOption="false"
-                        documentation="this option must be used in conjuction with the &apos;searchable&apos; meta on associations, this create an attribute that store associated nodes"
-                        hidden="false"
-                        key="alfresco.model.association.searchable"
-                        label="Searchable association">
-                     <moduleDependence
-                           moduleId="com.bluexml.side.Framework.alfresco.searchAssociation40d"
-                           moduleType="amp"
-                           technologyVersion="alfresco_40d"
-                           versionMax="1.0.4"
-                           versionMin="1.0.4">
-                     </moduleDependence>
-                  </option>
-                  <moduleDependence
-                        moduleId="com.bluexml.side.Framework.alfresco.singlePrimaryChildAssociation40d"
-                        moduleType="amp"
-                        technologyVersion="alfresco_40d"
-                        versionMax="1.0.7"
-                        versionMin="1.0.7">
-                  </moduleDependence>
-                  <moduleDependence
-                        moduleId="com.bluexml.side.Framework.alfresco.propertiesUpdater40d"
-                        moduleType="amp"
-                        technologyVersion="alfresco_40d"
-                        versionMax="1.0.9"
-                        versionMin="1.0.9">
-                  </moduleDependence>
-                  <option
-                        defaultOption="false"
-                        documentation="additional module to check if created/updated items already exist; in this case the update or creation is forbidden"
-                        key="alfresco.unicity"
-                        label="Content Uniqueness">
-                     <moduleDependence
-                           moduleId="com.bluexml.side.Framework.alfresco.unicity40d"
-                           moduleType="amp"
-                           technologyVersion="alfresco_40d"
-                           versionMax="1.0.7"
-                           versionMin="1.0.7">
-                     </moduleDependence>
-                  </option>
-               </generatorVersion>
-            </technologyVersion>
-         </technology>
-      </metamodel>
-   </extension>
-
+  <extension point="com.bluexml.side.Application.com_bluexml_application_configuration">
+    <metamodel description="Check this to generate data models on leading frameworks.&lt;br&gt; This Data Metamodel allows to model Application Object structure and persistence.&lt;br&gt;SIDE provides the modeler to graphically produce data models and various generators to instantiate these models on leading frameworks." id="http://www.kerblue.org/class/1.0" name="KSR500 Data" url="http://www.kerblue.org/v2/ksr500-class/">
+      <technology description="Check this to generate your Data models on the Alfresco product line.&lt;br&gt;Alfresco is the leading open source ECM solution.&lt;br&gt;SIDE allows to optimize the configuration of the Alfresco content model, views, forms and reports." id="alfresco" name="Alfresco" url="http://www.alfresco.com">
+        <technologyVersion description="Check this to generate data models on the major release 4 of Alfresco.&lt;br&gt;Alfresco 3.4.b is the leading open source collaborative ECM solution.&lt;br&gt;Additionally to content generation, SIDE provides useful server components to enhance some features of this release." id="alfresco_40d" version="Alfresco 4.0.d Community">
+          <generatorVersion class="com.bluexml.side.clazz.generator.alfresco40d.ext.labs.AlfClassGenerator40d" hidden="visible" id="com.bluexml.side.Class.generator.alfresco40d" version="SIDE Content Model Generator for Alfresco community">
+            <configurationParameter dataType="String" defaultValue="1.0" key="com.bluexml.side.Class.generator.alfresco.module.version" label="Class Module version" />
+            <configurationParameter dataType="String" defaultValue="http://localhost:8080/alfresco" documentation="Set this value to the URL of the Alfresco instance on which you want to generate and deploy this new content model from the SIDE data model." key="alfresco.url" label="Alfresco URL" />
+            <configurationParameter dataType="String" documentation="account to use when getting documents from alfresco" key="alfresco.report.runas" label="report as" />
+            <option defaultOption="true" key="alfresco.share.extension" label="Alfresco Share Extension">
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.shareStandAloneForms40d" moduleType="zip" technologyVersion="alfresco_40d" versionMax="1.0.3" versionMin="1.0.3" />
+            </option>
+            <option key="alfresco.webscripts.common" label="Alfresco Common Webscripts">
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.xforms40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.3" versionMin="1.0.3" />
+            </option>
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.model40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.4" versionMin="1.0.4" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.customAssociationManagement40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.9" versionMin="1.0.9" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.hotdeployer40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.4" versionMin="1.0.4" />
+            <option defaultOption="true" documentation="this must be hidden" hidden="true" key="generator.main" label="main generation" />
+            <option defaultOption="false" documentation="this option must be used in conjuction with the 'searchable' meta on associations, this create an attribute that store associated nodes" hidden="false" key="alfresco.model.association.searchable" label="Searchable association">
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.searchAssociation40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.6" versionMin="1.0.6" />
+            </option>
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.singlePrimaryChildAssociation40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.9" versionMin="1.0.9" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.propertiesUpdater40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.11" versionMin="1.0.11" />
+            <option defaultOption="false" documentation="additional module to check if created/updated items already exist; in this case the update or creation is forbidden" key="alfresco.unicity" label="Content Uniqueness">
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.unicity40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.9" versionMin="1.0.9" />
+            </option>
+          </generatorVersion>
+        </technologyVersion>
+      </technology>
+    </metamodel>
+  </extension>
 </plugin>
+
