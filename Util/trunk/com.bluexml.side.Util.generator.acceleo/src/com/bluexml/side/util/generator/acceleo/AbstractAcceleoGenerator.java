@@ -78,7 +78,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		}
 	};
 
-	protected final List<String> getTemplates() {
+	protected final List<String> getTemplates() throws Exception {
 		List<String> alltemplates = new ArrayList<String>();
 
 		if (getGeneratorOptionValue(MAIN_OPTION)) {
@@ -92,8 +92,9 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		alltemplates.addAll(optionalTemplates);
 
 		// apply templates substitution in the right order
+		boolean fails = false;
 		List<Map<String, String>> templatesSubstitution = getTemplatesSubstitution();
-
+		System.out.println("AbstractAcceleoGenerator.getTemplates() before substitution " + alltemplates.size());
 		for (Map<String, String> overrideTemplates : templatesSubstitution) {
 			Set<Entry<String, String>> entrySet = overrideTemplates.entrySet();
 			for (Entry<String, String> entry : entrySet) {
@@ -106,11 +107,22 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 					// if null the template is removed without replacement
 					if (value != null) {
 						alltemplates.add(value);
-					}					
+					}
+				} else {
+					fails = true;
+					if (debugMode()) {
+						System.err.println("AbstractAcceleoGenerator.getTemplates()\n" + "Fail to remove " + key + " for generator :\n" + this.getClass().getName());
+						//					throw new Exception("Fail to remove " + key + " for generator :\n" + this.getClass().getName());
+					}
+
 				}
 			}
 		}
-		
+
+		if (fails && debugMode()) {
+			throw new Exception("fail to remove some template ! (to avoid fake result select all generator options)");
+		}
+		System.out.println("AbstractAcceleoGenerator.getTemplates() after substitution " + alltemplates.size());
 		return alltemplates;
 	}
 
@@ -270,7 +282,7 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 
 		for (String templateFile : getTemplates()) {
 
-			 System.out.println("Templates: " + templateFile);
+			System.out.println("Templates: " + templateFile);
 			// Generator
 			Generator generator = ChainFactory.eINSTANCE.createGenerator();
 			EFactory.eAdd(repository, "files", generator); //$NON-NLS-1$

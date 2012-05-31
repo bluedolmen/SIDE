@@ -60,9 +60,10 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	protected ComponentMonitor monitor;
 	protected String id;
 	public String TEMP_FOLDER = "tmp";
-//	public static String GENERATOR_CODE = null;
+	//	public static String GENERATOR_CODE = null;
 	protected static String techVersion = null;
 	protected DependencesManager dm;
+	protected boolean debugMode = false;
 
 	public ComponentMonitor getMonitor() {
 		return monitor;
@@ -84,6 +85,10 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 		return TEMP_FOLDER;
 	}
 
+	public boolean debugMode() {
+		return debugMode;
+	}
+
 	/**
 	 * Return if this generator is a documentation generator.
 	 * 
@@ -93,8 +98,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 		return false;
 	}
 
-	public void initialize(Map<String, String> generationParameters_, Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_, DependencesManager dm,
-			ComponentMonitor monitor) throws Exception {
+	public void initialize(Map<String, String> generationParameters_, Map<String, Boolean> generatorOptions_, Map<String, String> configurationParameters_, DependencesManager dm, ComponentMonitor monitor) throws Exception {
 		this.monitor = monitor;
 		generationParameters = generationParameters_;
 		generatorOptions = generatorOptions_;
@@ -121,7 +125,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 		// "");
 		// }
 		// }
-
+		debugMode = "true".equals(getGenerationParameter("DEBUG"));
 	}
 
 	/**
@@ -142,7 +146,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 		Attribute date = new Attribute("date", new Date().toString()); //$NON-NLS-1$
 		racine.setAttribute(date);
 		XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
-		sortie.output(racine, new FileOutputStream(IFileHelper.getFile(IFileHelper.createFile((IContainer)ff, this.id + "-stamp.xml")))); //$NON-NLS-1$
+		sortie.output(racine, new FileOutputStream(IFileHelper.getFile(IFileHelper.createFile((IContainer) ff, this.id + "-stamp.xml")))); //$NON-NLS-1$
 	}
 
 	/**
@@ -256,7 +260,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	 */
 	public void addDependences() throws Exception {
 		// get dependences
-		dm.copyDependencies(getTemporarySystemFile(), getTargetSystemFile(),false);
+		dm.copyDependencies(getTemporarySystemFile(), getTargetSystemFile(), false);
 		// dependences packages is now with other resources in the target folder
 	}
 }
