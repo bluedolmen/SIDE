@@ -105,7 +105,7 @@ public class ReverseFromAlfrescoWizard extends Wizard implements IWorkbenchWizar
 			currentPage.setErrorMessage(e.getLocalizedMessage());
 			return false;
 		}
-		return false;
+		return true;
 	}
 
 	public void init(IWorkbench workbench, IStructuredSelection selection) {

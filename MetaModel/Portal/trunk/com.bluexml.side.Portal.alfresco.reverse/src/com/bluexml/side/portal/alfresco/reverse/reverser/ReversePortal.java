@@ -160,7 +160,7 @@ public class ReversePortal {
 	}
 
 	public void persist() throws IOException {
-		File file = new File(outputDir, "alfresco.portal");
+		File file = new File(outputDir, "alfrescoSharePortal.portal");
 		file.getParentFile().mkdirs();
 		file.createNewFile();
 		System.out.println("save model :" + file);
