@@ -7,8 +7,11 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.namespace.QName;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.util.EList;
 import org.w3c.dom.Element;
 
@@ -96,7 +99,9 @@ public class EclipseReverser {
 		String sourceId = component.getSourceId();
 		String scope = component.getScope() != null ? component.getScope() : "template";
 		Map<String, String> props = new TreeMap<String, String>();
-		props.put("url", componentURL);
+		if (StringUtils.trimToNull(componentURL) != null) {
+			props.put("url", componentURL);
+		}
 		props.put("scope", scope);
 
 		Properties properties = component.getProperties();
@@ -133,21 +138,22 @@ public class EclipseReverser {
 			List<SubComponent> subComponents = subComponentsE.getSubComponent();
 			for (SubComponent subComponent : subComponents) {
 				String id2 = subComponent.getId(); // Meta-info
-
+				Portlet subcreatePortlet_ = PortalHelper.createPortlet(rootObject, portletName);
+				PortalHelper.createMetaInfo(subcreatePortlet_, "subComponent_id", id2, false);
+				createPortlet.getSubPortlets().add(subcreatePortlet_);
 				Evaluations evaluationsE = subComponent.getEvaluations();
 				if (evaluationsE != null) {
 
 					for (Evaluation evaluation : evaluationsE.getEvaluation()) {
-
-						// subportlet
+						// evaluation data
+						String evaluation_id = evaluation.getId(); // Meta-info
 						String url = evaluation.getUrl();
 						Properties properties2 = evaluation.getProperties();
 						Map<String, String> subPortelt_props = new HashMap<String, String>();
 						subPortelt_props.put("url", url);
 						handleProperties(subPortelt_props, properties2);
 						Portlet subcreatePortlet = PortalHelper.createPortlet(rootObject, portletName, subPortelt_props);
-						PortalHelper.createMetaInfo(subcreatePortlet, "subComponent_id", id2, false);
-						String evaluation_id = evaluation.getId(); // Meta-info
+
 						PortalHelper.createMetaInfo(subcreatePortlet, "evaluation_id", evaluation_id, false);
 
 						Evaluators evaluatorsE = evaluation.getEvaluators(); // Meta-info
@@ -160,13 +166,15 @@ public class EclipseReverser {
 								Params params = evaluator.getParams();
 								if (params != null) {
 									System.out.println("EclipseReverser.handleSubComponents() params");
-									String element = params.getElement();
-									PortalHelper.createMetaInfo(subcreatePortlet, "params-element#" + evaluator_type, element, false);
+									List<Object> any = params.getAny();
+									Map<String, String> paramsMap = new HashMap<String, String>();
+									readAnyElements(paramsMap, any);
+									PortalHelper.createMetaInfos(paramsMap, subcreatePortlet, false, "params-");
 								}
 							}
 						}
 
-						createPortlet.getSubPortlets().add(subcreatePortlet);
+						subcreatePortlet_.getSubPortlets().add(subcreatePortlet);
 
 					}
 				}
@@ -177,15 +185,28 @@ public class EclipseReverser {
 	public void handleProperties(Map<String, String> props, Properties properties) {
 		if (properties != null) {
 			List<Object> any = properties.getAny();
-			for (Object object : any) {
-				if (object instanceof Element) {
-					System.out.println(" any Element (w3c) ?" + object);
-					Element el = (Element) object;
-					String nodeName = el.getNodeName();
-					String nodeValue = el.getTextContent();
-					props.put(nodeName, nodeValue);
-				}
+			readAnyElements(props, any);
+		}
+	}
+
+	protected void readAnyElements(Map<String, String> props, List<Object> any) {
+		for (Object object : any) {
+			String nodeName = null;
+			String nodeValue = null;
+			if (object instanceof Element) {
+				System.out.println(" any Element (w3c) ?" + object);
+				Element el = (Element) object;
+				nodeName = el.getNodeName();
+				nodeValue = el.getTextContent();
+				props.put(nodeName, nodeValue);
+			} else if (object instanceof JAXBElement) {
+				JAXBElement<String> jaxbE = (JAXBElement<String>) object;
+				QName name = jaxbE.getName();
+				nodeName = name.getLocalPart();
+				nodeValue = jaxbE.getValue();
 			}
+
+			props.put(nodeName, nodeValue);
 		}
 	}
 
@@ -234,7 +255,10 @@ public class EclipseReverser {
 				com = (Component) createUnmarshaller.unmarshal(componentFile);
 			}
 		}
-
+		// fill scope if not provided
+		if (com != null && StringUtils.trimToNull(com.getScope()) == null) {
+			com.setScope(region.getScope());
+		}
 		return com;
 	}
 

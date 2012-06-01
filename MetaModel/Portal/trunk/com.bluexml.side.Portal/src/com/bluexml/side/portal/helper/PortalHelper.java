@@ -57,6 +57,14 @@ public class PortalHelper {
 		page.getPortlets().add(haveProtView);
 	}
 
+	public static Portlet createPortlet(Portal portal, String portletName) throws Exception {
+		Portlet portletView = PortalFactory.eINSTANCE.createPortlet();
+		portletView.setName(portletName);
+		portal.getPortletSet().add(portletView);
+		return portletView;
+	}
+	
+	
 	public static Portlet createPortlet(Portal portal, String portletName, Map<String, String> properties) throws Exception {
 		Portlet portletView = PortalFactory.eINSTANCE.createPortlet();
 		portletView.setIsInstanceOfPortletType(createPortletInstance(portal, properties));
@@ -107,6 +115,7 @@ public class PortalHelper {
 		PortletAttributeInstance e = PortalFactory.eINSTANCE.createPortletAttributeInstance();
 		e.setInstanceOf(att);
 		e.setValue(value);
+		PortalHelper.createMetaInfo(e, "escape", "false", false);
 		portletTypeInstance.getInstances().add(e);
 		return e;
 	}

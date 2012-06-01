@@ -57,6 +57,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link SubComponent }
+     * 
+     */
+    public SubComponent createSubComponent() {
+        return new SubComponent();
+    }
+
+    /**
      * Create an instance of {@link TemplateInstance }
      * 
      */
@@ -65,19 +73,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Component }
+     * Create an instance of {@link Params }
      * 
      */
-    public Component createComponent() {
-        return new Component();
-    }
-
-    /**
-     * Create an instance of {@link Evaluators }
-     * 
-     */
-    public Evaluators createEvaluators() {
-        return new Evaluators();
+    public Params createParams() {
+        return new Params();
     }
 
     /**
@@ -97,46 +97,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link SubComponents }
-     * 
-     */
-    public SubComponents createSubComponents() {
-        return new SubComponents();
-    }
-
-    /**
-     * Create an instance of {@link SubComponent }
-     * 
-     */
-    public SubComponent createSubComponent() {
-        return new SubComponent();
-    }
-
-    /**
-     * Create an instance of {@link Properties }
-     * 
-     */
-    public Properties createProperties() {
-        return new Properties();
-    }
-
-    /**
-     * Create an instance of {@link Evaluation }
-     * 
-     */
-    public Evaluation createEvaluation() {
-        return new Evaluation();
-    }
-
-    /**
-     * Create an instance of {@link Params }
-     * 
-     */
-    public Params createParams() {
-        return new Params();
-    }
-
-    /**
      * Create an instance of {@link Evaluations }
      * 
      */
@@ -150,6 +110,46 @@ public class ObjectFactory {
      */
     public Evaluator createEvaluator() {
         return new Evaluator();
+    }
+
+    /**
+     * Create an instance of {@link SubComponents }
+     * 
+     */
+    public SubComponents createSubComponents() {
+        return new SubComponents();
+    }
+
+    /**
+     * Create an instance of {@link Evaluation }
+     * 
+     */
+    public Evaluation createEvaluation() {
+        return new Evaluation();
+    }
+
+    /**
+     * Create an instance of {@link Component }
+     * 
+     */
+    public Component createComponent() {
+        return new Component();
+    }
+
+    /**
+     * Create an instance of {@link Properties }
+     * 
+     */
+    public Properties createProperties() {
+        return new Properties();
+    }
+
+    /**
+     * Create an instance of {@link Evaluators }
+     * 
+     */
+    public Evaluators createEvaluators() {
+        return new Evaluators();
     }
 
     /**

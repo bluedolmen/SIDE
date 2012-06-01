@@ -43,8 +43,8 @@ public class TemplateInstance {
 
     @XmlElementRefs({
         @XmlElementRef(name = "components", type = Components.class),
-        @XmlElementRef(name = "properties", type = Properties.class),
-        @XmlElementRef(name = "template-type", type = JAXBElement.class)
+        @XmlElementRef(name = "template-type", type = JAXBElement.class),
+        @XmlElementRef(name = "properties", type = Properties.class)
     })
     @XmlMixed
     protected List<Object> content;
@@ -67,10 +67,10 @@ public class TemplateInstance {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Properties }
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link String }
      * {@link Components }
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
+     * {@link Properties }
      * 
      * 
      */

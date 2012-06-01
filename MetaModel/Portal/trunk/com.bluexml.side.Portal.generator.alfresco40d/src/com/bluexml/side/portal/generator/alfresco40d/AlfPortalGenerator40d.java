@@ -63,6 +63,8 @@ public class AlfPortalGenerator40d extends PortalGenerator {
 		mainTemplates.add(CREATE_SITE40d + "create-site.get_nl.properties.mt");
 		mainTemplates.add(CREATE_SITE40d + "create-site.get.properties.mt");
 
+		mainTemplates.add(PORTAL40d + "shareComponents.mt");
+
 		return mainTemplates;
 	}
 
