@@ -1162,13 +1162,13 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 		  (portalLayoutEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
-			 "body", "self.columns.subColumns->closure(subColumns)"
+			 "body", "self.columns -> union(self.columns->closure(subColumns)) ->sortedBy(x:Column|x.name)"
 		   });		
 		addAnnotation
 		  (portletEClass, 
 		   source, 
 		   new String[] {
-			 "haveType", "not (self.isPortletInternal.oclIsUndefined() and self.isInstanceOfPortletType.oclIsUndefined() and self.subPortlets.oclIsUndefined() and metainfo->size() = 0)"
+			 "haveType", "not (self.isPortletInternal.oclIsUndefined() and self.isInstanceOfPortletType.oclIsUndefined() and self.subPortlets->size() = 0 and metainfo->size() = 0)"
 		   });			
 		addAnnotation
 		  (portletEClass.getEOperations().get(0), 

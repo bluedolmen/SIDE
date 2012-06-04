@@ -74,7 +74,7 @@ public interface PortalLayout extends NamedModelElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.bluexml.com/OCL body='self.columns.subColumns->closure(subColumns)'"
+	 *        annotation="http://www.bluexml.com/OCL body='self.columns -> union(self.columns->closure(subColumns)) ->sortedBy(x:Column|x.name)'"
 	 * @generated
 	 */
 	EList<Column> getAllColumns();

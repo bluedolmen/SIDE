@@ -62,7 +62,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Portlet" eSuperTypes="#//PortalModelElement">
     <eAnnotations source="http://www.bluexml.com/OCL">
-      <details key="haveType" value="not (self.isPortletInternal.oclIsUndefined() and self.isInstanceOfPortletType.oclIsUndefined() and self.subPortlets.oclIsUndefined() and metainfo->size() = 0)"/>
+      <details key="haveType" value="not (self.isPortletInternal.oclIsUndefined() and self.isInstanceOfPortletType.oclIsUndefined() and self.subPortlets->size() = 0 and metainfo->size() = 0)"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="haveType"/>
