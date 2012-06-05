@@ -29,8 +29,8 @@
             <option defaultOption="false" documentation="this api use alfresco web-services-client to contact alfresco and do CRUD actions" key="com.bluexml.side.Class.generator.alfresco.enterprise.webserviceJavaAPI" label="Java webservice API" />
             <option defaultOption="false" documentation="this api use alfresco Embedded SDK, and allow webscript to use it" key="com.bluexml.side.Class.generator.alfresco.enterprise.embeddedJavaAPI" label="Java Embedded API" />
             <option defaultOption="false" key="com.bluexml.side.Class.generator.alfresco.enterprise.extJS" label="extJS (sample)" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.model346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.3" versionMin="1.0.3" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.customAssociationManagement346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.7" versionMin="1.0.7" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.model346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.4" versionMin="1.0.4" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.customAssociationManagement346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.8" versionMin="1.0.8" />
             <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.hotdeployer346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.2" versionMin="1.0.2" />
             <option defaultOption="true" documentation="this must be hidden" hidden="true" key="generator.main" label="main generation" />
             <option defaultOption="false" documentation="this option must be used in conjuction with the 'searchable' meta on associations, this create an attribute that store associated nodes" hidden="false" key="alfresco.model.association.searchable" label="Searchable association">
