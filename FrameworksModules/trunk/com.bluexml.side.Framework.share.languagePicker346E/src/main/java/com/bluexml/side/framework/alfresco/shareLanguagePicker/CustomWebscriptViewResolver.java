@@ -8,17 +8,14 @@ import org.springframework.web.servlet.view.AbstractUrlBasedView;
 public class CustomWebscriptViewResolver extends WebScriptViewResolver {
 
 	LocaleResolver localeResolver;
-	
-	
+
 	public LocaleResolver getLocaleResolver() {
 		return localeResolver;
 	}
 
-
 	public void setLocaleResolver(LocaleResolver localeResolver) {
 		this.localeResolver = localeResolver;
 	}
-
 
 	/*
 	 * (non-Javadoc)
@@ -42,7 +39,7 @@ public class CustomWebscriptViewResolver extends WebScriptViewResolver {
 		Match match = container.getRegistry().findWebScript("get", uri);
 		if (match != null) {
 			logger.debug("create instance of CustomWebScriptView");
-			view = new CustomWebScriptView(container, authenticatorFactory, configService,getLocaleResolver());
+			view = new CustomWebScriptView(container, authenticatorFactory, configService, getLocaleResolver());
 			view.setUrl(uri);
 		}
 

@@ -93,7 +93,7 @@ public class LanguageSetter {
 			// get language and convert to java locale format
 			language = t.nextToken().replace('-', '_');
 		} else {
-			language = Locale.ENGLISH.getLanguage();
+			language = Locale.getDefault().getLanguage();
 		}
 		return language;
 	}
