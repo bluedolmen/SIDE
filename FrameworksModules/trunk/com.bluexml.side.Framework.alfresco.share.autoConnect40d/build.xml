@@ -25,6 +25,18 @@
 		<echo message="==========" />
 	</target>
 
+	<target name="package" description="package the classes and resources in a jar file">
+		<echo message="use maven to build package..." />
+
+		<zip destfile="target/${moduleId}-${mypom.version}.jar">
+			<fileset dir="target/${moduleId}-${mypom.version}/WEB-INF/classes">
+				<include name="**/*" />
+			</fileset>
+		</zip>
+
+		<echo message="==========" />
+
+	</target>
 
 	<!-- ================================= 
 	          target: name              
