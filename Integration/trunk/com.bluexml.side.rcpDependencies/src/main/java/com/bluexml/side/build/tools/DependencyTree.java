@@ -2,6 +2,8 @@ package com.bluexml.side.build.tools;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,6 +16,12 @@ import java.util.Properties;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.JDOMException;
+import org.jdom.input.SAXBuilder;
+import org.jdom.output.Format;
+import org.jdom.output.XMLOutputter;
 
 import com.bluexml.side.build.tools.componants.Componant;
 import com.bluexml.side.build.tools.componants.Feature;
@@ -181,6 +189,88 @@ public class DependencyTree {
 
 		validateGraph(g);
 		compReg.saveToXML(new File("xstreamedReg.xml"));
+
+		logger.info("try to Fix some anomalies");
+		boolean featureAutoFix = Boolean.parseBoolean(graphCollectorConfiguration.getProperty("autoFix.features", "false"));
+		if (featureAutoFix) {
+
+			Element root = getSampleFeature();
+
+			List<String> list8 = compReg.getAnomaly().getFeatureNoCopyright();
+			if (list8.size() > 0) {
+				logger.info("FIX Feature Missing copyright");
+				fixFeatureElement(root, list8, "copyright");
+			}
+
+			List<String> list9 = compReg.getAnomaly().getFeatureNoLicence();
+			if (list9.size() > 0) {
+				logger.info("FIX Feature Missing Licence");
+				fixFeatureElement(root, list9, "license");
+			}
+
+			List<String> list10 = compReg.getAnomaly().getFeatureNoDescription();
+			if (list10.size() > 0) {
+				logger.info("FIX Feature Missing Description");
+				fixFeatureElement(root, list10, "description");
+			}
+
+			List<String> list11 = compReg.getAnomaly().getFeatureNoDescription();
+
+			if (list11.size() > 0) {
+				logger.info("FIX Feature Bad provider");
+				for (String id : list11) {
+					File projectFolder = compReg.getProjectFolder(id, null);
+					String systemId = projectFolder + File.separator + "feature.xml";
+					Document build = new SAXBuilder().build(systemId);
+					Element currentFeature = build.getRootElement();
+					String name = "provider-name";
+					currentFeature.setAttribute(name, root.getAttributeValue(name));
+					saveXML(systemId, build);
+				}
+			}
+
+		}
+	}
+
+	public static Element getSampleFeature() throws JDOMException, IOException {
+		InputStream resourceAsStream = DependencyTree.class.getResourceAsStream("/feature.xml");
+		Document doc = new SAXBuilder().build(resourceAsStream);
+		resourceAsStream.close();
+		Element root = doc.getRootElement();
+		return root;
+	}
+
+	protected void fixFeatureElement(Element root, List<String> list8, String elName) throws Exception, JDOMException, IOException {
+		Element child = root.getChild(elName);
+		String attributeURL = child.getAttributeValue("url");
+		String text = child.getText();
+		for (String id : list8) {
+			File projectFolder = compReg.getProjectFolder(id, null);
+			fixFeatureElement(projectFolder, elName, text, attributeURL);
+		}
+	}
+
+	protected void fixFeatureElement(File projectFolder, String elName, String content, String url) throws JDOMException, IOException {
+		String systemId = projectFolder + File.separator + "feature.xml";
+		Document document = new SAXBuilder().build(systemId);
+		Element root = document.getRootElement();
+		Element child = root.getChild(elName);
+		if (child == null) {
+			child = new Element(elName);
+			root.addContent(0, child);
+		}
+		child.setText(content);
+		child.setAttribute("url", url);
+
+		saveXML(systemId, document);
+	}
+
+	public static void saveXML(String systemId, Document root) throws FileNotFoundException, IOException {
+		XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
+		FileOutputStream out = new FileOutputStream(systemId);
+		sortie.output(root, out);
+		out.close();
+		logger.info("File :" + systemId + " saved !");
 	}
 
 	public static void applyFilterFromXMLStream(File xml, Properties props, String out) throws Exception {
@@ -196,7 +286,7 @@ public class DependencyTree {
 
 		// sumary
 
-		List<String> list = compReg.getAnomaly().notTree;
+		List<String> list = compReg.getAnomaly().getNotTree();
 		logger.warn("*** Anomaly summary ***");
 
 		if (list.size() > 0) {
@@ -206,7 +296,7 @@ public class DependencyTree {
 			}
 		}
 
-		List<String> list2 = compReg.getAnomaly().invalideCheckRef;
+		List<String> list2 = compReg.getAnomaly().getInvalideCheckRef();
 		if (list2.size() > 0) {
 			logger.warn("invalide check constraints :");
 			for (String string : list2) {
@@ -214,7 +304,7 @@ public class DependencyTree {
 			}
 		}
 
-		List<String[]> list3 = compReg.getAnomaly().bundleNotFoundInConf;
+		List<String[]> list3 = compReg.getAnomaly().getBundleNotFoundInConf();
 		if (list3.size() > 0) {
 			logger.error("Bundle not found in conf file :");
 			for (String[] string : list3) {
@@ -222,7 +312,7 @@ public class DependencyTree {
 			}
 		}
 
-		List<String> list4 = compReg.getAnomaly().invalideEntryInConf;
+		List<String> list4 = compReg.getAnomaly().getInvalideEntryInConf();
 		if (list4.size() > 0) {
 			logger.warn("Invalide Bundle in conf file :");
 			for (String string : list4) {
@@ -230,21 +320,50 @@ public class DependencyTree {
 			}
 		}
 
-		List<String> list5 = compReg.getAnomaly().missingPluginsInFeatures;
+		List<String> list5 = compReg.getAnomaly().getMissingPluginsInFeatures();
 		if (list5.size() > 0) {
 			logger.error("Missing required plugin in features");
 			for (String string : list5) {
-				logger.error(string);
+				logAnomaly(string);
 			}
 		}
 
-		List<String> list6 = compReg.getAnomaly().moduleNotFound;
+		List<String> list6 = compReg.getAnomaly().getModuleNotFound();
 		if (list6.size() > 0) {
 			logger.error("Missing Module :");
 			for (String string : list6) {
-				logger.error(string);
+				logAnomaly(string);
 			}
 		}
+
+		List<String> list7 = compReg.getAnomaly().getFeatureNoDescription();
+		if (list7.size() > 0) {
+			logger.error("Feature Missing description");
+			for (String string : list7) {
+				logAnomaly(string);
+			}
+		}
+
+		List<String> list8 = compReg.getAnomaly().getFeatureNoCopyright();
+		if (list8.size() > 0) {
+			logger.error("Feature Missing copyright");
+			for (String string : list8) {
+				logAnomaly(string);
+			}
+		}
+
+		List<String> list9 = compReg.getAnomaly().getFeatureNoLicence();
+		if (list9.size() > 0) {
+			logger.error("Feature Missing Licence");
+			for (String string : list9) {
+				logAnomaly(string);
+			}
+		}
+
+	}
+
+	protected void logAnomaly(String string) {
+		logger.error("\t" + string);
 	}
 
 	public static void filterGraphAndSave(Properties properties, Graph<Componant, String> g, String outputFileName) throws IOException, Exception {
@@ -322,7 +441,7 @@ public class DependencyTree {
 					}
 				}
 				if (count > 1) {
-					compReg.getAnomaly().notTree.add(componant.toString());
+					compReg.getAnomaly().addNotTree(componant.toString());
 				}
 			}
 		}

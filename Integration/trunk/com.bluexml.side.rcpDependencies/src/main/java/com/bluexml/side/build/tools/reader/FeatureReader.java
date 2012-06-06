@@ -4,11 +4,13 @@ import java.io.File;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 
+import com.bluexml.side.build.tools.DependencyTree;
 import com.bluexml.side.build.tools.componants.Feature;
 import com.bluexml.side.build.tools.componants.Plugin;
 
@@ -45,6 +47,24 @@ public class FeatureReader extends Reader {
 		String version = root.getAttributeValue("version");
 		feature.setVersion(version);
 
+		String provider_name = root.getAttributeValue("provider-name");
+		if (StringUtils.trimToNull(provider_name) == null || !provider_name.equals(DependencyTree.getSampleFeature().getAttributeValue("provider-name"))) {
+			this.registries.getAnomaly().addFeatureBadProvider(id);
+		}
+
+		String description = root.getChildText("description");
+		if (StringUtils.trimToNull(description) == null || description.startsWith("[")) {
+			this.registries.getAnomaly().addFeatureNoDescription(id);
+		}
+		String copyright = root.getChildText("copyright");
+		if (StringUtils.trimToNull(copyright) == null || copyright.equals("[Enter Copyright Description here.]")) {
+			this.registries.getAnomaly().addFeatureNoCopyright(id);
+		}
+		String license = root.getChildText("license");
+		if (StringUtils.trimToNull(license) == null || license.equals("[Enter License Description here.]")) {
+			this.registries.getAnomaly().addFeatureNoLicence(id);
+		}
+
 		if (readPlugins) {
 			/**
 			 * read plugins in this feature
@@ -52,9 +72,9 @@ public class FeatureReader extends Reader {
 			List<?> listPlugins = root.getChildren("plugin");
 
 			for (Object object : listPlugins) {
-				Element courant = (Element) object;
-				String pluginId = courant.getAttributeValue("id");
-				String pluginVersion = courant.getAttributeValue("version");
+				Element current = (Element) object;
+				String pluginId = current.getAttributeValue("id");
+				String pluginVersion = current.getAttributeValue("version");
 				Plugin p;
 				boolean side = true;
 
