@@ -107,7 +107,7 @@ public class SQLSynchronizationPolicy implements
 		if (synchroNodeService.exists(nodeRef) && filterer.accept(nodeRef)) {
 			Map<QName, Serializable> changes = new HashMap<QName, Serializable>();
 			for (QName key : after_properties.keySet()) {
-				if (filterer.acceptPropertyQName(key)) {
+				if (filterer.acceptPropertyQName(synchroNodeService.getType(nodeRef).getLocalName(), key)) {
 					if (
 							!before_properties.containsKey(key) || // new property
 							before_properties.get(key) == null ||  // a property with null value: trick to avoid null pointer exception on the next checking
@@ -193,6 +193,5 @@ public class SQLSynchronizationPolicy implements
 	public void setSchemaCreation(SchemaCreation schemaCreation_) {
 		schemaCreation = schemaCreation_;
 	}
-
 
 }

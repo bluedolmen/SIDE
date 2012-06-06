@@ -100,7 +100,7 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 				iterablePropertiesKeySet.retainAll(currentTypePropertiesKeySet);
 	
 				for (QName key : iterablePropertiesKeySet) {
-					if (filterer.acceptPropertyQName(key)) {
+					if (filterer.acceptPropertyQName(type_name, key)) {
 						PropertyDefinition propertyDefinition = dictionaryService.getProperty(key);
 						String value = getSQLFormatFromSerializable(nodeProperties.get(key), propertyDefinition);
 						
@@ -435,6 +435,7 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 			/* escape string values */
 			if (
 					dataTypeName.equals(DataTypeDefinition.TEXT) ||
+					dataTypeName.equals(DataTypeDefinition.MLTEXT) ||
 					dataTypeName.equals(DataTypeDefinition.PATH) ||
 					dataTypeName.equals(DataTypeDefinition.NODE_REF)
 				) {

@@ -50,4 +50,9 @@ public interface NodeService {
 	 */
 	public boolean exists(NodeRef nodeRef) ;
 
+	/*
+	 * get the Type of the node
+	 */
+	public QName getType(NodeRef nodeRef) ;
+
 }

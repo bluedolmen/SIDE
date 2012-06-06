@@ -48,6 +48,10 @@ public abstract class AbstractFilterer implements Filterer {
 		return acceptQName(qname);
 	}
 	
+	public boolean acceptPropertyQName(String className, QName propertyQname) {
+		return acceptPropertyQName(propertyQname);
+	}
+	
 	public boolean acceptPropertyQName(QName qname) {
 		return acceptQName(qname);
 	}

@@ -63,9 +63,20 @@ public interface DatabaseDictionary {
 	/**
 	 * Gets the mapped attributes of a class.
 	 * 
-	 * @param class_name the class_name
+	 * @param class_name the class name
 	 * 
 	 * @return the list of attribute names
 	 */
 	public List<String> getAttributesOfClass (String class_name);
+	
+	
+	/**
+	 * Gets the classes whihc map an attribute. Useful to find the classes which mapped attributes of an external aspects or a derived external class
+	 * 
+	 * @param attribute_name the attribute name
+	 * 
+	 * @return the list of class names
+	 */
+	public List<String> getClassesOfAttribute (String attribute_name);
+
 }

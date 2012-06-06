@@ -191,6 +191,26 @@ public class PropertyFileDatabaseDictionary implements BidirectionalDatabaseDict
 		return attributeNames;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.bluexml.alfresco.modules.sql.synchronization.dictionary.IDatabaseDictionary#getSourceClass(java.lang.String)
+	 */
+	public List<String> getClassesOfAttribute (String attribute_name) {
+		//if (logger.isDebugEnabled())
+		//	logger.debug("getClassesOfAttribute on attribute_name="+atribute_name);
+		String startkey = StringUtils.join(new String[] {CLASS_PREFIX, ATTRIBUTE_PREFIX, NAME_PREFIX}, KEY_SEPARATOR);
+		List<String> classNames = new ArrayList<String>();
+		Iterator<String> iterator = _dictionary.keySet().iterator();
+        while(iterator.hasNext()){        
+            String key = (String) iterator.next();
+            if (key.startsWith(startkey) && key.endsWith(KEY_SEPARATOR+attribute_name)) {            	
+            	classNames.add(key.replace(startkey+KEY_SEPARATOR, "").replace(KEY_SEPARATOR+attribute_name, ""));
+        		if (logger.isDebugEnabled())
+        			logger.debug(" add class="+key.replace(startkey+KEY_SEPARATOR, "").replace(KEY_SEPARATOR+attribute_name, ""));
+            }
+        }
+		return classNames;
+	}
+
 	public String resolveTableAsAssociationName(String tableName) {
 		return getDictionaryKey(tableName);
 	}

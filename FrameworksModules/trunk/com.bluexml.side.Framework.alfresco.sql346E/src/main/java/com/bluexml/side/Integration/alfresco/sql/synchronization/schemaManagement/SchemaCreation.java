@@ -130,43 +130,47 @@ public class SchemaCreation implements DictionaryListener {
 			Connection connection = DataSourceUtils.getConnection(dataSource);
 			
 			HashMap<QName, ArrayList<QName>> externalTypesMappingArray = filterer.getExternalTypesMappingArray();		
-			Iterator<QName> iterator = externalTypesMappingArray.keySet().iterator();
-			List<CreateTableStatement> createStatements = new ArrayList<CreateTableStatement>();;  
-			if (logger.isDebugEnabled())
-				logger.debug("External Types size="+externalTypesMappingArray.size());
-	        while(iterator.hasNext()){        
-	            QName externalType = (QName) iterator.next();
+			if (externalTypesMappingArray != null && !externalTypesMappingArray.isEmpty()) {
+				Iterator<QName> iterator = externalTypesMappingArray.keySet().iterator();
+				List<CreateTableStatement> createStatements = new ArrayList<CreateTableStatement>();;  
 				if (logger.isDebugEnabled())
-					logger.debug("create statement on external type "+externalType);
-				CreateTableStatement currentCreateStatement = createClass(externalType); 								
-				createStatements.add(currentCreateStatement);
-	        }	
+					logger.debug("External Types size="+externalTypesMappingArray.size());
+		        while(iterator.hasNext()){        
+		            QName externalType = (QName) iterator.next();
+					if (logger.isDebugEnabled())
+						logger.debug("create statement on external type "+externalType);
+					CreateTableStatement currentCreateStatement = createClass(externalType); 								
+					createStatements.add(currentCreateStatement);
+		        }	
+				
+				if (logger.isDebugEnabled())
+					logger.debug("Do check status ");
+				CheckTableStatus checkTableStatus = doCheckStatus(createStatements, connection);
+				
+				if (logger.isDebugEnabled())
+					logger.debug(" checkTableStatus= "+checkTableStatus+ " - CheckTableStatus.CREATE_TABLES="+CheckTableStatus.CREATE_TABLES);
+				if (checkTableStatus == CheckTableStatus.CREATE_TABLES) {
 			
-			if (logger.isDebugEnabled())
-				logger.debug("Do check status ");
-			CheckTableStatus checkTableStatus = doCheckStatus(createStatements, connection);
-			
-			if (logger.isDebugEnabled())
-				logger.debug(" checkTableStatus= "+checkTableStatus+ " - CheckTableStatus.CREATE_TABLES="+CheckTableStatus.CREATE_TABLES);
-			if (checkTableStatus == CheckTableStatus.CREATE_TABLES) {
-		
-				if (logger.isDebugEnabled())
-					logger.debug("Do doExecuteCreateStatements ");
-				boolean creationSuccess = doExecuteCreateStatements(createStatements, connection);
-				if (logger.isDebugEnabled())
-					logger.debug("  creationSuccess= "+creationSuccess);
-				if (! creationSuccess) {
-					logger.error("Creation of tables failed");
-					ready = false;
+					if (logger.isDebugEnabled())
+						logger.debug("Do doExecuteCreateStatements ");
+					boolean creationSuccess = doExecuteCreateStatements(createStatements, connection);
+					if (logger.isDebugEnabled())
+						logger.debug("  creationSuccess= "+creationSuccess);
+					if (! creationSuccess) {
+						logger.error("Creation of tables failed");
+						ready = false;
+					}
+					
+					DataSourceUtils.releaseConnection(connection, dataSource);
+				
+				} else {
+					if (logger.isDebugEnabled())
+						logger.debug("Creation of externalType was not performed since creation has yet be done or incorrect checking Tables (checkTableStatus="+checkTableStatus+")");
 				}
-				
-				DataSourceUtils.releaseConnection(connection, dataSource);
-				
-			} else {
-				if (logger.isDebugEnabled())
-					logger.debug("Creation of externalType was not performed since the previous process marked the schema as not ready or creation has yet be done");
-			}
-			
+			}			
+		} else {
+			if (logger.isDebugEnabled())
+				logger.debug("Creation of externalType was not performed since the previous process marked the schema as not ready");
 		}
 		if (logger.isDebugEnabled())
 			logger.debug("===============================end createFromExternalTypeMapping");
@@ -423,8 +427,10 @@ public class SchemaCreation implements DictionaryListener {
 			PropertyDefinition propertyDefinition = entry.getValue();
 			QName propertyName = propertyDefinition.getName(); 
 			// TODO : perform checking of existing table here (availability of the current Java type)
+			if (logger.isDebugEnabled())
+				logger.debug("  check attribute "+propertyName +" for class "+classQName);
 			
-			if (filterer.acceptPropertyQName(propertyName)) {
+			if (filterer.acceptPropertyQName(className, propertyName)) {
 				List<String> options = new ArrayList<String>();			
 				String sqlType = synchronizationDialect.getSQLMapping(propertyDefinition);
 				options.add(sqlType);

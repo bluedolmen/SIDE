@@ -1,0 +1,230 @@
+package com.bluexml.side.Integration.alfresco.sql.synchronization.common;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+
+import org.alfresco.model.ContentModel;
+import org.alfresco.service.namespace.NamespaceService;
+import org.alfresco.service.namespace.QName;
+import org.alfresco.service.transaction.TransactionService;
+import org.apache.log4j.Logger;
+
+import com.bluexml.side.Integration.alfresco.sql.synchronization.dictionary.DatabaseDictionary;
+/**
+ * A filter mode to limit the number of class to synchronize in the SQL Database
+ * This filter limits using :
+ * - the parameter "synchrodb.namespacePrefix" of the synchronisation.properties file:
+ * 		it gives the namepsace prefix of the classes to authorize
+ * 		Ex: synchrodb.namespacePrefix=http://www.bluexml.com/model/content/MyModel/ to authorize the types of 'MyModel'
+ * - the parameter "synchrodb.externalTypesMapping" of the synchronisation.properties file:
+ * 		it gives the list of classes which are also authorized but which are outside the namespace prefix given by the previous parameter 
+ *  	Ex: synchrodb.externalTypesMapping=cm:person,cm:authorityContainer,cm:authority to map the alfresco person, authorithyContainer,authorithy types
+ * - the parameter "synchrodb.externalAttributesMapping" of the synchronisation.properties file:
+ * 		it gives the list of attributes which are also authorized but which are outside the namespace prefix given by the first parameter 
+ *  	Ex: synchrodb.externalAttributesMapping=cm:title to map the cm:title attribute of the aspect cm:titled
+ *  if, in the synchronisation-database-mapping.properties file, it exists an entry of the form: 
+ *        class.attribute.name.<class>.title=<value>
+ *    this entry must be mapped in the database as a column 'title' of the <class> table and the values of the attribute 'cm:title'  of the aspect 'cm:titled' aspect
+ *    BEWARE: that if an attribute of the class has the same name that an attribute of an aspect you mapped, only one column is created and all the values of the class attribute and the aspect attribute are mapped in this column.
+ *
+ */
+public class NamespacePrefixAndExternalListFilterer extends AbstractFilterer {
+
+	private Logger logger = Logger.getLogger(getClass());
+
+	public boolean acceptQName(QName qname) {
+		return qname.getNamespaceURI().startsWith(namespacePrefix) || getExternalTypesMappingArray().containsKey(qname);
+	}
+
+	public boolean acceptPropertyQName(QName qname) {
+		return super.acceptPropertyQName(qname) || ContentModel.PROP_NODE_DBID.equals(qname) || ContentModel.PROP_NODE_UUID.equals(qname) || inAttributesOfExternalTypeMapping(qname);
+	}
+	
+	public boolean acceptPropertyQName(String className, QName propertyQname) {
+		if (logger.isDebugEnabled())
+			logger.debug("acceptPropertyQName className "+className+" propertyQname "+propertyQname+ " inExternalAttributesMapping(classQname,propertyQname) "+inExternalAttributesMapping(className,propertyQname));
+		return acceptPropertyQName(propertyQname) || inExternalAttributesMapping(className,propertyQname);
+	}
+	
+	//
+	// IoC/DI Spring
+	//
+	
+	// Dependencies
+	private String namespacePrefix;
+
+	public void setNamespacePrefix(String namespacePrefix_) {
+		namespacePrefix = namespacePrefix_;
+	}
+
+	private String externalTypesMapping;
+	public void setExternalTypesMapping(String externalTypesMapping_) {
+		externalTypesMapping = externalTypesMapping_;
+	}
+	// contains the types external to the namespaces prefix which must be equally mapped  in database as they are target of association
+	// this types are given by the parameter synchrodb.externalTypesMapping of the synchronization.properties file
+	// Ex : synchrodb.externalTypesMapping=cm:person,cm:authorityContainer
+	// BEWARE: a file synchronization-database-mapping.properties must be created which contains the mapping of the following external types and their associated attributes to map
+	private HashMap<QName, ArrayList<QName>> externalTypesMappingArray;
+	
+	/*
+	 * Get the list of the external types to map in the form of a list:  <prefix1>:<type1>,<prefix2>:<type2>,...
+	 * 
+	 * @see com.bluexml.side.Integration.alfresco.sql.synchronization.common.AbstractFilterer#getExternalTypesMappingArray()
+	 */
+	public HashMap<QName, ArrayList<QName>> getExternalTypesMappingArray() {
+ 		if (externalTypesMappingArray == null) {
+			externalTypesMappingArray = new HashMap<QName, ArrayList<QName>>();
+			if (logger.isDebugEnabled())
+				logger.debug("externalTypesMapping "+externalTypesMapping);
+			if (externalTypesMapping != null) {
+				String[] typeExpressions = externalTypesMapping.split( "," );
+				for ( int i = 0; i < typeExpressions.length; i++ ) {
+					String[] typePart = typeExpressions[i].split(":");
+					if (typePart.length > 1) {
+						String namespaceUri = namespaceService.getNamespaceURI(typePart[0]);
+						QName typeQName = QName.createQName(namespaceUri, typePart[1]);
+						if (logger.isDebugEnabled())
+							logger.debug("process Type "+namespaceUri+":"+typePart[1]);
+						List<String> attributes = databaseDictionary.getAttributesOfClass(typePart[1]);
+						Iterator<String> iter = attributes.iterator();
+						ArrayList<QName> attributeQNames = new ArrayList<QName>();
+						while (iter.hasNext()) {
+							String attribute = iter.next();
+							if (logger.isDebugEnabled())
+								logger.debug("   add Attribute "+attribute);
+							QName attributeQName = QName.createQName(namespaceUri, attribute);
+							attributeQNames.add(attributeQName);
+						}
+						externalTypesMappingArray.put(typeQName, attributeQNames);
+					} else {
+						logger.error("Mapping of external types failed for "+typePart+" in synchrnization.properties -> synchrodb.externalTypesMapping");					
+					}
+				}
+			}
+		}
+		return externalTypesMappingArray;
+	}
+
+	/*
+	 * Check if this attribute qname is in the mapped attributes of the external types 
+	 */
+	public boolean inAttributesOfExternalTypeMapping(QName qname) {
+		boolean found = false;
+		if (logger.isDebugEnabled())
+			logger.debug("   inAttributesOfExternalTypeMapping qname "+qname);
+		Iterator<QName> iter = getExternalTypesMappingArray().keySet().iterator();
+		while (iter.hasNext()) {
+			QName qn = iter.next();
+			//if (logger.isDebugEnabled())
+			//	logger.debug("   qn= "+qn);
+			ArrayList<QName> qnames = externalTypesMappingArray.get(qn);
+			Iterator it = qnames.iterator();
+			while (it.hasNext()) {
+				QName mappedqname = (QName) it.next();
+				if (mappedqname.equals(qname)) {
+					found = true;
+					if (logger.isDebugEnabled()) logger.debug("  found!!!");
+					break;
+				}
+			}
+		}
+		return found;
+	}
+
+	private String externalAttributesMapping;
+	public void setExternalAttributesMapping(String externalAttributesMapping_) {
+		externalAttributesMapping = externalAttributesMapping_;
+	}
+	// contains the attributes list external to the namespaces prefix which must be equally mapped  in database as they are associated to some internal types either through applied aspect or by inheritance
+	// this attributes are given by the parameter synchrodb.externalAttributesMapping of the synchronization.properties file
+	// Ex : synchrodb.externalAttributesMapping=cm:title
+	// 'cm:title' indicates that the attribute of the aspect 'cm:titled' must be taken into account into the SQL database through:
+	//  if, in the synchronisation-database-mapping.properties file, it exists an entry of the form: 
+	//        class.attribute.name.<class>.title=<value>
+	//    this entry must be mapped in the database as a column 'title' of the <class> table and the values of the attribute 'cm:title'  of the aspect 'cm:titled' aspect
+	// BEWARE: that if an attribute of the class has the same name that an attribute of an aspect you mapped, only one column is created and all the values of the class attribute and the aspect attribute are mapped in this column.
+	private HashMap<String, QName> externalAttributesMappingArray;
+	
+	/*
+	 * Get the list of the external aspects to map in the form of a list:  <external prefix1>:<external aspect1>|<internal prefix>:<interbal type>,,...
+	 * 
+	 * @see com.bluexml.side.Integration.alfresco.sql.synchronization.common.AbstractFilterer#getExternalTypesMappingArray()
+	 */
+	public HashMap<String, QName> getExternalAttributesMappingArray() {
+ 		if (externalAttributesMappingArray == null) {
+ 			externalAttributesMappingArray = new HashMap<String, QName>();
+			if (logger.isDebugEnabled())
+				logger.debug("externalAttributesMapping "+externalAttributesMapping);
+			if (externalAttributesMapping != null) {
+				String[] attributeExpressions = externalAttributesMapping.split( "," );
+				if (logger.isDebugEnabled())
+					logger.debug("attributeExpressions.length "+attributeExpressions.length);
+				for ( int i = 0; i < attributeExpressions.length; i++ ) {
+					String[] attributePart = attributeExpressions[i].split(":");
+					if (logger.isDebugEnabled())
+						logger.debug("attributePart.length "+attributePart.length);
+					if (attributePart.length > 1) {
+						String namespaceUri = namespaceService.getNamespaceURI(attributePart[0]);
+						QName attributeQName = QName.createQName(namespaceUri, attributePart[1]);
+						if (logger.isDebugEnabled())
+							logger.debug("process attribute: "+namespaceUri+":"+attributePart[1]);
+						List<String> classes = databaseDictionary.getClassesOfAttribute(attributePart[1]);
+						Iterator<String> iter = classes.iterator();
+						while (iter.hasNext()) {
+							String className = iter.next();
+							if (logger.isDebugEnabled())
+								logger.debug("   add class "+className+" and attribute "+attributeQName);
+							externalAttributesMappingArray.put(className, attributeQName);
+						}
+					} else {
+						logger.error("Mapping of external attribute failed for "+attributePart+" in synchronization.properties -> synchrodb.externalTypesMapping");					
+					}
+				}
+			}
+		}
+		return externalAttributesMappingArray;
+	}
+
+	/*
+	 * Check if this class qname and this attribute qname are in the external attribute mapped list 
+	 */
+	public boolean inExternalAttributesMapping(String className, QName propertyQname) {
+		boolean found = false;
+		if (logger.isDebugEnabled())
+			logger.debug("   inExternalAttributesMapping classQname "+className+" propertyQname "+propertyQname);
+		Iterator<String> iter = getExternalAttributesMappingArray().keySet().iterator();
+		while (iter.hasNext()) {
+			String type = iter.next();
+			if (logger.isDebugEnabled())
+				logger.debug("   inExternalAttributesMapping classqn "+type);
+			if (type.equals(className)) {
+				QName attributeqn = getExternalAttributesMappingArray().get(type);
+				if (logger.isDebugEnabled())
+					logger.debug("   inExternalAttributesMapping attributeqn "+attributeqn);
+				if (attributeqn.equals(propertyQname)) {
+					found = true;
+					if (logger.isDebugEnabled()) logger.debug("  found!!!");
+					break;					
+				}
+			}
+		}
+		return found;
+	}
+
+	
+	NamespaceService namespaceService;
+	public void setNamespaceService(NamespaceService namespaceService_) {
+		namespaceService = namespaceService_;
+	}
+	
+	private DatabaseDictionary databaseDictionary;
+	public void setDatabaseDictionary(DatabaseDictionary databaseDictionary_) {
+		databaseDictionary = databaseDictionary_;
+	}
+	
+	
+
+}
