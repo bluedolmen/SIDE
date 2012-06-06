@@ -2,7 +2,7 @@
 <@templateHeader>
    <@link rel="stylesheet" type="text/css" href="${url.context}/res/themes/${theme}/login.css" />
 	<script type="text/javascript" src="${url.context}/side-labs/3rd-party/js/jquery/jquery-1.6.2.min.js"></script>
-	<script type="text/javascript" src="${url.context}/side-labs/js/SIDE/security/AutoConnect.js"></script>
+	<script type="text/javascript" src="${url.context}/res/js/SIDE/security/AutoConnect.js"></script>
 </@>
 <#if (! url.args["auto"]??)>
 <@templateBody>
