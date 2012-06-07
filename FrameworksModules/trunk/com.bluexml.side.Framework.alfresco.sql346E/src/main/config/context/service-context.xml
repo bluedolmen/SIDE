@@ -50,6 +50,8 @@
 	<bean id="namespacePrefixFilterer" class="com.bluexml.side.Integration.alfresco.sql.synchronization.common.NamespacePrefixAndExternalListFilterer" parent="abstractFilterer">
 	 	<!-- This property can be externalized into the synchronization.properties enabling a more flexible parametrization -->
 	 	<property name="namespacePrefix" value="${synchrodb.namespacePrefix}" />
+	 	<property name="excludedTypesMapping" value="${synchrodb.excludedTypesMapping}" />
+	 	<property name="excludedAttributesMapping" value="${synchrodb.excludedAttributesMapping}" />
 	 	<property name="externalTypesMapping" value="${synchrodb.externalTypesMapping}" />
 	 	<property name="externalAttributesMapping" value="${synchrodb.externalAttributesMapping}" />
 		<property name="namespaceService" ref="namespaceService" />

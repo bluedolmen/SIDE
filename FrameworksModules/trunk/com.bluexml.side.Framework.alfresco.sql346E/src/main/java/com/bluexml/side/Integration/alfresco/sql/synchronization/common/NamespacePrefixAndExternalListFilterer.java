@@ -24,10 +24,14 @@ import com.bluexml.side.Integration.alfresco.sql.synchronization.dictionary.Data
  * - the parameter "synchrodb.externalAttributesMapping" of the synchronisation.properties file:
  * 		it gives the list of attributes which are also authorized but which are outside the namespace prefix given by the first parameter 
  *  	Ex: synchrodb.externalAttributesMapping=cm:title to map the cm:title attribute of the aspect cm:titled
- *  if, in the synchronisation-database-mapping.properties file, it exists an entry of the form: 
+ *      if, in the synchronization-database-mapping.properties file, it exists an entry of the form: 
  *        class.attribute.name.<class>.title=<value>
  *    this entry must be mapped in the database as a column 'title' of the <class> table and the values of the attribute 'cm:title'  of the aspect 'cm:titled' aspect
  *    BEWARE: that if an attribute of the class has the same name that an attribute of an aspect you mapped, only one column is created and all the values of the class attribute and the aspect attribute are mapped in this column.
+ * - the parameter "synchrodb.excludeTypes" of the synchronisation.properties file:
+ * 		it gives the list of the types under the namespace (synchrodb.namespacePrefix) which must be excluded of the synchronisation
+ * - the parameter "synchrodb.excludeAttribues" of the synchronisation.properties file:
+ * 		it gives the list of the attributes of the types under the namespace (synchrodb.namespacePrefix) which must be excluded of the synchronisation
  *
  */
 public class NamespacePrefixAndExternalListFilterer extends AbstractFilterer {
@@ -35,11 +39,11 @@ public class NamespacePrefixAndExternalListFilterer extends AbstractFilterer {
 	private Logger logger = Logger.getLogger(getClass());
 
 	public boolean acceptQName(QName qname) {
-		return qname.getNamespaceURI().startsWith(namespacePrefix) || getExternalTypesMappingArray().containsKey(qname);
+		return (qname.getNamespaceURI().startsWith(namespacePrefix) && !getExcludedTypesMappingArray().contains(qname)) || getExternalTypesMappingArray().containsKey(qname);
 	}
 
 	public boolean acceptPropertyQName(QName qname) {
-		return super.acceptPropertyQName(qname) || ContentModel.PROP_NODE_DBID.equals(qname) || ContentModel.PROP_NODE_UUID.equals(qname) || inAttributesOfExternalTypeMapping(qname);
+		return (super.acceptPropertyQName(qname) && !getExcludedAttributesMappingArray().contains(qname)) || ContentModel.PROP_NODE_DBID.equals(qname) || ContentModel.PROP_NODE_UUID.equals(qname) || inAttributesOfExternalTypeMapping(qname);
 	}
 	
 	public boolean acceptPropertyQName(String className, QName propertyQname) {
@@ -57,6 +61,51 @@ public class NamespacePrefixAndExternalListFilterer extends AbstractFilterer {
 		namespacePrefix = namespacePrefix_;
 	}
 
+	
+	// the parameter synchrodb.excludedTypesMapping of the synchronisation.properties file which list the namespace types to exclude of the synchronisation
+	private String excludedTypesMapping;
+	public void setExcludedTypesMapping(String excludedTypesMapping_) {
+		excludedTypesMapping = excludedTypesMapping_;
+	}
+	// contains the types under the namespace (synchrodb.namespacePrefix) which must be excluded of the synchronisation
+	private ArrayList<QName> excludedTypesMappingArray = null;
+	/*
+	 * Get the list of the types under the namespace (synchrodb.namespacePrefix) which must be excluded of the synchronisation
+	 * 
+	 * @see com.bluexml.side.Integration.alfresco.sql.synchronization.common.AbstractFilterer#getExternalTypesMappingArray()
+	 */
+	public ArrayList<QName> getExcludedTypesMappingArray() {
+ 		if (excludedTypesMappingArray == null) {
+ 			excludedTypesMappingArray = new ArrayList<QName>();
+ 			getExcludedList(excludedTypesMapping, excludedTypesMappingArray);
+ 		}
+		return excludedTypesMappingArray;
+	}
+
+	// the parameter synchrodb.excludedAttributesMapping of the synchronisation.properties file which list the attributes of the namespace type to exclude of the synchronisation
+	private String excludedAttributesMapping;
+	public void setExcludedAttributesMapping(String excludedAttributesMapping_) {
+		excludedAttributesMapping = excludedAttributesMapping_;
+	}
+	// contains the attributes under the namespace (synchrodb.namespacePrefix) which must be excluded of the synchronisation
+	private ArrayList<QName> excludedAttributesMappingArray = null;
+	/*
+	 * Get the list of the attributes of the types under the namespace (synchrodb.namespacePrefix) which must be excluded of the synchronisation
+	 * 
+	 * @see com.bluexml.side.Integration.alfresco.sql.synchronization.common.AbstractFilterer#getExternalTypesMappingArray()
+	 */
+	public ArrayList<QName> getExcludedAttributesMappingArray() {
+ 		if (excludedAttributesMappingArray == null) {
+ 			excludedAttributesMappingArray = new ArrayList<QName>();
+ 			getExcludedList(excludedAttributesMapping, excludedAttributesMappingArray);
+ 		}
+ 		return excludedAttributesMappingArray;
+	}
+
+	
+	
+	// the parameter synchrodb.externalTypesMapping of the synchronisation.properties file which list the external types to include in the synchronisation	
+	// this external types must be declared in a synchronization-database-mapping.properties file to give the mapping declaration of corresponding table and column name
 	private String externalTypesMapping;
 	public void setExternalTypesMapping(String externalTypesMapping_) {
 		externalTypesMapping = externalTypesMapping_;
@@ -98,7 +147,7 @@ public class NamespacePrefixAndExternalListFilterer extends AbstractFilterer {
 						}
 						externalTypesMappingArray.put(typeQName, attributeQNames);
 					} else {
-						logger.error("Mapping of external types failed for "+typePart+" in synchrnization.properties -> synchrodb.externalTypesMapping");					
+						logger.error("Mapping of external types failed for "+typePart+" in synchronization.properties -> synchrodb.externalTypesMapping");					
 					}
 				}
 			}
@@ -132,6 +181,8 @@ public class NamespacePrefixAndExternalListFilterer extends AbstractFilterer {
 		return found;
 	}
 
+	// the parameter synchrodb.externalAttributesMapping of the synchronisation.properties file which list the attributes of the external types to include in the synchronisation	
+	// this external attributes must be declared in the namespace synchronization-database-mapping.properties file for each associated types to give the mapping declaration of corresponding column name
 	private String externalAttributesMapping;
 	public void setExternalAttributesMapping(String externalAttributesMapping_) {
 		externalAttributesMapping = externalAttributesMapping_;
@@ -140,7 +191,7 @@ public class NamespacePrefixAndExternalListFilterer extends AbstractFilterer {
 	// this attributes are given by the parameter synchrodb.externalAttributesMapping of the synchronization.properties file
 	// Ex : synchrodb.externalAttributesMapping=cm:title
 	// 'cm:title' indicates that the attribute of the aspect 'cm:titled' must be taken into account into the SQL database through:
-	//  if, in the synchronisation-database-mapping.properties file, it exists an entry of the form: 
+	//  if, in the synchronization-database-mapping.properties file, it exists an entry of the form: 
 	//        class.attribute.name.<class>.title=<value>
 	//    this entry must be mapped in the database as a column 'title' of the <class> table and the values of the attribute 'cm:title'  of the aspect 'cm:titled' aspect
 	// BEWARE: that if an attribute of the class has the same name that an attribute of an aspect you mapped, only one column is created and all the values of the class attribute and the aspect attribute are mapped in this column.
@@ -230,6 +281,30 @@ public class NamespacePrefixAndExternalListFilterer extends AbstractFilterer {
 		databaseDictionary = databaseDictionary_;
 	}
 	
-	
+	/**
+	 * feed up an array list from a coma-separated string
+	 * @param excludedList the coma separated string
+	 * @param excludedListArray the array list
+	 */
+	public void getExcludedList(String excludedList, ArrayList<QName> excludedListArray) {
+		if (logger.isDebugEnabled())
+			logger.debug("excludedList "+excludedList);
+		if (excludedList != null) {
+			String[] expressions = excludedList.split( "," );
+			for ( int i = 0; i < expressions.length; i++ ) {
+				String[] part = expressions[i].split(":");
+				if (part.length > 1) {
+					String namespaceUri = namespaceService.getNamespaceURI(part[0]);
+					QName qName = QName.createQName(namespaceUri, part[1]);
+					if (logger.isDebugEnabled())
+						logger.debug("process Type "+namespaceUri+":"+part[1]);
+					excludedListArray.add(qName);
+				} else {
+					logger.error("Mapping of exluded types or attributes failed for "+part+" in excluded list :" + excludedList);					
+				}
+			}
+		}
+	}
+
 
 }

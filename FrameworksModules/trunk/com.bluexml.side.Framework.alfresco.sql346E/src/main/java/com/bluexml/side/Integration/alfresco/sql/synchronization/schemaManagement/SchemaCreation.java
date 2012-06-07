@@ -140,7 +140,7 @@ public class SchemaCreation implements DictionaryListener {
 					if (logger.isDebugEnabled())
 						logger.debug("create statement on external type "+externalType);
 					CreateTableStatement currentCreateStatement = createClass(externalType); 								
-					createStatements.add(currentCreateStatement);
+					if (currentCreateStatement != null) createStatements.add(currentCreateStatement);
 		        }	
 				
 				if (logger.isDebugEnabled())
@@ -231,7 +231,7 @@ public class SchemaCreation implements DictionaryListener {
 				// only create table for final leaf type
 				if (dictionaryService.getSubTypes(type, true).size()==1) {
 					CreateTableStatement currentCreateStatement = createClass(type); 								
-					createStatements.add(currentCreateStatement);
+					if (currentCreateStatement != null) createStatements.add(currentCreateStatement);
 				}
 			}
 		}
@@ -447,7 +447,6 @@ public class SchemaCreation implements DictionaryListener {
 			synchronizationDialect.newCreateTableStatementBuilder(tableName).columns(columns).tableType(TableType.TABLE_CLASS).pkConstraint(idColumnName);
 		
 		customActionManager.doInCreateType(classQName, builder);
-		
 		return builder.build();
 	}
 	
