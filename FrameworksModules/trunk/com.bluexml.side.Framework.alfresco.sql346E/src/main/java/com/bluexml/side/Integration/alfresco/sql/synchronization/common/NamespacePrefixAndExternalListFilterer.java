@@ -43,8 +43,6 @@ public class NamespacePrefixAndExternalListFilterer extends AbstractFilterer {
 	}
 	
 	public boolean acceptPropertyQName(String className, QName propertyQname) {
-		if (logger.isDebugEnabled())
-			logger.debug("acceptPropertyQName className "+className+" propertyQname "+propertyQname+ " inExternalAttributesMapping(classQname,propertyQname) "+inExternalAttributesMapping(className,propertyQname));
 		return acceptPropertyQName(propertyQname) || inExternalAttributesMapping(className,propertyQname);
 	}
 	
@@ -113,8 +111,8 @@ public class NamespacePrefixAndExternalListFilterer extends AbstractFilterer {
 	 */
 	public boolean inAttributesOfExternalTypeMapping(QName qname) {
 		boolean found = false;
-		if (logger.isDebugEnabled())
-			logger.debug("   inAttributesOfExternalTypeMapping qname "+qname);
+		//if (logger.isDebugEnabled())
+			//logger.debug("   inAttributesOfExternalTypeMapping qname "+qname);
 		Iterator<QName> iter = getExternalTypesMappingArray().keySet().iterator();
 		while (iter.hasNext()) {
 			QName qn = iter.next();
@@ -146,16 +144,16 @@ public class NamespacePrefixAndExternalListFilterer extends AbstractFilterer {
 	//        class.attribute.name.<class>.title=<value>
 	//    this entry must be mapped in the database as a column 'title' of the <class> table and the values of the attribute 'cm:title'  of the aspect 'cm:titled' aspect
 	// BEWARE: that if an attribute of the class has the same name that an attribute of an aspect you mapped, only one column is created and all the values of the class attribute and the aspect attribute are mapped in this column.
-	private HashMap<String, QName> externalAttributesMappingArray;
+	private HashMap<String, ArrayList<QName>> externalAttributesMappingArray;
 	
 	/*
 	 * Get the list of the external aspects to map in the form of a list:  <external prefix1>:<external aspect1>|<internal prefix>:<interbal type>,,...
 	 * 
 	 * @see com.bluexml.side.Integration.alfresco.sql.synchronization.common.AbstractFilterer#getExternalTypesMappingArray()
 	 */
-	public HashMap<String, QName> getExternalAttributesMappingArray() {
+	public HashMap<String, ArrayList<QName>> getExternalAttributesMappingArray() {
  		if (externalAttributesMappingArray == null) {
- 			externalAttributesMappingArray = new HashMap<String, QName>();
+ 			externalAttributesMappingArray = new HashMap<String, ArrayList<QName>>();
 			if (logger.isDebugEnabled())
 				logger.debug("externalAttributesMapping "+externalAttributesMapping);
 			if (externalAttributesMapping != null) {
@@ -177,7 +175,14 @@ public class NamespacePrefixAndExternalListFilterer extends AbstractFilterer {
 							String className = iter.next();
 							if (logger.isDebugEnabled())
 								logger.debug("   add class "+className+" and attribute "+attributeQName);
-							externalAttributesMappingArray.put(className, attributeQName);
+							if (externalAttributesMappingArray.containsKey(className)) {
+								ArrayList<QName> al = externalAttributesMappingArray.get(className);
+								al.add(attributeQName);								
+							} else {
+								ArrayList<QName> al = new ArrayList<QName>();								
+								al.add(attributeQName);								
+								externalAttributesMappingArray.put(className, al);
+							}
 						}
 					} else {
 						logger.error("Mapping of external attribute failed for "+attributePart+" in synchronization.properties -> synchrodb.externalTypesMapping");					
@@ -193,21 +198,21 @@ public class NamespacePrefixAndExternalListFilterer extends AbstractFilterer {
 	 */
 	public boolean inExternalAttributesMapping(String className, QName propertyQname) {
 		boolean found = false;
-		if (logger.isDebugEnabled())
-			logger.debug("   inExternalAttributesMapping classQname "+className+" propertyQname "+propertyQname);
+		//if (logger.isDebugEnabled())
+			//logger.debug("   inExternalAttributesMapping className "+className+" propertyQname "+propertyQname);
 		Iterator<String> iter = getExternalAttributesMappingArray().keySet().iterator();
 		while (iter.hasNext()) {
 			String type = iter.next();
-			if (logger.isDebugEnabled())
-				logger.debug("   inExternalAttributesMapping classqn "+type);
 			if (type.equals(className)) {
-				QName attributeqn = getExternalAttributesMappingArray().get(type);
-				if (logger.isDebugEnabled())
-					logger.debug("   inExternalAttributesMapping attributeqn "+attributeqn);
-				if (attributeqn.equals(propertyQname)) {
-					found = true;
-					if (logger.isDebugEnabled()) logger.debug("  found!!!");
-					break;					
+				ArrayList<QName> al = getExternalAttributesMappingArray().get(type);
+				Iterator it = al.iterator();
+				while (it.hasNext()) {
+					QName attributeqn = (QName) it.next();
+					if (attributeqn.equals(propertyQname)) {
+						found = true;
+						if (logger.isDebugEnabled()) logger.debug(" inExternalAttributesMapping  found!!! attributeqn="+attributeqn);
+						break;	
+					}
 				}
 			}
 		}
