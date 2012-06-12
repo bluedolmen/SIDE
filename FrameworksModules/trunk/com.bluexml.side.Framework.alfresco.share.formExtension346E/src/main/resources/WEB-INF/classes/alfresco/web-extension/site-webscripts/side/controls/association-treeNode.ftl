@@ -14,7 +14,7 @@
       itemType: "${field.endpointType}",
       multipleSelectMode: <#if field.control.params.multipleSelectMode??>${field.control.params.multipleSelectMode}<#else>${field.endpointMany?string}</#if>,
       itemFamily: "treeNode",
-      params: "${field.control.params.params!""}&site=" + (Alfresco ? Alfresco.constants.SITE : ""),
+      params: "${field.control.params.params!""}&site={site}",
       allowNavigationToContentChildren: true
    });
 })();

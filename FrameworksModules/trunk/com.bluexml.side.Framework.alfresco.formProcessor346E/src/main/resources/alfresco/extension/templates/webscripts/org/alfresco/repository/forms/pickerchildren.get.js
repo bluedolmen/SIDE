@@ -1,22 +1,29 @@
 <import resource="classpath:/alfresco/templates/webscripts/org/alfresco/repository/forms/pickerresults.lib.js">
 <import resource="classpath:/alfresco/extension/templates/webscripts/org/alfresco/repository/forms/treenode.lib.js">
 
+/*
+ * patched by SIDE to provide support of :
+ * url.templateArgs.type=search, allow to compute advanced query
+ * url.templateArgs.type=treeNode, allow to use this script to get children of arbitrary child->parent association and provide tree navigation 
+ * url.templateArgs.type=category, for scoped tags in share Site (use args["scopedTags"]=true)
+ */
+
 function main() {
-   var argsFilterType = args['filterType'],
-   argsSelectableType = args['selectableType'],
-   argsSite = args['site'],
-   argsSelectableTypeIsAspect = args['selectableTypeIsAspect'],
-   argsSearchTerm = args['searchTerm'],
-   argsAdvancedQuery = args['advancedQuery'],
-   argsMaxResults = args['size'],
-   argsXPath = args['xpath'],
-   pathElements = url.service.split("/"),
-   parent = null,
-   rootNode = companyhome,
-   results = [],
-   categoryResults = null,
-   resultObj = null,
-   lastPathElement = null;
+   var argsFilterType = args['filterType'];
+   var argsSelectableType = args['selectableType'];
+   var argsSite = args['site'];
+   var argsSelectableTypeIsAspect = args['selectableTypeIsAspect'];
+   var argsSearchTerm = args['searchTerm'];
+   var argsAdvancedQuery = args['advancedQuery'];
+   var argsMaxResults = args['size'];
+   var argsXPath = args['xpath'];
+   var pathElements = url.service.split("/");
+   var parent = null;
+   var rootNode = companyhome;
+   var results = [];
+   var categoryResults = null;
+   var resultObj = null;
+   var lastPathElement = null;
 
    if (logger.isLoggingEnabled()) {
       logger.log("children type = " + url.templateArgs.type);
@@ -94,18 +101,21 @@ function main() {
                logger.log("lastPathElement = " + lastPathElement);
 
             if (lastPathElement == "siblings") {
-               // the provided nodeRef is the node we want the siblings of so
+               // the provided nodeRef is the node we want the siblings of
+               // so
                // get
                // it's parent
                var node = search.findNode(nodeRef);
                if (node !== null) {
                   nodeRef = node.parent.nodeRef;
                } else {
-                  // if the provided node was not found default to companyhome
+                  // if the provided node was not found default to
+                  // companyhome
                   nodeRef = "alfresco://company/home";
                }
             } else if (lastPathElement == "doclib") {
-               // we want to find the document library for the nodeRef provided
+               // we want to find the document library for the nodeRef
+               // provided
                nodeRef = findDoclib(nodeRef);
             }
          }
@@ -160,7 +170,8 @@ function main() {
 
             for each ( var result in searchResults) {
                if (result.isContainer || result.type == "{http://www.alfresco.org/model/application/1.0}folderlink") {
-                  // wrap result and determine if it is selectable in the UI
+                  // wrap result and determine if it is selectable in the
+                  // UI
                   resultObj = {
                      item : result
                   };
@@ -168,7 +179,8 @@ function main() {
 
                   containerResults.push(resultObj);
                } else {
-                  // wrap result and determine if it is selectable in the UI
+                  // wrap result and determine if it is selectable in the
+                  // UI
                   resultObj = {
                      item : result
                   };
@@ -187,7 +199,41 @@ function main() {
                rootNode = rootCategories[0].parent;
                if (nodeRef == "alfresco://category/root") {
                   parent = rootNode;
-                  categoryResults = classification.getRootCategories(catAspect);
+                  var scopedTags = args["scopedTags"] == "true";
+                  if (scopedTags && argsSite !== null && argsSite.length > 0) {
+                     var site = siteService.getSite(argsSite);
+                     var siteNode = site.node;
+                     // fetch the nearest available tagscope
+                     var scope = siteNode.tagScope;
+                     categoryResults = [];
+                     if (scope != null) {
+                        var tagsDetails = null;
+                        var topN = args["topN"] != undefined ? parseInt(args["topN"]) : -1;
+                        if (topN > -1) {
+                           // PENDING:
+                           // getTopTags currently throws an AIOOB
+                           // exception if
+                           // topN >
+                           // tags.length() :-/
+                           if (scope.tags.length < topN) {
+                              topN = scope.tags.length;
+                           }  
+                           tagsDetails = scope.getTopTags(topN);
+                        } else {
+                           tagsDetails = scope.tags;
+                        }
+                        for each (var tagDetail in tagsDetails) {
+                           var name = tagDetail.name;
+                           // get the tag node
+                           var tagNode = parent.childrenByXPath("cm:"+name)[0];
+                           categoryResults.push(tagNode);
+                        }
+                        
+                     }
+                  } else {
+                     categoryResults = rootCategories;
+                  }
+
                } else {
                   parent = search.findNode(nodeRef);
                   categoryResults = parent.children;
@@ -195,7 +241,8 @@ function main() {
 
                categoryResults.sort(sortByName);
 
-               // make each result an object and indicate it is selectable in
+               // make each result an object and indicate it is selectable
+               // in
                // the
                // UI
                for each ( var result in categoryResults) {
@@ -264,10 +311,10 @@ function main() {
                   } else if (pathItem != "") {
                      resolvedPathItem = pathItem;
                   }
-                  if (resolvedPathItem != null ) {
+                  if (resolvedPathItem != null) {
                      qnamePaths += (validePathsCount > 0 ? " OR " : "") + "PATH:\"" + resolvedPathItem + "\"";
                      validePathsCount++;
-                  }                  
+                  }
                }
 
                if (argsSite !== null && argsSite.length > 0) {
@@ -391,7 +438,7 @@ function findUsers(searchTerm, maxResults, results, xpath) {
       } ]
    });
 
-   // create person objet for /*each*/ result
+   // create person objet for each result
    for each ( var node in searchResults) {
       // add to results
       results.push({
@@ -450,7 +497,7 @@ function findGroups(searchTerm, maxResults, results, xpath) {
  * "alfresco://company/home" is returned.
  * 
  * @param nodeRef
- *           The node to find the document library for
+ *            The node to find the document library for
  * @return The nodeRef of the doclib or "alfresco://company/home" if the node is
  *         not located within a site
  */

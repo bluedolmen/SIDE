@@ -357,7 +357,12 @@
           * @property startLocation
           * @type string
           */
-         startLocation: null
+         startLocation: null,
+         
+         /**
+          * share siteId, can be used to resolve {site} token in params
+          */
+         site : (Alfresco.constants.SITE ? Alfresco.constants.SITE : "")
       },
 
       /**
@@ -1979,7 +1984,12 @@
           * @type string
           * @default ""
           */
-         createNewItemIcon: ""
+         createNewItemIcon: "",
+         
+         /**
+          * share siteId, can be used to resolve {site} token in params
+          */
+         site : (Alfresco.constants.SITE ? Alfresco.constants.SITE : "")
       },
 
       /**
@@ -2802,7 +2812,7 @@
          
          if (this.options.params)
          {
-            params += "&" + encodeURI(this.options.params);
+            params += "&" + encodeURI(YAHOO.lang.substitute(this.options.params, this.options));
          }
          
          return params;
