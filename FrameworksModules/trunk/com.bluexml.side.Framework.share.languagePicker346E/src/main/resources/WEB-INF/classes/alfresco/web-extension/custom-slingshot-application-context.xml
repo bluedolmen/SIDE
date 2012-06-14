@@ -11,4 +11,5 @@
 		<property name="localeResolver" ref="localeResolver" />
 		<property name="authenticatorFactory" ref="webscripts.authenticator.basic" />
 	</bean>
+	
 </beans>

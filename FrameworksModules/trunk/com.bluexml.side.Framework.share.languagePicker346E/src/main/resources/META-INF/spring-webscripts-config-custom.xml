@@ -1,0 +1,29 @@
+<app-config>
+
+ 
+
+
+   <config evaluator="string-compare" condition="Remote">
+		<remote>
+
+			<!-- Connector Implementations -->
+			<connector>
+				<id>http</id>
+				<name>Simple Http Connector</name>
+				<description>Simple HTTP Connector</description>
+				<class>com.bluexml.side.framework.alfresco.shareLanguagePicker.connector.MyHttpConnector</class>
+			</connector>
+
+			<connector>
+				<id>alfresco</id>
+				<name>Alfresco Connector</name>
+				<description>Connects to an Alfresco instance using ticket-based authentication</description>
+				<class>com.bluexml.side.framework.alfresco.shareLanguagePicker.connector.MyAlfrescoConnector</class>
+				<authenticator-id>alfresco-ticket</authenticator-id>
+			</connector>
+
+
+		</remote>
+	</config>
+
+</app-config>

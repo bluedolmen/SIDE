@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.JSONException;
@@ -20,7 +21,10 @@ import org.springframework.extensions.webscripts.connector.Connector;
 import org.springframework.extensions.webscripts.connector.Response;
 import org.springframework.extensions.webscripts.connector.User;
 
+import com.bluexml.side.framework.alfresco.shareLanguagePicker.connector.MyHttpRequestServletAdaptator;
+
 public class LanguageSetter {
+	private static final String ACCEPT_LANGUAGE = "Accept-Language";
 	public static final String SHARE_LANG = "shareLang";
 	private static final Log logger = LogFactory.getLog(LanguageSetter.class);
 	static String preferences_values = "{http://www.alfresco.org/model/content/1.0}preferenceValues";
@@ -86,7 +90,7 @@ public class LanguageSetter {
 
 	private static String getLanguageFromBrowser(HttpServletRequest req) {
 		// set language locale from browser header
-		String acceptLang = req.getHeader("Accept-Language");
+		String acceptLang = req.getHeader(ACCEPT_LANGUAGE);
 		String language = null;
 		if (acceptLang != null && acceptLang.length() != 0) {
 			StringTokenizer t = new StringTokenizer(acceptLang, ",; ");
@@ -121,5 +125,29 @@ public class LanguageSetter {
 		}
 
 		return language;
+	}
+
+	/**
+	 * 
+	 * @param req
+	 * @return
+	 */
+	public static HttpServletRequest getMyRequestInstance(HttpServletRequest req) {
+		// we dont use getLanguageFromLayoutParam because this may cause loop getLanguageFromLayoutParam -> alfrescoConnector -> getMyRequestInstance -> getLanguageFromLayoutParam
+		String value = (String) req.getSession().getAttribute(LanguageSetter.SHARE_LANG);
+		if (StringUtils.trimToNull(value) != null) {
+			MyHttpRequestServletAdaptator myreq = new MyHttpRequestServletAdaptator(req);
+			String key = ACCEPT_LANGUAGE;
+
+			String replace = value.replace('_', '-');
+			logger.debug("getMyRequestInstance set Language to " + replace);
+			myreq.setHeader(key, replace);
+			return myreq;
+		} else {
+			logger.debug("getMyRequestInstance no language stored in session use ");
+		}
+		
+		return req;
+		
 	}
 }
