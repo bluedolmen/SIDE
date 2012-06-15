@@ -1,4 +1,4 @@
-package com.bluexml.britair.dinamex.applet;
+package com.bluexml.side.dinamex.applet;
 
 public class Exec extends Thread {
 	private String monAppli = null;

@@ -1,4 +1,4 @@
-package com.bluexml.britair.dinamex.applet;
+package com.bluexml.side.dinamex.applet;
 
 import java.applet.Applet;
 import java.awt.Graphics;
@@ -10,7 +10,6 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.SocketPermission;
 import java.net.URL;
 import java.net.URLConnection;
 

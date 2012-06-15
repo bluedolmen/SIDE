@@ -1,5 +1,4 @@
 <project xmlns:artifact="antlib:org.apache.maven.artifact.ant" name="com.bluexml.britair.dinamex.applet.editContentInline" default="patchModuleAlfrescoWithApplet">
-	<property file="${basedir}/../../../../build.${user.name}.properties" />
 	<property name="webapps.home" value="${tomcat.home}/webapps" />
 	<property file="${user.home}/build.properties" />
 	<path id="maven-ant-tasks.classpath" path="lib/maven-ant-tasks-2.1.3.jar" />
