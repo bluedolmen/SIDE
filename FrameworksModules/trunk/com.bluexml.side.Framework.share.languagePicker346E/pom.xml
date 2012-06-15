@@ -4,7 +4,7 @@
   <groupId>com.bluexml.side.Framework.share</groupId>
   <artifactId>languagePicker346E</artifactId>
   <name>com.bluexml.side.Framework.share.languagePicker346E</name>
-  <version>1.0.5</version>
+  <version>1.0.6</version>
   <packaging>zip</packaging>
   <parent>
     <groupId>org.bluexml</groupId>
@@ -63,9 +63,9 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-    	<groupId>commons-lang</groupId>
-    	<artifactId>commons-lang</artifactId>
-    	<version>2.1</version>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>2.1</version>
     </dependency>
   </dependencies>
   <description>project description</description>
