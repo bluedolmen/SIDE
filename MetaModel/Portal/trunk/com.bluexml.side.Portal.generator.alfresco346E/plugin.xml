@@ -28,7 +28,7 @@
             <configurationParameter dataType="String" defaultValue="1.0" key="com.bluexml.side.Portal.generator.alfresco.module.version" label="Portal module version" />
             <option defaultOption="true" documentation="this must be hidden" hidden="true" key="generator.main" label="main generation" />
             <option defaultOption="false" documentation="add a dashlet to let user choose the UI language, this is persited in user profile" hidden="false" key="portal.dashlet.language.picker" label="language picker dashlet">
-              <moduleDependence label="languagePicker" moduleId="com.bluexml.side.Framework.share.languagePicker346E" moduleType="zip" technologyVersion="alfresco_3.4.6E" versionMax="1.0.5" versionMin="1.0.5" />
+              <moduleDependence label="languagePicker" moduleId="com.bluexml.side.Framework.share.languagePicker346E" moduleType="zip" technologyVersion="alfresco_3.4.6E" versionMax="1.0.6" versionMin="1.0.6" />
             </option>
             <option defaultOption="false" documentation="module that use DataList to save search see portal model documentation" hidden="false" key="portal.save.search" label="save search">
               <moduleDependence label="saved search extension" moduleId="com.bluexml.side.Framework.share.savedSearch346E" moduleType="zip" technologyVersion="alfresco_3.4.6E" versionMax="1.0.7" versionMin="1.0.7" />
