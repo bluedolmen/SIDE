@@ -43,6 +43,8 @@ public class PortalGenerator346e extends PortalGenerator {
 		mainTemplates.add(template346e + "html-upload.get_de.properties.mt");		
 		mainTemplates.add(template346e + "html-upload.get_es.properties.mt");
 		mainTemplates.add(template346e + "html-upload.get_it.properties.mt");
+		
+		mainTemplates.add(template346e + "searchResultView.mt");
 
 		return mainTemplates;
 	}

@@ -14,6 +14,8 @@ public class AlfrescoGenerator346e extends AlfrescoGenerator {
 	protected final static String i18nFileExt = ".properties.mt";
 	protected final static String templateBase346e = "/com.bluexml.side.Class.generator.alfresco346E/com/bluexml/side/clazz/generator/alfresco346e/templates/";
 	protected final static String doclist = "alfrescoshare/doclist/";
+	
+	protected final static String search = "alfrescoshare/search/";
 
 	@Override
 	public String getComponentKey() {
@@ -45,6 +47,15 @@ public class AlfrescoGenerator346e extends AlfrescoGenerator {
 		templates.add(templateBase346e + "/Model/single-child-associations.properties.mt");
 		templates.add(templateBase346e + "/Model/properties_synchronization.mt");
 
+		
+		
+		templates.add(templateBase346e + search + "search.get_de" + i18nFileExt); //$NON-NLS-1$
+		templates.add(templateBase346e + search + "search.get_en" + i18nFileExt); //$NON-NLS-1$
+		templates.add(templateBase346e + search + "search.get_es" + i18nFileExt); //$NON-NLS-1$
+		templates.add(templateBase346e + search + "search.get_fr" + i18nFileExt); //$NON-NLS-1$
+		templates.add(templateBase346e + search + "search.get_it" + i18nFileExt); //$NON-NLS-1$
+		templates.add(templateBase346e + search + "search.get_ja" + i18nFileExt); //$NON-NLS-1$
+		
 		return templates;
 	}
 
