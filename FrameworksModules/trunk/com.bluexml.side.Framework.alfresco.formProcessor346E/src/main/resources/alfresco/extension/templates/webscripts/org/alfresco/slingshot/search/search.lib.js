@@ -113,7 +113,8 @@ function getRepositoryItem(folderPath, node) {
             modifiedByUser : node.properties["cm:modifier"],
             createdOn : node.properties["cm:created"],
             createdByUser : node.properties["cm:creator"],
-            path : folderPath.join("/")
+            path : folderPath.join("/"),
+            node : node
          };
          item.modifiedBy = getPersonDisplayName(item.modifiedByUser);
          item.createdBy = getPersonDisplayName(item.createdByUser);
@@ -161,7 +162,8 @@ function getDocumentItem(siteId, containerId, pathParts, node) {
             modifiedByUser : node.properties["cm:modifier"],
             createdOn : node.properties["cm:created"],
             createdByUser : node.properties["cm:creator"],
-            path : pathParts.join("/")
+            path : pathParts.join("/"),
+            node : node
          };
          item.modifiedBy = getPersonDisplayName(item.modifiedByUser);
          item.createdBy = getPersonDisplayName(item.createdByUser);
