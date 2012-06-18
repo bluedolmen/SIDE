@@ -132,7 +132,9 @@ wfbx<%ref.eContainer().filter("workflow.Process").name%>:<%ref.filter("workflow.
 
 <%script type="FormContainer" name="getDefaultWorkflowAppearanceStart"%>
 <set id="general" label-id="form.set.label.<%getPrefixedQualifiedName()%>.general" />
-<field id="bpm:workflowPriority" set="general" />
+<field id="bpm:workflowPriority" set="general">
+	<control template="/org/alfresco/components/form/controls/workflow/priority.ftl" />
+</field>
 <field id="bpm:workflowDescription" set="general" />
 <field id="bpm:workflowDueDate" set="general" />
 <field id="packageItems" set="general" />
