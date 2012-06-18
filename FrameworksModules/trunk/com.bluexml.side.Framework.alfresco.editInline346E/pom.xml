@@ -28,6 +28,18 @@
 		AMP module version. Instead we use the buildnumber-maven-plugin. This requires 
 		a scm connection. -->
   <description>this is a new Amp project generated using	"com.bluexml.side.Integration.m2.ampArchetype" thanks to change this description</description>
+  <repositories>
+    <repository>
+      <id>ss-public</id>
+      <url>http://pipin.bluexml.com/nexus/service/local/repo_groups/public/content/</url>
+    </repository>
+  </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>ss-public</id>
+      <url>http://pipin.bluexml.com/nexus/service/local/repo_groups/public/content/</url>
+    </pluginRepository>
+  </pluginRepositories>
   <properties>
     <!-- Default for which src/main/properties/<env>/application.properties 
 			is loaded. NB: used only for the 'test' profile (e.g. '-P test' on the mvn 
