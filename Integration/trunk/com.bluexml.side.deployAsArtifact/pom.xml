@@ -4,7 +4,7 @@
   <groupId>com.bluexml.side</groupId>
   <artifactId>deployAsArtifact</artifactId>
   <name>deployerAsArtifact</name>
-  <version>0.0.3</version>
+  <version>0.0.4</version>
   <description>use this project to deploy jar to SIDE maven third party repository
 copy jars files into "jarToDeploy" execute main java method, execute the bash file.</description>
   <build>
