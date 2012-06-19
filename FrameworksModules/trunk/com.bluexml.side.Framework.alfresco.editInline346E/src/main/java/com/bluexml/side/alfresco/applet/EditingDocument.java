@@ -10,36 +10,38 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.SocketPermission;
+
 import java.net.URL;
 import java.net.URLConnection;
 
-import netscape.javascript.JSException;
-import netscape.javascript.JSObject;
+import com.bluexml.side.alfresco.applet.Exec;
 
 
 public class EditingDocument extends Applet {
 
 	private static final long serialVersionUID = 1L;
 	String text = "debug: ";
+	String textInfo = "Veuillez fermer la fenêtre à la fin de votre édition ou consultation.";
 	File myFile = null;
 	URL url = null;
 	Exec monAppli = null;
 	String fileName = null;
 	long lastModified = 0;
-	private JSObject jso;
 
 	public void init() {
 		try {
-			try {
-				jso = JSObject.getWindow(this);
-			} catch (JSException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			
+			String webdav = getParameter("webdavUrl");
+			String [] webdavSplited = webdav.split("\\/");
+			String [] doc = webdavSplited[webdavSplited.length - 1].split("\\?ticket=");
+			doc[0] = doc[0].replaceAll(" ", "%20");
+			webdav = "";
+			for (int i = 0; i < webdavSplited.length - 1; i++) {
+				webdav += webdavSplited[i] + "/";
 			}
-			url = new URL(getParameter("webdavUrl"));
+			webdav += doc[0] + "?ticket=" + getParameter("ticket");
+			url = new URL(webdav);
 			URLConnection uc = url.openConnection();
-			fileName = getFileName(getParameter("webdavUrl"));
 			uc.setUseCaches(false);
 			uc.setDoInput(true);
 			uc.setDoOutput(true);
@@ -47,7 +49,7 @@ public class EditingDocument extends Applet {
 			uc.connect();
 
 			InputStream input = uc.getInputStream();
-			myFile = new File("C:/Documents and Settings/Default User/Local Settings/Temp/tmp.doc");
+			myFile = new File("C:/Temp/tmp.doc");
 			FileOutputStream fos = new FileOutputStream(myFile);
 			byte[] buffer = new byte[1024];
 			int count = 0;
@@ -57,8 +59,11 @@ public class EditingDocument extends Applet {
 			input.close();
 			fos.close();
 
-			Thread.sleep(10000);
-			String[] command = { "cmd", "/c", "copy /y C:\\Users\\Public\\tmp.doc" + " " + "C:\\Users\\Public\\" + fileName };
+			Thread.sleep(5000);
+			fileName = getFileName(getParameter("webdavUrl"));
+			fileName = fileName.replaceAll(" ", "_");
+			//text += " " + fileName;
+			String[] command = { "cmd", "/c", "copy /y C:\\Temp\\tmp.doc" + " " + "C:\\Temp\\" + fileName };
 			ProcessBuilder copyFiles = new ProcessBuilder(command);
 			copyFiles.redirectErrorStream(true);
 			Process p = copyFiles.start();
@@ -78,7 +83,7 @@ public class EditingDocument extends Applet {
 			//		+ "C:\\Users\\Public\\tmp.doc" + " " + "C:\\Users\\Public\\" + fileName);
 			//Thread.sleep(5000);
 			myFile.delete();
-			myFile = new File("C:/Users/Public/" + fileName);
+			myFile = new File("C:/Temp/" + fileName);
 			if (!getParameter("mode").equals("write")) {
 				myFile.setReadOnly();
 			}
@@ -89,7 +94,16 @@ public class EditingDocument extends Applet {
 				monAppli = new Exec("excel.exe", fileName);
 				monAppli.start();
 			} else if (getParameter("mime").equals("application/msword")) {
-				monAppli = new Exec("winword.exe", fileName);
+				monAppli = new Exec("swriter.exe", fileName);
+				monAppli.start();
+			} else if (getParameter("mime").equals("application/vnd.oasis.opendocument.spreadsheet")) {
+				monAppli = new Exec("scalc.exe", fileName);
+				monAppli.start();
+			} else if (getParameter("mime").equals("application/vnd.oasis.opendocument.text")) {
+				monAppli = new Exec("swriter.exe", fileName);
+				monAppli.start();
+			} else if (getParameter("mime").equals("application/vnd.oasis.opendocument.presentation")) {
+				monAppli = new Exec("simpress.exe", fileName);
 				monAppli.start();
 			}
 			Thread.sleep(1000);
@@ -100,6 +114,7 @@ public class EditingDocument extends Applet {
 
 	public void start() {
 		lastModified = myFile.lastModified();
+		//paint();
 		while (true) {
 			try {
 				Thread.sleep(1000);
@@ -109,15 +124,6 @@ public class EditingDocument extends Applet {
 			if (lastModified < myFile.lastModified()) {
 				lastModified = myFile.lastModified();
 				save();
-			}
-			if (!monAppli.isAlive()) {
-				myFile.setWritable(true);
-				try {
-					jso.call("Close", new String[1]);
-				} catch (Exception e) {
-					text += e.getMessage();
-					repaint();
-				}
 			}
 		}
 	}
@@ -180,10 +186,11 @@ public class EditingDocument extends Applet {
 	}
 
 	public void paint(Graphics g) {
-		//update(g);
+		update(g);
 	}
 
 	public void update(Graphics g) {
-		 g.drawString(text, 5, 50);
+		 //g.drawString(text, 100, 100);
+		 g.drawString(textInfo, 100, 100);
 	}
 }

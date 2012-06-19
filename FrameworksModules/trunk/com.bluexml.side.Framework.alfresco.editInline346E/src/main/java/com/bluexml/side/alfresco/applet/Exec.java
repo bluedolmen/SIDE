@@ -9,7 +9,7 @@ public class Exec extends Thread {
 	}
 	public void run() {
 		try {
-			Process p = new ProcessBuilder(monAppli, "C:\\Users\\Public\\" + monFile).start();
+			Process p = new ProcessBuilder(monAppli, "C:\\Temp\\" + monFile).start();
 			p.waitFor();
 		} catch (Exception e) {
 			e.printStackTrace();
