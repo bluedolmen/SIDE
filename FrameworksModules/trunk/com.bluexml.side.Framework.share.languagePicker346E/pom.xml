@@ -67,6 +67,13 @@
       <artifactId>commons-lang</artifactId>
       <version>2.1</version>
     </dependency>
+    <dependency>
+    	<groupId>com.bluexml.side.Framework.alfresco</groupId>
+    	<artifactId>sharePortalExtension346E</artifactId>
+    	<version>1.0.1</version>
+    	<type>zip</type>
+    	<scope>provided</scope>
+    </dependency>
   </dependencies>
   <description>project description</description>
   <build>
