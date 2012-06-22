@@ -89,10 +89,10 @@ public class EditingDocument extends Applet {
 			if (!getParameter("mode").equals("write")) {
 				myFile.setReadOnly();
 			}
-			if (getParameter("mime").equals("application/vnd.ms-powerpoint")) {
+			if (getParameter("mime").equals("application/vnd.ms-powerpoint") || getParameter("mime").equals("application/vnd.ms.powerpoint")) {
 				monAppli = new Exec("powerpnt.exe", fileName);
 				monAppli.start();
-			} else if (getParameter("mime").equals("application/vnd.ms-excel")) {
+			} else if (getParameter("mime").equals("application/vnd.ms.excel") || getParameter("mime").equals("application/vnd.ms-excel")) {
 				monAppli = new Exec("excel.exe", fileName);
 				monAppli.start();
 			} else if (getParameter("mime").equals("application/msword")) {
