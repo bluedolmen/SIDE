@@ -9,7 +9,9 @@ public class Exec extends Thread {
 	}
 	public void run() {
 		try {
-			Process p = new ProcessBuilder(monAppli, "C:\\Temp\\" + monFile).start();
+			String tmpdir = System.getProperty("java.io.tmpdir");
+			tmpdir = tmpdir.replaceAll("/", "\\\\");
+			Process p = new ProcessBuilder(monAppli, tmpdir + monFile).start();
 			p.waitFor();
 		} catch (Exception e) {
 			e.printStackTrace();

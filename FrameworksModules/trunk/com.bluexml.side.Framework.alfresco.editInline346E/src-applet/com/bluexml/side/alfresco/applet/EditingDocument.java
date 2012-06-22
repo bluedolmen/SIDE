@@ -31,6 +31,7 @@ public class EditingDocument extends Applet {
 	public void init() {
 		try {
 			
+			String tmpdir = System.getProperty("java.io.tmpdir");
 			String webdav = getParameter("webdavUrl");
 			String [] webdavSplited = webdav.split("\\/");
 			String [] doc = webdavSplited[webdavSplited.length - 1].split("\\?ticket=");
@@ -49,7 +50,7 @@ public class EditingDocument extends Applet {
 			uc.connect();
 
 			InputStream input = uc.getInputStream();
-			myFile = new File("C:/Temp/tmp.doc");
+			myFile = new File(tmpdir + "tmp.doc");
 			FileOutputStream fos = new FileOutputStream(myFile);
 			byte[] buffer = new byte[1024];
 			int count = 0;
@@ -60,10 +61,11 @@ public class EditingDocument extends Applet {
 			fos.close();
 
 			Thread.sleep(5000);
+			tmpdir = tmpdir.replaceAll("/", "\\\\");
 			fileName = getFileName(getParameter("webdavUrl"));
 			fileName = fileName.replaceAll(" ", "_");
 			//text += " " + fileName;
-			String[] command = { "cmd", "/c", "copy /y C:\\Temp\\tmp.doc" + " " + "C:\\Temp\\" + fileName };
+			String[] command = { "cmd", "/c", "copy /y " + tmpdir + "tmp.doc" + " " + tmpdir + fileName };
 			ProcessBuilder copyFiles = new ProcessBuilder(command);
 			copyFiles.redirectErrorStream(true);
 			Process p = copyFiles.start();
