@@ -8,7 +8,7 @@
 	<body>
 		<applet id="editDoc" name="editDoc" codebase="${url.context}/WEB-INF/lib" code="com.bluexml.side.alfresco.applet.EditingDocument.class"
 			height="80px" width="300px"
-			archive="editInline346E-1.0.2.jar" mayscript="true">
+			archive="editContentInline-${project.version}.jar" mayscript="true">
 			<param name="ticket" value="${ticket}" />
 			<param name="webdavUrl" value="${webdavUrl}" />
 			<param name="mode" value="${args.mode}" />

@@ -111,11 +111,6 @@
       <scope>provided</scope>
     </dependency>
     <!-- Don't add here amp dependencies as it will break amp packaging -->
-    <dependency>
-      <groupId>netscape</groupId>
-      <artifactId>javascript</artifactId>
-      <version>1.0</version>
-    </dependency>
   </dependencies>
   <!-- The scm is required for the buildnumber-maven-plugin which is required 
 		for AMP version numbering -->
@@ -166,25 +161,25 @@
           <overlays />
         </configuration>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jarsigner-plugin</artifactId>
-        <version>1.2</version>
-        <executions>
-          <execution>
-            <id>sign</id>
-            <goals>
-              <goal>sign</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <keystore>${basedir}/keystore/.keystore</keystore>
-          <alias>bxAlfrescoInlineEdit</alias>
-          <storepass>secret</storepass>
-          <keypass>secret</keypass>
-        </configuration>
-      </plugin>
+<!--       <plugin> -->
+<!--         <groupId>org.apache.maven.plugins</groupId> -->
+<!--         <artifactId>maven-jarsigner-plugin</artifactId> -->
+<!--         <version>1.2</version> -->
+<!--         <executions> -->
+<!--           <execution> -->
+<!--             <id>sign</id> -->
+<!--             <goals> -->
+<!--               <goal>sign</goal> -->
+<!--             </goals> -->
+<!--           </execution> -->
+<!--         </executions> -->
+<!--         <configuration> -->
+<!--           <keystore>${basedir}/keystore/.keystore</keystore> -->
+<!--           <alias>bxAlfrescoInlineEdit</alias> -->
+<!--           <storepass>secret</storepass> -->
+<!--           <keypass>secret</keypass> -->
+<!--         </configuration> -->
+<!--       </plugin> -->
     </plugins>
     <!-- Copies and filters resources in build folder so maven-amp-plugin can 
 			pick them up -->
