@@ -52,17 +52,16 @@
 		<echo message="build applet jar and copy in Alfresco extension Module Project as applet..." />
 
 		<delete failonerror="false" verbose="true" dir="${applet.bin}" />
-		<delete failonerror="false" verbose="true" dir="${applet.jar.home}" />
+		<delete failonerror="false" verbose="true" file="${applet.jar}" />
 		<mkdir dir="${applet.bin}" />
 		<javac srcdir="${applet.src}" destdir="${applet.bin}" />
-		<mkdir dir="${applet.jar.home}" />
-		<jar destfile="${applet.jar.home}/${applet.jar}" basedir="${applet.bin}">
+		<jar destfile="${applet.jar}" basedir="${applet.bin}">
 			<manifest>
 				<attribute name="Main-Class" value="com.bluexml.side.alfresco.applet.EditingDocument" />
 			</manifest>
 		</jar>
 		<echo message="Sign produced applet jar..." />
-		<signjar jar="${applet.jar.home}/${applet.jar}" storepass="secret" keypass="secret" keystore="${basedir}/keystore/.keystore" alias="bxAlfrescoInlineEdit" />
+		<signjar jar="${applet.jar}" storepass="secret" keypass="secret" keystore="${basedir}/keystore/.keystore" alias="bxAlfrescoInlineEdit" />
 		<echo message="=================" />
 	</target>
 
