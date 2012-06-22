@@ -3,5 +3,5 @@ var webdavUrl =args.webdavurl;
 
 
 webdavUrl += '?ticket=' + ticket;
-model.webdavUrl = url.getServer() + ":8080/alfresco" + webdavUrl;
+model.webdavUrl = url.getServer() + "/alfresco" + webdavUrl;
 model.ticket = ticket;

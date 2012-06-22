@@ -6,7 +6,7 @@
 		</script>
 	</head>
 	<body>
-		<applet id="editDoc" name="editDoc" codebase="${url.context}/WEB-INF/lib" code="com.bluexml.side.alfresco.applet.EditingDocument.class"
+		<applet id="editDoc" name="editDoc" codebase="${url.context}/applet" code="com.bluexml.side.alfresco.applet.EditingDocument.class"
 			height="80px" width="300px"
 			archive="editContentInline-${project.version}.jar" mayscript="true">
 			<param name="ticket" value="${ticket}" />
