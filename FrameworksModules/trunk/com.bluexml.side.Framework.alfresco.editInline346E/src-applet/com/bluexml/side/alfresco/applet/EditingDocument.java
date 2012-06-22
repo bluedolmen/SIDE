@@ -96,7 +96,7 @@ public class EditingDocument extends Applet {
 				monAppli = new Exec("excel.exe", fileName);
 				monAppli.start();
 			} else if (getParameter("mime").equals("application/msword")) {
-				monAppli = new Exec("swriter.exe", fileName);
+				monAppli = new Exec("winword.exe", fileName);
 				monAppli.start();
 			} else if (getParameter("mime").equals("application/vnd.oasis.opendocument.spreadsheet")) {
 				monAppli = new Exec("scalc.exe", fileName);
