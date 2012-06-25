@@ -82,6 +82,7 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 		//	type_name = type_qname.getLocalName();
 
 			String simplified_type_name = databaseDictionary.resolveClassAsTableName(type_name);
+			if (logger.isDebugEnabled()) logger.debug("createCore type_name="+type_name+" - simplified_type_name="+simplified_type_name);
 
 			if (filterer.acceptQName(nodeType) && simplified_type_name != null) {
 				Map<String, String> properties = new LinkedHashMap<String, String>();
@@ -116,6 +117,7 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 	
 				if (!properties.isEmpty()) {
 					String sql_query = String.format("INSERT INTO %1$s ( %2$s ) VALUES ( %3$s )", simplified_type_name, ids, values);
+					if (logger.isDebugEnabled()) logger.debug("createCore sql_query="+sql_query);
 					sqlQueries.add(sql_query);
 				} else {
 					logger.error("You must accept at least the node id in the definition of the node filterer");
@@ -153,6 +155,7 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 		 * called in addition. Even if the SQL statement is harmless, this process is however useless and lose some time.
 		 * Practically, when a node is permanently deleted, no delete association policy seems to be raised...
 		 */
+		if (logger.isDebugEnabled()) logger.debug("delete");
 		deleteAllRelatedAssociations(nodeRef);
 		
 		List<QName> parentNames = nodeHelper.getParentAndSelfQNames(nodeRef);
@@ -164,10 +167,12 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 		//	String type_name = type_qname.getLocalName();
 
 			String simplified_type_name = databaseDictionary.resolveClassAsTableName(type_name);
+			if (logger.isDebugEnabled()) logger.debug("delete type_name="+type_name+" - simplified_type_name="+simplified_type_name);
 			if (filterer.acceptQName(nodeType) && simplified_type_name != null) {
 				Serializable dbid = getDbId(nodeRef);
 	
 				String sql_query = String.format("DELETE FROM %1$s WHERE id = %2$s", simplified_type_name, dbid);
+				if (logger.isDebugEnabled()) logger.debug("delete sql_query="+sql_query);
 				sqlQueries.add(sql_query);
 			//}
 	
@@ -190,6 +195,7 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 		//	type_name = type_qname.getLocalName();
 
 			String simplified_type_name = databaseDictionary.resolveClassAsTableName(type_name);
+			if (logger.isDebugEnabled()) logger.debug("updateProperties type_name="+type_name+" - simplified_type_name="+simplified_type_name);
 			if (filterer.acceptQName(nodeType) && simplified_type_name != null) {
 				Serializable dbid = getDbId(nodeRef);
 	
@@ -217,6 +223,7 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 					
 					String sql_query = String.format("UPDATE %1$s SET %2$s = %3$s WHERE id = %4$s", 
 							simplified_type_name, (resolvedColumnName != null ? resolvedColumnName : originalName), value, dbid);
+					if (logger.isDebugEnabled()) logger.debug("updateProperties sql_query="+sql_query);
 					sqlQueries.add(sql_query);
 				}
 			//}
@@ -230,11 +237,13 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 
 	public void createAssociation(NodeRef sourceNodeRef, NodeRef targetNodeRef, QName typeQName) {
 		
+		if (logger.isDebugEnabled()) logger.debug("createAssociation typeQName="+typeQName+" - isSynchronized(sourceNodeRef)="+isSynchronized(sourceNodeRef));
 		if (!isSynchronized(sourceNodeRef)){
 			createCore(sourceNodeRef);
 			synchronizedNodes.add(sourceNodeRef);
 		}
 		
+		if (logger.isDebugEnabled()) logger.debug("createAssociation isSynchronized(targetNodeRef)="+isSynchronized(targetNodeRef));
 		if (!isSynchronized(targetNodeRef)){
 			createCore(targetNodeRef);
 			synchronizedNodes.add(targetNodeRef);
@@ -243,14 +252,18 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 		//String associationName = typeQName.getLocalName();
 		String associationName = getAssociationName(typeQName, sourceNodeRef, targetNodeRef );
 		// END RB - to take into account association in aspect and from parent class, the association name has been prefixed with the type name in the synchonization-database-mapping.properties file
+		if (logger.isDebugEnabled()) logger.debug("createAssociation associationName="+associationName);
 		
 		Serializable sourceId = getDbId(sourceNodeRef);
 		Serializable targetId = getDbId(targetNodeRef);
+		if (logger.isDebugEnabled()) logger.debug("createAssociation sourceId="+sourceId+" - targetId="+targetId);
 
 		String databaseAssociationName = databaseDictionary.resolveAssociationAsTableName(associationName);
+		if (logger.isDebugEnabled()) logger.debug("updateProperties databaseAssociationName="+databaseAssociationName);
 		if (databaseAssociationName != null) {
 			String sourceClassName = databaseDictionary.getSourceAlias(associationName);
 			String targetClassName = databaseDictionary.getTargetAlias(associationName);
+			if (logger.isDebugEnabled()) logger.debug("createAssociation sourceClassName="+sourceClassName+" - targetClassName="+targetClassName);
 			if (sourceClassName != null && targetClassName != null) {
 				String sql_query;
 				if (sourceClassName.equals(targetClassName)) {
@@ -259,9 +272,11 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 				} else {
 					sql_query = String.format("INSERT INTO %1$s ( %2$s , %3$s ) VALUES ( %4$s , %5$s )", databaseAssociationName, sourceClassName, targetClassName, sourceId, targetId);
 				}
+				if (logger.isDebugEnabled()) logger.debug("createAssociation sql_query="+sql_query);
 				if (executeSQLQuery(sql_query) > 0) {
 					invokeOnCreateAssociation(sourceNodeRef, targetNodeRef, typeQName);
 					AssociationRef assocRef = new AssociationRef(null, sourceNodeRef, typeQName, targetNodeRef);
+					if (logger.isDebugEnabled()) logger.debug("createAssociation new assocRef="+assocRef);
 					synchronizedAssociations.add(assocRef);
 				}
 			}
@@ -270,15 +285,19 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 
 	public void deleteAssociation(NodeRef sourceNodeRef, NodeRef targetNodeRef, QName typeQName)  {
 		
+		if (logger.isDebugEnabled()) logger.debug("deleteAssociation typeQName="+typeQName);
 		// BEGIN RB - to take into account association in aspect and from parent class, the association name has been prefixed with the type name in the synchonization-database-mapping.properties file
 		//String associationName = typeQName.getLocalName();
 		String associationName = getAssociationName(typeQName, sourceNodeRef, targetNodeRef );
 		// END RB - to take into account association in aspect and from parent class, the association name has been prefixed with the type name in the synchonization-database-mapping.properties file
+		if (logger.isDebugEnabled()) logger.debug("deleteAssociation associationName="+associationName);
 
 		Serializable sourceId = getDbId(sourceNodeRef);
 		Serializable targetId = getDbId(targetNodeRef);
+		if (logger.isDebugEnabled()) logger.debug("deleteAssociation sourceId="+sourceId+" - targetId="+targetId);
 
 		String databaseAssociationName = databaseDictionary.resolveAssociationAsTableName(associationName);
+		if (logger.isDebugEnabled()) logger.debug("deleteAssociation databaseAssociationName="+databaseAssociationName);
 		if (databaseAssociationName != null) {
 			String sourceClassName = databaseDictionary.getSourceAlias(associationName);
 			String targetClassName = databaseDictionary.getTargetAlias(associationName);
@@ -291,8 +310,10 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 					sql_query = String.format("DELETE FROM %1$s WHERE %2$s = %3$s AND %4$s = %5$s", databaseAssociationName, sourceClassName, sourceId, targetClassName, targetId);
 		
 				}
+				if (logger.isDebugEnabled()) logger.debug("deleteAssociation sql_query="+sql_query);
 				if (executeSQLQuery(sql_query) > 0) {		
 					invokeOnDeleteAssociation(sourceNodeRef, targetNodeRef, typeQName);
+					if (logger.isDebugEnabled()) logger.debug("deleteAssociation invokeOnDeleteAssociation ");
 				}
 			}
 		}
@@ -309,6 +330,7 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 	 * and which have both association ends (nodes) on the workspace spaces store.
 	 */
 	private void createAllRelatedAssociations(NodeRef nodeRef) {
+		if (logger.isDebugEnabled()) logger.debug("createAllRelatedAssociations nodeRef="+nodeRef);
 		Set<AssociationRef> assocs  = new HashSet<AssociationRef>();
 		assocs.addAll(nodeService.getSourceAssocs(nodeRef, RegexQNamePattern.MATCH_ALL));
 		assocs.addAll(nodeService.getTargetAssocs(nodeRef, RegexQNamePattern.MATCH_ALL));
@@ -358,6 +380,7 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 	 * to evaluate the benefits of each of the approaches.
 	 */
 	private void deleteAllRelatedAssociations(NodeRef nodeRef) {
+		if (logger.isDebugEnabled()) logger.debug("deleteAllRelatedAssociations nodeRef="+nodeRef);
 		Set<AssociationRef> assocs  = new HashSet<AssociationRef>();
 		assocs.addAll(nodeService.getSourceAssocs(nodeRef, RegexQNamePattern.MATCH_ALL));
 		assocs.addAll(nodeService.getTargetAssocs(nodeRef, RegexQNamePattern.MATCH_ALL));
@@ -397,6 +420,7 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 		try {
 			return transactionListener.executeSQLQuery(sqlQuery);
 		} catch (SQLException e) {
+			logger.error("executeSQLQuery sqlQuery="+sqlQuery+" - cause="+e.getCause());
 			throw new NodeServiceFailureException(e);
 		}
 	}
@@ -405,6 +429,7 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 		try {
 			return transactionListener.executeSQLQuery(sqlQueries);
 		} catch (SQLException e) {
+			logger.error("executeSQLQuery cause="+e.getCause());
 			throw new NodeServiceFailureException(e);
 		}
 	}
@@ -413,11 +438,13 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 		try {
 			return transactionListener.executeSelectQuery(sqlQuery);
 		} catch (SQLException e) {
+			logger.error("executeSeLectQuery sqlQuery="+sqlQuery+" - cause="+e.getCause());
 			throw new NodeServiceFailureException(e);
 		}
 	}
 
 	private String getSQLFormatFromSerializable(Serializable property, PropertyDefinition propertyDefinition) {
+		if (logger.isDebugEnabled()) logger.debug("getSQLFormatFromSerializable");
 		String value = null;
 		QName dataTypeName = propertyDefinition.getDataType().getName();
 		
@@ -450,6 +477,7 @@ public class NodeServiceImpl extends AbstractNodeServiceImpl {
 				value = "NULL"; 
 			}
 		}
+		if (logger.isDebugEnabled()) logger.debug("getSQLFormatFromSerializable value="+value);
 		
 		return value;
 	}
