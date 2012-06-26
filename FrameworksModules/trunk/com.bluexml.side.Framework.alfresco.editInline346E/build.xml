@@ -1,4 +1,4 @@
-<project xmlns:artifact="antlib:org.apache.maven.artifact.ant" name="com.bluexml.britair.dinamex.applet.editContentInline" default="patchWebapps">
+<project xmlns:artifact="antlib:org.apache.maven.artifact.ant" name="com.bluexml.side.Framework.alfresco.editInline346E" default="patchWebapps">
 	<property file="${user.home}/build.properties" />
 	
 	<property name="webapps.home" value="${tomcat.home}/webapps" />
