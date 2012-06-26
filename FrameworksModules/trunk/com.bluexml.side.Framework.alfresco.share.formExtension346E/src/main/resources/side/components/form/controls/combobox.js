@@ -162,8 +162,10 @@ if (!Array.prototype.indexOf) {
                disabled : true,
                field : this.options.field,
                compactMode : true,
-               currentValue : this.initialValue
+               currentValue : this.initialValue,
+               itemType: this.options.itemType
             }).setMessages(this.messages);
+            
          } else if (this.options.multipleSelectMode) {
             // cardinality n-n
             var multiselect = new SIDE.MyDSMultiSelectField({
