@@ -79,7 +79,6 @@
     	<artifactId>languagePicker346E</artifactId>
     	<version>1.0.0</version>
     	<type>amp</type>
-    	<scope>provided</scope>
     </dependency>
   </dependencies>
   <description>project description</description>
