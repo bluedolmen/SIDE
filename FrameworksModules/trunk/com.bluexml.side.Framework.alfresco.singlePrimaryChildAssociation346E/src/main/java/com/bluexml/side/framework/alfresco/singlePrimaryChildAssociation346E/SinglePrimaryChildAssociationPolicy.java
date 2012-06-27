@@ -9,7 +9,6 @@ import org.alfresco.repo.policy.Behaviour.NotificationFrequency;
 import org.alfresco.repo.policy.JavaBehaviour;
 import org.alfresco.repo.policy.PolicyComponent;
 import org.alfresco.service.ServiceRegistry;
-import org.alfresco.service.cmr.model.FileInfo;
 import org.alfresco.service.cmr.repository.ChildAssociationRef;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.NodeService;
@@ -92,7 +91,7 @@ public class SinglePrimaryChildAssociationPolicy implements OnCreateChildAssocia
 					// need to move the primary association and remove the current childAssociation
 					// to avoid constraints error (two same association between parent -> child) wee need to remove the current childAssociation before to move
 					getNodeService().removeChildAssociation(childAssocRef);
-					FileInfo moveFrom = getServiceRegistry().getFileFolderService().moveFrom(childRef, primaryParentRef, parentRef, null);
+					getServiceRegistry().getFileFolderService().moveFrom(childRef, primaryParentRef, parentRef, null);
 
 					if (logger.isDebugEnabled()) {
 						// get information to check the new parent
