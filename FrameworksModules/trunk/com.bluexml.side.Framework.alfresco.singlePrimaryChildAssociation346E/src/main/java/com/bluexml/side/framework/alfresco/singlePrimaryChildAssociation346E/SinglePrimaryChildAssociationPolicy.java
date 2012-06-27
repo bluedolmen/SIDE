@@ -1,5 +1,7 @@
 package com.bluexml.side.framework.alfresco.singlePrimaryChildAssociation346E;
 
+import java.io.Serializable;
+
 import org.alfresco.model.ContentModel;
 import org.alfresco.repo.node.NodeServicePolicies.OnCreateChildAssociationPolicy;
 import org.alfresco.repo.policy.Behaviour;
@@ -56,8 +58,6 @@ public class SinglePrimaryChildAssociationPolicy implements OnCreateChildAssocia
 			QName typeC = getNodeService().getType(childRef);
 			QName typeP = getNodeService().getType(parentRef);
 			logger.debug("\tisNewNode :" + isNewNode);
-			logger.debug("\tchildRef :" + childRef);
-			logger.debug("\tparentRef :" + parentRef);
 			logger.debug("\ttypeC :" + typeC);
 			logger.debug("\ttypeP" + typeP);
 			boolean hasValue = false;
@@ -78,25 +78,33 @@ public class SinglePrimaryChildAssociationPolicy implements OnCreateChildAssocia
 				if (!childAssocRef.isPrimary()) {
 					if (logger.isDebugEnabled()) {
 						logger.debug("Policy move primary to the new child-association ...");
+						logger.debug("\tchildRef   :" + childRef);
+						logger.debug("\tchildName  :" + getNodeName(childRef));
+						logger.debug("\tparentRef  :" + parentRef);
+						logger.debug("\tparentName :" + getNodeName(parentRef));
 					}
 					ChildAssociationRef primaryParent = getNodeService().getPrimaryParent(childRef);
-					logger.debug("OLD primary Parent :" + primaryParent.getParentRef());
-					// to avoid constraints error (two same association between parent -> child) wee need to remove the current childAssociation before to move
-					FileInfo fileInfo = getServiceRegistry().getFileFolderService().getFileInfo(childRef);
-					boolean linkB = fileInfo.isLink();
-					logger.debug("new ref isLink ? " + linkB);
+					NodeRef primaryParentRef = primaryParent.getParentRef();
+					logger.debug("OLD primary Parent ref  :" + primaryParentRef);
+					logger.debug("OLD primary Parent Name :" + getNodeName(primaryParentRef));
 
-					getNodeService().removeChildAssociation(childAssocRef);
-					FileInfo moveFrom = getServiceRegistry().getFileFolderService().moveFrom(childRef, primaryParent.getParentRef(), parentRef, null);
-					boolean linkA = moveFrom.isLink();
-					logger.debug("new ref isLink ? " + linkA);
+
 					// need to move the primary association and remove the current childAssociation
-					ChildAssociationRef newPrimaryParent = getNodeService().getPrimaryParent(childRef);
-					logger.debug("NEW primary Parent :" + newPrimaryParent.getParentRef());
-					//					getNodeService().moveNode(childRef, parentRef, ContentModel.ASSOC_CONTAINS, primaryParent.getQName());
-					if (primaryParent.getParentRef().toString().equals(newPrimaryParent.getParentRef())) {
-						// primary parent not changed
-						logger.error("Very Bad the node is in the temp folder, move do nothing ...");
+					// to avoid constraints error (two same association between parent -> child) wee need to remove the current childAssociation before to move
+					getNodeService().removeChildAssociation(childAssocRef);
+					FileInfo moveFrom = getServiceRegistry().getFileFolderService().moveFrom(childRef, primaryParentRef, parentRef, null);
+
+					if (logger.isDebugEnabled()) {
+						// get information to check the new parent
+						ChildAssociationRef newPrimaryParent = getNodeService().getPrimaryParent(childRef);
+						NodeRef newPrimaryParentRef = newPrimaryParent.getParentRef();
+						logger.debug("NEW primary Parent ref :" + newPrimaryParentRef);
+						logger.debug("NEW primary Parent name:" + getNodeName(newPrimaryParentRef));
+						//					getNodeService().moveNode(childRef, parentRef, ContentModel.ASSOC_CONTAINS, primaryParent.getQName());
+						if (primaryParentRef.toString().equals(newPrimaryParentRef)) {
+							// primary parent not changed
+							logger.error("Very Bad the node is in the temp folder, move do nothing ...");
+						}
 					}
 				} else {
 					logger.debug("\tnothing to do notPrimary asso");
@@ -109,6 +117,10 @@ public class SinglePrimaryChildAssociationPolicy implements OnCreateChildAssocia
 		} catch (Throwable e) {
 			logger.error(e.getMessage(), e);
 		}
+	}
+
+	protected Serializable getNodeName(NodeRef primaryParentRef) {
+		return getNodeService().getProperty(primaryParentRef, ContentModel.PROP_NAME);
 	}
 
 	/*
