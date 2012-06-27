@@ -23,7 +23,6 @@ public class MyLocalResolver implements LocaleResolver, ApplicationContextAware 
 	static {
 		logger.debug("MyLocalResolver Class Loaded");
 		logger.debug("MyLocalResolver default locale is :" + Locale.getDefault());
-		// TODO : need to patch org.springframework.extensions.webscripts.servlet.mvc.WebScriptView too
 	}
 
 	public Locale resolveLocale(HttpServletRequest request) {
