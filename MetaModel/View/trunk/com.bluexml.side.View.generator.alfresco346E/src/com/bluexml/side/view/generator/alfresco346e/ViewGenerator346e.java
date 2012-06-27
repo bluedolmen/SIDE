@@ -28,6 +28,8 @@ public class ViewGenerator346e extends ViewGenerator {
 		
 		map.put(TEMPLATE_HOME_34d + "/webscripts/alfrescoGenerator_template_js_get.mt", TEMPLATE_HOME_346E + "/webscripts/alfrescoGenerator_template_js_get.mt");
 		
+		map.put(TEMPLATE_HOME_34d + "/doclist_ftl.mt", TEMPLATE_HOME_346E + "/doclist_ftl.mt");
+		
 		templatesSubstitution.add(map);
 		return templatesSubstitution;
 	}

@@ -1,6 +1,8 @@
 package com.bluexml.side.portal.generator.alfresco346e;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -29,24 +31,36 @@ public class PortalGenerator346e extends PortalGenerator {
 
 		List<String> mainTemplates = super.getMainTemplates();
 
-		
 		mainTemplates.add(template346e + "flash-upload.get.config.xml.mt");
 		mainTemplates.add(template346e + "flash-upload.get_en.properties.mt");
 		mainTemplates.add(template346e + "flash-upload.get_fr.properties.mt");
 		mainTemplates.add(template346e + "flash-upload.get_de.properties.mt");
 		mainTemplates.add(template346e + "flash-upload.get_es.properties.mt");
 		mainTemplates.add(template346e + "flash-upload.get_it.properties.mt");
-		
+
 		mainTemplates.add(template346e + "html-upload.get.config.xml.mt");
 		mainTemplates.add(template346e + "html-upload.get_en.properties.mt");
 		mainTemplates.add(template346e + "html-upload.get_fr.properties.mt");
-		mainTemplates.add(template346e + "html-upload.get_de.properties.mt");		
+		mainTemplates.add(template346e + "html-upload.get_de.properties.mt");
 		mainTemplates.add(template346e + "html-upload.get_es.properties.mt");
 		mainTemplates.add(template346e + "html-upload.get_it.properties.mt");
-		
+
 		mainTemplates.add(template346e + "searchResultView.mt");
 
 		return mainTemplates;
+	}
+
+	@Override
+	protected List<Map<String, String>> getTemplatesSubstitution() {
+		
+		List<Map<String, String>> templatesSubstitution = super.getTemplatesSubstitution();
+		Map<String, String> map = new HashMap<String, String>();
+
+		// replace template to be compliant with alfresco community 3.4.6
+		map.put(templatesRoot34d + "customViews.ftl.mt", template346e + "customViews.ftl.mt");
+
+		templatesSubstitution.add(map);
+		return templatesSubstitution;
 	}
 
 }
