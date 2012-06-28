@@ -105,6 +105,7 @@ if (!Array.prototype.indexOf) {
 					field : this.options.field,
 					compactMode : true,
 					currentValue : this.initialValue,
+               itemType: this.options.itemType
 				});
 			} else if (this.options.multipleSelectMode) {
 				this.log("multiselect allowed");

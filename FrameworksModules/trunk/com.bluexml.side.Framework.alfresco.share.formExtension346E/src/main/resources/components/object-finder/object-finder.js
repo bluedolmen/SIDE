@@ -1420,7 +1420,10 @@
             for (var i = 0, il = items.length; i < il; i++)
             {
                item = items[i];
-               this.selectedItems[item.nodeRef] = item;
+               // SIDE we ckeck the itemType so form can define an endpoint subtype as itemType
+               if (this.options.itemType == null || item.type == null || item.type == this.options.itemType) {
+                  this.selectedItems[item.nodeRef] = item;
+               }
             }
 
             YAHOO.Bubbling.fire("renderCurrentValue",
