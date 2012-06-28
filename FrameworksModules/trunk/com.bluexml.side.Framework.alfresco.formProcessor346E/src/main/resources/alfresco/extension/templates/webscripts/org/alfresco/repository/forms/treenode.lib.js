@@ -21,8 +21,15 @@ function getTreeNodeChidren(params) {
 		parentNode = null;
 		children = [ currentNode ];
 	} else {
-		parentNode = currentNode;
-		children = currentNode.sourceAssocs[params.assoType];
+	   parentNode = currentNode;
+      children = currentNode.sourceAssocs[params.assoType];
+      var authorizedChildren = [];
+      for ( var c = 0; c < children.length; c++) {
+         if (children[c].hasPermission("Read")) {
+            authorizedChildren[authorizedChildren.length] = children[c];
+         }
+      }
+      children = authorizedChildren;
 	}
 
 	return {
