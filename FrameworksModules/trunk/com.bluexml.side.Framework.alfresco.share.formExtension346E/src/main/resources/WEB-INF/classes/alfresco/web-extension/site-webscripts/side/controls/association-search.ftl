@@ -19,7 +19,7 @@
 })();
 //]]></script>
 
-<div class="form-field">
+<div class="form-field form-field-searchPicker">
    <#if form.mode == "view">
       <div id="${controlId}" class="viewmode-field">
          <#if field.endpointMandatory && field.value == "">

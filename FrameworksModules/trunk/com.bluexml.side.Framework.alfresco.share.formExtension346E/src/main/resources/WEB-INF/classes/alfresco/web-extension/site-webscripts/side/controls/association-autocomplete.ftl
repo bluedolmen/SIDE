@@ -42,7 +42,7 @@
 
 //]]></script>
 
-<div class="form-field">
+<div class="form-field form-field-asso-autocomplete">
    <#if form.mode == "view">
       <div id="${controlId}" class="viewmode-field">
          <#if field.endpointMandatory && field.value == "">
