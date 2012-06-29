@@ -85,7 +85,7 @@ public class EditingDocument extends Applet {
 			//		+ "C:\\Users\\Public\\tmp.doc" + " " + "C:\\Users\\Public\\" + fileName);
 			//Thread.sleep(5000);
 			myFile.delete();
-			myFile = new File("C:/Temp/" + fileName);
+			myFile = new File(tmpdir + fileName);
 			if (!getParameter("mode").equals("write")) {
 				myFile.setReadOnly();
 			}
