@@ -61,11 +61,11 @@ public class EditingDocument extends Applet {
 			fos.close();
 
 			Thread.sleep(5000);
-			tmpdir = tmpdir.replaceAll("/", "\\\\");
+			String tmpdirReplaced = tmpdir.replaceAll("/", "\\\\");
 			fileName = getFileName(getParameter("webdavUrl"));
 			fileName = fileName.replaceAll(" ", "_");
 			//text += " " + fileName;
-			String[] command = { "cmd", "/c", "copy /y " + tmpdir + "tmp.doc" + " " + tmpdir + fileName };
+			String[] command = { "cmd", "/c", "copy /y " + tmpdirReplaced + "tmp.doc" + " " + tmpdirReplaced + fileName };
 			ProcessBuilder copyFiles = new ProcessBuilder(command);
 			copyFiles.redirectErrorStream(true);
 			Process p = copyFiles.start();
