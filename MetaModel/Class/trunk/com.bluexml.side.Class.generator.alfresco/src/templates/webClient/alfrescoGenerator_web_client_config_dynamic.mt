@@ -29,7 +29,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 <%-- GENERATE THE DECLARATION OF ICON'S SPACES  --%>
 <%for (getAllClasses().nSort("name")){%>
 	<%if (metainfo[key.equalsIgnoreCase("isContainer")].nSize()>0 && !abstract){%>
-<config evaluator="string-compare" condition="<%getFolder()%>:<%getQualifiedName()%> icons">
+<config evaluator="string-compare" condition="<%getPrefixedQName()%> icons">
 	<icons>
 		<icon name="<%name%>" path="/images/icons/<%getQualifiedName()%>.gif" />
 	</icons>
@@ -39,34 +39,35 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 
 <%-- GENERATE THE PROPERTIES REPRESENTATION OF A CONTENT  --%>
 <%for (getAllClasses().nSort("name")){%>
-<config evaluator="node-type" condition="<%getFolder()%>:<%getQualifiedName()%>">
+<config evaluator="node-type" condition="<%getPrefixedQName()%>">
 	<property-sheet>
 		<%for (getAllSortedAttibutes()){%>
-		<show-property name="<%getFolder()%>:<%getQualifiedName()%>" <%if (metainfo[key.equalsIgnoreCase("read-only")].nSize()>0) {%>read-only="true"<%}%> />				
+		<show-property name="<%getPrefixedQName()%>" <%if (metainfo[key.equalsIgnoreCase("read-only")].nSize()>0) {%>read-only="true"<%}%> />				
 		<%}%>
 		<%for (getAllSourceAssociationEnds()){%>
-		<show-<%eContainer().getAssociationType()%> name="<%eContainer().getFolder()%>:<%eContainer().getQualifiedName(current("AssociationEnd"))%>" />
+		<show-<%eContainer().getAssociationType()%> name="<%eContainer().getAssociationQName(current("AssociationEnd"))%>" />
 		<%}%>			
 		
-		<!-- from Alfresco content model -->
+		<%-- from Alfresco content model now use reversed model and inherit from cm:content or cm:folder
 		<show-property name="modified"/>
 		<show-property name="modifier"/>
 		<show-property name="creator"/>
 		<show-property name="created"/>
+		--%>
 		<%-- <show-property name="versionLabel"/> 2009-08-14 - removed from generation => should be managed through aspect representation ?--%>
 	</property-sheet>
 	<%-- 2009-08-14 removed => useless ???
 	<%for (getAllSortedAttibutes()){%>
-	<property name="<%getFolder()%>:<%getQualifiedName()%>" />
+	<property name="<%getPrefixedQName()%>" />
 	<%}%>
 
 	<%for (getAllSourceAssociationEnds()){%>
-	<property name="<%eContainer().getFolder()%>:<%eContainer().getQualifiedName(current("AssociationEnd"))%>" />
+	<property name="<%eContainer().getAssociationQName(current("AssociationEnd"))%>" />
 	<%}%>							
 		
 	<%for (current("clazz.ClassPackage").getAllAspects()){%>
 		<%for (getSortedAttibutes()){%>
-	<property name="<%getFolder()%>:<%getQualifiedName()%>" />
+	<property name="<%getPrefixedQName()%>" />
 		<%}%>				
 	<%}%>
 		
@@ -84,10 +85,10 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 
 <%-- GENERATE THE PROPERTIES REPRESENTATION OF AN ASPECT  --%>
 <%for (getAllAspects()){%>
-<config evaluator="aspect-name" condition="<%getFolder()%>:<%getQualifiedName()%>">
+<config evaluator="aspect-name" condition="<%getPrefixedQName()%>">
 	<property-sheet>			
 		<%for (getSortedAttibutes()){%>
-		<show-property name="<%getFolder()%>:<%getQualifiedName()%>" <%if (metainfo[key.equalsIgnoreCase("read-only")].nSize()>0) {%>read-only="true"<%}%> />
+		<show-property name="<%getPrefixedQName()%>" <%if (metainfo[key.equalsIgnoreCase("read-only")].nSize()>0) {%>read-only="true"<%}%> />
 		<%}%>			
 	</property-sheet>
 </config>
