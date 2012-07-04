@@ -6,6 +6,7 @@
  */
 package com.bluexml.side.clazz;
 
+import com.bluexml.side.common.CustomDataType;
 import org.eclipse.emf.common.util.EList;
 
 import com.bluexml.side.common.DataType;
@@ -33,6 +34,7 @@ import com.bluexml.side.common.Visibility;
  *   <li>{@link com.bluexml.side.clazz.Attribute#getValueList <em>Value List</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Attribute#isUnique <em>Unique</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.Attribute#getMockup <em>Mockup</em>}</li>
+ *   <li>{@link com.bluexml.side.clazz.Attribute#getCustomType <em>Custom Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -212,5 +214,31 @@ public interface Attribute extends TitledNamedClassModelElement {
 	 * @generated
 	 */
 	EList<String> getMockup();
+
+	/**
+	 * Returns the value of the '<em><b>Custom Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Custom Type</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Custom Type</em>' reference.
+	 * @see #setCustomType(CustomDataType)
+	 * @see com.bluexml.side.clazz.ClazzPackage#getAttribute_CustomType()
+	 * @model
+	 * @generated
+	 */
+	CustomDataType getCustomType();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.clazz.Attribute#getCustomType <em>Custom Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Custom Type</em>' reference.
+	 * @see #getCustomType()
+	 * @generated
+	 */
+	void setCustomType(CustomDataType value);
 		
 } // Attribute

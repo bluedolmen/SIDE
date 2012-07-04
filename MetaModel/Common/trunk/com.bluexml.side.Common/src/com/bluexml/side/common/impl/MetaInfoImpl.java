@@ -108,7 +108,7 @@ public class MetaInfoImpl extends MetaDataImpl implements MetaInfo {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final DataType CONSTRAINT_TYPE_EDEFAULT = DataType.BOOLEAN;
+	protected static final DataType CONSTRAINT_TYPE_EDEFAULT = DataType.CUSTOM;
 
 	/**
 	 * The cached value of the '{@link #getConstraintType() <em>Constraint Type</em>}' attribute.

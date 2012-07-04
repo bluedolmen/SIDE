@@ -326,13 +326,22 @@ public interface ClazzPackage extends EPackage {
 	int CLASS_PACKAGE__CONSTRAINT_SET = CommonPackage.PACKAGE_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Custom Data Type Set</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_PACKAGE__CUSTOM_DATA_TYPE_SET = CommonPackage.PACKAGE_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Class Package</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_PACKAGE_FEATURE_COUNT = CommonPackage.PACKAGE_FEATURE_COUNT + 5;
+	int CLASS_PACKAGE_FEATURE_COUNT = CommonPackage.PACKAGE_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.TitledNamedClassModelElementImpl <em>Titled Named Class Model Element</em>}' class.
@@ -1087,13 +1096,22 @@ public interface ClazzPackage extends EPackage {
 	int ATTRIBUTE__MOCKUP = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Custom Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__CUSTOM_TYPE = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>Attribute</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_FEATURE_COUNT = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 6;
+	int ATTRIBUTE_FEATURE_COUNT = TITLED_NAMED_CLASS_MODEL_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.clazz.impl.EnumerationImpl <em>Enumeration</em>}' class.
@@ -1840,6 +1858,15 @@ public interface ClazzPackage extends EPackage {
 	int MODEL__CONSTRAINT_SET = CLASS_PACKAGE__CONSTRAINT_SET;
 
 	/**
+	 * The feature id for the '<em><b>Custom Data Type Set</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__CUSTOM_DATA_TYPE_SET = CLASS_PACKAGE__CUSTOM_DATA_TYPE_SET;
+
+	/**
 	 * The number of structural features of the '<em>Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1944,6 +1971,17 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getClassPackage_ConstraintSet();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.clazz.ClassPackage#getCustomDataTypeSet <em>Custom Data Type Set</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Custom Data Type Set</em>'.
+	 * @see com.bluexml.side.clazz.ClassPackage#getCustomDataTypeSet()
+	 * @see #getClassPackage()
+	 * @generated
+	 */
+	EReference getClassPackage_CustomDataTypeSet();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.clazz.Clazz <em>Clazz</em>}'.
@@ -2117,6 +2155,17 @@ public interface ClazzPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAttribute_Mockup();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.bluexml.side.clazz.Attribute#getCustomType <em>Custom Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Custom Type</em>'.
+	 * @see com.bluexml.side.clazz.Attribute#getCustomType()
+	 * @see #getAttribute()
+	 * @generated
+	 */
+	EReference getAttribute_CustomType();
 
 	/**
 	 * Returns the meta object for class '{@link com.bluexml.side.clazz.Enumeration <em>Enumeration</em>}'.
@@ -2453,6 +2502,14 @@ public interface ClazzPackage extends EPackage {
 		EReference CLASS_PACKAGE__CONSTRAINT_SET = eINSTANCE.getClassPackage_ConstraintSet();
 
 		/**
+		 * The meta object literal for the '<em><b>Custom Data Type Set</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS_PACKAGE__CUSTOM_DATA_TYPE_SET = eINSTANCE.getClassPackage_CustomDataTypeSet();
+
+		/**
 		 * The meta object literal for the '{@link com.bluexml.side.clazz.impl.ClazzImpl <em>Clazz</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2585,6 +2642,14 @@ public interface ClazzPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ATTRIBUTE__MOCKUP = eINSTANCE.getAttribute_Mockup();
+
+		/**
+		 * The meta object literal for the '<em><b>Custom Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ATTRIBUTE__CUSTOM_TYPE = eINSTANCE.getAttribute_CustomType();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.clazz.impl.EnumerationImpl <em>Enumeration</em>}' class.

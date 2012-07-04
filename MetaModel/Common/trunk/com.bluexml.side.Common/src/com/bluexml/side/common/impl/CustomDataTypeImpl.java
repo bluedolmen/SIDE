@@ -6,57 +6,59 @@
  */
 package com.bluexml.side.common.impl;
 
+import com.bluexml.side.common.CommonPackage;
+import com.bluexml.side.common.CustomDataType;
+
+import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.ocl.ecore.OCL;
 
-import com.bluexml.side.common.CommonPackage;
-import com.bluexml.side.common.DataType;
-import com.bluexml.side.common.Parameter;
-import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.ocl.ecore.OCL;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Parameter</b></em>'.
+ * An implementation of the model object '<em><b>Custom Data Type</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.bluexml.side.common.impl.ParameterImpl#getValueType <em>Value Type</em>}</li>
+ *   <li>{@link com.bluexml.side.common.impl.CustomDataTypeImpl#getDataTypeImp <em>Data Type Imp</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ParameterImpl extends NamedModelElementImpl implements Parameter {
+public class CustomDataTypeImpl extends NamedModelElementImpl implements CustomDataType {
 	/**
-	 * The default value of the '{@link #getValueType() <em>Value Type</em>}' attribute.
+	 * The default value of the '{@link #getDataTypeImp() <em>Data Type Imp</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValueType()
+	 * @see #getDataTypeImp()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final DataType VALUE_TYPE_EDEFAULT = DataType.CUSTOM;
+	protected static final String DATA_TYPE_IMP_EDEFAULT = "java.lang.String";
 
 	/**
-	 * The cached value of the '{@link #getValueType() <em>Value Type</em>}' attribute.
+	 * The cached value of the '{@link #getDataTypeImp() <em>Data Type Imp</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValueType()
+	 * @see #getDataTypeImp()
 	 * @generated
 	 * @ordered
 	 */
-	protected DataType valueType = VALUE_TYPE_EDEFAULT;
+	protected String dataTypeImp = DATA_TYPE_IMP_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ParameterImpl() {
+	protected CustomDataTypeImpl() {
 		super();
 	}
 
@@ -67,7 +69,7 @@ public class ParameterImpl extends NamedModelElementImpl implements Parameter {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return CommonPackage.Literals.PARAMETER;
+		return CommonPackage.Literals.CUSTOM_DATA_TYPE;
 	}
 
 	/**
@@ -75,8 +77,8 @@ public class ParameterImpl extends NamedModelElementImpl implements Parameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DataType getValueType() {
-		return valueType;
+	public String getDataTypeImp() {
+		return dataTypeImp;
 	}
 
 	/**
@@ -84,11 +86,11 @@ public class ParameterImpl extends NamedModelElementImpl implements Parameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValueType(DataType newValueType) {
-		DataType oldValueType = valueType;
-		valueType = newValueType == null ? VALUE_TYPE_EDEFAULT : newValueType;
+	public void setDataTypeImp(String newDataTypeImp) {
+		String oldDataTypeImp = dataTypeImp;
+		dataTypeImp = newDataTypeImp;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CommonPackage.PARAMETER__VALUE_TYPE, oldValueType, valueType));
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonPackage.CUSTOM_DATA_TYPE__DATA_TYPE_IMP, oldDataTypeImp, dataTypeImp));
 	}
 
 	/**
@@ -99,8 +101,8 @@ public class ParameterImpl extends NamedModelElementImpl implements Parameter {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CommonPackage.PARAMETER__VALUE_TYPE:
-				return getValueType();
+			case CommonPackage.CUSTOM_DATA_TYPE__DATA_TYPE_IMP:
+				return getDataTypeImp();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -113,8 +115,8 @@ public class ParameterImpl extends NamedModelElementImpl implements Parameter {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CommonPackage.PARAMETER__VALUE_TYPE:
-				setValueType((DataType)newValue);
+			case CommonPackage.CUSTOM_DATA_TYPE__DATA_TYPE_IMP:
+				setDataTypeImp((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -128,8 +130,8 @@ public class ParameterImpl extends NamedModelElementImpl implements Parameter {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CommonPackage.PARAMETER__VALUE_TYPE:
-				setValueType(VALUE_TYPE_EDEFAULT);
+			case CommonPackage.CUSTOM_DATA_TYPE__DATA_TYPE_IMP:
+				setDataTypeImp(DATA_TYPE_IMP_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -143,8 +145,8 @@ public class ParameterImpl extends NamedModelElementImpl implements Parameter {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CommonPackage.PARAMETER__VALUE_TYPE:
-				return valueType != VALUE_TYPE_EDEFAULT;
+			case CommonPackage.CUSTOM_DATA_TYPE__DATA_TYPE_IMP:
+				return DATA_TYPE_IMP_EDEFAULT == null ? dataTypeImp != null : !DATA_TYPE_IMP_EDEFAULT.equals(dataTypeImp);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -159,12 +161,12 @@ public class ParameterImpl extends NamedModelElementImpl implements Parameter {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (valueType: ");
-		result.append(valueType);
+		result.append(" (dataTypeImp: ");
+		result.append(dataTypeImp);
 		result.append(')');
 		return result.toString();
 	}
 
 		private static final String OCL_ANNOTATION_SOURCE = "http://www.bluexml.com/OCL";
 		private static final OCL OCL_ENV = KerblueOCL.newInstance();		
-} //ParameterImpl
+} //CustomDataTypeImpl

@@ -10,22 +10,22 @@ import com.bluexml.side.common.NameSpace;
 
 public class Register {
 
-//	private Map<EObject, Object> eObjectSource = new HashMap<EObject, Object>();
+	//	private Map<EObject, Object> eObjectSource = new HashMap<EObject, Object>();
 
 	// (prefix,NS)
 	private Map<String, NameSpace> reccordedNS = new HashMap<String, NameSpace>();
 
 	// (alf-qname,EObject)
-//	private Map<String, EObject> qnameToEObject = new HashMap<String, EObject>();
+	//	private Map<String, EObject> qnameToEObject = new HashMap<String, EObject>();
 
 	// (EObject.class,(qname,EObject))
 	private Map<Class<?>, Map<String, EObject>> x = new HashMap<Class<?>, Map<String, EObject>>();
 
 	public void recordNewEObject(EObject o, String qname) {
 		if (qname != null) {
-			addItem(o, qname);			
+			addItem(o, qname);
 		} else {
-			System.err.println("try to record Object whithout NS :"+o);
+			System.err.println("try to record Object whithout NS :" + o);
 		}
 	}
 
@@ -33,6 +33,7 @@ public class Register {
 		if (x.containsKey(T)) {
 			return x.get(T).get(qname);
 		}
+		System.out.println("Register.getEObject() no Object registered for this type" + T);
 		return null;
 	}
 
@@ -67,11 +68,11 @@ public class Register {
 		NameSpace nameSpace = reccordedNS.get(prefix);
 		return nameSpace;
 	}
-	
+
 	public void addNewNS(NameSpace ns) {
-		reccordedNS.put(ns.getPrefix(), ns);		
+		reccordedNS.put(ns.getPrefix(), ns);
 	}
-	
+
 	public Set<Class<?>> getTypes() {
 		return x.keySet();
 	}

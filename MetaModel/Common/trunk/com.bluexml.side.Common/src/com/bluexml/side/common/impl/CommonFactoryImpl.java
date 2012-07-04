@@ -18,6 +18,7 @@ import com.bluexml.side.common.CommonFactory;
 import com.bluexml.side.common.CommonPackage;
 import com.bluexml.side.common.Constraint;
 import com.bluexml.side.common.ConstraintParam;
+import com.bluexml.side.common.CustomDataType;
 import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.MetaInfoGroup;
@@ -89,6 +90,7 @@ public class CommonFactoryImpl extends EFactoryImpl implements CommonFactory {
 			case CommonPackage.CONSTRAINT: return createConstraint();
 			case CommonPackage.CONSTRAINT_PARAM: return createConstraintParam();
 			case CommonPackage.NAME_SPACE: return createNameSpace();
+			case CommonPackage.CUSTOM_DATA_TYPE: return createCustomDataType();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -266,6 +268,16 @@ public class CommonFactoryImpl extends EFactoryImpl implements CommonFactory {
 	public NameSpace createNameSpace() {
 		NameSpaceImpl nameSpace = new NameSpaceImpl();
 		return nameSpace;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CustomDataType createCustomDataType() {
+		CustomDataTypeImpl customDataType = new CustomDataTypeImpl();
+		return customDataType;
 	}
 
 	/**

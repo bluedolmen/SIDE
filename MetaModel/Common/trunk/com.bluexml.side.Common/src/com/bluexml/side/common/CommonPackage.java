@@ -1573,6 +1573,115 @@ public interface CommonPackage extends EPackage {
 	int NAME_SPACE_FEATURE_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link com.bluexml.side.common.impl.CustomDataTypeImpl <em>Custom Data Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.bluexml.side.common.impl.CustomDataTypeImpl
+	 * @see com.bluexml.side.common.impl.CommonPackageImpl#getCustomDataType()
+	 * @generated
+	 */
+	int CUSTOM_DATA_TYPE = 17;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOM_DATA_TYPE__STEREOTYPES = NAMED_MODEL_ELEMENT__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOM_DATA_TYPE__TAGS = NAMED_MODEL_ELEMENT__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOM_DATA_TYPE__COMMENTS = NAMED_MODEL_ELEMENT__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOM_DATA_TYPE__DOCUMENTATION = NAMED_MODEL_ELEMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOM_DATA_TYPE__DESCRIPTION = NAMED_MODEL_ELEMENT__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Metainfo</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOM_DATA_TYPE__METAINFO = NAMED_MODEL_ELEMENT__METAINFO;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOM_DATA_TYPE__CONSTRAINTS = NAMED_MODEL_ELEMENT__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOM_DATA_TYPE__NAMESPACE = NAMED_MODEL_ELEMENT__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOM_DATA_TYPE__NAME = NAMED_MODEL_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Data Type Imp</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOM_DATA_TYPE__DATA_TYPE_IMP = NAMED_MODEL_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Custom Data Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOM_DATA_TYPE_FEATURE_COUNT = NAMED_MODEL_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link com.bluexml.side.common.DataType <em>Data Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1580,7 +1689,7 @@ public interface CommonPackage extends EPackage {
 	 * @see com.bluexml.side.common.impl.CommonPackageImpl#getDataType()
 	 * @generated
 	 */
-	int DATA_TYPE = 17;
+	int DATA_TYPE = 18;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.common.Visibility <em>Visibility</em>}' enum.
@@ -1590,7 +1699,7 @@ public interface CommonPackage extends EPackage {
 	 * @see com.bluexml.side.common.impl.CommonPackageImpl#getVisibility()
 	 * @generated
 	 */
-	int VISIBILITY = 18;
+	int VISIBILITY = 19;
 
 
 	/**
@@ -2149,6 +2258,27 @@ public interface CommonPackage extends EPackage {
 	EAttribute getNameSpace_URI();
 
 	/**
+	 * Returns the meta object for class '{@link com.bluexml.side.common.CustomDataType <em>Custom Data Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Custom Data Type</em>'.
+	 * @see com.bluexml.side.common.CustomDataType
+	 * @generated
+	 */
+	EClass getCustomDataType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.common.CustomDataType#getDataTypeImp <em>Data Type Imp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Data Type Imp</em>'.
+	 * @see com.bluexml.side.common.CustomDataType#getDataTypeImp()
+	 * @see #getCustomDataType()
+	 * @generated
+	 */
+	EAttribute getCustomDataType_DataTypeImp();
+
+	/**
 	 * Returns the meta object for enum '{@link com.bluexml.side.common.DataType <em>Data Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2639,6 +2769,24 @@ public interface CommonPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute NAME_SPACE__URI = eINSTANCE.getNameSpace_URI();
+
+		/**
+		 * The meta object literal for the '{@link com.bluexml.side.common.impl.CustomDataTypeImpl <em>Custom Data Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.bluexml.side.common.impl.CustomDataTypeImpl
+		 * @see com.bluexml.side.common.impl.CommonPackageImpl#getCustomDataType()
+		 * @generated
+		 */
+		EClass CUSTOM_DATA_TYPE = eINSTANCE.getCustomDataType();
+
+		/**
+		 * The meta object literal for the '<em><b>Data Type Imp</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CUSTOM_DATA_TYPE__DATA_TYPE_IMP = eINSTANCE.getCustomDataType_DataTypeImp();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.common.DataType <em>Data Type</em>}' enum.

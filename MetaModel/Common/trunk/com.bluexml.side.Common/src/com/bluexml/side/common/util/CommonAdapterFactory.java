@@ -16,6 +16,7 @@ import com.bluexml.side.common.CommonPackage;
 import com.bluexml.side.common.Constraint;
 import com.bluexml.side.common.ConstraintParam;
 import com.bluexml.side.common.Container;
+import com.bluexml.side.common.CustomDataType;
 import com.bluexml.side.common.MetaData;
 import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.MetaInfoGroup;
@@ -152,6 +153,10 @@ public class CommonAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseNameSpace(NameSpace object) {
 				return createNameSpaceAdapter();
+			}
+			@Override
+			public Adapter caseCustomDataType(CustomDataType object) {
+				return createCustomDataTypeAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -408,6 +413,20 @@ public class CommonAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNameSpaceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.bluexml.side.common.CustomDataType <em>Custom Data Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.bluexml.side.common.CustomDataType
+	 * @generated
+	 */
+	public Adapter createCustomDataTypeAdapter() {
 		return null;
 	}
 

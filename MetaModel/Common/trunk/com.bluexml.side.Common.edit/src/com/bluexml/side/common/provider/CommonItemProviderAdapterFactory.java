@@ -397,6 +397,29 @@ public class CommonItemProviderAdapterFactory extends CommonAdapterFactory imple
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.bluexml.side.common.CustomDataType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected CustomDataTypeItemProvider customDataTypeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.bluexml.side.common.CustomDataType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createCustomDataTypeAdapter() {
+		if (customDataTypeItemProvider == null) {
+			customDataTypeItemProvider = new CustomDataTypeItemProvider(this);
+		}
+
+		return customDataTypeItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -509,6 +532,7 @@ public class CommonItemProviderAdapterFactory extends CommonAdapterFactory imple
 		if (constraintItemProvider != null) constraintItemProvider.dispose();
 		if (constraintParamItemProvider != null) constraintParamItemProvider.dispose();
 		if (nameSpaceItemProvider != null) nameSpaceItemProvider.dispose();
+		if (customDataTypeItemProvider != null) customDataTypeItemProvider.dispose();
 	}
 
 }

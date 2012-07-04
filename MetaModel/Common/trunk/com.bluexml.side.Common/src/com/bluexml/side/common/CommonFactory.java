@@ -152,6 +152,15 @@ public interface CommonFactory extends EFactory {
 	NameSpace createNameSpace();
 
 	/**
+	 * Returns a new object of class '<em>Custom Data Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Custom Data Type</em>'.
+	 * @generated
+	 */
+	CustomDataType createCustomDataType();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

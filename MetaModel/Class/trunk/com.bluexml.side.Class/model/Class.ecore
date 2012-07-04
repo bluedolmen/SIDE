@@ -86,6 +86,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="constraintSet" upperBound="-1"
         eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//Constraint"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="customDataTypeSet" upperBound="-1"
+        eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//CustomDataType"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractClass" abstract="true" eSuperTypes="#//TitledNamedClassModelElement ../../com.bluexml.side.Common/model/Common.ecore#//Container">
     <eAnnotations source="http://www.bluexml.com/OCL">
@@ -362,6 +365,7 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="mockup" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="customType" eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//CustomDataType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Enumeration" eSuperTypes="../../com.bluexml.side.Common/model/Common.ecore#//NamedModelElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

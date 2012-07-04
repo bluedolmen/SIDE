@@ -40,6 +40,14 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum DataType implements Enumerator {
 	/**
+	 * The '<em><b>Custom</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #CUSTOM_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	CUSTOM(-1, "Custom", "Custom"), /**
 	 * The '<em><b>Boolean</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -168,6 +176,21 @@ public enum DataType implements Enumerator {
 	 * @ordered
 	 */
 	TIME(13, "Time", "Time");
+
+	/**
+	 * The '<em><b>Custom</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Custom</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #CUSTOM
+	 * @model name="Custom"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CUSTOM_VALUE = -1;
 
 	/**
 	 * The '<em><b>Boolean</b></em>' literal value.
@@ -372,6 +395,7 @@ public enum DataType implements Enumerator {
 	 */
 	private static final DataType[] VALUES_ARRAY =
 		new DataType[] {
+			CUSTOM,
 			BOOLEAN,
 			BYTE,
 			CHAR,
@@ -435,6 +459,7 @@ public enum DataType implements Enumerator {
 	 */
 	public static DataType get(int value) {
 		switch (value) {
+			case CUSTOM_VALUE: return CUSTOM;
 			case BOOLEAN_VALUE: return BOOLEAN;
 			case BYTE_VALUE: return BYTE;
 			case CHAR_VALUE: return CHAR;

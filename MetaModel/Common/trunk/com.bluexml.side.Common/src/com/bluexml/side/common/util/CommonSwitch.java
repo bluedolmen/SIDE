@@ -18,6 +18,7 @@ import com.bluexml.side.common.CommonPackage;
 import com.bluexml.side.common.Constraint;
 import com.bluexml.side.common.ConstraintParam;
 import com.bluexml.side.common.Container;
+import com.bluexml.side.common.CustomDataType;
 import com.bluexml.side.common.MetaData;
 import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.MetaInfoGroup;
@@ -211,6 +212,14 @@ public class CommonSwitch<T> extends Switch<T> {
 			case CommonPackage.NAME_SPACE: {
 				NameSpace nameSpace = (NameSpace)theEObject;
 				T result = caseNameSpace(nameSpace);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CommonPackage.CUSTOM_DATA_TYPE: {
+				CustomDataType customDataType = (CustomDataType)theEObject;
+				T result = caseCustomDataType(customDataType);
+				if (result == null) result = caseNamedModelElement(customDataType);
+				if (result == null) result = caseModelElement(customDataType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -470,6 +479,21 @@ public class CommonSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseNameSpace(NameSpace object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Custom Data Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Custom Data Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCustomDataType(CustomDataType object) {
 		return null;
 	}
 

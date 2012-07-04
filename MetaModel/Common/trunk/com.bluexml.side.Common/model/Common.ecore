@@ -134,6 +134,7 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Definition: this enumeration allows to set up a format to a data. The supported data types are:&#xD;&#xA;- boolean: true or false,&#xD;&#xA;- byte: 8-bits integer&#xD;&#xA;- char: Single two-byte Unicode character&#xD;&#xA;- Date: a calendar date &#xD;&#xA;- DateTime: calendar date and day time&#xD;&#xA;- double: 8-bytes floating point number&#xD;&#xA;- float: 4-bytes floating point number&#xD;&#xA;- int: 4-bytes signed integer&#xD;&#xA;- long: 8-bytes signed integer&#xD;&#xA;- Object: other data types; for Alfresco, associated to the 'Any' data type.&#xD;&#xA;- short: 2-bytes signed integer&#xD;&#xA;- String: a sequence of plain-text characters&#xD;&#xA;- Time : an instant of time that recurs every day&#xD;&#xA;- void: pas de generation de l'attribut"/>
     </eAnnotations>
+    <eLiterals name="Custom" value="-1" literal="Custom"/>
     <eLiterals name="boolean"/>
     <eLiterals name="byte" value="1"/>
     <eLiterals name="char" value="2"/>
@@ -203,5 +204,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="NameSpace">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="prefix" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="URI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CustomDataType" eSuperTypes="#//NamedModelElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataTypeImp" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral="java.lang.String"/>
   </eClassifiers>
 </ecore:EPackage>

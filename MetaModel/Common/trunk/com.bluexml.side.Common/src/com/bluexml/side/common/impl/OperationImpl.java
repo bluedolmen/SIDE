@@ -59,7 +59,7 @@ public class OperationImpl extends OperationComponentImpl implements Operation {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final DataType RETURN_TYPE_EDEFAULT = DataType.BOOLEAN;
+	protected static final DataType RETURN_TYPE_EDEFAULT = DataType.CUSTOM;
 
 	/**
 	 * The cached value of the '{@link #getReturnType() <em>Return Type</em>}' attribute.

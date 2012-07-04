@@ -85,6 +85,7 @@ public class ClassPackageItemProvider
 			childrenFeatures.add(ClazzPackage.Literals.CLASS_PACKAGE__ASPECT_SET);
 			childrenFeatures.add(ClazzPackage.Literals.CLASS_PACKAGE__ENUMERATION_SET);
 			childrenFeatures.add(ClazzPackage.Literals.CLASS_PACKAGE__CONSTRAINT_SET);
+			childrenFeatures.add(ClazzPackage.Literals.CLASS_PACKAGE__CUSTOM_DATA_TYPE_SET);
 		}
 		return childrenFeatures;
 	}
@@ -144,6 +145,7 @@ public class ClassPackageItemProvider
 			case ClazzPackage.CLASS_PACKAGE__ASPECT_SET:
 			case ClazzPackage.CLASS_PACKAGE__ENUMERATION_SET:
 			case ClazzPackage.CLASS_PACKAGE__CONSTRAINT_SET:
+			case ClazzPackage.CLASS_PACKAGE__CUSTOM_DATA_TYPE_SET:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -190,6 +192,11 @@ public class ClassPackageItemProvider
 			(createChildParameter
 				(ClazzPackage.Literals.CLASS_PACKAGE__CONSTRAINT_SET,
 				 CommonFactory.eINSTANCE.createConstraint()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ClazzPackage.Literals.CLASS_PACKAGE__CUSTOM_DATA_TYPE_SET,
+				 CommonFactory.eINSTANCE.createCustomDataType()));
 	}
 
 	/**

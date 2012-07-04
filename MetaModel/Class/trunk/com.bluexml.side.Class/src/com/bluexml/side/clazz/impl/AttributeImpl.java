@@ -19,6 +19,7 @@ import org.eclipse.ocl.ecore.OCL;
 import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.clazz.Enumeration;
+import com.bluexml.side.common.CustomDataType;
 import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.Visibility;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
@@ -36,6 +37,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *   <li>{@link com.bluexml.side.clazz.impl.AttributeImpl#getValueList <em>Value List</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AttributeImpl#isUnique <em>Unique</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.AttributeImpl#getMockup <em>Mockup</em>}</li>
+ *   <li>{@link com.bluexml.side.clazz.impl.AttributeImpl#getCustomType <em>Custom Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -141,6 +143,16 @@ public class AttributeImpl extends TitledNamedClassModelElementImpl implements A
 	 * @ordered
 	 */
 	protected EList<String> mockup;
+
+	/**
+	 * The cached value of the '{@link #getCustomType() <em>Custom Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCustomType()
+	 * @generated
+	 * @ordered
+	 */
+	protected CustomDataType customType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -300,6 +312,44 @@ public class AttributeImpl extends TitledNamedClassModelElementImpl implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public CustomDataType getCustomType() {
+		if (customType != null && customType.eIsProxy()) {
+			InternalEObject oldCustomType = (InternalEObject)customType;
+			customType = (CustomDataType)eResolveProxy(oldCustomType);
+			if (customType != oldCustomType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClazzPackage.ATTRIBUTE__CUSTOM_TYPE, oldCustomType, customType));
+			}
+		}
+		return customType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CustomDataType basicGetCustomType() {
+		return customType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCustomType(CustomDataType newCustomType) {
+		CustomDataType oldCustomType = customType;
+		customType = newCustomType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClazzPackage.ATTRIBUTE__CUSTOM_TYPE, oldCustomType, customType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -316,6 +366,9 @@ public class AttributeImpl extends TitledNamedClassModelElementImpl implements A
 				return isUnique();
 			case ClazzPackage.ATTRIBUTE__MOCKUP:
 				return getMockup();
+			case ClazzPackage.ATTRIBUTE__CUSTOM_TYPE:
+				if (resolve) return getCustomType();
+				return basicGetCustomType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -348,6 +401,9 @@ public class AttributeImpl extends TitledNamedClassModelElementImpl implements A
 				getMockup().clear();
 				getMockup().addAll((Collection<? extends String>)newValue);
 				return;
+			case ClazzPackage.ATTRIBUTE__CUSTOM_TYPE:
+				setCustomType((CustomDataType)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -378,6 +434,9 @@ public class AttributeImpl extends TitledNamedClassModelElementImpl implements A
 			case ClazzPackage.ATTRIBUTE__MOCKUP:
 				getMockup().clear();
 				return;
+			case ClazzPackage.ATTRIBUTE__CUSTOM_TYPE:
+				setCustomType((CustomDataType)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -402,6 +461,8 @@ public class AttributeImpl extends TitledNamedClassModelElementImpl implements A
 				return unique != UNIQUE_EDEFAULT;
 			case ClazzPackage.ATTRIBUTE__MOCKUP:
 				return mockup != null && !mockup.isEmpty();
+			case ClazzPackage.ATTRIBUTE__CUSTOM_TYPE:
+				return customType != null;
 		}
 		return super.eIsSet(featureID);
 	}

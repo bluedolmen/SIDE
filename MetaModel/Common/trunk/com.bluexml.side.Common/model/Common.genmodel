@@ -10,6 +10,7 @@
   <genPackages prefix="Common" basePackage="com.bluexml.side" disposableProviderFactory="true"
       ecorePackage="Common.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Common.ecore#//DataType">
+      <genEnumLiterals ecoreEnumLiteral="Common.ecore#//DataType/Custom"/>
       <genEnumLiterals ecoreEnumLiteral="Common.ecore#//DataType/boolean"/>
       <genEnumLiterals ecoreEnumLiteral="Common.ecore#//DataType/byte"/>
       <genEnumLiterals ecoreEnumLiteral="Common.ecore#//DataType/char"/>
@@ -100,6 +101,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Common.ecore#//MetaInfo/constraintType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Common.ecore#//MetaInfo/valueSet"/>
       <genFeatures createChild="false" propertyMultiLine="true" ecoreFeature="ecore:EAttribute Common.ecore#//MetaInfo/multilineValue"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Common.ecore#//MetaInfo/EObjectValue"/>
       <genOperations ecoreOperation="Common.ecore#//MetaInfo/equalsForMerge">
         <genParameters ecoreParameter="Common.ecore#//MetaInfo/equalsForMerge/other"/>
       </genOperations>
@@ -119,6 +121,9 @@
     <genClasses ecoreClass="Common.ecore#//NameSpace">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Common.ecore#//NameSpace/prefix"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Common.ecore#//NameSpace/URI"/>
+    </genClasses>
+    <genClasses ecoreClass="Common.ecore#//CustomDataType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Common.ecore#//CustomDataType/dataTypeImp"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

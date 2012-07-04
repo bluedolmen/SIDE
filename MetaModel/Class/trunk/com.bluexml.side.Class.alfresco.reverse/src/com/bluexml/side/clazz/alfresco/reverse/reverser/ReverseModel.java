@@ -7,6 +7,7 @@ import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.w3c.dom.Element;
 
 import com.bluexml.side.alfresco.binding.Aspect;
 import com.bluexml.side.alfresco.binding.Association;
@@ -21,6 +22,7 @@ import com.bluexml.side.alfresco.binding.Constraint;
 import com.bluexml.side.alfresco.binding.MandatoryDef;
 import com.bluexml.side.alfresco.binding.Model.Aspects;
 import com.bluexml.side.alfresco.binding.Model.Constraints;
+import com.bluexml.side.alfresco.binding.Model.DataTypes;
 import com.bluexml.side.alfresco.binding.Model.Namespaces;
 import com.bluexml.side.alfresco.binding.Model.Namespaces.Namespace;
 import com.bluexml.side.alfresco.binding.Model.Types;
@@ -44,11 +46,13 @@ import com.bluexml.side.clazz.service.alfresco.AttributeServices;
 import com.bluexml.side.clazz.service.alfresco.CommonServices;
 import com.bluexml.side.common.CommonFactory;
 import com.bluexml.side.common.ConstraintParam;
+import com.bluexml.side.common.CustomDataType;
 import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NameSpace;
 import com.bluexml.side.common.NamedModelElement;
+import com.bluexml.side.common.impl.CustomDataTypeImpl;
 import com.bluexml.side.util.libs.ecore.EResourceUtils;
 
 public class ReverseModel {
@@ -148,6 +152,9 @@ public class ReverseModel {
 		// set name and prefix (must be done after NS declaration)
 		setNameAndNS(model, qname);
 
+		// DataType (CustomDataType)
+		addDataTypes(model, alfModel);
+
 		// Constraints
 		addConstraints(model, alfModel);
 
@@ -156,7 +163,38 @@ public class ReverseModel {
 
 		// Aspects
 		addAspects(model, alfModel);
+
 		return model;
+	}
+
+	private void addDataTypes(Model model, com.bluexml.side.alfresco.binding.Model alfModel) {
+		// TODO Auto-generated method stub
+		DataTypes dataTypesE = alfModel.getDataTypes();
+		if (dataTypesE != null) {
+			List<com.bluexml.side.alfresco.binding.Model.DataTypes.DataType> dataTypes = dataTypesE.getDataType();
+			for (com.bluexml.side.alfresco.binding.Model.DataTypes.DataType dataType : dataTypes) {
+				CustomDataType createCustomDataType = CommonFactory.eINSTANCE.createCustomDataType();
+				// extract data from dataType 
+				Element analyserClass = (Element)dataType.getAnalyserClass();
+				System.out.println("ReverseModel.addDataTypes() " + analyserClass.getClass().getName());
+				String description = dataType.getDescription();
+				Element javaClass = (Element) dataType.getJavaClass();
+				System.out.println("ReverseModel.addDataTypes() " + javaClass.getClass().getName());
+				String name = dataType.getName();
+				String title = dataType.getTitle();
+
+				// set customDataType
+				createCustomDataType.setName(name);
+				createCustomDataType.setDescription(description);
+				createCustomDataType.setDataTypeImp(javaClass.getTextContent());
+
+				MetaInfo createMetaInfo = ReverseHelper.createMetaInfo("analyser", null, analyserClass.getTextContent());
+				createCustomDataType.getMetainfo().add(createMetaInfo);
+				model.getCustomDataTypeSet().add(createCustomDataType);
+				register.recordNewEObject(createCustomDataType, name);
+				System.out.println("ReverseModel.addDataTypes() reccord :" + name);
+			}
+		}
 	}
 
 	private void addAspects(Model model, com.bluexml.side.alfresco.binding.Model alfModel) throws Exception {
@@ -374,6 +412,13 @@ public class ReverseModel {
 					String propType = property.getType();
 					DataType propertyType = AttributeServices.getPropertyType(propType);
 					attribute.setTyp(propertyType);
+
+					if (propertyType.equals(DataType.CUSTOM)) {
+						// need to search for matching reference in register
+						System.out.println("ReverseModel.addProperties() search CustomDataType for :" + propType);
+						CustomDataType eObject = (CustomDataType) register.getEObject(CustomDataTypeImpl.class, propType);
+						attribute.setCustomType(eObject);
+					}
 
 					String description = property.getDescription();
 					attribute.setDescription(description);

@@ -22,6 +22,7 @@ import com.bluexml.side.common.CommonFactory;
 import com.bluexml.side.common.CommonPackage;
 import com.bluexml.side.common.Constraint;
 import com.bluexml.side.common.ConstraintParam;
+import com.bluexml.side.common.CustomDataType;
 import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.MetaData;
 import com.bluexml.side.common.MetaInfo;
@@ -162,6 +163,13 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 	 * @generated
 	 */
 	private EClass nameSpaceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass customDataTypeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -711,6 +719,24 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getCustomDataType() {
+		return customDataTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCustomDataType_DataTypeImp() {
+		return (EAttribute)customDataTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getDataType() {
 		return dataTypeEEnum;
 	}
@@ -821,6 +847,9 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		createEAttribute(nameSpaceEClass, NAME_SPACE__PREFIX);
 		createEAttribute(nameSpaceEClass, NAME_SPACE__URI);
 
+		customDataTypeEClass = createEClass(CUSTOM_DATA_TYPE);
+		createEAttribute(customDataTypeEClass, CUSTOM_DATA_TYPE__DATA_TYPE_IMP);
+
 		// Create enums
 		dataTypeEEnum = createEEnum(DATA_TYPE);
 		visibilityEEnum = createEEnum(VISIBILITY);
@@ -867,6 +896,7 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		metaInfoGroupEClass.getESuperTypes().add(this.getNamedModelElement());
 		constraintEClass.getESuperTypes().add(this.getNamedModelElement());
 		constraintParamEClass.getESuperTypes().add(this.getNamedModelElement());
+		customDataTypeEClass.getESuperTypes().add(this.getNamedModelElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(modelElementEClass, ModelElement.class, "ModelElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -973,8 +1003,12 @@ public class CommonPackageImpl extends EPackageImpl implements CommonPackage {
 		initEAttribute(getNameSpace_Prefix(), ecorePackage.getEString(), "prefix", null, 0, 1, NameSpace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNameSpace_URI(), ecorePackage.getEString(), "URI", null, 0, 1, NameSpace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(customDataTypeEClass, CustomDataType.class, "CustomDataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCustomDataType_DataTypeImp(), ecorePackage.getEString(), "dataTypeImp", "java.lang.String", 1, 1, CustomDataType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(dataTypeEEnum, DataType.class, "DataType");
+		addEEnumLiteral(dataTypeEEnum, DataType.CUSTOM);
 		addEEnumLiteral(dataTypeEEnum, DataType.BOOLEAN);
 		addEEnumLiteral(dataTypeEEnum, DataType.BYTE);
 		addEEnumLiteral(dataTypeEEnum, DataType.CHAR);

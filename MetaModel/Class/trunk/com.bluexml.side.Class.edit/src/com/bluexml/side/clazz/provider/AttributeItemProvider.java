@@ -67,6 +67,7 @@ public class AttributeItemProvider
 			addValueListPropertyDescriptor(object);
 			addUniquePropertyDescriptor(object);
 			addMockupPropertyDescriptor(object);
+			addCustomTypePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -199,6 +200,28 @@ public class AttributeItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Custom Type feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addCustomTypePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Attribute_customType_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Attribute_customType_feature", "_UI_Attribute_type"),
+				 ClazzPackage.Literals.ATTRIBUTE__CUSTOM_TYPE,
+				 true,
+				 false,
+				 true,
+				 null,
 				 null,
 				 null));
 	}

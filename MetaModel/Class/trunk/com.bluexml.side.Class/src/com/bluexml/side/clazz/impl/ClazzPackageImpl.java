@@ -289,6 +289,15 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getClassPackage_CustomDataTypeSet() {
+		return (EReference)classPackageEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getClazz() {
 		return clazzEClass;
 	}
@@ -426,6 +435,15 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 */
 	public EAttribute getAttribute_Mockup() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAttribute_CustomType() {
+		return (EReference)attributeEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -672,6 +690,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		createEReference(classPackageEClass, CLASS_PACKAGE__ASPECT_SET);
 		createEReference(classPackageEClass, CLASS_PACKAGE__ENUMERATION_SET);
 		createEReference(classPackageEClass, CLASS_PACKAGE__CONSTRAINT_SET);
+		createEReference(classPackageEClass, CLASS_PACKAGE__CUSTOM_DATA_TYPE_SET);
 
 		abstractClassEClass = createEClass(ABSTRACT_CLASS);
 		createEReference(abstractClassEClass, ABSTRACT_CLASS__ATTRIBUTES);
@@ -696,6 +715,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		createEReference(attributeEClass, ATTRIBUTE__VALUE_LIST);
 		createEAttribute(attributeEClass, ATTRIBUTE__UNIQUE);
 		createEAttribute(attributeEClass, ATTRIBUTE__MOCKUP);
+		createEReference(attributeEClass, ATTRIBUTE__CUSTOM_TYPE);
 
 		enumerationEClass = createEClass(ENUMERATION);
 		createEReference(enumerationEClass, ENUMERATION__LITERALS);
@@ -783,6 +803,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		initEReference(getClassPackage_AspectSet(), this.getAspect(), null, "aspectSet", null, 0, -1, ClassPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClassPackage_EnumerationSet(), this.getEnumeration(), null, "enumerationSet", null, 0, -1, ClassPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClassPackage_ConstraintSet(), theCommonPackage.getConstraint(), null, "constraintSet", null, 0, -1, ClassPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClassPackage_CustomDataTypeSet(), theCommonPackage.getCustomDataType(), null, "customDataTypeSet", null, 0, -1, ClassPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(classPackageEClass, this.getClassPackage(), "getAllPackages", 0, -1, IS_UNIQUE, IS_ORDERED);
 
@@ -892,6 +913,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		initEReference(getAttribute_ValueList(), this.getEnumeration(), null, "valueList", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttribute_Unique(), ecorePackage.getEBoolean(), "unique", "false", 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttribute_Mockup(), ecorePackage.getEString(), "mockup", null, 0, -1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAttribute_CustomType(), theCommonPackage.getCustomDataType(), null, "customType", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(enumerationEClass, Enumeration.class, "Enumeration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEnumeration_Literals(), this.getEnumerationLiteral(), this.getEnumerationLiteral_Enum(), "literals", null, 0, -1, Enumeration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

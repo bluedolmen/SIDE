@@ -23,6 +23,7 @@ public class Reverser {
 		ReverseModel rm = new ReverseModel(verbose);
 		// load and register EObject from existing SIDE models
 		rm.loadSIDEModels(sideModels);
+		// execute reverse
 		for (Map.Entry<Integer, List<Model>> ent : tree.entrySet()) {
 			for (Model model : ent.getValue()) {
 				EObject sideO = rm.reverse(model);

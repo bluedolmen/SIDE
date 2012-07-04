@@ -7,6 +7,7 @@
 package com.bluexml.side.clazz;
 
 import com.bluexml.side.common.Constraint;
+import com.bluexml.side.common.CustomDataType;
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -27,6 +28,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link com.bluexml.side.clazz.ClassPackage#getAspectSet <em>Aspect Set</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.ClassPackage#getEnumerationSet <em>Enumeration Set</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.ClassPackage#getConstraintSet <em>Constraint Set</em>}</li>
+ *   <li>{@link com.bluexml.side.clazz.ClassPackage#getCustomDataTypeSet <em>Custom Data Type Set</em>}</li>
  * </ul>
  * </p>
  *
@@ -115,6 +117,22 @@ public interface ClassPackage extends com.bluexml.side.common.Package {
 	 * @generated
 	 */
 	EList<Constraint> getConstraintSet();
+
+	/**
+	 * Returns the value of the '<em><b>Custom Data Type Set</b></em>' containment reference list.
+	 * The list contents are of type {@link com.bluexml.side.common.CustomDataType}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Custom Data Type Set</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Custom Data Type Set</em>' containment reference list.
+	 * @see com.bluexml.side.clazz.ClazzPackage#getClassPackage_CustomDataTypeSet()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<CustomDataType> getCustomDataTypeSet();
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -31,6 +31,7 @@ import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.ClazzPackage;
 import com.bluexml.side.clazz.Enumeration;
 import com.bluexml.side.common.Constraint;
+import com.bluexml.side.common.CustomDataType;
 import com.bluexml.side.common.impl.PackageImpl;
 import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
 
@@ -46,6 +47,7 @@ import com.bluexml.side.util.metaModel.validate.OCLextension.KerblueOCL;
  *   <li>{@link com.bluexml.side.clazz.impl.ClassPackageImpl#getAspectSet <em>Aspect Set</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.ClassPackageImpl#getEnumerationSet <em>Enumeration Set</em>}</li>
  *   <li>{@link com.bluexml.side.clazz.impl.ClassPackageImpl#getConstraintSet <em>Constraint Set</em>}</li>
+ *   <li>{@link com.bluexml.side.clazz.impl.ClassPackageImpl#getCustomDataTypeSet <em>Custom Data Type Set</em>}</li>
  * </ul>
  * </p>
  *
@@ -101,6 +103,16 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 * @ordered
 	 */
 	protected EList<Constraint> constraintSet;
+
+	/**
+	 * The cached value of the '{@link #getCustomDataTypeSet() <em>Custom Data Type Set</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCustomDataTypeSet()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<CustomDataType> customDataTypeSet;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -179,6 +191,18 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 			constraintSet = new EObjectContainmentEList<Constraint>(Constraint.class, this, ClazzPackage.CLASS_PACKAGE__CONSTRAINT_SET);
 		}
 		return constraintSet;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<CustomDataType> getCustomDataTypeSet() {
+		if (customDataTypeSet == null) {
+			customDataTypeSet = new EObjectContainmentEList<CustomDataType>(CustomDataType.class, this, ClazzPackage.CLASS_PACKAGE__CUSTOM_DATA_TYPE_SET);
+		}
+		return customDataTypeSet;
 	}
 
 	/**
@@ -601,6 +625,8 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 				return ((InternalEList<?>)getEnumerationSet()).basicRemove(otherEnd, msgs);
 			case ClazzPackage.CLASS_PACKAGE__CONSTRAINT_SET:
 				return ((InternalEList<?>)getConstraintSet()).basicRemove(otherEnd, msgs);
+			case ClazzPackage.CLASS_PACKAGE__CUSTOM_DATA_TYPE_SET:
+				return ((InternalEList<?>)getCustomDataTypeSet()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -623,6 +649,8 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 				return getEnumerationSet();
 			case ClazzPackage.CLASS_PACKAGE__CONSTRAINT_SET:
 				return getConstraintSet();
+			case ClazzPackage.CLASS_PACKAGE__CUSTOM_DATA_TYPE_SET:
+				return getCustomDataTypeSet();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -656,6 +684,10 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 				getConstraintSet().clear();
 				getConstraintSet().addAll((Collection<? extends Constraint>)newValue);
 				return;
+			case ClazzPackage.CLASS_PACKAGE__CUSTOM_DATA_TYPE_SET:
+				getCustomDataTypeSet().clear();
+				getCustomDataTypeSet().addAll((Collection<? extends CustomDataType>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -683,6 +715,9 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 			case ClazzPackage.CLASS_PACKAGE__CONSTRAINT_SET:
 				getConstraintSet().clear();
 				return;
+			case ClazzPackage.CLASS_PACKAGE__CUSTOM_DATA_TYPE_SET:
+				getCustomDataTypeSet().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -705,6 +740,8 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 				return enumerationSet != null && !enumerationSet.isEmpty();
 			case ClazzPackage.CLASS_PACKAGE__CONSTRAINT_SET:
 				return constraintSet != null && !constraintSet.isEmpty();
+			case ClazzPackage.CLASS_PACKAGE__CUSTOM_DATA_TYPE_SET:
+				return customDataTypeSet != null && !customDataTypeSet.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
