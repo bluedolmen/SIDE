@@ -46,7 +46,7 @@ public class SinglePrimaryChildAssociationPolicy implements OnCreateChildAssocia
 		} else if (logger.isDebugEnabled()) {
 			logger.info("Policy DISABLED !! no entries in dictionary");
 		}
-
+		
 	}
 
 	public void onCreateChildAssociation(ChildAssociationRef childAssocRef, boolean isNewNode) {
@@ -87,9 +87,8 @@ public class SinglePrimaryChildAssociationPolicy implements OnCreateChildAssocia
 					logger.debug("OLD primary Parent ref  :" + primaryParentRef);
 					logger.debug("OLD primary Parent Name :" + getNodeName(primaryParentRef));
 
-
 					// need to move the primary association and remove the current childAssociation
-					// to avoid constraints error (two same association between parent -> child) wee need to remove the current childAssociation before to move
+					// to avoid constraints error (two same association between parent -> child) wee need to remove the current childAssociation (secondary) before to move
 					getNodeService().removeChildAssociation(childAssocRef);
 					getServiceRegistry().getFileFolderService().moveFrom(childRef, primaryParentRef, parentRef, null);
 
