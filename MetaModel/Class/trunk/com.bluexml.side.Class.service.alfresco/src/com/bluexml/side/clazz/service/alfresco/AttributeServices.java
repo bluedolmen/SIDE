@@ -16,145 +16,185 @@
  ******************************************************************************/
 package com.bluexml.side.clazz.service.alfresco;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.clazz.Attribute;
+import com.bluexml.side.common.CustomDataType;
 import com.bluexml.side.common.DataType;
 
 public class AttributeServices {
 
+	static String numberRange = "/org/alfresco/components/form/controls/numberrange.ftl";
+	static String dateRange = "/org/alfresco/components/form/controls/daterange.ftl";
+
+	static String selectMany = "/org/alfresco/components/form/controls/selectmany.ftl";
+
 	public String getPropertyType(EObject node) throws Exception {
 		if (node instanceof Attribute) {
 			Attribute object = (Attribute) node;
-			if (object.getTyp() == DataType.BOOLEAN) {
-				return "d:boolean";
-			} else if (object.getTyp() == DataType.BYTE) {
-				return "d:int";
-			} else if (object.getTyp() == DataType.CHAR) {
-				return "d:text";
-			} else if (object.getTyp() == DataType.DATE) {
-				return "d:date";
-			} else if (object.getTyp() == DataType.DATE_TIME) {
-				return "d:datetime";
-			} else if (object.getTyp() == DataType.DOUBLE) {
-				return "d:double";
-			} else if (object.getTyp() == DataType.FLOAT) {
-				return "d:float";
-			} else if (object.getTyp() == DataType.INT) {
-				return "d:int";
-			} else if (object.getTyp() == DataType.LONG) {
-				return "d:long";
-			} else if (object.getTyp() == DataType.OBJECT) {
-				//return "d:content";
-				return "d:any";
-			} else if (object.getTyp() == DataType.SHORT) {
-				return "d:int";
-			} else if (object.getTyp() == DataType.STRING) {
-				return "d:text";
-			} else if (object.getTyp() == DataType.TIME) {
-				return "d:datetime";
+			DataType typ = object.getTyp();
+			if (typ == DataType.CUSTOM) {
+				// need to get the 
+				CustomDataType customType = object.getCustomType();
+				if (customType != null) {
+					return customType.getName();
+				} else {
+					new Exception("attribute type=CUSTOM but customType is null !!");
+				}
+			} else {
+				Alfresco_Data_Type alf_DataType = Alfresco_Data_Type.getAlf_DataType(typ);
+				return alf_DataType.qname;
 			}
 		}
 		throw new Exception("node must be an attribute");
 	}
 
 	public String getShareSearchFormControl(Attribute object) throws Exception {
-		String numberRange = "/org/alfresco/components/form/controls/numberrange.ftl";
-		String dateRange = "/org/alfresco/components/form/controls/daterange.ftl";
-		
-		String selectMany = "/org/alfresco/components/form/controls/selectmany.ftl";
+
 		if (object.getValueList() != null) {
 			return selectMany;
 		}
-		if (object.getTyp() == DataType.BOOLEAN) {
-			return "";
-		} else if (object.getTyp() == DataType.BYTE) {
-			return numberRange;
-		} else if (object.getTyp() == DataType.CHAR) {
-			return "";
-		} else if (object.getTyp() == DataType.DATE) {
-			return dateRange;
-		} else if (object.getTyp() == DataType.DATE_TIME) {
-			return dateRange;
-		} else if (object.getTyp() == DataType.DOUBLE) {
-			return numberRange;
-		} else if (object.getTyp() == DataType.FLOAT) {
-			return numberRange;
-		} else if (object.getTyp() == DataType.INT) {
-			return numberRange;
-		} else if (object.getTyp() == DataType.LONG) {
-			return numberRange;
-		} else if (object.getTyp() == DataType.OBJECT) {
-			//return "d:content";
-			return "";
-		} else if (object.getTyp() == DataType.SHORT) {
-			return numberRange;
-		} else if (object.getTyp() == DataType.STRING) {
-			return "";
-		} else if (object.getTyp() == DataType.TIME) {
-			return dateRange;
-		}
+		DataType typ = object.getTyp();
+		Alfresco_Data_Type alf_DataType = Alfresco_Data_Type.getAlf_DataType(typ);
+		return alf_DataType.control;
 
-		throw new Exception("no controle found for " + object);
 	}
 
 	public static DataType getPropertyType(String type) throws Exception {
-		if (type.equals("d:boolean")) {
-			return DataType.BOOLEAN;
-		} else if (type.equals("d:int")) {
-			return DataType.INT;
-		} else if (type.equals("d:text")) {
-			return DataType.STRING;
-		} else if (type.equals("d:date")) {
-			return DataType.DATE;
-		} else if (type.equals("d:datetime")) {
-			return DataType.DATE_TIME;
-		} else if (type.equals("d:double")) {
-			return DataType.DOUBLE;
-		} else if (type.equals("d:float")) {
-			return DataType.FLOAT;
-		} else if (type.equals("d:long")) {
-			return DataType.LONG;
-		} else {
-			System.err.println("Property type fall to default Object Type :" + type);
-			return DataType.OBJECT;
-		}
-		//		throw new Exception("Property Type not managed :" + type);
+		DataType dataType = Alfresco_Data_Type.getDataType(type);
+		return dataType;
 	}
 
 	public String getFtlTypeConverter(EObject node) throws Exception {
 		if (node instanceof Attribute) {
 			Attribute object = (Attribute) node;
+
 			String string = "?js_string";
-			if (object.getTyp() == DataType.BOOLEAN) {
-				return "?string";
-			} else if (object.getTyp() == DataType.BYTE) {
-				return "?int";
-			} else if (object.getTyp() == DataType.CHAR) {
+			DataType typ = object.getTyp();
+
+			Alfresco_Data_Type alf_DataType = Alfresco_Data_Type.getAlf_DataType(typ);
+			if (alf_DataType.js_freemarker) {
 				return string;
-			} else if (object.getTyp() == DataType.DATE) {
-				return "?date";
-			} else if (object.getTyp() == DataType.DATE_TIME) {
-				return "?datetime";
-			} else if (object.getTyp() == DataType.DOUBLE) {
-				return "?double";
-			} else if (object.getTyp() == DataType.FLOAT) {
-				return "?float";
-			} else if (object.getTyp() == DataType.INT) {
-				return "?int";
-			} else if (object.getTyp() == DataType.LONG) {
-				return "?long";
-			} else if (object.getTyp() == DataType.OBJECT) {
-				//return "?content";
-				return string;
-			} else if (object.getTyp() == DataType.SHORT) {
-				return "?int";
-			} else if (object.getTyp() == DataType.STRING) {
-				return string;
-			} else if (object.getTyp() == DataType.TIME) {
-				return "?datetime";
+			} else {
+				return alf_DataType.freemarker;
 			}
+
 		}
 		throw new Exception("node must be an attribute");
+	}
+
+	public enum Alfresco_Data_Type {
+		Any("d:any", "?string", false, DataType.OBJECT),
+		Text("d:text", "?string", false, DataType.STRING),
+		Mltext("d:mltext", "?string", false, DataType.CUSTOM),
+		Content("d:content", "?string", false, DataType.CUSTOM),
+		Int("d:int", "?int", false, DataType.INT, numberRange),
+		Long("d:long", "?long", false, DataType.LONG, numberRange),
+		Float("d:float", "?float", false, DataType.FLOAT, numberRange),
+		Double("d:double", "?double", false, DataType.DOUBLE, numberRange),
+		Date("d:date", "?date", false, DataType.DATE, dateRange),
+		Datetime("d:datetime", "?datetime", false, DataType.DATE_TIME, dateRange),
+		Boolean("d:boolean", "?string", false, DataType.BOOLEAN),
+		Qname("d:qname", "?string", false, DataType.CUSTOM),
+		Noderef("d:noderef", "?string", false, DataType.CUSTOM),
+		Childassocref("d:childassocref", "?string", false, DataType.CUSTOM),
+		Assocref("d:assocref", "?string", false, DataType.CUSTOM),
+		Path("d:path", "?string", false, DataType.CUSTOM),
+		Category("d:category", "?string", false, DataType.CUSTOM),
+		Locale("d:locale", "?string", false, DataType.CUSTOM),
+		Version("d:version", "?string", false, DataType.CUSTOM),
+		Period("d:period", "?string", false, DataType.CUSTOM);
+
+		/*
+		 * d:any
+		 * d:text
+		 * d:mltext
+		 * d:content
+		 * d:int
+		 * d:long
+		 * d:float
+		 * d:double
+		 * d:date
+		 * d:datetime
+		 * d:boolean
+		 * d:qname
+		 * d:noderef
+		 * d:childassocref
+		 * d:assocref
+		 * d:path
+		 * d:category
+		 * d:locale
+		 * d:version
+		 * d:period
+		 */
+
+		static Map<Alfresco_Data_Type, DataType> m = null;
+		static Map<DataType, Alfresco_Data_Type> m2 = null;
+
+		static {
+			// initialize m2
+			m2 = new HashMap<DataType, Alfresco_Data_Type>();
+			Alfresco_Data_Type[] values = values();
+			for (Alfresco_Data_Type alfresco_Data_Type : values) {
+				m2.put(alfresco_Data_Type.datatype, alfresco_Data_Type);
+			}
+			// add none bijective mapping
+			m2.put(DataType.CHAR, Text);
+			m2.put(DataType.BYTE, Int);
+			m2.put(DataType.SHORT, Int);
+			m2.put(DataType.TIME, Date);
+
+		}
+		static Map<String, Alfresco_Data_Type> valueof = null;
+		static {
+			// initialize valueof
+			valueof = new HashMap<String, Alfresco_Data_Type>();
+			Alfresco_Data_Type[] values = values();
+			for (Alfresco_Data_Type alfresco_Data_Type : values) {
+				valueof.put(alfresco_Data_Type.qname, alfresco_Data_Type);
+			}
+		}
+		static String js_String = "?js_string";
+
+		String qname = null;
+		String freemarker = null;
+		String control = "";
+		boolean js_freemarker = false;
+		DataType datatype = null;
+
+		Alfresco_Data_Type(String qname, String freemarker, boolean js_freemarker, DataType datatype, String control) {
+			this(qname, freemarker, js_freemarker, datatype);
+			this.control = control;
+		}
+
+		Alfresco_Data_Type(String qname, String freemarker, boolean js_freemarker, DataType datatype) {
+			this.qname = qname;
+			this.freemarker = freemarker;
+			this.js_freemarker = js_freemarker;
+			this.datatype = datatype;
+		}
+
+		public static Alfresco_Data_Type getAlf_DataType(String qname) {
+			return valueof.get(qname);
+		}
+
+		public static Alfresco_Data_Type getAlf_DataType(DataType qname) {
+			return m2.get(qname);
+		}
+
+		public static DataType getDataType(String qname) {
+			if (m == null) {
+				m = new HashMap<AttributeServices.Alfresco_Data_Type, DataType>();
+				Alfresco_Data_Type[] values = values();
+				for (Alfresco_Data_Type alfresco_Data_Type : values) {
+					m.put(alfresco_Data_Type, alfresco_Data_Type.datatype);
+				}
+			}
+			return m.get(qname);
+
+		}
 	}
 }
