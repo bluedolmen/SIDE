@@ -35,26 +35,23 @@ import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
 
 <%for (getAllClasses().nSort("name")){%>
 #Class' messages : <%getQualifiedName()%>
-<%getFolder()%>_model.type.<%getFolder()%>_<%getQualifiedName()%>.title=<%getLabel()%>
-<%getFolder()%>_model.type.<%getFolder()%>_<%getQualifiedName()%>.description=<%getDescriptionOrName()%>
-	<%for (getSortedAttibutes()){%>
-<%getFolder()%>_model.property.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>.title=<%getLabel()%>
-<%getFolder()%>_model.property.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>.description=<%getDescriptionOrName()%>
-	<%}%>
-	<%for (getSourceAssociationEnds()){%>
-<%getFolder()%>_model.association.<%eContainer().getFolder()%>_<%current(1).getQualifiedName()%>_<%if (name != null){%><%name%><%}%>.title=<%getRoleOrTitleFromSource()%>
-<%--<%getFolder()%>_model.association.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>_search.title=<%getRoleOrTitle(current(1))%>--%>
-<%--<%getFolder()%>_model.association.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>_search_operator=Option <%getLabel()%>--%>
-<%getFolder()%>_model.association.<%eContainer().getFolder()%>_<%current(1).getQualifiedName()%>_<%if (name != null){%><%name%><%}%>.description=<%eContainer().getDescriptionOrName()%>
-	<%}%>	
-	
+<%getFolder()%>_model.type.<%getPrefixedQName("_")%>.title=<%getLabel()%>
+<%getFolder()%>_model.type.<%getPrefixedQName("_")%>.description=<%getDescriptionOrName()%>
+<%generateMessagesForAbsClasses()%>
 <%}%>
 <%for (getAllAspects().nSort("name")){%>
 #Aspect's messages : <%getQualifiedName()%>
-<%getFolder()%>_model.aspect.<%getFolder()%>_<%getQualifiedName()%>.title=<%getLabel()%>
-<%getFolder()%>_model.aspect.<%getFolder()%>_<%getQualifiedName()%>.description=<%getDescriptionOrName()%>
-	<%for (getSortedAttibutes()){%>
-<%getFolder()%>_model.property.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>.title=<%getLabel()%>
-<%getFolder()%>_model.property.<%getFolder()%>_<%current(1).getQualifiedName()%>_<%name%>.description=<%getDescriptionOrName()%>
-	<%}%>
+<%getFolder()%>_model.aspect.<%getPrefixedQName("_")%>.title=<%getLabel()%>
+<%getFolder()%>_model.aspect.<%getPrefixedQName("_")%>.description=<%getDescriptionOrName()%>
+<%generateMessagesForAbsClasses()%>	
+<%}%>
+
+<%script type="AbstractClass" name="generateMessagesForAbsClasses"%>
+<%for (getSortedAttibutes()){%>
+<%getFolder()%>_model.property.<%getPrefixedQName("_")%>.title=<%getLabel()%>
+<%getFolder()%>_model.property.<%getPrefixedQName("_")%>.description=<%getDescriptionOrName()%>
+<%}%>
+<%for (getSourceAssociationEnds()){%>
+<%getFolder()%>_model.association.<%eContainer().getPrefixedAssociationQName(current("AssociationEnd"))%>.title=<%getRoleOrTitleFromSource()%>
+<%getFolder()%>_model.association.<%eContainer().getPrefixedAssociationQName(current("AssociationEnd"))%>.description=<%eContainer().getDescriptionOrName()%>
 <%}%>
