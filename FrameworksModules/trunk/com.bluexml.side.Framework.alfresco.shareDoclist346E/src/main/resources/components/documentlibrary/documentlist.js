@@ -925,7 +925,7 @@
 										var customDesc = "";
 										if (typeof customProp == "object") {
 											for ( var x in customProp) {
-												var i18nKey = x.replace(/.*:/, "");
+												var i18nKey = x.replace(":", "_");
 												customDesc += '<span class="item"><em>' + scope.msg(i18nKey) + '</em> ' + customProp[x] + '</span>';
 											}
 										}
@@ -1001,7 +1001,7 @@
 										var customDesc = "";
 										if (typeof customProp == "object") {
 											for ( var x in customProp) {
-												var i18nKey = x.replace(/.*:/, "");
+												var i18nKey = x.replace(":", "_");
 												customDesc += '<span class="item"><em>' + scope.msg(i18nKey) + '</em> ' + customProp[x] + '</span>';
 											}
 										}
