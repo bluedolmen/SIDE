@@ -3,6 +3,7 @@ metamodel http://www.kerblue.org/class/1.0
 
 import templates.alfrescoshare.uploadForm.file-upload-js-get-lib
 import templates.servicesTemplates.Common
+import com.bluexml.side.clazz.service.alfresco.ClassServices
 %>
 
 <%--
@@ -117,10 +118,7 @@ search.sort.size=Size
 search.sort.mimetype=MIME Type
 search.sort.type=Type
 
-## Custom Types
-<%for (getAllAbstractClasses().nSort("name")){%>
-### <%getFullName()%>
-<%for (getSortedAttibutes()){%>
-<%getQualifiedName%>=<%getLabel()%>
-<%}%>
+## SIDE view labels
+<%for (getAllReferencedAttributes()){%>
+<%getPrefixedQualifiedName().replaceAll(":", "_")%>=<%getLabel()%>
 <%}%>

@@ -23,10 +23,12 @@ import org.eclipse.emf.common.util.EList;
 
 import com.bluexml.side.clazz.AbstractClass;
 import com.bluexml.side.clazz.Association;
+import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.common.Comment;
 import com.bluexml.side.common.Stereotype;
+import com.bluexml.side.util.metaModel.validate.OCLextension.OCLEvaluator;
 
 public class ClassServices {
 
@@ -148,5 +150,11 @@ public class ClassServices {
 			}
 		}
 		return filtered;
+	}
+	
+	public static EList<Attribute> getAllReferencedAttributes(ClassPackage p) throws Exception {
+		String oclExp="self.getAllAbstractClasses().getAllAttributes() ->asSet() ->sortedBy(name)";
+		EList<Attribute> eval = OCLEvaluator.eval(p,oclExp);
+		return eval;
 	}
 }
