@@ -443,7 +443,9 @@ public class EResourceUtils {
 		URI createFileURI = URI.createFileURI(canonicalPath);
 		Resource outputResource = set.createResource(createFileURI);
 		outputResource.getContents().add(rootObject);
-		outputResource.save(os, null);
+		Map<Object, Object> options = new HashMap<Object, Object>();
+		options.put(XMLResource.OPTION_ENCODING, "UTF-8"); //$NON-NLS-1$
+		outputResource.save(os, options);
 		os.close();
 	}
 

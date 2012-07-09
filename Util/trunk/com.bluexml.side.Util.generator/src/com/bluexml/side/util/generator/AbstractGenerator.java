@@ -63,7 +63,7 @@ public abstract class AbstractGenerator implements IGenerator, Checkable {
 	//	public static String GENERATOR_CODE = null;
 	protected static String techVersion = null;
 	protected DependencesManager dm;
-	protected boolean debugMode = false;
+	protected boolean debugMode = true;
 
 	public ComponentMonitor getMonitor() {
 		return monitor;

@@ -50,16 +50,20 @@ public class SynchonizeWithClassDiagramAction extends Action implements ISelecti
 	private void doAction(FormCollection fc) {
 		// We will iterate on each child on make action for each FormClass
 		SynchronizeWithClass synchronizer = new SynchronizeWithClass(domain);
-		synchronizer.synchronize(fc);
+		try {
+			synchronizer.synchronize(fc);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 		CompoundCommand cc = synchronizer.getCc();
 		domain.getCommandStack().execute(cc);
-		
-//		for (FormContainer form : fc.getForms()) {
-//			if (form instanceof FormClass) {
-//				Command c = ClassSynchronizationUtils.synchronizeClass((FormClass) form, domain);
-//				domain.getCommandStack().execute(c);
-//			}
-//		}
+
+		//		for (FormContainer form : fc.getForms()) {
+		//			if (form instanceof FormClass) {
+		//				Command c = ClassSynchronizationUtils.synchronizeClass((FormClass) form, domain);
+		//				domain.getCommandStack().execute(c);
+		//			}
+		//		}
 	}
 
 	@Override

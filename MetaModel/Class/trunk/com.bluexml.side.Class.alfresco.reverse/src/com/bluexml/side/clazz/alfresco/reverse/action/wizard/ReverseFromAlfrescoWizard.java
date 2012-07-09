@@ -101,6 +101,7 @@ public class ReverseFromAlfrescoWizard extends Wizard implements IWorkbenchWizar
 					}
 					monitor.done();
 					current = STATE.finished;
+					
 				}
 			};
 

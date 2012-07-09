@@ -24,7 +24,6 @@ import com.bluexml.side.clazz.Model;
 import com.bluexml.side.clazz.TitledNamedClassModelElement;
 import com.bluexml.side.clazz.service.alfresco.CommonServices;
 import com.bluexml.side.common.ModelElement;
-import com.bluexml.side.common.NameSpace;
 import com.bluexml.side.common.NamedModelElement;
 import com.bluexml.side.form.ClassFormCollection;
 import com.bluexml.side.form.ClassReference;
@@ -69,7 +68,7 @@ public class SynchronizeWithClass {
 		headless = true;
 	}
 
-	public void synchronize(FormCollection fc) {
+	public void synchronize(FormCollection fc) throws Exception {
 		InternalModification.dontMoveToDisabled();
 		removeInvalide(fc);
 
@@ -87,9 +86,8 @@ public class SynchronizeWithClass {
 
 				if (!(abstractClass instanceof Clazz) ^ !((Clazz) abstractClass).isAbstract()) {
 					FormContainer formContainer = null;
-					NameSpace logicalNameSpace = abstractClass.getLogicalNameSpace();
-					boolean isNativeAlfresco = logicalNameSpace != null && logicalNameSpace.getURI().startsWith("http://www.alfresco.org/model");
-					if (!isNativeAlfresco || includeAlfrescoNativeClass) {
+					
+					if (!CommonServices.isNativeModel(abstractClass) || includeAlfrescoNativeClass) {
 
 						if (fc instanceof ClassFormCollection) {
 							formContainer = FormFactory.eINSTANCE.createFormClass();

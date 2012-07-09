@@ -612,6 +612,43 @@ public class ClassPackageImpl extends PackageImpl implements ClassPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<CustomDataType> getAllCustomDataType() {
+		if (getAllCustomDataTypeBodyOCL == null) {
+			EOperation eOperation = ClazzPackage.Literals.CLASS_PACKAGE.getEOperations().get(11);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(ClazzPackage.Literals.CLASS_PACKAGE, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				getAllCustomDataTypeBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(getAllCustomDataTypeBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<CustomDataType> result = (Collection<CustomDataType>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<CustomDataType>(result.size(), result.toArray());
+	
+	}
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #getAllCustomDataType <em>Get All Custom Data Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAllCustomDataType
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> getAllCustomDataTypeBodyOCL;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {

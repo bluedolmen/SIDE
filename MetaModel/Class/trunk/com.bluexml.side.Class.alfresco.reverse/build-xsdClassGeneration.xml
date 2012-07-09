@@ -7,7 +7,7 @@
 		</classpath>
 	</taskdef>
 	<target name="prepare-compile" description="Compilation du schéma pour obtenir les classes nécessaires à la production du fichier mapping.xml">
-		<mkdir dir="${generated.sources.dir.3.4.d}" />
-		<xjc schema="alfresco/xsd/modelSchema_3.4.d.xsd" destdir="${generated.sources.dir.3.4.d}" package="com.bluexml.side.alfresco.binding" removeOldOutput="yes" header="false"/>
+		<mkdir dir="${generated.sources.dir}" />
+		<xjc schema="alfresco/xsd/modelSchema_mergedAllVersion.xsd" destdir="${generated.sources.dir}" package="com.bluexml.side.alfresco.binding" removeOldOutput="yes" header="false"/>
 	</target>
 </project>

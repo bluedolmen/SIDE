@@ -14,6 +14,7 @@ import java.util.Set;
 import java.util.Map.Entry;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Path;
@@ -585,7 +586,7 @@ public class ApplicationUtil {
 				// side.customModules generator is a system generator only used to list user module dependencies so modules are not listed in extension point but provided in configuration
 				String id = generatorConfiguration.getId();
 				System.out.println("ApplicationUtil.updateConfigurationFromExtensionPoint() generatorId :" + id);
-				
+
 				if (!isCustomModuleGenerator(id)) {
 					System.out.println("ApplicationUtil.updateConfigurationFromExtensionPoint() generatorId != side.customModules");
 					Map<String, IConfigurationElement> dependencies_ext = new HashMap<String, IConfigurationElement>();
@@ -1000,8 +1001,7 @@ public class ApplicationUtil {
 	public static Display getDisplay() {
 		Display display = Display.getCurrent();
 		// may be null if outside the UI thread
-		if (display == null)
-			display = Display.getDefault();
+		if (display == null) display = Display.getDefault();
 		return display;
 	}
 
@@ -1070,4 +1070,23 @@ public class ApplicationUtil {
 		return manager.performStringSubstitution(exp);
 	}
 
+	/**
+	 * TODO all
+	 * 
+	 * @param sideProject
+	 * @param applicationFile
+	 */
+	public static void updateApplicationCustomModuleFromSrcModule(IProject sideProject, IFile applicationFile) {
+
+		// parse application file search for customModule generator
+		
+		// if custom module exists continue
+
+		// locate modules binaries (amp, zip) or src
+
+		// extract module information (moduleid package version)
+
+		// update application model with extracted information
+
+	}
 }

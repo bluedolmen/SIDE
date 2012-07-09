@@ -123,6 +123,12 @@ public class ReverseModel {
 		EList<Enumeration> allEnumerations = m.getAllEnumerations();
 		namedElements.addAll(allEnumerations);
 
+		// DataType
+		EList<CustomDataType> allCustomDataType = m.getAllCustomDataType();
+		if (allCustomDataType.size() > 0) {
+			namedElements.addAll(allCustomDataType);
+		}
+
 		// records all NamedModelElement
 		for (NamedModelElement abstractClass : namedElements) {
 			String prefixedQName = CommonServices.getPrefixedQName(abstractClass);
@@ -167,34 +173,43 @@ public class ReverseModel {
 		return model;
 	}
 
-	private void addDataTypes(Model model, com.bluexml.side.alfresco.binding.Model alfModel) {
-		// TODO Auto-generated method stub
+	private void addDataTypes(Model model, com.bluexml.side.alfresco.binding.Model alfModel) throws Exception {
 		DataTypes dataTypesE = alfModel.getDataTypes();
 		if (dataTypesE != null) {
 			List<com.bluexml.side.alfresco.binding.Model.DataTypes.DataType> dataTypes = dataTypesE.getDataType();
 			for (com.bluexml.side.alfresco.binding.Model.DataTypes.DataType dataType : dataTypes) {
-				CustomDataType createCustomDataType = CommonFactory.eINSTANCE.createCustomDataType();
-				// extract data from dataType 
-				Element analyserClass = (Element)dataType.getAnalyserClass();
-				System.out.println("ReverseModel.addDataTypes() " + analyserClass.getClass().getName());
-				String description = dataType.getDescription();
-				Element javaClass = (Element) dataType.getJavaClass();
-				System.out.println("ReverseModel.addDataTypes() " + javaClass.getClass().getName());
-				String name = dataType.getName();
-				String title = dataType.getTitle();
-
-				// set customDataType
-				createCustomDataType.setName(name);
-				createCustomDataType.setDescription(description);
-				createCustomDataType.setDataTypeImp(javaClass.getTextContent());
-
-				MetaInfo createMetaInfo = ReverseHelper.createMetaInfo("analyser", null, analyserClass.getTextContent());
-				createCustomDataType.getMetainfo().add(createMetaInfo);
-				model.getCustomDataTypeSet().add(createCustomDataType);
-				register.recordNewEObject(createCustomDataType, name);
-				System.out.println("ReverseModel.addDataTypes() reccord :" + name);
+				createDataType(model, dataType);
 			}
 		}
+	}
+
+	protected void createDataType(Model model, com.bluexml.side.alfresco.binding.Model.DataTypes.DataType dataType) {
+		CustomDataType createCustomDataType = CommonFactory.eINSTANCE.createCustomDataType();
+		// extract data from dataType 
+		Element analyserClass = (Element) dataType.getAnalyserClass();
+		if (analyserClass == null) {
+			// model from alfresco 4.0+
+			analyserClass = (Element) dataType.getDefaultAnalyserClass();
+		}
+
+		System.out.println("ReverseModel.addDataTypes() " + analyserClass.getClass().getName());
+		String description = dataType.getDescription();
+		Element javaClass = (Element) dataType.getJavaClass();
+		System.out.println("ReverseModel.addDataTypes() " + javaClass.getClass().getName());
+		String qname = dataType.getName();
+		String title = dataType.getTitle();
+
+		// set customDataType
+		setNameAndNS(createCustomDataType, qname);
+		createCustomDataType.setDescription(description);
+		createCustomDataType.setDataTypeImp(javaClass.getTextContent());
+
+		MetaInfo createMetaInfo = ReverseHelper.createMetaInfo("analyser", null, analyserClass.getTextContent());
+		createCustomDataType.getMetainfo().add(createMetaInfo);
+		model.getCustomDataTypeSet().add(createCustomDataType);
+		register.recordNewEObject(createCustomDataType, qname);
+		System.out.println("ReverseModel.addDataTypes() reccord :" + qname);
+		ReverseHelper.addSimpleNameTag(createCustomDataType);
 	}
 
 	private void addAspects(Model model, com.bluexml.side.alfresco.binding.Model alfModel) throws Exception {
@@ -286,7 +301,7 @@ public class ReverseModel {
 				}
 			}
 		}
-
+		ReverseHelper.addSimpleNameTag(c);
 	}
 
 	private com.bluexml.side.clazz.Aspect createNewAspect(Model model, com.bluexml.side.alfresco.binding.Class type, com.bluexml.side.alfresco.binding.Model alfModel) throws Exception {
@@ -368,6 +383,7 @@ public class ReverseModel {
 		}
 		AssociationEnd createAssoEndTarget = createAssoEnd(parseBoolean, many2, true, role2, target.getClazz(), model, alfModel);
 		asso.setSecondEnd(createAssoEndTarget);
+		ReverseHelper.addSimpleNameTag(asso);
 		return asso;
 	}
 
@@ -392,6 +408,7 @@ public class ReverseModel {
 			srcMax = "-1";
 		}
 		createAssociationEndSource.setCardMax(srcMax);
+		ReverseHelper.addSimpleNameTag(createAssociationEndSource);
 		return createAssociationEndSource;
 	}
 
@@ -401,142 +418,155 @@ public class ReverseModel {
 			List<Property> properties = propertiesE.getProperty();
 			if (properties != null) {
 				for (Property property : properties) {
-					Attribute attribute = ClazzFactory.eINSTANCE.createAttribute();
-					ac.getAttributes().add(attribute);
-
-					String qname = property.getName();
-					register.recordNewEObject(attribute, qname);
-					setNameAndNS(attribute, qname);
-					attribute.setTitle(property.getTitle());
-
-					String propType = property.getType();
-					DataType propertyType = AttributeServices.getPropertyType(propType);
-					attribute.setTyp(propertyType);
-
-					if (propertyType.equals(DataType.CUSTOM)) {
-						// need to search for matching reference in register
-						System.out.println("ReverseModel.addProperties() search CustomDataType for :" + propType);
-						CustomDataType eObject = (CustomDataType) register.getEObject(CustomDataTypeImpl.class, propType);
-						attribute.setCustomType(eObject);
-					}
-
-					String description = property.getDescription();
-					attribute.setDescription(description);
-
-					Object default1 = property.getDefault();
-					if (default1 instanceof String) {
-						attribute.setInitialValue((String) default1);
-					}
-
-					// Mandatory
-					MandatoryDef mandatory2 = property.getMandatory();
-					if (mandatory2 != null) {
-						String mandatory = mandatory2.getContent();
-						if (mandatory.trim().equals("true")) {
-							MetaInfo createRequired = ReverseHelper.createRequired();
-							attribute.getMetainfo().add(createRequired);
-
-							// mandatory/@enforced
-							Boolean enforced = mandatory2.isEnforced();
-							if (enforced != null && enforced) {
-								MetaInfo createMandatoryEnforced = ReverseHelper.createMandatoryEnforced();
-								attribute.getMetainfo().add(createMandatoryEnforced);
-							}
-						}
-					}
-
-					Index index = property.getIndex();
-					if (index != null) {
-						String tokenised = index.getTokenised();
-						Boolean atomic = index.isAtomic();
-						boolean enabled = index.isEnabled();
-						Boolean stored = index.isStored();
-						if (enabled) {
-							MetaInfo createPropertySearched = ReverseHelper.createPropertySearched();
-							attribute.getMetainfo().add(createPropertySearched);
-						}
-
-						if (atomic != null && atomic) {
-							MetaInfo createIndexAtomic = ReverseHelper.createIndexAtomic();
-							attribute.getMetainfo().add(createIndexAtomic);
-						}
-
-						if (stored != null && stored) {
-							MetaInfo createIndexStored = ReverseHelper.createIndexStored();
-							attribute.getMetainfo().add(createIndexStored);
-						}
-
-						if (StringUtils.trimToNull(tokenised) != null) {
-							MetaInfo createIndexTokenised = ReverseHelper.createIndexTokenised(tokenised);
-							attribute.getMetainfo().add(createIndexTokenised);
-						}
-
-					}
-
-					// NOT REVERSED SIDE MM do not are equivalent
-					// protected
-
-					// constraints
-					// SIDE Have Enumeration the equivalent for Alfresco is constraints type=LIST
-					com.bluexml.side.alfresco.binding.Property.Constraints constraintsE = property.getConstraints();
-					if (constraintsE != null) {
-						List<Constraint> constraints = constraintsE.getConstraint();
-						for (Constraint constraint : constraints) {
-							EObject eObject = null;
-							String ref = constraint.getRef();
-							if (ref == null) {
-								// local declaration
-								String constraintsType = constraint.getType();
-								if (constraintsType.equals(CONSTRAINTS_ENUMERATION_TYPE)) {
-									// Enumeration					
-									eObject = createEnumeration(model, constraint, property);
-								} else if (constraintsType.equals(CONSTRAINTS_LENGTH)) {
-									List<NamedValue> parameters = constraint.getParameter();
-									for (NamedValue namedValue : parameters) {
-										if (namedValue.getName().equals("minLength")) {
-											MetaInfo createMinLength = ReverseHelper.createMinLength(Integer.parseInt(namedValue.getValue()));
-											attribute.getMetainfo().add(createMinLength);
-										} else if (namedValue.getName().equals("maxLength")) {
-											MetaInfo createMaxLength = ReverseHelper.createMaxLength(Integer.parseInt(namedValue.getValue()));
-											attribute.getMetainfo().add(createMaxLength);
-										}
-									}
-								} else if (constraintsType.equals(CONSTRAINTS_REGEX)) {
-									List<NamedValue> parameters = constraint.getParameter();
-									for (NamedValue namedValue : parameters) {
-										if (namedValue.getName().equals("expression")) {
-											MetaInfo createRegularExpression = ReverseHelper.createRegularExpression(namedValue.getValue());
-											attribute.getMetainfo().add(createRegularExpression);
-
-										} else if (namedValue.getName().equals("requiresMatch")) {
-											MetaInfo createRegularExpressionMatch = ReverseHelper.createRegularExpressionMatch();
-											attribute.getMetainfo().add(createRegularExpressionMatch);
-										}
-									}
-
-								} else {
-									eObject = createConstraints(model, constraint, property);
-								}
-							} else {
-								// referenced constraints
-								eObject = register.getEObject(com.bluexml.side.common.Constraint.class, ref);
-								if (eObject == null) {
-									// search an Enumeration
-									eObject = register.getEObject(Enumeration.class, ref);
-								}
-							}
-
-							if (eObject instanceof com.bluexml.side.common.Constraint) {
-								attribute.getConstraints().add((com.bluexml.side.common.Constraint) eObject);
-							} else if (eObject instanceof Enumeration) {
-								attribute.setValueList((Enumeration) eObject);
-							}
-
-						}
-					}
+					createAttribute(model, ac, property);
 				}
 			}
 		}
+	}
+
+	protected void createAttribute(Model model, AbstractClass ac, Property property) throws Exception {
+		Attribute attribute = ClazzFactory.eINSTANCE.createAttribute();
+		ac.getAttributes().add(attribute);
+
+		String qname = property.getName();
+		register.recordNewEObject(attribute, qname);
+		setNameAndNS(attribute, qname);
+		attribute.setTitle(property.getTitle());
+
+		String propType = property.getType();
+		DataType propertyType = AttributeServices.getPropertyType(propType);
+		if (propertyType == null) {
+			// no existing mapping so use Custom
+			propertyType = DataType.CUSTOM;
+		}
+		attribute.setTyp(propertyType);
+
+		if (propertyType.equals(DataType.CUSTOM)) {
+			// need to search for matching reference in register
+			System.out.println("ReverseModel.addProperties() search CustomDataType for :" + propType);
+			CustomDataType eObject = (CustomDataType) register.getEObject(CustomDataTypeImpl.class, propType);
+			if (eObject == null) {
+				register.printX();
+				throw new Exception("CustomDataType Object not found ");
+			}
+			attribute.setCustomType(eObject);
+		}
+
+		String description = property.getDescription();
+		attribute.setDescription(description);
+
+		Object default1 = property.getDefault();
+		if (default1 instanceof String) {
+			attribute.setInitialValue((String) default1);
+		}
+
+		// Mandatory
+		MandatoryDef mandatory2 = property.getMandatory();
+		if (mandatory2 != null) {
+			String mandatory = mandatory2.getContent();
+			if (mandatory.trim().equals("true")) {
+				MetaInfo createRequired = ReverseHelper.createRequired();
+				attribute.getMetainfo().add(createRequired);
+
+				// mandatory/@enforced
+				Boolean enforced = mandatory2.isEnforced();
+				if (enforced != null && enforced) {
+					MetaInfo createMandatoryEnforced = ReverseHelper.createMandatoryEnforced();
+					attribute.getMetainfo().add(createMandatoryEnforced);
+				}
+			}
+		}
+
+		Index index = property.getIndex();
+		if (index != null) {
+			String tokenised = index.getTokenised();
+			Boolean atomic = index.isAtomic();
+			boolean enabled = index.isEnabled();
+			Boolean stored = index.isStored();
+			if (enabled) {
+				MetaInfo createPropertySearched = ReverseHelper.createPropertySearched();
+				attribute.getMetainfo().add(createPropertySearched);
+			}
+
+			if (atomic != null && atomic) {
+				MetaInfo createIndexAtomic = ReverseHelper.createIndexAtomic();
+				attribute.getMetainfo().add(createIndexAtomic);
+			}
+
+			if (stored != null && stored) {
+				MetaInfo createIndexStored = ReverseHelper.createIndexStored();
+				attribute.getMetainfo().add(createIndexStored);
+			}
+
+			if (StringUtils.trimToNull(tokenised) != null) {
+				MetaInfo createIndexTokenised = ReverseHelper.createIndexTokenised(tokenised);
+				attribute.getMetainfo().add(createIndexTokenised);
+			}
+
+		}
+
+		// NOT REVERSED SIDE MM do not are equivalent
+		// protected
+
+		// constraints
+		// SIDE Have Enumeration the equivalent for Alfresco is constraints type=LIST
+		com.bluexml.side.alfresco.binding.Property.Constraints constraintsE = property.getConstraints();
+		if (constraintsE != null) {
+			List<Constraint> constraints = constraintsE.getConstraint();
+			for (Constraint constraint : constraints) {
+				EObject eObject = null;
+				String ref = constraint.getRef();
+				if (ref == null) {
+					// local declaration
+					String constraintsType = constraint.getType();
+					if (constraintsType.equals(CONSTRAINTS_ENUMERATION_TYPE)) {
+						// Enumeration					
+						eObject = createEnumeration(model, constraint, property);
+					} else if (constraintsType.equals(CONSTRAINTS_LENGTH)) {
+						List<NamedValue> parameters = constraint.getParameter();
+						for (NamedValue namedValue : parameters) {
+							if (namedValue.getName().equals("minLength")) {
+								MetaInfo createMinLength = ReverseHelper.createMinLength(Integer.parseInt(namedValue.getValue()));
+								attribute.getMetainfo().add(createMinLength);
+							} else if (namedValue.getName().equals("maxLength")) {
+								MetaInfo createMaxLength = ReverseHelper.createMaxLength(Integer.parseInt(namedValue.getValue()));
+								attribute.getMetainfo().add(createMaxLength);
+							}
+						}
+					} else if (constraintsType.equals(CONSTRAINTS_REGEX)) {
+						List<NamedValue> parameters = constraint.getParameter();
+						for (NamedValue namedValue : parameters) {
+							if (namedValue.getName().equals("expression")) {
+								MetaInfo createRegularExpression = ReverseHelper.createRegularExpression(namedValue.getValue());
+								attribute.getMetainfo().add(createRegularExpression);
+
+							} else if (namedValue.getName().equals("requiresMatch")) {
+								MetaInfo createRegularExpressionMatch = ReverseHelper.createRegularExpressionMatch();
+								attribute.getMetainfo().add(createRegularExpressionMatch);
+							}
+						}
+
+					} else {
+						eObject = createConstraints(model, constraint, property);
+					}
+				} else {
+					// referenced constraints
+					eObject = register.getEObject(com.bluexml.side.common.Constraint.class, ref);
+					if (eObject == null) {
+						// search an Enumeration
+						eObject = register.getEObject(Enumeration.class, ref);
+					}
+				}
+
+				if (eObject instanceof com.bluexml.side.common.Constraint) {
+					attribute.getConstraints().add((com.bluexml.side.common.Constraint) eObject);
+				} else if (eObject instanceof Enumeration) {
+					attribute.setValueList((Enumeration) eObject);
+				}
+
+			}
+		}
+		ReverseHelper.addSimpleNameTag(attribute);
 	}
 
 	private com.bluexml.side.common.Constraint createConstraints(Model model, Constraint constraint, Property localDeclarationContext) {
@@ -561,6 +591,7 @@ public class ReverseModel {
 			createConstraintParam.getValues().add(namedValue.getValue());
 			createConstraint.getParams().add(createConstraintParam);
 		}
+		ReverseHelper.addSimpleNameTag(createConstraint);
 		return createConstraint;
 	}
 
@@ -598,15 +629,26 @@ public class ReverseModel {
 		// Enumeration
 		List<NamedValue> parameters = constraint.getParameter();
 		for (NamedValue namedValue : parameters) {
-			com.bluexml.side.alfresco.binding.NamedValue.List list = namedValue.getList();
-			List<String> values = list.getValue();
-			for (String value : values) {
-				EnumerationLiteral createEnumerationLiteral = ClazzFactory.eINSTANCE.createEnumerationLiteral();
-				createEnumerationLiteral.setName(value);
-				createEnumerationLiteral.setValue(value);
-				createEnumeration.getLiterals().add(createEnumerationLiteral);
+			if (namedValue.getName().equals("allowedValues")) {
+				com.bluexml.side.alfresco.binding.NamedValue.List list = namedValue.getList();
+				List<String> values = list.getValue();
+				for (String value : values) {
+					EnumerationLiteral createEnumerationLiteral = ClazzFactory.eINSTANCE.createEnumerationLiteral();
+					createEnumerationLiteral.setName(value);
+					createEnumerationLiteral.setValue(value);
+					createEnumeration.getLiterals().add(createEnumerationLiteral);
+				}
+			} else if (namedValue.getName().equals("caseSensitive")) {
+				MetaInfo m = CommonFactory.eINSTANCE.createMetaInfo();
+				m.setKey("caseSensitive");
+				// check that the value is boolean, and set value
+				boolean parseBoolean = Boolean.parseBoolean(namedValue.getValue());
+				m.setValue(Boolean.toString(parseBoolean));
+				createEnumeration.getMetainfo().add(m);
 			}
+
 		}
+		ReverseHelper.addSimpleNameTag(createEnumeration);
 		return createEnumeration;
 	}
 

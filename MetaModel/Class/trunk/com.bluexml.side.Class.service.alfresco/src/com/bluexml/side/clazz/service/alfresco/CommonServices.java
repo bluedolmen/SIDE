@@ -19,11 +19,12 @@ import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NameSpace;
 import com.bluexml.side.common.NamedModelElement;
+import com.bluexml.side.common.Tag;
 import com.bluexml.side.util.metaModel.validate.OCLextension.OCLEvaluator;
 
 public class CommonServices {
 	public static String getNamedModelElementQName(NamedModelElement node) throws Exception {
-		if (isNativeModel(node)) {
+		if (isSimpleName(node)) {
 			return node.getName();
 		}
 		return convertFullNameToQualifiedName(node.getFullName());
@@ -31,7 +32,6 @@ public class CommonServices {
 
 	public static String convertFullNameToQualifiedName(String fullName) {
 		return fullName.replaceAll("\\.", "_");
-		// return StringHelper.getJavaQName(fullName, "\\.");
 	}
 
 	public static EObject getRootContainer(EObject o) {
@@ -40,10 +40,6 @@ public class CommonServices {
 		} else {
 			return o;
 		}
-	}
-
-	public static boolean isNativeModel(ModelElement element) throws Exception {
-		return getNamespaceURI(element).startsWith("http://www.alfresco.org/model");
 	}
 
 	public static String getPrefixedQName(NamedModelElement node, String separator) throws Exception {
@@ -223,4 +219,37 @@ public class CommonServices {
 		}
 		return filtered;
 	}
+
+	/**
+	 * use this when you need to compute QName
+	 * @param element
+	 * @return
+	 * @throws Exception
+	 */
+	public static boolean isSimpleName(ModelElement element) throws Exception {
+		boolean simpleTag = false;
+		List<Tag> ts = element.getTags();
+		for (Tag tag : ts) {
+			String key = tag.getKey();
+			String value = tag.getValue();
+			if (key.contains("simpleName") && value.contains("true")) {
+				simpleTag = true;
+				break;
+			}
+		}
+
+		return simpleTag || isNativeModel(element);
+	}
+
+	/**
+	 * only use this if you need to know if current element if reversed from native alfresco model
+	 * main case to add defaults properties ...
+	 * @param element
+	 * @return
+	 * @throws Exception
+	 */
+	public static boolean isNativeModel(ModelElement element) throws Exception {
+		return getNamespaceURI(element).startsWith("http://www.alfresco.org/model");
+	}
+
 }

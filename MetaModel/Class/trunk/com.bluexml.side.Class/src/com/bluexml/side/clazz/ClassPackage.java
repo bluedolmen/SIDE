@@ -232,5 +232,14 @@ public interface ClassPackage extends com.bluexml.side.common.Package {
 	 * @generated
 	 */
 	EList<AbstractClass> getAllAbstractClassesAndReferences();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.bluexml.com/OCL body='common::CustomDataType.allInstances()'"
+	 * @generated
+	 */
+	EList<CustomDataType> getAllCustomDataType();
 		
 } // ClassPackage

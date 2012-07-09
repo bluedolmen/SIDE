@@ -28,7 +28,6 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 <%script type="clazz.Aspect" name="alfrescoGeneratorModelAspect" %>	
 		<aspect name="<%getPrefixedQName()%>">
 <%alfrescoGenerator_abstractClass()%>
-	<!-- Aspects -->
 		<%if (aspects.nSize()>0){%>
 			<mandatory-aspects>
 			<%for (aspects.nSort("name")){%>

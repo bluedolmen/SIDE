@@ -2,6 +2,8 @@ package com.bluexml.side.clazz.alfresco.reverse.reverser;
 
 import com.bluexml.side.common.CommonFactory;
 import com.bluexml.side.common.MetaInfo;
+import com.bluexml.side.common.ModelElement;
+import com.bluexml.side.common.Tag;
 
 public class ReverseHelper {
 
@@ -14,7 +16,7 @@ public class ReverseHelper {
 	}
 
 	public static MetaInfo createSimpleMetaInfo(String key) {
-		return createMetaInfo(key, null, null);
+		return createMetaInfo(key, null, "true");
 	}
 
 	public static MetaInfo createRequired() {
@@ -100,4 +102,10 @@ public class ReverseHelper {
 		return qname.split(":")[1];
 	}
 	
+	public static void addSimpleNameTag(ModelElement o) {
+		Tag createTag = CommonFactory.eINSTANCE.createTag();
+		createTag.setKey("simpleName");		
+		createTag.setValue("true");
+		o.getTags().add(createTag);
+	}
 }

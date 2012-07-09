@@ -1,5 +1,6 @@
 package com.bluexml.side.clazz.generator.alfresco;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,14 +8,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
+import com.bluexml.side.clazz.ClazzFactory;
+import com.bluexml.side.clazz.Model;
+import com.bluexml.side.common.CommonFactory;
+import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.util.generator.XMLConflictResolver;
 import com.bluexml.side.util.generator.alfresco.AbstractAlfrescoGenerator;
+import com.bluexml.side.util.libs.IFileHelper;
+import com.bluexml.side.util.libs.ecore.EResourceUtils;
 
 public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
-	public static String templateBase = "/com.bluexml.side.Class.generator.alfresco/templates/";
 	
+
+	public static String templateBase = "/com.bluexml.side.Class.generator.alfresco/templates/";
+
 	protected static final String ALFRESCO_SEARCH_ASSOCIATION = "alfresco.model.association.searchable";
 	/*
 	 * final fields used in generation too
@@ -35,6 +48,7 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 
 	public ClassAlfrescoGenerator() {
 		versionProperty = "com.bluexml.side.Class.generator.alfresco.module.version"; //$NON-NLS-1$
+		this.useOverhead = false;
 	}
 
 	public static String MMUri = "http://www.kerblue.org/class/1.0"; //$NON-NLS-1$
@@ -206,4 +220,41 @@ public class ClassAlfrescoGenerator extends AbstractAlfrescoGenerator {
 		System.out.println("generatorOptionValue :" + generatorOptionValue);
 		return generatorOptionValue;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.bluexml.side.util.generator.acceleo.AbstractAcceleoGenerator#
+	 * overHeadingModels(java.util.List)
+	 */
+	@Override
+	protected IFile overHeadingModels(List<IFile> models) throws Exception {
+		File temporarySystemFile = this.getTemporarySystemFile();
+		if (!temporarySystemFile.exists()) {
+			temporarySystemFile.mkdirs();
+		}
+		IFolder iFile = IFileHelper.getIFolder(temporarySystemFile);
+		IPath fullPath = iFile.getFullPath();
+		// create overhead model resource
+		// IPath p = models.get(0).getParent().getFullPath();
+		
+		IPath p = fullPath;
+		p = p.append(OVER_HEAD_MODEL + "." + models.get(0).getFileExtension());
+		IFile overheadedModel = IFileHelper.getIFile(p);
+
+		// create overhead root element
+		Model m = ClazzFactory.eINSTANCE.createModel();
+		m.setName(OVER_HEAD_MODEL);
+		MetaInfo createMetaInfo = CommonFactory.eINSTANCE.createMetaInfo();
+		createMetaInfo.setKey("overHead");
+		m.getMetainfo().add(createMetaInfo);
+		for (IFile model : models) {
+			EList<EObject> openModel = EResourceUtils.openModel(model);
+			Model eObject = (Model) openModel.get(0);
+			m.getPackageSet().add(eObject);
+		}
+		// save overhead model
+		EResourceUtils.saveModel(overheadedModel, m);
+		return overheadedModel;
+	}
+
 }

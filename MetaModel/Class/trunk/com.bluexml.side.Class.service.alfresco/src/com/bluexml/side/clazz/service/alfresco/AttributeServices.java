@@ -22,6 +22,7 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 
 import com.bluexml.side.clazz.Attribute;
+import com.bluexml.side.clazz.Enumeration;
 import com.bluexml.side.common.CustomDataType;
 import com.bluexml.side.common.DataType;
 
@@ -35,6 +36,7 @@ public class AttributeServices {
 	public String getPropertyType(EObject node) throws Exception {
 		if (node instanceof Attribute) {
 			Attribute object = (Attribute) node;
+
 			DataType typ = object.getTyp();
 			if (typ == DataType.CUSTOM) {
 				// need to get the 
@@ -48,6 +50,7 @@ public class AttributeServices {
 				Alfresco_Data_Type alf_DataType = Alfresco_Data_Type.getAlf_DataType(typ);
 				return alf_DataType.qname;
 			}
+			throw new Exception("somethings wrong ... " + object);
 		}
 		throw new Exception("node must be an attribute");
 	}
@@ -106,8 +109,10 @@ public class AttributeServices {
 		Category("d:category", "?string", false, DataType.CUSTOM),
 		Locale("d:locale", "?string", false, DataType.CUSTOM),
 		Version("d:version", "?string", false, DataType.CUSTOM),
-		Period("d:period", "?string", false, DataType.CUSTOM);
-
+		Period("d:period", "?string", false, DataType.CUSTOM),
+		Cmisid("cmis:id", "?string", false, DataType.CUSTOM),
+		Cmisuri("cmis:uri", "?string", false, DataType.CUSTOM),
+		Cmishtml("cmis:html", "?string", false, DataType.CUSTOM);
 		/*
 		 * d:any
 		 * d:text
@@ -131,7 +136,7 @@ public class AttributeServices {
 		 * d:period
 		 */
 
-		static Map<Alfresco_Data_Type, DataType> m = null;
+		static Map<String, DataType> m = null;
 		static Map<DataType, Alfresco_Data_Type> m2 = null;
 
 		static {
@@ -186,15 +191,23 @@ public class AttributeServices {
 		}
 
 		public static DataType getDataType(String qname) {
-			if (m == null) {
-				m = new HashMap<AttributeServices.Alfresco_Data_Type, DataType>();
+			if (null == null) {
+				m = new HashMap<String, DataType>();
 				Alfresco_Data_Type[] values = values();
 				for (Alfresco_Data_Type alfresco_Data_Type : values) {
-					m.put(alfresco_Data_Type, alfresco_Data_Type.datatype);
+					m.put(alfresco_Data_Type.qname, alfresco_Data_Type.datatype);
 				}
 			}
 			return m.get(qname);
 
 		}
+	}
+
+	public static String getListContraintPrefixedQName(Enumeration en) throws Exception {
+		if (CommonServices.isSimpleName(en)) {
+			return CommonServices.getPrefixedQName(en);
+		}
+		return CommonServices.getPrefix(en) + ":nomenclature:" + CommonServices.getNamedModelElementQName(en);
+
 	}
 }

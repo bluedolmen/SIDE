@@ -75,6 +75,11 @@
         <details key="body" value="AbstractClass.allInstances().getAllLinkedAbstractClass() -> union(AbstractClass.allInstances().getAssociatedClasses())"/>
       </eAnnotations>
     </eOperations>
+    <eOperations name="getAllCustomDataType" upperBound="-1" eType="ecore:EClass ../../com.bluexml.side.Common/model/Common.ecore#//CustomDataType">
+      <eAnnotations source="http://www.bluexml.com/OCL">
+        <details key="body" value="common::CustomDataType.allInstances()"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="classSet" upperBound="-1"
         eType="#//Clazz" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="associationSet" upperBound="-1"

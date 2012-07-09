@@ -33,15 +33,8 @@ import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
 <%if (description != null){%>
 <description><%description%></description>
 <%}%>
-<%script type="clazz.AbstractClass" name="alfrescoGenerator_abstractClass_parent" %>
-<!-- Generalization -->						
-<%for (generalizations.nSort("name")){%>
-    <%if (i() > 0){%>
-<!-- <parent><%getPrefixedQName()%></parent> -->
-    <%}else{%>
-<parent><%getPrefixedQName()%></parent>			    
-    <%}%>
-<%}%>
+<%script type="clazz.Clazz" name="alfrescoGenerator_abstractClass_parent" %>
+<%alfrescoGenerator_parent%>
 <%if (generalizations.nSize() == 0){%>
 	<%if (metainfo[key.equalsIgnoreCase("isContainer")].nSize()>0){%>
 <parent>cm:folder</parent>
@@ -49,12 +42,21 @@ import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
 <parent>bxcm:content</parent>
 	<%}%>
 <%}%>
+<%script type="clazz.AbstractClass" name="alfrescoGenerator_parent" %>
+<%for (generalizations.nSort("name")){%>
+    <%if (i() > 0){%>
+<!-- <parent><%getPrefixedQName()%></parent> -->
+    <%}else{%>
+<parent><%getPrefixedQName()%></parent>			    
+    <%}%>
+<%}%>
+<%script type="clazz.Aspect" name="alfrescoGenerator_abstractClass_parent" %>
+<%alfrescoGenerator_parent%>
 
 <%script type="clazz.AbstractClass" name="alfrescoGenerator_abstractClass_archive" %>
 <archive><%if (metainfo[key.equalsIgnoreCase("archive")].nSize()>0){%>true<%}else{%>false<%}%></archive>
 
 <%script type="clazz.AbstractClass" name="alfrescoGenerator_abstractClass_properties" %>
-<!-- Properties -->
 <properties>
 	<%for (getSortedAttibutes()){%>
 	<property name="<%getPrefixedQName()%>">
@@ -97,12 +99,7 @@ import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
 			<constraint ref="<%getFolder()%>:constraint:mail"/>
 		<%}%>
 		<%if (valueList) {%>
-			<%--<%if (!valueList.dynamic){%>--%>
-				<constraint ref="<%valueList.service::getRootContainer().name%>:nomenclature:<%valueList.getQualifiedName()%>"/>
-			<%--<%}else{%>
-				<!--<constraint ref="<%getFolder()%>:Litteral"/>-->
-				<constraint ref="<%getFolder()%>:enumU:<%valueList.getQualifiedName()%>"/>
-			<%}%>--%>
+			<constraint ref="<%valueList.getListContraintPrefixedQName()%>"/>
 		<%}%>
 		<%if (metainfo[key.endsWith("-length")].nSize()>0) {%>
              <constraint type="LENGTH">
@@ -124,16 +121,15 @@ import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
 		</constraints>
 		<%}%>
 	</property>
-	<%}%>
-	<!-- Properties for search association <%IsSearchInAssociation()%>-->
-	<%if (IsSearchInAssociation()){%>	
+	<%}%>	
+	<%if (IsSearchInAssociation()){%>
+	<!-- Properties to search associations -->	
 	<%generate_searchFieldForAssociation()%>
 	<%}%>
 </properties>
 
 <%script type="clazz.AbstractClass" name="alfrescoGenerator_abstractClass_associations" %>
 <%if (getSourceAssociationEnds().nSize() > 0){%>
-<!-- Associations -->
 <associations>
 <%for (getSourceAssociationEnds()){%>
 	<<%eContainer().getAssociationType()%> name="<%eContainer().getPrefixedAssociationQName(current("AssociationEnd"))%>">
@@ -173,7 +169,7 @@ import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
 <%script type="clazz.AbstractClass" name="generate_searchFieldForAssociation" %>
 <!-- generate_searchFieldForAssociation -->
 <%if (getSourceAssociationEnds().nSize() > 0){%>
-<!-- properties to store seachable associations target-->
+<!-- properties to store searchable associations target -->
 <%for (getSourceAssociationEnds()){%>	
 <%if (eContainer().filter("Association").metainfo[key.equalsIgnoreCase("searchable")].nSize()>0){%>
 <property name="<%eContainer().getPrefixedAssociationQName(current("AssociationEnd"))%>search">

@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.EObject;
 
@@ -27,7 +28,11 @@ public class Reverser {
 		for (Map.Entry<Integer, List<Model>> ent : tree.entrySet()) {
 			for (Model model : ent.getValue()) {
 				EObject sideO = rm.reverse(model);
-				File file = new File(sideModelRepo, ReverseHelper.extractLocalNameFromAlfQName(model.getName()) + ".dt");
+				String name = model.getName();
+				String modelName = ReverseHelper.extractLocalNameFromAlfQName(name);
+				String modelPrefix = ReverseHelper.extractPrefixFromAlfQName(name);
+
+				File file = new File(sideModelRepo, modelPrefix + StringUtils.capitalize(modelName) + ".dt");
 				file.getParentFile().mkdirs();
 				file.createNewFile();
 				System.out.println("save model :" + file);

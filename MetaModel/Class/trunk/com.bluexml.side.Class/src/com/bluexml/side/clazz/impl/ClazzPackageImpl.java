@@ -827,6 +827,8 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 
 		addEOperation(classPackageEClass, this.getAbstractClass(), "getAllAbstractClassesAndReferences", 0, -1, IS_UNIQUE, IS_ORDERED);
 
+		addEOperation(classPackageEClass, theCommonPackage.getCustomDataType(), "getAllCustomDataType", 0, -1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(abstractClassEClass, AbstractClass.class, "AbstractClass", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAbstractClass_Attributes(), this.getAttribute(), null, "attributes", null, 0, -1, AbstractClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractClass_Generalizations(), this.getAbstractClass(), null, "generalizations", null, 0, -1, AbstractClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1048,6 +1050,12 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   source, 
 		   new String[] {
 			 "body", "AbstractClass.allInstances().getAllLinkedAbstractClass() -> union(AbstractClass.allInstances().getAssociatedClasses())"
+		   });		
+		addAnnotation
+		  (classPackageEClass.getEOperations().get(11), 
+		   source, 
+		   new String[] {
+			 "body", "common::CustomDataType.allInstances()"
 		   });		
 		addAnnotation
 		  (abstractClassEClass, 
@@ -1337,7 +1345,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 	 * @generated
 	 */
 	protected void createInternalDocAnnotations() {
-		String source = "InternalDoc";																																																																														
+		String source = "InternalDoc";																																																																															
 		addAnnotation
 		  (classCommentEClass, 
 		   source, 
@@ -1359,7 +1367,7 @@ public class ClazzPackageImpl extends EPackageImpl implements ClazzPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "PackageNameNull"
-		   });															
+		   });																
 		addAnnotation
 		  (abstractClassEClass, 
 		   source, 

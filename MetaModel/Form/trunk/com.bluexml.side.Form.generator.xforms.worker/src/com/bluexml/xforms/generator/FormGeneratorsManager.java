@@ -322,12 +322,12 @@ public class FormGeneratorsManager {
 	 *            the class being used as the source for the association
 	 * @return
 	 */
-	public String getAssoQualifiedName(Association asso, AbstractClass classAsSource) {		
+	public String getAssoQualifiedName(Association asso, AbstractClass classAsSource) {
 		// ** #979, #1273
 		AssociationEnd srcEnd = (AssociationEnd) getRealObject(asso.getFirstEnd());
 		AssociationEnd targetEnd = (AssociationEnd) getRealObject(srcEnd.getOpposite());
 		// @Amenel: not sure whether linked classes may be proxies but getRealObject won't hurt
-		
+
 		AbstractClass targetClass = (AbstractClass) getRealObject(targetEnd.getLinkedClass());
 		// ** #979, #1273
 
@@ -340,7 +340,13 @@ public class FormGeneratorsManager {
 			srcEnd = tempClass;
 		}
 		// use the AssociationService as all other alfresco generator
-		return AssociationServices.getAssociationQName(asso, srcEnd);
+		String associationQName;
+		try {
+			associationQName = AssociationServices.getAssociationQName(asso, srcEnd);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		return associationQName;
 	}
 
 	/**
@@ -469,7 +475,7 @@ public class FormGeneratorsManager {
 	 * 
 	 * @param generators
 	 *            the generators
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public void generate(List<GeneratorInterface> generators) throws Exception {
 		genLogger.setTaskName("Collecting data");
@@ -621,7 +627,7 @@ public class FormGeneratorsManager {
 	 * 
 	 * @param aspect
 	 *            the aspect
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	private void processAspect(Aspect aspect) throws Exception {
 		String completeName = ModelTools.getCompleteName(aspect);
@@ -799,7 +805,7 @@ public class FormGeneratorsManager {
 	 *            the classe
 	 * @param rendered
 	 *            the rendered
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	private void processClasse(Clazz classe, boolean rendered) throws Exception {
 		if (isDebugMode()) {
@@ -828,7 +834,7 @@ public class FormGeneratorsManager {
 	 * 
 	 * @param form
 	 *            the form
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	private void processForm(FormContainer form) throws Exception {
 		currentForm = ModelTools.getCompleteName(form);
@@ -841,7 +847,8 @@ public class FormGeneratorsManager {
 
 	/**
 	 * Process generator.
-	 * @throws Exception 
+	 * 
+	 * @throws Exception
 	 */
 	private void processGenerator() throws Exception {
 		// logger = LogFactory.getLog(currentGenerator.getClass());
@@ -1314,7 +1321,7 @@ public class FormGeneratorsManager {
 			if (StringUtils.trimToNull(fieldOp) == null) {
 				fieldOp = defaultTypeOp;
 			}
- 			listOp.add(getOperatorFromPool(fieldOp));
+			listOp.add(getOperatorFromPool(fieldOp));
 		} else {
 			if (fieldOp == null) {
 				fieldOp = listOp.get(0).getId();

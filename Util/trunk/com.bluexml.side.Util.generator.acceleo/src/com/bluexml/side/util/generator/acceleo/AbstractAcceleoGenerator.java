@@ -61,7 +61,8 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 	private String fileEncoding = System.getProperty("file.encoding"); //$NON-NLS-1$
 	protected String versionProperty = null;
 	protected final static String MAIN_OPTION = "generator.main";
-
+	protected boolean useOverhead = false;
+	protected static final String OVER_HEAD_MODEL = "overHeadModel";
 	/**
 	 * use to give an version number to this generation package
 	 * 
@@ -162,41 +163,60 @@ public abstract class AbstractAcceleoGenerator extends AbstractGenerator {
 		if (modelsInfo.get(id_metamodel) != null && modelsInfo.get(id_metamodel).size() > 0) {
 			List<IFile> models = modelsInfo.get(id_metamodel);
 			groupedModels = MergeUtil.groupByRootPackage(models);
+			List<IFile> models_merged = new ArrayList<IFile>();
 			for (Map.Entry<String, List<IFile>> l : groupedModels.entrySet()) {
 				String rootName = l.getKey();
 				List<IFile> models_ = l.getValue();
 				monitor.getLog().addModelsLog(models_);
-				IFile mergedModel = merging(models_);
-				// initialize generator we must change the TEMP_FOLDER
-				// System.out.println("getClass().getName(): " +
-				// getClass().getName());
-				setTEMP_FOLDER("generator_" + getClass().getName() + File.separator + rootName); //$NON-NLS-1$
-				// clean directory before generate, needed if cleaning option is
-				// not enable
-				File wkdir = getTemporarySystemFile();
-				if (wkdir.exists()) {
-					boolean result = FileHelper.deleteFile(wkdir);
-					// update IFolder
-					IFileHelper.refreshFolder(wkdir);
-					if (!result) {
-						monitor.getLog().addWarningLog(Activator.Messages.getString("AbstractAcceleoGenerator_7"), Activator.Messages.getString("AbstractAcceleoGenerator_8"), ""); //$NON-NLS-1$ //$NON-NLS-2$//$NON-NLS-3$
-					}
+				IFile mergedModel = merging(models_, rootName);
+				models_merged.add(mergedModel);
+
+				if (!useOverhead) {
+					// initialize generator we must change the TEMP_FOLDER
+					prepareTempFolder(rootName);
+					// generate
+					results.addAll(generate(mergedModel));
 				}
+			}
+
+			if (useOverhead) {
+				prepareTempFolder(OVER_HEAD_MODEL);
+				// we create a new model that contains all accepted models before execute the generation
+				IFile overHeadModel = overHeadingModels(models_merged);
 				// generate
-				results.addAll(generate(mergedModel));
+				results.addAll(generate(overHeadModel));
 			}
 		}
 		return results;
 	}
 
-	protected IFile merging(List<IFile> models) throws Exception {
+	protected void prepareTempFolder(String rootName) throws Exception, CoreException {
+		setTEMP_FOLDER("generator_" + getClass().getName() + File.separator + rootName); //$NON-NLS-1$
+		// clean directory before generate, needed if cleaning option is
+		// not enable
+		File wkdir = getTemporarySystemFile();
+		if (wkdir.exists()) {
+			boolean result = FileHelper.deleteFile(wkdir);
+			// update IFolder
+			IFileHelper.refreshFolder(wkdir);
+			if (!result) {
+				monitor.getLog().addWarningLog(Activator.Messages.getString("AbstractAcceleoGenerator_7"), Activator.Messages.getString("AbstractAcceleoGenerator_8"), ""); //$NON-NLS-1$ //$NON-NLS-2$//$NON-NLS-3$
+			}
+		}
+	}
+
+	protected IFile overHeadingModels(List<IFile> models) throws Exception {
+		throw new UnsupportedOperationException("This Implementation do not provide support of overheading generation");
+	}
+
+	protected IFile merging(List<IFile> models, String rootName) throws Exception {
 		if (models.size() == 1) {
 			return models.get(0);
 		} else {
 			monitor.addTextAndLog(Activator.Messages.getString("AbstractAcceleoGenerator_10"), ""); //$NON-NLS-1$//$NON-NLS-2$
 			// create resource for merged file
 			IPath p = models.get(0).getParent().getFullPath();
-			p = p.append(mergedFilePath + "." + models.get(0).getFileExtension()); //$NON-NLS-1$
+			p = p.append(mergedFilePath + "_" + rootName + "." + models.get(0).getFileExtension()); //$NON-NLS-1$
 			IFile mergedIFile = IFileHelper.getIFile(p);
 			// do merge
 			MergeUtils.merge(mergedIFile, models, this.getClass().getClassLoader());

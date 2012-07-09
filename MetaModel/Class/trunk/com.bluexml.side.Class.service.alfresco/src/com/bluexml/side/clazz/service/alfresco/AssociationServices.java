@@ -16,8 +16,6 @@
  ******************************************************************************/
 package com.bluexml.side.clazz.service.alfresco;
 
-import java.util.List;
-
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -29,7 +27,6 @@ import com.bluexml.side.clazz.AssociationEnd;
 import com.bluexml.side.clazz.AssociationType;
 import com.bluexml.side.clazz.ClassModelElement;
 import com.bluexml.side.clazz.Clazz;
-import com.bluexml.side.common.Tag;
 
 public class AssociationServices {
 
@@ -318,7 +315,7 @@ public class AssociationServices {
 	}
 
 	public static String getPrefixedAssociationQName(Association a, AssociationEnd source) throws Exception {
-		if (CommonServices.isNativeModel(a)) {
+		if (CommonServices.isSimpleName(a)) {
 			return CommonServices.getPrefix(a) + ":" + a.getName();
 		}
 		return CommonServices.getPrefix(a) + ":" + getAssociationQName(a, source);
@@ -351,9 +348,10 @@ public class AssociationServices {
 	 * @param a
 	 * @param source
 	 * @return the association alfresco QName
+	 * @throws Exception
 	 */
-	public static String getAssociationQName(Association a, AssociationEnd source) {
-		if (isSimpleAssoName(a)) {
+	public static String getAssociationQName(Association a, AssociationEnd source) throws Exception {
+		if (CommonServices.isSimpleName(a)) {
 			// reversed element that require to do not use "src_assoname_target"
 			// pattern
 			return a.getName();
@@ -378,16 +376,6 @@ public class AssociationServices {
 		}
 	}
 
-	public static boolean isSimpleAssoName(Association element) {
-		List<Tag> ts = element.getTags();
-		for (Tag tag : ts) {
-			String key = tag.getKey();
-			String value = tag.getValue();
-			if (key.contains("simpleAssoName") && value.contains("true")) {
-				return true;
-			}
-		}
-		return false;
-	}
+	
 
 }

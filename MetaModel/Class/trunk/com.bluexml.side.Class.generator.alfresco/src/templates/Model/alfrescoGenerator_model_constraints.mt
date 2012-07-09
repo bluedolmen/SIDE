@@ -73,7 +73,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	    
 		<!-- STARTMMLOOP -->
 	    <%for (getAllEnumerations().nSort("name")) {%>		   
-	    <constraint name="<%getFolder()%>:nomenclature:<%getQualifiedName()%>" type="LIST">
+	    <constraint name="<%getListContraintPrefixedQName()%>" type="LIST">
             <parameter name="allowedValues">
                 <list>
 			<%for (literals.nSort("name")) {%>
@@ -85,6 +85,11 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 			<%}%>
                 </list>
             </parameter>
+            <%if (metainfo[key.equalsIgnoreCase("caseSensitive")].nSize()>0){%>
+            <parameter name="caseSensitive">
+				<value><%metainfo[key.equalsIgnoreCase("caseSensitive")].nFirst().value%></value>
+			</parameter>
+			<%}%>
         </constraint>
         <%}%>
 		<!-- ENDMMLOOP -->
