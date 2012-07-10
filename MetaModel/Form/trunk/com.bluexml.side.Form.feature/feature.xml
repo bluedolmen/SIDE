@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Form.feature" label="SIDE Web Form Modeler" version="1.0.162.v35624-20120503" provider-name="BlueXML">
+<feature id="com.bluexml.side.Form.feature" label="SIDE Web Form Modeler" version="1.0.163.v37666-20120710" provider-name="BlueXML">
   <description url="http://www.side-labs.com">SIDE lets developers who are new to Alfresco get started quickly and helps experienced developers get the job done even faster.</description>
   <copyright url="http://www.bluexml.com/copyright">Copyright 2005-2012 BlueXML SARL.</copyright>
   <license url="http://www.side-labs.com/en/index.php/Product:License">SIDE SOFTWARE IS LICENSED BY BLUEXML. PLEASE GO TO http://www.side-labs.com/en/index.php/Product:License. READ THIS AGREEMENT CAREFULLY BEFORE PURCHASING AND/OR USING SIDE SOFTWARE.</license>
@@ -42,7 +42,7 @@
   </requires>
   <plugin id="com.bluexml.side.Form" download-size="0" install-size="0" version="1.0.95.v33565-20120307" unpack="false" />
   <plugin id="com.bluexml.side.Form.edit" download-size="0" install-size="0" version="1.0.78.v35494-20120427" unpack="false" />
-  <plugin id="com.bluexml.side.Form.edit.ui" download-size="0" install-size="0" version="1.0.105.v35494-20120427" unpack="false" />
+  <plugin id="com.bluexml.side.Form.edit.ui" download-size="0" install-size="0" version="1.0.106.v37666-20120710" unpack="false" />
   <plugin id="com.bluexml.side.Form.editor" download-size="0" install-size="0" version="1.0.58.v33565-20120307" unpack="false" />
   <plugin id="com.bluexml.side.Form.generator.documentation" download-size="0" install-size="0" version="1.0.32.v29723-20111108" unpack="false" />
 </feature>
