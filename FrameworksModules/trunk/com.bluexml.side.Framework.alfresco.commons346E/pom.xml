@@ -145,6 +145,18 @@
       <version>1.0-FCS</version>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+    	<groupId>org.apache.lucene</groupId>
+    	<artifactId>lucene-snowball</artifactId>
+    	<version>2.4.1</version>
+    	<scope>provided</scope>
+    </dependency>
+    <dependency>
+    	<groupId>org.apache.lucene</groupId>
+    	<artifactId>lucene-analyzers</artifactId>
+    	<version>2.4.1</version>
+    	<scope>provided</scope>
+    </dependency>
   </dependencies>
   <!-- The scm is required for the buildnumber-maven-plugin which is required for AMP version numbering
 -->

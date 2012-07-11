@@ -81,6 +81,33 @@
 		-->
 	</target>
 
+
+	<!-- ================================= 
+	          target: runluke              
+	         ================================= -->
+	<target name="runluke" depends="" description="description">
+		<echo message="runing ${lukeall}" />
+		<path id="alfresco.cp">
+			<fileset dir="${libs}" includes="alfresco-data*.jar" />
+			<fileset dir="${libs}" includes="c*.jar" />
+			<!--<fileset dir="${libs}" includes="lucene*.jar" />
+				-->
+			<pathelement path="target/${moduleId}-${mypom.version}-classes.jar" />
+			<pathelement path="${lukeall}" />
+		</path>
+
+		<property name="myproperty" refid="alfresco.cp" />
+		<echo message="${myproperty}">
+		</echo>
+		<java classname="org.getopt.luke.Luke" fork="true" dir="${basedir}" classpathref="alfresco.cp" >
+			<jvmarg line="-Xdebug -Xrunjdwp:transport=dt_socket,address=4005,server=y,suspend=n -Dlog4j.logger.com.bluexml.side.framework.alfresco.commons=debug"/>
+			<arg line="-index ${index.home} -ro" />
+		</java>
+
+
+	</target>
+
+
 	<!-- ========
 		we do not use artifact: to avoid jvm termination error
 	 ======== -->
