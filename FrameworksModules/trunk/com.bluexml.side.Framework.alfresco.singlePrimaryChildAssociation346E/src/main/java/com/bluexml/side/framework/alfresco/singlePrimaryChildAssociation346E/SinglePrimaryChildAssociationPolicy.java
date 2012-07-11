@@ -51,14 +51,14 @@ public class SinglePrimaryChildAssociationPolicy implements OnCreateChildAssocia
 
 	public void onCreateChildAssociation(ChildAssociationRef childAssocRef, boolean isNewNode) {
 		try {
-			logger.debug("SinglePrimaryChildAssociationPolicy.onCreateChildAssociation()");
+			logger.trace("SinglePrimaryChildAssociationPolicy.onCreateChildAssociation()");
 			NodeRef childRef = childAssocRef.getChildRef();
 			NodeRef parentRef = childAssocRef.getParentRef();
 			QName typeC = getNodeService().getType(childRef);
 			QName typeP = getNodeService().getType(parentRef);
-			logger.debug("\tisNewNode :" + isNewNode);
-			logger.debug("\ttypeC :" + typeC);
-			logger.debug("\ttypeP" + typeP);
+			logger.trace("\tisNewNode :" + isNewNode);
+			logger.trace("\ttypeC :" + typeC);
+			logger.trace("\ttypeP" + typeP);
 			boolean hasValue = false;
 			boolean hasValueC = configuration.hasValue(typeC.toPrefixString(this.getNamespaceService()));
 			boolean hasValueP = configuration.hasValue(typeP.toPrefixString(this.getNamespaceService()));
@@ -71,7 +71,7 @@ public class SinglePrimaryChildAssociationPolicy implements OnCreateChildAssocia
 				}
 			}
 			QName typeQName = childAssocRef.getTypeQName();
-			logger.debug("\tassoType :" + typeQName);
+			logger.trace("\tassoType :" + typeQName);
 			if (!isNewNode && hasValue && typeQName.equals(ContentModel.ASSOC_CONTAINS)) {
 
 				if (!childAssocRef.isPrimary()) {
@@ -105,11 +105,11 @@ public class SinglePrimaryChildAssociationPolicy implements OnCreateChildAssocia
 						}
 					}
 				} else {
-					logger.debug("\tnothing to do notPrimary asso");
+					logger.trace("\tnothing to do notPrimary asso");
 				}
 
 			} else {
-				logger.debug("\tnothing to do");
+				logger.trace("\tnothing to do");
 				// do nothing this is the call that create the initial primary association
 			}
 		} catch (Throwable e) {
