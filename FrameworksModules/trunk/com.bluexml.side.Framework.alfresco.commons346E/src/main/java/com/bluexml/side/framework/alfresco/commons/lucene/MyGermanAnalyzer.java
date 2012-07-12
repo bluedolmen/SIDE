@@ -5,7 +5,7 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.analysis.StopFilter;
-import org.apache.lucene.analysis.fr.FrenchAnalyzer;
+import org.apache.lucene.analysis.de.GermanAnalyzer;
 
 /**
  * Original code from Code from org.apache.lucene.analysis.StopAnalyzer
@@ -13,14 +13,14 @@ import org.apache.lucene.analysis.fr.FrenchAnalyzer;
  * 
  * @author davidabad
  */
-public class MyFrenchAnalyzer extends MyAnalyzer {
-	protected static Log logger = LogFactory.getLog(MyFrenchAnalyzer.class);
+public class MyGermanAnalyzer extends MyAnalyzer {
+	protected static Log logger = LogFactory.getLog(MyGermanAnalyzer.class);
 
 	protected Set<?> stopWords;
 
-	/** Builds an analyzer which removes words in FRENCH_STOP_WORDS. */
-	public MyFrenchAnalyzer() {
-		stopWords = StopFilter.makeStopSet(FrenchAnalyzer.FRENCH_STOP_WORDS);
+	/** Builds an analyzer which removes words in GERMAN_STOP_WORDS. */
+	public MyGermanAnalyzer() {
+		stopWords = StopFilter.makeStopSet(GermanAnalyzer.GERMAN_STOP_WORDS);
 	}
 
 }
