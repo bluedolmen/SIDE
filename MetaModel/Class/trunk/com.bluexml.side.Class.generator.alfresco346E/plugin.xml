@@ -20,24 +20,24 @@
               <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.xforms346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.2" versionMin="1.0.2" />
             </option>
             <option documentation="Generates random data regarding the current Alfresco model. The generated ACP can be imported and reused accross various Alfresco installations." key="com.bluexml.side.Class.generator.alfresco.randomDataGenerator" label="Alfresco Random Data Generator">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.dataGenerator346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.9" versionMin="1.0.9" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.dataGenerator346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.10" versionMin="1.0.10" />
             </option>
             <option defaultOption="false" documentation="additional module to check if created/updated items already exist; in this case the update or creation is forbidden" key="alfresco.unicity" label="Content Uniqueness">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.unicity346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.10" versionMin="1.0.10" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.unicity346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.11" versionMin="1.0.11" />
             </option>
             <option defaultOption="false" key="com.bluexml.side.Class.generator.alfresco.facetMapWebscript" label="Alfresco FacetMap Extension" />
             <option defaultOption="false" documentation="this api use alfresco web-services-client to contact alfresco and do CRUD actions" key="com.bluexml.side.Class.generator.alfresco.enterprise.webserviceJavaAPI" label="Java webservice API" />
             <option defaultOption="false" documentation="this api use alfresco Embedded SDK, and allow webscript to use it" key="com.bluexml.side.Class.generator.alfresco.enterprise.embeddedJavaAPI" label="Java Embedded API" />
             <option defaultOption="false" key="com.bluexml.side.Class.generator.alfresco.enterprise.extJS" label="extJS (sample)" />
             <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.model346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.4" versionMin="1.0.4" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.customAssociationManagement346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.11" versionMin="1.0.11" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.customAssociationManagement346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.12" versionMin="1.0.12" />
             <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.hotdeployer346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.2" versionMin="1.0.2" />
             <option defaultOption="true" documentation="this must be hidden" hidden="true" key="generator.main" label="main generation" />
             <option defaultOption="false" documentation="this option must be used in conjuction with the 'searchable' meta on associations, this create an attribute that store associated nodes" hidden="false" key="alfresco.model.association.searchable" label="Searchable association">
               <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.searchAssociation346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.5" versionMin="1.0.5" />
             </option>
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.singlePrimaryChildAssociation346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.10" versionMin="1.0.10" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.propertiesUpdater346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.11" versionMin="1.0.11" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.singlePrimaryChildAssociation346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.11" versionMin="1.0.11" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.propertiesUpdater346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.12" versionMin="1.0.12" />
           </generatorVersion>
         </technologyVersion>
       </technology>
