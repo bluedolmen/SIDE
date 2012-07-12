@@ -13,6 +13,7 @@ import java.net.HttpURLConnection;
 
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 
 import com.bluexml.side.alfresco.applet.Exec;
 
@@ -33,14 +34,9 @@ public class EditingDocument extends Applet {
 			
 			String tmpdir = System.getProperty("java.io.tmpdir");
 			String webdav = getParameter("webdavUrl");
-			String [] webdavSplited = webdav.split("\\/");
-			String [] doc = webdavSplited[webdavSplited.length - 1].split("\\?ticket=");
-			doc[0] = doc[0].replaceAll(" ", "%20");
-			webdav = "";
-			for (int i = 0; i < webdavSplited.length - 1; i++) {
-				webdav += webdavSplited[i] + "/";
-			}
-			webdav += doc[0] + "?ticket=" + getParameter("ticket");
+			webdav = webdav.replaceAll(" ", "%20");
+			webdav += "?ticket=" + getParameter("ticket");
+			//webdav = URLEncoder.encode(webdav, "UTF-8");
 			url = new URL(webdav);
 			URLConnection uc = url.openConnection();
 			uc.setUseCaches(false);
