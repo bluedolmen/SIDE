@@ -142,6 +142,10 @@ if (console == undefined) {
       },
 
       doBeforeSubmit : function DLTB_onBeforeSubmit(ob) {
+         var cf = this.widgets.createFolder;
+         cf.widgets.okButton.set("disabled", true);
+         cf.widgets.cancelButton.set("disabled", true);
+         
          this.widgets.feedbackMessage = Alfresco.util.PopupManager.displayMessage({
             text : Alfresco.util.message("form.control.upload.uploading", this.name),
             spanClass : "wait",
