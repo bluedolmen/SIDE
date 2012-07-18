@@ -7,6 +7,7 @@ import com.bluexml.side.view.generator.alfresco.templates.services.common
 %>
 
 <%script type="DataList" name="doclist_ftl" file="webapps/alfresco/WEB-INF/classes/alfresco/extension/templates/webscripts/org/alfresco/slingshot/documentlibrary/doclist_views/doclist_<%name%>.ftl"%>
+<#escape x as jsonUtils.encodeJSONString(x)>
 <%for (children){%>
 	<%if ( mapTo.filter("clazz.Attribute")){%>
 	<#if (item.asset.properties["<%mapTo.filter("clazz.Attribute").getPrefixedQualifiedName()%>"])??>	
@@ -20,3 +21,4 @@ import com.bluexml.side.view.generator.alfresco.templates.services.common
 	</#if>
 	<%}%>
 <%}%>
+</#escape>

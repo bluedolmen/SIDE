@@ -98,8 +98,8 @@ public class AttributeServices {
 		Long("d:long", "?long", false, DataType.LONG, numberRange),
 		Float("d:float", "?float", false, DataType.FLOAT, numberRange),
 		Double("d:double", "?double", false, DataType.DOUBLE, numberRange),
-		Date("d:date", "?date", false, DataType.DATE, dateRange),
-		Datetime("d:datetime", "?datetime", false, DataType.DATE_TIME, dateRange),
+		Date("d:date", "?date?string.full", false, DataType.DATE, dateRange),
+		Datetime("d:datetime", "?datetime?string.full", false, DataType.DATE_TIME, dateRange),
 		Boolean("d:boolean", "?string", false, DataType.BOOLEAN),
 		Qname("d:qname", "?string", false, DataType.CUSTOM),
 		Noderef("d:noderef", "?string", false, DataType.CUSTOM),
@@ -150,7 +150,7 @@ public class AttributeServices {
 			m2.put(DataType.CHAR, Text);
 			m2.put(DataType.BYTE, Int);
 			m2.put(DataType.SHORT, Int);
-			m2.put(DataType.TIME, Date);
+			m2.put(DataType.TIME, Datetime);
 
 		}
 		static Map<String, Alfresco_Data_Type> valueof = null;
