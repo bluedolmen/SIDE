@@ -24,6 +24,7 @@ import templates.Model.alfrescoGenerator_model_classes
 import templates.Model.alfrescoGenerator_model_imports
 import templates.Model.alfrescoGenerator_model_NS
 import templates.Model.alfrescoGenerator_model_constraints
+import templates.Model.alfrescoGenerator_model_dataTypes
 import com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator
 import com.bluexml.side.clazz.service.alfresco.ClassServices
 import com.bluexml.side.clazz.service.alfresco.CommonServices
@@ -48,6 +49,12 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	
 	<%model_ns%>
 	
+	<data-types>
+		<%for (customDataTypeSet){%>
+		<%alfrescoGeneratorModelDataType%>
+		<%}%>
+	</data-types>
+	
 	<%model_constraints%>
 	
 	<types>
@@ -55,6 +62,6 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	</types>
 	<aspects>
 		<%alfrescoGenerator_model_aspects()%>		
-	</aspects> 
+	</aspects>
 	
 </model>

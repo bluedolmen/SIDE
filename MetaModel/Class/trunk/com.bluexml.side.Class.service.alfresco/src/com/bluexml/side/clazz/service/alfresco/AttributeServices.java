@@ -42,7 +42,7 @@ public class AttributeServices {
 				// need to get the 
 				CustomDataType customType = object.getCustomType();
 				if (customType != null) {
-					return customType.getName();
+					return CommonServices.getPrefixedQName(customType);
 				} else {
 					new Exception("attribute type=CUSTOM but customType is null !!");
 				}
