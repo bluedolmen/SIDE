@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Class.modeler.feature" label="SIDE Data Modeler" version="1.0.157.v37666-20120710" provider-name="BlueXML">
+<feature id="com.bluexml.side.Class.modeler.feature" label="SIDE Data Modeler" version="1.0.158.v37877-20120718" provider-name="BlueXML">
   <description url="http://www.side-labs.com">SIDE lets developers who are new to Alfresco get started quickly and helps experienced developers get the job done even faster.</description>
   <copyright url="http://www.bluexml.com/copyright">Copyright 2005-2012 BlueXML SARL.</copyright>
   <license url="http://www.side-labs.com/en/index.php/Product:License">SIDE SOFTWARE IS LICENSED BY BLUEXML. PLEASE GO TO http://www.side-labs.com/en/index.php/Product:License. READ THIS AGREEMENT CAREFULLY BEFORE PURCHASING AND/OR USING SIDE SOFTWARE.</license>
@@ -43,6 +43,6 @@
   <plugin id="com.bluexml.side.Class.editor" download-size="0" install-size="0" version="1.0.42.v31485-20120104" unpack="false" />
   <plugin id="com.bluexml.side.Class.modeler" download-size="0" install-size="0" version="1.0.78.v33565-20120307" unpack="false" />
   <plugin id="com.bluexml.side.Class.generator.documentation" download-size="0" install-size="0" version="1.0.24.v29723-20111108" unpack="false" />
-  <plugin id="com.bluexml.side.Class.service.alfresco" download-size="0" install-size="0" version="1.0.57.v37666-20120710" unpack="false" />
+  <plugin id="com.bluexml.side.Class.service.alfresco" download-size="0" install-size="0" version="1.0.58.v37877-20120718" unpack="false" />
 </feature>
 
