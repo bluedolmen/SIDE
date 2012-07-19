@@ -1072,8 +1072,12 @@ function getSearchDef(params) {
       } else if (searchPath != undefined && searchPath != '') {
          path = searchPath;
          // interprate {site} token
-         if (params.siteId !== null && params.siteId.length > 0) {
-            path = path.replace(/\{site\}/, "cm:" + search.ISO9075Encode(params.siteId));
+         if (path.indexOf("{site}") != -1) {
+            if (params.siteId !== null && params.siteId.length > 0) {
+               path = path.replace(/\{site\}/, "cm:" + search.ISO9075Encode(params.siteId));
+            } else {
+               path = path.replace(/\{site\}/, "*");
+            }
          }
 
          if (getSearchSubdirectories(formJson)) {
