@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Class.generator.alfresco34d.feature" label="SIDE Alfresco 3.4b Community Generator" version="1.0.55.v37877-20120718" provider-name="BLUEXML">
+<feature id="com.bluexml.side.Class.generator.alfresco34d.feature" label="SIDE Alfresco 3.4b Community Generator" version="1.0.56.v37954-20120720" provider-name="BLUEXML">
   <description url="http://www.side-labs.com">SIDE lets developers who are new to Alfresco get started quickly and helps experienced developers get the job done even faster.</description>
   <copyright url="http://www.bluexml.com/copyright">Copyright 2005-2012 BlueXML SARL.</copyright>
   <license url="http://www.side-labs.com/en/index.php/Product:License">SIDE SOFTWARE IS LICENSED BY BLUEXML. PLEASE GO TO http://www.side-labs.com/en/index.php/Product:License. READ THIS AGREEMENT CAREFULLY BEFORE PURCHASING AND/OR USING SIDE SOFTWARE.</license>
   <plugin id="com.bluexml.side.Class.generator.alfresco34d" download-size="0" install-size="0" version="1.0.36.v37877-20120718" unpack="false" />
   <plugin id="com.bluexml.side.Class.generator.alfresco34d.ext.sidelabs" download-size="0" install-size="0" version="1.0.14.v36727-20120531" unpack="false" />
-  <plugin id="com.bluexml.side.Class.generator.alfresco" download-size="0" install-size="0" version="1.0.635.v37877-20120718" unpack="false" />
+  <plugin id="com.bluexml.side.Class.generator.alfresco" download-size="0" install-size="0" version="1.0.636.v37954-20120720" unpack="false" />
 </feature>
 
