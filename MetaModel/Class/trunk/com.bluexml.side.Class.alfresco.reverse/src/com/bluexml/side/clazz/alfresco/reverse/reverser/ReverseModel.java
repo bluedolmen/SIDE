@@ -42,6 +42,7 @@ import com.bluexml.side.clazz.EnumerationLiteral;
 import com.bluexml.side.clazz.Model;
 import com.bluexml.side.clazz.impl.AspectImpl;
 import com.bluexml.side.clazz.impl.ClazzImpl;
+import com.bluexml.side.clazz.impl.EnumerationImpl;
 import com.bluexml.side.clazz.service.alfresco.AttributeServices;
 import com.bluexml.side.clazz.service.alfresco.CommonServices;
 import com.bluexml.side.common.CommonFactory;
@@ -554,7 +555,7 @@ public class ReverseModel {
 					eObject = register.getEObject(com.bluexml.side.common.Constraint.class, ref);
 					if (eObject == null) {
 						// search an Enumeration
-						eObject = register.getEObject(Enumeration.class, ref);
+						eObject = register.getEObject(EnumerationImpl.class, ref);
 					}
 				}
 
@@ -562,6 +563,8 @@ public class ReverseModel {
 					attribute.getConstraints().add((com.bluexml.side.common.Constraint) eObject);
 				} else if (eObject instanceof Enumeration) {
 					attribute.setValueList((Enumeration) eObject);
+				} else {
+					System.err.println("ReverseModel.createAttribute() oups contraints not applied on this attribute " + attribute.getName() + " contraint " + ref);
 				}
 
 			}
