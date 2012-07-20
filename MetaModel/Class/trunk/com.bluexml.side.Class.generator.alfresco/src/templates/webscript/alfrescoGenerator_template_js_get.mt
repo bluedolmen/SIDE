@@ -35,7 +35,7 @@ if (argsM["nodeRef"] != null) {
 	var xpath = "./*[subtypeOf('<%getPrefixedQName()%>')]";
 	model.records = myNode.childrenByXPath(xpath);
 } else {
-	var lucene="TYPE:\"{<%getNameSpace()%>}<%getQualifiedName()%>\"";
+	var lucene="TYPE:\"<%getPrefixedNamespaceQName()%>\"";
     model.records = search.luceneSearch(lucene);
 }
 
@@ -48,7 +48,7 @@ if (myNode != null) {
 } else {
 <%for (getAllLinkedClasses().nSort("name")){%>
 <%if (getFolder() == current(1).getRootContainer().name){%>
-  var lucene="TYPE:\"{<%getNameSpace()%>}<%getQualifiedName()%>\"";
+  var lucene="TYPE:\"<%getPrefixedNamespaceQName()%>\"";
   model.<%getQualifiedName()%>_list = search.luceneSearch(lucene);
 <%}%>
 <%}%>

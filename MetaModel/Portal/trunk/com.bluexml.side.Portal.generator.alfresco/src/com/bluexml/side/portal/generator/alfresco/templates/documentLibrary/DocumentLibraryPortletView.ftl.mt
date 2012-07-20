@@ -16,7 +16,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 <%for (portletSet){%>
 <%if (name.toLowerCase() == "documentlibrary" && isPortletInternal != null && isPortletInternal.view != null) {%>
 <%for (isPortletInternal.view.getInnerView()){%>
-<#if item.asset.type == "{<%filter("view.AbstractViewOf").viewOf.filter("clazz.Clazz").getNameSpace()%>}<%filter("view.AbstractViewOf").viewOf.filter("clazz.Clazz").getQualifiedName()%>">
+<#if item.asset.type == "<%filter("view.AbstractViewOf").viewOf.filter("clazz.Clazz").getPrefixedNamespaceQName()%>">
 	<#include "doclist_views/doclist_<%filter("view.AbstractViewOf").name%>.ftl">
 </#if>
 <%}%>

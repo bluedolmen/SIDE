@@ -34,7 +34,7 @@ if (argsM["nodeRef"] != null) {
 	var xpath = "./*[subtypeOf('<%getPrefixedQName()%>')]";
 	model.records = myNode.childrenByXPath(xpath);
 } else {
-	var lucene="TYPE:\"{<%getNameSpace()%>}<%getQualifiedName()%>\"";
+	var lucene="TYPE:\"<%getPrefixedNamespaceQName()%>\"";
     model.records = search.luceneSearch(lucene);
 }
 
@@ -43,7 +43,7 @@ if (argsM["nodeRef"] != null) {
 if (myNode != null) {
   model.<%getQualifiedName()%>_list = myNode.childrenByXPath("./*[subtypeOf('<%getPrefixedQName()%>')]");
 } else {
-  var lucene="TYPE:\"{<%getNameSpace()%>}<%getQualifiedName()%>\"";
+  var lucene="TYPE:\"<%getPrefixedNamespaceQName()%>\"";
   model.<%getQualifiedName()%>_list = search.luceneSearch(lucene);
 }
 <%}%>

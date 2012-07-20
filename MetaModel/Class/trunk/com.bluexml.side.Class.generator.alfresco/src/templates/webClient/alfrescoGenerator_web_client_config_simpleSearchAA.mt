@@ -29,7 +29,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
          	<%for (getAllAbstractClasses()) {%>
          		<%for attributes {%>
          		<%if (getPropertyType().equalsIgnoreCase("d:text")&&(metainfo[key.startsWith("propertySearched")].nSize()>0)) {%>
-         		<qname>{http://www.bluexml.com/model/content/<%current(3).name%>/1.0}<%getQualifiedName()%></qname>
+         		<qname><%getPrefixedNamespaceQName()%></qname>
          		<%}%>
          		<%}%>
 			<%}%>
