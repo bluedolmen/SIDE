@@ -40,7 +40,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	<%for (getAllSortedAttibutes()){%>
 	<#if (child.properties["<%getRootContainer().name%>:<%getQualifiedName()%>"]?exists)>
 		<#if child.properties["<%getRootContainer().name%>:<%getQualifiedName()%>"]?is_sequence>
-		"<%getQualifiedName()%>":"<#list child.properties["<%current(1).getFolder()%>:<%getQualifiedName()%>"] as key>${key} </#list>",
+		"<%getQualifiedName()%>":"<#list child.properties["<%current(1).getPrefixedQName()%>"] as key>${key} </#list>",
 		<#else>
 		<%if (typ.toString().equalsIgnoreCase("date")){%>
 		"<%getQualifiedName()%>":"${child.properties["<%getRootContainer().name%>:<%getQualifiedName()%>"]?string("yyyy-MM-dd'T'HH:mm:ss.SSSZ")!""}",
@@ -59,15 +59,15 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	<%--
 		<%if (isSource(current(1))){%>
 			<%if (firstEnd == current(2)){%>
-			"<%secondEnd.getFullName()%>":"<#if child.<%getAssociationVariableName()%>["<%getFolder()%>:<%getQualifiedName(firstEnd)%>"]?exists><#list child.<%getAssociationVariableName()%>["<%getFolder()%>:<%getQualifiedName(firstEnd)%>"] as key><%secondEnd.getFullName().replaceAll("child","key").replaceAll("\n","" )%> </#list></#if>",
+			"<%secondEnd.getFullName()%>":"<#if child.<%getAssociationVariableName()%>["<%getPrefixedAssociationQName(firstEnd)%>"]?exists><#list child.<%getAssociationVariableName()%>["<%getPrefixedAssociationQName(firstEnd)%>"] as key><%secondEnd.getFullName().replaceAll("child","key").replaceAll("\n","" )%> </#list></#if>",
 			<%}else{%>
-			"<%firstEnd.getFullName()%>":"<#if child.<%getAssociationVariableName()%>["<%getFolder()%>:<%getQualifiedName(secondEnd)%>"]?exists><#list child.<%getAssociationVariableName()%>["<%getFolder()%>:<%getQualifiedName(secondEnd)%>"] as key><%firstEnd.getFullName().replaceAll("child","key").replaceAll("\n","" )%> </#list></#if>",
+			"<%firstEnd.getFullName()%>":"<#if child.<%getAssociationVariableName()%>["<%getPrefixedAssociationQName(secondEnd)%>"]?exists><#list child.<%getAssociationVariableName()%>["<%getPrefixedAssociationQName(secondEnd)%>"] as key><%firstEnd.getFullName().replaceAll("child","key").replaceAll("\n","" )%> </#list></#if>",
 			<%}%>
 		<%}else{%>
 			<%if (firstEnd == current(2)){%>
-			"<%secondEnd.getFullName()%>":"<#list <%secondEnd.getQualifiedName()%>_list as object><#if object.<%getAssociationVariableName()%>["<%getFolder()%>:<%getQualifiedName(secondEnd)%>"]?exists><#list object.<%getAssociationVariableName()%>["<%getFolder()%>:<%getQualifiedName(secondEnd)%>"] as other><#if other.id = child.id><%secondEnd.getFullName().replaceAll("child","object").replaceAll("\n","" )%> <#break></#if></#list></#if></#list>",
+			"<%secondEnd.getFullName()%>":"<#list <%secondEnd.getQualifiedName()%>_list as object><#if object.<%getAssociationVariableName()%>["<%getPrefixedAssociationQName(secondEnd)%>"]?exists><#list object.<%getAssociationVariableName()%>["<%getPrefixedAssociationQName(secondEnd)%>"] as other><#if other.id = child.id><%secondEnd.getFullName().replaceAll("child","object").replaceAll("\n","" )%> <#break></#if></#list></#if></#list>",
 			<%}else{%>
-			"<%firstEnd.getFullName()%>":"<#list <%firstEnd.getQualifiedName()%>_list as object><#if object.<%getAssociationVariableName()%>["<%getFolder()%>:<%getQualifiedName(firstEnd)%>"]?exists><#list object.<%getAssociationVariableName()%>["<%getFolder()%>:<%getQualifiedName(firstEnd)%>"] as other><#if other.id = child.id><%firstEnd.getFullName().replaceAll("child","object").replaceAll("\n","" )%> <#break></#if></#list></#if></#list>",
+			"<%firstEnd.getFullName()%>":"<#list <%firstEnd.getQualifiedName()%>_list as object><#if object.<%getAssociationVariableName()%>["<%getPrefixedAssociationQName(firstEnd)%>"]?exists><#list object.<%getAssociationVariableName()%>["<%getPrefixedAssociationQName(firstEnd)%>"] as other><#if other.id = child.id><%firstEnd.getFullName().replaceAll("child","object").replaceAll("\n","" )%> <#break></#if></#list></#if></#list>",
 			<%}%>
 		<%}%>
 	--%>

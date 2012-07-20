@@ -28,7 +28,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 
   	<%for (getAllClasses().nSort("name")){%>
   	<%if (metainfo[key.equalsIgnoreCase("isContainer")].nSize()==0 && !abstract){%>
-  	<config evaluator="node-type" condition="<%getFolder()%>:<%getQualifiedName()%>">
+  	<config evaluator="node-type" condition="<%getPrefixedQName()%>">
       <actions>
          <action-group id="document_browse_menu">
             <show-link>false</show-link>

@@ -32,7 +32,7 @@ var myNode = null;
 if (argsM["nodeRef"] != null) {
 	var myNodeRef="workspace://SpacesStore/"+argsM["nodeRef"][0];
 	myNode = search.findNode(myNodeRef);
-	var xpath = "./*[subtypeOf('<%getFolder()%>:<%getQualifiedName()%>')]";
+	var xpath = "./*[subtypeOf('<%getPrefixedQName()%>')]";
 	model.records = myNode.childrenByXPath(xpath);
 } else {
 	var lucene="TYPE:\"{<%getNameSpace()%>}<%getQualifiedName()%>\"";
@@ -42,7 +42,7 @@ if (argsM["nodeRef"] != null) {
 if (myNode != null) {
 <%for (getAllLinkedClasses().nSort("name")){%>
 <%if (getFolder() == current(1).getRootContainer().name){%>
-  model.<%getQualifiedName()%>_list = myNode.childrenByXPath("./*[subtypeOf('<%getFolder()%>:<%getQualifiedName()%>')]");
+  model.<%getQualifiedName()%>_list = myNode.childrenByXPath("./*[subtypeOf('<%getPrefixedQName()%>')]");
 <%}%>
 <%}%>
 } else {

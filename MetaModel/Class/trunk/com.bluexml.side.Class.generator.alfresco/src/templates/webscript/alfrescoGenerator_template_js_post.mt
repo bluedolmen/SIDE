@@ -31,7 +31,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 if (argsM["nodeRef"] != null) {
 	var myNodeRef="workspace://SpacesStore/"+argsM["nodeRef"][0];
 	var myNode = search.findNode(myNodeRef);
-	var xpath = "./*[subtypeOf('<%getFolder()%>:<%getQualifiedName()%>')]";
+	var xpath = "./*[subtypeOf('<%getPrefixedQName()%>')]";
 	model.records = myNode.childrenByXPath(xpath);
 } else {
 	var lucene="TYPE:\"{<%getNameSpace()%>}<%getQualifiedName()%>\"";
@@ -41,7 +41,7 @@ if (argsM["nodeRef"] != null) {
 <%for (getAllLinkedClasses()){%>
 <%if (getFolder() == current(1).getRootContainer().name){%>
 if (myNode != null) {
-  model.<%getQualifiedName()%>_list = myNode.childrenByXPath("./*[subtypeOf('<%getFolder()%>:<%getQualifiedName()%>')]");
+  model.<%getQualifiedName()%>_list = myNode.childrenByXPath("./*[subtypeOf('<%getPrefixedQName()%>')]");
 } else {
   var lucene="TYPE:\"{<%getNameSpace()%>}<%getQualifiedName()%>\"";
   model.<%getQualifiedName()%>_list = search.luceneSearch(lucene);

@@ -21,7 +21,7 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 	            <!-- START BlueXML custom form configuration (<%filter("view.AbstractViewOf").viewOf.filter("clazz.Clazz").getContentType()%>) -->
 	            <%for (children){%>
 					<%if ( mapTo.filter("common.NamedModelElement")){%>
-					<show id="<%mapTo.filter("common.NamedModelElement").getFolder()%>:<%mapTo.filter("common.NamedModelElement").getQualifiedName()%>"/>
+					<show id="<%mapTo.filter("common.NamedModelElement").getPrefixedQName()%>"/>
 					<%}%>
 				<%}%>
 	            <!-- END BlueXML custom form configuration (<%filter("view.AbstractViewOf").viewOf.filter("clazz.Clazz").getContentType()%>) -->

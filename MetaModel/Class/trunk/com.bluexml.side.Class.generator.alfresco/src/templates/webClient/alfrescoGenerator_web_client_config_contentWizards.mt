@@ -29,12 +29,12 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 		<%for (getAllClasses().nSort("name")){%>
 			<%-- We assume that folder type is defined by inheritance with reversed cm.dt model --%>
 			<%if (!isFolder() && !abstract){%>
-				<type name="<%getFolder()%>:<%getQualifiedName()%>" />
+				<type name="<%getPrefixedQName()%>" />
 			<%}%>
 		<%}%>
 		<%for (getAllEnumerations().nSort("name")) {%>
 		    <%if current("clazz.Enumeration").dynamic {%> 
-		    	<type name="<%getFolder()%>:<%getQualifiedName()%>" />
+		    	<type name="<%getPrefixedQName()%>" />
 		    <%}%>
 		<%}%>
 		

@@ -29,14 +29,14 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 				<%for (getAllAspects().nSort("name")) {%>
 					<%for (getSortedAttibutes()){%>
 						<%if (metainfo[key.startsWith("propertySearched")].nSize()>0){%>
-						<meta-data aspect="<%getFolder()%>:<%eContainer().getQualifiedName()%>" property="<%getFolder()%>:<%getQualifiedName()%>"/>
+						<meta-data aspect="<%eContainer().getPrefixedQName()%>" property="<%getPrefixedQName()%>"/>
 						<%}%>
 					<%}%>
 				<%}%>
 				<%for (getAllClasses().nSort("name")) {%>
 					<%for (getSortedAttibutes()){%>
 						<%if (metainfo[key.startsWith("propertySearched")].nSize()>0){%>
-						<meta-data type="<%getFolder()%>:<%eContainer().getQualifiedName()%>" property="<%getFolder()%>:<%getQualifiedName()%>"/>
+						<meta-data type="<%eContainer().getPrefixedQName()%>" property="<%getPrefixedQName()%>"/>
 						<%}%>
 					<%}%>
 				<%}%>

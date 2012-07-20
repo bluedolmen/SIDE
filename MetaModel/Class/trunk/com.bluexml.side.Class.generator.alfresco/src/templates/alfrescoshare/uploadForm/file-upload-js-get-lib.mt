@@ -1,6 +1,7 @@
 <%
 metamodel http://www.kerblue.org/class/1.0
 import templates.servicesTemplates.Common
+import com.bluexml.side.clazz.service.alfresco.CommonServices
 import com.bluexml.side.clazz.service.alfresco.ClassServices
 %>
 
@@ -40,4 +41,4 @@ model.contentTypes = contentTypes;
 <%}%>
 
 <%script type="clazz.Clazz" name="getContentTypeJSON"%>
-{id: "<%getFolder()%>:<%getQualifiedName()%>", value: "<%getLabel()%>"}
+{id: "<%getPrefixedQName()%>", value: "<%getLabel()%>"}

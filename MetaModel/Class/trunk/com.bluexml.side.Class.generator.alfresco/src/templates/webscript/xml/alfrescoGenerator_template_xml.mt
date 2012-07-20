@@ -41,16 +41,16 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 	<createdDate>${child.properties["cm:created"]?datetime}</createdDate>
 	<modifyDate>${child.properties["cm:modified"]?datetime}</modifyDate>
 	<%for (getAllSortedAttibutes()){%>
-	<#if (child.properties["<%current(1).getFolder()%>:<%getQualifiedName()%>"]?exists)>
-		<#if child.properties["<%current(1).getFolder()%>:<%getQualifiedName()%>"]?is_sequence>
-	<<%getQualifiedName()%>><#list child.properties["<%current(1).getFolder()%>:<%getQualifiedName()%>"] as key>${key} </#list></<%getQualifiedName()%>>
+	<#if (child.properties["<%current(1).getPrefixedQName()%>"]?exists)>
+		<#if child.properties["<%current(1).getPrefixedQName()%>"]?is_sequence>
+	<<%getQualifiedName()%>><#list child.properties["<%current(1).getPrefixedQName()%>"] as key>${key} </#list></<%getQualifiedName()%>>
 		<#else>
 		<%if (typ.toString().equalsIgnoreCase("date")){%>
-		<<%getQualifiedName()%>>${child.properties["<%current(1).getFolder()%>:<%getQualifiedName()%>"]?string("yyyy-MM-dd")!""}</<%getQualifiedName()%>>
+		<<%getQualifiedName()%>>${child.properties["<%current(1).getPrefixedQName()%>"]?string("yyyy-MM-dd")!""}</<%getQualifiedName()%>>
 		<%}else if (typ.toString().equalsIgnoreCase("datetime")){%>
-		<<%getQualifiedName()%>>${child.properties["<%current(1).getFolder()%>:<%getQualifiedName()%>"]?string("yyyy-MM-dd'T'HH:mm:ss")!""}</<%getQualifiedName()%>>
+		<<%getQualifiedName()%>>${child.properties["<%current(1).getPrefixedQName()%>"]?string("yyyy-MM-dd'T'HH:mm:ss")!""}</<%getQualifiedName()%>>
 		<%}else{%>
-		<<%getQualifiedName()%>>${child.properties["<%current(1).getFolder()%>:<%getQualifiedName()%>"]?string!""}</<%getQualifiedName()%>>
+		<<%getQualifiedName()%>>${child.properties["<%current(1).getPrefixedQName()%>"]?string!""}</<%getQualifiedName()%>>
 		<%}%>
 		</#if>
 	<#else>

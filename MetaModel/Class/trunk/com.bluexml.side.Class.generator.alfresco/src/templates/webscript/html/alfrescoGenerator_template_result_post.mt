@@ -79,7 +79,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 
 <div id="information" style="visibility:hidden">
 	<type><%getQualifiedName()%></type>
-	<qName><%getFolder()%>:<%getQualifiedName()%></qName>
+	<qName><%getPrefixedQName()%></qName>
 	<totalCount>${recordsCount}</totalCount>
 </div>
 <ul>

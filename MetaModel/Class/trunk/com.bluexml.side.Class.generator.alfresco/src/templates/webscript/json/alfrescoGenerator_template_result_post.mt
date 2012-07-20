@@ -78,7 +78,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 
 {
 	"type":"<%getQualifiedName()%>",
-	"qName":"<%getFolder()%>:<%getQualifiedName()%>",
+	"qName":"<%getPrefixedQName()%>",
 	"totalCount":${recordsCount},
 	"records":[
 						<#assign index=0>

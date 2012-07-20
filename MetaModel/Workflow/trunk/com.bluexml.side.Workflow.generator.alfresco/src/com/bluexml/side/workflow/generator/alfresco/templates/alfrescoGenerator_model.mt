@@ -79,7 +79,7 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 			<%for (clazz){%>
 				<association name="wfbx<%current("Process").name%>:<%current("StartState").name%>_<%name%>">
 					<target>
-						<class><%getFolder()%>:<%getQualifiedName()%></class>
+						<class><%getPrefixedQName()%></class>
 					</target>
 				</association>
 			<%}%>
@@ -114,7 +114,7 @@ import com.bluexml.side.workflow.generator.alfresco.WorkflowGenerator
 			<%for (clazz){%>
 				<association name="wfbx<%current("Process").name%>:<%current("TaskNode").name%>_<%name%>">
 					<target>
-						<class><%getFolder()%>:<%getQualifiedName()%></class>
+						<class><%getPrefixedQName()%></class>
 					</target>
 				</association>
 			<%}%>

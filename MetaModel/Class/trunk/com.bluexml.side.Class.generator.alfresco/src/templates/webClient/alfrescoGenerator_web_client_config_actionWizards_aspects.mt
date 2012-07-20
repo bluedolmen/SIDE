@@ -27,6 +27,6 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 <%script type="clazz.ClassPackage" name="alfrescoGenerator_actionWizards_aspects"%>
 
 			<%for (getAllAspects().nSort("name")) {%>
-			<aspect name="<%getFolder()%>:<%getQualifiedName()%>"/>
+			<aspect name="<%getPrefixedQName()%>"/>
 			<%}%>
 

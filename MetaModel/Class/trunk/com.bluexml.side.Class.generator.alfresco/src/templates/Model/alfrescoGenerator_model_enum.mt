@@ -24,13 +24,13 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 %>
 <%script type="clazz.Enumeration" name="alfrescoGeneratorEnums" %>
 	<%if (dynamic) {%>
-	<type name="<%getFolder()%>:<%getQualifiedName()%>">
+	<type name="<%getPrefixedQName()%>">
 		<title><%name%></title>		
 		<description><%name%></description>		
 		<parent>bxcm:content</parent>
 		
 		<properties>
-			<property name="<%getFolder()%>:<%getQualifiedName()%>_label">
+			<property name="<%getPrefixedQName()%>_label">
 				<title>Label</title>
 				<type>d:text</type>
 				<mandatory>true</mandatory>
@@ -41,7 +41,7 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
 		        </index>
 			</property>						
 			
-			<property name="<%getFolder()%>:<%getQualifiedName()%>_code">
+			<property name="<%getPrefixedQName()%>_code">
 				<title>Code</title>
 				<type>d:text</type>
 				<mandatory>true</mandatory>
