@@ -109,12 +109,14 @@ public class RuleScriptExtension extends BaseScopableProcessorExtension {
 	public void addScriptRuleWithTypeCondition(ScriptNode script, ScriptNode targetSpace, String ruleType, String contentType, String uri) {
 		String title = "rule_script_execution";
 		String description = "Run a script when an event occurs on the targetSpace";
-	    String scriptName = (String) serviceRegistry.getNodeService().getProperty(script.getNodeRef(), ContentModel.PROP_NAME);
-	    String targetSpaceName = (String) serviceRegistry.getNodeService().getProperty(targetSpace.getNodeRef(), ContentModel.PROP_NAME);
-		title = scriptName+"_"+ruleType+"_"+targetSpaceName;
-	    if (serviceRegistry.getNodeService().getProperty(script.getNodeRef(), ContentModel.PROP_TITLE) != null) {
-			if (contentType != null) description = serviceRegistry.getNodeService().getProperty(script.getNodeRef(), ContentModel.PROP_TITLE)+" for type "+contentType+" on space "+targetSpaceName;
-			else description = (String) serviceRegistry.getNodeService().getProperty(script.getNodeRef(), ContentModel.PROP_TITLE)+" for all types on space "+targetSpaceName;
+		String scriptName = (String) serviceRegistry.getNodeService().getProperty(script.getNodeRef(), ContentModel.PROP_NAME);
+		String targetSpaceName = (String) serviceRegistry.getNodeService().getProperty(targetSpace.getNodeRef(), ContentModel.PROP_NAME);
+		title = scriptName + "_" + ruleType + "_" + targetSpaceName;
+		if (serviceRegistry.getNodeService().getProperty(script.getNodeRef(), ContentModel.PROP_TITLE) != null) {
+			if (contentType != null)
+				description = serviceRegistry.getNodeService().getProperty(script.getNodeRef(), ContentModel.PROP_TITLE) + " for type " + contentType + " on space " + targetSpaceName;
+			else
+				description = (String) serviceRegistry.getNodeService().getProperty(script.getNodeRef(), ContentModel.PROP_TITLE) + " for all types on space " + targetSpaceName;
 		}
 		boolean setExecuteAsynchronously = true;
 		boolean applyToChildren = false;
@@ -181,4 +183,50 @@ public class RuleScriptExtension extends BaseScopableProcessorExtension {
 		this.getRuleService().saveRule(targetSpace.getNodeRef(), rule);
 	}
 
+	/**
+	 * 
+	 * @param script
+	 * @param title (optional return all if null)
+	 * @param ruleTypeName (optional return all if null)
+	 * @param includeInhertiedRuleType
+	 */
+	public void disableRules(ScriptNode script, String title, String ruleTypeName, boolean includeInhertiedRuleType) {
+		List<Rule> rules = serviceRegistry.getRuleService().getRules(script.getNodeRef(), includeInhertiedRuleType, ruleTypeName);
+		for (Rule rule : rules) {
+			if (title == null || rule.getTitle().equals(title)) {
+				serviceRegistry.getRuleService().disableRule(rule);
+			}
+
+		}
+	}
+
+	/**
+	 * 
+	 * @param script
+	 * @param title (optional return all if null)
+	 * @param ruleTypeName (optional return all if null)
+	 * @param includeInhertiedRuleType
+	 */
+	public void enableRules(ScriptNode script, String title, String ruleTypeName, boolean includeInhertiedRuleType) {
+		List<Rule> rules = serviceRegistry.getRuleService().getRules(script.getNodeRef(), includeInhertiedRuleType, ruleTypeName);
+		for (Rule rule : rules) {
+			if (title == null || rule.getTitle().equals(title)) {
+				serviceRegistry.getRuleService().enableRule(rule);
+			}
+		}
+	}
+
+	/**
+	 * Disable all rule in the current thread
+	 */
+	public void disableAllRules() {
+		serviceRegistry.getRuleService().disableRules();
+	}
+
+	/**
+	 * Enable all rule in the current thread
+	 */
+	public void enableAllRules() {
+		serviceRegistry.getRuleService().enableRules();
+	}
 }
