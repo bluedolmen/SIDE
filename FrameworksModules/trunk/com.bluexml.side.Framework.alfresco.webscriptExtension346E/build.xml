@@ -1,4 +1,4 @@
-<project xmlns:artifact="antlib:org.apache.maven.artifact.ant" name="com.bluexml.side.Framework.alfresco.webscriptExtension34d" default="patchWebapps">
+<project xmlns:artifact="antlib:org.apache.maven.artifact.ant" name="com.bluexml.side.Framework.alfresco.webscriptExtension346E" default="patchWebapps">
 	<property file="build.${user.name}.properties" />
 	<property file="${user.home}/build.properties" />
 	<path id="maven-ant-tasks.classpath" path="lib/maven-ant-tasks-2.1.3.jar" />
