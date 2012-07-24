@@ -1149,7 +1149,9 @@
 									filterId : window.unescape(filters[0] || ""),
 									filterData : window.unescape(filters[1] || "")
 								};
-
+								if (filters.length > 2) {
+                           filterObj.filterDisplay = window.unescape(filters[2] || "");
+                        }
 								filterObj.filterOwner = Alfresco.util.FilterManager.getOwner(filterObj.filterId);
 								return filterObj;
 							};

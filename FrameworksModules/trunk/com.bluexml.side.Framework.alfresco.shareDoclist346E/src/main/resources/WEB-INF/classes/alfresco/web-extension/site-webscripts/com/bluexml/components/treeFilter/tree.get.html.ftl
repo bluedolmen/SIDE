@@ -17,7 +17,8 @@
       assoTypeDocument: "${assoTypeDocument}",
       documentTypeIsAspect : "${documentTypeIsAspect}",
       rootProperty: "${rootProperty}",
-      rootName: "${rootName}"
+      rootName: "${rootName}",
+      rootLabel:"${msg(rootLabelId)}"
    }).setMessages(
       ${messages}
    );
