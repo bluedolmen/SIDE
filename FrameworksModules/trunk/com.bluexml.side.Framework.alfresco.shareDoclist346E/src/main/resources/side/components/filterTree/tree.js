@@ -255,7 +255,7 @@ if (console == undefined) {
 			query.fields[this.options.assoTypeDocument+"search"] = {
 				type : "String",
 				operator : "is",
-				values : [ node.data.nodeRef ]
+				values : [ (node.data.nodeRef ? node.data.nodeRef : "null")]
 			};
 
 			return query;
