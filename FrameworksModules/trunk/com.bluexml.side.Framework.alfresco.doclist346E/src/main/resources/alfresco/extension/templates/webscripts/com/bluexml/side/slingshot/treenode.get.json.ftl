@@ -17,10 +17,15 @@
    [
    <#list treenode.items as item>
       <#assign t = item.node>
+      <#if (t.properties.description?? && t.properties.description.length > 0)>
+      	<#assign description = t.properties.description>
+      <#else>
+      	<#assign description = t.name>
+      </#if> 
       {
          "nodeRef": "${t.nodeRef}",
          "name": "${t.name}",
-         "description": "${(t.properties.description!t.name)}",
+         "description": "${description}",
          "hasChildren": ${item.hasSubfolders?string},
          "userAccess":
          {

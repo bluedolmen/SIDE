@@ -41,7 +41,7 @@ if (console == undefined) {
     * @constructor
     */
    SIDE.DocListTree = function DLT_constructor(htmlId) {
-      Alfresco.DocListTree.superclass.constructor.call(this, "SIDE.DocListTree", htmlId, [ "treeview", "json" ]);
+      Alfresco.DocListTree.superclass.constructor.call(this, "SIDE.DocListFilter", htmlId, [ "treeview", "json" ]);
 
       // Register with Filter Manager
       Alfresco.util.FilterManager.register(this.name, "metadata");
@@ -228,6 +228,15 @@ if (console == undefined) {
 
             // Fire the change filter event
             this.log("this.name :" + this.name);
+            /*
+             * Some confusion is made in Alfresco between Filter Type and Filter instances,
+             * in Share only one instance of each Filter Object exists,
+             * But SIDE allow to have more instances, we need to separate Filter Type (class) from Filter instances (handle preferences)
+             * 
+             * need to set filterOwner to something that ends by DocListFilter or DocListTree ...
+             * this is used to get the right toolbar behavior (allow to hide/show action div that have DocList* in className)
+             * But the this.name is used to store preferences of the twister 
+             */ 
             YAHOO.Bubbling.fire("changeFilter", {
                filterOwner : this.name,
                filterId : "metadata",
