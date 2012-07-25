@@ -20,7 +20,7 @@
       {
          "nodeRef": "${t.nodeRef}",
          "name": "${t.name}",
-         "description": "${(t.properties.description!"")}",
+         "description": "${(t.properties.description!t.name)}",
          "hasChildren": ${item.hasSubfolders?string},
          "userAccess":
          {
