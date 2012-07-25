@@ -227,6 +227,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 			<%if (getShareSearchFormControl() != ""){%>
 			<control template="<%getShareSearchFormControl()%>" >
 				<control-param name="forceEditable">true</control-param>
+				<control-param name="search">true</control-param>
 			</control>
 			<%}else{%>
 			<control>

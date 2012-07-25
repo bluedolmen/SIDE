@@ -314,15 +314,3 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 <%getXtensionAsControlParam("showTargetLink")%>
 <%getXtensionAsControlParam("displayMode")%>
 
-<%--script type="ModelChoiceField" name="getSearchFormControl"--%>
-<%--script type="FormElement" name="getSearchFormControl"%>
-<control <%getShareSearchFormControlTemplate()%>>
-	<control-param name="forceEditable">true</control-param>
-</control>
---%>
-<%--script type="ModelChoiceField" name="getSearchFormControlTemplate"--%>
-<%--script type="FormElement" name="getSearchFormControlTemplate" post="trim()" %>
-<%if (getShareSearchFormControl() != ""){%>
-template="<%getShareSearchFormControl()%>"
-<%}%> 
---%>
