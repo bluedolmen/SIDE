@@ -112,6 +112,7 @@ public class EditingDocument extends Applet {
 
 	public void start() {
 		lastModified = myFile.lastModified();
+		myFile.setWritable(true);
 		//paint();
 		while (true) {
 			try {
