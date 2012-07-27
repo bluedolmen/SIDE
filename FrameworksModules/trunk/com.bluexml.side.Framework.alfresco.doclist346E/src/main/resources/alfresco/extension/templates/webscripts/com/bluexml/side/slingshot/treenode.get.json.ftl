@@ -17,7 +17,7 @@
    [
    <#list treenode.items as item>
       <#assign t = item.node>
-      <#if (t.properties.description?? && t.properties.description.length > 0)>
+      <#if (t.properties.description?exists && t.properties.description?length > 0)>
       	<#assign description = t.properties.description>
       <#else>
       	<#assign description = t.name>
