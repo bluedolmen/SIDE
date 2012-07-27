@@ -17,7 +17,10 @@ import org.alfresco.repo.forms.FormData;
 import org.alfresco.repo.forms.FormData.FieldData;
 import org.alfresco.service.cmr.dictionary.AssociationDefinition;
 import org.alfresco.service.cmr.dictionary.ChildAssociationDefinition;
+import org.alfresco.service.cmr.dictionary.InvalidTypeException;
+import org.alfresco.service.cmr.repository.ContentIOException;
 import org.alfresco.service.cmr.repository.ContentWriter;
+import org.alfresco.service.cmr.repository.InvalidNodeRefException;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.namespace.QName;
 import org.apache.commons.logging.Log;
@@ -49,21 +52,35 @@ public class CustomNodeFormProcessor extends NodeFormProcessor {
 				CustomFormData.FieldData cfd = (CustomFormData.FieldData) fieldData;
 				if (fileFieldCount == 0) {
 					InputStream inputStream = cfd.getInputStream();
-
-					ContentWriter writer = this.contentService.getWriter(nodeRef, ContentModel.PROP_CONTENT, true);
-					String mimetype = cfd.getMimetype();
-					
-					logger.debug("write content in :" + nodeRef);
-					logger.debug("mimeType :" + mimetype);
-					logger.debug("encoding :" + writer.getEncoding());
-					
-					writer.setMimetype(mimetype);
-					writer.putContent(inputStream);
 					try {
-						inputStream.close();
-					} catch (IOException e) {
-						logger.error("trying to close inputStream fail", e);
+						if (inputStream.available() > 0) {
+
+							ContentWriter writer = this.contentService.getWriter(nodeRef, ContentModel.PROP_CONTENT, true);
+							String mimetype = cfd.getMimetype();
+
+							logger.debug("write content in :" + nodeRef);
+							logger.debug("mimeType :" + mimetype);
+							logger.debug("encoding :" + writer.getEncoding());
+
+							writer.setMimetype(mimetype);
+							writer.putContent(inputStream);
+						}
+					} catch (InvalidTypeException e1) {
+						logger.error(e1);
+					} catch (ContentIOException e1) {
+						logger.error(e1);
+					} catch (InvalidNodeRefException e1) {
+						logger.error(e1);
+					} catch (IOException e1) {
+						logger.error(e1);
+					} finally {
+						try {
+							inputStream.close();
+						} catch (IOException e) {
+							logger.error("trying to close inputStream fail", e);
+						}
 					}
+
 				} else {
 					// TODO multi file upload not implemented yet
 				}
@@ -71,7 +88,7 @@ public class CustomNodeFormProcessor extends NodeFormProcessor {
 			}
 		}
 	}
-	
+
 	@Override
 	protected void processAssociationPersist(NodeRef nodeRef, Map<QName, AssociationDefinition> assocDefs, Map<QName, ChildAssociationDefinition> childAssocDefs, FieldData fieldData, List<org.alfresco.repo.forms.processor.node.AbstractAssocCommand> assocCommands) {
 		if (getLogger().isDebugEnabled())

@@ -22,9 +22,12 @@ import org.alfresco.repo.forms.FormNotFoundException;
 import org.alfresco.repo.forms.Item;
 import org.alfresco.service.cmr.dictionary.AssociationDefinition;
 import org.alfresco.service.cmr.dictionary.ChildAssociationDefinition;
+import org.alfresco.service.cmr.dictionary.InvalidTypeException;
 import org.alfresco.service.cmr.dictionary.TypeDefinition;
+import org.alfresco.service.cmr.repository.ContentIOException;
 import org.alfresco.service.cmr.repository.ContentWriter;
 import org.alfresco.service.cmr.repository.DuplicateChildNodeNameException;
+import org.alfresco.service.cmr.repository.InvalidNodeRefException;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.StoreRef;
 import org.alfresco.service.cmr.search.ResultSet;
@@ -108,16 +111,26 @@ public class CustomTypeFormProcessor extends TypeFormProcessor {
 				if (fileFieldCount == 0) {
 					fileName = cfd.getFileName();
 					InputStream inputStream = cfd.getInputStream();
+					try {
+						if (inputStream.available() > 0) {
+							ContentWriter writer = this.contentService.getWriter(nodeRef, ContentModel.PROP_CONTENT, true);
+							String mimetype = cfd.getMimetype();
+							logger.debug("write content in :" + nodeRef);
+							logger.debug("mimeType :" + mimetype);
+							logger.debug("encoding :" + writer.getEncoding());
 
-					ContentWriter writer = this.contentService.getWriter(nodeRef, ContentModel.PROP_CONTENT, true);
-					String mimetype = cfd.getMimetype();
-					logger.debug("write content in :" + nodeRef);
-					logger.debug("mimeType :" + mimetype);
-					logger.debug("encoding :" + writer.getEncoding());
-
-					writer.setMimetype(mimetype);
-
-					writer.putContent(inputStream);
+							writer.setMimetype(mimetype);
+							writer.putContent(inputStream);
+						}
+					} catch (InvalidTypeException e1) {
+						logger.error(e1);
+					} catch (ContentIOException e1) {
+						logger.error(e1);
+					} catch (InvalidNodeRefException e1) {
+						logger.error(e1);
+					} catch (IOException e1) {
+						logger.error(e1);
+					}
 					try {
 						inputStream.close();
 					} catch (IOException e) {
