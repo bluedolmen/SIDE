@@ -35,6 +35,7 @@ if (console == undefined) {
    SIDE.MyDSMultiSelectField = function(options, initialValue) {
       this.name = "SIDE.MyDSMultiSelectField";
       this.initialValue = initialValue;
+      this.weirdValues = [];
       this.currentValueHtmlId = options.currentValueHtmlId;
       SIDE.MyDSMultiSelectField.superclass.constructor.call(this, options);
 
@@ -48,6 +49,7 @@ if (console == undefined) {
       setOptions : function(options) {
          SIDE.MyDSMultiSelectField.superclass.setOptions.call(this, options);
          this.options.editConfig = options.editConfig;
+         this.options.keepWeirdValues = options.keepWeirdValues ? options.keepWeirdValues : true;
       },
 
       /**
@@ -179,16 +181,24 @@ if (console == undefined) {
             position = this.getChoicePosition({
                value : value[i]
             });
-            choice = this.choicesList[position];
 
-            ddlistValue.push({
-               value : choice.value,
-               label : choice.label
-            });
+            // check if value exists in available ones
+            if (position > -1) {
+               choice = this.choicesList[position];
 
-            this.hideChoice({
-               position : position
-            });
+               ddlistValue.push({
+                  value : choice.value,
+                  label : choice.label
+               });
+
+               this.hideChoice({
+                  position : position
+               });
+            } else {
+               // the current value do not exists in choiceList
+               // this is weird ... so keep it in dedicated array
+               this.weirdValues.push(value[i]);
+            }
          }
 
          // set ddlist value
@@ -209,7 +219,15 @@ if (console == undefined) {
        * @return {Any} an array of selected values
        */
       getValue : function() {
-         return this.ddlist.getValue();
+         this.log("values :");
+         this.log("values selected:");
+         this.log("values wierd:" + this.weirdValues);
+         var values = this.ddlist.getValue();
+         if (this.options.keepWeirdValues) {
+            // ok so be it, we add values stored in weirdValues
+            values = values.concat(this.weirdValues);
+         }          
+         return values;
       },
       /**
        * Send the datasource request for reload
