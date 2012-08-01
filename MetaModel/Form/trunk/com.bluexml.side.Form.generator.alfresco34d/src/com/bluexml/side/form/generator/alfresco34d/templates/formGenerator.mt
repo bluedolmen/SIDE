@@ -14,6 +14,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 <%if (eContainer() == null) {%><%getProperty("alf.share.paths.web-ext")%>/<%getModuleIdService(getRootPackage().name)%>/share-forms-config.xml<%}%>
 
 <%script type="form.FormCollection" name="generate" file="<%fileName()%>" %>
+<?xml version="1.0" encoding="iso-8859-1"?>
 <alfresco-config>
 	<!-- Forms from SIDE <%current("FormCollection").name%> model -->
 	<%generateGlobalConfig%>
