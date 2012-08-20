@@ -35,7 +35,17 @@ public class EditingDocument extends Applet {
 			String tmpdir = System.getProperty("java.io.tmpdir");
 			String webdav = getParameter("webdavUrl");
 			webdav = webdav.replaceAll(" ", "%20");
-			webdav += "?ticket=" + getParameter("ticket");
+			webdav = webdav.replaceAll("à", "%c3%a0");
+			webdav = webdav.replaceAll("â", "%c3%a2");
+			webdav = webdav.replaceAll("ç", "%c3%a7");
+			webdav = webdav.replaceAll("è", "%c3%a8");
+			webdav = webdav.replaceAll("é", "%C3%A9");
+			webdav = webdav.replaceAll("ê", "%c3%aa");
+			webdav = webdav.replaceAll("î", "%c3%ae");
+			webdav = webdav.replaceAll("ô", "%c3%b4");
+			webdav = webdav.replaceAll("ù", "%c3%b9");
+			webdav = webdav.replaceAll("û", "%c3%bb");
+			//webdav += "?ticket=" + getParameter("ticket");
 			//webdav = URLEncoder.encode(webdav, "UTF-8");
 			url = new URL(webdav);
 			URLConnection uc = url.openConnection();
