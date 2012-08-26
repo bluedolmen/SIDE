@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.forAlfresco.labs.feature" label="SIDE Labs For Alfresco" version="1.0.345.v38642-20120825" provider-name="BLUEXML" plugin="com.bluexml.side.Integration.eclipse.branding.labs">
+<feature id="com.bluexml.side.Common.forAlfresco.labs.feature" label="SIDE Labs For Alfresco" version="1.0.346.v38652-20120826" provider-name="BLUEXML" plugin="com.bluexml.side.Integration.eclipse.branding.labs">
   <description url="http://www.side-labs.com">SIDE lets developers who are new to Alfresco get started quickly and helps experienced developers get the job done even faster.</description>
   <copyright url="http://www.bluexml.com/copyright">Copyright 2005-2012 BlueXML SARL.</copyright>
   <license url="http://www.side-labs.com/en/index.php/Product:License">SIDE SOFTWARE IS LICENSED BY BLUEXML. PLEASE GO TO http://www.side-labs.com/en/index.php/Product:License. READ THIS AGREEMENT CAREFULLY BEFORE PURCHASING AND/OR USING SIDE SOFTWARE.</license>
   <includes id="com.bluexml.side.Common.forAlfresco34d.labs.feature" version="1.0.85.v38281-20120801" />
   <includes id="com.bluexml.side.Common.forAlfresco40d.feature" version="1.0.5.v38114-20120726" />
-  <plugin id="com.bluexml.side.Integration.eclipse.branding.labs" download-size="0" install-size="0" version="1.0.878.v38642-20120825" unpack="false" />
+  <plugin id="com.bluexml.side.Integration.eclipse.branding.labs" download-size="0" install-size="0" version="1.0.879.v38652-20120826" unpack="false" />
 </feature>
 
