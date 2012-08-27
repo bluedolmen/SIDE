@@ -43,7 +43,6 @@ public class PortalModelInitializer extends ModelAndDiagramInitializer {
 	@Override
 	protected void headLessInitialize() throws Exception {
 
-		
 		// create layout
 		PortalLayout layout = createDefaultPortalLayout();
 
@@ -110,14 +109,14 @@ public class PortalModelInitializer extends ModelAndDiagramInitializer {
 		String pageId = "document-details"; //$NON-NLS-1$
 		int index = 0;
 		String initializerIndex = InitializerRegister.DEFAULT_ANOTHER_FORM_COLLECTION; //$NON-NLS-1$
-		create_page_internal_portlet(portal, layout, createColumn, pageId, index, initializerIndex, InternalPortletType.FORM, Visibility.PRIVATE, null);
+		create_page_internal_portlet(portal, layout, createColumn, pageId, index, initializerIndex, InternalPortletType.FORM, Visibility.PRIVATE, null, null);
 	}
 
 	private void createAdvsearchPage(Portal portal, PortalLayout layout, Column createColumn) throws Exception {
 		String pageId = "advsearch"; //$NON-NLS-1$
 		int index = 0;
 		String initializerIndex = InitializerRegister.DEFAULT_INITIALIZER_KEY; //$NON-NLS-1$
-		create_page_internal_portlet(portal, layout, createColumn, pageId, index, initializerIndex, InternalPortletType.FORM, Visibility.PRIVATE, "search");
+		create_page_internal_portlet(portal, layout, createColumn, pageId, index, initializerIndex, InternalPortletType.FORM, Visibility.PRIVATE, "search", "search");
 	}
 
 	private Page createPage(Portal portal, PortalLayout layout, boolean generate, String id, Visibility visibility) {
@@ -137,18 +136,18 @@ public class PortalModelInitializer extends ModelAndDiagramInitializer {
 		return ob;
 	}
 
-	private Page create_page_internal_portlet(Portal portal, PortalLayout layout, Column createColumn, String pageId, int eobjectIndex, String initializerIndex, InternalPortletType type, Visibility visibility, String subtype) throws Exception {
+	private Page create_page_internal_portlet(Portal portal, PortalLayout layout, Column createColumn, String pageId, int eobjectIndex, String initializerIndex, InternalPortletType type, Visibility visibility, String subtype, String portletName) throws Exception {
 		Page page = createPage(portal, layout, false, pageId, visibility);
 		// set HavePortlets
 		PortletInternal portletInternal = createPortletInternal(portal, eobjectIndex, initializerIndex, type, subtype);
 
 		// set Portlet - HavePortlet
-		createHavePortlet(portal, layout, createColumn, pageId, eobjectIndex, page, portletInternal);
+		createHavePortlet(portal, layout, createColumn, portletName, eobjectIndex, page, portletInternal);
 		return page;
 	}
 
 	private Page create_page_docLib_internal_portlet(Portal portal, PortalLayout layout, Column createColumn, String pageId, int eobjectIndex, String initializerIndex, InternalPortletType type, Visibility visibility, String subtype) throws Exception {
-		Page page = create_page_internal_portlet(portal, layout, createColumn, pageId, eobjectIndex, initializerIndex, type, visibility, subtype);
+		Page page = create_page_internal_portlet(portal, layout, createColumn, pageId, eobjectIndex, initializerIndex, type, visibility, subtype, pageId);
 
 		// create internalProtlet on default form
 		PortletInternal portletInternal2 = createPortletInternal(portal, eobjectIndex, initializerIndex, InternalPortletType.FORM, subtype);
@@ -158,16 +157,16 @@ public class PortalModelInitializer extends ModelAndDiagramInitializer {
 		return page;
 	}
 
-	private void createHavePortlet(Portal portal, PortalLayout layout, Column createColumn, String pageId, int eobjectIndex, Page page, PortletInternal portletInternal) {
-		Portlet portletView = createPortletInstance_Internal(portal, pageId, portletInternal);
-		
-		PortalHelper.createHavePortlet(layout, createColumn, eobjectIndex, page, portletView);
+	private void createHavePortlet(Portal portal, PortalLayout layout, Column createColumn, String portletId, int eobjectIndex, Page page, PortletInternal portletInternal) {
+		Portlet portlet = createPortletInstance_Internal(portal, portletId, portletInternal);
+
+		PortalHelper.createHavePortlet(layout, createColumn, eobjectIndex, page, portlet);
 	}
 
-	private Portlet createPortletInstance_Internal(Portal portal, String pageId, PortletInternal portletInternal) {
+	private Portlet createPortletInstance_Internal(Portal portal, String portletId, PortletInternal portletInternal) {
 		Portlet portletView = PortalFactory.eINSTANCE.createPortlet();
 		portletView.setIsPortletInternal(portletInternal);
-		portletView.setName(pageId);
+		portletView.setName(portletId);
 		portal.getPortletSet().add(portletView);
 		return portletView;
 	}
