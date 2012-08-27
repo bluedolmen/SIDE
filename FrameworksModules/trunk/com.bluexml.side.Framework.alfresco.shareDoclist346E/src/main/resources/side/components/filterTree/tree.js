@@ -223,25 +223,32 @@ if (console == undefined) {
             this.log("isFilterOwner && this.selectedNode");
             YAHOO.Bubbling.fire("metadataRefresh");
          } else {
-            this.log("else >>>");
-            this._updateSelectedNode(node);
+            this.log("else >>> path : " + node.data.path);
+            // clicking on root item is disabled by default
+            if (node.data.path != "/") {
+               this._updateSelectedNode(node);
 
-            // Fire the change filter event
-            this.log("this.name :" + this.name);
-            /*
-             * Some confusion is made in Alfresco between Filter Type and Filter instances,
-             * in Share only one instance of each Filter Object exists,
-             * But SIDE allow to have more instances, we need to separate Filter Type (class) from Filter instances (handle preferences)
-             * 
-             * need to set filterOwner to something that ends by DocListFilter or DocListTree ...
-             * this is used to get the right toolbar behavior (allow to hide/show action div that have DocList* in className)
-             * But the this.name is used to store preferences of the twister 
-             */ 
-            YAHOO.Bubbling.fire("changeFilter", {
-               filterOwner : this.name,
-               filterId : "metadata",
-               filterData : (JSON.stringify(this._buildTreeNodeDocLibQuery(node)) + "|" + this.msg("filter.metadata.filterDisplay", window.unescape(this.options.rootLabel), node.data.description))
-            });
+               // Fire the change filter event
+               this.log("this.name :" + this.name);
+               /*
+                * Some confusion is made in Alfresco between Filter Type and
+                * Filter instances, in Share only one instance of each Filter
+                * Object exists, But SIDE allow to have more instances, we need
+                * to separate Filter Type (class) from Filter instances (handle
+                * preferences)
+                * 
+                * need to set filterOwner to something that ends by
+                * DocListFilter or DocListTree ... this is used to get the right
+                * toolbar behavior (allow to hide/show action div that have
+                * DocList* in className) But the this.name is used to store
+                * preferences of the twister
+                */
+               YAHOO.Bubbling.fire("changeFilter", {
+                  filterOwner : this.name,
+                  filterId : "metadata",
+                  filterData : (JSON.stringify(this._buildTreeNodeDocLibQuery(node)) + "|" + this.msg("filter.metadata.filterDisplay", window.unescape(this.options.rootLabel), node.data.description))
+               });
+            }
          }
 
          Event.stopEvent(args.event);
