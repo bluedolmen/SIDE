@@ -7,7 +7,7 @@
         <technologyVersion description="Check this to generate class models on the major release 3 of Alfresco.&lt;br&gt;Alfresco 3.x is the leading open source collaborative ECM solution.&lt;br&gt;Additionally to content generation, SIDE provides useful server components to enhance some features of this release." id="alfresco_3.4.6E" version="Alfresco3.4.6 Enterprise">
           <generatorVersion class="com.bluexml.side.portal.generator.alfresco346e.PortalGenerator346e" hidden="visible" id="com.bluexml.side.Portal.generator.alfresco3.46E" version="SIDE Alfresco Portal Generator 3.46E">
             <option defaultOption="true" key="com.bluexml.side.Portal.generator.alfresco.doclist" label="Alfresco Share document library component">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.shareDoclist346E" moduleType="zip" technologyVersion="alfresco_3.4.6E" versionMax="1.0.47" versionMin="1.0.47" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.shareDoclist346E" moduleType="zip" technologyVersion="alfresco_3.4.6E" versionMax="1.0.48" versionMin="1.0.48" />
               <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.doclist346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.42" versionMin="1.0.42" />
             </option>
             <option defaultOption="true" key="com.bluexml.side.Portal.generator.alfresco.forms" label="document details editing">
@@ -17,7 +17,7 @@
               <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.shareIframe" moduleType="zip" technologyVersion="alfresco_3.4.6E" versionMax="1.0.13" versionMin="1.0.13" />
             </option>
             <option defaultOption="false" documentation="&lt;p&gt;This option enable Xform integration in Alfresco share.&lt;/p&gt; &lt;ul&gt; &lt;li&gt;Search forms can be accessible from advanced-search page&lt;/li&gt; &lt;li&gt;Results are displayed in documentlist components instead of share result list&lt;/li&gt; &lt;li&gt;Native advanced-search page is no longer accessible&lt;/li&gt; &lt;li&gt;Native open search displays results using documentlist too&lt;/li&gt; &lt;li&gt;Open search DO NOT WORK ANYMORE outside sites&lt;/li&gt; &lt;/ul&gt;" key="com.bluexml.side.Portal.generator.alfresco.xforms34d" label="XForms Integration">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.shareSearchResultsExtension346E" moduleType="zip" technologyVersion="alfresco_3.4.6E" versionMax="1.0.35" versionMin="1.0.35" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.shareSearchResultsExtension346E" moduleType="zip" technologyVersion="alfresco_3.4.6E" versionMax="1.0.36" versionMin="1.0.36" />
             </option>
             <mustBeChecked pluginId="com.bluexml.side.Class.generator.alfresco346E">
               <optionRef optionId="alfresco.share.extension" />
