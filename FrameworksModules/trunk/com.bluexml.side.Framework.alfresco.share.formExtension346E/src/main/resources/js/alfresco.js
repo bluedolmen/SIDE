@@ -5461,9 +5461,10 @@ Alfresco.util.RENDERLOOPSIZE = 25;
       onFormContentReady: function FormManager_onFormContentReady(layer, args)
       {
     	  var formUI = args[1];
-          //SIDE add-on test if this instance is the event recipient allow to use many form dialog at same time
+        //SIDE add-on test if this instance is the event recipient allow to use many form dialog at same time
     	  // need to map the create-content-mgr component to the formComponent id
-    	  if (this.id.replace("-mgr","") + "-form" == formUI.id) {
+    	  // but in start-workflow page this test always fails so wee need to test if the form is to manage workflow
+    	  if (this.id.replace("-mgr","") + "-form" == formUI.id || formUI.id.indexOf("workflow") != -1) {
 	         // change the default 'Submit' label to be 'Save'
 	         var submitButton = args[1].buttons.submit;
 	         submitButton.set("label", this.msg(this.options.submitButtonMessageKey));
