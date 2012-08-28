@@ -145,7 +145,7 @@ if (typeof SIDE == "undefined" || !SIDE) {
                var index2 = inputFileValue.lastIndexOf('\\');
                if (index != -1 || index2 != -1) {
                   index = index > index2 ? index : index2;
-                  cm_name_field.value = inputFileValue.substring(index + 1, inputFileValue.length - 1);
+                  cm_name_field.value = inputFileValue.substring(index + 1, inputFileValue.length );
                } else {
                   cm_name_field.value = inputFileValue;
                }
