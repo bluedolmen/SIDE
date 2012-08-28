@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Alfresco 3.4.6 EE Share Forms Generator
 Bundle-SymbolicName: com.bluexml.side.Form.generator.alfresco.enterprise346E;singleton:=true
-Bundle-Version: 1.0.58.v38675-20120827
+Bundle-Version: 1.0.59.v38709-20120828
 Bundle-Activator: com.bluexml.side.form.generator.alfresco.enterprise346.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.core.runtime,
