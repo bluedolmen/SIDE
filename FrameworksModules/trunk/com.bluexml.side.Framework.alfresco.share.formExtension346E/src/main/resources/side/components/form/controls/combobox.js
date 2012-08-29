@@ -163,9 +163,11 @@ if (!Array.prototype.indexOf) {
                field : this.options.field,
                compactMode : true,
                currentValue : this.initialValue,
-               itemType: this.options.itemType
+               itemType : this.options.itemType,
+               showLinkToTarget : this.options.showLinkToTarget ? this.options.showLinkToTarget : false,
+               targetLinkTemplate : this.options.targetLinkTemplate ? this.options.targetLinkTemplate : null
             }).setMessages(this.messages);
-            
+
          } else if (this.options.multipleSelectMode) {
             // cardinality n-n
             var multiselect = new SIDE.MyDSMultiSelectField({
