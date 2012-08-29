@@ -149,9 +149,8 @@ if (typeof SIDE == "undefined" || !SIDE) {
                } else {
                   cm_name_field.value = inputFileValue;
                }
-               cm_name_field.form.formRuntime.updateSubmitElements();
-
             }
+            me.widgets.inputFile.form.formRuntime.updateSubmitElements();
          });
       },
 
