@@ -243,6 +243,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 		<%if (args(0) == "multiple"){%>
 		 	<control-param name="multipleSelectMode">true</control-param>		
 		<%}%>
+		<%getXtensionAsControlParam("showTargetLink")%>
 		<%getPickerControlParams()%>
 		<%getBehaviour()%>
 	</control>
@@ -285,6 +286,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 		<%getXtensionAsControlParam("targetFormSubmitType")%>		
 		<%getXtensionAsControlParam("targetDestination")%>
 		<%getXtensionAsControlParam("hideSelector")%>
+		<%getXtensionAsControlParam("showTargetLink")%>
 		<%getBehaviour()%>
 	</control>
 <%}else if (widget.toString() == "Inline"){%>
