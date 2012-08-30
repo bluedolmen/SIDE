@@ -48,6 +48,18 @@ the file webapps/alfresco/WEB-INF//classes/alfresco/webscripts/extension/com/blu
 
 Note: on some specific deployed site, the ${url.context} variable is not correctly set up; you may have to replace by the direct domain value of
 
+- SSO or NTLM support:
+  by default the applet is deployed under the alfresco webapps (in webapps/alfresco/applet/editContentInline-1.0.3.jar), but the page which loads the applet is under share.
+  In this case, the Java plugin makes a direct call to the alfresco webapps to load the jar without sending the authentication (like mod_auth_cas in SSO CAS) cookie which is related to the /share domain (and not /alfresco).
+  In order to make it works in SSO or NTLM environment, follow the steps:
+  - copy the webapps/alfresco/applet/editContentInline-1.0.3.jar under webapps/share/applet/editContentInline-1.0.3.jar
+  - change the call to the applet in the file webapps/alfresco/WEB-INF//classes/alfresco/webscripts/extension/com/bluexml/side/alfresco/editInline/editWordContentInline.get.html.ftl by setting the codebase to
+      	<applet id="editDoc" name="editDoc" codebase="share/applet" code="com.bluexml.side.alfresco.applet.EditingDocument.class"
+    in order to load the jar on Share and by sending the authentication cookie.
+  Note: without these configuration for SSO, an error "invalid jar file" is raised by the java plugin when it tries to load the jar applet as it receives in return the authentication page and not the jar as 
+  the alfresco webapp sees it as not authentified.  
+
+
 Customization:
 ---------------
 - applet tracing:
