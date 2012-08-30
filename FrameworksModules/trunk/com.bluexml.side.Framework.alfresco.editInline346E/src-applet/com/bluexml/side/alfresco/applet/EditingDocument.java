@@ -15,7 +15,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
-import com.bluexml.side.alfresco.applet.Exec;
 
 
 public class EditingDocument extends Applet {
@@ -113,9 +112,13 @@ public class EditingDocument extends Applet {
 			} else if (getParameter("mime").equals("application/vnd.oasis.opendocument.presentation")) {
 				monAppli = new Exec("simpress.exe", fileName);
 				monAppli.start();
+			} else {
+				System.out.println("MimeType not recognized "+getParameter("mime"));
+				throw new Exception("Invalid MimeType"+getParameter("mime"));
 			}
 			Thread.sleep(1000);
 		} catch (Exception e) {
+            System.out.println("Exception in main editingDocument for File "+fileName);
 			e.printStackTrace();
 		}
 	}

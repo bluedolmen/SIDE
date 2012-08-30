@@ -1,5 +1,6 @@
 <project xmlns:artifact="antlib:org.apache.maven.artifact.ant" name="com.bluexml.side.Framework.alfresco.editInline346E" default="patchWebapps">
 	<property file="${user.home}/build.properties" />
+	<property file="build.${user.name}.properties" />
 	
 	<property name="webapps.home" value="${tomcat.home}/webapps" />
 	<path id="maven-ant-tasks.classpath" path="lib/maven-ant-tasks-2.1.3.jar" />
