@@ -50,6 +50,14 @@ Note: on some specific deployed site, the ${url.context} variable is not correct
 
 Customization:
 ---------------
+- applet tracing:
+  to debug and trace applet execution:
+      as Administraor, Control panel -> Java -> Advanced -> debug & Java console parameters to set up
+    or
+      C:\Users\<yourusername>\AppData\LocalLow\Sun\Java\Deployment\deployment.properties
+          add:
+            deployment.console.startup.mode=SHOW
+            deployment.trace.level=all
 - Applet transfer and caching:
   The following applet parameters may be added to:
   . optimize transfer:
