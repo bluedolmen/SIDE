@@ -11,7 +11,6 @@
         <p />
 		<p>A la fin de l'&eacute;dition de votre document, NE PAS fermer la fen&euml;tre avant d'avoir ferm&eacute; votre document et avoir attendu 5 secondes.</p>
 		<p>Ceci est n&eacute;cessaire pour laisser le temps de sauvegarder les derni&egrave;res modifications de votre document dans Alfresco.</p>
-		<p> </p>
 		<p>Merci de votre compr&eacute;hension. </p>
 		<hr/>
         <p>The loading duration of the document in your editor may take some seconds according to its size.</p>
@@ -19,7 +18,6 @@
         <p />
 		<p>After closing your editor, DO NOT close this window before closing your document and waiting for 5 seconds.</p>
 		<p>This is required to let the necessary time to save the last updates of your document in Alfresco</p>
-		<p> </p>
 		<p>Thanks you for your understanding. </p>
 		<applet id="editDoc" name="editDoc" codebase="${url.context}/applet" code="com.bluexml.side.alfresco.applet.EditingDocument.class"
 			height="80" width="300"
