@@ -8,13 +8,14 @@ import com.bluexml.side.clazz.service.alfresco.ClassServices
 <%if (pageSet[ID.toLowerCase().trim() == "documentlibrary"].nSize() > 0 &&
  pageSet[ID.toLowerCase().trim() == "documentlibrary"].portlets[associationPortlet.name.toLowerCase().trim() == "toolbar-create-content" && associationPortlet.isPortletInternal != null].nSize() > 0){%>
  <%getProperty("alf.share.paths.web-ext.alf.components")%>/documentlibrary/toolbar.get.config.xml
- <%}else if(pageSet[ID.toLowerCase().trim() == "documentlibrary"].nSize() > 0 &&
- pageSet[ID.toLowerCase().trim() == "documentlibrary"].portlets[associationPortlet.name.toLowerCase().trim() == "repo-toolbar-create-content" && associationPortlet.isPortletInternal != null].nSize() > 0){%>
- <%getProperty("alf.share.paths.web-ext.alf.components")%>/documentlibrary/repo-toolbar.get.config.xml
- <%}%>
+<%}%>
 
-<%script type="Portal" name="alfrescoGenerator" file="<%validatedFilename%>"%>
-<%for (pageSet[ID.toLowerCase().trim() == "documentlibrary"].portlets.associationPortlet[(name.toLowerCase().trim() == "toolbar-create-content" || name.toLowerCase().trim() == "repo-toolbar-create-content") && isPortletInternal != null]){%>
+<%script type="Portal" name="toolbar-create-content" file="<%validatedFilename%>"%>
+<%for (pageSet[ID.toLowerCase().trim() == "documentlibrary"].portlets.associationPortlet[(name.toLowerCase().trim() == "toolbar-create-content") && isPortletInternal != null]){%>
+<%generate_toolbar_portlet()%>
+<%}%>
+
+<%script type="Portlet" name="generate_toolbar_portlet"%>
 <toolbar>
    <createContent>
    	  <%if (metainfo[key == "default-create-content"].nSize() == 1 && metainfo[key == "default-create-content"].nGet(0).value.trim() == "true"){%>
@@ -25,7 +26,7 @@ import com.bluexml.side.clazz.service.alfresco.ClassServices
       <%-- disabled since MM back before adding metainfoGroup
       <%if (metainfoGroup[key == 'mimetypes'].nSize() > 0){%>
       	<%for (metainfoGroup[key == 'mimetypes']){%>
-      <content mimetype="<%if (children[key == 'mimetype']){%><%children[key == 'mimetype'].filter("common.metaInfo").value%><%}%>" icon="plain-text" label="menu.create-content.<%children[key == 'form'].filter("common.metaInfo").EObjectValue.filter("form.ClassReference").real_class.name%>" itemid="<%children[key == 'form'].filter("common.metaInfo").EObjectValue.filter("form.ClassReference").real_class.getPrefixedQName()%>"<%if (children[key == 'form'].filter("common.metaInfo").EObjectValue.eContainer("FormCollection").name != "default"){%> formid="<%children[key == 'form'].filter("common.metaInfo").EObjectValue.eContainer("FormCollection").name%>"<%}%>/>
+      <content mimetype="<%if (children[key == 'mimetype']){%><%children[key == 'mimetype'].filter("common.metaInfo").value%><%}else{%>text/plain<%}%>" icon="plain-text" label="menu.create-content.<%children[key == 'form'].filter("common.metaInfo").EObjectValue.filter("form.ClassReference").real_class.name%>" itemid="<%children[key == 'form'].filter("common.metaInfo").EObjectValue.filter("form.ClassReference").real_class.getPrefixedQName()%>"<%if (children[key == 'form'].filter("common.metaInfo").EObjectValue.eContainer("FormCollection").name != "default"){%> formid="<%children[key == 'form'].filter("common.metaInfo").EObjectValue.eContainer("FormCollection").name%>"<%}%>/>
       	<%}%>
       <%}else{%>
       --%>
@@ -34,9 +35,7 @@ import com.bluexml.side.clazz.service.alfresco.ClassServices
       	<%}%>
       <%--
       <%}%>
-      --%>
-      
-            
+      --%>      
    </createContent>
    <actionSets>
       <actionSet id="default">
@@ -48,4 +47,3 @@ import com.bluexml.side.clazz.service.alfresco.ClassServices
       </actionSet>
    </actionSets>
 </toolbar>
-<%}%>

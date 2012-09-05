@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <chain:Chain xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:chain="http://www.obeo.fr/acceleo/chain">
   <repository>
-    <files xsi:type="chain:Model" path="/Ifremer_NSE_V1/src/models/portal/Ifremer_NSE_V1.portal"/>
+    <files xsi:type="chain:Model" path="/Rochefort_Liberacces_V1/src/models/portal/rmContentmodel.portal"/>
     <files xsi:type="chain:Folder" path="/com.bluexml.side.Portal.generator.alfresco34d/generation"/>
     <files xsi:type="chain:Log" path="/com.bluexml.side.Portal.generator.alfresco34d/src/com/bluexml/side/portal/generator/alfresco34d/templates/default.log.txt"/>
     <files xsi:type="chain:EmfMetamodel" path="http://www.kerblue.org/portal/1.0"/>
@@ -18,7 +18,8 @@
     <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.alfresco34d/src/com/bluexml/side/portal/generator/alfresco34d/templates/folder-details.xml.mt"/>
     <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.alfresco34d/src/com/bluexml/side/portal/generator/alfresco34d/templates/inline-edit.xml.mt"/>
     <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.alfresco34d/src/com/bluexml/side/portal/generator/alfresco34d/templates/searchFormCallBack.html.mt"/>
-    <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.alfresco34d/src/com/bluexml/side/portal/generator/alfresco34d/templates/toolbar.get.config.xml.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.alfresco34d/src/com/bluexml/side/portal/generator/alfresco34d/templates/toolbar.mt"/>
+    <files xsi:type="chain:Generator" path="/com.bluexml.side.Portal.generator.alfresco34d/src/com/bluexml/side/portal/generator/alfresco34d/templates/repo-toolbar.mt"/>
   </repository>
   <actions>
     <actions xsi:type="chain:Generate" documentation="create-site.get.properties" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.4" folder="//@repository/@files.1"/>
@@ -35,5 +36,6 @@
     <actions xsi:type="chain:Generate" documentation="inline-edit.xml" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.15" folder="//@repository/@files.1"/>
     <actions xsi:type="chain:Generate" documentation="searchFormCallBack.html" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.16" folder="//@repository/@files.1"/>
     <actions xsi:type="chain:Generate" documentation="toolbar.get.config.xml" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.17" folder="//@repository/@files.1"/>
+    <actions xsi:type="chain:Generate" documentation="repo-toolbar.get.config.xml" log="//@repository/@files.2" model="//@repository/@files.0" metamodel="//@repository/@files.3" generator="//@repository/@files.18" folder="//@repository/@files.1"/>
   </actions>
 </chain:Chain>
