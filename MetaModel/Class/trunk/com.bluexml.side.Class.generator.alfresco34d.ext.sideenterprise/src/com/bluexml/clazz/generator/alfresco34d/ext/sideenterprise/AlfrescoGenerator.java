@@ -39,6 +39,11 @@ public class AlfrescoGenerator extends com.bluexml.side.clazz.generator.alfresco
 		templates.add(templateBase34d + "alfrescoshare/doclist/documentlist.get_es.properties.mt"); //$NON-NLS-1$
 		templates.add(templateBase34d + "alfrescoshare/doclist/documentlist.get_fr.properties.mt"); //$NON-NLS-1$
 		templates.add(templateBase34d + "alfrescoshare/doclist/documentlist.get_it.properties.mt"); //$NON-NLS-1$
+		
+		templates.add(templateBase34d + "alfrescoshare/doclist/repo-documentlist.get_de.properties.mt"); //$NON-NLS-1$
+		templates.add(templateBase34d + "alfrescoshare/doclist/repo-documentlist.get_es.properties.mt"); //$NON-NLS-1$
+		templates.add(templateBase34d + "alfrescoshare/doclist/repo-documentlist.get_fr.properties.mt"); //$NON-NLS-1$
+		templates.add(templateBase34d + "alfrescoshare/doclist/repo-documentlist.get_it.properties.mt"); //$NON-NLS-1$
 
 		templates.add(templateBase34d + "alfrescoshare/changetype/change-type.get_de.properties.mt");
 		templates.add(templateBase34d + "alfrescoshare/changetype/change-type.get_es.properties.mt");
