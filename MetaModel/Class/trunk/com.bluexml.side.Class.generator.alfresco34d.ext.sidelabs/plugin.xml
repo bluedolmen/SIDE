@@ -11,7 +11,6 @@
             <configurationParameter dataType="String" defaultValue="http://localhost:8080/alfresco" documentation="Set this value to the URL of the Alfresco instance on which you want to generate and deploy this new content model from the SIDE data model." key="alfresco.url" label="Alfresco URL" />
             <option defaultOption="true" key="alfresco.share.extension" label="Alfresco Share Extension">
               <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.shareStandAloneForms" moduleType="zip" technologyVersion="alfresco_3.4d" versionMax="1.0.17" versionMin="1.0.17" />
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.upload34d" moduleType="amp" technologyVersion="alfresco_3.4d" versionMax="1.0.10" versionMin="1.0.10" />
             </option>
             <option key="alfresco.webscripts.common" label="Alfresco Common Webscripts">
               <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.xforms34d" moduleType="amp" technologyVersion="alfresco_3.4d" versionMax="1.0.12" versionMin="1.0.12" />

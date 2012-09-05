@@ -11,7 +11,7 @@
             <configurationParameter dataType="String" documentation="account to use when getting documents from alfresco" key="alfresco.report.runas" label="report as" />
             <option defaultOption="true" key="alfresco.share.extension" label="Alfresco Share Extension">
               <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.shareStandAloneForms" moduleType="zip" technologyVersion="alfresco_3.4d" versionMax="1.0.17" versionMin="1.0.17" />
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.upload34d" moduleType="amp" technologyVersion="alfresco_3.4d" versionMax="1.0.10" versionMin="1.0.10" />
+              <!--<moduleDependence moduleId="com.bluexml.side.Framework.alfresco.upload34d" moduleType="amp" technologyVersion="alfresco_3.4d" versionMax="1.0.10" versionMin="1.0.10" />-->
             </option>
             <option key="alfresco.webscript.report" label="Alfresco Report Webscripts" />
             <option documentation="Check this option to include the SIDE SQL extension module for Alfresco.&lt;br&gt;This module provides the synchronisation of alfresco data into a relational database.&lt;br&gt; Queries with joins can thus be performed." key="com.bluexml.side.Class.generator.alfresco.sql" label="Alfresco SQL">
