@@ -28,16 +28,19 @@ SIDE.Util.addQueryParam = function(qs, param) {
 
 if ((SIDE.Util.getParam('auto'))
 	&& (!SIDE.Util.getParam('try'))
-	&& (
-		(document.referrer && document.referrer.indexOf('/share/page/user/') == -1)
+	&& ((document.referrer && document.referrer.indexOf('/share/page/user/') == -1)
 		|| (document.referrer == ""))) {
-	var jqxhr = $.ajax({
-	  type: 'GET',
-	  url: '/share/page/dologin',
-	  data: {
-	  	'username': 'anonymous',
-	  	'password': 'anonymous'
-  	  },
+	
+	var username = "anonymous";
+	if (SIDE.Util.getParam('username')) {
+		username = SIDE.Util.getParam('username');
+	}
+    var jqxhr = $.ajax({
+      type: 'POST',
+      url: '/share/page/autologin',
+      data: {
+            'username': username
+      },
   	  statusCode: {
 	    302: function(a, b, c) {
   			//alert('302');
