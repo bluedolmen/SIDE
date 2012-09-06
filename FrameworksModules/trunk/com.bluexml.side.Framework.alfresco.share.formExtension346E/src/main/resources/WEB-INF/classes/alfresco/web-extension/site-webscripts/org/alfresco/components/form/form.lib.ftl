@@ -101,7 +101,7 @@
 </#macro>
 
 <#macro renderSet set>
-   <#-- SIDE Id -->
+   <!-- SIDE.custom.Controller -->
    <#if (set.id != "")>
        <@renderRule "${args.htmlid}-${set.id}-pre" "SIDE.custom.Controller.onSet"/>
 	   <div id="${set.id?replace('.', '_')}" class="set">
@@ -109,7 +109,7 @@
        <@renderRule "${args.htmlid}-main-set-pre" "SIDE.custom.Controller.onSet"/>
    	   <div class="set">
    </#if>
-   </#-- SIDE -->
+   
    
    <#if set.appearance??>
       <#if set.appearance == "fieldset">

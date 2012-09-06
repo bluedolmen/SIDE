@@ -5,7 +5,7 @@
 <@link rel="stylesheet" type="text/css" href="${page.url.context}/res/components/object-finder/object-finder.css" />
 <@link rel="stylesheet" type="text/css" href="${page.url.context}/res/components/form/form.css" />
 
-<#-- SIDE Custom Priority -->
+<!-- SIDE Custom Priority -->
 <#if config.global.forms?exists && config.global.forms.dependencies?exists && config.global.forms.dependencies.css?exists>
 <style type="text/css" media="screen">
 <#list config.global.forms.dependencies.css as cssFile>
