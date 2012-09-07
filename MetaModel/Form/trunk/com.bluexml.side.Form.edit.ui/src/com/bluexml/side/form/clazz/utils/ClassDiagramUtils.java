@@ -23,6 +23,7 @@ import com.bluexml.side.clazz.Attribute;
 import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.Clazz;
 import com.bluexml.side.clazz.EnumerationLiteral;
+import com.bluexml.side.common.CustomDataType;
 import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.ModelElement;
@@ -49,12 +50,19 @@ public class ClassDiagramUtils {
 		if (att != null) {
 			Map<String, String> metaInfoMap = InitializeMetaInfo(att.getMetainfo());
 			// Choice Field
+
+			DataType typ = att.getTyp();
+			if (typ.equals(DataType.CUSTOM)) {
+				// map to handled type
+				typ = getFieldForAlfrescoCustomType(att);
+			}
+
 			if (att.getValueList() != null) {
 				field = FormFactory.eINSTANCE.createChoiceField();
 				if (metaInfoMap.containsKey("multiple") && metaInfoMap.get("multiple") != null && metaInfoMap.get("multiple").equals("True")) {
 					((ChoiceField) field).setMultiple(true);
 				}
-			} else if (att.getTyp().equals(DataType.STRING)) {
+			} else if (typ.equals(DataType.STRING)) {
 				// Email Field
 				if (Boolean.parseBoolean(metaInfoMap.get("email"))) {
 					field = FormFactory.eINSTANCE.createEmailField();
@@ -69,36 +77,38 @@ public class ClassDiagramUtils {
 					}
 				}
 				// Date Time Field
-			} else if (att.getTyp().equals(DataType.DATE_TIME)) {
+			} else if (typ.equals(DataType.DATE_TIME)) {
 				field = FormFactory.eINSTANCE.createDateTimeField();
 				// Date Field
-			} else if (att.getTyp().equals(DataType.DATE)) {
+			} else if (typ.equals(DataType.DATE)) {
 				field = FormFactory.eINSTANCE.createDateField();
 				// Time Field
-			} else if (att.getTyp().equals(DataType.TIME)) {
+			} else if (typ.equals(DataType.TIME)) {
 				field = FormFactory.eINSTANCE.createTimeField();
-			} else if (att.getTyp().equals(DataType.BOOLEAN)) {
+			} else if (typ.equals(DataType.BOOLEAN)) {
 				// Boolean Field
 				field = FormFactory.eINSTANCE.createBooleanField();
-			} else if (att.getTyp().equals(DataType.INT)) {
+			} else if (typ.equals(DataType.INT)) {
 				// Integer Field
 				field = FormFactory.eINSTANCE.createIntegerField();
-			} else if (att.getTyp().equals(DataType.LONG)) {
+			} else if (typ.equals(DataType.LONG)) {
 				// Long Field
 				field = FormFactory.eINSTANCE.createIntegerField();
-			} else if (att.getTyp().equals(DataType.FLOAT)) {
+			} else if (typ.equals(DataType.FLOAT)) {
 				// Float Field
 				field = FormFactory.eINSTANCE.createFloatField();
-			} else if (att.getTyp().equals(DataType.DOUBLE)) {
+			} else if (typ.equals(DataType.DOUBLE)) {
 				// Decimal Field
 				field = FormFactory.eINSTANCE.createDecimalField();
-			} else if (att.getTyp().equals(DataType.SHORT)) {
+			} else if (typ.equals(DataType.SHORT)) {
 				// Short Field
 				field = FormFactory.eINSTANCE.createIntegerField();
-			} else if (att.getTyp().equals(DataType.OBJECT)) {
+			} else if (typ.equals(DataType.OBJECT)) {
+				field = FormFactory.eINSTANCE.createCharField();
+			} else if (typ.equals(DataType.CUSTOM)) {
 				field = FormFactory.eINSTANCE.createCharField();
 			} else {
-				EcorePlugin.INSTANCE.log("No field available for " + att.getTyp());
+				EcorePlugin.INSTANCE.log("No field available for " + typ);
 			}
 
 			if (field == null) {
@@ -212,7 +222,7 @@ public class ClassDiagramUtils {
 	public static ModelChoiceSearchField transformAssociationIntoModelChoiceSearchField(Association ass, AbstractClass srcClazz) {
 		ModelChoiceSearchField f = FormFactory.eINSTANCE.createModelChoiceSearchField();
 
-		AssociationEnd target = setModelChoiceField(ass, srcClazz, f);
+		setModelChoiceField(ass, srcClazz, f);
 
 		return f;
 	}
@@ -374,8 +384,7 @@ public class ClassDiagramUtils {
 			if (elt instanceof ClassPackage) {
 				ClassPackage p = (ClassPackage) elt;
 				return p;
-			} else
-				return null;
+			} else return null;
 		}
 		if (elt.eContainer() instanceof ModelElement) {
 			ModelElement me = (ModelElement) elt.eContainer();
@@ -441,4 +450,30 @@ public class ClassDiagramUtils {
 		return listChild;
 	}
 
+	static Map<String, DataType> m = null;
+
+	public static DataType getFieldForAlfrescoCustomType(Attribute att) {
+		if (m == null) {
+			m = new HashMap<String, DataType>();
+
+			m.put("d:any", DataType.STRING);
+			m.put("d:mltext", DataType.STRING);
+			m.put("d:qname", DataType.STRING);
+			m.put("d:noderef", DataType.STRING);
+			m.put("d:childassocref", DataType.STRING);
+			m.put("d:assocref", DataType.STRING);
+			m.put("cmis:html", DataType.STRING);
+			m.put("cmis:uri", DataType.STRING);
+			m.put("cmis:html", DataType.STRING);
+		}
+
+		CustomDataType customType = att.getCustomType();
+		String logicalNameSpace = customType.getLogicalNameSpace().getPrefix();
+		String name = customType.getName();
+		String dtype = logicalNameSpace + ":" + name;
+		DataType dataType2 = m.get(dtype);
+		DataType dataType = dataType2 != null ? dataType2 : DataType.CUSTOM;
+		return dataType;
+
+	}
 }
