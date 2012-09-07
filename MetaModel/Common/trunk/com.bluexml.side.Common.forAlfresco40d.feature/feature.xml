@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.forAlfresco40d.feature" label="SIDE for Alfresco 4.0.d CE" version="1.0.6.v38914-20120906" provider-name="BLUEXML">
+<feature id="com.bluexml.side.Common.forAlfresco40d.feature" label="SIDE for Alfresco 4.0.d CE" version="1.0.7.v38944-20120907" provider-name="BLUEXML">
   <description url="http://www.side-labs.com">SIDE lets developers who are new to Alfresco get started quickly and helps experienced developers get the job done even faster.</description>
   <copyright url="http://www.bluexml.com/copyright">Copyright 2005-2012 BlueXML SARL.</copyright>
   <license url="http://www.side-labs.com/en/index.php/Product:License">SIDE SOFTWARE IS LICENSED BY BLUEXML. PLEASE GO TO http://www.side-labs.com/en/index.php/Product:License. READ THIS AGREEMENT CAREFULLY BEFORE PURCHASING AND/OR USING SIDE SOFTWARE.</license>
@@ -7,7 +7,7 @@
   <plugin id="com.bluexml.side.Class.generator.alfresco40d.ext.labs" download-size="0" install-size="0" version="1.0.2.v38114-20120726" unpack="false" />
   <plugin id="com.bluexml.side.Deployer.alfresco40d" download-size="0" install-size="0" version="1.0.1.v36382-20120523" unpack="false" />
   <plugin id="com.bluexml.side.Deployer.alfrescoDirectCopy40d" download-size="0" install-size="0" version="1.0.2.v36489-20120523" unpack="false" />
-  <plugin id="com.bluexml.side.Form.generator.alfresco40d" download-size="0" install-size="0" version="1.0.5.v38914-20120906" unpack="false" />
+  <plugin id="com.bluexml.side.Form.generator.alfresco40d" download-size="0" install-size="0" version="1.0.6.v38944-20120907" unpack="false" />
   <plugin id="com.bluexml.side.Form.generator.xforms.chiba40d" download-size="0" install-size="0" version="1.0.1.v36382-20120523" unpack="false" />
   <plugin id="com.bluexml.side.Portal.generator.alfresco40d" download-size="0" install-size="0" version="1.0.7.v36844-20120605" unpack="false" />
   <plugin id="com.bluexml.side.View.generator.alfresco40d" download-size="0" install-size="0" version="1.0.2.v36589-20120525" unpack="false" />
