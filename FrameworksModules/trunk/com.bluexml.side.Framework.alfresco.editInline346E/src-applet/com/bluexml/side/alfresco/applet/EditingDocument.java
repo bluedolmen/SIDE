@@ -124,19 +124,31 @@ public class EditingDocument extends Applet {
 	}
 
 	public void start() {
-		lastModified = myFile.lastModified();
-		myFile.setWritable(true);
-		//paint();
-		while (true) {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+		if (myFile != null && monAppli != null) {
+			lastModified = myFile.lastModified();
+			myFile.setWritable(true);
+			//paint();
+			while (true) {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				if (lastModified < myFile.lastModified()) {
+					lastModified = myFile.lastModified();
+					save();
+				}
 			}
-			if (lastModified < myFile.lastModified()) {
-				lastModified = myFile.lastModified();
-				save();
-			}
+		}
+	}
+
+	public void stop() {
+		//destroy monAppli
+		if (monAppli != null) {
+			monAppli.interrupt();
+		}
+		if (myFile != null) {
+			myFile.delete();
 		}
 	}
 
