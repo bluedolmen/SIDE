@@ -21,7 +21,7 @@
 		<p>Thanks you for your understanding. </p>
 		<applet id="editDoc" name="editDoc" codebase="${url.context}/applet" code="com.bluexml.side.alfresco.applet.EditingDocument.class"
 			height="100" width="300"
-			archive="editContentInline-${project.version}.jar" mayscript="true">
+			archive="editContentInline.jar" mayscript="true">
 			<param name="ticket" value="${ticket}" />
 			<param name="webdavUrl" value="${webdavUrl}" />
 			<param name="mode" value="${args.mode}" />
