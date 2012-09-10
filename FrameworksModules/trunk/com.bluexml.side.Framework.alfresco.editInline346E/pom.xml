@@ -131,7 +131,7 @@
               <target>
                 <property name="applet.src" value="${basedir}/src-applet" />
                 <property name="applet.bin" value="${basedir}/target/applet/bin" />
-                <property name="applet.jar" value="${basedir}/src/main/webapp/applet/editContentInline-${project.version}.jar" />
+                <property name="applet.jar" value="${basedir}/src/main/webapp/applet/editContentInline.jar" />
                 <echo message="build applet jar and copy in Alfresco extension Module Project as applet..." />
                 <delete failonerror="false" verbose="true" dir="${applet.bin}" />
                 <delete failonerror="false" verbose="true" file="${applet.jar}" />
@@ -140,6 +140,7 @@
                 <jar destfile="${applet.jar}" basedir="${applet.bin}">
                   <manifest>
                     <attribute name="Main-Class" value="com.bluexml.side.alfresco.applet.EditingDocument" />
+                    <attribute name="Manifest-Version" value="${project.version}" />
                   </manifest>
                 </jar>
                 <echo message="Sign produced applet jar..." />
