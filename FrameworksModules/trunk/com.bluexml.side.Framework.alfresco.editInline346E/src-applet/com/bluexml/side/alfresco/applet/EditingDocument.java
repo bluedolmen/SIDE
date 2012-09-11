@@ -1,6 +1,7 @@
 package com.bluexml.side.alfresco.applet;
 
 import java.applet.Applet;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -13,7 +14,6 @@ import java.net.HttpURLConnection;
 
 import java.net.URL;
 import java.net.URLConnection;
-import java.net.URLEncoder;
 
 
 
@@ -21,7 +21,7 @@ public class EditingDocument extends Applet {
 
 	private static final long serialVersionUID = 1L;
 	String text = "debug: ";
-	String textInfo = "Veuillez fermer la fenêtre à la fin de votre édition ou consultation.";
+	String textInfo = " test";
 	File myFile = null;
 	URL url = null;
 	Exec monAppli = null;
@@ -95,23 +95,42 @@ public class EditingDocument extends Applet {
 				myFile.setReadOnly();
 			}
 			if (getParameter("mime").equals("application/vnd.ms-powerpoint") || getParameter("mime").equals("application/vnd.ms.powerpoint") || getParameter("mime").equals("application/vnd.powerpoint") || getParameter("mime").equals("application/vnd.openxmlformats-officedocument.presentationml.presentation")) {
-				monAppli = new Exec("powerpnt.exe", fileName);
-				monAppli.start();
+				String appli = checkAppli("microsoft");
+				if (appli != null) {
+					monAppli = new Exec(appli + "powerpnt.exe", fileName);
+					monAppli.start();
+				} else {
+					textInfo = "Votre application de Microsoft PowerPoint n'a pas ete trouve,";
+					repaint();
+				}
 			} else if (getParameter("mime").equals("application/vnd.ms.excel") || getParameter("mime").equals("application/vnd.ms-excel") || getParameter("mime").equals("application/vnd.excel") || getParameter("mime").equals("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")) {
-				monAppli = new Exec("excel.exe", fileName);
-				monAppli.start();
+				String appli = checkAppli("microsoft");
+				if (appli != null) {
+					monAppli = new Exec(appli + "excel.exe", fileName);
+					monAppli.start();
+				} else {
+					textInfo = "Votre instance de Microsoft Excel n'a pas ete trouve,";
+					repaint();
+				}
 			} else if (getParameter("mime").equals("application/msword") || getParameter("mime").equals("application/vnd.openxmlformats-officedocument.wordprocessingml.document")) {
-				monAppli = new Exec("winword.exe", fileName);
-				monAppli.start();
-			} else if (getParameter("mime").equals("application/vnd.oasis.opendocument.spreadsheet")) {
-				monAppli = new Exec("scalc.exe", fileName);
-				monAppli.start();
-			} else if (getParameter("mime").equals("application/vnd.oasis.opendocument.text")) {
-				monAppli = new Exec("swriter.exe", fileName);
-				monAppli.start();
-			} else if (getParameter("mime").equals("application/vnd.oasis.opendocument.presentation")) {
-				monAppli = new Exec("simpress.exe", fileName);
-				monAppli.start();
+				String appli = checkAppli("microsoft");
+				System.out.println(appli);
+				if (appli != null) {
+					monAppli = new Exec(appli + "winword.exe", fileName);
+					monAppli.start();
+				} else {
+					textInfo = "Votre instance de Microsoft Word n'a pas ete trouve,";
+					repaint();
+				}
+			} else if (getParameter("mime").equals("application/vnd.oasis.opendocument.spreadsheet") || getParameter("mime").equals("application/vnd.oasis.opendocument.text") || getParameter("mime").equals("application/vnd.oasis.opendocument.presentation")) {
+				String appli = checkAppli("openoffice");
+				if (appli != null) {
+					monAppli = new Exec(appli, fileName);
+					monAppli.start();
+				} else {
+					textInfo = "Votre instance de OpenOffice.org n'a pas ete trouve,";
+					repaint();
+				}
 			} else {
 				System.out.println("MimeType not recognized "+getParameter("mime"));
 				throw new Exception("Invalid MimeType"+getParameter("mime"));
@@ -122,6 +141,89 @@ public class EditingDocument extends Applet {
 			e.printStackTrace();
 		}
 	}
+
+	private String checkAppli(String appli) {
+		if (appli.equals("openoffice")) {
+			String values = WindowsReqistry.readRegistry("HKEY_LOCAL_MACHINE\\SOFTWARE\\OpenOffice.org\\OpenOffice.org", null);
+	    	if (values != null) {
+				String [] value = values.split("\\\n");
+				if (value.length >= 1) {
+			        values = WindowsReqistry.readRegistry(value[1], "Path");
+			        if (values != null) {
+			        	String Newvalues = values.replaceAll("\\n", "");
+						File exe = new File (Newvalues.replaceAll("\\r", ""));
+						System.out.println(exe);
+				        if (exe.exists()) {
+				        	return Newvalues.replaceAll("\\r", "");
+				        }
+						value = values.split("\\\n");
+				        value = value[2].split("[\\s][\\s][\\s][\\s]");
+				        exe = new File (value[value.length - 1].replaceAll("\\r", ""));
+				        if (exe.exists()) {
+				        	return value[value.length - 1].replaceAll("\\r", "");
+				        }
+			        }
+				}
+	    	}
+	    	return null;
+		} else if (appli.equals("microsoft")) {
+			String values = WindowsReqistry.readRegistry("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Office", null);
+			if (values != null) {
+		    	String [] value = values.split("\\\n");
+				for (String ligne : value) {
+					ligne = ligne.replaceAll("\\r","");
+					String[] splited = ligne.split("\\\\");
+					String version = splited[splited.length - 1];
+					if (version.equals("9.0") || version.equals("10.0") || version.equals("11.0") || version.equals("12.0") || version.equals("14.0")) {
+						 values = WindowsReqistry.readRegistry("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Office\\" + version + "\\Common\\InstallRoot", "Path");
+						 if (values != null) {
+							String Newvalues = values.replaceAll("\\n", "");
+							File exe = new File (Newvalues.replaceAll("\\r", ""));
+							System.out.println(exe);
+					        if (exe.exists()) {
+					        	return Newvalues.replaceAll("\\r", "");
+					        }
+							value = values.split("\\\n");
+					        value = value[value.length - 1].split("[\\s][\\s][\\s][\\s]");
+					        exe = new File (value[value.length - 1].replaceAll("\\r", ""));
+					        if (exe.exists()) {
+					        	return value[value.length - 1].replaceAll("\\r", "");
+					        }
+						}
+					}
+				}
+			}
+			values = WindowsReqistry.readRegistry("HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Office", null);
+			System.out.println(values);
+			if (values != null) {
+		    	String [] value = values.split("\\\n");
+				for (String ligne : value) {
+					ligne = ligne.replaceAll("\\r","");
+					String[] splited = ligne.split("\\\\");
+					String version = splited[splited.length - 1];
+					if (version.equals("9.0") || version.equals("10.0") || version.equals("11.0") || version.equals("12.0") || version.equals("14.0")) {
+						values = WindowsReqistry.readRegistry("HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Office\\" + version + "\\Common\\InstallRoot", "Path");
+						if (values != null) {
+							String Newvalues = values.replaceAll("\\n", "");
+							File exe = new File (Newvalues.replaceAll("\\r", ""));
+							System.out.println(exe);
+					        if (exe.exists()) {
+					        	return Newvalues.replaceAll("\\r", "");
+					        }
+							value = values.split("\\\n");
+					        value = value[value.length - 1].split("[\\s][\\s][\\s][\\s]");
+					        exe = new File (value[value.length - 1].replaceAll("\\r", ""));
+					        if (exe.exists()) {
+					        	return value[value.length - 1].replaceAll("\\r", "");
+					        }
+						}
+					}
+				}
+			}
+		}
+		return null;
+	}
+
 
 	public void start() {
 		if (myFile != null && monAppli != null) {
@@ -210,11 +312,15 @@ public class EditingDocument extends Applet {
 	}
 
 	public void paint(Graphics g) {
+		 System.out.println(textInfo);
 		update(g);
 	}
 
 	public void update(Graphics g) {
 		 //g.drawString(text, 100, 100);
-		 g.drawString(textInfo, 100, 100);
+		 System.out.println(textInfo);
+		 g.setColor(Color.BLACK);
+		 g.drawString(textInfo, 5, 10);
+		 g.drawString("veuillez contacter votre administrateur.", 5, 25);
 	}
 }
