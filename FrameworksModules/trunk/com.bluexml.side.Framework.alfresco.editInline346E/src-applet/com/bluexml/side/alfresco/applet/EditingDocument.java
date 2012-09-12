@@ -21,7 +21,7 @@ public class EditingDocument extends Applet {
 
 	private static final long serialVersionUID = 1L;
 	String text = "debug: ";
-	String textInfo = " test";
+	String textInfo = "";
 	File myFile = null;
 	URL url = null;
 	Exec monAppli = null;
@@ -152,7 +152,6 @@ public class EditingDocument extends Applet {
 			        if (values != null) {
 			        	String Newvalues = values.replaceAll("\\n", "");
 						File exe = new File (Newvalues.replaceAll("\\r", ""));
-						System.out.println(exe);
 				        if (exe.exists()) {
 				        	return Newvalues.replaceAll("\\r", "");
 				        }
@@ -179,7 +178,6 @@ public class EditingDocument extends Applet {
 						 if (values != null) {
 							String Newvalues = values.replaceAll("\\n", "");
 							File exe = new File (Newvalues.replaceAll("\\r", ""));
-							System.out.println(exe);
 					        if (exe.exists()) {
 					        	return Newvalues.replaceAll("\\r", "");
 					        }
@@ -204,17 +202,16 @@ public class EditingDocument extends Applet {
 					if (version.equals("9.0") || version.equals("10.0") || version.equals("11.0") || version.equals("12.0") || version.equals("14.0")) {
 						values = WindowsReqistry.readRegistry("HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Office\\" + version + "\\Common\\InstallRoot", "Path");
 						if (values != null) {
-							String Newvalues = values.replaceAll("\\n", "");
-							File exe = new File (Newvalues.replaceAll("\\r", ""));
-							System.out.println(exe);
-					        if (exe.exists()) {
-					        	return Newvalues.replaceAll("\\r", "");
-					        }
 							value = values.split("\\\n");
-					        value = value[value.length - 1].split("[\\s][\\s][\\s][\\s]");
-					        exe = new File (value[value.length - 1].replaceAll("\\r", ""));
-					        if (exe.exists()) {
-					        	return value[value.length - 1].replaceAll("\\r", "");
+							if (value.length > 0) {
+								System.out.println(values);
+								System.out.println(value.length);
+								values = value[value.length - 2].replaceAll("\\n", "");
+								value = values.split("[\\s][\\s][\\s][\\s]");
+						        File exe = new File (value[value.length - 1].replaceAll("\\r", ""));
+						        if (exe.exists()) {
+						        	return value[value.length - 1].replaceAll("\\r", "");
+						        }
 					        }
 						}
 					}
@@ -312,15 +309,14 @@ public class EditingDocument extends Applet {
 	}
 
 	public void paint(Graphics g) {
-		 System.out.println(textInfo);
 		update(g);
 	}
 
 	public void update(Graphics g) {
-		 //g.drawString(text, 100, 100);
-		 System.out.println(textInfo);
-		 g.setColor(Color.BLACK);
-		 g.drawString(textInfo, 5, 10);
-		 g.drawString("veuillez contacter votre administrateur.", 5, 25);
+		if (!textInfo.equals("")) {
+			 g.setColor(Color.BLACK);
+			 g.drawString(textInfo, 5, 10);
+			 g.drawString("veuillez contacter votre administrateur.", 5, 25);
+		}
 	}
 }
