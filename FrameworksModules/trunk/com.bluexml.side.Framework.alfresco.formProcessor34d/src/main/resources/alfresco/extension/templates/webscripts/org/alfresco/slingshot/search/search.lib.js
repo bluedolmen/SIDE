@@ -784,10 +784,10 @@ function makeQueryFor(formJson, p, operator, first) {
                         from = (sepindex === 0 ? "MIN" : propValue.substr(0, sepindex));
                         to = (sepindex === propValue.length - 1 ? "MAX" : propValue.substr(sepindex + 1));
                      }
-                     formQuery += (first ? '' : ' ' + operator + ' ') + search.ISO9075Encode(propName) + ':"' + from + '".."' + to + '"';
+                     formQuery += (first ? '' : ' ' + operator + ' ') + fixPrefixedQName(propName) + ':"' + from + '".."' + to + '"';
                   }
                } else {
-                  propName = search.ISO9075Encode(propName);
+                  propName = fixPrefixedQName(propName);
                   var queryTerm = "";
                   var orString = msg.get("advsearch.inner.operator.or");
                   var andString = msg.get("advsearch.inner.operator.and");
@@ -856,7 +856,7 @@ function makeQueryFor(formJson, p, operator, first) {
          } else if (p.indexOf("assoc_") === 0 && p.match("_added$") == "_added") {
             var regexp = new RegExp("assoc_([^_]+)_(.*)_added");
             var propName = '@' + p.replace(regexp, "$1:$2") + "search";
-            propName = search.ISO9075Encode(propName);
+            propName = fixPrefixedQName(propName);
             if (propValue.indexOf(',') != -1) {
                var values = propValue.split(',');
                formQuery += (first ? '' : ' ' + operator + ' ');
@@ -990,4 +990,9 @@ function getSearchSubdirectories(formJson) {
       logger.log("search in subdirectories :" + sub);
    }
    return sub;
+}
+
+function fixPrefixedQName(propName) {
+   var qname = propName.split(":");
+   return qname[0] + ":" + search.ISO9075Encode(qname[1]);
 }
