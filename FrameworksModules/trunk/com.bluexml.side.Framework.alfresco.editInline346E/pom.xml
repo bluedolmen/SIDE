@@ -236,7 +236,7 @@
       </resource>
     </resources>
   </build>
-  <version>1.0.14</version>
+  <version>1.0.15</version>
   <profiles>
     <profile>
       <id>tools.jar.notOnMacOSX</id>
