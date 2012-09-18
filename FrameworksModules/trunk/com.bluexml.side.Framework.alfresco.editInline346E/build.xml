@@ -16,7 +16,7 @@
 		<echo message="==========" />
 		<echo message="patch the web application webapps.home=${webapps.home}" />
 
-		<copy todir="${webapps.home}/alfresco" verbose="true">
+		<copy todir="${webapps.home}/share" verbose="true">
 			<fileset dir="target/${moduleId}-${mypom.version}/web" id="id">
 				<include name="**/**" />
 			</fileset>
