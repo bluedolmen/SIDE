@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.sideForAlfresco.feature" label="SIDE for Alfresco" version="1.0.981.v39098-20120917" provider-name="blueXML" plugin="com.bluexml.side.Integration.eclipse.branding.labs">
+<feature id="com.bluexml.side.Common.sideForAlfresco.feature" label="SIDE for Alfresco" version="1.0.982.v39135-20120919" provider-name="blueXML" plugin="com.bluexml.side.Integration.eclipse.branding.labs">
   <description url="http://www.side-labs.com">SIDE lets developers who are new to Alfresco get started quickly and helps experienced developers get the job done even faster.</description>
   <copyright url="http://www.bluexml.com/copyright">Copyright 2005-2012 BlueXML SARL.</copyright>
   <license url="http://www.bluexml.com">GNU GENERAL PUBLIC LICENSE
@@ -636,6 +636,6 @@ copy of the Program in return for a fee.
   <includes id="com.bluexml.side.View.generator.facetmap.feature" version="1.0.91.v35624-20120503" />
   <includes id="com.bluexml.side.Workflow.generator.alfresco.feature" version="1.0.83.v37954-20120720" />
   <includes id="com.bluexml.side.Class.generator.alfresco34d.feature" version="1.0.57.v38883-20120905" />
-  <plugin id="com.bluexml.side.Integration.eclipse.branding.labs" download-size="0" install-size="0" version="1.0.896.v39098-20120917" unpack="false" />
+  <plugin id="com.bluexml.side.Integration.eclipse.branding.labs" download-size="0" install-size="0" version="1.0.897.v39135-20120919" unpack="false" />
 </feature>
 
