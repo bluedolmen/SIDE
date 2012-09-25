@@ -102,6 +102,8 @@ public class EditingDocument extends Applet {
 				} else {
 					textInfo = "Votre application de Microsoft PowerPoint n'a pas ete trouve,";
 					repaint();
+					monAppli = new Exec("powerpnt.exe", fileName);
+					monAppli.start();
 				}
 			} else if (getParameter("mime").equals("application/vnd.ms.excel") || getParameter("mime").equals("application/vnd.ms-excel") || getParameter("mime").equals("application/vnd.excel") || getParameter("mime").equals("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")) {
 				String appli = checkAppli("microsoft");
@@ -111,6 +113,8 @@ public class EditingDocument extends Applet {
 				} else {
 					textInfo = "Votre instance de Microsoft Excel n'a pas ete trouve,";
 					repaint();
+					monAppli = new Exec("excel.exe", fileName);
+					monAppli.start();
 				}
 			} else if (getParameter("mime").equals("application/msword") || getParameter("mime").equals("application/vnd.openxmlformats-officedocument.wordprocessingml.document")) {
 				String appli = checkAppli("microsoft");
@@ -121,6 +125,8 @@ public class EditingDocument extends Applet {
 				} else {
 					textInfo = "Votre instance de Microsoft Word n'a pas ete trouve,";
 					repaint();
+					monAppli = new Exec("winword.exe", fileName);
+					monAppli.start();
 				}
 			} else if (getParameter("mime").equals("application/vnd.oasis.opendocument.spreadsheet") || getParameter("mime").equals("application/vnd.oasis.opendocument.text") || getParameter("mime").equals("application/vnd.oasis.opendocument.presentation")) {
 				String appli = checkAppli("openoffice");
@@ -130,6 +136,8 @@ public class EditingDocument extends Applet {
 				} else {
 					textInfo = "Votre instance de OpenOffice.org n'a pas ete trouve,";
 					repaint();
+					monAppli = new Exec("soffice.exe", fileName);
+					monAppli.start();
 				}
 			} else {
 				System.out.println("MimeType not recognized "+getParameter("mime"));
