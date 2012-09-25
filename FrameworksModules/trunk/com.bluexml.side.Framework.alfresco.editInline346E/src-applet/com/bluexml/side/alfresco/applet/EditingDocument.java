@@ -190,11 +190,15 @@ public class EditingDocument extends Applet {
 					        	return Newvalues.replaceAll("\\r", "");
 					        }
 							value = values.split("\\\n");
-					        value = value[value.length - 1].split("[\\s][\\s][\\s][\\s]");
-					        exe = new File (value[value.length - 1].replaceAll("\\r", ""));
-					        if (exe.exists()) {
-					        	return value[value.length - 1].replaceAll("\\r", "");
-					        }
+							for (String line : value) {
+								String [] newValue = line.split("[\\s][\\s][\\s][\\s]");
+								if (newValue.length >= 1) {
+									exe = new File (newValue[newValue.length - 1].replaceAll("\\r", ""));
+									if (exe.exists()) {
+										return newValue[newValue.length - 1].replaceAll("\\r", "");
+									}
+								}
+							}
 						}
 					}
 				}
@@ -211,15 +215,15 @@ public class EditingDocument extends Applet {
 						values = WindowsReqistry.readRegistry("HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Office\\" + version + "\\Common\\InstallRoot", "Path");
 						if (values != null) {
 							value = values.split("\\\n");
-							if (value.length > 0) {
-								System.out.println(values);
-								System.out.println(value.length);
-								values = value[value.length - 2].replaceAll("\\n", "");
-								value = values.split("[\\s][\\s][\\s][\\s]");
-						        File exe = new File (value[value.length - 1].replaceAll("\\r", ""));
-						        if (exe.exists()) {
-						        	return value[value.length - 1].replaceAll("\\r", "");
-						        }
+							for (String line : value) {
+								line = line.replaceAll("\\n", "");
+								String [] newValue = line.split("[\\s][\\s][\\s][\\s]");
+								if (newValue.length >= 1) {
+							        File exe = new File (newValue[newValue.length - 1].replaceAll("\\r", ""));
+							        if (exe.exists()) {
+							        	return newValue[newValue.length - 1].replaceAll("\\r", "");
+							        }
+								}
 					        }
 						}
 					}
