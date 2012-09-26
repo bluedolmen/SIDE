@@ -62,9 +62,11 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 <%metainfo[key.toLowerCase() == args(0).toLowerCase()].nSize() > 0 || Xtension[toString().toLowerCase().startsWith(args(0).toLowerCase())].nSize() > 0%>
 
 <%script type="FormElement" name="getXtensionValue" post="trim()" %>
+<%if (haveXtension(args(0))){%>
 <%metainfo[key.toLowerCase() == args(0).toLowerCase()].value%>
 <%metainfo[key.toLowerCase() == args(0).toLowerCase()].multilineValue%>
 <%Xtension[toString().toLowerCase().startsWith(args(0).toLowerCase())]%>
+<%}%>
 
 <%-- getXtensionAsControlParam :
 	 args(0) : expected parameter name
@@ -97,20 +99,28 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 
 <%script type="FormElement" name="getSetId" post="trim()" %>
 <%if (eContainer().filter("FormContainer")){%><%args(0)%><%}else{%><%current("FormGroup").getPrefixedQualifiedName()%><%}%>
+
 <%script type="FormElement" name="getFieldLabelId" post="trim()" %>
 form.field.label.<%args(0)%><%getPrefixedQualifiedName()%>
+
 <%script type="FormGroup" name="getGroupLabelId" post="trim()" %>
 form.set.label.<%getPrefixedQualifiedName()%>
+
 <%script type="FormElement" name="getFieldId" post="trim()" %>
 <%for (ref.filter("workflow.Attribute")){%>
 <%service::getRootContainer().filter("workflow.Process").name%>:<%name%>
 <%}%>
 <%if (ref.filter("clazz.Attribute")){%>
-	<%ref.getPrefixedQName()%>
+	<%if (getXtensionValue("pseudo-field").nSize() > 0){%>
+<%getXtensionValue("pseudo-field")%>
+	<%}else{%>
+<%ref.getPrefixedQName()%>
+	<%}%>
 <%}%>
 <%for (ref.filter("clazz.Association")){%>
 	<%getPrefixedAssociationQName(getOppositeAssociationEnd(current("ClassReference").real_class))%>
 <%}%>
+
 <%script type="FormElement" name="isSearchForm"%>
 <%service::getRootContainer().filter("SearchFormCollection").nSize() > 0%>
 <%--

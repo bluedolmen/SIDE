@@ -9,7 +9,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 %>
 
 <%script type="FormElement" name="getAssociationControl"%>
-<%if (filter("TextField")){%>
+<%if (filter("Field")){%>
 	<control template="/org/alfresco/components/form/controls/association.ftl">
 		<%getXtensionAsControlParam("compactMode")%>
 		<%getXtensionAsControlParam("displayMode")%>
@@ -26,7 +26,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 <%}%>
 
 <%script type="FormElement" name="getAuthorityControl"%>
-<%if (filter("TextField")){%>
+<%if (filter("Field")){%>
 	<control template="/org/alfresco/components/form/controls/authority.ftl">
 		<%getXtensionAsControlParam("forceEditable")%>
 		<%getXtensionAsControlParam("compactMode")%>
@@ -66,7 +66,16 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 <%}%>
 
 <%script type="FormElement" name="getContentControl"%>
-<%if (filter("TextField")){%>
+<%if (filter("Field")){%>
+<%if (getXtensionValue("pseudo-field").nSize() > 0){%>
+	<%if (getXtensionValue("pseudo-field").toLowerCase() == "mimetype"){%>
+<%getMimeTypeControl()%>
+	<%}else if (getXtensionValue("pseudo-field").toLowerCase() == "size"){%>
+<%getSizeControl()%>
+	<%}else if (getXtensionValue("pseudo-field").toLowerCase() == "encoding"){%>
+<%getEncodingControl()%>
+	<%}%>	
+<%}else{%>
 	<control template="/org/alfresco/components/form/controls/content.ftl">
 		<%getXtensionAsControlParam("rows")%>
 		<%getXtensionAsControlParam("columns")%>
@@ -83,6 +92,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 		<%getBehaviour()%>
 	</control>
 <%}%>
+<%}%>
 
 <%script type="FormElement" name="getDateControl"%>
 <%if (filter("DateField")){%>
@@ -94,7 +104,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 <%}%>
 
 <%script type="FormElement" name="getEncodingControl"%>
-<%if (filter("TextField")){%>
+<%if (filter("Field")){%>
 	<control template="/org/alfresco/components/form/controls/encoding.ftl">
 		<%getXtensionAsControlParam("styleClass")%>
 		<%getXtensionAsControlParam("style")%>
@@ -104,7 +114,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 <%}%>
 
 <%script type="FormElement" name="getHiddenControl"%>
-<%if (filter("TextField")){%>
+<%if (filter("Field")){%>
 	<control template="/org/alfresco/components/form/controls/hidden.ftl">
 		<%getXtensionAsControlParam("contextProperty")%>
 		<%getBehaviour()%>
@@ -112,14 +122,14 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 <%}%>
 
 <%script type="FormElement" name="getInfoControl"%>
-<%if (filter("TextField")){%>
+<%if (filter("Field")){%>
 	<control template="/org/alfresco/components/form/controls/info.ftl">
 		<%getBehaviour()%>
 	</control>
 <%}%>
 
 <%script type="FormElement" name="getMimeTypeControl"%>
-<%if (filter("TextField")){%>
+<%if (filter("Field")){%>
 	<control template="/org/alfresco/components/form/controls/mimetype.ftl">
 		<%getXtensionAsControlParam("styleClass")%>
 		<%getXtensionAsControlParam("style")%>
@@ -141,7 +151,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 <%}%>
 
 <%script type="FormElement" name="getPeriodControl"%>
-<%if (filter("TextField")){%>
+<%if (filter("Field")){%>
 	<control template="/org/alfresco/components/form/controls/period.ftl">
 		<%getXtensionAsControlParam("forceEditable")%>
 		<%getBehaviour()%>
@@ -149,7 +159,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 <%}%>
 
 <%script type="FormElement" name="getRichTextControl"%>
-<%if (filter("TextField")){%>
+<%if (filter("Field")){%>
 	<control template="/org/alfresco/components/form/controls/richtext.ftl">
 		<%getXtensionAsControlParam("editorAppearance")%>
 		<%getXtensionAsControlParam("editorParameters")%>
@@ -161,7 +171,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 <%}%>
 
 <%script type="FormElement" name="getSelectOneControl"%>
-<%if (filter("TextField")){%>
+<%if (filter("Field")){%>
 	<control template="/org/alfresco/components/form/controls/selectone.ftl">
 		<%getXtensionAsControlParam("styleClass")%>
 		<%getXtensionAsControlParam("style")%>
@@ -173,7 +183,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 <%}%>
 
 <%script type="FormElement" name="getSelectManyControl"%>
-<%if (filter("TextField")){%>
+<%if (filter("Field")){%>
 	<control template="/org/alfresco/components/form/controls/selectmany.ftl">
 		<%getXtensionAsControlParam("styleClass")%>
 		<%getXtensionAsControlParam("style")%>
@@ -185,7 +195,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 <%}%>
 
 <%script type="FormElement" name="getSizeControl"%>
-<%if (filter("TextField")){%>
+<%if (filter("Field")){%>
 	<control template="/org/alfresco/components/form/controls/size.ftl">
 		<%getXtensionAsControlParam("property")%>
 		<%getBehaviour()%>
@@ -193,7 +203,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 <%}%>
 
 <%script type="FormElement" name="getTextAreaControl"%>
-<%if (filter("TextField")){%>
+<%if (filter("Field")){%>
 	<control template="/org/alfresco/components/form/controls/textarea.ftl">
 		<%getXtensionAsControlParam("styleClass")%>
 		<%getXtensionAsControlParam("style")%>
@@ -206,7 +216,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 <%}%>
 
 <%script type="FormElement" name="getTextFieldControl"%>
-<%if (filter("CharField")){%>
+<%if (filter("Field")){%>
 	<control template="/org/alfresco/components/form/controls/textfield.ftl">
 		<%getXtensionAsControlParam("styleClass")%>
 		<%getXtensionAsControlParam("style")%>
