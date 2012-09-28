@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Alfresco Form Generator for Alfresco Community 34d
 Bundle-SymbolicName: com.bluexml.side.Form.generator.alfresco34d;singleton:=true
-Bundle-Version: 1.0.87.v38944-20120907
+Bundle-Version: 1.0.88.v39253-20120928
 Bundle-Activator: com.bluexml.side.form.generator.alfresco34d.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.core.runtime,
