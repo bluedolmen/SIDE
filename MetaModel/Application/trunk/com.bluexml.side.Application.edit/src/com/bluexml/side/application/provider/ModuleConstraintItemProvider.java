@@ -67,6 +67,7 @@ public class ModuleConstraintItemProvider
 			addVersionMaxPropertyDescriptor(object);
 			addModuleTypePropertyDescriptor(object);
 			addTechnologyVersionPropertyDescriptor(object);
+			addClassifierPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -182,6 +183,28 @@ public class ModuleConstraintItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Classifier feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addClassifierPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ModuleConstraint_classifier_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ModuleConstraint_classifier_feature", "_UI_ModuleConstraint_type"),
+				 ApplicationPackage.Literals.MODULE_CONSTRAINT__CLASSIFIER,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns ModuleConstraint.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -223,6 +246,7 @@ public class ModuleConstraintItemProvider
 			case ApplicationPackage.MODULE_CONSTRAINT__VERSION_MAX:
 			case ApplicationPackage.MODULE_CONSTRAINT__MODULE_TYPE:
 			case ApplicationPackage.MODULE_CONSTRAINT__TECHNOLOGY_VERSION:
+			case ApplicationPackage.MODULE_CONSTRAINT__CLASSIFIER:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

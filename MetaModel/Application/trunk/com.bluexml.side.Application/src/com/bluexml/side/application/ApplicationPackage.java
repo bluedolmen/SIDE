@@ -724,13 +724,22 @@ public interface ApplicationPackage extends EPackage {
 	int MODULE_CONSTRAINT__TECHNOLOGY_VERSION = 4;
 
 	/**
+	 * The feature id for the '<em><b>Classifier</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODULE_CONSTRAINT__CLASSIFIER = 5;
+
+	/**
 	 * The number of structural features of the '<em>Module Constraint</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODULE_CONSTRAINT_FEATURE_COUNT = 5;
+	int MODULE_CONSTRAINT_FEATURE_COUNT = 6;
 
 	/**
 	 * The meta object id for the '{@link com.bluexml.side.application.StaticConfigurationParameters <em>Static Configuration Parameters</em>}' enum.
@@ -1163,6 +1172,17 @@ public interface ApplicationPackage extends EPackage {
 	EAttribute getModuleConstraint_TechnologyVersion();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.bluexml.side.application.ModuleConstraint#getClassifier <em>Classifier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Classifier</em>'.
+	 * @see com.bluexml.side.application.ModuleConstraint#getClassifier()
+	 * @see #getModuleConstraint()
+	 * @generated
+	 */
+	EAttribute getModuleConstraint_Classifier();
+
+	/**
 	 * Returns the meta object for enum '{@link com.bluexml.side.application.StaticConfigurationParameters <em>Static Configuration Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1525,6 +1545,14 @@ public interface ApplicationPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MODULE_CONSTRAINT__TECHNOLOGY_VERSION = eINSTANCE.getModuleConstraint_TechnologyVersion();
+
+		/**
+		 * The meta object literal for the '<em><b>Classifier</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MODULE_CONSTRAINT__CLASSIFIER = eINSTANCE.getModuleConstraint_Classifier();
 
 		/**
 		 * The meta object literal for the '{@link com.bluexml.side.application.StaticConfigurationParameters <em>Static Configuration Parameters</em>}' enum.

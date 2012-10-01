@@ -3,10 +3,10 @@ package com.bluexml.side.util.dependencies;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.maven.execution.MavenExecutionResult;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -56,6 +56,12 @@ public class MavenTmpProject {
 		depends.addContent(artifactId);
 		depends.addContent(version);
 		depends.addContent(type);
+		
+		String classifierString = mc.getClassifier();
+		if (StringUtils.trimToNull(classifierString) != null) {
+			Element classifier = new Element("classifier", n.getURI()).setText(classifierString); //$NON-NLS-1$
+			depends.addContent(classifier);
+		}
 		return depends;
 	}
 

@@ -711,7 +711,7 @@ public class Generate extends WorkspaceJob {
 			EList<com.bluexml.side.application.ModuleConstraint> l = elem.getModuleContraints();
 			for (int c = 0; c < l.size(); c++) {
 				com.bluexml.side.application.ModuleConstraint current = l.get(c);
-				lmc.add(new ModuleConstraint(current.getModuleId(), current.getTechnologyVersion(), current.getModuleType(), current.getVersionMin(), current.getVersionMax()));
+				lmc.add(new ModuleConstraint(current.getModuleId(), current.getClassifier(), current.getTechnologyVersion(), current.getModuleType(), current.getVersionMin(), current.getVersionMax()));
 			}
 
 			DependencesManager dm = new DependencesManager(lmc, isOfflineMode(configurationParameters));

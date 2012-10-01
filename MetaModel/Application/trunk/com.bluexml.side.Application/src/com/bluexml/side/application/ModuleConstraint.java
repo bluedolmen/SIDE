@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.bluexml.side.application.ModuleConstraint#getVersionMax <em>Version Max</em>}</li>
  *   <li>{@link com.bluexml.side.application.ModuleConstraint#getModuleType <em>Module Type</em>}</li>
  *   <li>{@link com.bluexml.side.application.ModuleConstraint#getTechnologyVersion <em>Technology Version</em>}</li>
+ *   <li>{@link com.bluexml.side.application.ModuleConstraint#getClassifier <em>Classifier</em>}</li>
  * </ul>
  * </p>
  *
@@ -158,5 +159,31 @@ public interface ModuleConstraint extends EObject {
 	 * @generated
 	 */
 	void setTechnologyVersion(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Classifier</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Classifier</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Classifier</em>' attribute.
+	 * @see #setClassifier(String)
+	 * @see com.bluexml.side.application.ApplicationPackage#getModuleConstraint_Classifier()
+	 * @model
+	 * @generated
+	 */
+	String getClassifier();
+
+	/**
+	 * Sets the value of the '{@link com.bluexml.side.application.ModuleConstraint#getClassifier <em>Classifier</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Classifier</em>' attribute.
+	 * @see #getClassifier()
+	 * @generated
+	 */
+	void setClassifier(String value);
 
 } // ModuleConstraint

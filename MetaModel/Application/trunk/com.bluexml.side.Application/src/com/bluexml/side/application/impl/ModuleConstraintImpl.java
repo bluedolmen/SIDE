@@ -26,6 +26,7 @@ import com.bluexml.side.application.ModuleConstraint;
  *   <li>{@link com.bluexml.side.application.impl.ModuleConstraintImpl#getVersionMax <em>Version Max</em>}</li>
  *   <li>{@link com.bluexml.side.application.impl.ModuleConstraintImpl#getModuleType <em>Module Type</em>}</li>
  *   <li>{@link com.bluexml.side.application.impl.ModuleConstraintImpl#getTechnologyVersion <em>Technology Version</em>}</li>
+ *   <li>{@link com.bluexml.side.application.impl.ModuleConstraintImpl#getClassifier <em>Classifier</em>}</li>
  * </ul>
  * </p>
  *
@@ -131,6 +132,26 @@ public class ModuleConstraintImpl extends EObjectImpl implements ModuleConstrain
 	 * @ordered
 	 */
 	protected String technologyVersion = TECHNOLOGY_VERSION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getClassifier() <em>Classifier</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getClassifier()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String CLASSIFIER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getClassifier() <em>Classifier</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getClassifier()
+	 * @generated
+	 * @ordered
+	 */
+	protected String classifier = CLASSIFIER_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -261,6 +282,27 @@ public class ModuleConstraintImpl extends EObjectImpl implements ModuleConstrain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getClassifier() {
+		return classifier;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setClassifier(String newClassifier) {
+		String oldClassifier = classifier;
+		classifier = newClassifier;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ApplicationPackage.MODULE_CONSTRAINT__CLASSIFIER, oldClassifier, classifier));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -274,6 +316,8 @@ public class ModuleConstraintImpl extends EObjectImpl implements ModuleConstrain
 				return getModuleType();
 			case ApplicationPackage.MODULE_CONSTRAINT__TECHNOLOGY_VERSION:
 				return getTechnologyVersion();
+			case ApplicationPackage.MODULE_CONSTRAINT__CLASSIFIER:
+				return getClassifier();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -300,6 +344,9 @@ public class ModuleConstraintImpl extends EObjectImpl implements ModuleConstrain
 				return;
 			case ApplicationPackage.MODULE_CONSTRAINT__TECHNOLOGY_VERSION:
 				setTechnologyVersion((String)newValue);
+				return;
+			case ApplicationPackage.MODULE_CONSTRAINT__CLASSIFIER:
+				setClassifier((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -328,6 +375,9 @@ public class ModuleConstraintImpl extends EObjectImpl implements ModuleConstrain
 			case ApplicationPackage.MODULE_CONSTRAINT__TECHNOLOGY_VERSION:
 				setTechnologyVersion(TECHNOLOGY_VERSION_EDEFAULT);
 				return;
+			case ApplicationPackage.MODULE_CONSTRAINT__CLASSIFIER:
+				setClassifier(CLASSIFIER_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -350,6 +400,8 @@ public class ModuleConstraintImpl extends EObjectImpl implements ModuleConstrain
 				return MODULE_TYPE_EDEFAULT == null ? moduleType != null : !MODULE_TYPE_EDEFAULT.equals(moduleType);
 			case ApplicationPackage.MODULE_CONSTRAINT__TECHNOLOGY_VERSION:
 				return TECHNOLOGY_VERSION_EDEFAULT == null ? technologyVersion != null : !TECHNOLOGY_VERSION_EDEFAULT.equals(technologyVersion);
+			case ApplicationPackage.MODULE_CONSTRAINT__CLASSIFIER:
+				return CLASSIFIER_EDEFAULT == null ? classifier != null : !CLASSIFIER_EDEFAULT.equals(classifier);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -374,6 +426,8 @@ public class ModuleConstraintImpl extends EObjectImpl implements ModuleConstrain
 		result.append(moduleType);
 		result.append(", technologyVersion: ");
 		result.append(technologyVersion);
+		result.append(", classifier: ");
+		result.append(classifier);
 		result.append(')');
 		return result.toString();
 	}

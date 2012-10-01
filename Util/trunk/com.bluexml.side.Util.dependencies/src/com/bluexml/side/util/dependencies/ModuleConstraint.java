@@ -9,6 +9,7 @@ public class ModuleConstraint {
 
 	protected String artifactId = null;
 	protected String groupId = null;
+	protected String classifier = null;
 	protected String moduleType = null;
 	protected String tech_version = ""; //$NON-NLS-1$
 	protected ModuleVersion versionMin = null;
@@ -28,22 +29,20 @@ public class ModuleConstraint {
 	};
 
 	public ModuleConstraint(String id, String tech_version, String moduleType, String versionNumMin, String versionNumMax) {
+		this(id, null, tech_version, moduleType, versionNumMin, versionNumMax);
+	}
+
+	public ModuleConstraint(String id, String classifier, String tech_version, String moduleType, String versionNumMin, String versionNumMax) {
 		setGroupAndArtifactId(id);
 		this.tech_version = tech_version;
 		this.moduleType = moduleType;
+		this.classifier = classifier;
 		if (StringUtils.trimToNull(versionNumMin) != null) {
 			this.versionMin = new ModuleVersion(versionNumMin);
 		}
 		if (StringUtils.trimToNull(versionNumMax) != null) {
 			this.versionMax = new ModuleVersion(versionNumMax);
 		}
-	}
-
-	public ModuleConstraint(String id, String moduleType, ModuleVersion versionNumMin, ModuleVersion versionNumMax) {
-		setGroupAndArtifactId(id);
-		this.moduleType = moduleType;
-		this.versionMin = versionNumMin;
-		this.versionMax = versionNumMax;
 	}
 
 	public String getModuleType() {
@@ -72,6 +71,13 @@ public class ModuleConstraint {
 
 	public void setVersionMax(String versionMax) {
 		this.versionMax = new ModuleVersion(versionMax);
+	}
+
+	/**
+	 * @return the classifier
+	 */
+	public String getClassifier() {
+		return classifier;
 	}
 
 	/**
