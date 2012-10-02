@@ -303,7 +303,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 	 	<%-- TODO--%> 
 <%}else if (widget.toString() == "ItemSelector"){%>
 	<!-- default widget (itemSelector) -->
-	<%if (Xtension.nSize() > 0){%>
+	<%if (Xtension.nSize() > 0 || metainfo.nSize() > 0){%>
 	<control>
 		<%if (args(0) == "multiple"){%>
 		 	<control-param name="multipleSelectMode">true</control-param>		
