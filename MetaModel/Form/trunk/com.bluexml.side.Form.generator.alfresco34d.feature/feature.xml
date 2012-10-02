@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Form.generator.alfresco34d.feature" label="Alfresco 3.4.d Form Generator" version="1.0.90.v39274-20120930" provider-name="BLUEXML">
+<feature id="com.bluexml.side.Form.generator.alfresco34d.feature" label="Alfresco 3.4.d Form Generator" version="1.0.91.v39305-20121002" provider-name="BLUEXML">
   <description url="http://www.side-labs.com">SIDE lets developers who are new to Alfresco get started quickly and helps experienced developers get the job done even faster.</description>
   <copyright url="http://www.bluexml.com/copyright">Copyright 2005-2012 BlueXML SARL.</copyright>
   <license url="http://www.side-labs.com/en/index.php/Product:License">SIDE SOFTWARE IS LICENSED BY BLUEXML. PLEASE GO TO http://www.side-labs.com/en/index.php/Product:License. READ THIS AGREEMENT CAREFULLY BEFORE PURCHASING AND/OR USING SIDE SOFTWARE.</license>
-  <plugin id="com.bluexml.side.Form.generator.alfresco34d" download-size="0" install-size="0" version="1.0.89.v39274-20120930" unpack="false" />
+  <plugin id="com.bluexml.side.Form.generator.alfresco34d" download-size="0" install-size="0" version="1.0.90.v39305-20121002" unpack="false" />
 </feature>
 
