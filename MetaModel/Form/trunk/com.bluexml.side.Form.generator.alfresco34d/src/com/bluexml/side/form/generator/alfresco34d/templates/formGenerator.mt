@@ -174,14 +174,14 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 	<%}%>
 </control>
 <%}else{%>
-	<%if (filter("Field") && ref.getPrefixedQName() == "cm:content"){%>
-		<%getContentControl()%>
+	<%if (filter("FileField") && ref.getPrefixedQName() == "cm:content"){%>
+		<%getFileFieldControl()%>
 	<%}else if (filter("Field") && ref.getPrefixedQName() == "cm:taggable"){%>
 		<%getTagControl()%>
 	<%}else if (filter("Field") && ref.getPrefixedQName() == "cm:categories"){%>
 		<%getCategoryControl()%>
-	<%}else if (filter("FileField") && ref.getPrefixedQName() == "cm:content"){%>
-		<%getFileFieldControl()%>	
+	<%}else if (filter("Field") && ref.getPrefixedQName() == "cm:content"){%>
+		<%getContentControl()%>
 	<%}else if (filter("BooleanField")){%>
 		<%getCheckBoxControl()%>
 	<%}else if (filter("TextField")){%>

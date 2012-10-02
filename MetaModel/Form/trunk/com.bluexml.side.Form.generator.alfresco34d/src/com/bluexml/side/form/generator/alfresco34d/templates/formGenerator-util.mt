@@ -101,7 +101,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 <%if (eContainer().filter("FormContainer")){%><%args(0)%><%}else{%><%current("FormGroup").getPrefixedQualifiedName()%><%}%>
 
 <%script type="FormElement" name="getFieldLabelId" post="trim()" %>
-form.field.label.<%args(0)%><%getPrefixedQualifiedName()%>
+form.field.label.<%args(0)%><%getPrefixedQualifiedName()%><%if (getXtensionValue("pseudo-field").nSize() > 0){%>.<%getXtensionValue("pseudo-field")%><%}%>
 
 <%script type="FormGroup" name="getGroupLabelId" post="trim()" %>
 form.set.label.<%getPrefixedQualifiedName()%>
