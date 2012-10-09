@@ -44,6 +44,8 @@
 	 <#if field.control.params.addNewConfig??>, addNewConfig : <@addNewConfig field /></#if>
 	 <#if field.control.params.editConfig??>, editConfig : <@editConfig field /></#if>
 	 <#if field.control.params.startLocation??>, startLocation : "${field.control.params.startLocation}"</#if>
+	 <#if field.control.params.nodoubleValue??>, nodoubleValue : ${field.control.params.nodoubleValue}</#if>
+	 <#if field.control.params.nodoubleLabel??>, nodoubleLabel : ${field.control.params.nodoubleLabel}</#if>
    });
    
    

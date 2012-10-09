@@ -50,6 +50,8 @@ if (console == undefined) {
          SIDE.MyDSMultiSelectField.superclass.setOptions.call(this, options);
          this.options.editConfig = options.editConfig;
          this.options.keepWeirdValues = options.keepWeirdValues ? options.keepWeirdValues : true;
+         this.options.nodoubleValue = options.nodoubleValue != null && options.nodoubleValue != undefined ? options.nodoubleValue : true;
+         this.options.nodoubleLabel = options.nodoubleLabel != null && options.nodoubleLabel != undefined ? options.nodoubleLabel : true;
       },
 
       /**
@@ -88,7 +90,9 @@ if (console == undefined) {
          this.ddlist = new SIDE.MyDDList({
             parentEl : this.fieldContainer,
             editConfig : this.options.editConfig,
-            currentValueHtmlId : this.currentValueHtmlId
+            currentValueHtmlId : this.currentValueHtmlId,
+            nodoubleValue : this.options.nodoubleValue,
+            nodoubleLabel : this.options.nodoubleLabel
          });
 
       },
@@ -306,8 +310,8 @@ if (console == undefined) {
          SIDE.MyDDList.superclass.setOptions.call(this, options);
          this.options.editConfig = options.editConfig;
          this.options.currentValueHtmlId = options.currentValueHtmlId;
-         this.options.nodoubleValue = options.nodoubleValue ? options.nodoubleValue : true;
-         this.options.nodoubleLabel = options.nodoubleLabel ? options.nodoubleLabel : true;
+         this.options.nodoubleValue = options.nodoubleValue;
+         this.options.nodoubleLabel = options.nodoubleLabel;
       },
 
       /**

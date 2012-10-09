@@ -93,7 +93,9 @@ if (!Array.prototype.indexOf) {
          editConfig : {
             disabled : true,
             formconfig : {}
-         }
+         },
+         nodoubleValue : true,
+         nodoubleLabel : true
       },
 
       setOptions : function(options) {
@@ -177,7 +179,9 @@ if (!Array.prototype.indexOf) {
                labelKey : "name",
                parentEl : this.htmlid,
                currentValueHtmlId : this.currentValueHtmlId,
-               editConfig : this.options.editConfig
+               editConfig : this.options.editConfig,
+               nodoubleValue : this.options.nodoubleValue,
+               nodoubleLabel : this.options.nodoubleLabel
             }, this.initialValue);
             multiselect.setMessages(this.messages);
             var me = this;
