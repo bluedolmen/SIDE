@@ -20,7 +20,7 @@
 		<p>This is required to let the necessary time to save the last updates of your document in Alfresco</p>
 		<p>Thanks you for your understanding. </p>
 		<applet id="editDoc" name="editDoc" codebase="${url.context}/applet" code="com.bluexml.side.alfresco.applet.EditingDocument.class"
-			height="100" width="300"
+			height="1" width="1"
 			archive="editContentInline.jar" mayscript="true">
 			<param name="ticket" value="${ticket}" />
 			<param name="webdavUrl" value="${webdavUrl}" />
