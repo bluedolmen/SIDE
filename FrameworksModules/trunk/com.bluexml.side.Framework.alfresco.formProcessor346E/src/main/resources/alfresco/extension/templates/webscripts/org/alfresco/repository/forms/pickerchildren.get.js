@@ -269,6 +269,12 @@ function main() {
                findGroups(argsSearchTerm, maxResults, results, argsXPath);
                findUsers(argsSearchTerm, maxResults, results, argsXPath);
             }
+            // sort the full results by name alphabetically
+            // it means that group and person [name=firstname lastname (username)] are mixed by the sort if combined
+   			if (results.length > 0) {
+      			results.sort(sortItemByName);
+   			}
+            
          } else if (url.templateArgs.type == "search") {
             // search in given path of the given type
             var type = "";
@@ -407,6 +413,11 @@ function sortByName(a, b) {
    return (b.properties.name.toLowerCase() > a.properties.name.toLowerCase() ? -1 : 1);
 }
 
+/* Sort the user/group results by case-insensitive name */
+function sortItemByName(a, b) {
+   return (b.item.properties.name.toLowerCase() > a.item.properties.name.toLowerCase() ? -1 : 1);
+}
+
 function findUsers(searchTerm, maxResults, results, xpath) {
    // construct query string
    var query = '+TYPE:"cm:person"';
@@ -483,12 +494,6 @@ function findGroups(searchTerm, maxResults, results, xpath) {
       }
    }
 
-   // sort the groups by name alphabetically
-   if (results.length > 0) {
-      results.sort(function(a, b) {
-         return (a.item.properties.name < b.item.properties.name) ? -1 : (a.item.properties.name > b.item.properties.name) ? 1 : 0;
-      });
-   }
 }
 
 /**
