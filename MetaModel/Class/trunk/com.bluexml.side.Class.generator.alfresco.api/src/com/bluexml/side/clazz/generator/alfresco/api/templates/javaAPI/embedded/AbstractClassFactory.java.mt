@@ -92,7 +92,7 @@ public class <%getProperty("java.classes.abstractClassFactory")%> {
 
 		QName lassocQName = assocQName;
 		if (lassocQName == null) {
-			lassocQName = QName.createQName(ALF_CONTENT_URI + parent.getId());
+			lassocQName = QName.createQName("{" + ALF_CONTENT_URI + "}" + properties.get(ContentModel.PROP_NAME));
 		}
 		if (properties != null) {
 			newNode = nodeService.createNode(parent, assocTypeQName, lassocQName, nodeTypeQName, properties).getChildRef();
