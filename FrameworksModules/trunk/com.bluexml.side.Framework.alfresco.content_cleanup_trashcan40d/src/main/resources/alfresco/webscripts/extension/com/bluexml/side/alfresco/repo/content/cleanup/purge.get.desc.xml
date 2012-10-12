@@ -1,0 +1,11 @@
+<webscript>
+  <shortname>Alfresco purge deleted document</shortname>
+  <description> <![CDATA[
+  Automate the process of permanently delete contents which has been deleted more than past 'daysNbOlderThan' days; deleted contents is kept in alfresco database and content store; this process supress the metadata in database but kept content in content store: the content is sayd 'orphean'. The Alfresco ContentStoreCleaner periodically moves 'orphean' content in the contentstore.deleted store.  
+  ]]></description>
+  <url>/com/bluexml/side/alfresco/repo/content/cleanup/purge?daysNbOlderThan={daysNbOlderThan?}</url>
+   	<format default="html">extension</format>
+   	<authentication>admin</authentication>
+   	<transaction>required</transaction>
+   	<family>side</family>
+</webscript>
