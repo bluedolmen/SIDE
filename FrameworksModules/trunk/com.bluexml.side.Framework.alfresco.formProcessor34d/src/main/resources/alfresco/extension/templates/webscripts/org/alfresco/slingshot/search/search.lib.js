@@ -547,7 +547,7 @@ function processResults(nodes, maxResults) {
  *           Object containing search parameters - see API description above
  */
 function getSearchResults(params) {
-   var nodes, ftsQuery = "", term = params.term, tag = params.tag, formData = params.query;
+   var nodes, ftsQuery = "", term = params.term, tag = params.tag, formData = params.query, repoSearch = params.repo;
 
    // Simple keyword search and tag specific search
    if (term !== null && term.length !== 0) {
@@ -568,7 +568,6 @@ function getSearchResults(params) {
    if (formData !== null && formData.length !== 0) {
       var formQuery = "", formJson = jsonUtils.toObject(formData);
 
-      var repoSearch = params.repo;
       var searchPath = getSearchPath(formJson);
       if (searchPath != null) {
          repoSearch = true;
