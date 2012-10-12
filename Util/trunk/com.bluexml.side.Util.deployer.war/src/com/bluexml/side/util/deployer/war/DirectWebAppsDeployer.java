@@ -3,6 +3,7 @@ package com.bluexml.side.util.deployer.war;
 import java.io.File;
 import java.io.FileFilter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -123,7 +124,19 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 		}
 		if (fileToDeploy.exists() && fileToDeploy.isDirectory()) {
 			for (File f : fileToDeploy.listFiles(fileFilter)) {
-				deployedFiles.addAll(deployFile(f).getList());
+				List<String> list = deployFile(f).getList();
+
+				deployedFiles.addAll(list);
+
+				// check if files are copied more than one time, this detect file collision
+//				for (String file : deployedFiles) {
+//					int frequency = Collections.frequency(deployedFiles, file);
+//					if (frequency > 1) {
+//						// conflict detected ...
+//						monitor.addWarningTextAndLog("Beware the file "+file+"have been overrided by module :"+fileToDeploy, "");
+//					}
+//				}
+
 			}
 		} else if (fileToDeploy.exists() && fileToDeploy.isFile() && fileFilter.accept(fileToDeploy)) {
 			deployedFiles.addAll(deployFile(fileToDeploy).getList());
@@ -141,6 +154,7 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 			// we touch web.xml too to let tomcat reload the webapp, some webapps should not be restarted
 			FileUtils.touch(getWebAppXMLFile());
 		}
+
 	}
 
 	private MonitorWriter deployFile(File f) throws Exception {
@@ -216,4 +230,5 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 		String path = FilenameUtils.separatorsToSystem("/META-INF/lastDeployed.txt");
 		return new File(getDeployedWebbAppFolder().getAbsolutePath() + path);
 	}
+
 }

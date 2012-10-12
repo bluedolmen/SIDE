@@ -274,6 +274,8 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 		<%getXtensionAsControlParam("maxResults")%>
 		<%getXtensionAsControlParam("startLocation")%>
 		<%getXtensionAsControlParam("getDataSource")%>
+		<%getXtensionAsControlParam("nodoubleValue")%>
+		<%getXtensionAsControlParam("nodoubleLabel")%>
 		
 		<%if (filter("ModelChoiceField").association_formClass.nSize() == 1){%>		
 			<%if (getXtensionValue("allowToCreate") != "false"){%>
