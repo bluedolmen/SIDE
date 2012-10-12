@@ -38,6 +38,9 @@
             </option>
             <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.singlePrimaryChildAssociation40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.9" versionMin="1.0.9" />
             <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.propertiesUpdater40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.11" versionMin="1.0.11" />
+            <option defaultOption="false" documentation="add extension to purge deleted items from alfresco" hidden="false" key="com.bluexml.side.Framework.alfresco.content_cleanup_trashcan40d" label="Cleanup trashcan">
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.content_cleanup_trashcan40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.0" versionMin="1.0.0" />
+            </option>
           </generatorVersion>
         </technologyVersion>
       </technology>
