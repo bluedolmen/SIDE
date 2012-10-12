@@ -12,7 +12,7 @@
             <option defaultOption="true" documentation="this must be hidden" hidden="true" key="generator.main" label="main generation" />
             <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.share.Inputex" moduleType="zip" technologyVersion="alfresco_40d" versionMax="1.0.4" versionMin="1.0.4" />
             <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.share.autoConnect40d" moduleType="zip" technologyVersion="alfresco_40d" versionMax="1.0.5" versionMin="1.0.5" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.formProcessor40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.29" versionMin="1.0.29" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.formProcessor40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.30" versionMin="1.0.30" />
           </generatorVersion>
         </technologyVersion>
       </technology>
