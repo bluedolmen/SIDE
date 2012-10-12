@@ -15,7 +15,7 @@
   <artifactId>doclist40d</artifactId>
   <packaging>amp</packaging>
   <name>com.bluexml.side.Framework.alfresco.doclist40d</name>
-  <version>1.0.35</version>
+  <version>1.0.36</version>
   <!-- An Alfresco version number must be of the form 1.2.3.4. Using 1.0-SNAPSHOT 
 		as the AMP version will create an exception. See http://wiki.alfresco.com/wiki/Developing_an_Alfresco_Module: 
 		"The version number must be made up of numeric values separated by dots. 
@@ -121,7 +121,7 @@
     <dependency>
       <groupId>com.bluexml.side.Framework.alfresco</groupId>
       <artifactId>formProcessor40d</artifactId>
-      <version>1.0.29</version>
+      <version>1.0.30</version>
       <type>amp</type>
     </dependency>
   </dependencies>
