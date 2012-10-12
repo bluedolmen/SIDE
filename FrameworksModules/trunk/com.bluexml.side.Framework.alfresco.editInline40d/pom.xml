@@ -46,7 +46,7 @@
 			commandline) jetty run deployment, does not impact AMP behavior which is 
 			typically environment independent -->
     <env>local</env>
-    <config.target.path>alfresco/module/SIDE_editContentInline</config.target.path>
+    <config.target.path>alfresco/module/SIDE_editContentInline40d</config.target.path>
     <!-- Webapp used to test/develop locally the AMP -->
     <webapp.name>SIDE_editContentInline-webapp</webapp.name>
     <alfresco.data.location>./alf_data_jetty</alfresco.data.location>
