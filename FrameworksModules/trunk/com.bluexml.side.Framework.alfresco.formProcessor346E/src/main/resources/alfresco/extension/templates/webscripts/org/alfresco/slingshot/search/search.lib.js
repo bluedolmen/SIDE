@@ -766,10 +766,18 @@ function makeQueryFor(formJson, p, operator, first) {
                      var m = propValue.match(isNotEnum);
                      if (propValue.indexOf(",") != -1 && propName != "cm:content" && m == null) {
                         var terms = propValue.split(",");
+                        // TODO : must use dictionary service to resolve isMultiple
+                        var isMultiple = false;
                         for ( var tc = 0; tc < terms.length; tc++) {
                            var cterm = terms[tc];
                            var enumterm = propName + ':"' + cterm + '"';
-                           queryTerm += (tc == 0 ? '' : ' ' + operator + ' ') + enumterm;
+                           // two cases :
+                           // field with constraints LIST (Enumeration) simple value
+                           // field with constraints LIST (Enumeration) multiple value
+                           // the operator to use must be OR if simple value (because no results in this case)
+                           // if multiple value use the operator as is
+                           var enumOp = isMultiple ? operator : "OR";
+                           queryTerm += (tc == 0 ? '' : ' ' + enumOp + ' ') + enumterm;
                         }
                         queryTerm = addSubQueryParenthesis(queryTerm);
                      } else {
