@@ -1,0 +1,10 @@
+<webscript>	
+	<!-- Details of the web script -->
+	<shortname>SIDE Edit Word Content Inline</shortname>
+  	<description>Call Java Applet to start MS Office, MS Excel or Ms PowerPoint to edit Office content inline using webdav url. Mode can be write or read (write by default). Mime type can be "application/msword", "application/vnd.ms-excel" or "application/vnd.ms-powerpoint"</description>   	
+   	<!-- Web script URL's 	-->
+   	<url>/side/editWordContentInline?webdavurl={webdavurl}&amp;mime={mime?}&amp;mode={mode?}</url>  
+   	<format default="html">extension</format>
+   	<authentication>user</authentication>
+   	<transaction>required</transaction>   	
+</webscript>
