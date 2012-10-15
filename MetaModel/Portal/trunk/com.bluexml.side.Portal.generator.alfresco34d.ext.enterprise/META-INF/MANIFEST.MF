@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Alfresco34d SIDE Enterprise
 Bundle-SymbolicName: com.bluexml.side.Portal.generator.alfresco34d.ext.enterprise;singleton:=true
-Bundle-Version: 1.0.19.v39587-20121012
+Bundle-Version: 1.0.20.v39652-20121015
 Bundle-Activator: com.bluexml.side.portal.generator.alfresco34d.ext.enterprise.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.ui,
