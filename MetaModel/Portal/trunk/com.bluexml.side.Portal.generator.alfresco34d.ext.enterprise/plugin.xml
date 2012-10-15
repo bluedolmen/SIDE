@@ -35,6 +35,9 @@
             <configurationParameter dataType="String" defaultValue="http://localhost:8080/facetmap" documentation="The URL to reach facetMap web application (for exemple http://localhost:8080/facetmap)" key="facetMap.url" label="FacetMap URL" />
             <configurationParameter dataType="String" defaultValue="1.0" key="com.bluexml.side.Portal.generator.alfresco.module.version" label="Portal module version" />
             <option defaultOption="true" documentation="this must be hidden" hidden="true" key="generator.main" label="main generation" />
+            <option defaultOption="false" documentation="this option install a share extension that allow MS office user to edit document" hidden="false" key="com.bluexml.side.Portal.generator.alfresco346E.editContentInline" label="edit content inline">
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.editInline34d" moduleType="amp" technologyVersion="alfresco_3.4d" versionMax="1.0.21" versionMin="1.0.21" />
+            </option>
           </generatorVersion>
         </technologyVersion>
       </technology>
