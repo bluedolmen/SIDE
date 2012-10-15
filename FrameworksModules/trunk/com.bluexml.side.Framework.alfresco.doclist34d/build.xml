@@ -62,23 +62,13 @@
           target: name              
          ================================= -->
 	<target name="maven_install" depends="" description="do mvn install">
-		<!--<artifact:mvn pom="pom.xml" mavenHome="/usr/share/maven">
-			<arg value="clean" />
-			<arg value="install" />
-		</artifact:mvn>
-		-->
+		<maven basedir="${basedir}" options="" goal="clean" resultproperty="maven.build.result" />
 		<maven basedir="${basedir}" options="" goal="install" resultproperty="maven.build.result" />
 	</target>
 
 	<target name="maven_deploy" depends="" description="do mvn deploy">
 		<maven basedir="${basedir}" options="" goal="clean" resultproperty="maven.build.result" />
 		<maven basedir="${basedir}" options="" goal="deploy" resultproperty="maven.build.result" />
-		<!--
-		<artifact:mvn pom="pom.xml" mavenHome="${maven.home}">
-			<arg value="clean" />
-			<arg value="deploy" />
-		</artifact:mvn>
-		-->
 	</target>
 
 	<!-- ========
