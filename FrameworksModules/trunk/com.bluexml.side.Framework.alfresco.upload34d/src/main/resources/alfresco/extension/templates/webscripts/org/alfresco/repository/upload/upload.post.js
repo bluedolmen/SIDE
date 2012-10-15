@@ -238,7 +238,7 @@ function main()
          // SIDE allow to change type for updated document
          if (contentType !== null)
          {
-            newFile.specializeType(contentType);
+            updateNode.specializeType(contentType);
          }
 
          // check it in again, with supplied version history note
@@ -386,7 +386,7 @@ function main()
       else
       {
          e.code = 500;
-         e.message = "Unexpected error occured during upload of new content.";      
+         e.message = "Unexpected error occured during upload of new content. "+ e.message;      
       }
       throw e;
    }
