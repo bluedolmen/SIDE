@@ -22,7 +22,7 @@
   <artifactId>doclistEnterprise333</artifactId>
   <packaging>amp</packaging>
   <name>com.bluexml.side.Framework.alfresco.doclistEnterprise333</name>
-  <version>1.0.9</version>
+  <version>1.0.10</version>
   <!-- An Alfresco version number must be of the form 1.2.3.4. Using 1.0-SNAPSHOT as the AMP version 
 	     will create an exception. See http://wiki.alfresco.com/wiki/Developing_an_Alfresco_Module:
 	
