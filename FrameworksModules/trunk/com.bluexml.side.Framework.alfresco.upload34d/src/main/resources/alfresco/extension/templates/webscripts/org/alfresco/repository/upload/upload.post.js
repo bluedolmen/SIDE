@@ -234,6 +234,13 @@ function main()
          // Reset working copy mimetype and encoding
          updateNode.properties.content.guessMimetype(filename);
          updateNode.properties.content.guessEncoding();
+         
+         // SIDE allow to change type for updated document
+         if (contentType !== null)
+         {
+            newFile.specializeType(contentType);
+         }
+
          // check it in again, with supplied version history note
          updateNode = updateNode.checkin(description, majorVersion);
 
@@ -267,13 +274,7 @@ function main()
             {
                // Upload component was configured to overwrite files if name clashes
                existingFile.properties.content.write(content);
-               
-               // SIDE allow to change type for updated document
-               if (contentType !== null)
-               {
-                  newFile.specializeType(contentType);
-               }
-
+              
                // Reapply mimetype as upload may have been via Flash - which always sends binary mimetype
                existingFile.properties.content.guessMimetype(filename);
                existingFile.properties.content.guessEncoding();
