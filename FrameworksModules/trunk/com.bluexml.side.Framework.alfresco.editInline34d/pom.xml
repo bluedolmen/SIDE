@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor 
+	license agreements. See the NOTICE file distributed with this work for additional 
+	information regarding copyright ownership. The ASF licenses this file to 
+	You under the Apache License, Version 2.0 (the "License"); you may not use 
+	this file except in compliance with the License. You may obtain a copy of 
+	the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required 
+	by applicable law or agreed to in writing, software distributed under the 
+	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
+	OF ANY KIND, either express or implied. See the License for the specific 
+	language governing permissions and limitations under the License. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>superpom</artifactId>
+    <groupId>org.bluexml</groupId>
+    <version>1.10</version>
+  </parent>
+  <groupId>com.bluexml.side.Framework.alfresco</groupId>
+  <artifactId>editInline34d</artifactId>
+  <packaging>amp</packaging>
+  <name>editContentInline</name>
+  <!-- An Alfresco version number must be of the form 1.2.3.4. Using 1.0-SNAPSHOT 
+		as the AMP version will create an exception. See http://wiki.alfresco.com/wiki/Developing_an_Alfresco_Module: 
+		"The version number must be made up of numeric values separated by dots. 
+		For example '2.1.56' is a valid version number, '2.3.4a' is not. " In order 
+		to be able to use Maven snapshots we cannot use the <version/> below as the 
+		AMP module version. Instead we use the buildnumber-maven-plugin. This requires 
+		a scm connection. -->
+  <description>this is a new Amp project generated using	"com.bluexml.side.Integration.m2.ampArchetype" thanks to change this description</description>
+  <repositories>
+    <repository>
+      <id>ss-public</id>
+      <url>http://pipin.bluexml.com/nexus/service/local/repo_groups/public/content/</url>
+    </repository>
+  </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>ss-public</id>
+      <url>http://pipin.bluexml.com/nexus/service/local/repo_groups/public/content/</url>
+    </pluginRepository>
+  </pluginRepositories>
+  <properties>
+    <!-- Default for which src/main/properties/<env>/application.properties 
+			is loaded. NB: used only for the 'test' profile (e.g. '-P test' on the mvn 
+			commandline) jetty run deployment, does not impact AMP behavior which is 
+			typically environment independent -->
+    <env>local</env>
+    <config.target.path>alfresco/module/SIDE_editContentInline</config.target.path>
+    <!-- Webapp used to test/develop locally the AMP -->
+    <webapp.name>SIDE_editContentInline-webapp</webapp.name>
+    <alfresco.data.location>./alf_data_jetty</alfresco.data.location>
+    <alfresco.db.name>alf_jetty</alfresco.db.name>
+    <alfresco.db.username>alfresco</alfresco.db.username>
+    <alfresco.db.password>alfresco</alfresco.db.password>
+    <webapp.log.level>error</webapp.log.level>
+    <!-- End of testing webapp specific properties -->
+    <!-- Module specific build time properties -->
+    <module.log.level>warn</module.log.level>
+  </properties>
+  <!-- need to list these as a provided so that Maven doesn't download them 
+		and include them in the AMP, they are provided by Alfresco -->
+  <dependencies>
+    <!-- Alfresco -->
+    <dependency>
+      <groupId>org.alfresco</groupId>
+      <artifactId>alfresco-core</artifactId>
+      <version>3.4.d</version>
+      <classifier>community</classifier>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.alfresco</groupId>
+      <artifactId>alfresco-repository</artifactId>
+      <version>3.4.6</version>
+      <scope>provided</scope>
+      <classifier>enterprise</classifier>
+    </dependency>
+    <dependency>
+      <groupId>org.alfresco</groupId>
+      <artifactId>alfresco-data-model</artifactId>
+      <version>3.4.d</version>
+      <classifier>community</classifier>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.alfresco</groupId>
+      <artifactId>alfresco-remote-api</artifactId>
+      <version>3.4.d</version>
+      <classifier>community</classifier>
+      <scope>provided</scope>
+    </dependency>
+    <!-- Alfresco deps -->
+    <dependency>
+      <groupId>org.apache.lucene</groupId>
+      <artifactId>lucene-core</artifactId>
+      <version>2.4.1</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- SURF -->
+    <dependency>
+      <groupId>org.springframework.extensions.surf</groupId>
+      <artifactId>spring-webscripts</artifactId>
+      <version>1.0.0.CI-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>3.0.0.RELEASE</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- Don't add here amp dependencies as it will break amp packaging -->
+  </dependencies>
+  <!-- The scm is required for the buildnumber-maven-plugin which is required 
+		for AMP version numbering -->
+  <scm>
+    <connection>scm:svn:http://domain.com/svn/trunk/</connection>
+    <developerConnection>scm:svn:https://${maven.username}@domain.com/svn/trunk/</developerConnection>
+    <url>http://domain.com/svn/trunk/</url>
+  </scm>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.7</version>
+        <executions>
+          <execution>
+            <phase>compile</phase>
+            <configuration>
+              <target>
+                <property name="applet.src" value="${basedir}/src-applet" />
+                <property name="applet.bin" value="${basedir}/target/applet/bin" />
+                <property name="applet.jar" value="${basedir}/src/main/webapp/applet/editContentInline.jar" />
+                <echo message="build applet jar and copy in Alfresco extension Module Project as applet..." />
+                <delete failonerror="false" verbose="true" dir="${applet.bin}" />
+                <delete failonerror="false" verbose="true" file="${applet.jar}" />
+                <mkdir dir="${applet.bin}" />
+                <javac srcdir="${applet.src}" destdir="${applet.bin}" />
+                <jar destfile="${applet.jar}" basedir="${applet.bin}">
+                  <manifest>
+                    <attribute name="Main-Class" value="com.bluexml.side.alfresco.applet.EditingDocument" />
+                    <attribute name="Manifest-Version" value="${project.version}" />
+                  </manifest>
+                </jar>
+                <echo message="Sign produced applet jar..." />
+                <signjar jar="${applet.jar}" storepass="secret" keypass="secret" keystore="${basedir}/keystore/.keystore" alias="bxAlfrescoInlineEdit" />
+                <echo message="=================" />
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>buildnumber-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>validate</phase>
+            <goals>
+              <goal>create</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <revisionOnScmFailure>${project.version}</revisionOnScmFailure>
+          <doCheck>false</doCheck>
+          <doUpdate>false</doUpdate>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+          <debug>true</debug>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.bluexml.side.Integration.m2</groupId>
+        <artifactId>ampMojo</artifactId>
+        <version>1.0.15</version>
+        <extensions>true</extensions>
+        <configuration>
+          <dependentAmpExcludes>**</dependentAmpExcludes>
+          <dependentAmpIncludes />
+          <attachClasses>true</attachClasses>
+          <archive>
+            <addMavenDescriptor>false</addMavenDescriptor>
+          </archive>
+          <overlays />
+        </configuration>
+      </plugin>
+      <!-- <plugin> -->
+      <!-- <groupId>org.apache.maven.plugins</groupId> -->
+      <!-- <artifactId>maven-jarsigner-plugin</artifactId> -->
+      <!-- <version>1.2</version> -->
+      <!-- <executions> -->
+      <!-- <execution> -->
+      <!-- <id>sign</id> -->
+      <!-- <goals> -->
+      <!-- <goal>sign</goal> -->
+      <!-- </goals> -->
+      <!-- </execution> -->
+      <!-- </executions> -->
+      <!-- <configuration> -->
+      <!-- <keystore>${basedir}/keystore/.keystore</keystore> -->
+      <!-- <alias>bxAlfrescoInlineEdit</alias> -->
+      <!-- <storepass>secret</storepass> -->
+      <!-- <keypass>secret</keypass> -->
+      <!-- </configuration> -->
+      <!-- </plugin> -->
+    </plugins>
+    <!-- Copies and filters resources in build folder so maven-amp-plugin can 
+			pick them up -->
+    <resources>
+      <resource>
+        <filtering>true</filtering>
+        <directory>src/main/resources</directory>
+        <excludes>
+          <exclude>**README-*</exclude>
+        </excludes>
+      </resource>
+      <!-- Copies and filters AMP config in the proper package so to enforce 
+				full module naming single sourcing from POM properties -->
+      <resource>
+        <filtering>true</filtering>
+        <directory>src/main/config</directory>
+        <targetPath>${config.target.path}</targetPath>
+        <excludes>
+          <exclude>**README-*</exclude>
+        </excludes>
+      </resource>
+    </resources>
+  </build>
+  <version>1.0.21</version>
+  <profiles>
+    <profile>
+      <id>tools.jar.notOnMacOSX</id>
+      <activation>
+        <property>
+          <name>java.vendor</name>
+          <value>Sun Microsystems Inc.</value>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <dependencies>
+              <dependency>
+                <groupId>com.sun</groupId>
+                <artifactId>tools</artifactId>
+                <version>1.5.0</version>
+                <scope>system</scope>
+                <systemPath>${java.home}/../lib/tools.jar</systemPath>
+              </dependency>
+            </dependencies>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>
+
