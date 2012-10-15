@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Labs
 Bundle-SymbolicName: com.bluexml.side.Portal.generator.alfresco34d.ext.labs;singleton:=true
-Bundle-Version: 1.0.18.v39711-20121015
+Bundle-Version: 1.0.19.v39749-20121015
 Bundle-Activator: com.bluexml.side.portal.generator.alfresco34d.ext.labs.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.ui,
