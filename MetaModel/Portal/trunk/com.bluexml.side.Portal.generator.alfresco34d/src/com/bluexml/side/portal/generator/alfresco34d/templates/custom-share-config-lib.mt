@@ -33,7 +33,7 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
   -->
   
   <!--
-     Google Docsª integration
+     Google Docsï¿½ integration
   -->
   <google-docs>
      <!--
@@ -57,7 +57,7 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
   -->
   <file-upload>
      <!--
-        Adobe Flashª
+        Adobe Flashï¿½
         In certain environments, an HTTP request originating from Flash cannot be authenticated using an existing session.
         See: http://bugs.adobe.com/jira/browse/FP-4830
         For these cases, it is useful to disable the Flash-based uploader for Share Document Libraries.
@@ -82,9 +82,9 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 <%script type="Portlet" name="generateAvailableTypeHierachy"%>
 <types>
 	<type name="cm:content">
-	<%for (args(0).filter("clazz.Clazz")[generalizations.nSize() == 0 && !abstract]){%>
+	<%for (args(0).filter("clazz.Clazz")[generalizations.nSize() == 0 && !abstract || isChildOfCmContent()]){%>
 		<%-- class that inerite from cm:content by default --%>			
-		<subtype name="<%getPrefixedQName()%>" />	
+		<subtype name="<%getPrefixedQName()%>" />
 	<%}%>
 	</type>
 	
