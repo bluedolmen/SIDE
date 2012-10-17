@@ -234,16 +234,16 @@ function main()
          // Reset working copy mimetype and encoding
          updateNode.properties.content.guessMimetype(filename);
          updateNode.properties.content.guessEncoding();
-         
+
+         // check it in again, with supplied version history note
+         updateNode = updateNode.checkin(description, majorVersion);
+
          // SIDE allow to change type for updated document
          if (contentType !== null)
          {
             updateNode.specializeType(contentType);
          }
-
-         // check it in again, with supplied version history note
-         updateNode = updateNode.checkin(description, majorVersion);
-
+         
          model.document = updateNode;
       }
       else
