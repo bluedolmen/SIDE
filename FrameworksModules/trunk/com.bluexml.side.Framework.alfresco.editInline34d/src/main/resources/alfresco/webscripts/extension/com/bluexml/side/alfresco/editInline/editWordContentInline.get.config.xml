@@ -1,0 +1,4 @@
+<config>
+	<!-- please override this configuration to fit final environment -->
+	<host value="localhost:8080"/>
+</config>

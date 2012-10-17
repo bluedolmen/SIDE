@@ -19,7 +19,7 @@
 		<p>After closing your editor, DO NOT close this window before closing your document and waiting for 5 seconds.</p>
 		<p>This is required to let the necessary time to save the last updates of your document in Alfresco</p>
 		<p>Thanks you for your understanding. </p>
-		<applet id="editDoc" name="editDoc" codebase="share/applet" code="com.bluexml.side.alfresco.applet.EditingDocument.class"
+		<applet id="editDoc" name="editDoc" codebase="http://${publicHost}/share/applet" code="com.bluexml.side.alfresco.applet.EditingDocument.class"
 			height="1" width="1"
 			archive="editContentInline.jar" mayscript="true">
 			<param name="ticket" value="${ticket}" />
