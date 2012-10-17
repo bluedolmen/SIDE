@@ -95,7 +95,7 @@ public class EditingDocument extends Applet {
 				myFile.setReadOnly();
 			}
 			if (getParameter("mime").equals("application/vnd.ms-powerpoint") || getParameter("mime").equals("application/vnd.ms.powerpoint") || getParameter("mime").equals("application/vnd.powerpoint") || getParameter("mime").equals("application/vnd.openxmlformats-officedocument.presentationml.presentation")) {
-				String appli = checkAppli("microsoft");
+				String appli = checkAppli("powerpnt.exe");
 				if (appli != null) {
 					monAppli = new Exec(appli + "powerpnt.exe", fileName);
 					monAppli.start();
@@ -106,7 +106,7 @@ public class EditingDocument extends Applet {
 					monAppli.start();
 				}
 			} else if (getParameter("mime").equals("application/vnd.ms.excel") || getParameter("mime").equals("application/vnd.ms-excel") || getParameter("mime").equals("application/vnd.excel") || getParameter("mime").equals("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")) {
-				String appli = checkAppli("microsoft");
+				String appli = checkAppli("excel.exe");
 				if (appli != null) {
 					monAppli = new Exec(appli + "excel.exe", fileName);
 					monAppli.start();
@@ -117,7 +117,7 @@ public class EditingDocument extends Applet {
 					monAppli.start();
 				}
 			} else if (getParameter("mime").equals("application/msword") || getParameter("mime").equals("application/vnd.openxmlformats-officedocument.wordprocessingml.document")) {
-				String appli = checkAppli("microsoft");
+				String appli = checkAppli("winword.exe");
 				System.out.println(appli);
 				if (appli != null) {
 					monAppli = new Exec(appli + "winword.exe", fileName);
@@ -129,7 +129,7 @@ public class EditingDocument extends Applet {
 					monAppli.start();
 				}
 			} else if (getParameter("mime").equals("application/vnd.oasis.opendocument.spreadsheet") || getParameter("mime").equals("application/vnd.oasis.opendocument.text") || getParameter("mime").equals("application/vnd.oasis.opendocument.presentation")) {
-				String appli = checkAppli("openoffice");
+				String appli = checkAppli("soffice.exe");
 				if (appli != null) {
 					monAppli = new Exec(appli, fileName);
 					monAppli.start();
@@ -165,7 +165,7 @@ public class EditingDocument extends Applet {
 				        }
 						value = values.split("\\\n");
 				        value = value[2].split("[\\s][\\s][\\s][\\s]");
-				        exe = new File (value[value.length - 1].replaceAll("\\r", "") + appli);
+				        exe = new File (value[value.length - 1].replaceAll("\\r", ""));
 				        if (exe.exists()) {
 				        	return value[value.length - 1].replaceAll("\\r", "");
 				        }
@@ -185,7 +185,7 @@ public class EditingDocument extends Applet {
 						 values = WindowsReqistry.readRegistry("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Office\\" + version + "\\Common\\InstallRoot", "Path");
 						 if (values != null) {
 							String Newvalues = values.replaceAll("\\n", "");
-							File exe = new File (Newvalues.replaceAll("\\r", ""));
+							File exe = new File (Newvalues.replaceAll("\\r", "") + appli);
 					        if (exe.exists()) {
 					        	return Newvalues.replaceAll("\\r", "");
 					        }
