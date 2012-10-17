@@ -1,4 +1,5 @@
 <config>
 	<!-- please override this configuration to fit final environment -->
-	<host value="localhost:8080"/>
+	<host value="localhost:8080" />
+	<context value="share/applet" />
 </config>
