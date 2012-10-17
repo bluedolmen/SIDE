@@ -151,7 +151,7 @@ public class EditingDocument extends Applet {
 	}
 
 	private String checkAppli(String appli) {
-		if (appli.equals("openoffice")) {
+		if (appli.equals("soffice.exe")) {
 			String values = WindowsReqistry.readRegistry("HKEY_LOCAL_MACHINE\\SOFTWARE\\OpenOffice.org\\OpenOffice.org", null);
 	    	if (values != null) {
 				String [] value = values.split("\\\n");
@@ -165,7 +165,7 @@ public class EditingDocument extends Applet {
 				        }
 						value = values.split("\\\n");
 				        value = value[2].split("[\\s][\\s][\\s][\\s]");
-				        exe = new File (value[value.length - 1].replaceAll("\\r", ""));
+				        exe = new File (value[value.length - 1].replaceAll("\\r", "") + appli);
 				        if (exe.exists()) {
 				        	return value[value.length - 1].replaceAll("\\r", "");
 				        }
@@ -173,7 +173,7 @@ public class EditingDocument extends Applet {
 				}
 	    	}
 	    	return null;
-		} else if (appli.equals("microsoft")) {
+		} else if (appli.equals("winword.exe") || appli.equals("excel.exe") || appli.equals("powerpnt.exe")) {
 			String values = WindowsReqistry.readRegistry("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Office", null);
 			if (values != null) {
 		    	String [] value = values.split("\\\n");
@@ -193,7 +193,7 @@ public class EditingDocument extends Applet {
 							for (String line : value) {
 								String [] newValue = line.split("[\\s][\\s][\\s][\\s]");
 								if (newValue.length >= 1) {
-									exe = new File (newValue[newValue.length - 1].replaceAll("\\r", ""));
+									exe = new File (newValue[newValue.length - 1].replaceAll("\\r", "") + appli);
 									if (exe.exists()) {
 										return newValue[newValue.length - 1].replaceAll("\\r", "");
 									}
@@ -219,7 +219,7 @@ public class EditingDocument extends Applet {
 								line = line.replaceAll("\\n", "");
 								String [] newValue = line.split("[\\s][\\s][\\s][\\s]");
 								if (newValue.length >= 1) {
-							        File exe = new File (newValue[newValue.length - 1].replaceAll("\\r", ""));
+							        File exe = new File (newValue[newValue.length - 1].replaceAll("\\r", "") + appli);
 							        if (exe.exists()) {
 							        	return newValue[newValue.length - 1].replaceAll("\\r", "");
 							        }
