@@ -210,7 +210,7 @@ var Filters =
         	 var logicalOperator = " AND ";
         	 if (searchObj.operator && searchObj.operator.toLowerCase() == "or") {
             	logicalOperator = " OR ";
-             }
+          }
         	  
         	 var query = "";
         	 var query_type = "";
@@ -231,8 +231,11 @@ var Filters =
         		 }        		 
         	 }
         	 
-        	 if (path) {
+        	 if (path) {        	    
         		 query_path = '+PATH:"' + path + '"';
+        		 if (parsedArgs.location.site) {
+        		    query_path = query_path.replace(/\{site\}/g,"cm:" + parsedArgs.location.site);
+        		 }
         	 }
         	 
         	 query = query_type + " " + query_aspect + " " + query_path + " " + query_notAspects + " ";
@@ -342,7 +345,7 @@ var Filters =
 		var propQuery = "";
 		for ( var prop in properties) {
 			var att = properties[prop];
-			if (att.values.length > 0 && att.values[0] != "") {
+			if (att.values.length > 0 && att.values[0] !== "") {
 				var dataType = att.type.toLowerCase();
 				var comparator = att.operator.toLowerCase();
 				var values = att.values;
