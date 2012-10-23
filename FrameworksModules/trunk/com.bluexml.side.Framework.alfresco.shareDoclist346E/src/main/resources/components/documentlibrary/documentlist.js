@@ -2686,7 +2686,7 @@
                         if (this.options.search) {
                            params += "&search=" + encodeURIComponent(JSON.stringify(this.options.search));
                         }
-                     } else if (obj.filter.filterId == "metadata") {
+                     } else if (obj.filter.filterId.match(/metadata.*/)) {
                         params += "?filter=metadata";
                         // IDE
                         // search parameters
