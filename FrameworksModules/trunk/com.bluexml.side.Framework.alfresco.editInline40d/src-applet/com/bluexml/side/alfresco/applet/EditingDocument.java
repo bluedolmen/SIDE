@@ -278,7 +278,6 @@ public class EditingDocument extends Applet {
 			huc.setUseCaches(false);
 			huc.setDoOutput(true);
 			huc.setRequestMethod("PUT");
-			huc.setRequestProperty("Content-type", "application/binary");
 			huc.addRequestProperty("ticket", getParameter("ticket"));
 			huc.connect();
 			DataOutputStream os = new DataOutputStream(huc.getOutputStream());
