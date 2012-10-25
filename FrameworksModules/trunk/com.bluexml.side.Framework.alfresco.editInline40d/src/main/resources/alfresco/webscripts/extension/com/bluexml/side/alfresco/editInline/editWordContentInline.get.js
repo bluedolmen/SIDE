@@ -1,4 +1,4 @@
-function main() {
+﻿function main() {
 
 var ticket = side.getCurrentTicket();
 model.ticket = ticket;
@@ -38,7 +38,7 @@ if (commit === "true") {
 		if (docs[0].assocs["cm:workingcopylink"] == null) {
 			workingCopy = docs[0].checkout();
 		} else {
-			status.setCode(status.STATUS_INTERNAL_SERVER_ERROR, "La copie de travail de ce document n'a pu être crée.");
+			status.setCode(status.STATUS_INTERNAL_SERVER_ERROR, "La copie de travail de ce document n'a pu être créée.");
 			return;
 		}
 	} else {
