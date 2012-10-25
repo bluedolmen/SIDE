@@ -39,7 +39,7 @@
 			<param name="ticket" value="${ticket}" />
 			<param name="webdavUrl" value="${webdavUrl}" />
 			<param name="mode" value="${args.mode}" />
-			<param name="mime" value="${args.mime}" />
+			<param name="mime" value="${mime}" />
 		</applet>
 	</body>
 </html>
