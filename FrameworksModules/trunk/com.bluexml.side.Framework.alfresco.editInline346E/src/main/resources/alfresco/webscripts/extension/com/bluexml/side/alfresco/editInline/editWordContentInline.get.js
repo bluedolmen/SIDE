@@ -4,11 +4,7 @@ var ticket = side.getCurrentTicket();
 model.ticket = ticket;
 
 var webdavUrl = args.webdavurl;
-var webdavUrlSplited = webdavUrl.split("/");
-webdavUrl = "";
-for ( var i = 0; i < webdavUrlSplited.length - 1; i++) {
-	webdavUrl += webdavUrlSplited[i] + "/";
-}
+
 
 var xmlConf = new XML(config.script);
 model.publicHost = xmlConf.host.@value.toString();
@@ -37,6 +33,13 @@ if (commit === "true") {
 	if ( docs.length == 1) {
 		if (docs[0].assocs["cm:workingcopylink"] == null) {
 			workingCopy = docs[0].checkout();
+			var webdavUrlSplited = webdavUrl.split("/");
+			webdavUrl = "";
+			for ( var i = 0; i < webdavUrlSplited.length - 1; i++) {
+				webdavUrl += webdavUrlSplited[i] + "/";
+			}
+			model.noderef = workingCopy.nodeRef.toString();
+			webdavUrl += workingCopy.properties["cm:name"];
 		} else {
 			status.setCode(status.STATUS_INTERNAL_SERVER_ERROR, "La copie de travail de ce document n'a pu être créée.");
 			return;
@@ -45,12 +48,13 @@ if (commit === "true") {
 		status.setCode(status.STATUS_INTERNAL_SERVER_ERROR, "Le document n'a pu être retrouvé.");
 		return;
 	}
+} else {
+	model.noderef = "";
 }
 
-webdavUrl += workingCopy.properties["cm:name"];
+
 webdavUrl += '?ticket=' + ticket;
 model.webdavUrl = "http://" + model.publicHost + "/alfresco" + webdavUrl;
 
-model.noderef = workingCopy.nodeRef.toString();
 }
 main();
