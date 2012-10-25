@@ -1,11 +1,25 @@
 <html>
 	<head>
 		<title>SIDE Inline Edition</title>
+		<script type="text/javascript" src="/share/res/js/yui-common.js"></script>
+		<script type="text/javascript" src="/share/res/js/alfresco.js"></script>
 		<script type="text/javascript">
-			function Close(){window.open("","_self").close();}
+			function Close(){
+					var nodeRef = new Alfresco.util.NodeRef("${noderef}");
+					Alfresco.util.Ajax.jsonRequest(
+					{		
+						method: "POST",
+						url: "../slingshot/doclib/action/checkin/node/" + nodeRef.uri
+					});
+					alert("Thank you for visiting W3Schools!");
+			}
 		</script>
 	</head>
+<#if commit = "true">
+	<body onunload='Close()'>
+<#else>
 	<body>
+</#if>
         <p>Le temps de chargement du document dans votre &eacute;diteur peut prendre quelques secondes suivant sa taille.</p>
         <p>Merci d'attendre le temps n&eacute;cessaire.</p>
         <p />
@@ -19,13 +33,13 @@
 		<p>After closing your editor, DO NOT close this window before closing your document and waiting for 5 seconds.</p>
 		<p>This is required to let the necessary time to save the last updates of your document in Alfresco</p>
 		<p>Thanks you for your understanding. </p>
-		<applet id="editDoc" name="editDoc" codebase="${url.context}/applet" code="com.bluexml.side.alfresco.applet.EditingDocument.class"
+		<applet id="editDoc" name="editDoc" codebase="http://${publicHost}/${context}" code="com.bluexml.side.alfresco.applet.EditingDocument.class"
 			height="1" width="1"
 			archive="editContentInline.jar" mayscript="true">
 			<param name="ticket" value="${ticket}" />
 			<param name="webdavUrl" value="${webdavUrl}" />
 			<param name="mode" value="${args.mode}" />
-			<param name="mime" value="${args.mime}" />
+			<param name="mime" value="${mime}" />
 		</applet>
 	</body>
 </html>
