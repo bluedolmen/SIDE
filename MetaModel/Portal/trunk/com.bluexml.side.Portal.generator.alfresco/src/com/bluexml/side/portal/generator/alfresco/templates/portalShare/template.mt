@@ -18,6 +18,8 @@ import com.bluexml.side.portal.generator.alfresco.service.ShareGeneratorServices
 <%if (metainfo[key == "rawFtlFilePath"]){%>
 <%getFileContent(metainfo[key == "rawFtlFilePath"].value)%>
 <%-- load external files content and add it here --%>
+<%}else if (metainfo[key == "rawContent"]){%>
+<%metainfo[key == "rawContent"].multilineValue%>
 <%}else{%>
 <%for (useLayout.columns){%>
 <%generateLayout()%>
