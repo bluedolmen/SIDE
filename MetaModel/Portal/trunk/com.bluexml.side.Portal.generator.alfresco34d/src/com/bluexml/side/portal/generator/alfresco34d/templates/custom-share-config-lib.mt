@@ -81,9 +81,19 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 
 <%script type="Portlet" name="generateAvailableTypeHierachy"%>
 <types>
+	<%if (metainfo[key.toLowerCase() == "flat"].nSize() > 0){%>
+	<%for (args(0).filter("clazz.Clazz")[!abstract]){%>
+	<%getPrefixedQName().put("currentqname")%>
+	<type name="<%get("currentqname")%>">
+		<%for (args(0).filter("clazz.Clazz")[!abstract && getPrefixedQName() != get("currentqname")]){%>
+		<subtype name="<%getPrefixedQName()%>" />
+		<%}%>
+	</type>
+	<%}%>
+	<%}else{%>
 	<type name="cm:content">
 	<%for (args(0).filter("clazz.Clazz")[generalizations.nSize() == 0 && !abstract || isChildOfCmContent()]){%>
-		<%-- class that inerite from cm:content by default --%>			
+		<%-- class that inerite from cm:content by default --%>
 		<subtype name="<%getPrefixedQName()%>" />
 	<%}%>
 	</type>
@@ -95,9 +105,13 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 		<%}%>
 	</type>
 	<%}%>
+	
+	<%}%>
+	
+	
 </types>
 
-<aspects>         
+<aspects>
 	<visible>
 	<%for (args(0).filter("clazz.Aspect")){%>
 		<aspect name="<%getPrefixedQName()%>" />
