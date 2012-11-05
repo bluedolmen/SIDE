@@ -26,6 +26,7 @@ public class Exec extends Thread {
 	        reader.close();
 	        // Wait to be sure process ended
 	        proc.waitFor();
+	        
 
 		} catch (Exception e) {
 			e.printStackTrace();

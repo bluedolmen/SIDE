@@ -15,6 +15,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 
+import netscape.javascript.JSObject;
+
 
 
 public class EditingDocument extends Applet {
@@ -27,10 +29,11 @@ public class EditingDocument extends Applet {
 	Exec monAppli = null;
 	String fileName = null;
 	long lastModified = 0;
+	JSObject jso = null;
 
 	public void init() {
 		try {
-			
+			jso = JSObject.getWindow(this);
 			String tmpdir = System.getProperty("java.io.tmpdir");
 			String webdav = getParameter("webdavUrl");
 			webdav = webdav.replaceAll(" ", "%20");
@@ -248,6 +251,14 @@ public class EditingDocument extends Applet {
 				if (lastModified < myFile.lastModified()) {
 					lastModified = myFile.lastModified();
 					save();
+				}
+				if (!monAppli.isAlive()) {
+					myFile.setWritable(true);
+					try {
+						jso.call("Close", new String[1]);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		}
