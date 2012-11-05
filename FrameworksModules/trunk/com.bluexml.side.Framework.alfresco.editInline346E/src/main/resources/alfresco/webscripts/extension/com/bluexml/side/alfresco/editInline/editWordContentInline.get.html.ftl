@@ -5,21 +5,19 @@
 		<script type="text/javascript" src="/share/res/js/alfresco.js"></script>
 		<script type="text/javascript">
 			function Close(){
+					<#if commit = "true">
 					var nodeRef = new Alfresco.util.NodeRef("${noderef}");
 					Alfresco.util.Ajax.jsonRequest(
 					{		
 						method: "POST",
 						url: "../slingshot/doclib/action/checkin/node/" + nodeRef.uri
 					});
-					alert("Thank you for visiting W3Schools!");
+					</#if>
+					window.open("","_self").close();
 			}
 		</script>
 	</head>
-<#if commit = "true">
-	<body onunload='Close()'>
-<#else>
 	<body>
-</#if>
         <p>Le temps de chargement du document dans votre &eacute;diteur peut prendre quelques secondes suivant sa taille.</p>
         <p>Merci d'attendre le temps n&eacute;cessaire.</p>
         <p />

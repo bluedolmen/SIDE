@@ -1,4 +1,4 @@
-﻿function main() {
+function main() {
 
 var ticket = side.getCurrentTicket();
 model.ticket = ticket;
