@@ -1,11 +1,13 @@
 package com.bluexml.side.framework.alfresco.webscriptExtension;
 
 import org.alfresco.repo.jscript.BaseScopableProcessorExtension;
+import org.alfresco.repo.jscript.ScriptNode;
 import org.alfresco.repo.security.authentication.TicketComponent;
 import org.alfresco.service.ServiceRegistry;
-import org.apache.log4j.Logger;
+import org.alfresco.service.namespace.QName;
 
 public class TicketScriptExtension extends BaseScopableProcessorExtension {
+
 	/**
 	 * @return the serviceRegistry
 	 */
@@ -39,13 +41,22 @@ public class TicketScriptExtension extends BaseScopableProcessorExtension {
 		this.ticketComponent = ticketComponent;
 	}
 
-	private Logger logger = Logger.getLogger(getClass());
-
 	public String getCurrentTicket() {
 		return serviceRegistry.getAuthenticationService().getCurrentTicket();
 	}
 
-	// public String getCurrentUser() {
-	//		
-	// }
+	/**
+	 * setType change the node type without check anythings this allow to avoid
+	 * limitation of ScriptNode.specialiseType
+	 * 
+	 * @param node
+	 * @param type
+	 * @return new instance of the ScriptNode to be sure to have updated
+	 *         ScriptNode because getType call nodeService.getType only one time
+	 */
+	public ScriptNode setType(ScriptNode node, String type) {
+		serviceRegistry.getNodeService().setType(node.getNodeRef(), QName.createQName(type, serviceRegistry.getNamespaceService()));
+		return new ScriptNode(node.getNodeRef(), serviceRegistry);
+	}
+
 }
