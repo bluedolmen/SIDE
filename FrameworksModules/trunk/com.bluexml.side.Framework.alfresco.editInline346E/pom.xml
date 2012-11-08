@@ -116,8 +116,14 @@
 			<artifactId>javascript</artifactId>
 			<version>1.0</version>
 		</dependency>
-		<!-- Don't add here amp dependencies as it will break amp packaging -->
-		
+		<!-- need to be sure that project will be builds in the right order -->
+		<dependency>
+			<groupId>com.bluexml.side.Framework.alfresco</groupId>
+			<artifactId>editInlineApplet</artifactId>
+			<version>LATEST</version>
+			<scope>provided</scope>
+		</dependency>
+
 	</dependencies>
 	<!-- The scm is required for the buildnumber-maven-plugin which is required 
 		for AMP version numbering -->
@@ -128,44 +134,6 @@
 	</scm>
 	<build>
 		<plugins>
-			<!-- <plugin> -->
-			<!-- <artifactId>maven-antrun-plugin</artifactId> -->
-			<!-- <version>1.7</version>$NO-MVN-MAN-VER$ -->
-			<!-- <executions> -->
-			<!-- <execution> -->
-			<!-- <phase>compile</phase> -->
-			<!-- <configuration> -->
-			<!-- <target> -->
-			<!-- <property name="applet.src" value="${basedir}/src-applet" /> -->
-			<!-- <property name="applet.bin" value="${basedir}/target/applet/bin" 
-				/> -->
-			<!-- <property name="applet.jar" value="${basedir}/src/main/webapp/applet/editContentInline.jar" 
-				/> -->
-			<!-- <echo message="build applet jar and copy in Alfresco extension Module 
-				Project as applet..." /> -->
-			<!-- <delete failonerror="false" verbose="true" dir="${applet.bin}" /> -->
-			<!-- <delete failonerror="false" verbose="true" file="${applet.jar}" /> -->
-			<!-- <mkdir dir="${applet.bin}" /> -->
-			<!-- <javac srcdir="${applet.src}" destdir="${applet.bin}" /> -->
-			<!-- <jar destfile="${applet.jar}" basedir="${applet.bin}"> -->
-			<!-- <manifest> -->
-			<!-- <attribute name="Main-Class" value="com.bluexml.side.alfresco.applet.EditingDocument" 
-				/> -->
-			<!-- <attribute name="Manifest-Version" value="${project.version}" /> -->
-			<!-- </manifest> -->
-			<!-- </jar> -->
-			<!-- <echo message="Sign produced applet jar..." /> -->
-			<!-- <signjar jar="${applet.jar}" storepass="secret" keypass="secret" 
-				keystore="${basedir}/keystore/.keystore" alias="bxAlfrescoInlineEdit" /> -->
-			<!-- <echo message="=================" /> -->
-			<!-- </target> -->
-			<!-- </configuration> -->
-			<!-- <goals> -->
-			<!-- <goal>run</goal> -->
-			<!-- </goals> -->
-			<!-- </execution> -->
-			<!-- </executions> -->
-			<!-- </plugin> -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
@@ -234,25 +202,6 @@
 					<overlays />
 				</configuration>
 			</plugin>
-			<!-- <plugin> -->
-			<!-- <groupId>org.apache.maven.plugins</groupId> -->
-			<!-- <artifactId>maven-jarsigner-plugin</artifactId> -->
-			<!-- <version>1.2</version> -->
-			<!-- <executions> -->
-			<!-- <execution> -->
-			<!-- <id>sign</id> -->
-			<!-- <goals> -->
-			<!-- <goal>sign</goal> -->
-			<!-- </goals> -->
-			<!-- </execution> -->
-			<!-- </executions> -->
-			<!-- <configuration> -->
-			<!-- <keystore>${basedir}/keystore/.keystore</keystore> -->
-			<!-- <alias>bxAlfrescoInlineEdit</alias> -->
-			<!-- <storepass>secret</storepass> -->
-			<!-- <keypass>secret</keypass> -->
-			<!-- </configuration> -->
-			<!-- </plugin> -->
 		</plugins>
 		<!-- Copies and filters resources in build folder so maven-amp-plugin can 
 			pick them up -->
@@ -275,40 +224,6 @@
 				</excludes>
 			</resource>
 		</resources>
-		<pluginManagement>
-			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
-					only. It has no influence on the Maven build itself. -->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											org.apache.maven.plugins
-										</groupId>
-										<artifactId>
-											maven-antrun-plugin
-										</artifactId>
-										<versionRange>[1.7,)</versionRange>
-										<goals>
-											<goal>run</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 	</build>
 	<version>1.0.21</version>
 	<profiles>
