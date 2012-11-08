@@ -19,11 +19,11 @@
             <#if field.control.params.styleClass??>class="${field.control.params.styleClass}"</#if>
             <#if field.control.params.style??>style="${field.control.params.style}"</#if>
             <#if field.disabled>disabled="true"</#if>>
-            <option value="1"<#if field.value?string == "Not Yet Started"> selected="selected"</#if>>${msg("status.notyetstarted")}</option>
-            <option value="2"<#if field.value?string == "In Progress"> selected="selected"</#if>>${msg("status.inprogress")}</option>
-            <option value="3"<#if field.value?string == "On Hold"> selected="selected"</#if>>${msg("status.onhold")}</option>
-            <option value="3"<#if field.value?string == "Cancelled"> selected="selected"</#if>>${msg("status.canceled")}</option>
-            <option value="3"<#if field.value?string == "Completed"> selected="selected"</#if>>${msg("status.completed")}</option>
+            <option value="Not Yet Started"<#if field.value?string == "Not Yet Started"> selected="selected"</#if>>${msg("status.notyetstarted")}</option>
+            <option value="In Progress"<#if field.value?string == "In Progress"> selected="selected"</#if>>${msg("status.inprogress")}</option>
+            <option value="On Hold"<#if field.value?string == "On Hold"> selected="selected"</#if>>${msg("status.onhold")}</option>
+            <option value="Cancelled"<#if field.value?string == "Cancelled"> selected="selected"</#if>>${msg("status.canceled")}</option>
+            <option value="Completed"<#if field.value?string == "Completed"> selected="selected"</#if>>${msg("status.completed")}</option>
       </select>
    </#if>
 </div>
