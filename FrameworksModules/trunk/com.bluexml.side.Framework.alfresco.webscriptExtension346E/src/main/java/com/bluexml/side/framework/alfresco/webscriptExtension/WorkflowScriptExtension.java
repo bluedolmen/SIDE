@@ -22,8 +22,7 @@ import org.apache.log4j.Logger;
 
 /**
  * Extend Alfresco Javascript API with rule service
- * siderule.addScriptRule(scriptFileNode, targetedSpace) to add a
- * javascript-based script rule to a targeted space
+ * siderule.getTasksDescriptionOfDocument(document) to get the workflow task on a document, including subprocess
  */
 public class WorkflowScriptExtension extends BaseScopableProcessorExtension {
 
@@ -67,6 +66,8 @@ public class WorkflowScriptExtension extends BaseScopableProcessorExtension {
 	 * 
 	 * @param document
 	 *            the document to get all the active tasks
+	 *            
+	 * @return list of string of the form "<definition_id>/<instance_id>/[<task_id>]", task may be not present if subprocess
 	 */
 	public List<String> getTasksDescriptionOfDocument(ScriptNode document) {
         if (logger.isDebugEnabled()) logger.debug("Process document "+document.getNodeRef());
