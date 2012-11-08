@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: View Generator for Facetmap - alfresco 34d
 Bundle-SymbolicName: com.bluexml.side.View.generator.facetmap34d;singleton:=true
-Bundle-Version: 1.0.11.v31653-20120106
+Bundle-Version: 1.0.12.v39976-20121108
 Bundle-Activator: com.bluexml.side.view.generator.facetmap34d.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.ui,
