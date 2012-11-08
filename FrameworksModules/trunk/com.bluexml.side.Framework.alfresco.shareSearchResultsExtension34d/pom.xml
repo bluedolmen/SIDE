@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.bluexml.side.Framework.alfresco</groupId>
   <artifactId>shareSearchResultsExtension34d</artifactId>
-  <version>1.0.10</version>
+  <version>1.0.11</version>
   <name>com.bluexml.side.Framework.alfresco.shareSearchResultsExtension34d</name>
   <packaging>zip</packaging>
   <parent>
@@ -21,7 +21,7 @@
     <dependency>
       <groupId>com.bluexml.side.Framework.alfresco</groupId>
       <artifactId>shareDoclist34d</artifactId>
-      <version>1.0.23</version>
+      <version>1.0.24</version>
       <type>zip</type>
     </dependency>
   </dependencies>
