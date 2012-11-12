@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.forAlfresco.enterprise.feature" label="SIDE Generators For Alfresco 3.2.0r Enterprise" version="1.0.671.v39976-20121108" provider-name="BlueXML">
+<feature id="com.bluexml.side.Common.forAlfresco.enterprise.feature" label="SIDE Generators For Alfresco 3.2.0r Enterprise" version="1.0.672.v40056-20121112" provider-name="BlueXML">
   <description url="http://www.side-labs.com">SIDE lets developers who are new to Alfresco get started quickly and helps experienced developers get the job done even faster.</description>
   <copyright url="http://www.bluexml.com/copyright">Copyright 2005-2012 BlueXML SARL.</copyright>
   <license url="http://www.side-labs.com/en/index.php/Product:License">SIDE SOFTWARE IS LICENSED BY BLUEXML. PLEASE GO TO http://www.side-labs.com/en/index.php/Product:License. READ THIS AGREEMENT CAREFULLY BEFORE PURCHASING AND/OR USING SIDE SOFTWARE.</license>
-  <includes id="com.bluexml.side.Common.forAlfresco34d.sideenterprise.feature" version="1.0.109.v39976-20121108" />
+  <includes id="com.bluexml.side.Common.forAlfresco34d.sideenterprise.feature" version="1.0.110.v40056-20121112" />
   <includes id="com.bluexml.side.Deployer.xforms.feature" version="1.0.38.v35624-20120503" />
   <includes id="com.bluexml.side.Deployer.xformsDirectCopy.feature" version="1.0.31.v35624-20120503" />
   <includes id="com.bluexml.side.Deployer.demoWebApplication.feature" version="1.0.3.v35624-20120503" />
@@ -12,7 +12,7 @@
   <includes id="com.bluexml.side.Common.forAlfresco333E.sideenterprise.feature" version="1.0.19.v35624-20120503" />
   <includes id="com.bluexml.side.Common.forBirtReport.sideenterprise.feature" version="1.0.4.v35624-20120503" />
   <includes id="com.bluexml.side.Common.forFacetMap.sideenterprise.feature" version="1.0.10.v35624-20120503" />
-  <includes id="com.bluexml.side.Common.forAlfresco346E.sideenterprise.feature" version="1.0.117.v39976-20121108" />
+  <includes id="com.bluexml.side.Common.forAlfresco346E.sideenterprise.feature" version="1.0.118.v40056-20121112" />
   <includes id="com.bluexml.side.Common.forAlfresco40d.sideenterprise.feature" version="1.0.17.v39976-20121108" />
   <requires>
     <import plugin="org.eclipse.ui" />
