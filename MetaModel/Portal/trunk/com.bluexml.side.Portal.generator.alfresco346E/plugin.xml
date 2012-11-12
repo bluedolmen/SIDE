@@ -23,7 +23,7 @@
               <optionRef optionId="alfresco.share.extension" />
             </mustBeChecked>
             <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.sharePortalExtension346E" moduleType="zip" technologyVersion="alfresco_3.4.6E" versionMax="1.0.1" versionMin="1.0.1" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.cmisFacetMap346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.8" versionMin="1.0.8" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.cmisFacetMap346E" moduleType="amp" technologyVersion="alfresco_3.4.6E" versionMax="1.0.9" versionMin="1.0.9" />
             <configurationParameter dataType="String" defaultValue="http://localhost:8080/share" documentation="Set this value to the URL of the Alfresco Share instance on which you want to generate and deploy" key="alfresco.share.url" label="Alfresco share URL" />
             <configurationParameter dataType="String" defaultValue="1.0" key="com.bluexml.side.Portal.generator.alfresco.module.version" label="Portal module version" />
             <option defaultOption="true" documentation="this must be hidden" hidden="true" key="generator.main" label="main generation" />
