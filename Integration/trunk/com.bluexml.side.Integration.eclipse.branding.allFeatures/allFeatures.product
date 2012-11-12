@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
-<product name="SIDE Products Builder" uid="SIDEAllFeatures" id="com.bluexml.side.Integration.eclipse.branding.allFeatures.side_product_builder" application="org.eclipse.ui.ide.workbench" version="1.0.374" useFeatures="true" includeLaunchers="true">
+<product name="SIDE Products Builder" uid="SIDEAllFeatures" id="com.bluexml.side.Integration.eclipse.branding.allFeatures.side_product_builder" application="org.eclipse.ui.ide.workbench" version="1.0.375" useFeatures="true" includeLaunchers="true">
   <configIni use="default" />
   <launcherArgs>
     <vmArgs>-d32</vmArgs>
@@ -20,11 +20,11 @@
     <feature id="com.bluexml.side.Integration.eclipse.dependencies.feature" version="1.0.2.v35624-20120503" />
     <feature id="org.eclipse.m2e.feature" version="1.0.0.20110607-2117" />
     <feature id="com.bluexml.side.Common.core.labs.feature" version="1.0.385.v39544-20121012" />
-    <feature id="com.bluexml.side.Common.forAlfresco.labs.feature" version="1.0.390.v40056-20121112" />
-    <feature id="com.bluexml.side.Common.sideForAlfresco.feature" version="1.0.1008.v40056-20121112" />
-    <feature id="com.bluexml.side.Common.core.enterprise.feature" version="1.0.833.v40056-20121112" />
-    <feature id="com.bluexml.side.Common.forAlfresco.enterprise.feature" version="1.0.672.v40056-20121112" />
-    <feature id="com.bluexml.side.Integration.eclipse.allFeatures.feature" version="1.0.374.v40056-20121112" />
+    <feature id="com.bluexml.side.Common.forAlfresco.labs.feature" version="1.0.391.v40096-20121112" />
+    <feature id="com.bluexml.side.Common.sideForAlfresco.feature" version="1.0.1009.v40096-20121112" />
+    <feature id="com.bluexml.side.Common.core.enterprise.feature" version="1.0.834.v40096-20121112" />
+    <feature id="com.bluexml.side.Common.forAlfresco.enterprise.feature" version="1.0.673.v40096-20121112" />
+    <feature id="com.bluexml.side.Integration.eclipse.allFeatures.feature" version="1.0.375.v40096-20121112" />
   </features>
 </product>
 
