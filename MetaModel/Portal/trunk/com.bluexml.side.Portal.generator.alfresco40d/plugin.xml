@@ -34,7 +34,7 @@
               <moduleDependence label="saved search extension" moduleId="com.bluexml.side.Framework.share.savedSearch40d" moduleType="zip" technologyVersion="alfresco_40d" versionMax="1.0.8" versionMin="1.0.8" />
             </option>
             <option defaultOption="false" documentation="this option install a share extension that allow MS office user to edit document" hidden="false" key="com.bluexml.side.Portal.generator.alfresco40d.editContentInline" label="edit content inline">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.editInline40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.2" versionMin="1.0.2" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.editInline40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.3" versionMin="1.0.3" />
             </option>
           </generatorVersion>
         </technologyVersion>
