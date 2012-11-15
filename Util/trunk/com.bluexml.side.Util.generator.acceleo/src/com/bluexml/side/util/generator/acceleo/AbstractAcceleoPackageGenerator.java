@@ -20,7 +20,8 @@ public abstract class AbstractAcceleoPackageGenerator extends AbstractAcceleoGen
 		for (Map.Entry<String, List<IFile>> l : groupedModels.entrySet()) {
 			String rootName = l.getKey();
 			setTEMP_FOLDER("generator_" + getClass().getName() + File.separator + rootName);
-			Collection<IFile> packageFile = buildPackages(rootName);
+			// packages name/id do not need to have suffix eClass().name			
+			Collection<IFile> packageFile = buildPackages(rootName.substring(0, rootName.lastIndexOf("_")));
 			generatedFiles.addAll(packageFile);
 			for (IFile p : packageFile) {
 				monitor.getLog().addFileGeneratedLog(p.getName() + " created.", p.getName() + " created in " + p.getFullPath(), IFileHelper.getFile(p).toURI());
