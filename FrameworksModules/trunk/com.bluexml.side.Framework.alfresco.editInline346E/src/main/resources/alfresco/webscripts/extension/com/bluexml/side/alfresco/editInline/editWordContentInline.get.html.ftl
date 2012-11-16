@@ -5,19 +5,32 @@
 		<script type="text/javascript" src="/share/res/js/alfresco.js"></script>
 		<script type="text/javascript">
 			function Close(){
-					<#if commit = "true">
+				<#if commit = "true">
 					var nodeRef = new Alfresco.util.NodeRef("${noderef}");
 					Alfresco.util.Ajax.jsonRequest(
 					{		
 						method: "POST",
 						url: "../slingshot/doclib/action/checkin/node/" + nodeRef.uri
 					});
-					</#if>
-					window.open("","_self").close();
+				</#if>
+				<#if britair = "true">
+					var stringifyed = stringify({eventType: "endOfProcessing"});
+					window.parent.postMessage( stringifyed , '*');
+						function stringify(data) {
+							var JSON = YAHOO.lang.JSON;
+							if (!JSON) {
+								Alfresco.logger.error('Cannot stringify to JSON the provided data. Problems may occur');
+								return data;
+							}
+		
+							return JSON.stringify(data);
+						}
+				</#if>
 			}
 		</script>
 	</head>
 	<body>
+
         <p>Le temps de chargement du document dans votre &eacute;diteur peut prendre quelques secondes suivant sa taille.</p>
         <p>Merci d'attendre le temps n&eacute;cessaire.</p>
         <p />
@@ -40,4 +53,4 @@
 			<param name="mime" value="${mime}" />
 		</applet>
 	</body>
-</html>
+</ht11:10 16/11/2012ml>

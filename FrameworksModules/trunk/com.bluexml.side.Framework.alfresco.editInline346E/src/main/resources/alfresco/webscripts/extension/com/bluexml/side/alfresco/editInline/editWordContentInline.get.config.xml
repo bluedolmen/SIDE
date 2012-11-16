@@ -3,5 +3,6 @@
 	<host value="localhost:8080" />
 	<context value="share/applet" />
 	<!-- set "true" to activate commit or anything different to desactivate commit  -->
-	<commit value="true" />
+	<commit value="false" />
+	<britair value="false" />
 </config>
