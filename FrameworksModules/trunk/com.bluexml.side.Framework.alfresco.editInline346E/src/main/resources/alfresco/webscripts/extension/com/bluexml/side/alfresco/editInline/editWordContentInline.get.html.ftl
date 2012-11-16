@@ -53,3 +53,4 @@
 			<param name="mime" value="${mime}" />
 		</applet>
 	</body>
+</html>
