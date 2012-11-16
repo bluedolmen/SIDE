@@ -53,4 +53,3 @@
 			<param name="mime" value="${mime}" />
 		</applet>
 	</body>
-</ht11:10 16/11/2012ml>
