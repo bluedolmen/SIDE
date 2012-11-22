@@ -1,0 +1,7 @@
+<config>
+	<!-- please override this configuration to fit final environment -->
+	<host value="localhost:8080" />
+	<context value="share/applet" />
+	<!-- set "true" to activate commit or anything different to desactivate commit  -->
+	<commit value="true" />
+</config>
