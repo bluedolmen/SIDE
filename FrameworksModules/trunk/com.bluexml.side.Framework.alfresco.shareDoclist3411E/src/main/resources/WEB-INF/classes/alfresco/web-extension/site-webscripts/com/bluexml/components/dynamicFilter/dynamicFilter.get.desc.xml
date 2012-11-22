@@ -1,0 +1,5 @@
+<webscript>
+  <shortname>dynamicFilter</shortname>
+  <description>this is a component that displays filters from getFilters service</description>
+  <url>/components/dynamicFilter</url>
+</webscript>
