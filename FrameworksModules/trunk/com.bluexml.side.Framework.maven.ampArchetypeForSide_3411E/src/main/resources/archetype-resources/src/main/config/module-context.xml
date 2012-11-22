@@ -1,0 +1,9 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+<beans>
+	<import resource="classpath:${symbol_dollar}{config.target.path}/context/service-context.xml" />
+</beans>
