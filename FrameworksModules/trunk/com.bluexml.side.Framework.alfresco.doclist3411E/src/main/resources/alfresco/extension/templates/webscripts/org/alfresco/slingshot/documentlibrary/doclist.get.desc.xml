@@ -1,0 +1,19 @@
+<webscript>
+  <shortname>doclist</shortname>
+  	<description><![CDATA[
+Document List Component - doclist data webscript<br/>
+Originally designed for alfrecoShare web application<br/>
+This extends the original one to manage SIDE content types<br/>
+<br/>
+]]>
+  </description>
+  <url>/slingshot/doclib/doclist/{type}/site/{site}/{container}/{path}</url>
+  <url>/slingshot/doclib/doclist/{type}/site/{site}/{container}</url>
+  <url>/slingshot/doclib/doclist/{type}/node/{store_type}/{store_id}/{id}/{path}</url>
+  <url>/slingshot/doclib/doclist/{type}/node/{store_type}/{store_id}/{id}</url>
+  <format default="json">argument</format>
+  <authentication>user</authentication>
+  <transaction allow="readwrite" buffersize="0">required</transaction>
+  <family>SIDE</family>
+  <lifecycle>internal</lifecycle>
+</webscript>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<webscript>
+  <shortname>WebScript to get views of nodes using share advanced search queryString</shortname>
+  <description><![CDATA[
+	need to activate views generation nad define some views in views model
+	viewName : the view.id in model
+	query : see advanced query in share it's the q parameter
+]]>
+  </description>
+  <url>/com/bluexml/side/views?viewName={viewName}&amp;site={site}&amp;container={container}&amp;repo={repo}&amp;term={term}&amp;tag={tag}&amp;query={query}&amp;sort={sort}</url>  
+  <format default="text">any</format>
+  <authentication>guest</authentication>
+  <family>SIDE</family>
+</webscript>
