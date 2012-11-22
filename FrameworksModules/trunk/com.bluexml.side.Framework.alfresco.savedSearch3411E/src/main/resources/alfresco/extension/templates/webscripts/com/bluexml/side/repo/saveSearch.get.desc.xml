@@ -1,0 +1,24 @@
+<webscript>
+	<shortname>save search</shortname>
+	<description>
+		service to persists share search query
+		<ul>
+			<li>saveName : the value used to set cm:name</li>
+			<li>site : the current share site</li>
+			<li>term : query part </li>
+			<li>tag : query part</li>
+			<li>maxResults : query part</li>
+			<li>sort : query part</li>
+			<li>query : advanced query</li>
+			<li>repo :  query part</li>
+			<li>userName : the current user that request to save the search, if provided the saved search will be private</li>
+			<li>overrideAllowed : true to allow to override existing saved search</li>
+		</ul>
+	</description>
+	<url>/side/repo/saveSearch/site/{site}?saveName={saveName}&amp;site={site}&amp;term={term}&amp;tag={tag}&amp;maxResults={maxResults}&amp;sort={sort}&amp;query={query}&amp;repo={repo}&amp;userName={userName}&amp;overrideAllowed={overrideAllowed}</url>
+	<format default="json">argument</format>
+	<authentication>user</authentication>
+	<transaction allow="readwrite" buffersize="0">required
+	</transaction>
+	<family>SIDE</family>
+</webscript>
