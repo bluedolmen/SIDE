@@ -123,6 +123,12 @@
       <version>3.0.0.RELEASE</version>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+      <version>3.0.0.RELEASE</version>
+      <scope>provided</scope>
+    </dependency>
     <!--
 			Example Jar dependency: will be properly packed into the AMP /lib
 			directory <dependency> <groupId>rome</groupId>
