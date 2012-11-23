@@ -11,6 +11,8 @@ model.publicHost = xmlConf.host.@value.toString();
 model.context = xmlConf.context.@value.toString();
 var commit = xmlConf.commit.@value.toString();
 model.commit = commit;
+var closeMsg = xmlConf.closeMsg.@value.toString();
+model.closeMsg = closeMsg;
 
 var docs = null;
 if (args.mime == "") {
