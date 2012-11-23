@@ -162,7 +162,7 @@
       onCreateContentFailure: function CreateContentMgr_onCreateContentFailure(response)
       {
          var errorMsg = this.msg("create-content-mgr.create.failed");
-         if (response.json.message)
+         if (response.json && response.json.message)
          {
             errorMsg = errorMsg + ": " + response.json.message;
          }  

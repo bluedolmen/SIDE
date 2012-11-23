@@ -458,6 +458,28 @@ Alfresco.util.assertNotEmpty = function(param, message)
 };
 
 /**
+ * Check a value is neither undefined nor null (returns false).
+ * An empty string also returns false unless the allowEmptyString flag is set.
+ * @method Alfresco.util.isValueSet
+ * @param value {object} Parameter to check
+ * @param allowEmptyString {boolean} Optional flag to indicate that empty strings are valid inputs.
+ * @static
+ * @return {boolean} Flag indicating whether the value is set or not.
+ */
+Alfresco.util.isValueSet = function(value, allowEmptyString)
+{
+   if (YAHOO.lang.isUndefined(value) || YAHOO.lang.isNull(value))
+   {
+      return false;
+   }
+   if (YAHOO.lang.isString(value) && value.length === 0 && !!allowEmptyString === false)
+   {
+      return false;
+   }
+   return true;
+};
+
+/**
  * Append multiple parts of a path, ensuring duplicate path separators are removed.
  * Leaves "://" patterns intact so URIs and nodeRefs are safe to pass through.
  *
@@ -541,10 +563,26 @@ Alfresco.util.getFileIcon = function(p_fileName, p_fileType, p_iconSize)
    {
       "doc": "doc",
       "docx": "doc",
+      "docm": "doc",
+      "dotx": "doc",
+      "dotm": "doc",
       "ppt": "ppt",
       "pptx": "ppt",
+      "pptm": "ppt",
+      "ppsx": "ppt",
+      "ppsm": "ppt",
+      "potx": "ppt",
+      "potm": "ppt",
+      "ppam": "ppt",
+      "sldx": "ppt",
+      "sldm": "ppt",
       "xls": "xls",
       "xlsx": "xls",
+      "xltx": "xls",
+      "xlsm": "xls",
+      "xltm": "xls",
+      "xlam": "xls",
+      "xlsb": "xls",
       "pdf": "pdf",
       "bmp": "img",
       "gif": "img",
@@ -2581,6 +2619,18 @@ Alfresco.util.ComponentManager = function()
        */
       register: function CM_register(p_oComponent)
       {
+         if (p_oComponent.id !== "null" && components.hasOwnProperty(p_oComponent.id))
+         {
+            var purge = components[p_oComponent.id];
+            if (purge.name === p_oComponent.name)
+            {
+               if (typeof purge.destroy  === "function")
+               {
+                  purge.destroy();
+               }
+               this.unregister(components[p_oComponent.id]);
+            }
+         }
          components.push(p_oComponent);
          components[p_oComponent.id] = p_oComponent;
       },
@@ -3376,7 +3426,7 @@ Alfresco.util.Ajax = function()
                   c.url += (c.url.indexOf("?") == -1 ? "?" : "&") + this.jsonToParamString(c.dataObj, true);
                }
             }
-            else
+            else if (c.method.toUpperCase() !== this.DELETE)
             {
                // If json is used encode the dataObj parameter and put it in the body
                c.dataStr = YAHOO.lang.JSON.stringify(c.dataObj || {});
@@ -3392,7 +3442,7 @@ Alfresco.util.Ajax = function()
                   // Encode the dataObj and put it in the url
                   c.url += (c.url.indexOf("?") == -1 ? "?" : "&") + this.jsonToParamString(c.dataObj, true);
                }
-               else
+               else if (c.method.toUpperCase() !== this.DELETE)
                {
                   // Enccode the dataObj and put it in the body
                   c.dataStr = this.jsonToParamString(c.dataObj, true);
@@ -5059,6 +5109,56 @@ Alfresco.util.RENDERLOOPSIZE = 25;
       },
 
       /**
+       * Destroy method - destroy widgets, dereference modules & services
+       *
+       * @method destroy
+       */
+      destroy: function Base_destroy()
+      {
+         var index, purge;
+
+         // Destroy widgets
+         for (index in this.widgets)
+         {
+            if (this.widgets.hasOwnProperty(index))
+            {
+               try
+               {
+                  purge = this.widgets[index];
+                  if (typeof purge.destroy == "function")
+                  {
+                     purge.destroy();
+                  }
+               }
+               catch (e)
+               {
+                  // Ignore
+               }
+               
+               delete this.widgets[index];
+            }
+         }
+         
+         // Modules
+         for (index in this.modules)
+         {
+            if (this.modules.hasOwnProperty(index))
+            {
+               delete this.modules[index];
+            }
+         }
+
+         // Services
+         for (index in this.services)
+         {
+            if (this.services.hasOwnProperty(index))
+            {
+               delete this.services[index];
+            }
+         }
+      },
+
+      /**
        * Gets a custom message
        *
        * @method msg
@@ -5081,7 +5181,6 @@ Alfresco.util.RENDERLOOPSIZE = 25;
       {
          return Alfresco.util.bind(method, this);
       }
-
    };
 })();
 

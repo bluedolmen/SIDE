@@ -1388,9 +1388,14 @@
                         // Need to highlight a file now
                         // the data is available?
                         if (this.options.highlightFile) {
-                           YAHOO.Bubbling.fire("highlightFile", {
-                              fileName : unescape(this.options.highlightFile)
-                           });
+                           // Add a delay to ensure the table is fully in the DOM
+               				YAHOO.lang.later(200, this, function()
+               				{
+                  				YAHOO.Bubbling.fire("highlightFile",
+                  				{
+                     				fileName: unescape(this.options.highlightFile)
+                  				});
+               				});
                         } else {
                            // Scroll up (only) to the
                            // top of the documents
@@ -2220,7 +2225,7 @@
                    */
                   onDocListRefresh : function DL_onDocListRefresh(layer, args) {
                      var obj = args[1];
-                     if (obj && (obj.highlightFile !== null)) {
+                     if (obj && obj.highlightFile) {
                         this.options.highlightFile = obj.highlightFile;
                      }
                      this._updateDocList.call(this);
@@ -2329,9 +2334,17 @@
                            this.options.highlightFile = null;
 
                            // Select the file
-                           Dom.get("checkbox-" + recordFound.getId()).checked = true;
-                           this.selectedFiles[recordFound.getData("nodeRef")] = true;
-                           YAHOO.Bubbling.fire("selectedFilesChanged");
+                           var chk = Dom.get("checkbox-" + recordFound.getId());
+               				if (chk !== null)
+				               {
+            				      chk.checked = true;
+				                  this.selectedFiles[recordFound.getData("nodeRef")] = true;
+            				      YAHOO.Bubbling.fire("selectedFilesChanged");
+               				}
+				               else
+            				   {
+				                  Alfresco.logger.warn("checkbox-" + recordFound.getId() + " not found.");
+            				   }
                         }
                      }
                   },

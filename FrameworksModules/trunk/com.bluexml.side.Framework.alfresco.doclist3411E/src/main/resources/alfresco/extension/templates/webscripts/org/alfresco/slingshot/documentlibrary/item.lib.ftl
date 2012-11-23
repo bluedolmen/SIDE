@@ -4,28 +4,28 @@
 
 <#macro itemJSON item>
    <#escape x as jsonUtils.encodeJSONString(x)>
-      <#assign node = item.node>
-      <#assign version = "1.0">
-      <#if node.hasAspect("cm:versionable") && node.versionHistory?size != 0><#assign version = node.versionHistory[0].versionLabel></#if>
+      <#local node = item.node>
+      <#local version = "1.0">
+      <#if node.hasAspect("cm:versionable")><#local version = node.properties["cm:versionLabel"]></#if>
       <#if item.createdBy??>
-         <#assign createdBy = item.createdBy.displayName>
-         <#assign createdByUser = item.createdBy.userName>
+         <#local createdBy = item.createdBy.displayName>
+         <#local createdByUser = item.createdBy.userName>
       <#else>
-         <#assign createdBy="" createdByUser="">
+         <#local createdBy="" createdByUser="">
       </#if>
       <#if item.modifiedBy??>
-         <#assign modifiedBy = item.modifiedBy.displayName>
-         <#assign modifiedByUser = item.modifiedBy.userName>
+         <#local modifiedBy = item.modifiedBy.displayName>
+         <#local modifiedByUser = item.modifiedBy.userName>
       <#else>
-         <#assign modifiedBy="" modifiedByUser="">
+         <#local modifiedBy="" modifiedByUser="">
       </#if>
       <#if item.lockedBy??>
-         <#assign lockedBy = item.lockedBy.displayName>
-         <#assign lockedByUser = item.lockedBy.userName>
+         <#local lockedBy = item.lockedBy.displayName>
+         <#local lockedByUser = item.lockedBy.userName>
       <#else>
-         <#assign lockedBy="" lockedByUser="">
+         <#local lockedBy="" lockedByUser="">
       </#if>
-      <#assign tags><#list item.tags as tag>"${tag}"<#if tag_has_next>,</#if></#list></#assign>
+      <#local tags><#list item.tags as tag>"${tag}"<#if tag_has_next>,</#if></#list></#local>
    "nodeRef": "${node.nodeRef}",
    "nodeType": "${shortQName(node.type)}",
    "type": "${item.type}",
@@ -83,6 +83,20 @@
    {
       "latitude": ${(node.properties["cm:latitude"]!0)?c},
       "longitude": ${(node.properties["cm:longitude"]!0)?c}
+   },</#if>
+   <#if node.hasAspect("audio:audio")>"audio":
+   {
+      "album": "${node.properties["audio:album"]!""}",
+      "artist": "${node.properties["audio:artist"]!""}",
+      "composer": "${node.properties["audio:composer"]!""}",
+      "engineer": "${node.properties["audio:engineer"]!""}",
+      "genre": "${node.properties["audio:genre"]!""}",
+      "trackNumber": ${(node.properties["audio:trackNumber"]!0)?c},
+      "releaseDate": "<@dateFormat node.properties["audio:releaseDate"] />",
+      "sampleRate": ${(node.properties["audio:sampleRate"]!0)?c},
+      "sampleType": "${node.properties["audio:sampleType"]!""}",
+      "channelType": "${node.properties["audio:channelType"]!""}",
+      "compressor": "${node.properties["audio:compressor"]!""}"
    },</#if>
    <#if node.hasAspect("exif:exif")>"exif":
    {

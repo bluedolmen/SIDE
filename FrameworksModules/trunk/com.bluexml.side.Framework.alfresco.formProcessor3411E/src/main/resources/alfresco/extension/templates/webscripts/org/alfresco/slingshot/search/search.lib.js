@@ -67,24 +67,16 @@ function getPersonDisplayName(userId) {
  * blog post match the search criteria
  */
 var processedCache = {};
-function addToProcessed(category, key) {
-   var cat = processedCache[category];
-   if (typeof cat !== "object") {
-      processedCache[category] = [];
-      cat = processedCache[category];
+function checkProcessedCache(key)
+{
+   var found = processedCache.hasOwnProperty(key);
+   if (!found)
+   {
+      processedCache[key] = true;
    }
-   cat.push(key);
-}
-function checkProcessed(category, key) {
-   var cat = processedCache[category];
-   if (typeof cat === "object") {
-      for ( var x in cat) {
-         if (cat[x] == key) {
-            return true;
-         }
-      }
-   }
-   return false;
+   else if (found && logger.isLoggingEnabled())
+      logger.log("...already processed item with key: " + key);
+   return found;
 }
 
 /**
@@ -92,11 +84,10 @@ function checkProcessed(category, key) {
  */
 function getRepositoryItem(folderPath, node) {
    // check whether we already processed this document
-   var cat = "repository", refkey = "" + node.nodeRef.toString();
-   if (checkProcessed(cat, refkey)) {
+   if (checkProcessedCache("" + node.nodeRef.toString()))
+   {
       return null;
    }
-   addToProcessed(cat, refkey);
 
    // check whether this is a valid folder or a file
    var item = t = null;
@@ -139,11 +130,10 @@ function getDocumentItem(siteId, containerId, pathParts, node) {
    // be returned instead
 
    // check whether we already processed this document
-   var cat = siteId + containerId, refkey = "" + node.nodeRef.toString();
-   if (checkProcessed(cat, refkey)) {
+   if (checkProcessedCache("" + node.nodeRef.toString()))
+   {
       return null;
    }
-   addToProcessed(cat, refkey);
 
    // check whether this is a valid folder or a file
    var item = t = null;
@@ -205,11 +195,10 @@ function getBlogPostItem(siteId, containerId, pathParts, node) {
    }
 
    // check whether we already added this blog post
-   var cat = siteId + containerId, refkey = "" + child.nodeRef.toString();
-   if (checkProcessed(cat, refkey)) {
+   if (checkProcessedCache("" + child.nodeRef.toString()))
+   {
       return null;
    }
-   addToProcessed(cat, refkey);
 
    // child is our blog post
    var item, t = null;
@@ -246,11 +235,10 @@ function getForumPostItem(siteId, containerId, pathParts, node) {
    }
 
    // make sure we haven't already added the post
-   var cat = siteId + containerId, refkey = "" + topicNode.nodeRef.toString();
-   if (checkProcessed(cat, refkey)) {
+   if (checkProcessedCache("" + topicNode.nodeRef.toString()))
+   {
       return null;
    }
-   addToProcessed(cat, refkey);
 
    // find the first post, which contains the post title
    // PENDING: error prone
@@ -286,12 +274,11 @@ function getCalendarItem(siteId, containerId, pathParts, node) {
       return null;
    }
 
-   // make sure we haven't already added the post
-   var cat = siteId + containerId, refkey = "" + node.nodeRef.toString();
-   if (checkProcessed(cat, refkey)) {
+   // make sure we haven't already added the event
+   if (checkProcessedCache("" + node.nodeRef.toString()))
+   {
       return null;
    }
-   addToProcessed(cat, refkey);
 
    var item, t = null;
    item = {
@@ -323,11 +310,10 @@ function getWikiItem(siteId, containerId, pathParts, node) {
    }
 
    // make sure we haven't already added the page
-   var cat = siteId + containerId, refkey = "" + node.nodeRef.toString();
-   if (checkProcessed(cat, refkey)) {
+   if (checkProcessedCache("" + node.nodeRef.toString()))
+   {
       return null;
    }
-   addToProcessed(cat, refkey);
 
    var item, t = null;
    item = {
@@ -359,11 +345,10 @@ function getLinkItem(siteId, containerId, pathParts, node) {
    }
 
    // make sure we haven't already added this link
-   var cat = siteId + containerId, refkey = "" + node.nodeRef.toString();
-   if (checkProcessed(cat, refkey)) {
+   if (checkProcessedCache("" + node.nodeRef.toString()))
+   {
       return null;
    }
-   addToProcessed(cat, refkey);
 
    var item = t = null;
    if (node.qnamePath.indexOf(COMMENT_QNAMEPATH) == -1 && !(node.qnamePath.match(DISCUSSION_QNAMEPATH + "$") == DISCUSSION_QNAMEPATH)) {
@@ -392,11 +377,10 @@ function getLinkItem(siteId, containerId, pathParts, node) {
 
 function getDataItem(siteId, containerId, pathParts, node) {
    // make sure we haven't already added this item
-   var cat = siteId + containerId, refkey = "" + node.nodeRef.toString();
-   if (checkProcessed(cat, refkey)) {
+   if (checkProcessedCache("" + node.nodeRef.toString()))
+   {
       return null;
    }
-   addToProcessed(cat, refkey);
 
    var item = null;
 
@@ -491,21 +475,24 @@ function getItem(siteId, containerId, pathParts, node) {
  * not match [2] = remaining part of the cm:name based path to the object - as
  * an array
  */
-function splitQNamePath(node) {
-   var path = node.qnamePath;
-   var displayPath = node.displayPath.split("/");
-   var parts = null;
+function splitQNamePath(node)
+{
+   var path = node.qnamePath,
+       displayPath = node.displayPath.split("/"),
+       parts = null;
 
-   if (path.match("^" + SITES_SPACE_QNAME_PATH) == SITES_SPACE_QNAME_PATH) {
-      var tmp = path.substring(SITES_SPACE_QNAME_PATH.length);
-      var pos = tmp.indexOf('/');
-      if (pos >= 1) {
-         // site id is the cm:name for the site - we cannot use the encoded
-         // QName version
+   if (path.match("^"+SITES_SPACE_QNAME_PATH) == SITES_SPACE_QNAME_PATH)
+   {
+      var tmp = path.substring(SITES_SPACE_QNAME_PATH.length),
+          pos = tmp.indexOf('/');
+      if (pos >= 1)
+      {
+         // site id is the cm:name for the site - we cannot use the encoded QName version
          var siteId = displayPath[3];
          tmp = tmp.substring(pos + 1);
          pos = tmp.indexOf('/');
-         if (pos >= 1) {
+         if (pos >= 1)
+         {
             // strip container id from the path
             var containerId = tmp.substring(0, pos);
             containerId = containerId.substring(containerId.indexOf(":") + 1);
@@ -515,7 +502,7 @@ function splitQNamePath(node) {
       }
    }
 
-   return (parts != null ? parts : [ null, null, displayPath ]);
+   return (parts !== null ? parts : [ null, null, displayPath ]);
 }
 
 /**
@@ -523,25 +510,42 @@ function splitQNamePath(node) {
  * 
  * @return the final search results object
  */
-function processResults(nodes, maxResults) {
-   var results = [], added = 0, parts, item, i, j;
+function processResults(nodes, maxResults)
+{    
+   var results = [],
+      added = 0,
+      parts,
+      item,
+      failed = 0,
+      i, j;
 
-   for (i = 0, j = nodes.length; i < j && added < maxResults; i++) {
+   if (logger.isLoggingEnabled())
+      logger.log("Processing resultset of length: " + nodes.length);
+   
+   for (i = 0, j = nodes.length; i < j && added < maxResults; i++)
+   {
       /**
-       * For each node we extract the site/container qname path and then let the
-       * per-container helper function decide what to do.
+       * For each node we extract the site/container qname path and then
+       * let the per-container helper function decide what to do.
        */
       parts = splitQNamePath(nodes[i]);
-      if (parts !== null) {
          item = getItem(parts[0], parts[1], parts[2], nodes[i]);
-         if (item !== null) {
+      if (item !== null)
+      {
             results.push(item);
             added++;
          }
+      else
+      {
+         failed++;
       }
    }
 
-   return ({
+   if (logger.isLoggingEnabled())
+      logger.log("Filtered resultset to length: " + results.length + ". Discarded item count: " + failed);
+   
+   return (
+   {
       items : results
    });
 }
@@ -578,6 +582,196 @@ function escapeString(value) {
    }
    return result;
 }
+
+/**
+ * Helper method used to determine whether the property value is multi-valued.
+ *
+ * @param propValue the property value to test
+ * @param modePropValue the logical operand that should be used for multi-value property
+ * @return true if it is multi-valued, false otherwise
+ */
+function isMultiValueProperty(propValue, modePropValue)
+{
+   return modePropValue != null && propValue.indexOf(",") !== -1;
+}
+
+/**
+ * Helper method used to construct lucene query fragment for a multi-valued property.
+ *
+ * @param propName property name
+ * @param propValue property value (comma separated)
+ * @param operand logical operand that should be used
+ * @param pseudo is it a pseudo property
+ * @return lucene query with multi-valued property
+ */
+function processMultiValue(propName, propValue, operand, pseudo)
+{
+   var multiValue = propValue.split(","),
+       formQuery = "";
+   for (var i = 0; i < multiValue.length; i++)
+   {
+      if (i > 0)
+      {
+         formQuery += ' ' + operand + ' ';
+      }
+      
+      if (pseudo)
+      {
+         formQuery += '(cm:content.' + propName + ':"' + multiValue[i] + '")';
+      }
+      else
+      {
+         formQuery += '(' + escapeQName(propName) + ':"' + multiValue[i] + '")';
+      }
+   }
+   
+   return formQuery;
+}
+
+function getSearchDef(params) {
+   var ftsQuery = "", term = params.term, tag = params.tag, formData = params.query, repoSearch = params.repo;
+
+   // Simple keyword search and tag specific search
+   if (term !== null && term.length !== 0)
+   {
+      // TAG is now part of the default search macro
+      ftsQuery = term + " ";
+   } else if (tag !== null && tag.length !== 0) {
+      // Just look for tag
+      ftsQuery = "TAG:" + tag + " ";
+   }
+
+   // Advanced search form data search.
+   // Supplied as json in the standard Alfresco Forms data structure:
+   // prop_<name>:value|assoc_<name>:value
+   // name = namespace_propertyname|pseudopropertyname
+   // value = string value - comma separated for multi-value, no escaping yet!
+   // - underscore represents colon character in name
+   // - pseudo property is one of any cm:content url property:
+   // mimetype|encoding|size
+   // - always string values - interogate DD for type data
+   if (formData !== null && formData.length !== 0) {
+      var formQuery = "", formJson = jsonUtils.toObject(formData);
+
+      var searchPath = getSearchPath(formJson);
+      if (searchPath != null) {
+         repoSearch = true;
+      }
+
+      formQuery = buildFormQuery(formJson);
+
+      if (formQuery.length !== 0 || ftsQuery.length !== 0 || repoSearch) {
+         // extract data type for this search - advanced search query is type
+         // specific
+         ftsQuery = 'TYPE:"' + formJson.datatype + '"' + (formQuery.length !== 0 ? ' AND ' + addSubQueryParenthesis(formQuery) : '')
+               + (ftsQuery.length !== 0 ? ' AND ' + addSubQueryParenthesis(ftsQuery) : '');
+      }
+   }
+
+   if (ftsQuery.length !== 0 || repoSearch) {
+      
+      // ensure a TYPE is specified - if no add one to remove system objects from result sets
+      if (ftsQuery.indexOf("TYPE:\"") === -1 && ftsQuery.indexOf("TYPE:'") === -1)
+      {
+         ftsQuery += ' AND (+TYPE:"cm:content" +TYPE:"cm:folder")';
+      }
+      
+      
+      // we processed the search terms, so suffix the PATH query
+      var path = null;
+      if (!repoSearch) {
+         path = SITES_SPACE_QNAME_PATH;
+         if (params.siteId !== null && params.siteId.length > 0) {
+            path += "cm:" + search.ISO9075Encode(params.siteId) + "/";
+         } else {
+            path += "*/";
+         }
+         if (params.containerId !== null && params.containerId.length > 0) {
+            path += "cm:" + search.ISO9075Encode(params.containerId) + "/";
+         } else {
+            path += "*/";
+         }
+      } else if (searchPath != undefined && searchPath != '') {
+         path = searchPath;
+         // interprate {site} token
+         if (path.indexOf("{site}") != -1) {
+            if (params.siteId !== null && params.siteId.length > 0) {
+               path = path.replace(/\{site\}/, "cm:" + search.ISO9075Encode(params.siteId));
+            } else {
+               path = path.replace(/\{site\}/, "*");
+            }
+         }
+
+         if (getSearchSubdirectories(formJson)) {
+            path += "/";
+         }
+      }
+
+      if (path !== null) {
+         ftsQuery = 'PATH:"' + path + '/*" AND ' + addSubQueryParenthesis(ftsQuery);
+      }
+      ftsQuery = addSubQueryParenthesis(ftsQuery) + ' AND -TYPE:"cm:thumbnail"';
+
+      ftsQuery = '(' + ftsQuery + ') AND NOT ASPECT:"sys:hidden"';
+      
+      // sort field - expecting field to in one of the following formats:
+      // - short QName form such as: cm:name
+      // - pseudo cm:content field starting with "." such as: .size
+      // - any other directly supported search field such as: TYPE
+      var sortColumns = [];
+      var sortParam = params.sort;
+      if (sortParam != null && sortParam.length != 0) {
+         var sort = sortParam;
+         var asc = true;
+         var separator = sort.indexOf("|");
+         if (separator != -1) {
+            sort = sort.substring(0, separator);
+            asc = (sortParam.substring(separator + 1) == "true");
+         }
+         var column;
+         if (sort.charAt(0) == '.') {
+            // handle pseudo cm:content fields
+            column = "@{http://www.alfresco.org/model/content/1.0}content" + sort;
+         } else if (sort.indexOf(":") != -1) {
+            // handle attribute field sort
+            column = "@" + utils.longQName(sort);
+         } else {
+            // other sort types e.g. TYPE
+            column = sort;
+         }
+         sortColumns.push({
+            column : column,
+            ascending : asc
+         });
+      }
+
+      if (logger.isLoggingEnabled())
+         logger.log("Query:\r\n" + ftsQuery + "\r\nSortby: " + (sort != null ? sort : ""));
+      
+      
+      // perform fts-alfresco language query
+      var queryDef = {
+         query : ftsQuery,
+         language : "fts-alfresco",
+         page : {
+            maxItems : params.maxResults * 2 // allow for space for filtering out results
+         },
+         templates : QUERY_TEMPLATES,
+         defaultField : "keywords",
+         onerror : "no-results",
+         sort : sortColumns
+      };
+      if (logger.isLoggingEnabled()) {
+         logger.log("getSearchResults ftsQuery :" + ftsQuery);
+         logger.log("search.lib.js queryDef:" + queryDef.toSource());
+      }
+
+      return queryDef;
+
+   }
+   return null;
+}
+
 
 /**
  * Return Search results with the given search terms. Patched and extended by
@@ -676,9 +870,9 @@ function makeQueryFor(formJson, p, operator, first) {
 
    var formQuery = "";
    if (operator != 'IGNORE') {
-      var propValue = formJson[p];
+      var propValue = formJson[p], modePropValue = formJson[p + "-mode"];;
       if (propValue != null && propValue.length !== 0) {
-         if (p.indexOf("prop_") === 0) {
+         if (p.indexOf("prop_") === 0 && p.match("-mode$") != "-mode")) {
             // found a property - is it namespace_propertyname or pseudo
             // property format?
             var propName = p.substr(5);
@@ -719,7 +913,44 @@ function makeQueryFor(formJson, p, operator, first) {
                      }
                      formQuery += (first ? '' : ' ' + operator + ' ') + propName + ':"' + from + '".."' + to + '"';
                   }
-               } else {
+               } else if (propName.indexOf("cm:categories") != -1) {
+                  // determines if the checkbox use sub categories was clicked
+                  if (propName.indexOf("usesubcats") == -1)
+                  {
+                     if (formJson["prop_cm_categories_usesubcats"] == "true")
+                     {
+                        useSubCats = true;
+                     }
+                     
+                     // build list of category terms to search for
+                     var firstCat = true;
+                     var catQuery = "";
+                     var cats = propValue.split(',');
+                     for (var i = 0; i < cats.length; i++) 
+                     {
+                        var cat = cats[i];
+                        var catNode = search.findNode(cat);
+                        if (catNode) 
+                        {
+                           catQuery += (firstCat ? '' : ' OR ') + "PATH:\"" + catNode.qnamePath + (useSubCats ? "//*\"" : "/member\"" );
+                           firstCat = false;
+                        }
+                     }
+                     
+                     if (catQuery.length !== 0)
+                     {
+                        // surround category terms with brackets if appropriate
+                        formQuery += (first ? '' : ' AND ') + "(" + catQuery + ")";
+                        first = false;
+                     }
+                  }
+               }
+//               else if (isMultiValueProperty(propValue, modePropValue)) {
+//                  formQuery += (first ? '(' : ' AND (');
+//                  formQuery += processMultiValue(propName, propValue, modePropValue, false);
+//                  formQuery += ')';
+//               }
+               else {
                   var queryTerm = "";
                   var orString = msg.get("advsearch.inner.operator.or");
                   var andString = msg.get("advsearch.inner.operator.and");
@@ -1022,131 +1253,3 @@ function getSavedSearchQueryDef(nodeRef) {
    return getSearchDef(savedSearch);
 }
 
-function getSearchDef(params) {
-   var ftsQuery = "", term = params.term, tag = params.tag, formData = params.query, repoSearch = params.repo;
-
-   // Simple keyword search and tag specific search
-   if (term !== null && term.length !== 0) {
-      // TAG is now part of the default macro
-      ftsQuery = term + " ";
-   } else if (tag !== null && tag.length !== 0) {
-      // Just look for tag
-      ftsQuery = "TAG:" + tag + " ";
-   }
-
-   // Advanced search form data search.
-   // Supplied as json in the standard Alfresco Forms data structure:
-   // prop_<name>:value|assoc_<name>:value
-   // name = namespace_propertyname|pseudopropertyname
-   // value = string value - comma separated for multi-value, no escaping yet!
-   // - underscore represents colon character in name
-   // - pseudo property is one of any cm:content url property:
-   // mimetype|encoding|size
-   // - always string values - interogate DD for type data
-   if (formData !== null && formData.length !== 0) {
-      var formQuery = "", formJson = jsonUtils.toObject(formData);
-
-      var searchPath = getSearchPath(formJson);
-      if (searchPath != null) {
-         repoSearch = true;
-      }
-
-      formQuery = buildFormQuery(formJson);
-
-      if (formQuery.length !== 0 || ftsQuery.length !== 0 || repoSearch) {
-         // extract data type for this search - advanced search query is type
-         // specific
-         ftsQuery = 'TYPE:"' + formJson.datatype + '"' + (formQuery.length !== 0 ? ' AND ' + addSubQueryParenthesis(formQuery) : '')
-               + (ftsQuery.length !== 0 ? ' AND ' + addSubQueryParenthesis(ftsQuery) : '');
-      }
-   }
-
-   if (ftsQuery.length !== 0 || repoSearch) {
-      // we processed the search terms, so suffix the PATH query
-      var path = null;
-      if (!repoSearch) {
-         path = SITES_SPACE_QNAME_PATH;
-         if (params.siteId !== null && params.siteId.length > 0) {
-            path += "cm:" + search.ISO9075Encode(params.siteId) + "/";
-         } else {
-            path += "*/";
-         }
-         if (params.containerId !== null && params.containerId.length > 0) {
-            path += "cm:" + search.ISO9075Encode(params.containerId) + "/";
-         } else {
-            path += "*/";
-         }
-      } else if (searchPath != undefined && searchPath != '') {
-         path = searchPath;
-         // interprate {site} token
-         if (path.indexOf("{site}") != -1) {
-            if (params.siteId !== null && params.siteId.length > 0) {
-               path = path.replace(/\{site\}/, "cm:" + search.ISO9075Encode(params.siteId));
-            } else {
-               path = path.replace(/\{site\}/, "*");
-            }
-         }
-
-         if (getSearchSubdirectories(formJson)) {
-            path += "/";
-         }
-      }
-
-      if (path != null) {
-         ftsQuery = 'PATH:"' + path + '/*" AND ' + addSubQueryParenthesis(ftsQuery);
-      }
-      ftsQuery = addSubQueryParenthesis(ftsQuery) + ' AND -TYPE:"cm:thumbnail"';
-
-      // sort field - expecting field to in one of the following formats:
-      // - short QName form such as: cm:name
-      // - pseudo cm:content field starting with "." such as: .size
-      // - any other directly supported search field such as: TYPE
-      var sortColumns = [];
-      var sortParam = params.sort;
-      if (sortParam != null && sortParam.length != 0) {
-         var sort = sortParam;
-         var asc = true;
-         var separator = sort.indexOf("|");
-         if (separator != -1) {
-            sort = sort.substring(0, separator);
-            asc = (sortParam.substring(separator + 1) == "true");
-         }
-         var column;
-         if (sort.charAt(0) == '.') {
-            // handle pseudo cm:content fields
-            column = "@{http://www.alfresco.org/model/content/1.0}content" + sort;
-         } else if (sort.indexOf(":") != -1) {
-            // handle attribute field sort
-            column = "@" + utils.longQName(sort);
-         } else {
-            // other sort types e.g. TYPE
-            column = sort;
-         }
-         sortColumns.push({
-            column : column,
-            ascending : asc
-         });
-      }
-
-      // perform fts-alfresco language query
-      var queryDef = {
-         query : ftsQuery,
-         language : "fts-alfresco",
-         page : {
-            maxItems : params.maxResults
-         },
-         templates : QUERY_TEMPLATES,
-         defaultField : "keywords",
-         onerror : "no-results",
-         sort : sortColumns
-      };
-      if (logger.isLoggingEnabled()) {
-         logger.log("getSearchResults ftsQuery :" + ftsQuery);
-         logger.log("search.lib.js queryDef:" + queryDef.toSource());
-      }
-
-      return queryDef;
-
-   }
-   return null;
-}

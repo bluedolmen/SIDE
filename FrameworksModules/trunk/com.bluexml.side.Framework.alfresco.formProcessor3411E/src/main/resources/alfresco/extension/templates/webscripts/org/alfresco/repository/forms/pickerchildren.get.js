@@ -257,7 +257,7 @@ function main() {
             var maxResults = 100;
             if (argsMaxResults != null) {
                // force the argsMaxResults var to be treated as a number
-               maxResults = argsMaxResults + 0;
+            	maxResults = parseInt(argsMaxResults, 10) || maxResults;
             }
 
             if (argsSelectableType == "cm:person") {

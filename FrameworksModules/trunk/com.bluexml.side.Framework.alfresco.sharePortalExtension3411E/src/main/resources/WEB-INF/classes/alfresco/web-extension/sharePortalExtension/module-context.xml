@@ -12,14 +12,10 @@
             <value>side-*-presets.xml</value>
          </list>
       </property>
-      
    </bean>
    
    <bean id="webscript.org.alfresco.modules.create-site.get" class="com.bluexml.side.framework.alfresco.sharePortalExtension.CreateSiteWebScript" parent="webscript" >
    		<property name="persetManager" ref="webframework.presets.manager" />
    </bean>
-   
-   
-   
    
 </beans>

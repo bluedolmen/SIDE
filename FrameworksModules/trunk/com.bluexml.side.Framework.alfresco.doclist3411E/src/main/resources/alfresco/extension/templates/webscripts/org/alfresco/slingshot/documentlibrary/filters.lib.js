@@ -136,7 +136,6 @@ var Filters =
 
          case "editingMe":
             filterQuery = this.constructPathQuery(parsedArgs);
-            filterQuery += " +ASPECT:\"workingcopy\"";
             filterQuery += " +@cm\\:workingCopyOwner:\"" + person.properties.userName + '"';
             filterParams.query = filterQuery;
             break;
@@ -149,21 +148,23 @@ var Filters =
             break;
 
          case "favourites":
-            var foundOne = false;
-
             for (var favourite in favourites)
             {
-               if (foundOne)
+               if (filterQuery)
                {
                   filterQuery += " OR ";
                }
-               foundOne = true;
                filterQuery += "ID:\"" + favourite + "\"";
             }
             
-            if (filterQuery.length > 0)
+            if (filterQuery.length !== 0)
             {
-               filterQuery = "+(" + filterQuery + ") " + this.constructPathQuery(parsedArgs);
+               filterQuery = "+(" + filterQuery + ")";
+               // no need to specify path here for all sites - IDs are exact matches
+               if (parsedArgs.nodeRef != "alfresco://sites/home")
+               {
+                  filterQuery += ' +PATH:"' + parsedArgs.rootNode.qnamePath + '//*"';
+               }
             }
             else
             {
@@ -287,7 +288,7 @@ var Filters =
          default: // "path"
             filterParams.variablePath = false;
             filterQuery = "+PATH:\"" + parsedArgs.pathNode.qnamePath + "/*\"";
-            filterParams.query = filterQuery + filterQueryDefaults;
+            filterParams.query = filterQuery + " AND NOT ASPECT:\"sys:hidden\"" + filterQueryDefaults;
             break;
       }
 
@@ -305,12 +306,16 @@ var Filters =
       var pathQuery = "";
       if (parsedArgs.nodeRef != "alfresco://company/home")
       {
-         pathQuery = "+PATH:\"" + parsedArgs.rootNode.qnamePath;
          if (parsedArgs.nodeRef == "alfresco://sites/home")
          {
-            pathQuery += "/*/cm:documentLibrary";
+            // all sites query - better with //cm:*
+            pathQuery = '+PATH:"' + parsedArgs.rootNode.qnamePath + '//cm:*"';
          }
-         pathQuery += "//*\"";
+         else
+         {
+            // site specific query - better with //*
+            pathQuery = '+PATH:"' + parsedArgs.rootNode.qnamePath + '//*"';
+         }
       }
       return pathQuery;
    },
