@@ -13,7 +13,7 @@
 						url: "../slingshot/doclib/action/checkin/node/" + nodeRef.uri
 					});
 				</#if>
-				<#if britair = "true">
+				<#if closeMsg = "true">
 					var stringifyed = stringify({eventType: "endOfProcessing"});
 					window.parent.postMessage( stringifyed , '*');
 						function stringify(data) {
