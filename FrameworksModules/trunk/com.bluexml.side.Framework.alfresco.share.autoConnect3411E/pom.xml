@@ -4,7 +4,7 @@
   <groupId>com.bluexml.side.Framework.alfresco.share</groupId>
   <artifactId>autoConnect3411E</artifactId>
   <name>com.bluexml.side.Framework.alfresco.share.autoConnect</name>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <packaging>zip</packaging>
   <parent>
     <groupId>org.bluexml</groupId>
