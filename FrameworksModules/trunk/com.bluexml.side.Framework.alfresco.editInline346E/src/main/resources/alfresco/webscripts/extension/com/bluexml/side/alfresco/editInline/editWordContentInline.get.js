@@ -11,6 +11,8 @@ model.publicHost = xmlConf.host.@value.toString();
 model.context = xmlConf.context.@value.toString();
 var commit = xmlConf.commit.@value.toString();
 model.commit = commit;
+var britair = xmlConf.britair.@value.toString();
+model.britair = britair;
 
 var docs = null;
 if (args.mime == "") {
