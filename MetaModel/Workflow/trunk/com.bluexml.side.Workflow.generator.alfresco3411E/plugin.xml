@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+  <extension point="com.bluexml.side.Application.com_bluexml_application_configuration">
+    <metamodel description="Check this to generate workflow models on leading frameworks.&lt;br&gt; This Workflow Metamodel allows to model Business processes.&lt;br&gt;SIDE provides the modeler to graphically produce workflow models and various generators to instantiate these models on leading frameworks." id="http://www.kerblue.org/workflow/1.0" name="KSR600 Workflow" url="http://www.kerblue.org/v2/ksr600-workflow/">
+      <technology description="Check this to generate your workflow models on the Alfresco product line.&lt;br&gt;Alfresco is the leading open source ECM solution. It integrates the jBoss BPM to manage workflow.&lt;br&gt;SIDE allows to optimize the generation of advanced jPDL-based workflows." id="alfresco-jbpm" name="Alfresco-jBPM" url="http://www.alfresco.com">
+        <technologyVersion description="Check this to generate workflow models on the major release 3 of Alfresco.&lt;br&gt;Alfresco 3.x is the leading open source collaborative ECM solution. It comes with the jBoss BPM 5.1 engine to run generated advanced workflows.&lt;br&gt;SIDE provides the modeler with validation rules and the generators to ease production of advanced workflows on Alfresco 3.x." id="alfresco_3.4.11E" version="Alfresco3.4.11 Enterprise">
+          <generatorVersion class="com.bluexml.side.workflow.generator.alfresco3411e.WorkflowGenerator3411E" hidden="hidden" id="com.bluexml.side.Workflow.generator.alfresco3411E" version="SIDE Workflow Generator for Alfresco Enterprise 3.4.11">
+            <configurationParameter dataType="String" defaultValue="1.0" key="com.bluexml.side.Workflow.generator.alfresco.module.version" label="Workflow Module version" />
+            <configurationParameter dataType="String" defaultValue="http://localhost:8080/alfresco" documentation="Set this value to the URL of the Alfresco instance on which have been generated and deployed new content types from the SIDE data model." key="alfresco.url" label="Alfresco URL" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.pdfGenerator3411E" moduleType="amp" technologyVersion="alfresco_3.4.11E" versionMax="1.0.2" versionMin="1.0.2" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.hotdeployer3411E" moduleType="amp" technologyVersion="alfresco_3.4.11E" versionMax="1.0.2" versionMin="1.0.2" />
+            <option defaultOption="true" documentation="this must be hidden" hidden="true" key="generator.main" label="main generation" />
+          </generatorVersion>
+        </technologyVersion>
+      </technology>
+    </metamodel>
+  </extension>
+</plugin>
+

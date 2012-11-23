@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Alfresco 3.4.6 EE View Generator
-Bundle-SymbolicName: com.bluexml.side.View.generator.alfresco346E;singleton:=true
+Bundle-Name: Alfresco 3.4.11 EE View Generator
+Bundle-SymbolicName: com.bluexml.side.View.generator.alfresco3411E;singleton:=true
 Bundle-Version: 1.0.4.v37877-20120718
-Bundle-Activator: com.bluexml.side.view.generator.alfresco346e.Activator
+Bundle-Activator: com.bluexml.side.view.generator.alfresco3411e.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources,
@@ -18,7 +18,7 @@ Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.Util.libs,
  com.bluexml.side.Util.componentMonitor,
  com.bluexml.side.Util.dependencies,
- com.bluexml.side.View.generator.alfresco34d
+ com.bluexml.side.View.generator.alfresco34d,
+ com.bluexml.side.View.generator.alfresco346E;bundle-version="1.0.4"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Export-Package: com.bluexml.side.view.generator.alfresco346e

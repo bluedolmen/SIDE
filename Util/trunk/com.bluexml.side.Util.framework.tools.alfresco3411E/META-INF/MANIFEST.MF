@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Alfresco Enterprise 3.4.11
+Bundle-SymbolicName: com.bluexml.side.Util.framework.tools.alfresco3411E;singleton:=true
+Bundle-Version: 1.0.13.v36931-20120607
+Bundle-Activator: com.bluexml.side.util.framework.tools.alfresco3411e.Activator
+Bundle-Vendor: BLUEXML
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ com.bluexml.side.Util.framework.tools
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

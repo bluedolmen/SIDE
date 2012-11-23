@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="com.bluexml.side.Application.com_bluexml_application_configuration">
+      <technology
+            description="Check this to deploy your generated application components on the Alfresco product line.&lt;br&gt;Alfresco is the leading open source ECM solution.&lt;br&gt;MDA-based SIDE allows to deploy MDA generated artefacts on main ALfresco releases."
+            id="alfresco"
+            name="Alfresco"
+            url="http://www.alfresco.com">
+         <technologyVersion
+               description="Check this to generate data models on the major release 3 of Alfresco.&lt;br&gt;Alfresco 3.x is the leading open source collaborative ECM solution.&lt;br&gt;Additionally to content generation, SIDE provides useful server components to enhance some features of this release."
+               id="alfresco_3.4.11E"
+               version="Alfresco3.4.11 Enterprise">
+            <deployerVersion
+                  class="com.bluexml.side.deployer.alfresco3411e.Deployer"
+                  description="Check this to generate a full deployable Alfresco package containing the newly generated Alfresco artifacts."
+                  hidden="hidden"
+                  id="com.bluexml.side.Deployer.alfresco3411E"
+                  shared="false"
+                  version="SIDE Alfresco Deployer">
+               <configurationParameter
+                     dataType="Directory"
+                     documentation="Set this value to the Alfresco Tomcat directory path in order the deployer puts the packaged war file.&lt;br&gt;&lt;b&gt;This option is mandatory.&lt;/b&gt;"
+                     key="CATALINA_HOME"
+                     label="Tomcat installation directory">
+               </configurationParameter>
+               <option
+                     defaultOption="true"
+                     documentation="Check this option if you want to completely remove previous deployed packages.&lt;br&gt;May be longer but may avoid some side effects when done from time to time."
+                     key="com.bluexml.side.deployer.alfresco.clean"
+                     label="clean">
+               </option>
+               <option
+                     documentation="Check this option if you want to log changes made in alfresco war."
+                     key="com.bluexml.side.deployer.alfresco.logChanges"
+                     label="log details">
+               </option>
+               <configurationParameter
+                     dataType="File"
+                     documentation="Set this value to the location of the alfresco mmt tool to manage amp files."
+                     key="com.bluexml.side.deployer.alfresco.mmtPath"
+                     label="alfresco-mmt.jar file path">
+               </configurationParameter>
+            </deployerVersion>
+         </technologyVersion>
+      </technology>
+   </extension>
+
+</plugin>

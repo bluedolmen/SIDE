@@ -1,24 +1,23 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Alfresco 3.4.6 EE Portal Generator
-Bundle-SymbolicName: com.bluexml.side.Portal.generator.alfresco346E;singleton:=true
-Bundle-Version: 1.0.90.v40413-20121123
-Bundle-Activator: com.bluexml.side.portal.generator.alfresco346e.Activator
+Bundle-Name: Alfresco 3.4.11 EE Share Forms Generator
+Bundle-SymbolicName: com.bluexml.side.Form.generator.alfresco.enterprise3411E;singleton:=true
+Bundle-Version: 1.0.66.v39976-20121108
+Bundle-Activator: com.bluexml.side.form.generator.alfresco.enterprise3411e.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.core.resources,
+ com.bluexml.side.Form.generator.alfresco34d,
  com.bluexml.side.Application,
  com.bluexml.side.Util.generator,
  com.bluexml.side.Util.generator.acceleo,
  com.bluexml.side.Util.security,
  com.bluexml.side.Util.generator.alfresco,
- com.bluexml.side.Portal,
  com.bluexml.side.Util.dependencies,
  com.bluexml.side.Util.componentMonitor,
- com.bluexml.side.Util.libs,
+ com.bluexml.side.Util.log,
+ com.bluexml.side.Form,
  com.bluexml.side.Class.service.alfresco,
- com.bluexml.side.Portal.generator.alfresco,
- com.bluexml.side.Portal.generator.alfresco34d
+ com.bluexml.side.Class.generator.alfresco,
+ org.eclipse.core.resources
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Export-Package: com.bluexml.side.portal.generator.alfresco346e

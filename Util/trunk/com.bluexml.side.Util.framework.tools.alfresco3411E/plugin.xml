@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+  <extension point="com.bluexml.side.util.framework.tooling">
+    <modelLibrary activator="com.bluexml.side.util.framework.tools.alfresco3411e.Activator" archivePath="/com/bluexml/side/util/framework/tools/alfresco3411E/models/alfresco3411E.zip" id="alfresco_3.4.11E" label="Alfresco Models 3.4.11 Enterprise" pluginId="com.bluexml.side.Util.framework.tools.alfresco3411E" projectId="Model-library-Alfresco-3.4.11-EE">
+      <moduleDependence label="Alfresco Extension 3.4.11 Enterprise" moduleId="com.bluexml.side.Framework.maven.ampArchetypeForSide_3411E" moduleType="jar" technologyVersion="internal" versionMax="1.0.4" versionMin="1.0.4" />
+      <moduleDependence label="Alfresco Share Extension 3.4.11 Enterprise" moduleId="com.bluexml.side.Framework.maven.warPatchArchetypeForSide_3411E" moduleType="jar" technologyVersion="internal" versionMax="1.0.3" versionMin="1.0.3" />
+      <generatorVersion class="com.bluexml.side.util.framework.tools.alfresco3411e.Activator" hidden="visible" id="com.bluexml.side.Class.generator.alfresco3411E" version="auto">
+        <option defaultOption="false" hidden="false" key="alfresco.share.extension" label="alfresco.share.extension" />
+      </generatorVersion>
+      <generatorVersion class="com.bluexml.side.util.framework.tools.alfresco3411e.Activator" hidden="visible" id="com.bluexml.side.Portal.generator.alfresco3411E" version="auto">
+        <option defaultOption="false" hidden="false" key="com.bluexml.side.Portal.generator.alfresco.forms" label="com.bluexml.side.Portal.generator.alfresco.forms" />
+        <option defaultOption="false" hidden="false" key="com.bluexml.side.Portal.generator.alfresco.doclist" label="com.bluexml.side.Portal.generator.alfresco.doclist" />
+      </generatorVersion>
+      <generatorVersion class="com.bluexml.side.util.framework.tools.alfresco3411e.Activator" hidden="visible" id="com.bluexml.side.View.generator.alfresco 3411E" version="auto" />
+      <generatorVersion class="com.bluexml.side.util.framework.tools.alfresco3411e.Activator" hidden="visible" id="com.bluexml.side.Form.generator.alfresco3411E" version="com.bluexml.side.Util.framework.tools.alfresco3411E.generatorVersion4" />
+      <deployerVersion class="com.bluexml.side.util.framework.tools.alfresco3411e.Activator" hidden="visible" id="com.bluexml.side.Deployer.alfrescoDirectCopy3411E" shared="false" version="com.bluexml.side.Util.framework.tools.alfresco3411E.deployerVersion1">
+        <option defaultOption="false" hidden="false" key="com.bluexml.side.Deployer.alfrescoDirectCopy3411E.clean" label="com.bluexml.side.Deployer.alfrescoDirectCopy3411E.clean" />
+      </deployerVersion>
+      <generatorVersion class="com.bluexml.side.util.framework.tools.alfresco3411e.Activator" hidden="visible" id="com.bluexml.side.Workflow.generator.alfresco3411E" version="com.bluexml.side.Util.framework.tools.alfresco3411E.generatorVersion5" />
+      <generatorVersion class="com.bluexml.side.util.framework.tools.alfresco3411e.Activator" hidden="hidden and used by default" id="side.customModules" version="side.customModules" />
+    </modelLibrary>
+  </extension>
+</plugin>
+
