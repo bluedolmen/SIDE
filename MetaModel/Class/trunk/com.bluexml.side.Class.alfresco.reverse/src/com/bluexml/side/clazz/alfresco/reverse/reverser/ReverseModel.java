@@ -552,7 +552,7 @@ public class ReverseModel {
 					}
 				} else {
 					// referenced constraints
-					eObject = register.getEObject(com.bluexml.side.common.Constraint.class, ref);
+					eObject = register.getEObject(com.bluexml.side.common.impl.ConstraintImpl.class, ref);
 					if (eObject == null) {
 						// search an Enumeration
 						eObject = register.getEObject(EnumerationImpl.class, ref);

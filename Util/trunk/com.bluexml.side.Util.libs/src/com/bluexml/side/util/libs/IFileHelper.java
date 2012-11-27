@@ -72,7 +72,13 @@ public class IFileHelper {
 	}
 
 	public static File convertIRessourceToFile(IResource ir) {
-		return ir.getRawLocation().makeAbsolute().toFile();		
+		IPath rawLocation = ir.getRawLocation();
+		if (rawLocation == null) {
+			return new File(ir.getLocationURI());
+		} else {
+			return rawLocation.makeAbsolute().toFile();
+		}
+				
 	}
 
 	public static String convertIRessourceToSystemString(IResource ir) {

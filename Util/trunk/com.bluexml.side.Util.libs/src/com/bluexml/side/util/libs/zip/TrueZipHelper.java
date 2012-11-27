@@ -56,8 +56,10 @@ public class TrueZipHelper {
 		} else {
 			result = srcF.copyAllTo(destF, ArchiveDetector.NULL, ArchiveDetector.NULL);
 		}
-
+		
+		// mandatory call see TrueZip doc
 		File.update();
+		
 		if (!result) {
 			String message = "Error while extract files";
 			System.err.println(message);
@@ -66,7 +68,7 @@ public class TrueZipHelper {
 			throw new Exception(message);
 		}
 
-		// mandatory call see TrueZip doc
+
 		return result;
 	}
 

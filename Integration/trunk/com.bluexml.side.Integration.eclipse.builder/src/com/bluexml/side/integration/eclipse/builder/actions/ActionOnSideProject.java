@@ -1,69 +1,57 @@
-package com.bluexml.side.Integration.eclipse.branding.enterprise.actions;
+package com.bluexml.side.integration.eclipse.builder.actions;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.wizard.Wizard;
-import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 
-import com.bluexml.side.Integration.eclipse.branding.enterprise.wizards.newAlfrescoModule.NewModuleDialog;
-import com.bluexml.side.Integration.eclipse.branding.enterprise.wizards.newAlfrescoModule.NewModuleWizard;
 import com.bluexml.side.integration.eclipse.builder.SIDEBuilderUtil;
 
-
-public class NewAlfrescoModuleAction implements IObjectActionDelegate {
-
-	private ISelection selection;
-	private Shell currentShell;
+public abstract class ActionOnSideProject implements IObjectActionDelegate {
+	protected ISelection selection;
+	protected Shell currentShell;
 
 	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
 		currentShell = targetPart.getSite().getShell();
-
 	}
 
-	public void run(IAction action) {
+	public final void run(IAction action) {
 		System.out.println("action start " + selection);
 		if (selection instanceof IStructuredSelection) {
-			IProject project = null;
+			List<IProject> projects = new ArrayList<IProject>();
 			for (Iterator<?> it = ((IStructuredSelection) selection).iterator(); it.hasNext();) {
 				Object element = it.next();
-
+				IProject project = null;
 				if (element instanceof IProject) {
 					project = (IProject) element;
 				} else if (element instanceof IAdaptable) {
 					project = (IProject) ((IAdaptable) element).getAdapter(IProject.class);
 				}
-			}
-			if (project != null && SIDEBuilderUtil.isSIDEProject(project)) {
-				System.out.println("selection resolved as Project :" + project);
-
-				System.out.println("open Wizard");
-
-				try {
-					Wizard w = new NewModuleWizard(project);
-					WizardDialog wd = new NewModuleDialog(currentShell, w);
-					wd.open();
-				} catch (Throwable e1) {
-					e1.printStackTrace();
-					MessageDialog.openError(currentShell.getShell(), "Error", e1.getMessage());
+				if (project != null && SIDEBuilderUtil.isSIDEProject(project)) {
+					System.out.println("selection resolved as Project :" + project);
+					projects.add(project);
 				}
-				
+			}
+
+			if(projects.size() > 0) {
+				run(projects);
 			}
 		}
 
 	}
 
+	abstract public void run(List<IProject> projects) ;
+
 	public void selectionChanged(IAction action, ISelection selection) {
 		this.selection = selection;
 	}
 
-	
 }

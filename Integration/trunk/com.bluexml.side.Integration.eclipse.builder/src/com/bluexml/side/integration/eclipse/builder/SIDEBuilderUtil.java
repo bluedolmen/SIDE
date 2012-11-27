@@ -7,6 +7,7 @@ import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -14,6 +15,9 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.sideLabs.referential.references.Model;
 import org.sideLabs.referential.references.ModelsDocument;
+
+import com.bluexml.side.integration.eclipse.builder.nature.SIDENature;
+import com.bluexml.side.integration.eclipse.builder.nature.SIDENatureWithBuilder;
 
 public class SIDEBuilderUtil {
 
@@ -144,4 +148,23 @@ public class SIDEBuilderUtil {
 		}
 	}
 
+	public static boolean isSIDEProject(IProject project) {
+		return hasNature(project, SIDENature.NATURE_ID) || hasNature(project, SIDENatureWithBuilder.NATURE_ID);
+	}
+
+	public static boolean hasNature(IProject project, String nature) {
+		boolean found = false;
+		try {
+			IProjectDescription description = project.getDescription();
+			String[] natures = description.getNatureIds();
+
+			for (int i = 0; i < natures.length; ++i) {
+				if (nature.equals(natures[i]))
+					found = true;
+			}
+
+		} catch (CoreException e) {
+		}
+		return found;
+	}
 }
