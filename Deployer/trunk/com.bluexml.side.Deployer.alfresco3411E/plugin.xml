@@ -15,7 +15,7 @@
             <deployerVersion
                   class="com.bluexml.side.deployer.alfresco3411e.Deployer"
                   description="Check this to generate a full deployable Alfresco package containing the newly generated Alfresco artifacts."
-                  hidden="hidden"
+                  hidden="visible"
                   id="com.bluexml.side.Deployer.alfresco3411E"
                   shared="false"
                   version="SIDE Alfresco Deployer">

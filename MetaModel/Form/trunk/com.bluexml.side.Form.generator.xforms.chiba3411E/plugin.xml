@@ -7,7 +7,7 @@
         <technologyVersion description="Check this to generate your form models on the major release 1.5 of the XForms-based Chiba engine.&lt;br&gt;Chiba 1.5.x is the leading open source Xforms engine solution.&lt;br&gt;SIDE allows to generate the XForms templates and this generation has been heavily qualified on Chiba." id="chiba_1_5.x" version="Chiba 1.5.x">
           <generatorVersion
                 class="com.bluexml.side.form.generator.xforms.chiba3411e.FormGenerator3411E"
-                hidden="hidden"
+                hidden="visible"
                 id="com.bluexml.side.Form.generator.xforms.chiba3411E"
                 version="SIDE Chiba Form Generator for Alfresco 3.4.11 Enterprise">
             <configurationParameter dataType="File" documentation="Set this field to the complete path to your messages.properties file. The file may point to a customized version of the file.&lt;p&gt;It is &lt;b&gt;strongly recommended&lt;/b&gt; to set the option. if not specified, a default file is created in the generation folder under xformsModel/defaults." key="com.bluexml.side.Form.generator.xforms.chiba.messagesFilePath" label="Messages file" />
