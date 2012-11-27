@@ -22,7 +22,7 @@
       <action
             class="com.bluexml.side.Integration.eclipse.branding.enterprise.actions.ModelMigration"
             id="com.bluexml.side.Integration.eclipse.branding.enterprise.modelMigration"
-            label="switch project from one Alfresco version to another"
+            label="Switch project references from a &quot;Model Library&quot; to another"
             menubarPath="com.bluexml.side/project">
       </action>
     </objectContribution>
