@@ -1,19 +1,26 @@
 package com.bluexml.side.Integration.eclipse.branding.enterprise.wizards.migration;
 
-import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-import org.eclipse.core.resources.IFile;
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IProjectDescription;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 
+import com.bluexml.side.Integration.eclipse.branding.enterprise.Activator;
 import com.bluexml.side.Integration.eclipse.branding.enterprise.actions.ModelMigrationHelper;
 import com.bluexml.side.Integration.eclipse.branding.enterprise.wizards.migration.pages.GeneralProjectMigration;
 import com.bluexml.side.util.alfresco.tools.ToolingUtils;
-import com.bluexml.side.util.libs.IFileHelper;
 
 public class ModelMigrationWizard extends Wizard implements IWorkbenchWizard {
 
@@ -21,38 +28,73 @@ public class ModelMigrationWizard extends Wizard implements IWorkbenchWizard {
 
 	public ModelMigrationWizard(List<IProject> projects) {
 		this.projects = projects;
+		setNeedsProgressMonitor(true);
+
 	}
 
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
-		List list = selection.toList();
-		for (Object object : list) {
-			System.out.println("ModelMigrationWizard.init() :" + object);
-		}
 
 	}
 
 	@Override
 	public boolean performFinish() {
 		System.out.println("ModelMigrationWizard.performFinish()");
-		GeneralProjectMigration page = (GeneralProjectMigration) getContainer().getCurrentPage();
-		String libraryId = page.getFieldValueString(GeneralProjectMigration.Fields.library.toString());
+		final GeneralProjectMigration page = (GeneralProjectMigration) getContainer().getCurrentPage();
+		final String libraryId = page.getFieldValueString(GeneralProjectMigration.Fields.library.toString());
 		// import library if project do not exists in workspace
-		try {
-			IProject target = ToolingUtils.importLibrary(libraryId);
 
-			// execute models conversion
+		IRunnableWithProgress runnable = new IRunnableWithProgress() {
 
-			for (IProject source : this.projects) {
-				ModelMigrationHelper.updateProject(source, target, true);
+			public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+				try {
+					execute(page, libraryId, monitor);
+				} catch (Exception e) {
+
+					throw new InvocationTargetException(e);
+				}
 			}
+		};
 
-		} catch (Exception e) {
+		try {
+			this.getContainer().run(true, false, runnable);
+		} catch (InvocationTargetException e) {
+			Throwable cause = e.getCause();
+			Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, 0, cause.toString(), cause));
+			MessageDialog.openError(getShell(), "Error", NLS.bind("Internal error {0}", cause.getMessage())); //$NON-NLS-1$
+		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return false;
 		}
 
-		return false;
+		return true;
+	}
+
+	protected void execute(GeneralProjectMigration page, String libraryId, IProgressMonitor monitor2) throws Exception {
+
+		IProject target = ToolingUtils.importLibrary(libraryId);
+
+		// copy projects before as requested
+		Boolean fieldValueBoolean = page.getFieldValueBoolean(GeneralProjectMigration.Fields.copybefore.toString());
+		if (fieldValueBoolean) {
+			String newNameParam = page.getFieldValueString(GeneralProjectMigration.Fields.newName.toString());
+
+			if (StringUtils.trimToNull(newNameParam) == null) {
+				newNameParam = GeneralProjectMigration.DEFAULT_VALUE_NEWNAME;
+			}
+			for (IProject source : this.projects) {
+				IProjectDescription description = source.getDescription();
+				String name = description.getName();
+				String newName = newNameParam + name;
+				description.setName(newName);
+				source.copy(description, true, monitor2);
+			}
+		}
+
+		// execute models conversion
+		for (IProject source : this.projects) {
+			ModelMigrationHelper.updateProject(source, target, false, monitor2);
+		}
+
 	}
 
 	/*

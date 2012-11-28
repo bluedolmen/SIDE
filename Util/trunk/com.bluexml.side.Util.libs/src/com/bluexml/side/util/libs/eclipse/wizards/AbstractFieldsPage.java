@@ -72,6 +72,10 @@ public abstract class AbstractFieldsPage extends WizardPage implements Checkable
 	protected Button createBooleanFieldControl(Composite composite, final String label, final String id, boolean initialValue) {
 		return controlHelper.createBooleanFieldControl(composite, label, id, initialValue, values);
 	}
+	
+	protected Button createBooleanFieldControl2(Composite composite, final String label, final String id, boolean initialValue) {
+		return controlHelper.createBooleanFieldControl2(composite, label, id, initialValue, values);
+	}
 
 	/**
 	 * @param composite

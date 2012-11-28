@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.viewers.Viewer;
@@ -55,7 +56,7 @@ public class PageControlsHelper {
 		textField.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
 				// records changed value into map values
-				values.put(id, textField.getText());
+				values.put(id, StringUtils.trimToNull(textField.getText()));
 				page.checkPageComplite();
 			}
 		});
@@ -80,6 +81,38 @@ public class PageControlsHelper {
 		Label artifactIdLabel = new Label(composite, SWT.NONE);
 		artifactIdLabel.setText(label);
 		artifactIdLabel.setLayoutData(newLayoutData);
+		return button;
+	}
+
+	/**
+	 * this one display label before the checkbox
+	 * 
+	 * @param composite
+	 * @param label
+	 * @param id
+	 * @param initialValue
+	 * @param values
+	 * @return
+	 */
+	public Button createBooleanFieldControl2(Composite composite, final String label, final String id, boolean initialValue, final Map<String, Object> values) {
+		values.put(id, Boolean.toString(initialValue));
+
+		Label artifactIdLabel = new Label(composite, SWT.NONE);
+		artifactIdLabel.setText(label);
+
+		GridData newLayoutData = StylingUtil.getNewLayoutData();
+		newLayoutData.horizontalSpan = 3;
+		
+		final Button button = new Button(composite, SWT.CHECK);
+		button.setSelection(initialValue);
+		button.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(final SelectionEvent e) {
+				values.put(id, Boolean.toString(button.getSelection()));
+				page.checkPageComplite();
+			}
+		});
+		button.setLayoutData(newLayoutData);
 		return button;
 	}
 
@@ -117,7 +150,7 @@ public class PageControlsHelper {
 		return new Object[] { archetypeIdLabel, archetypeIdControl };
 	}
 
-	public static void initializeCombo(final String id, Map<String,Object> allowedValues, final Map<String, Object> values, final Combo archetypeIdControl) {
+	public static void initializeCombo(final String id, Map<String, Object> allowedValues, final Map<String, Object> values, final Combo archetypeIdControl) {
 		String[] items = allowedValues.keySet().toArray(new String[allowedValues.size()]);
 		archetypeIdControl.setItems(items);
 		Object string = values.get(id);
