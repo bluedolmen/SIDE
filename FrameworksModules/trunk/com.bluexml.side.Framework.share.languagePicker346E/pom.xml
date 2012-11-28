@@ -4,7 +4,7 @@
   <groupId>com.bluexml.side.Framework.share</groupId>
   <artifactId>languagePicker346E</artifactId>
   <name>com.bluexml.side.Framework.share.languagePicker346E</name>
-  <version>1.0.8</version>
+  <version>1.0.9</version>
   <packaging>zip</packaging>
   <parent>
     <groupId>org.bluexml</groupId>
@@ -77,7 +77,7 @@
     <dependency>
       <groupId>com.bluexml.side.Framework.alfresco</groupId>
       <artifactId>languagePicker346E</artifactId>
-      <version>1.0.1</version>
+      <version>1.0.2</version>
       <type>amp</type>
     </dependency>
   </dependencies>
