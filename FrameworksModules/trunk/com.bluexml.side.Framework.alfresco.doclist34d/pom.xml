@@ -19,7 +19,7 @@
   <artifactId>doclist34d</artifactId>
   <packaging>amp</packaging>
   <name>com.bluexml.side.Framework.alfresco.doclist34d</name>
-  <version>1.0.13</version>
+  <version>1.0.14</version>
   <!--
 		An Alfresco version number must be of the form 1.2.3.4. Using
 		1.0-SNAPSHOT as the AMP version will create an exception. See
@@ -36,7 +36,6 @@
     <artifactId>superpom</artifactId>
     <version>1.10</version>
   </parent>
-
   <properties>
     <!--
 			Default for which src/main/properties/<env>/application.properties is
