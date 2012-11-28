@@ -49,14 +49,14 @@ public class ModelMigrationHelper {
 		monitor2.beginTask("updating models references", models.size());
 		// System.out.println("ModelMigrationHelper.updateProject() models to update :" + models.size());
 		for (File file : models) {
-			List<File> modelsTarget_filtred = new ArrayList<File>();
-			for (File fileT : modelsTarget) {
-				if (FileHelper.getFileExt(fileT).equals(FileHelper.getFileExt(file))) {
-					modelsTarget_filtred.add(fileT);
-				}
-			}
+			//			List<File> modelsTarget_filtred = new ArrayList<File>();
+			//			for (File fileT : modelsTarget) {
+			//				if (FileHelper.getFileExt(fileT).equals(FileHelper.getFileExt(file))) {
+			//					modelsTarget_filtred.add(fileT);
+			//				}
+			//			}
 
-			updateModel(file, modelsTarget_filtred, preview, monitor2);
+			updateModel(file, modelsTarget, preview, monitor2);
 			monitor2.worked(1);
 		}
 
@@ -67,7 +67,7 @@ public class ModelMigrationHelper {
 		FilenameFilter filter = new FilenameFilter() {
 			public boolean accept(File file, String name) {
 				boolean ok = false;
-				String[] accepted = { ".dt", ".portal" };
+				String[] accepted = { ".dt", ".portal", ".form", ".view", ".workflow" };
 				for (String string : accepted) {
 					if (name.endsWith(string)) {
 						ok = true;
@@ -110,26 +110,31 @@ public class ModelMigrationHelper {
 						// System.out.println("ModelMigrationHelper.updateModel() le truc est une list de truc");
 						EObjectEList<EObject> l = (EObjectEList<EObject>) o;
 						EObjectEList<EObject> l_r = (EObjectEList<EObject>) o_resolved;
-						Map<Integer, Object> toReplace = new HashMap<Integer, Object>();
+						Map<Object, Object[]> toReplace = new HashMap<Object, Object[]>();
 
 						for (EObject object : l.basicList()) {
 							int indexOf = l.indexOf(object);
 							EObject updateElement = updateElement(esf, object, l_r.get(indexOf), modelsTarget);
 							if (updateElement != null) {
-
-								toReplace.put(indexOf, updateElement);
+								// System.out.println("ModelMigrationHelper.updateModel() indexof :" + indexOf);
+								toReplace.put(l_r.get(indexOf), new Object[] { indexOf, updateElement });
 							}
 						}
 						// replace
-						Set<Entry<Integer, Object>> entrySet = toReplace.entrySet();
-						for (Entry<Integer, Object> entry : entrySet) {
+						Set<Entry<Object, Object[]>> entrySet = toReplace.entrySet();
+						for (Entry<Object, Object[]> entry : entrySet) {
 
-							Integer index = entry.getKey();
-							EObject updateElement = (EObject) entry.getValue();
+							Object object = entry.getKey();
+							EObject updateElement = (EObject) entry.getValue()[1];
 							// System.out.println("ModelMigrationHelper.updateModel() REPLACE " + o + " by " + updateElement);
-							l.remove(index);
 
-							l.add(index, updateElement);
+							// System.out.println("ModelMigrationHelper.updateModel() BEFORE size :" + l.size());
+							int indexOf = (Integer) entry.getValue()[0];
+							l.add(indexOf, updateElement);
+							// System.out.println("ModelMigrationHelper.updateModel() ADD size :" + l.size());
+							boolean remove = l.remove(object);
+							// System.out.println("ModelMigrationHelper.updateModel() REMOVE " + remove + " size :" + l.size());
+
 						}
 					} else {
 						// System.out.println("ModelMigrationHelper.updateModel() o: " + eObject2 + " for :" + esf.getName());
@@ -228,6 +233,7 @@ public class ModelMigrationHelper {
 						equals &= ((Portlet) a).getName().equals(((Portlet) b).getName());
 					}
 				} else {
+					System.out.println("ModelMigrationHelper.equals() not managed to be compared NEED TO BE ADDED TO CONTROLER :" + a.getClass());
 					equals = false;
 				}
 			}

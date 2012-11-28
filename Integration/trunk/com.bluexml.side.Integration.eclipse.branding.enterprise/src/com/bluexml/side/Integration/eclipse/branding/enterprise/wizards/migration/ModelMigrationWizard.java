@@ -1,11 +1,13 @@
 package com.bluexml.side.Integration.eclipse.branding.enterprise.wizards.migration;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -72,10 +74,11 @@ public class ModelMigrationWizard extends Wizard implements IWorkbenchWizard {
 	protected void execute(GeneralProjectMigration page, String libraryId, IProgressMonitor monitor2) throws Exception {
 
 		IProject target = ToolingUtils.importLibrary(libraryId);
-
+		List<IProject> project2Update = this.projects;
 		// copy projects before as requested
 		Boolean fieldValueBoolean = page.getFieldValueBoolean(GeneralProjectMigration.Fields.copybefore.toString());
 		if (fieldValueBoolean) {
+			project2Update = new ArrayList<IProject>();
 			String newNameParam = page.getFieldValueString(GeneralProjectMigration.Fields.newName.toString());
 
 			if (StringUtils.trimToNull(newNameParam) == null) {
@@ -87,11 +90,14 @@ public class ModelMigrationWizard extends Wizard implements IWorkbenchWizard {
 				String newName = newNameParam + name;
 				description.setName(newName);
 				source.copy(description, true, monitor2);
+				IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(description.getName());
+				project2Update.add(project);
+
 			}
 		}
 
 		// execute models conversion
-		for (IProject source : this.projects) {
+		for (IProject source : project2Update) {
 			ModelMigrationHelper.updateProject(source, target, false, monitor2);
 		}
 

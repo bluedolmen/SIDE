@@ -27,6 +27,7 @@ import com.bluexml.side.common.CustomDataType;
 import com.bluexml.side.common.DataType;
 import com.bluexml.side.common.MetaInfo;
 import com.bluexml.side.common.ModelElement;
+import com.bluexml.side.common.NameSpace;
 import com.bluexml.side.common.OperationComponent;
 import com.bluexml.side.form.CharField;
 import com.bluexml.side.form.ChoiceField;
@@ -468,12 +469,15 @@ public class ClassDiagramUtils {
 		}
 
 		CustomDataType customType = att.getCustomType();
-		String logicalNameSpace = customType.getLogicalNameSpace().getPrefix();
-		String name = customType.getName();
-		String dtype = logicalNameSpace + ":" + name;
-		DataType dataType2 = m.get(dtype);
+		NameSpace logicalNameSpace2 = customType.getLogicalNameSpace();
+		DataType dataType2 = null;
+		if (logicalNameSpace2 != null) {
+			String logicalNameSpace = logicalNameSpace2.getPrefix();
+			String name = customType.getName();
+			String dtype = logicalNameSpace + ":" + name;
+			dataType2 = m.get(dtype);
+		}
 		DataType dataType = dataType2 != null ? dataType2 : DataType.CUSTOM;
 		return dataType;
-
 	}
 }

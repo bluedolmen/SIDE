@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
@@ -32,6 +33,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 
 import com.bluexml.side.Util.ecore.ModelInitializationUtils;
+import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
 import com.bluexml.side.clazz.edit.ui.Messages;
 import com.bluexml.side.util.libs.eclipse.ProjectNatureHelper;
 import com.bluexml.side.util.libs.ecore.EResourceUtils;
@@ -183,20 +185,28 @@ public abstract class ModelCreator {
 		project.refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
 		// get new Resource
 		final IFile newModelFile = getNewModelIFile();
-		boolean doWork = true;
+		final Boolean doWork[] = new Boolean[]{true};
 		boolean exists = newModelFile.exists();
 
 		if (exists && !headless) {
 			if (ask.equals(ASK_USER.ASK)) {
 				// open warning dialog to ask user about overriding existing models
-				doWork = UIUtils.showConfirmation(Messages.ModelCreator_3 + newModelFile.getName() + Messages.ModelCreator_4, Messages.ModelCreator_5);
+				Display currentDisp = ApplicationUtil.getDisplay();
+				currentDisp.syncExec(new Runnable() {
+					
+					public void run() {
+						// TODO Auto-generated method stub
+						doWork[0] = UIUtils.showConfirmation(Messages.ModelCreator_3 + newModelFile.getName() + Messages.ModelCreator_4, Messages.ModelCreator_5);		
+					}
+				});
+				
 			} else if (ask.equals(ASK_USER.SKIP)) {
 				// do no ask user, just skip initializing
-				doWork = false;
+				doWork[0] = false;
 			}
 		}
 
-		if (doWork) {
+		if (doWork[0]) {
 			// the UDPATE case need to use current existing model, if implemented update is done instead of overriding model
 			final boolean update = exists && this instanceof ModelUpdater;
 			ModelUpdater modelUpdater = null;
