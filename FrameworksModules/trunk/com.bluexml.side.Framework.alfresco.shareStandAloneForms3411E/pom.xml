@@ -9,7 +9,7 @@
   <groupId>com.bluexml.side.Framework.alfresco</groupId>
   <artifactId>shareStandAloneForms3411E</artifactId>
   <name>com.bluexml.side.Framework.alfresco.shareStandAloneForms</name>
-  <version>1.0.3</version>
+  <version>1.0.4</version>
   <packaging>zip</packaging>
   <dependencies>
     <dependency>
