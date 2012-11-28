@@ -22,13 +22,12 @@
 		to be able to use Maven snapshots we cannot use the <version/> below as the 
 		AMP module version. Instead we use the buildnumber-maven-plugin. This requires 
 		a scm connection. -->
-  <version>1.0.4</version>
+  <version>1.0.5</version>
   <parent>
     <groupId>org.bluexml</groupId>
     <artifactId>superpom</artifactId>
     <version>1.10</version>
   </parent>
-
   <properties>
     <!-- Default for which src/main/properties/<env>/application.properties 
 			is loaded. NB: used only for the 'test' profile (e.g. '-P test' on the mvn 
