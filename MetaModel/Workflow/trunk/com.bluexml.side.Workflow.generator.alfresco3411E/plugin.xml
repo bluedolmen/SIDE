@@ -8,8 +8,8 @@
           <generatorVersion class="com.bluexml.side.workflow.generator.alfresco3411e.WorkflowGenerator3411E" hidden="visible" id="com.bluexml.side.Workflow.generator.alfresco3411E" version="SIDE Workflow Generator for Alfresco Enterprise 3.4.11">
             <configurationParameter dataType="String" defaultValue="1.0" key="com.bluexml.side.Workflow.generator.alfresco.module.version" label="Workflow Module version" />
             <configurationParameter dataType="String" defaultValue="http://localhost:8080/alfresco" documentation="Set this value to the URL of the Alfresco instance on which have been generated and deployed new content types from the SIDE data model." key="alfresco.url" label="Alfresco URL" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.pdfGenerator3411E" moduleType="amp" technologyVersion="alfresco_3.4.11E" versionMax="1.0.2" versionMin="1.0.2" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.hotdeployer3411E" moduleType="amp" technologyVersion="alfresco_3.4.11E" versionMax="1.0.2" versionMin="1.0.2" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.pdfGenerator3411E" moduleType="amp" technologyVersion="alfresco_3.4.11E" versionMax="1.0.4" versionMin="1.0.4" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.hotdeployer3411E" moduleType="amp" technologyVersion="alfresco_3.4.11E" versionMax="1.0.4" versionMin="1.0.4" />
             <option defaultOption="true" documentation="this must be hidden" hidden="true" key="generator.main" label="main generation" />
           </generatorVersion>
         </technologyVersion>
