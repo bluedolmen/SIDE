@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.forAlfresco3411E.sideenterprise.feature" label="Generator and Deployer For Alfresco 3.4.11 Enterprise" version="1.0.122.v40538-20121128" provider-name="BLUEXML">
+<feature id="com.bluexml.side.Common.forAlfresco3411E.sideenterprise.feature" label="Generator and Deployer For Alfresco 3.4.11 Enterprise" version="1.0.123.v40699-20121128" provider-name="BLUEXML">
   <description url="http://www.side-labs.com">SIDE lets developers who are new to Alfresco get started quickly and helps experienced developers get the job done even faster.</description>
   <copyright url="http://www.bluexml.com/copyright">Copyright 2005-2012 BlueXML SARL.</copyright>
   <license url="http://www.side-labs.com/en/index.php/Product:License">SIDE SOFTWARE IS LICENSED BY BLUEXML. PLEASE GO TO http://www.side-labs.com/en/index.php/Product:License. READ THIS AGREEMENT CAREFULLY BEFORE PURCHASING AND/OR USING SIDE SOFTWARE.</license>
@@ -11,6 +11,6 @@
   <plugin id="com.bluexml.side.View.generator.alfresco3411E" download-size="0" install-size="0" version="1.0.5.v40538-20121128" unpack="false" />
   <plugin id="com.bluexml.side.Workflow.generator.alfresco3411E" download-size="0" install-size="0" version="1.0.3.v40538-20121128" unpack="false" />
   <plugin id="com.bluexml.side.Deployer.alfresco3411E" download-size="0" install-size="0" version="1.0.1.v40538-20121128" unpack="false" />
-  <plugin id="com.bluexml.side.Util.framework.tools.alfresco3411E" download-size="0" install-size="0" version="1.0.14.v40538-20121128" unpack="false" />
+  <plugin id="com.bluexml.side.Util.framework.tools.alfresco3411E" download-size="0" install-size="0" version="1.0.15.v40699-20121128" unpack="false" />
 </feature>
 
