@@ -7,12 +7,12 @@
         <technologyVersion description="Check this to generate on the major release 3.4 of Alfresco.&lt;br&gt;Alfresco 3.4.d is the leading open source collaborative ECM solution.&lt;br&gt;Additionally to content generation, SIDE provides useful server components to enhance some features of this release." id="alfresco_3.4.11E" version="Alfresco3.4.11 Enterprise">
           <generatorVersion class="com.bluexml.side.form.generator.alfresco.enterprise3411e.FormGenerator3411E" description="This generator generate configuration from Forms Models for Alfresco Share" hidden="visible" id="com.bluexml.side.Form.generator.alfresco3411E" version="Alfresco Share Forms Generator">
             <configurationParameter dataType="String" defaultValue="1.0" key="com.bluexml.side.Form.generator.alfresco3411E.module.version" label="Form Module version" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.share.formExtension3411E" moduleType="zip" technologyVersion="alfresco_3.4.11E" versionMax="1.0.47" versionMin="1.0.47" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.sharePortalExtension3411E" moduleType="zip" technologyVersion="alfresco_3.4.11E" versionMax="1.0.1" versionMin="1.0.1" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.share.formExtension3411E" moduleType="zip" technologyVersion="alfresco_3.4.11E" versionMax="1.0.49" versionMin="1.0.49" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.sharePortalExtension3411E" moduleType="zip" technologyVersion="alfresco_3.4.11E" versionMax="1.0.3" versionMin="1.0.3" />
             <option defaultOption="true" documentation="this must be hidden" hidden="true" key="generator.main" label="main generation" />
             <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.share.Inputex" moduleType="zip" technologyVersion="alfresco_3.4.11E" versionMax="1.0.4" versionMin="1.0.4" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.share.autoConnect3411E" moduleType="zip" technologyVersion="alfresco_3.4.11E" versionMax="1.0.1" versionMin="1.0.1" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.formProcessor3411E" moduleType="amp" technologyVersion="alfresco_3.4.11E" versionMax="1.0.38" versionMin="1.0.38" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.share.autoConnect3411E" moduleType="zip" technologyVersion="alfresco_3.4.11E" versionMax="1.0.3" versionMin="1.0.3" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.formProcessor3411E" moduleType="amp" technologyVersion="alfresco_3.4.11E" versionMax="1.0.40" versionMin="1.0.40" />
           </generatorVersion>
         </technologyVersion>
       </technology>
