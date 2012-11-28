@@ -9,7 +9,7 @@
             <configurationParameter dataType="String" defaultValue="1.0" key="com.bluexml.side.Workflow.generator.alfresco.module.version" label="Workflow Module version" />
             <configurationParameter dataType="String" defaultValue="http://localhost:8080/alfresco" documentation="Set this value to the URL of the Alfresco instance on which have been generated and deployed new content types from the SIDE data model." key="alfresco.url" label="Alfresco URL" />
             <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.workflow.pdfGenerator34d" moduleType="amp" technologyVersion="alfresco_3.4d" versionMax="1.0.10" versionMin="1.0.10" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.hotdeployer34d" moduleType="amp" technologyVersion="alfresco_3.4d" versionMax="1.0.9" versionMin="1.0.9" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.hotdeployer34d" moduleType="amp" technologyVersion="alfresco_3.4d" versionMax="1.0.10" versionMin="1.0.10" />
             <option defaultOption="true" documentation="this must be hidden" hidden="true" key="generator.main" label="main generation" />
           </generatorVersion>
         </technologyVersion>
