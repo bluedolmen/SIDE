@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.core.labs.feature" label="SIDE Core Components" version="1.0.388.v40699-20121128" provider-name="blueXML">
+<feature id="com.bluexml.side.Common.core.labs.feature" label="SIDE Core Components" version="1.0.389.v40729-20121129" provider-name="blueXML">
   <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized
 frameworks like Alfresco. This feature gathers common tools for
 SIDE modelers.</description>
@@ -625,7 +625,7 @@ Program, unless a warranty or assumption of liability accompanies a
 copy of the Program in return for a fee.
 
                      END OF TERMS AND CONDITIONS</license>
-  <includes id="com.bluexml.side.Application.feature" version="1.0.187.v39305-20121002" />
+  <includes id="com.bluexml.side.Application.feature" version="1.0.188.v40729-20121129" />
   <includes id="com.bluexml.side.Class.modeler.feature" version="1.0.158.v37877-20120718" />
   <includes id="com.bluexml.side.Common.feature" version="1.0.54.v37545-20120705" />
   <includes id="com.bluexml.side.Form.feature" version="1.0.165.v40699-20121128" />
@@ -633,12 +633,12 @@ copy of the Program in return for a fee.
   <includes id="com.bluexml.side.Requirements.feature" version="1.0.121.v35624-20120503" />
   <includes id="com.bluexml.side.View.feature" version="1.0.90.v36589-20120525" />
   <includes id="com.bluexml.side.Workflow.modeler.feature" version="1.0.112.v35624-20120503" />
-  <includes id="com.bluexml.side.Util.feature" version="1.0.328.v40699-20121128" />
+  <includes id="com.bluexml.side.Util.feature" version="1.0.329.v40729-20121129" />
   <includes id="com.bluexml.side.Deployer.documentation.feature" version="1.0.45.v35624-20120503" />
   <plugin id="com.bluexml.side.Integration.standAlone" download-size="0" install-size="0" version="1.0.54.v28467-20111005" unpack="false" />
   <plugin id="com.bluexml.side.Application.ui.newSIDEProject" download-size="0" install-size="0" version="1.0.9.v36070-20120514" unpack="false" />
   <plugin id="com.bluexml.side.Class.edit.ui" download-size="0" install-size="0" version="1.0.59.v40699-20121128" unpack="false" />
-  <plugin id="com.bluexml.side.Integration.eclipse.builder" download-size="0" install-size="0" version="1.0.66.v40538-20121128" unpack="false" />
+  <plugin id="com.bluexml.side.Integration.eclipse.builder" download-size="0" install-size="0" version="1.0.67.v40729-20121129" unpack="false" />
   <plugin id="com.bluexml.side.Util.antRunner" download-size="0" install-size="0" version="1.0.37.v37666-20120710" unpack="false" />
   <plugin id="com.bluexml.side.Util.security.enterprise" download-size="0" install-size="0" version="1.0.16.v31653-20120106" unpack="false" />
 </feature>
