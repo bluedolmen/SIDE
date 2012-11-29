@@ -4,10 +4,14 @@ import java.io.File;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.IJobChangeListener;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Point;
@@ -300,8 +304,9 @@ public class GeneratePopUp extends Dialog {
 					// schedule side job
 					gen.schedule();
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					GeneratePopUp.this.close();
+					Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, 0, e.toString(), e));
+					MessageDialog.openError(getShell(), "Error", NLS.bind("Internal error {0}", e.getMessage())); //$NON-NLS-1$
 				}
 			}
 		});

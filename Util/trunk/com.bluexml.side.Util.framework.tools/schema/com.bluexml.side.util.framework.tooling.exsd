@@ -54,7 +54,6 @@
          <sequence>
             <element ref="generatorVersion" minOccurs="0" maxOccurs="unbounded"/>
             <element ref="deployerVersion" minOccurs="0" maxOccurs="unbounded"/>
-            <element ref="moduleDependence" minOccurs="0" maxOccurs="unbounded"/>
          </sequence>
          <attribute name="label" type="string">
             <annotation>
@@ -98,6 +97,27 @@
             </annotation>
          </attribute>
          <attribute name="id" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="mavenFrameworkVersion" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="mavenFrameworkClassifier" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="mavenFrameworkGroup" type="string">
             <annotation>
                <documentation>
                   

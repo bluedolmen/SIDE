@@ -1,8 +1,6 @@
 package com.bluexml.side.Integration.eclipse.branding.enterprise.wizards.migration;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.resources.IProject;
@@ -23,13 +21,14 @@ import com.bluexml.side.Integration.eclipse.branding.enterprise.Activator;
 import com.bluexml.side.Integration.eclipse.branding.enterprise.actions.ModelMigrationHelper;
 import com.bluexml.side.Integration.eclipse.branding.enterprise.wizards.migration.pages.GeneralProjectMigration;
 import com.bluexml.side.util.alfresco.tools.ToolingUtils;
+import com.bluexml.side.util.libs.IFileHelper;
 
 public class ModelMigrationWizard extends Wizard implements IWorkbenchWizard {
 
-	List<IProject> projects = null;
+	IProject project = null;
 
-	public ModelMigrationWizard(List<IProject> projects) {
-		this.projects = projects;
+	public ModelMigrationWizard(IProject project) {
+		this.project = project;
 		setNeedsProgressMonitor(true);
 
 	}
@@ -74,33 +73,35 @@ public class ModelMigrationWizard extends Wizard implements IWorkbenchWizard {
 	protected void execute(GeneralProjectMigration page, String libraryId, IProgressMonitor monitor2) throws Exception {
 
 		IProject target = ToolingUtils.importLibrary(libraryId);
-		List<IProject> project2Update = this.projects;
+		IProject project2Update = this.project;
 		// copy projects before as requested
-		Boolean fieldValueBoolean = page.getFieldValueBoolean(GeneralProjectMigration.Fields.copybefore.toString());
-		if (fieldValueBoolean) {
-			project2Update = new ArrayList<IProject>();
+		Boolean projectCopy = page.getFieldValueBoolean(GeneralProjectMigration.Fields.copybefore.toString());
+		if (projectCopy) {
+			project2Update = null;
 			String newNameParam = page.getFieldValueString(GeneralProjectMigration.Fields.newName.toString());
 
 			if (StringUtils.trimToNull(newNameParam) == null) {
 				newNameParam = GeneralProjectMigration.DEFAULT_VALUE_NEWNAME;
 			}
-			for (IProject source : this.projects) {
-				IProjectDescription description = source.getDescription();
-				String name = description.getName();
-				String newName = newNameParam + name;
-				description.setName(newName);
-				source.copy(description, true, monitor2);
-				IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(description.getName());
-				project2Update.add(project);
 
-			}
+			IProjectDescription description = project.getDescription();
+			String name = description.getName();
+			String newName = newNameParam + name;
+			description.setName(newName);
+			description.setLocationURI(null);
+			System.out.println("ModelMigrationWizard.execute() rename project " + project.getName() + " -> " + newName);
+			project.copy(description, true, monitor2);
+			IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(description.getName());
+			project2Update = project;
+
 		}
 
 		// execute models conversion
-		for (IProject source : project2Update) {
-			ModelMigrationHelper.updateProject(source, target, false, monitor2);
-		}
 
+		ModelMigrationHelper.updateProject(project2Update, target, libraryId, projectCopy, monitor2);
+		monitor2.subTask("Refresh project");
+		IFileHelper.refreshFolder(project2Update);
+		monitor2.done();
 	}
 
 	/*
@@ -109,7 +110,7 @@ public class ModelMigrationWizard extends Wizard implements IWorkbenchWizard {
 	 */
 	@Override
 	public void addPages() {
-		addPage(new GeneralProjectMigration());
+		addPage(new GeneralProjectMigration(project.getName()));
 	}
 
 }

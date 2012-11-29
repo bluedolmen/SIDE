@@ -316,6 +316,7 @@ public class Generate extends WorkspaceJob {
 			if (ApplicationDialog.staticFieldsName.contains(param.getKey())) {
 				configurationParameters.put(param.getKey(), ApplicationUtil.eclipseVariableSubstitution(param.getValue()));
 			} else {
+
 				generationParameters.put(param.getKey(), ApplicationUtil.eclipseVariableSubstitution(param.getValue()));
 				// Check to know if option have been set, no error but
 				// warning

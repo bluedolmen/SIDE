@@ -21,6 +21,11 @@ public class ToolingUtils {
 	public static final String MODEL_LIBRARY_PLUGIN_ID = "pluginId";
 	public static final String MODEL_LIBRARY_ACTIVATOR = "activator";
 	public static final String MODEL_LIBRARY_ARCHIVEPATH = "archivePath";
+	public static final String MODEL_LIBRARY_mavenFrameworkVersion = "mavenFrameworkVersion";
+	public static final String MODEL_LIBRARY_mavenFrameworkClassifier = "mavenFrameworkClassifier";
+	public static final String MODEL_LIBRARY_mavenFrameworkGroup = "mavenFrameworkGroup";
+	
+	
 
 	public static List<IConfigurationElement> getAllToolingModuleExtensions() {
 		String nodeName = "moduleDependence";
@@ -37,7 +42,7 @@ public class ToolingUtils {
 		return ExtensionPointUtils.getConfigurationElements(com.bluexml.side.util.alfresco.tools.Activator.EXTENSION_POINT_TOOLING, nodeName);
 	}
 	
-	public static List<IConfigurationElement> getAllToolingDefaultDeployers() {
+	public static List<IConfigurationElement> getAllToolingDefaultDeployers(String id) {
 		String nodeName = "deployerVersion";
 		return ExtensionPointUtils.getConfigurationElements(com.bluexml.side.util.alfresco.tools.Activator.EXTENSION_POINT_TOOLING, nodeName);
 	}

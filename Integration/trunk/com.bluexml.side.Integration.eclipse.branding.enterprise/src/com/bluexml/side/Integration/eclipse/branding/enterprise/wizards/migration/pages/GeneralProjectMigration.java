@@ -11,21 +11,23 @@ import com.bluexml.side.util.alfresco.tools.AlfrescoModelBaseVersionChooser;
 
 public class GeneralProjectMigration extends AlfrescoModelBaseVersionChooser {
 	public final static String DEFAULT_VALUE_NEWNAME = "Copy-of-";
+	protected String projectName = null;
 
-	public GeneralProjectMigration() {
+	public GeneralProjectMigration(String projectName) {
 		super("importBuildInLibrary");
+		this.projectName = projectName;
 		this.setTitle("Switch between Model Library");
 		this.setDescription("Select the target Model Library");
 	}
 
 	public void createFieldsControls(Composite composite) {
-		this.values.put(Fields.newName.toString(), DEFAULT_VALUE_NEWNAME);
+		this.values.put(Fields.newName.toString(), DEFAULT_VALUE_NEWNAME + projectName);
 
 		createAlfrescoLibComboBox(composite, Fields.library.toString());
 
-		final Button createBooleanFieldControl = createBooleanFieldControl2(composite, "Copy project", Fields.copybefore.toString(), true);
+		final Button createBooleanFieldControl = createBooleanFieldControl2(composite, "copy project", Fields.copybefore.toString(), true);
 
-		final Text createTextFieldControl = createTextFieldControl(composite, "prefix for new project name", Fields.newName.toString());
+		final Text createTextFieldControl = createTextFieldControl(composite, "new project name", Fields.newName.toString());
 
 		createBooleanFieldControl.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -33,7 +35,7 @@ public class GeneralProjectMigration extends AlfrescoModelBaseVersionChooser {
 				boolean selection = createBooleanFieldControl.getSelection();
 				createTextFieldControl.setEnabled(selection);
 				if (!selection) {
-					GeneralProjectMigration.this.values.put(Fields.newName.toString(), DEFAULT_VALUE_NEWNAME);
+					GeneralProjectMigration.this.values.put(Fields.newName.toString(), DEFAULT_VALUE_NEWNAME + projectName);
 					checkPageComplite();
 				} else {
 					GeneralProjectMigration.this.values.put(Fields.newName.toString(), StringUtils.trimToNull(createTextFieldControl.getText()));

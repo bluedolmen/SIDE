@@ -33,6 +33,29 @@ public class SIDEBuilderConfiguration {
 	String applicationRessourcePath;
 	IProject project;
 
+	/**
+	 * @return the applicationRessourcePath
+	 */
+	public String getApplicationRessourcePath() {
+		return applicationRessourcePath;
+	}
+
+	/**
+	 * @param applicationRessourcePath
+	 *            the applicationRessourcePath to set
+	 */
+	public void setApplicationRessourcePath(String applicationRessourcePath) {
+		this.applicationRessourcePath = applicationRessourcePath;
+	}
+
+	/**
+	 * @param configurationName
+	 *            the configurationName to set
+	 */
+	public void setConfigurationName(String configurationName) {
+		this.configurationName = configurationName;
+	}
+
 	public SIDEBuilderConfiguration(IProject project) {
 		this.project = project;
 	}
@@ -111,6 +134,23 @@ public class SIDEBuilderConfiguration {
 			// load application IFile
 			applicationFile = getIFileFromPortableString(ApplicationUtil.eclipseVariableSubstitution(applicationRessourcePath));
 		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	public boolean reload() {
+		if (applicationRessourcePath == null || configurationName == null) {
+			applicationRessourcePath = null;
+			configurationName = null;
+			return false;
+		}
+		// load application IFile
+		try {
+			applicationFile = getIFileFromPortableString(ApplicationUtil.eclipseVariableSubstitution(applicationRessourcePath));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}

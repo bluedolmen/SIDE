@@ -41,14 +41,14 @@ public abstract class ActionOnSideProject implements IObjectActionDelegate {
 				}
 			}
 
-			if(projects.size() > 0) {
-				run(projects);
+			if(projects.size() == 1) {
+				run(projects.get(0));
 			}
 		}
 
 	}
 
-	abstract public void run(List<IProject> projects) ;
+	abstract public void run(IProject projects) ;
 
 	public void selectionChanged(IAction action, ISelection selection) {
 		this.selection = selection;

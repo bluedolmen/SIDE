@@ -1079,7 +1079,7 @@ public class ApplicationUtil {
 	public static void updateApplicationCustomModuleFromSrcModule(IProject sideProject, IFile applicationFile) {
 
 		// parse application file search for customModule generator
-		
+
 		// if custom module exists continue
 
 		// locate modules binaries (amp, zip) or src
@@ -1088,5 +1088,29 @@ public class ApplicationUtil {
 
 		// update application model with extracted information
 
+	}
+
+	/**
+	 * search in extensionPoints components for the given technologyVersion
+	 * @param libraryId
+	 * @return
+	 */
+	public static List<String> getAvailableComponents(String libraryId) {
+		List<String> ids = new ArrayList<String>();
+		IConfigurationElement[] contributions = Platform.getExtensionRegistry().getConfigurationElementsFor(EXTENSIONPOINT_ID);
+		for (IConfigurationElement config_exp : contributions) {
+			List<IConfigurationElement> iConfigurationElementsByName = ExtensionPointUtils.getIConfigurationElementsByName(config_exp, "technologyVersion");
+			for (IConfigurationElement iConfigurationElement : iConfigurationElementsByName) {
+				if (iConfigurationElement.getAttribute("id").equals(libraryId)) {
+					List<IConfigurationElement> l = ExtensionPointUtils.getIConfigurationElementsByName(iConfigurationElement, "generatorVersion");
+					List<IConfigurationElement> l2 = ExtensionPointUtils.getIConfigurationElementsByName(iConfigurationElement, "deployerVersion");
+					l.addAll(l2);
+					for (IConfigurationElement iConfigurationElement2 : l) {
+						ids.add(iConfigurationElement2.getAttribute("id"));
+					}
+				}
+			}
+		}
+		return ids;
 	}
 }

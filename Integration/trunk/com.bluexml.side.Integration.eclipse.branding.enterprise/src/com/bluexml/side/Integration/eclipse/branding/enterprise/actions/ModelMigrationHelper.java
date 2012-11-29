@@ -9,10 +9,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import org.eclipse.core.resources.IContainer;
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -23,11 +26,21 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import com.bluexml.side.application.Application;
+import com.bluexml.side.application.ComponantConfiguration;
+import com.bluexml.side.application.GeneratorConfiguration;
+import com.bluexml.side.application.Model;
+import com.bluexml.side.application.ModuleConstraint;
+import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
+import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NameSpace;
 import com.bluexml.side.common.NamedModelElement;
 import com.bluexml.side.integration.eclipse.builder.settings.SIDEBuilderConfiguration;
 import com.bluexml.side.portal.PortalModelElement;
 import com.bluexml.side.portal.Portlet;
+import com.bluexml.side.portal.PortletAttribute;
+import com.bluexml.side.util.alfresco.tools.ModelLibrary;
+import com.bluexml.side.util.antrunner.AntFileGeneratorAction;
 import com.bluexml.side.util.libs.FileHelper;
 import com.bluexml.side.util.libs.IFileHelper;
 import com.bluexml.side.util.libs.ecore.EResourceUtils;
@@ -43,32 +56,148 @@ public class ModelMigrationHelper {
 		return null;
 	}
 
-	public static void updateProject(IProject source, IProject target, boolean preview, IProgressMonitor monitor2) throws Exception {
+	public static void updateProject(IProject source, IProject target, String libraryId, boolean makeCopy, IProgressMonitor monitor2) throws Exception {
 		List<File> models = getModels(source);
-		List<File> modelsTarget = getModels(target);
-		monitor2.beginTask("updating models references", models.size());
-		// System.out.println("ModelMigrationHelper.updateProject() models to update :" + models.size());
-		for (File file : models) {
-			//			List<File> modelsTarget_filtred = new ArrayList<File>();
-			//			for (File fileT : modelsTarget) {
-			//				if (FileHelper.getFileExt(fileT).equals(FileHelper.getFileExt(file))) {
-			//					modelsTarget_filtred.add(fileT);
-			//				}
-			//			}
+		List<File> applicationModels = ModelMigrationHelper.getApplicationModels(source);
 
-			updateModel(file, modelsTarget, preview, monitor2);
+		List<File> mavenModules = getMavenModules(source);
+
+		List<File> modelsTarget = getModels(target);
+		monitor2.beginTask("updating project", models.size() + applicationModels.size() + mavenModules.size());
+		// System.out.println("ModelMigrationHelper.updateProject() models to update :" + models.size());
+		monitor2.subTask("models references");
+		for (File file : models) {
+			updateModel(file, modelsTarget, monitor2);
+			monitor2.worked(1);
+		}
+		monitor2.subTask("application model");
+		for (File file : applicationModels) {
+			if (makeCopy) {
+				updateApplicationModel(file, libraryId, source);
+			} else {
+				updateApplicationModel(file, libraryId, null);
+			}
+			AntFileGeneratorAction.generate(IFileHelper.getIFile(file));
 			monitor2.worked(1);
 		}
 
+		if (makeCopy) {
+			// check update project configuration
+			SIDEBuilderConfiguration conf = new SIDEBuilderConfiguration(source);
+			conf.load();
+			String applicationRessourcePath = conf.getApplicationRessourcePath();
+			String match = "(" + Pattern.quote("${workspace_loc:/") + ")" + "([^/]*)" + "(" + Pattern.quote("/") + ".*" + Pattern.quote("}") + ")";
+			if (applicationRessourcePath.matches(match)) {
+				Pattern p = Pattern.compile(match);
+				Matcher matcher = p.matcher(applicationRessourcePath);
+				matcher.find();
+				String group1 = matcher.group(1);
+				String group3 = matcher.group(3);
+				String replace = group1 + source.getName() + group3;
+				conf.setApplicationRessourcePath(replace);
+				conf.reload();
+				conf.persist();
+			}
+		}
+
+		monitor2.subTask("maven modules");
+		ModelLibrary modellib = new ModelLibrary(libraryId);
+		for (File file : mavenModules) {
+			String newVersion = modellib.getMavenFrameworkVersion();
+			String newClassifier = modellib.getMavenFrameworkClassifier();
+
+			String[] groupIds = modellib.getMavenFrameworkGroup().split(",");
+			if (StringUtils.trimToNull(newClassifier) != null && StringUtils.trimToNull(newVersion) != null && StringUtils.trimToNull(libraryId) != null) {
+				PomMigrationHelper.updateMavenPom(file, groupIds, newVersion, newClassifier);
+			}
+		}
 	}
 
-	protected static List<File> getModels(IProject source) {
+	/**
+	 * we make the assumption that componentId are somethings like
+	 * &lt;id&gt;&lt;version&gt;, and version start by a digit
+	 * 
+	 * @param componentsId
+	 * @param currentId
+	 * @return
+	 */
+	protected static String getTargetComponentId(List<String> componentsId, String currentId) {
+		String root = currentId.replaceFirst("[0-9]+.*", "");
+		for (String string : componentsId) {
+			String prefix = string.replaceFirst("[0-9]+.*", "");
+			if (root.equals(prefix)) {
+				//				System.out.println("ModelMigrationHelper.getTargetComponentId() matchs :" + currentId + " -> " + string);
+				return string;
+			}
+		}
+
+		return null;
+	}
+
+	protected static void updateApplicationModel(File file, String libraryId, IProject source) throws IOException, CoreException, Exception {
+
+		IFile model = IFileHelper.getIFile(file);
+		EList<EObject> openModel = EResourceUtils.openModel(model);
+		EObject eObject = openModel.get(0);
+		TreeIterator<EObject> eAllContents = eObject.eAllContents();
+		while (eAllContents.hasNext()) {
+			EObject eObject2 = (EObject) eAllContents.next();
+
+			if (eObject2 instanceof ComponantConfiguration) {
+				List<String> availableComponents = ApplicationUtil.getAvailableComponents(libraryId);
+				ComponantConfiguration generatorConfiguration = (ComponantConfiguration) eObject2;
+				String id = generatorConfiguration.getId();
+				String targetComponentId = getTargetComponentId(availableComponents, id);
+				if (targetComponentId != null) {
+					generatorConfiguration.setId(targetComponentId);
+				}
+				if (eObject2 instanceof GeneratorConfiguration && id.equals("side.customModules")) {
+					// need to update the techVersion
+					GeneratorConfiguration gen = (GeneratorConfiguration) eObject2;
+					EList<ModuleConstraint> moduleContraints = gen.getModuleContraints();
+					for (ModuleConstraint moduleConstraint : moduleContraints) {
+						moduleConstraint.setTechnologyVersion(libraryId);
+					}
+				}
+			} else if (eObject2 instanceof Model && source != null) {
+				// check models list
+				Model modelItem = (Model) eObject2;
+				String file2 = modelItem.getFile();
+				String[] split = file2.split("/");
+				String toreplace = split[1];
+
+				modelItem.setFile(file2.replace(toreplace, source.getName()));
+			}
+		}
+
+		EResourceUtils.saveModel(model, eObject);
+		// apply autoUpdate that check and fix options and modules according to componentId
+		ApplicationUtil.updateApplicationFromExtensionPoint((Application) eObject, model);
+
+	}
+
+	public static List<File> getModels(IProject source) {
+		String[] accepted = { ".dt", ".portal", ".form", ".view", ".workflow" };
+		return getModels(source, accepted);
+	}
+
+	public static List<File> getApplicationModels(IProject source) {
+		String[] accepted = { ".application" };
+		return getModels(source, accepted);
+	}
+
+	public static List<File> getMavenModules(IProject source) {
+		String[] accepted = { "pom.xml" };
+		return getModels(source, accepted);
+	}
+
+	public static List<File> getModels(IProject source, final String[] fileExt) {
 		File projectHome = IFileHelper.convertIRessourceToFile(source);
 		FilenameFilter filter = new FilenameFilter() {
 			public boolean accept(File file, String name) {
 				boolean ok = false;
-				String[] accepted = { ".dt", ".portal", ".form", ".view", ".workflow" };
-				for (String string : accepted) {
+
+				for (String string : fileExt) {
 					if (name.endsWith(string)) {
 						ok = true;
 						break;
@@ -87,7 +216,7 @@ public class ModelMigrationHelper {
 		return models;
 	}
 
-	public static void updateModel(File file, List<File> modelsTarget, boolean preview, IProgressMonitor monitor2) throws Exception {
+	public static void updateModel(File file, List<File> modelsTarget, IProgressMonitor monitor2) throws Exception {
 		// System.out.println("ModelMigrationHelper.updateModel() on " + file);
 		// load ECore resource
 		IFile model = IFileHelper.getIFile(file);
@@ -150,13 +279,8 @@ public class ModelMigrationHelper {
 				}
 			}
 		}
-		if (preview) {
-			IContainer parent = model.getParent();
-			IFile createFile = IFileHelper.createFile(parent, "preview_" + model.getName());
-			EResourceUtils.saveModel(createFile, eObject);
-		} else {
-			EResourceUtils.saveModel(model, eObject);
-		}
+
+		EResourceUtils.saveModel(model, eObject);
 
 	}
 
@@ -198,7 +322,7 @@ public class ModelMigrationHelper {
 		while (eAllContents.hasNext()) {
 			EObject eObject2 = (EObject) eAllContents.next();
 			if (equals(object, eObject2)) {
-				// System.out.println("ModelMigrationHelper.searchForSameObjectIn() object matchs :" + eObject2);
+				//				System.out.println("ModelMigrationHelper.searchForSameObjectIn() object matchs :" + eObject2);
 				return eObject2;
 			}
 		}
@@ -232,20 +356,29 @@ public class ModelMigrationHelper {
 						// System.out.println("ModelMigrationHelper.equals() is Portlet");
 						equals &= ((Portlet) a).getName().equals(((Portlet) b).getName());
 					}
+
+				} else if (a instanceof PortletAttribute) {
+					PortletAttribute portA = (PortletAttribute) a;
+					PortletAttribute portB = (PortletAttribute) b;
+
+					equals &= isInSameNS(portA, portB);
+					equals &= portA.getName().equals(portB.getName());
+					equals &= portA.getType().getName().equals(portB.getType().getName());
+
 				} else {
 					System.out.println("ModelMigrationHelper.equals() not managed to be compared NEED TO BE ADDED TO CONTROLER :" + a.getClass());
-					equals = false;
+					throw new UnsupportedOperationException("equals on " + a.getClass() + " is not supported this need to be implemented");
 				}
 			}
 		}
 		return equals;
 	}
 
-	public static boolean isInSameNS(NamedModelElement a, NamedModelElement b) {
+	public static boolean isInSameNS(ModelElement a, ModelElement b) {
 		return getCompliteNS(a).equals(getCompliteNS(b));
 	}
 
-	public static String getCompliteNS(NamedModelElement a) {
+	public static String getCompliteNS(ModelElement a) {
 		NameSpace logicalNameSpace = a.getLogicalNameSpace();
 		if (logicalNameSpace != null) {
 			return "{" + logicalNameSpace.getURI() + "}" + logicalNameSpace.getPrefix();
@@ -260,4 +393,5 @@ public class ModelMigrationHelper {
 	protected static String getRootName(EObject a) {
 		return ((NamedModelElement) EcoreUtil.getRootContainer(a, true)).getName();
 	}
+
 }

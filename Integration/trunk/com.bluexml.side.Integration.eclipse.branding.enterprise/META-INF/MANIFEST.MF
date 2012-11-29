@@ -23,7 +23,8 @@ Require-Bundle: org.eclipse.ui.intro,
  com.bluexml.side.Class.edit.ui;visibility:=reexport,
  org.eclipse.m2e.maven.runtime,
  com.bluexml.side.Application.ui,
- com.bluexml.side.Util.framework.tools
+ com.bluexml.side.Util.framework.tools,
+ com.bluexml.side.Util.antRunner
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.ui.actions,
