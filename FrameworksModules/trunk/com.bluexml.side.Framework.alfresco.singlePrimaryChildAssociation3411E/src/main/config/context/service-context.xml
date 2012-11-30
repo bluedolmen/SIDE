@@ -19,7 +19,7 @@
 	</bean>
 
 	<bean id="singlePrimaryChildAssociationPolicy"
-		class="com.bluexml.side.framework.alfresco.singlePrimaryChildAssociation3411E.SinglePrimaryChildAssociationPolicy"
+		class="com.bluexml.side.framework.alfresco.singlePrimaryChildAssociation.SinglePrimaryChildAssociationPolicy"
 		init-method="init">
 		<property name="policyComponent" ref="policyComponent" />
 		<property name="nodeService" ref="nodeService" />
