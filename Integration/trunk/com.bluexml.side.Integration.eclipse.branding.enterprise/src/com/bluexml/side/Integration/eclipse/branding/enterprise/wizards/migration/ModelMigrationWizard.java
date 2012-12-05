@@ -57,7 +57,7 @@ public class ModelMigrationWizard extends Wizard implements IWorkbenchWizard {
 		};
 
 		try {
-			this.getContainer().run(true, false, runnable);
+			this.getContainer().run(true, true, runnable);
 		} catch (InvocationTargetException e) {
 			Throwable cause = e.getCause();
 			Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, 0, cause.toString(), cause));

@@ -36,9 +36,13 @@ import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NameSpace;
 import com.bluexml.side.common.NamedModelElement;
 import com.bluexml.side.integration.eclipse.builder.settings.SIDEBuilderConfiguration;
+import com.bluexml.side.portal.HavePortlet;
+import com.bluexml.side.portal.InstanciatePortletType;
+import com.bluexml.side.portal.Page;
 import com.bluexml.side.portal.PortalModelElement;
 import com.bluexml.side.portal.Portlet;
 import com.bluexml.side.portal.PortletAttribute;
+import com.bluexml.side.portal.PortletType;
 import com.bluexml.side.util.alfresco.tools.ModelLibrary;
 import com.bluexml.side.util.antrunner.AntFileGeneratorAction;
 import com.bluexml.side.util.libs.FileHelper;
@@ -58,20 +62,37 @@ public class ModelMigrationHelper {
 
 	public static void updateProject(IProject source, IProject target, String libraryId, boolean makeCopy, IProgressMonitor monitor2) throws Exception {
 		List<File> models = getModels(source);
+		List<File> diagrams = getDiagrams(source);
 		List<File> applicationModels = ModelMigrationHelper.getApplicationModels(source);
 
 		List<File> mavenModules = getMavenModules(source);
 
 		List<File> modelsTarget = getModels(target);
-		monitor2.beginTask("updating project", models.size() + applicationModels.size() + mavenModules.size());
+		monitor2.beginTask("updating project", models.size() + applicationModels.size() + mavenModules.size() + diagrams.size());
 		// System.out.println("ModelMigrationHelper.updateProject() models to update :" + models.size());
 		monitor2.subTask("models references");
 		for (File file : models) {
+			if (monitor2.isCanceled()) {
+				return;
+			}
 			updateModel(file, modelsTarget, monitor2);
 			monitor2.worked(1);
 		}
+
+		monitor2.subTask("diagrams references");
+		for (File file : diagrams) {
+			if (monitor2.isCanceled()) {
+				return;
+			}
+			updateModel(file, modelsTarget, monitor2);
+			monitor2.worked(1);
+		}
+
 		monitor2.subTask("application model");
 		for (File file : applicationModels) {
+			if (monitor2.isCanceled()) {
+				return;
+			}
 			if (makeCopy) {
 				updateApplicationModel(file, libraryId, source);
 			} else {
@@ -103,6 +124,9 @@ public class ModelMigrationHelper {
 		monitor2.subTask("maven modules");
 		ModelLibrary modellib = new ModelLibrary(libraryId);
 		for (File file : mavenModules) {
+			if (!monitor2.isCanceled()) {
+				return;
+			}
 			String newVersion = modellib.getMavenFrameworkVersion();
 			String newClassifier = modellib.getMavenFrameworkClassifier();
 
@@ -178,6 +202,11 @@ public class ModelMigrationHelper {
 
 	public static List<File> getModels(IProject source) {
 		String[] accepted = { ".dt", ".portal", ".form", ".view", ".workflow" };
+		return getModels(source, accepted);
+	}
+
+	public static List<File> getDiagrams(IProject source) {
+		String[] accepted = { ".dtdi", ".portaldi", ".workflowdi" };
 		return getModels(source, accepted);
 	}
 
@@ -350,12 +379,18 @@ public class ModelMigrationHelper {
 			} else {
 
 				// System.out.println("ModelMigrationHelper.equals() not NamedElement " + a);
-				if (a instanceof PortalModelElement) {
+
+				if (a instanceof Portlet && b instanceof Portlet) {
 					equals &= getRootName(a).equals(getRootName(b));
-					if (a instanceof Portlet && b instanceof Portlet) {
-						// System.out.println("ModelMigrationHelper.equals() is Portlet");
-						equals &= ((Portlet) a).getName().equals(((Portlet) b).getName());
-					}
+					// System.out.println("ModelMigrationHelper.equals() is Portlet");
+					equals &= ((Portlet) a).getName().equals(((Portlet) b).getName());
+				} else if (a instanceof Page && b instanceof Page) {
+					equals &= getRootName(a).equals(getRootName(b));
+					equals &= ((Page) a).getID().equals(((Page) b).getID());
+				} else if (a instanceof PortletType && b instanceof PortletType) {
+					equals &= getRootName(a).equals(getRootName(b));
+					equals &= ((PortletType) a).getId().equals(((PortletType) b).getId());
+					equals &= ((PortletType) a).getName().equals(((PortletType) b).getName());
 
 				} else if (a instanceof PortletAttribute) {
 					PortletAttribute portA = (PortletAttribute) a;
@@ -365,6 +400,25 @@ public class ModelMigrationHelper {
 					equals &= portA.getName().equals(portB.getName());
 					equals &= portA.getType().getName().equals(portB.getType().getName());
 
+				} else if (a instanceof HavePortlet) {
+					equals &= getRootName(a).equals(getRootName(b));
+
+					HavePortlet hpA = (HavePortlet) a;
+
+					Page associationPage = hpA.getAssociationPage();
+					Portlet associationPortlet = hpA.getAssociationPortlet();
+
+					HavePortlet hpB = (HavePortlet) b;
+					Page associationPage2 = hpB.getAssociationPage();
+					Portlet associationPortlet2 = hpB.getAssociationPortlet();
+
+					equals &= equals(associationPage, associationPage2);
+					equals &= equals(associationPortlet, associationPortlet2);
+				} else if (a instanceof InstanciatePortletType) {
+					InstanciatePortletType iptA = (InstanciatePortletType) a;
+					InstanciatePortletType iptB = (InstanciatePortletType) b;
+
+					equals &= equals(iptA.getPortletType(), iptB.getPortletType());
 				} else {
 					System.out.println("ModelMigrationHelper.equals() not managed to be compared NEED TO BE ADDED TO CONTROLER :" + a.getClass());
 					throw new UnsupportedOperationException("equals on " + a.getClass() + " is not supported this need to be implemented");

@@ -22,7 +22,7 @@
       <action
             class="com.bluexml.side.Integration.eclipse.branding.enterprise.actions.ModelMigration"
             id="com.bluexml.side.Integration.eclipse.branding.enterprise.modelMigration"
-            label="Switch project references from a &quot;Model Library&quot; to another"
+            label="Switch model library references"
             menubarPath="com.bluexml.side/project">
       </action>
     </objectContribution>
