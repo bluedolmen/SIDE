@@ -62,11 +62,6 @@
           target: name              
          ================================= -->
 	<target name="maven_install" depends="" description="do mvn install">
-		<!--<artifact:mvn pom="pom.xml" mavenHome="/usr/share/maven">
-			<arg value="clean" />
-			<arg value="install" />
-		</artifact:mvn>
-		-->
 		<maven basedir="${basedir}" options="" goal="install" resultproperty="maven.build.result" />
 	</target>
 
