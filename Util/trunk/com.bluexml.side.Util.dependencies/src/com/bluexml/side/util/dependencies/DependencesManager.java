@@ -100,12 +100,14 @@ public class DependencesManager {
 	public void copyDependencies(File workFolder, File generateFolder, boolean custom) throws Exception {
 		for (Map.Entry<String, List<ModuleConstraint>> mc : this.getContraints().entrySet()) {
 			// copy dependencies
+			boolean offline = true;
 			MavenTmpProject mvp = new MavenTmpProject(workFolder, mc.getKey(), getConstraintsFor(mc.getKey()), offline);
 			File whereTocopy = new File(generateFolder, mc.getKey());
 			if (custom) {
 				whereTocopy = new File(whereTocopy, CUSTOM_FOLDER);
+				offline = false;
 			}
-			mvp.copyAllDependencies(whereTocopy, generatorID);
+			mvp.copyAllDependencies(whereTocopy, generatorID, offline);
 
 		}
 	}

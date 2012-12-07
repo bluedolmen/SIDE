@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.topcased.modeler.di.model.internal.impl.EMFSemanticModelBridgeImpl;
 
 import com.bluexml.side.application.Application;
 import com.bluexml.side.application.ComponantConfiguration;
@@ -32,6 +33,8 @@ import com.bluexml.side.application.GeneratorConfiguration;
 import com.bluexml.side.application.Model;
 import com.bluexml.side.application.ModuleConstraint;
 import com.bluexml.side.application.ui.action.utils.ApplicationUtil;
+import com.bluexml.side.clazz.Enumeration;
+import com.bluexml.side.clazz.EnumerationLiteral;
 import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NameSpace;
 import com.bluexml.side.common.NamedModelElement;
@@ -39,7 +42,6 @@ import com.bluexml.side.integration.eclipse.builder.settings.SIDEBuilderConfigur
 import com.bluexml.side.portal.HavePortlet;
 import com.bluexml.side.portal.InstanciatePortletType;
 import com.bluexml.side.portal.Page;
-import com.bluexml.side.portal.PortalModelElement;
 import com.bluexml.side.portal.Portlet;
 import com.bluexml.side.portal.PortletAttribute;
 import com.bluexml.side.portal.PortletType;
@@ -51,7 +53,13 @@ import com.bluexml.side.util.libs.ecore.EResourceUtils;
 
 public class ModelMigrationHelper {
 
-	public static IFile getApplication(IProject project) {
+	List<File> loadedFiles = new ArrayList<File>();
+
+	List<ComparableEObject> index = new ArrayList<ModelMigrationHelper.ComparableEObject>();
+
+	Map<File, List<ComparableEObject>> map = new HashMap<File, List<ComparableEObject>>();
+
+	public IFile getApplication(IProject project) {
 
 		SIDEBuilderConfiguration sideconf = new SIDEBuilderConfiguration(project);
 		if (sideconf.load()) {
@@ -60,10 +68,10 @@ public class ModelMigrationHelper {
 		return null;
 	}
 
-	public static void updateProject(IProject source, IProject target, String libraryId, boolean makeCopy, IProgressMonitor monitor2) throws Exception {
+	public void updateProject(final IProject source, IProject target, String libraryId, boolean makeCopy, IProgressMonitor monitor2) throws Exception {
 		List<File> models = getModels(source);
 		List<File> diagrams = getDiagrams(source);
-		List<File> applicationModels = ModelMigrationHelper.getApplicationModels(source);
+		List<File> applicationModels = getApplicationModels(source);
 
 		List<File> mavenModules = getMavenModules(source);
 
@@ -145,7 +153,7 @@ public class ModelMigrationHelper {
 	 * @param currentId
 	 * @return
 	 */
-	protected static String getTargetComponentId(List<String> componentsId, String currentId) {
+	protected String getTargetComponentId(List<String> componentsId, String currentId) {
 		String root = currentId.replaceFirst("[0-9]+.*", "");
 		for (String string : componentsId) {
 			String prefix = string.replaceFirst("[0-9]+.*", "");
@@ -158,7 +166,7 @@ public class ModelMigrationHelper {
 		return null;
 	}
 
-	protected static void updateApplicationModel(File file, String libraryId, IProject source) throws IOException, CoreException, Exception {
+	protected void updateApplicationModel(File file, String libraryId, IProject source) throws IOException, CoreException, Exception {
 
 		IFile model = IFileHelper.getIFile(file);
 		EList<EObject> openModel = EResourceUtils.openModel(model);
@@ -200,27 +208,27 @@ public class ModelMigrationHelper {
 
 	}
 
-	public static List<File> getModels(IProject source) {
+	public List<File> getModels(IProject source) {
 		String[] accepted = { ".dt", ".portal", ".form", ".view", ".workflow" };
 		return getModels(source, accepted);
 	}
 
-	public static List<File> getDiagrams(IProject source) {
+	public List<File> getDiagrams(IProject source) {
 		String[] accepted = { ".dtdi", ".portaldi", ".workflowdi" };
 		return getModels(source, accepted);
 	}
 
-	public static List<File> getApplicationModels(IProject source) {
+	public List<File> getApplicationModels(IProject source) {
 		String[] accepted = { ".application" };
 		return getModels(source, accepted);
 	}
 
-	public static List<File> getMavenModules(IProject source) {
+	public List<File> getMavenModules(IProject source) {
 		String[] accepted = { "pom.xml" };
 		return getModels(source, accepted);
 	}
 
-	public static List<File> getModels(IProject source, final String[] fileExt) {
+	public List<File> getModels(IProject source, final String[] fileExt) {
 		File projectHome = IFileHelper.convertIRessourceToFile(source);
 		FilenameFilter filter = new FilenameFilter() {
 			public boolean accept(File file, String name) {
@@ -245,7 +253,7 @@ public class ModelMigrationHelper {
 		return models;
 	}
 
-	public static void updateModel(File file, List<File> modelsTarget, IProgressMonitor monitor2) throws Exception {
+	public void updateModel(File file, List<File> modelsTarget, IProgressMonitor monitor2) throws Exception {
 		// System.out.println("ModelMigrationHelper.updateModel() on " + file);
 		// load ECore resource
 		IFile model = IFileHelper.getIFile(file);
@@ -259,52 +267,68 @@ public class ModelMigrationHelper {
 			EObject eObject2 = (EObject) eAllContents.next();
 			// System.out.println("ModelMigrationHelper.updateModel() " + eObject2);
 			for (EStructuralFeature esf : eObject2.eClass().getEAllStructuralFeatures()) {
+
 				// System.out.println("ModelMigrationHelper.updateModel() search on feature " + esf.getName());
 				Object o = eObject2.eGet(esf, false);
 				Object o_resolved = eObject2.eGet(esf, true);
-				if (o instanceof List<?>) {
-					if (o instanceof EObjectEList) {
+				try {
+					if (o != null || o_resolved != null) {
+						if (o instanceof List<?>) {
+							if (o instanceof EObjectEList) {
 
-						// System.out.println("ModelMigrationHelper.updateModel() le truc est une list de truc");
-						EObjectEList<EObject> l = (EObjectEList<EObject>) o;
-						EObjectEList<EObject> l_r = (EObjectEList<EObject>) o_resolved;
-						Map<Object, Object[]> toReplace = new HashMap<Object, Object[]>();
+								// System.out.println("ModelMigrationHelper.updateModel() le truc est une list de truc");
+								EObjectEList<EObject> l = (EObjectEList<EObject>) o;
+								EObjectEList<EObject> l_r = (EObjectEList<EObject>) o_resolved;
+								Map<Object, Object[]> toReplace = new HashMap<Object, Object[]>();
 
-						for (EObject object : l.basicList()) {
-							int indexOf = l.indexOf(object);
-							EObject updateElement = updateElement(esf, object, l_r.get(indexOf), modelsTarget);
-							if (updateElement != null) {
-								// System.out.println("ModelMigrationHelper.updateModel() indexof :" + indexOf);
-								toReplace.put(l_r.get(indexOf), new Object[] { indexOf, updateElement });
+								for (EObject object : l.basicList()) {
+									int indexOf = l.indexOf(object);
+									EObject updateElement = updateElement(esf, object, l_r.get(indexOf), modelsTarget);
+									if (updateElement != null) {
+										// System.out.println("ModelMigrationHelper.updateModel() indexof :" + indexOf);
+										toReplace.put(l_r.get(indexOf), new Object[] { indexOf, updateElement });
+									}
+								}
+								// replace
+								Set<Entry<Object, Object[]>> entrySet = toReplace.entrySet();
+								for (Entry<Object, Object[]> entry : entrySet) {
+
+									Object object = entry.getKey();
+									EObject updateElement = (EObject) entry.getValue()[1];
+									// System.out.println("ModelMigrationHelper.updateModel() REPLACE " + o + " by " + updateElement);
+
+									// System.out.println("ModelMigrationHelper.updateModel() BEFORE size :" + l.size());
+									int indexOf = (Integer) entry.getValue()[0];
+									l.add(indexOf, updateElement);
+									// System.out.println("ModelMigrationHelper.updateModel() ADD size :" + l.size());
+									l.remove(object);
+									// System.out.println("ModelMigrationHelper.updateModel() REMOVE " + remove + " size :" + l.size());
+
+								}
+							} else {
+								// System.out.println("ModelMigrationHelper.updateModel() o: " + eObject2 + " for :" + esf.getName());
+							}
+						} else {
+							if (o instanceof EObject) {
+								EObject updateElement = updateElement(esf, (EObject) o, (EObject) o_resolved, modelsTarget);
+								if (updateElement != null) {
+									// System.out.println("ModelMigrationHelper.updateModel() REPLACE " + o + " by " + updateElement);
+									eObject2.eSet(esf, updateElement);
+								}
 							}
 						}
-						// replace
-						Set<Entry<Object, Object[]>> entrySet = toReplace.entrySet();
-						for (Entry<Object, Object[]> entry : entrySet) {
-
-							Object object = entry.getKey();
-							EObject updateElement = (EObject) entry.getValue()[1];
-							// System.out.println("ModelMigrationHelper.updateModel() REPLACE " + o + " by " + updateElement);
-
-							// System.out.println("ModelMigrationHelper.updateModel() BEFORE size :" + l.size());
-							int indexOf = (Integer) entry.getValue()[0];
-							l.add(indexOf, updateElement);
-							// System.out.println("ModelMigrationHelper.updateModel() ADD size :" + l.size());
-							boolean remove = l.remove(object);
-							// System.out.println("ModelMigrationHelper.updateModel() REMOVE " + remove + " size :" + l.size());
-
-						}
 					} else {
-						// System.out.println("ModelMigrationHelper.updateModel() o: " + eObject2 + " for :" + esf.getName());
+//						System.out.println("ModelMigrationHelper.updateModel() null value in " + model + " on " + eObject2 + " ref :" + esf.getName());
 					}
-				} else {
-					if (o instanceof EObject) {
-						EObject updateElement = updateElement(esf, (EObject) o, (EObject) o_resolved, modelsTarget);
-						if (updateElement != null) {
-							// System.out.println("ModelMigrationHelper.updateModel() REPLACE " + o + " by " + updateElement);
-							eObject2.eSet(esf, updateElement);
-						}
+				} catch (RuntimeException e) {
+					if (eObject2 instanceof EMFSemanticModelBridgeImpl) {
+						EMFSemanticModelBridgeImpl item = (EMFSemanticModelBridgeImpl) eObject2;
+						System.out.println("ModelMigrationHelper.updateModel()" + eObject2.hashCode());
+						System.out.println("ModelMigrationHelper.updateModel()" + eObject2.eResource());
+						System.out.println("ModelMigrationHelper.updateModel()" + eObject2.eIsProxy());
+						System.out.println("ModelMigrationHelper.updateModel()" + eObject2.eContainer());
 					}
+					throw new Exception("Please Check your models for missing references in " + model + " on " + eObject2 + " ref :" + esf.getName());
 				}
 			}
 		}
@@ -313,7 +337,7 @@ public class ModelMigrationHelper {
 
 	}
 
-	protected static EObject updateElement(EStructuralFeature esf, EObject eo2, EObject resolved, List<File> modelsTarget) throws IOException {
+	protected EObject updateElement(EStructuralFeature esf, EObject eo2, EObject resolved, List<File> modelsTarget) throws Exception {
 		if (eo2.eIsProxy()) {
 			// System.out.println("ModelMigrationHelper.updateModel() search on feature " + esf.getName());
 			if (eo2 instanceof InternalEObject) {
@@ -330,7 +354,8 @@ public class ModelMigrationHelper {
 		return null;
 	}
 
-	protected static EObject searchForSameObjectIn(EObject object, List<File> modelsTarget) throws IOException {
+	protected EObject searchForSameObjectIn(EObject object, List<File> modelsTarget) throws Exception {
+		loadIndexes(modelsTarget);
 		EObject target = null;
 		for (File file : modelsTarget) {
 			target = searchForSameObjectIn(object, file);
@@ -341,24 +366,39 @@ public class ModelMigrationHelper {
 		return target;
 	}
 
-	protected static EObject searchForSameObjectIn(EObject object, File modelsTarget) throws IOException {
-		IFile model = IFileHelper.getIFile(modelsTarget);
-		EList<EObject> openModel = EResourceUtils.openModel(model);
-		EObject eObject = openModel.get(0);
-		// System.out.println("ModelMigrationHelper.searchForSameObjectIn() model root :" + eObject);
-		// System.out.println("ModelMigrationHelper.searchForSameObjectIn() Object to find :" + object);
-		TreeIterator<EObject> eAllContents = eObject.eAllContents();
-		while (eAllContents.hasNext()) {
-			EObject eObject2 = (EObject) eAllContents.next();
-			if (equals(object, eObject2)) {
-				//				System.out.println("ModelMigrationHelper.searchForSameObjectIn() object matchs :" + eObject2);
-				return eObject2;
+	protected void loadIndexes(List<File> modelsTarget) throws IOException {
+		for (File file : modelsTarget) {
+			if (!map.containsKey(file)) {
+				List<ComparableEObject> value = new ArrayList<ModelMigrationHelper.ComparableEObject>();
+				IFile model = IFileHelper.getIFile(file);
+				EList<EObject> openModel = EResourceUtils.openModel(model);
+				EObject eObject = openModel.get(0);
+				// System.out.println("ModelMigrationHelper.searchForSameObjectIn() model root :" + eObject);
+				// System.out.println("ModelMigrationHelper.searchForSameObjectIn() Object to find :" + object);
+				TreeIterator<EObject> eAllContents = eObject.eAllContents();
+				while (eAllContents.hasNext()) {
+					EObject eObject2 = (EObject) eAllContents.next();
+					value.add(new ComparableEObject(eObject2));
+				}
+				map.put(file, value);
 			}
 		}
+	}
+
+	protected EObject searchForSameObjectIn(EObject object, File modelsTarget) throws Exception {
+
+		List<ComparableEObject> list = map.get(modelsTarget);
+		for (ComparableEObject comparableEObject : list) {
+			if (new ComparableEObject(object).equals(comparableEObject)) {
+				//				System.out.println("ModelMigrationHelper.searchForSameObjectIn() object matchs :" + eObject2);
+				return comparableEObject.eObject;
+			}
+		}
+
 		return null;
 	}
 
-	public static boolean equals(EObject a, EObject b) {
+	public static boolean equals(EObject a, EObject b) throws RootElementException {
 		EClass aeClass = a.eClass();
 		EClass beClass = b.eClass();
 		// System.out.println("ModelMigrationHelper.equals() a :" + a);
@@ -419,6 +459,13 @@ public class ModelMigrationHelper {
 					InstanciatePortletType iptB = (InstanciatePortletType) b;
 
 					equals &= equals(iptA.getPortletType(), iptB.getPortletType());
+				} else if (a instanceof EnumerationLiteral) {
+					Enumeration eContainerA = (Enumeration) a.eContainer();
+					Enumeration eContainerB = (Enumeration) b.eContainer();
+					equals &= equals(eContainerA, eContainerB);
+					
+					equals &= ((EnumerationLiteral) a).getName().equals(((EnumerationLiteral) b).getName());
+					equals &= ((EnumerationLiteral) a).getValue().equals(((EnumerationLiteral) b).getValue());
 				} else {
 					System.out.println("ModelMigrationHelper.equals() not managed to be compared NEED TO BE ADDED TO CONTROLER :" + a.getClass());
 					throw new UnsupportedOperationException("equals on " + a.getClass() + " is not supported this need to be implemented");
@@ -428,16 +475,19 @@ public class ModelMigrationHelper {
 		return equals;
 	}
 
-	public static boolean isInSameNS(ModelElement a, ModelElement b) {
+	public static boolean isInSameNS(ModelElement a, ModelElement b) throws RootElementException {
 		return getCompliteNS(a).equals(getCompliteNS(b));
 	}
 
-	public static String getCompliteNS(ModelElement a) {
+	public static String getCompliteNS(ModelElement a) throws RootElementException {
 		NameSpace logicalNameSpace = a.getLogicalNameSpace();
 		if (logicalNameSpace != null) {
 			return "{" + logicalNameSpace.getURI() + "}" + logicalNameSpace.getPrefix();
 		} else {
 			String name = getRootName(a);
+			if (name == null) {
+				throw new RootElementException("Root element is Null, please to check and Fix your models");
+			}
 			// System.out.println("ModelMigrationHelper.getCompliteNS() no NS object so use rootElement name as NS :" + name);
 			return name;
 		}
@@ -448,4 +498,30 @@ public class ModelMigrationHelper {
 		return ((NamedModelElement) EcoreUtil.getRootContainer(a, true)).getName();
 	}
 
+	class ComparableEObject {
+		EObject eObject;
+
+		public ComparableEObject(EObject eObject) {
+			this.eObject = eObject;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see java.lang.Object#equals(java.lang.Object)
+		 */
+		@Override
+		public boolean equals(Object arg0) {
+			if (arg0 instanceof ComparableEObject) {
+				try {
+					ModelMigrationHelper.equals(eObject, ((ComparableEObject) arg0).eObject);
+				} catch (RootElementException e) {
+					throw new RuntimeException(e.getMessage(), e.getCause());
+				}
+			} else {
+
+			}
+			return false;
+		}
+
+	}
 }

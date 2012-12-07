@@ -85,8 +85,7 @@ public class ModelMigrationWizard extends Wizard implements IWorkbenchWizard {
 			}
 
 			IProjectDescription description = project.getDescription();
-			String name = description.getName();
-			String newName = newNameParam + name;
+			String newName = newNameParam;
 			description.setName(newName);
 			description.setLocationURI(null);
 			System.out.println("ModelMigrationWizard.execute() rename project " + project.getName() + " -> " + newName);
@@ -97,8 +96,8 @@ public class ModelMigrationWizard extends Wizard implements IWorkbenchWizard {
 		}
 
 		// execute models conversion
-
-		ModelMigrationHelper.updateProject(project2Update, target, libraryId, projectCopy, monitor2);
+		ModelMigrationHelper modelMigrationHelper = new ModelMigrationHelper();
+		modelMigrationHelper.updateProject(project2Update, target, libraryId, projectCopy, monitor2);
 		monitor2.subTask("Refresh project");
 		IFileHelper.refreshFolder(project2Update);
 		monitor2.done();

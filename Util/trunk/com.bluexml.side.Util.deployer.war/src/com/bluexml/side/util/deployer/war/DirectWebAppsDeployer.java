@@ -129,13 +129,13 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 				deployedFiles.addAll(list);
 
 				// check if files are copied more than one time, this detect file collision
-//				for (String file : deployedFiles) {
-//					int frequency = Collections.frequency(deployedFiles, file);
-//					if (frequency > 1) {
-//						// conflict detected ...
-//						monitor.addWarningTextAndLog("Beware the file "+file+"have been overrided by module :"+fileToDeploy, "");
-//					}
-//				}
+				//				for (String file : deployedFiles) {
+				//					int frequency = Collections.frequency(deployedFiles, file);
+				//					if (frequency > 1) {
+				//						// conflict detected ...
+				//						monitor.addWarningTextAndLog("Beware the file "+file+"have been overrided by module :"+fileToDeploy, "");
+				//					}
+				//				}
 
 			}
 		} else if (fileToDeploy.exists() && fileToDeploy.isFile() && fileFilter.accept(fileToDeploy)) {
@@ -205,7 +205,10 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 	}
 
 	protected MonitorWriter dispatchFiles(List<File> files, Map<String, File> mapper) throws Exception {
+		List<String> copyFiles = new ArrayList<String>();
+
 		MonitorWriter mw = new MonitorWriter(monitor, Activator.Messages.getString("DirectWebAppsDeployer.3"), ""); //$NON-NLS-1$ //$NON-NLS-2$
+
 		for (File f : files) {
 			for (Map.Entry<String, File> ent : mapper.entrySet()) {
 				if (f.getAbsolutePath().indexOf(ent.getKey()) != -1) {
@@ -213,10 +216,14 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 					String pathIn = ent.getValue().getAbsolutePath() + File.separator + path.substring(path.indexOf(ent.getKey()) + ent.getKey().length());
 					File dest = new File(pathIn);
 					dest.getParentFile().mkdirs();
-					// put to this dir
-					FileHelper.copyFiles(f, dest, true, mw);
+
+					copyFiles.addAll(FileHelper.copyFiles(f, dest, true, mw));
 				}
 			}
+		}
+		mw.write("OVERRIDEN FILES" + copyFiles.size());
+		for (String string : copyFiles) {
+			mw.write("\t" + string);
 		}
 		return mw;
 	}

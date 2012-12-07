@@ -40,7 +40,8 @@ public class FileHelper {
 	 * @throws IOException
 	 *             if unable to copy.
 	 */
-	public static void copyFiles(File src, File dest, boolean override, StringWriter report) throws IOException {
+	public static List<String> copyFiles(File src, File dest, boolean override, StringWriter report) throws IOException {
+		List<String> overridenFiles = new ArrayList<String>();
 		// Check to ensure that the source is valid...
 		if (!src.exists()) {
 			throw new IOException("copyFiles: Can not find source: " + src.getAbsolutePath() + ".");
@@ -63,17 +64,22 @@ public class FileHelper {
 			for (int i = 0; i < list.length; i++) {
 				File dest1 = new File(dest, list[i]);
 				File src1 = new File(src, list[i]);
-				copyFiles(src1, dest1, override, report);
+				overridenFiles.addAll(copyFiles(src1, dest1, override, report));
 			}
 		} else {
 			String srcname = src.getName();
 			// This was not a directory, so lets just copy the file
 			FileInputStream fin = new FileInputStream(src);
-			copyStreamToFile(fin, srcname, dest, override, report);
+			boolean copyStreamToFile = copyStreamToFile(fin, srcname, dest, override, report);
+			if (copyStreamToFile) {
+				overridenFiles.add(src.toString());
+			}
 		}
+		return overridenFiles;
 	}
 
-	public static void copyStreamToFile(InputStream input, String srcFilename, File dest, boolean override, StringWriter report) throws IOException {
+	public static boolean copyStreamToFile(InputStream input, String srcFilename, File dest, boolean override, StringWriter report) throws IOException {
+		boolean overriden = false;
 		FileOutputStream fout = null;
 		byte[] buffer = new byte[4096]; // Buffer 4K at a time (you can
 		// change this).
@@ -90,6 +96,10 @@ public class FileHelper {
 				dest = new File(dest.getAbsolutePath() + File.separator + srcFilename);
 			}
 
+			if (dest.exists() && override) {
+//				report.write(" OVERRIDING " + dest);
+				overriden = true;
+			}
 			if (!dest.exists() || override) {
 				// create parents before create the file if needed
 				dest.getParentFile().mkdirs();
@@ -119,6 +129,7 @@ public class FileHelper {
 		if (report != null) {
 			report.write(dest.toString());
 		}
+		return overriden;
 	}
 
 	public static File getFileFromCP(Class<?> context, String path) throws URISyntaxException {

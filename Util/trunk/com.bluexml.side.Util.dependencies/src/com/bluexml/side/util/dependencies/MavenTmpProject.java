@@ -56,7 +56,7 @@ public class MavenTmpProject {
 		depends.addContent(artifactId);
 		depends.addContent(version);
 		depends.addContent(type);
-		
+
 		String classifierString = mc.getClassifier();
 		if (StringUtils.trimToNull(classifierString) != null) {
 			Element classifier = new Element("classifier", n.getURI()).setText(classifierString); //$NON-NLS-1$
@@ -86,31 +86,34 @@ public class MavenTmpProject {
 			Element depends = buildPomDependency(n, mc);
 			dependencies.addContent(depends);
 		}
-		
+
 		// setArtifactId
 		Element artifactIdE = project.getChild("artifactId", n); //$NON-NLS-1$
 		artifactIdE.setText(artifactId);
-		
-		
+
 		FileOutputStream os = new FileOutputStream(pomFile);
 		outputter.output(pom, os);
 		os.close();
 	}
 
-	public void copyAllDependencies(File whereTocopy,String artifactId) throws Exception {
+	public void copyAllDependencies(File whereTocopy, String artifactId) throws Exception {
+		copyAllDependencies(whereTocopy, artifactId, true);
+	}
+
+	public void copyAllDependencies(File whereTocopy, String artifactId, boolean offline) throws Exception {
 		createProject(artifactId);
 		Map<String, String> params = DependenciesDeployer.getDefaultMavenPropertyMap();
 		params.put("outputDirectory", whereTocopy.getAbsolutePath()); //$NON-NLS-1$
 		params.put("excludeScope", "provided"); //$NON-NLS-1$ //$NON-NLS-2$
 		params.put("excludeTypes", "jar"); //$NON-NLS-1$ //$NON-NLS-2$
-		
+
 		String[] profiles = offline_profiles;
-		boolean offline = true;
-		// if (offline) {
-		// profiles = offline_profiles;
-		// } else {
-		// profiles = inline_profiles;
-		// }
+
+		if (offline) {
+			profiles = offline_profiles;
+		} else {
+			profiles = online_profiles;
+		}
 		MavenExecutionResult result = getMavenUtil().doMavenGoal(projectFolder, "dependency:copy-dependencies", params, profiles, offline); //$NON-NLS-1$
 		if (result.getExceptions().size() > 0) {
 			List<?> exceps = result.getExceptions();
