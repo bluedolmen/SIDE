@@ -25,7 +25,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.topcased.modeler.di.model.internal.impl.EMFSemanticModelBridgeImpl;
 
 import com.bluexml.side.application.Application;
 import com.bluexml.side.application.ComponantConfiguration;
@@ -318,16 +317,9 @@ public class ModelMigrationHelper {
 							}
 						}
 					} else {
-//						System.out.println("ModelMigrationHelper.updateModel() null value in " + model + " on " + eObject2 + " ref :" + esf.getName());
+						// System.out.println("ModelMigrationHelper.updateModel() null value in " + model + " on " + eObject2 + " ref :" + esf.getName());
 					}
-				} catch (RuntimeException e) {
-					if (eObject2 instanceof EMFSemanticModelBridgeImpl) {
-						EMFSemanticModelBridgeImpl item = (EMFSemanticModelBridgeImpl) eObject2;
-						System.out.println("ModelMigrationHelper.updateModel()" + eObject2.hashCode());
-						System.out.println("ModelMigrationHelper.updateModel()" + eObject2.eResource());
-						System.out.println("ModelMigrationHelper.updateModel()" + eObject2.eIsProxy());
-						System.out.println("ModelMigrationHelper.updateModel()" + eObject2.eContainer());
-					}
+				} catch (EqualsException e) {
 					throw new Exception("Please Check your models for missing references in " + model + " on " + eObject2 + " ref :" + esf.getName());
 				}
 			}
@@ -463,7 +455,7 @@ public class ModelMigrationHelper {
 					Enumeration eContainerA = (Enumeration) a.eContainer();
 					Enumeration eContainerB = (Enumeration) b.eContainer();
 					equals &= equals(eContainerA, eContainerB);
-					
+
 					equals &= ((EnumerationLiteral) a).getName().equals(((EnumerationLiteral) b).getName());
 					equals &= ((EnumerationLiteral) a).getValue().equals(((EnumerationLiteral) b).getValue());
 				} else {
@@ -515,7 +507,7 @@ public class ModelMigrationHelper {
 				try {
 					ModelMigrationHelper.equals(eObject, ((ComparableEObject) arg0).eObject);
 				} catch (RootElementException e) {
-					throw new RuntimeException(e.getMessage(), e.getCause());
+					throw new EqualsException(e.getMessage(), e.getCause());
 				}
 			} else {
 
