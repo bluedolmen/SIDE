@@ -456,6 +456,18 @@ public class ReverseModel {
 		String description = property.getDescription();
 		attribute.setDescription(description);
 
+		Boolean multiple = property.isMultiple();
+		if (multiple != null && multiple) {
+			MetaInfo createMultiple = ReverseHelper.createMultiple();
+			attribute.getMetainfo().add(createMultiple);
+		}
+		
+		Boolean encrypted = property.isEncrypted();
+		if (encrypted != null && encrypted) {
+			MetaInfo createEncrypted = ReverseHelper.createEncrypted();
+			attribute.getMetainfo().add(createEncrypted);
+		}
+		
 		Object default1 = property.getDefault();
 		if (default1 instanceof String) {
 			attribute.setInitialValue((String) default1);
@@ -493,12 +505,12 @@ public class ReverseModel {
 				MetaInfo createIndexAtomic = ReverseHelper.createIndexAtomic();
 				attribute.getMetainfo().add(createIndexAtomic);
 			}
-
+			
 			if (stored != null && stored) {
 				MetaInfo createIndexStored = ReverseHelper.createIndexStored();
 				attribute.getMetainfo().add(createIndexStored);
 			}
-
+			
 			if (StringUtils.trimToNull(tokenised) != null) {
 				MetaInfo createIndexTokenised = ReverseHelper.createIndexTokenised(tokenised);
 				attribute.getMetainfo().add(createIndexTokenised);

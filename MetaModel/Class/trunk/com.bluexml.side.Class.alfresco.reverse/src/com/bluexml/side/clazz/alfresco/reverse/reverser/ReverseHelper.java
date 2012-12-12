@@ -48,6 +48,11 @@ public class ReverseHelper {
 		String key = "multiple";
 		return createSimpleMetaInfo(key);
 	}
+	
+	public static MetaInfo createEncrypted() {
+		String key = "encrypted";
+		return createSimpleMetaInfo(key);
+	}
 
 	public static MetaInfo createEmail() {
 		String key = "email";
