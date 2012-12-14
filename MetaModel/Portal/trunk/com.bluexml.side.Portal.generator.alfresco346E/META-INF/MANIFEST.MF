@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Alfresco 3.4.6 EE Portal Generator
 Bundle-SymbolicName: com.bluexml.side.Portal.generator.alfresco346E;singleton:=true
-Bundle-Version: 1.0.92.v40767-20121130
+Bundle-Version: 1.0.93.v40895-20121214
 Bundle-Activator: com.bluexml.side.portal.generator.alfresco346e.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.core.runtime,
