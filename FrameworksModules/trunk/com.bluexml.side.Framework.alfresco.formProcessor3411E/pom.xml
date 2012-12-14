@@ -29,7 +29,7 @@
 		below as the AMP module version. Instead we use the
 		buildnumber-maven-plugin. This requires a scm connection.
 	-->
-  <version>1.0.40</version>
+  <version>1.0.41</version>
   <description>this is a new Amp project generated using	"com.bluexml.side.Integration.m2.ampArchetype" thanks to change this description</description>
   <parent>
     <groupId>org.bluexml</groupId>
@@ -154,13 +154,13 @@
     <dependency>
       <groupId>com.bluexml.side.Framework.alfresco</groupId>
       <artifactId>commons3411E</artifactId>
-      <version>1.0.12</version>
+      <version>1.0.13</version>
       <type>amp</type>
     </dependency>
     <dependency>
       <groupId>com.bluexml.side.Framework.alfresco</groupId>
       <artifactId>commons3411E</artifactId>
-      <version>1.0.12</version>
+      <version>1.0.13</version>
       <type>jar</type>
       <classifier>classes</classifier>
       <scope>provided</scope>
