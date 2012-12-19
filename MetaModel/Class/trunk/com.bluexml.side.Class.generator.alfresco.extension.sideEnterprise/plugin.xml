@@ -7,29 +7,29 @@
         <technologyVersion description="Check this to generate data models on the major release 3 of Alfresco.&lt;br&gt;Alfresco 3.x is the leading open source collaborative ECM solution.&lt;br&gt;Additionally to content generation, SIDE provides useful server components to enhance some features of this release." id="alfresco_3.x" version="Alfresco3.x Community Edition">
           <generatorVersion class="com.bluexml.side.clazz.generator.alfresco.extension.sideenterprise.AlfrescoGenerator" description="SIDE Enterprise Edition" hidden="visible" id="com.bluexml.side.Class.generator.alfresco" version="SIDE Content Model Generator for Alfresco">
             <option key="alfresco.webscripts.common" label="Alfresco Common Webscripts">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.xforms" moduleType="amp" technologyVersion="alfresco_3.x" versionMax="1.0.87" versionMin="1.0.87" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.xforms" moduleType="amp" technologyVersion="alfresco_3.x" versionMax="1.0.88" versionMin="1.0.88" />
             </option>
             <option defaultOption="false" key="com.bluexml.side.Class.generator.alfresco.facetMapWebscript" label="Alfresco FacetMap Extension">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.cmisFacetMap" moduleType="amp" technologyVersion="alfresco_3.x" versionMax="1.0.45" versionMin="1.0.45" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.cmisFacetMap" moduleType="amp" technologyVersion="alfresco_3.x" versionMax="1.0.46" versionMin="1.0.46" />
             </option>
             <option documentation="Generates random data regarding the current Alfresco model. The generated ACP can be imported and reused accross various Alfresco installations." key="com.bluexml.side.Class.generator.alfresco.randomDataGenerator" label="Alfresco Random Data Generator">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.dataGenerator" moduleType="amp" technologyVersion="alfresco_3.x" versionMax="1.0.94" versionMin="1.0.94" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.dataGenerator" moduleType="amp" technologyVersion="alfresco_3.x" versionMax="1.0.95" versionMin="1.0.95" />
             </option>
             <option key="alfresco.webscript.report" label="Alfresco Report Webscripts" />
             <configurationParameter dataType="String" documentation="account to use when getting documents from alfresco" key="alfresco.report.runas" label="report as" />
             <option documentation="Check this option to include the SIDE SQL extension module for Alfresco.&lt;br&gt;This module provides the synchronisation of alfresco data into a relational database.&lt;br&gt; Queries with joins can thus be performed." key="com.bluexml.side.Class.generator.alfresco.sql" label="Alfresco SQL">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.sql" moduleType="amp" technologyVersion="alfresco_3.x" versionMax="1.1.36" versionMin="1.1.36" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.sql" moduleType="amp" technologyVersion="alfresco_3.x" versionMax="1.1.37" versionMin="1.1.37" />
             </option>
             <option defaultOption="true" key="alfresco.share.extension" label="Alfresco Share Extension">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.upload" moduleType="amp" technologyVersion="alfresco_3.x" versionMax="1.0.28" versionMin="1.0.28" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.upload" moduleType="amp" technologyVersion="alfresco_3.x" versionMax="1.0.29" versionMin="1.0.29" />
             </option>
             <option defaultOption="false" documentation="additional module to check if created/updated items already exist; in this case the update or creation is forbidden" key="alfresco.unicity" label="Content Uniqueness">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.unicity" moduleType="amp" technologyVersion="alfresco_3.x" versionMax="1.0.60" versionMin="1.0.60" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.unicity" moduleType="amp" technologyVersion="alfresco_3.x" versionMax="1.0.61" versionMin="1.0.61" />
             </option>
             <configurationParameter dataType="String" key="com.bluexml.side.Class.generator.alfresco.module.version" defaultValue="1.0" label="Class Module version" />
             <configurationParameter dataType="String" documentation="Set this value to the URL of the Alfresco instance on which you want to generate and deploy this new content model from the SIDE data model." key="alfresco.url" defaultValue="http://localhost:8080/alfresco" label="Alfresco URL" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.model" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.28" versionMax="1.0.28" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.customAssociationManagement" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.1.38" versionMax="1.1.38" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.model" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.29" versionMax="1.0.29" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.customAssociationManagement" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.1.39" versionMax="1.1.39" />
             <option defaultOption="false" documentation="this api use alfresco web-services-client to contact alfresco and do CRUD actions" key="com.bluexml.side.Class.generator.alfresco.enterprise.webserviceJavaAPI" label="Java webservice API" />
             <option defaultOption="false" documentation="this api use alfresco Embedded SDK, and allow webscript to use it" key="com.bluexml.side.Class.generator.alfresco.enterprise.embeddedJavaAPI" label="Java Embedded API" />
             <option defaultOption="false" key="com.bluexml.side.Class.generator.alfresco.enterprise.extJS" label="extJS (sample)" />
