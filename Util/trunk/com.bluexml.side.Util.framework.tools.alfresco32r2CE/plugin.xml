@@ -2,18 +2,9 @@
 <?eclipse version="3.4"?>
 <plugin>
   <extension point="com.bluexml.side.util.framework.tooling">
-    <modelLibrary
-          activator="com.bluexml.side.util.framework.tools.alfresco32r2ce.Activator"
-          archivePath="/com/bluexml/side/util/framework/tools/alfresco32r2ce/models/alfresco32r2.zip"
-          id="alfresco_3.x"
-          label="Alfresco Models 3.2r2 CE"
-          mavenFrameworkClassifier="community"
-          mavenFrameworkGroup="org.alfresco"
-          mavenFrameworkVersion="3.2r2"
-          pluginId="com.bluexml.side.Util.framework.tools.alfresco32r2CE"
-          projectId="Model-library-Alfresco-3.2r2-CE">
-      <moduleDependence label="Alfresco Extension 3.2r2 CE" moduleId="com.bluexml.side.Framework.maven.ampArchetypeForSide" moduleType="jar" technologyVersion="internal" versionMax="1.0.17" versionMin="1.0.17" />
-      <moduleDependence label="Alfresco Share Extension 3.2r2 CE" moduleId="com.bluexml.side.Framework.maven.warPatchArchetypeForSide" moduleType="jar" technologyVersion="internal" versionMax="1.0.18" versionMin="1.0.18" />
+    <modelLibrary activator="com.bluexml.side.util.framework.tools.alfresco32r2ce.Activator" archivePath="/com/bluexml/side/util/framework/tools/alfresco32r2ce/models/alfresco32r2.zip" id="alfresco_3.x" label="Alfresco Models 3.2r2 CE" mavenFrameworkClassifier="community" mavenFrameworkGroup="org.alfresco" mavenFrameworkVersion="3.2r2" pluginId="com.bluexml.side.Util.framework.tools.alfresco32r2CE" projectId="Model-library-Alfresco-3.2r2-CE">
+      <moduleDependence label="Alfresco Extension 3.2r2 CE" moduleId="com.bluexml.side.Framework.maven.ampArchetypeForSide" moduleType="jar" technologyVersion="internal" versionMax="1.0.18" versionMin="1.0.18" />
+      <moduleDependence label="Alfresco Share Extension 3.2r2 CE" moduleId="com.bluexml.side.Framework.maven.warPatchArchetypeForSide" moduleType="jar" technologyVersion="internal" versionMax="1.0.19" versionMin="1.0.19" />
       <generatorVersion class="com.bluexml.side.util.framework.tools.alfresco32r2ce.Activator" hidden="visible" id="com.bluexml.side.Class.generator.alfresco" version="com.bluexml.side.Util.framework.tools.alfresco32r2CE.generatorVersion6">
         <option defaultOption="false" hidden="false" key="alfresco.share.extension" label="alfresco.share.extension" />
         <option defaultOption="false" hidden="false" key="alfresco.webscripts.common" label="alfresco.webscripts.common" />
