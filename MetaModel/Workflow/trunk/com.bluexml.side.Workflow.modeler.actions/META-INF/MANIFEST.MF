@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Workflow Actions
 Bundle-SymbolicName: com.bluexml.side.Workflow.modeler.actions;singleton:=true
-Bundle-Version: 1.0.10.v29723-20111108
+Bundle-Version: 1.0.11.v41038-20121219
 Bundle-Activator: com.bluexml.side.workflow.modeler.actions.Activator
 Bundle-Vendor: blueXML
 Require-Bundle: org.eclipse.ui,
