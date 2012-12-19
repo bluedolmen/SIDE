@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.forAlfresco320rE.sideenterprise.feature" label="SIDE Generators For Alfresco 3.2.0r Enterprise" version="1.0.12.v39652-20121015" provider-name="BLUEXML">
+<feature id="com.bluexml.side.Common.forAlfresco320rE.sideenterprise.feature" label="SIDE Generators For Alfresco 3.2.0r Enterprise" version="1.0.13.v41038-20121219" provider-name="BLUEXML">
   <description url="http://www.side-labs.com">SIDE lets developers who are new to Alfresco get started quickly and helps experienced developers get the job done even faster.</description>
   <copyright url="http://www.bluexml.com/copyright">Copyright 2005-2012 BlueXML SARL.</copyright>
   <license url="http://www.side-labs.com/en/index.php/Product:License">SIDE SOFTWARE IS LICENSED BY BLUEXML. PLEASE GO TO http://www.side-labs.com/en/index.php/Product:License. READ THIS AGREEMENT CAREFULLY BEFORE PURCHASING AND/OR USING SIDE SOFTWARE.</license>
-  <includes id="com.bluexml.side.Deployer.alfresco.enterprise.feature" version="1.0.20.v35624-20120503" />
-  <includes id="com.bluexml.side.Deployer.alfrescoDirectCopy.enterprise.feature" version="1.0.7.v35624-20120503" />
-  <includes id="com.bluexml.side.Form.generator.xforms.enterprise.feature" version="1.0.30.v35624-20120503" />
-  <includes id="com.bluexml.side.Portal.generator.alfresco.enterprise.feature" version="1.0.34.v39652-20121015" />
-  <includes id="com.bluexml.side.Portal.generator.liferay.enterprise.feature" version="1.0.23.v35624-20120503" />
-  <includes id="com.bluexml.side.View.generator.alfresco.enterprise.feature" version="1.0.23.v35624-20120503" />
-  <includes id="com.bluexml.side.View.generator.facetmap.enterprise.feature" version="1.0.45.v35624-20120503" />
-  <includes id="com.bluexml.side.Workflow.generator.alfresco.enterprise.feature" version="1.0.25.v35624-20120503" />
-  <includes id="com.bluexml.side.Class.generator.report.enterprise.feature" version="1.0.21.v35624-20120503" />
-  <includes id="com.bluexml.side.Class.generator.alfresco.enterprise.feature" version="1.0.51.v39544-20121012" />
+  <includes id="com.bluexml.side.Deployer.alfresco.enterprise.feature" version="1.0.21.v41038-20121219" />
+  <includes id="com.bluexml.side.Deployer.alfrescoDirectCopy.enterprise.feature" version="1.0.8.v41038-20121219" />
+  <includes id="com.bluexml.side.Form.generator.xforms.enterprise.feature" version="1.0.31.v41038-20121219" />
+  <includes id="com.bluexml.side.Portal.generator.alfresco.enterprise.feature" version="1.0.35.v41038-20121219" />
+  <includes id="com.bluexml.side.Portal.generator.liferay.enterprise.feature" version="1.0.24.v41038-20121219" />
+  <includes id="com.bluexml.side.View.generator.alfresco.enterprise.feature" version="1.0.24.v41038-20121219" />
+  <includes id="com.bluexml.side.View.generator.facetmap.enterprise.feature" version="1.0.46.v41038-20121219" />
+  <includes id="com.bluexml.side.Workflow.generator.alfresco.enterprise.feature" version="1.0.26.v41038-20121219" />
+  <includes id="com.bluexml.side.Class.generator.report.enterprise.feature" version="1.0.22.v41038-20121219" />
+  <includes id="com.bluexml.side.Class.generator.alfresco.enterprise.feature" version="1.0.52.v41038-20121219" />
 </feature>
 
