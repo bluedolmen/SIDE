@@ -10,22 +10,22 @@
             <configurationParameter dataType="String" defaultValue="http://localhost:8080/alfresco" documentation="Set this value to the URL of the Alfresco instance on which you want to generate and deploy this new content model from the SIDE data model." key="alfresco.url" label="Alfresco URL" />
             <configurationParameter dataType="String" documentation="account to use when getting documents from alfresco" key="alfresco.report.runas" label="report as" />
             <option defaultOption="true" key="alfresco.share.extension" label="Alfresco Share Extension">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.shareStandAloneForms40d" moduleType="zip" technologyVersion="alfresco_40d" versionMax="1.0.4" versionMin="1.0.4" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.shareStandAloneForms40d" moduleType="zip" technologyVersion="alfresco_40d" versionMax="1.0.5" versionMin="1.0.5" />
             </option>
             <option key="alfresco.webscripts.common" label="Alfresco Common Webscripts">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.xforms40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.3" versionMin="1.0.3" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.xforms40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.4" versionMin="1.0.4" />
             </option>
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.model40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.4" versionMin="1.0.4" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.customAssociationManagement40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.11" versionMin="1.0.11" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.hotdeployer40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.5" versionMin="1.0.5" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.model40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.5" versionMin="1.0.5" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.customAssociationManagement40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.12" versionMin="1.0.12" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.hotdeployer40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.6" versionMin="1.0.6" />
             <option defaultOption="true" documentation="this must be hidden" hidden="true" key="generator.main" label="main generation" />
             <option defaultOption="false" documentation="this option must be used in conjuction with the 'searchable' meta on associations, this create an attribute that store associated nodes" hidden="false" key="alfresco.model.association.searchable" label="Searchable association">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.searchAssociation40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.7" versionMin="1.0.7" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.searchAssociation40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.8" versionMin="1.0.8" />
             </option>
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.singlePrimaryChildAssociation40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.11" versionMin="1.0.11" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.propertiesUpdater40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.13" versionMin="1.0.13" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.singlePrimaryChildAssociation40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.12" versionMin="1.0.12" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.propertiesUpdater40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.14" versionMin="1.0.14" />
             <option defaultOption="false" documentation="additional module to check if created/updated items already exist; in this case the update or creation is forbidden" key="alfresco.unicity" label="Content Uniqueness">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.unicity40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.11" versionMin="1.0.11" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.unicity40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.12" versionMin="1.0.12" />
             </option>
           </generatorVersion>
         </technologyVersion>
