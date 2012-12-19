@@ -8,7 +8,7 @@
   </parent>
   <groupId>com.bluexml.side.Framework.xforms.controller</groupId>
   <artifactId>alfrescoEnterprise333</artifactId>
-  <version>1.0.8</version>
+  <version>1.0.9</version>
   <packaging>zip</packaging>
   <name>XForms controller</name>
   <description>This module provides controller allowing conversion to and from XForm XML and Alfresco custom webscript.
@@ -41,7 +41,7 @@
     <dependency>
       <groupId>com.bluexml.side.Form</groupId>
       <artifactId>XFormsUtils</artifactId>
-      <version>1.0.6</version>
+      <version>1.0.7</version>
     </dependency>
     <dependency>
       <groupId>com.google.code.gson</groupId>
