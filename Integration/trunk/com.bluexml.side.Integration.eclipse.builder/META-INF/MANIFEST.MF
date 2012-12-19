@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Builder
 Bundle-SymbolicName: com.bluexml.side.Integration.eclipse.builder;singleton:=true
-Bundle-Version: 1.0.67.v40729-20121129
+Bundle-Version: 1.0.68.v41038-20121219
 Bundle-Activator: com.bluexml.side.integration.eclipse.builder.Activator
 Bundle-Vendor: blueXML
 Require-Bundle: org.eclipse.ui,
