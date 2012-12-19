@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.bluexml.side.Framework.alfresco</groupId>
   <artifactId>sharePortalExtensionEnterprise</artifactId>
-  <version>1.0.8</version>
+  <version>1.0.9</version>
   <name>com.bluexml.side.Framework.alfresco.sharePortalExtensionEnterprise</name>
   <packaging>zip</packaging>
   <parent>
