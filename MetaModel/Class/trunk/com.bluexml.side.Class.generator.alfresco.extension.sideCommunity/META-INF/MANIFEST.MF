@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: CommunityExtension
 Bundle-SymbolicName: com.bluexml.side.Class.generator.alfresco.extension.sideCommunity;singleton:=true
-Bundle-Version: 1.0.40.v33947-20120315
+Bundle-Version: 1.0.41.v41038-20121219
 Bundle-Activator: com.bluexml.side.clazz.generator.alfresco.communityextension.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.core.runtime,
