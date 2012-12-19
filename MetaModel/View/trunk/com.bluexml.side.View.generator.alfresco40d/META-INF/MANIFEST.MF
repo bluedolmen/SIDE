@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE View Generator for Alfresco 4.0.d
 Bundle-SymbolicName: com.bluexml.side.View.generator.alfresco40d;singleton:=true
-Bundle-Version: 1.0.2.v36589-20120525
+Bundle-Version: 1.0.3.v41038-20121219
 Bundle-Activator: com.bluexml.side.view.generator.alfresco40d.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.ui,
