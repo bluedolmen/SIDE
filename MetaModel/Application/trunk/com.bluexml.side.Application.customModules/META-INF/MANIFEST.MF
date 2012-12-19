@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE CustomModules
 Bundle-SymbolicName: com.bluexml.side.Application.customModules;singleton:=true
-Bundle-Version: 1.0.3.v32264-20120125
+Bundle-Version: 1.0.4.v41038-20121219
 Bundle-Activator: com.bluexml.side.application.custommodules.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.core.runtime,
