@@ -4,7 +4,7 @@
   <groupId>com.bluexml.side.Framework.facetMap</groupId>
   <artifactId>multiMapEnterprise</artifactId>
   <name>facet map extension to manage facetmaps</name>
-  <version>1.0.7</version>
+  <version>1.0.8</version>
   <description>including facetmap in alfresco share</description>
   <packaging>zip</packaging>
   <parent>
