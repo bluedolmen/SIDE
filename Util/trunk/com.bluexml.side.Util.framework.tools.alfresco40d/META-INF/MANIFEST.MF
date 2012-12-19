@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Alfresco40d
 Bundle-SymbolicName: com.bluexml.side.Util.framework.tools.alfresco40d;singleton:=true
-Bundle-Version: 1.0.5.v37666-20120710
+Bundle-Version: 1.0.6.v41038-20121219
 Bundle-Activator: com.bluexml.side.util.framework.tools.alfresco40d.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.ui,
