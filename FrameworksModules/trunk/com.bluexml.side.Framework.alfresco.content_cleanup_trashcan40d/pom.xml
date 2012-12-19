@@ -23,7 +23,7 @@
 		AMP module version. Instead we use the buildnumber-maven-plugin. This requires 
 		a scm connection. -->
   <description>this is a new Amp project generated using	"com.bluexml.side.Integration.m2.ampArchetype" thanks to change this description</description>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <parent>
     <groupId>org.bluexml</groupId>
     <artifactId>superpom</artifactId>
