@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Data Type Generator for Alfresco 4.0.d
 Bundle-SymbolicName: com.bluexml.side.Class.generator.alfresco40d
-Bundle-Version: 1.0.3.v36727-20120531
+Bundle-Version: 1.0.4.v41038-20121219
 Bundle-Activator: com.bluexml.side.clazz.generator.alfresco40d.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.ui,
