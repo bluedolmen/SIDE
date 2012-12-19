@@ -9,14 +9,14 @@
   <groupId>com.bluexml.side.Framework.xforms.demo.war</groupId>
   <artifactId>webapp</artifactId>
   <packaging>war</packaging>
-  <version>1.0.10</version>
+  <version>1.0.11</version>
   <name>webapp Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
       <groupId>com.bluexml.side.Framework.xforms.controller</groupId>
       <artifactId>alfrescoEnterprise</artifactId>
-      <version>1.0.127</version>
+      <version>1.0.128</version>
       <type>jar</type>
       <classifier>classes</classifier>
     </dependency>
