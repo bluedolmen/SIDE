@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Enterprise maven reprository
 Bundle-SymbolicName: com.bluexml.side.Util.dependencies.repository.enterprise;singleton:=true
-Bundle-Version: 1.0.93.v29723-20111108
+Bundle-Version: 1.0.94.v41038-20121219
 Bundle-Activator: com.bluexml.side.util.dependencies.repository.enterprise.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.core.runtime,
