@@ -7,18 +7,18 @@
         <technologyVersion description="Check this to generate data models on the major release 3 of Alfresco.&lt;br&gt;Alfresco 3.x is the leading open source collaborative ECM solution.&lt;br&gt;Additionally to content generation, SIDE provides useful server components to enhance some features of this release." id="alfresco_3.x" version="Alfresco3.x Community Edition">
           <generatorVersion class="com.bluexml.side.clazz.generator.alfresco.ClassAlfrescoGenerator" hidden="visible" id="com.bluexml.side.Class.generator.alfresco" version="SIDE Content Model Generator for Alfresco">
             <option key="alfresco.webscripts.common" label="Alfresco Common Webscripts">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.xforms" moduleType="amp" technologyVersion="alfresco_3.x" versionMax="1.0.87" versionMin="1.0.87" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.xforms" moduleType="amp" technologyVersion="alfresco_3.x" versionMax="1.0.88" versionMin="1.0.88" />
             </option>
             <option defaultOption="false" key="com.bluexml.side.Class.generator.alfresco.facetMapWebscript" label="Alfresco FacetMap Extension">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.cmisFacetMap" moduleType="amp" technologyVersion="alfresco_3.x" versionMax="1.0.45" versionMin="1.0.45" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.cmisFacetMap" moduleType="amp" technologyVersion="alfresco_3.x" versionMax="1.0.46" versionMin="1.0.46" />
             </option>
             <configurationParameter dataType="String" key="com.bluexml.side.Class.generator.alfresco.module.version" defaultValue="1.0" label="Class Module version" />
             <option defaultOption="true" documentation="Check this option to include the production of the Alfresco Share's module extension in the generation.&lt;br&gt;If not checked, the extension modules are not included in the generated AMPs.&lt;br&gt;SIDE provides extension modules to Alfresco Share in order to view and edit all the metadata of the newly generated content model." key="alfresco.share.extension" label="Alfresco Share Extension">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.upload" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.28" versionMax="1.0.28" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.upload" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.29" versionMax="1.0.29" />
             </option>
             <configurationParameter dataType="String" defaultValue="http://localhost:8080/alfresco" documentation="Set this value to the URL of the Alfresco instance on which you want to generate and deploy this new content model from the SIDE data model." key="alfresco.url" label="Alfresco URL" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.model" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.28" versionMax="1.0.28" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.customAssociationManagement" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.1.38" versionMax="1.1.38" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.model" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.0.29" versionMax="1.0.29" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.customAssociationManagement" moduleType="amp" technologyVersion="alfresco_3.x" versionMin="1.1.39" versionMax="1.1.39" />
             <option defaultOption="true" documentation="this must be hidden" hidden="true" key="generator.main" label="main generation" />
           </generatorVersion>
         </technologyVersion>
