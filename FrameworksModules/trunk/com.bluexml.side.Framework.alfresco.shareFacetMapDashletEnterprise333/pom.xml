@@ -17,7 +17,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.bluexml.side.Framework.alfresco</groupId>
   <artifactId>shareFacetMapDashletEnterprise333</artifactId>
-  <version>1.0.7</version>
+  <version>1.0.8</version>
   <name>Dashlets Alfresco Enterpsie share</name>
   <description>including facetmap in alfresco share</description>
   <packaging>zip</packaging>
