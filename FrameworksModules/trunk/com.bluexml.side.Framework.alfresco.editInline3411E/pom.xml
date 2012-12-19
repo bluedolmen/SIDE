@@ -119,7 +119,7 @@
     <dependency>
       <groupId>com.bluexml.side.Framework.alfresco</groupId>
       <artifactId>editInlineApplet</artifactId>
-      <version>1.0.1</version>
+      <version>1.0.2</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
@@ -223,7 +223,7 @@
       </resource>
     </resources>
   </build>
-  <version>1.0.25</version>
+  <version>1.0.26</version>
   <profiles>
     <profile>
       <id>tools.jar.notOnMacOSX</id>
