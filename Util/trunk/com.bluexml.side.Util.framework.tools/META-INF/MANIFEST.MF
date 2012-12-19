@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Alfresco tooling
 Bundle-SymbolicName: com.bluexml.side.Util.framework.tools;singleton:=true
-Bundle-Version: 1.0.4.v40729-20121129
+Bundle-Version: 1.0.5.v41038-20121219
 Bundle-Activator: com.bluexml.side.util.alfresco.tools.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.ui,
