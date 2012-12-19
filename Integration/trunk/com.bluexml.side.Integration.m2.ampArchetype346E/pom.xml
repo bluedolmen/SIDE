@@ -5,7 +5,7 @@
   <artifactId>ampArchetype346E</artifactId>
   <packaging>maven-archetype</packaging>
   <name>ampArchetype</name>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
   <parent>
     <groupId>org.bluexml</groupId>
     <artifactId>superpom</artifactId>
