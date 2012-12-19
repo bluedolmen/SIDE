@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Birt Report Deployer
 Bundle-SymbolicName: com.bluexml.side.Deployer.report;singleton:=true
-Bundle-Version: 1.0.32.v28467-20111005
+Bundle-Version: 1.0.33.v41038-20121219
 Bundle-Activator: com.bluexml.side.deployer.report.Activator
 Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.ui,
