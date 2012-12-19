@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Alfresco 3.3.3 Enterprise Deployer
 Bundle-SymbolicName: com.bluexml.side.Deployer.alfresco.enterprise333;singleton:=true
-Bundle-Version: 1.0.5.v28467-20111005
+Bundle-Version: 1.0.6.v41038-20121219
 Bundle-Activator: com.bluexml.side.deployer.alfresco.enterprise333.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: com.bluexml.side.Application,
