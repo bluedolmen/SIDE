@@ -22,7 +22,7 @@
 		to be able to use Maven snapshots we cannot use the <version/> below as the 
 		AMP module version. Instead we use the buildnumber-maven-plugin. This requires 
 		a scm connection. -->
-  <version>1.0.32</version>
+  <version>1.0.33</version>
   <description>this is a new Amp project generated using	"com.bluexml.side.Integration.m2.ampArchetype" thanks to change this description</description>
   <parent>
     <groupId>org.bluexml</groupId>
@@ -142,13 +142,13 @@
     <dependency>
       <groupId>com.bluexml.side.Framework.alfresco</groupId>
       <artifactId>commons40d</artifactId>
-      <version>1.0.10</version>
+      <version>1.0.11</version>
       <type>amp</type>
     </dependency>
     <dependency>
       <groupId>com.bluexml.side.Framework.alfresco</groupId>
       <artifactId>commons40d</artifactId>
-      <version>1.0.10</version>
+      <version>1.0.11</version>
       <type>jar</type>
       <classifier>classes</classifier>
       <scope>provided</scope>
