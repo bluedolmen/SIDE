@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Enterprise Security Utilities
-Bundle-Version: 1.0.16.v31653-20120106
+Bundle-Version: 1.0.17.v41038-20121219
 Bundle-Activator: com.bluexml.side.util.security.Activator
 Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.ui,
