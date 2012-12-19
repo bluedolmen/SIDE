@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Deployer for demo web application
 Bundle-SymbolicName: com.bluexml.side.Deployer.demoWebApplication;singleton:=true
-Bundle-Version: 1.0.2.v28467-20111005
+Bundle-Version: 1.0.3.v41038-20121219
 Bundle-Activator: com.bluexml.side.deployer.demoapplication.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.core.runtime,
