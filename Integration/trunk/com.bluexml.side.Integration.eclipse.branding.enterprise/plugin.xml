@@ -19,22 +19,17 @@
   <extension point="org.eclipse.ui.popupMenus">
     <objectContribution adaptable="true" id="com.bluexml.side.Integration.eclipse.builder.contribution1" nameFilter="*" objectClass="org.eclipse.core.resources.IProject">
       <action class="com.bluexml.side.Integration.eclipse.branding.enterprise.actions.NewAlfrescoModuleAction" enablesFor="+" id="com.bluexml.side.Integration.eclipse.branding.enterprise.newAlfrescoModule" label="Create new Alfresco Module Project" menubarPath="com.bluexml.side/project" />
-      <action
-            class="com.bluexml.side.Integration.eclipse.branding.enterprise.actions.ModelMigration"
-            id="com.bluexml.side.Integration.eclipse.branding.enterprise.modelMigration"
-            label="Switch model library references"
-            menubarPath="com.bluexml.side/project">
-      </action>
+      <action class="com.bluexml.side.Integration.eclipse.branding.enterprise.actions.ModelMigration" id="com.bluexml.side.Integration.eclipse.branding.enterprise.modelMigration" label="Switch model library references" menubarPath="com.bluexml.side/project" />
     </objectContribution>
   </extension>
   <extension point="com.bluexml.side.Util.dependencies.com_bluexml_side_framework_module_repository">
     <repository activator="com.bluexml.side.Integration.eclipse.branding.enterprise.Activator" pluginId="com.bluexml.side.Integration.eclipse.branding.enterprise" repositoryName="com.bluexml.side.Integration.eclipse.branding.enterprise.repository" repositoryPath="/com/bluexml/side/Integration/eclipse/branding/enterprise/repository/m2repositoryForSIDE.zip" />
   </extension>
   <extension point="com.bluexml.side.Application.com_bluexml_application_configuration">
-    <moduleDependence label="Alfresco Extension 3.2r2 CE" moduleId="com.bluexml.side.Framework.maven.ampArchetypeForSide" moduleType="jar" technologyVersion="internal" versionMax="1.0.17" versionMin="1.0.17" />
-    <moduleDependence label="Alfresco Share Extension 3.2r2 CE" moduleId="com.bluexml.side.Framework.maven.warPatchArchetypeForSide" moduleType="jar" technologyVersion="internal" versionMax="1.0.18" versionMin="1.0.18" />
-    <moduleDependence label="Alfresco Extension 3.4.d CE" moduleId="com.bluexml.side.Framework.maven.ampArchetypeForSide_34dCE" moduleType="jar" technologyVersion="internal" versionMax="1.0.7" versionMin="1.0.7" />
-    <moduleDependence label="Alfresco Share Extension 3.4.d CE" moduleId="com.bluexml.side.Framework.maven.warPatchArchetypeForSide_34dCE" moduleType="jar" technologyVersion="internal" versionMax="1.0.7" versionMin="1.0.7" />
+    <moduleDependence label="Alfresco Extension 3.2r2 CE" moduleId="com.bluexml.side.Framework.maven.ampArchetypeForSide" moduleType="jar" technologyVersion="internal" versionMax="1.0.18" versionMin="1.0.18" />
+    <moduleDependence label="Alfresco Share Extension 3.2r2 CE" moduleId="com.bluexml.side.Framework.maven.warPatchArchetypeForSide" moduleType="jar" technologyVersion="internal" versionMax="1.0.19" versionMin="1.0.19" />
+    <moduleDependence label="Alfresco Extension 3.4.d CE" moduleId="com.bluexml.side.Framework.maven.ampArchetypeForSide_34dCE" moduleType="jar" technologyVersion="internal" versionMax="1.0.8" versionMin="1.0.8" />
+    <moduleDependence label="Alfresco Share Extension 3.4.d CE" moduleId="com.bluexml.side.Framework.maven.warPatchArchetypeForSide_34dCE" moduleType="jar" technologyVersion="internal" versionMax="1.0.8" versionMin="1.0.8" />
   </extension>
 </plugin>
 
