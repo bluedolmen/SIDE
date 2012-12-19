@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Class Generator Alfresco API
 Bundle-SymbolicName: com.bluexml.side.Class.generator.alfresco.api;singleton:=true
-Bundle-Version: 1.0.18.v39544-20121012
+Bundle-Version: 1.0.19.v41038-20121219
 Bundle-Activator: com.bluexml.side.clazz.generator.alfresco.api.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.core.runtime,
