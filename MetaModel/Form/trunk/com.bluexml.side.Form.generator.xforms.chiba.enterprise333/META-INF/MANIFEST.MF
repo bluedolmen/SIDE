@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: XForms Generator for Alfresco 3.3.3 Enterprise
 Bundle-SymbolicName: com.bluexml.side.Form.generator.xforms.chiba.enterprise333;singleton:=true
-Bundle-Version: 1.0.9.v29723-20111108
+Bundle-Version: 1.0.10.v41038-20121219
 Bundle-Activator: com.bluexml.side.form.generator.xforms.chiba.enterprise333.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: com.bluexml.side.Class,
