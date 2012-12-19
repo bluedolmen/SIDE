@@ -4,7 +4,7 @@
   <groupId>com.bluexml.side.Framework.alfresco.share</groupId>
   <artifactId>Inputex</artifactId>
   <name>com.bluexml.side.Framework.alfresco.share.Inputex</name>
-  <version>1.0.4</version>
+  <version>1.0.5</version>
   <packaging>zip</packaging>
   <parent>
     <groupId>org.bluexml</groupId>
