@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Workflow Alfresco Generator 3.3.3 Enterprise
 Bundle-SymbolicName: com.bluexml.side.Workflow.generator.alfresco.enterprise333;singleton:=true
-Bundle-Version: 1.0.10.v31653-20120106
+Bundle-Version: 1.0.11.v41038-20121219
 Bundle-Activator: com.bluexml.side.workflow.generator.alfresco.enterprise333.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: com.bluexml.side.Application,
