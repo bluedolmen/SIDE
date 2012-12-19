@@ -17,7 +17,7 @@
             <configurationParameter dataType="String" defaultValue="http://localhost:8080/alfresco" documentation="Set this value to the URL of the Alfresco instance on which you want to generate and deploy this new content model from the SIDE data model." key="alfresco.url" label="Alfresco URL" />
             <configurationParameter dataType="String" documentation="default value is &quot;admin&quot;" key="alfresco.admin.login" label="Alfresco Administrator login" />
             <configurationParameter dataType="String" documentation="default value is &quot;admin&quot;" key="alfresco.admin.psw" label="Alfresco Administrator pass word" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.xforms.controller.alfresco40d" moduleType="zip" technologyVersion="chiba_1_5.x" versionMax="1.0.2" versionMin="1.0.2" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.xforms.controller.alfresco40d" moduleType="zip" technologyVersion="chiba_1_5.x" versionMax="1.0.3" versionMin="1.0.3" />
           </generatorVersion>
         </technologyVersion>
       </technology>
