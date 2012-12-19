@@ -7,12 +7,12 @@
         <technologyVersion description="Check this to generate on the major release 3.4 of Alfresco.&lt;br&gt;Alfresco 3.4.d is the leading open source collaborative ECM solution.&lt;br&gt;Additionally to content generation, SIDE provides useful server components to enhance some features of this release." id="alfresco_40d" version="Alfresco 4.0.d Community">
           <generatorVersion class="com.bluexml.side.form.generator.alfresco40d.FormGenerator40d" description="This generator generate configuration from Forms Models for Alfresco Share" hidden="visible" id="com.bluexml.side.Form.generator.alfresco40d" version="Alfresco Share Forms Generator">
             <configurationParameter dataType="String" defaultValue="1.0" key="com.bluexml.side.Form.generator.alfresco40d.module.version" label="Form Module version" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.share.formExtension40d" moduleType="zip" technologyVersion="alfresco_40d" versionMax="1.0.35" versionMin="1.0.35" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.sharePortalExtension40d" moduleType="zip" technologyVersion="alfresco_40d" versionMax="1.0.2" versionMin="1.0.2" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.share.formExtension40d" moduleType="zip" technologyVersion="alfresco_40d" versionMax="1.0.36" versionMin="1.0.36" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.sharePortalExtension40d" moduleType="zip" technologyVersion="alfresco_40d" versionMax="1.0.3" versionMin="1.0.3" />
             <option defaultOption="true" documentation="this must be hidden" hidden="true" key="generator.main" label="main generation" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.share.Inputex" moduleType="zip" technologyVersion="alfresco_40d" versionMax="1.0.4" versionMin="1.0.4" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.share.autoConnect40d" moduleType="zip" technologyVersion="alfresco_40d" versionMax="1.0.5" versionMin="1.0.5" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.formProcessor40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.32" versionMin="1.0.32" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.share.Inputex" moduleType="zip" technologyVersion="alfresco_40d" versionMax="1.0.5" versionMin="1.0.5" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.share.autoConnect40d" moduleType="zip" technologyVersion="alfresco_40d" versionMax="1.0.6" versionMin="1.0.6" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.formProcessor40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.33" versionMin="1.0.33" />
           </generatorVersion>
         </technologyVersion>
       </technology>
