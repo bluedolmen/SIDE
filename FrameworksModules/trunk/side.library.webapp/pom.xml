@@ -5,7 +5,7 @@
   <artifactId>webapp</artifactId>
   <packaging>war</packaging>
   <name>SIDE Alfresco services demo</name>
-  <version>2.0.5</version>
+  <version>2.0.6</version>
   <description>this web application can be used to show how to use generated webscripts ...</description>
   <url>http://www.bluexml.com</url>
   <parent>
