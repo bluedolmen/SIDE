@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.core.enterprise.feature" label="SIDE Enterprise Core Components" version="1.0.860.v41038-20121219" provider-name="BlueXML" plugin="com.bluexml.side.Integration.eclipse.branding.enterprise">
+<feature id="com.bluexml.side.Common.core.enterprise.feature" label="SIDE Enterprise Core Components" version="1.0.861.v41542-20121220" provider-name="BlueXML" plugin="com.bluexml.side.Integration.eclipse.branding.enterprise">
   <description url="http://www.side-labs.com">SIDE lets developers who are new to Alfresco get started quickly and helps experienced developers get the job done even faster.</description>
   <copyright url="http://www.bluexml.com/copyright">Copyright 2005-2012 BlueXML SARL.</copyright>
   <license url="http://www.side-labs.com/en/index.php/Product:License">SIDE SOFTWARE IS LICENSED BY BLUEXML. PLEASE GO TO http://www.side-labs.com/en/index.php/Product:License. READ THIS AGREEMENT CAREFULLY BEFORE PURCHASING AND/OR USING SIDE SOFTWARE.</license>
-  <includes id="com.bluexml.side.Application.feature" version="1.0.189.v41038-20121219" />
-  <includes id="com.bluexml.side.Class.modeler.feature" version="1.0.159.v41038-20121219" />
-  <includes id="com.bluexml.side.Common.feature" version="1.0.55.v41038-20121219" />
-  <includes id="com.bluexml.side.Deployer.documentation.feature" version="1.0.46.v41038-20121219" />
-  <includes id="com.bluexml.side.Form.feature" version="1.0.166.v41038-20121219" />
-  <includes id="com.bluexml.side.Portal.modeler.feature" version="1.0.71.v41038-20121219" />
-  <includes id="com.bluexml.side.Requirements.feature" version="1.0.122.v41038-20121219" />
-  <includes id="com.bluexml.side.Util.feature" version="1.0.331.v41038-20121219" />
-  <includes id="com.bluexml.side.View.feature" version="1.0.91.v41038-20121219" />
-  <includes id="com.bluexml.side.Workflow.modeler.feature" version="1.0.113.v41038-20121219" />
+  <includes id="com.bluexml.side.Application.feature" version="1.0.190.v41542-20121220" />
+  <includes id="com.bluexml.side.Class.modeler.feature" version="1.0.160.v41542-20121220" />
+  <includes id="com.bluexml.side.Common.feature" version="1.0.56.v41542-20121220" />
+  <includes id="com.bluexml.side.Deployer.documentation.feature" version="1.0.47.v41542-20121220" />
+  <includes id="com.bluexml.side.Form.feature" version="1.0.167.v41542-20121220" />
+  <includes id="com.bluexml.side.Portal.modeler.feature" version="1.0.72.v41542-20121220" />
+  <includes id="com.bluexml.side.Requirements.feature" version="1.0.123.v41542-20121220" />
+  <includes id="com.bluexml.side.Util.feature" version="1.0.332.v41542-20121220" />
+  <includes id="com.bluexml.side.View.feature" version="1.0.92.v41542-20121220" />
+  <includes id="com.bluexml.side.Workflow.modeler.feature" version="1.0.114.v41542-20121220" />
   <requires>
     <import plugin="org.eclipse.ui" />
     <import plugin="org.eclipse.core.runtime" />
@@ -20,15 +20,15 @@
     <import plugin="org.eclipse.ui.forms" />
     <import plugin="com.bluexml.side.Util.security" />
   </requires>
-  <plugin id="com.bluexml.side.Integration.eclipse.branding.enterprise" download-size="0" install-size="0" version="1.0.861.v41038-20121219" unpack="false" />
-  <plugin id="com.bluexml.side.Integration.standAlone.enterprise" download-size="0" install-size="0" version="1.0.9.v41038-20121219" unpack="false" />
-  <plugin id="com.bluexml.side.Class.alfresco.reverse" download-size="0" install-size="0" version="1.0.15.v41038-20121219" unpack="false" />
-  <plugin id="com.bluexml.side.Application.ui.newSIDEProject" download-size="0" install-size="0" version="1.0.10.v41038-20121219" unpack="false" />
-  <plugin id="com.bluexml.side.Class.edit.ui" download-size="0" install-size="0" version="1.0.60.v41038-20121219" unpack="false" />
-  <plugin id="com.bluexml.side.Integration.eclipse.builder" download-size="0" install-size="0" version="1.0.68.v41038-20121219" unpack="false" />
-  <plugin id="com.bluexml.side.Util.antRunner" download-size="0" install-size="0" version="1.0.38.v41038-20121219" unpack="false" />
-  <plugin id="com.bluexml.side.Util.security.enterprise" download-size="0" install-size="0" version="1.0.17.v41038-20121219" unpack="false" />
-  <plugin id="com.bluexml.side.Integration.standAlone" download-size="0" install-size="0" version="1.0.55.v41038-20121219" unpack="false" />
-  <plugin id="com.bluexml.side.Util.framework.tools.builtinModelsAlfresco" download-size="0" install-size="0" version="1.0.4.v41038-20121219" unpack="false" />
+  <plugin id="com.bluexml.side.Integration.eclipse.branding.enterprise" download-size="0" install-size="0" version="1.0.862.v41542-20121220" unpack="false" />
+  <plugin id="com.bluexml.side.Integration.standAlone.enterprise" download-size="0" install-size="0" version="1.0.10.v41542-20121220" unpack="false" />
+  <plugin id="com.bluexml.side.Class.alfresco.reverse" download-size="0" install-size="0" version="1.0.16.v41542-20121220" unpack="false" />
+  <plugin id="com.bluexml.side.Application.ui.newSIDEProject" download-size="0" install-size="0" version="1.0.11.v41542-20121220" unpack="false" />
+  <plugin id="com.bluexml.side.Class.edit.ui" download-size="0" install-size="0" version="1.0.61.v41542-20121220" unpack="false" />
+  <plugin id="com.bluexml.side.Integration.eclipse.builder" download-size="0" install-size="0" version="1.0.69.v41542-20121220" unpack="false" />
+  <plugin id="com.bluexml.side.Util.antRunner" download-size="0" install-size="0" version="1.0.39.v41542-20121220" unpack="false" />
+  <plugin id="com.bluexml.side.Util.security.enterprise" download-size="0" install-size="0" version="1.0.18.v41542-20121220" unpack="false" />
+  <plugin id="com.bluexml.side.Integration.standAlone" download-size="0" install-size="0" version="1.0.56.v41542-20121220" unpack="false" />
+  <plugin id="com.bluexml.side.Util.framework.tools.builtinModelsAlfresco" download-size="0" install-size="0" version="1.0.5.v41542-20121220" unpack="false" />
 </feature>
 
