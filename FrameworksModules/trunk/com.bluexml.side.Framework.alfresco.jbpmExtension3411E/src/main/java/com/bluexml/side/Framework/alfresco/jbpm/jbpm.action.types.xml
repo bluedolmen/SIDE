@@ -1,0 +1,11 @@
+<action-types>
+  <action-type element="action" class="org.jbpm.graph.def.Action" />
+   <!-- START SIDE Alfresco extension: set a new timer creation action to take into account variable and name settings based on task instance id for parallel user tasks (ForEachFork)
+    --> 
+  <action-type element="create-timer" class="com.bluexml.side.Framework.alfresco.jbpm.CustomCreateTimerAction" />
+   <!-- END SIDE Alfresco extension: set a new timer creation action to take into account variable and name settings based on task instance id for parallel user tasks (ForEachFork)
+    --> 
+  <action-type element="cancel-timer" class="org.jbpm.scheduler.def.CancelTimerAction" />
+  <action-type element="script" class="org.jbpm.graph.action.Script" />
+  <action-type element="mail" class="org.jbpm.graph.action.MailAction" />
+</action-types>
