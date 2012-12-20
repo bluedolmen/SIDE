@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE FacetMap View Generator For alfresco Enterprise
 Bundle-SymbolicName: com.bluexml.side.View.generator.facetmap.enterprise;singleton:=true
-Bundle-Version: 1.0.31.v41038-20121219
+Bundle-Version: 1.0.32.v41542-20121220
 Bundle-Activator: com.bluexml.side.view.generator.facetmap.enterprise.Activator
 Bundle-Vendor: BlueXML
 Require-Bundle: org.eclipse.ui,
