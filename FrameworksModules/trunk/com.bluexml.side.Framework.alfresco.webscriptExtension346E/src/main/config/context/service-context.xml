@@ -56,7 +56,6 @@
 		</property>
 		<property name="serviceRegistry" ref="ServiceRegistry" />
 		<property name="workflowService" ref="WorkflowService" />
-		<property name="namespaceService" ref="NamespaceService" />
 	</bean>
 
 	<bean id="side.webscripts.js.node" parent="baseJavaScriptExtension"
@@ -75,7 +74,7 @@
 			<value>sidesite</value>
 		</property>
 		<property name="serviceRegistry" ref="ServiceRegistry" />
-		<property name="nodeService" ref="NodeService" />
+		<property name="siteService" ref="SiteService" />
 	</bean>
 
 </beans>

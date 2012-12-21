@@ -63,7 +63,11 @@ public class SiteScriptExtension extends BaseScopableProcessorExtension {
 	 */
 	public NodeRef createSite(String baseUrl, String alfrescoUsername, String alfrescoPwd, 
 			String siteTitle, String siteShortname, String siteDescription, String siteVisibility, String sitePreset) {
-        if (logger.isDebugEnabled()) logger.debug("Create site "+siteTitle);
+        if (logger.isDebugEnabled()) {
+        	logger.debug("Create site "+siteTitle+" - sitheShortname ="+siteShortname+" - siteDescription="+siteDescription);
+        	logger.debug("             - siteVisibility ="+siteVisibility+" - sitePreset="+sitePreset);
+        	logger.debug("             - baseUrl ="+baseUrl+" - alfrescoUsername="+alfrescoUsername+" - alfrescoPwd="+alfrescoPwd);
+        }
         NodeRef nodeRef = null;
         if (siteShortname != null) {
         	SiteInfo siteInfo = siteService.getSite(siteShortname);
@@ -97,7 +101,7 @@ public class SiteScriptExtension extends BaseScopableProcessorExtension {
 				}
                
                 // send create-site request
-                makePostCall(httpClient, CREATE_SITE_URL, json.toString(), CONTENT_TYPE_JSON,
+                makePostCall(httpClient, baseUrl+CREATE_SITE_URL, json.toString(), CONTENT_TYPE_JSON,
                         "Create site with name: " + siteShortname, HttpStatus.SC_OK, alfrescoUsername);
                 
                 siteInfo = siteService.getSite(siteShortname);
@@ -133,6 +137,9 @@ public class SiteScriptExtension extends BaseScopableProcessorExtension {
      */
     private void makePostCall(HttpClient httpClient, String url, String data, String dataType,
                               String callName, int expectedStatus, String alfrescoUsername) {
+        if (logger.isDebugEnabled()) {
+            logger.debug(callName + " url: " + url+" - data="+data+" - dataType="+dataType);
+        }
         PostMethod postMethod = null;
         try {
             postMethod = createPostMethod(url, data, dataType);
@@ -198,7 +205,7 @@ public class SiteScriptExtension extends BaseScopableProcessorExtension {
 	/**
 	 * @return the siteService
 	 */
-	public SiteService getsiteService() {
+	public SiteService getSiteService() {
 		return siteService;
 	}
 
@@ -206,7 +213,7 @@ public class SiteScriptExtension extends BaseScopableProcessorExtension {
 	 * @param serviceRegistry
 	 *            the serviceRegistry to set
 	 */
-	public void setsiteService(SiteService siteService) {
+	public void setSiteService(SiteService siteService) {
 		this.siteService = siteService;
 	}
 
