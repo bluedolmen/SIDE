@@ -47,7 +47,7 @@ public class CustomNodeFormProcessor extends NodeFormProcessor {
 		// implements File field persistance
 		int fileFieldCount = 0;
 		for (FieldData fieldData : data) {
-			// NOTE: ignore file fields for now, not supported yet!
+
 			if (fieldData.isFile() == true && fieldData instanceof CustomFormData.FieldData) {
 				CustomFormData.FieldData cfd = (CustomFormData.FieldData) fieldData;
 				if (fileFieldCount == 0) {
