@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+<beans>
+	<!-- Rule triggers -->
+
+	<bean id="rule-trigger-base-fixed" abstract="true" init-method="registerRuleTrigger">
+		<property name="policyComponent" ref="policyComponent" />
+		<property name="nodeService" ref="nodeService" />
+		<property name="contentService" ref="contentService" />
+		<property name="authenticationComponent" ref="authenticationComponent" />
+		<property name="dictionaryService" ref="dictionaryService" />
+		<property name="ruleService" ref="ruleService" />
+	</bean>
+
+
+	<bean id="on-content-create-trigger" class="com.bluexml.side.Integration.alfresco.hotfixes.OnPropertyUpdateRuleTrigger" parent="rule-trigger-base-fixed">
+      <property name="onNewContent">
+         <value>true</value>
+      </property>
+      <property name="runtimeRuleService" ref="ruleService"/>
+      <property name="ignoreEmptyContent" >
+         <value>${policy.content.update.ignoreEmpty}</value>
+      </property>
+   </bean>
+
+</beans>

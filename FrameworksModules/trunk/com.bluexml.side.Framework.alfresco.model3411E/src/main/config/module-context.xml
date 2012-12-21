@@ -21,5 +21,6 @@
 <beans>
 	
     <import resource="classpath:${config.target.path}/context/service-context.xml" />
+    <import resource="classpath:${config.target.path}/context/rule-services-context.xml" />
     
 </beans>
