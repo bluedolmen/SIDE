@@ -870,9 +870,9 @@ function makeQueryFor(formJson, p, operator, first) {
 
    var formQuery = "";
    if (operator != 'IGNORE') {
-      var propValue = formJson[p], modePropValue = formJson[p + "-mode"];;
+      var propValue = formJson[p], modePropValue = formJson[p + "-mode"];
       if (propValue != null && propValue.length !== 0) {
-         if (p.indexOf("prop_") === 0 && p.match("-mode$") != "-mode")) {
+         if (p.indexOf("prop_") === 0 && p.match("-mode$") != "-mode") {
             // found a property - is it namespace_propertyname or pseudo
             // property format?
             var propName = p.substr(5);
