@@ -1,0 +1,118 @@
+13:55:14,668 DEBUG [org.redpill.alfresco.module.metadatawriter.services.impl.MetadataServiceImpl] Did not find any converter for value the-property-value
+13:55:14,669 DEBUG [org.redpill.alfresco.module.metadatawriter.services.impl.MetadataServiceImpl] Did not find any converter for value value2
+13:55:14,669 DEBUG [org.redpill.alfresco.module.metadatawriter.services.impl.MetadataServiceImpl] Did not find any converter for value value1
+13:55:14,682 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata custom field with value my value
+13:55:14,686 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata Title with value title
+13:55:14,687 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata Author with value author
+13:55:14,688 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata Keywords with value keywords
+13:55:14,689 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Saving content
+14:00:34,686 DEBUG [org.redpill.alfresco.module.metadatawriter.services.impl.MetadataServiceImpl] Did not find any converter for value the-property-value
+14:00:34,688 DEBUG [org.redpill.alfresco.module.metadatawriter.services.impl.MetadataServiceImpl] Did not find any converter for value value2
+14:00:34,688 DEBUG [org.redpill.alfresco.module.metadatawriter.services.impl.MetadataServiceImpl] Did not find any converter for value value1
+14:00:34,703 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata custom field with value my value
+14:00:34,709 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata Title with value title
+14:00:34,710 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata Author with value author
+14:00:34,711 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata Keywords with value keywords
+14:00:34,712 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Saving content
+14:03:23,076 DEBUG [org.redpill.alfresco.module.metadatawriter.services.impl.MetadataServiceImpl] Did not find any converter for value the-property-value
+14:03:23,078 DEBUG [org.redpill.alfresco.module.metadatawriter.services.impl.MetadataServiceImpl] Did not find any converter for value value2
+14:03:23,078 DEBUG [org.redpill.alfresco.module.metadatawriter.services.impl.MetadataServiceImpl] Did not find any converter for value value1
+14:03:23,092 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata custom field with value my value
+14:03:23,099 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata Title with value title
+14:03:23,100 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata Author with value author
+14:03:23,101 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata Keywords with value keywords
+14:03:23,102 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Saving content
+14:04:37,736 DEBUG [org.redpill.alfresco.module.metadatawriter.services.impl.MetadataServiceImpl] Did not find any converter for value the-property-value
+14:04:37,738 DEBUG [org.redpill.alfresco.module.metadatawriter.services.impl.MetadataServiceImpl] Did not find any converter for value value2
+14:04:37,738 DEBUG [org.redpill.alfresco.module.metadatawriter.services.impl.MetadataServiceImpl] Did not find any converter for value value1
+14:04:37,753 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata custom field with value my value
+14:04:37,760 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata Title with value title
+14:04:37,761 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata Author with value author
+14:04:37,762 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata Keywords with value keywords
+14:04:37,763 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Saving content
+14:06:41,963 DEBUG [org.redpill.alfresco.module.metadatawriter.services.impl.MetadataServiceImpl] Did not find any converter for value the-property-value
+14:06:41,965 DEBUG [org.redpill.alfresco.module.metadatawriter.services.impl.MetadataServiceImpl] Did not find any converter for value value2
+14:06:41,965 DEBUG [org.redpill.alfresco.module.metadatawriter.services.impl.MetadataServiceImpl] Did not find any converter for value value1
+14:06:41,978 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata custom field with value my value
+14:06:41,985 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata Title with value title
+14:06:41,986 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata Author with value author
+14:06:41,987 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata Keywords with value keywords
+14:06:41,988 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Saving content
+14:08:15,122 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Loading resource URL [file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties]
+14:08:15,125 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Load Properties form Resource file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties
+14:08:15,128 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Loading resource URL [file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties]
+14:08:15,129 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Load Properties form Resource file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties
+14:08:39,523 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Loading resource URL [file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties]
+14:08:39,524 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Load Properties form Resource file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties
+14:16:33,071 DEBUG [org.redpill.alfresco.module.metadatawriter.services.impl.MetadataServiceImpl] Did not find any converter for value the-property-value
+14:16:33,072 DEBUG [org.redpill.alfresco.module.metadatawriter.services.impl.MetadataServiceImpl] Did not find any converter for value value2
+14:16:33,073 DEBUG [org.redpill.alfresco.module.metadatawriter.services.impl.MetadataServiceImpl] Did not find any converter for value value1
+14:16:33,089 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata custom field with value my value
+14:16:33,093 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata Title with value title
+14:16:33,094 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata Author with value author
+14:16:33,095 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata Keywords with value keywords
+14:16:33,096 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Saving content
+14:18:09,119 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Loading resource URL [file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties]
+14:18:09,121 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Load Properties form Resource file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties
+14:18:09,125 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Loading resource URL [file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties]
+14:18:09,126 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Load Properties form Resource file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties
+14:18:10,739 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Loading resource URL [file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties]
+14:18:10,740 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Load Properties form Resource file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties
+14:18:19,287 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Loading resource URL [file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties]
+14:18:19,289 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Load Properties form Resource file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties
+14:18:19,292 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Loading resource URL [file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties]
+14:18:19,293 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Load Properties form Resource file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties
+14:18:19,294 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Loading resource URL [file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties]
+14:18:19,295 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Load Properties form Resource file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties
+14:18:34,606 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Loading resource URL [file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties]
+14:18:34,608 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Load Properties form Resource file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties
+14:18:34,613 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Loading resource URL [file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties]
+14:18:34,615 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Load Properties form Resource file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties
+14:18:34,616 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Loading resource URL [file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties]
+14:18:34,617 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Load Properties form Resource file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties
+14:18:34,618 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Loading resource URL [file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties]
+14:18:34,619 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Load Properties form Resource file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties
+14:18:34,619 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Loading resource URL [file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties]
+14:18:34,620 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Load Properties form Resource file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties
+14:18:34,621 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Loading resource URL [file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties]
+14:18:34,622 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Load Properties form Resource file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties
+14:18:34,622 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Loading resource URL [file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties]
+14:18:34,623 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Load Properties form Resource file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties
+14:18:52,257 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Loading resource URL [file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties]
+14:18:52,259 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Load Properties form Resource file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties
+14:18:52,262 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Loading resource URL [file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties]
+14:18:52,262 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Load Properties form Resource file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties
+14:18:52,264 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Loading resource URL [file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties]
+14:18:52,264 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Load Properties form Resource file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties
+14:18:52,267 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Loading resource URL [file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties]
+14:18:52,268 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Load Properties form Resource file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties
+14:18:52,268 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Loading resource URL [file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties]
+14:18:52,269 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Load Properties form Resource file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties
+14:18:52,270 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Loading resource URL [file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties]
+14:18:52,271 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Load Properties form Resource file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties
+14:18:52,272 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Loading resource URL [file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties]
+14:18:52,273 INFO  [com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl] Load Properties form Resource file:/C:/workspace/metadatawriter3411E/target/classes/com/bluexml/side/alfresco/metadatawriter/test/mapping.properties
+14:18:52,350 DEBUG [org.redpill.alfresco.module.metadatawriter.services.impl.MetadataServiceImpl] Did not find any converter for value the-property-value
+14:18:52,352 DEBUG [org.redpill.alfresco.module.metadatawriter.services.impl.MetadataServiceImpl] Did not find any converter for value value2
+14:18:52,352 DEBUG [org.redpill.alfresco.module.metadatawriter.services.impl.MetadataServiceImpl] Did not find any converter for value value1
+14:18:52,363 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata custom field with value my value
+14:18:52,369 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata Title with value title
+14:18:52,370 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata Author with value author
+14:18:52,370 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata Keywords with value keywords
+14:18:52,371 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Saving content
+14:19:16,823 DEBUG [org.redpill.alfresco.module.metadatawriter.services.impl.MetadataServiceImpl] Did not find any converter for value the-property-value
+14:19:16,824 DEBUG [org.redpill.alfresco.module.metadatawriter.services.impl.MetadataServiceImpl] Did not find any converter for value value2
+14:19:16,824 DEBUG [org.redpill.alfresco.module.metadatawriter.services.impl.MetadataServiceImpl] Did not find any converter for value value1
+14:19:16,836 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata custom field with value my value
+14:19:16,840 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata Title with value title
+14:19:16,840 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata Author with value author
+14:19:16,841 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata Keywords with value keywords
+14:19:16,842 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Saving content
+14:20:21,093 DEBUG [org.redpill.alfresco.module.metadatawriter.services.impl.MetadataServiceImpl] Did not find any converter for value the-property-value
+14:20:21,094 DEBUG [org.redpill.alfresco.module.metadatawriter.services.impl.MetadataServiceImpl] Did not find any converter for value value2
+14:20:21,094 DEBUG [org.redpill.alfresco.module.metadatawriter.services.impl.MetadataServiceImpl] Did not find any converter for value value1
+14:20:21,106 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata custom field with value my value
+14:20:21,110 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata Title with value title
+14:20:21,110 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata Author with value author
+14:20:21,111 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Exporting metadata Keywords with value keywords
+14:20:21,112 DEBUG [org.redpill.alfresco.module.metadatawriter.services.msoffice.impl.MSOfficeFacade] Saving content

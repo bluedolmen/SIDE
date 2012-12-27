@@ -1,0 +1,64 @@
+Guide pour générer vos documents word :
+
+étape 1 Remplir le document mapping.properties:
+
+Les propriétés d'initialisation:
+mapping.dossier.etape.name est le nom du dossier contenant les objets de type visas.
+mapping.qname.uri est le namespace du modèle à utiliser (pour britair :http://www.bluexml.com/model/content/britair/1.0)
+mapping.qname.typevisa est le localname de la propriété de l'objet visa qui défini le type du visa.
+mapping.qname.visa est le localname de l'objet visa.
+mapping.qname.file est le localname de l'objet qui représente un document bureautique. (pour l'instant seul word est disponible)
+mapping.qname.file.content est le localname de l'association entre l'objet visa et l'objet qui représente un document bureautique.
+
+Les propriétés de visa:
+Il est conseillé de regarder l'exemple (mapping.properties.exemple) et le modèle de donnée de britair tout en lisant cette partie.
+
+ATTENTION seul les attributs de la classe visa, de sa classe mère et/ou des aspects de la classe visa ou de la classe mère de visa peuvent être injecter AUTOMATIQUEMENT de la manière suivante.
+Les autres doivent être injecter MANUELLEMENT dans la méthode getSpecialVisaProperties() de MetadataWriterAbstract. Le QName à passer est le QName que de la propriété et le Serializable est une liste de valeurs séparée par ", ". Si il n'y a pas d'attribut de ce type getSpecialVisaProperties() doit retourner null.
+
+Dans la partie "Propriétés des visas" on va définir les propriétés des objets visa que l'ont souhaite injecter.
+Seul le localname doit être renseigner par exemple dans le projet Britair si on veut récupérer la date du visa il faut saisir "dinamex_Acces_date".
+
+Dans la partie "Définition des colonnes" on défini l'ordre des colonnes du tableau de validation.
+Attention ici on ne saisie que la dernière partie du localname de l'attribut par exemple pour la date saisie dans plus haut on passe de "dinamex_Acces_date" à "date".
+
+Dans la partie "Description des visas" on va expliquer au metadataWriter comment mettre en forme les données pour les passer à l'injecteur.
+mapping.etapeX.name,où X est le numéro de l'étape, est la valeur de l'attribut définit par mapping.qname.typevisa pour lequel on désire injecter des données. Par exemple pour le projet britair on va avoir "VisaRedaction", "VisaValidation", ...
+
+mapping.etapeX.attY.name,où X est le numéro de l'étape et Y est le numéro de l'attribut, permet de définir le nom de la propriété qui récupérera la valeur de cette attribut dans le document bureautique.
+Elle est composé de la chaîne de caractères "VisaEtape_", du nom du visa (mapping.etapeX.name) et de la propriété de visa correspondante (mapping.attY.qname) séparé par un underscore ("_").
+Par exemple pour la date saisie dans plus haut on aura "VisaEtape_VisaRedaction_date".
+
+mapping.etapeX.attY.value est le qname qui permet d'injecter la valeur de l'attribut au document bureautique.
+Elle est composé du préfix du namespace (mapping.qname.uri) de la chaîne de caractère "VisaEtape" du nom du visa (mapping.etapeX.name) et de la propriété de visa correspondante (mapping.attY.qname).
+Par exemple pour la date saisie plus haut, on a le namespace "http://www.bluexml.com/model/content/britair/1.0" donc le préfixe sera "britair" et le qname sera "britair:VisaEtape_VisaRedaction_date".
+
+étape 2 Sélectionner les propriétés du document à injecter
+
+Dans le modèle de donnée, on peut choisir les propriétés à injecter en faisant un double clic sur l'attribut désiré puis en cliquant sur l'onglet option et en passant la à "Yes" la valeur de l'attribut ...
+ATTENTION seul les attributs de la classe document, de sa classe mère et/ou des aspects de la classe document ou de la classe mère de document peuvent être injecter AUTOMATIQUEMENT de cette manière.
+Si la propriété est dans une classe lié à la classe document où à sa classe mère, il est possible de la retrouver en remplissant les propriétés par association
+mapping.association1.name permet de définir le nom de la propriété qui récupérera la valeur de cette attribut dans le document bureautique.
+mapping.association1.nameassoc est le localname de l'association permettant de récupérer l'attribut
+mapping.association1.qname est qname de cette propriété sous la forme PREFIX:LOCALNAME.
+Les autres propriété doivent être injecté MANUELLEMENT dans la méthode getSpecialProperties() de MetadataWriterAbstract. Le QName à passer est le QName de la propriété. Si il n'y a pas d'attribut de ce type getSpecialProperties() doit retourner null.
+
+étape 3 Créer le modèle du document bureautique
+Un exemple est fourni (modeleDocument.doc).
+
+Récupérer la macro contenu dans modeleDocument.doc et ajouter la dans votre modèle.
+Pour chaque propriété choisie dans le modèle de donnée créer une propriété dans le document bureautique (Fichier->Propriétés->Personnalisation) avec pour nom champ Name de la propriété du modèle de donnée correspondante.
+Puis positionner cette propriété dans votre document bureautique (on peut la positionner plusieurs fois).
+
+Pour les visas on doit créer une propriété dans le document bureautique pour chaque propriété de type "mapping.etapeX.attY.name" avec le nom correspondant à la valeur de "mapping.etapeX.attY.name".
+Ne pas matérialiser cette propriété dans le document bureautique.
+Ensuite on doit créer le tableau de validation, chaque ligne correspond à la propriété de type "mapping.etapeX.name". On doit dans la première cellule écrire en majuscule la valeur de "mapping.etapeX.name"
+et créer dans cette cellule un signet avec pour nom la valeur de "mapping.etapeX.name" précédé de la chaine de caractère "VisaEtape_". Les autres cellules de la ligne doivent rester vide.
+
+Il faut aussi créer une propriété par colonne avec comme nom colonneX où X est le numéro de la colonne.
+
+
+
+
+
+
