@@ -1,7 +1,0 @@
-<webscript>
-  <shortname>Site Members Send Mail service</shortname>
-  <description>service to send mail to site members</description>
-  <url>/side/notification/sendmail</url>
-  <format default="json" />
-  <authentication>user</authentication>
-</webscript>
