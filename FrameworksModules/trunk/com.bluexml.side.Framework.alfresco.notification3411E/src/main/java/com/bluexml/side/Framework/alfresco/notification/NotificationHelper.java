@@ -189,7 +189,7 @@ public class NotificationHelper {
 		return getUserPreferences(user).get(key);
 	}
 
-	public void sendMails(List<String> dests, String eventType, String language, NodeRef document, Map<String, Object> model) throws Exception {
+	public void sendMails(List<String> dests, String eventType, NodeRef document, String language, Map<String, Object> model) throws Exception {
 		EmailTest emailTest = new EmailTest(serviceRegistry);
 
 		Properties propertiesFor = getPropertiesFor(language);

@@ -363,7 +363,7 @@ public class NotificationPolicy implements OnCreateNodePolicy, OnUpdatePropertie
 			// send mail for users with language
 			List<String> users = entry.getValue();
 			String language = (String) entry.getKey();
-			notificationHelper.sendMails(users, notify_key, language, document, null);
+			notificationHelper.sendMails(users, notify_key, document, language, null);
 		}
 	}
 
