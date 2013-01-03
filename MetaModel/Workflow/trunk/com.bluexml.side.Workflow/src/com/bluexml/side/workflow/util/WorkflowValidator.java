@@ -932,6 +932,8 @@ public class WorkflowValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateFork_ForkMustBeFollowedByJoin(Fork fork, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        return true;
+		/*
         if (fork_ForkMustBeFollowedByJoinInvOCL == null) {
 			OCL.Helper helper = OCL_ENV.createOCLHelper();
 			helper.setContext(WorkflowPackage.Literals.FORK);
@@ -962,6 +964,7 @@ public class WorkflowValidator extends EObjectValidator {
 			return false;
 		}
 		return true;
+		*/
 	}
 
 	/**
