@@ -8,7 +8,6 @@ import java.util.Map;
 
 import org.alfresco.repo.jscript.BaseScopableProcessorExtension;
 import org.alfresco.repo.jscript.ScriptNode;
-import org.alfresco.repo.workflow.jscript.JscriptWorkflowTask;
 import org.alfresco.service.ServiceRegistry;
 import org.alfresco.service.cmr.repository.ChildAssociationRef;
 import org.alfresco.service.cmr.repository.NodeRef;
@@ -27,38 +26,6 @@ import org.apache.log4j.Logger;
 public class WorkflowScriptExtension extends BaseScopableProcessorExtension {
 
 	private Logger logger = Logger.getLogger(getClass());
-	ServiceRegistry serviceRegistry;
-	WorkflowService workflowService;
-
-	/**
-	 * @return the serviceRegistry
-	 */
-	public ServiceRegistry getServiceRegistry() {
-		return serviceRegistry;
-	}
-
-	/**
-	 * @param serviceRegistry
-	 *            the serviceRegistry to set
-	 */
-	public void setServiceRegistry(ServiceRegistry serviceRegistry) {
-		this.serviceRegistry = serviceRegistry;
-	}
-
-	/**
-	 * @return the ruleService
-	 */
-	public WorkflowService getWorkflowService() {
-		return workflowService;
-	}
-
-	/**
-	 * @param ruleService
-	 *            the Rule Service to set
-	 */
-	public void setWorkflowService(WorkflowService workflowService) {
-		this.workflowService = workflowService;
-	}
 
 
 	/**
@@ -115,4 +82,74 @@ public class WorkflowScriptExtension extends BaseScopableProcessorExtension {
 		}
 		return concernedTasks;
 	}
+	
+	
+	
+	/**
+	 * Method to reassign a task
+	 * 
+	 * @param taskId
+	 *            the id of the task to reassign
+	 * @param actor 
+	 * 			  the current actor of the task; if present, check that is the current actor of the task and if not, do not perform the reassign
+	 *            
+	 * @param newActor 
+	 * 			  the newActor to assign the task
+	 * 
+	 * @return boolean true if the task has been reassigned
+	 */
+	public boolean reassign(String currentUser, String taskId, String actor, String newActor) {
+        boolean reassigned = false;
+		WorkflowTask workflowTask = workflowService.getTaskById(taskId);
+        if (logger.isDebugEnabled()) logger.debug("reassign task " + taskId+" from "+actor+" to "+newActor);
+		if (this.workflowService.isTaskEditable(workflowTask, currentUser) || serviceRegistry.getAuthorityService().isAdminAuthority(currentUser)) {
+			Map<QName, Serializable> props = new HashMap<QName, Serializable>();
+            QName key = QName.createQName("cm:owner", serviceRegistry.getNamespaceService());
+            props.put(key, newActor);
+			// update task properties
+			workflowTask = workflowService.updateTask(taskId, props, null, null);
+			reassigned = true;
+	        if (logger.isDebugEnabled()) logger.debug("Task has been reassigned ");
+		} else {
+			logger.error("Task is not editable by user "+currentUser+" - An admin user must be used !!!");
+		}
+		return reassigned;
+	}
+
+	// IOC
+	private ServiceRegistry serviceRegistry;
+	private WorkflowService workflowService;
+
+	/**
+	 * @return the serviceRegistry
+	 */
+	public ServiceRegistry getServiceRegistry() {
+		return serviceRegistry;
+	}
+
+	/**
+	 * @param serviceRegistry
+	 *            the serviceRegistry to set
+	 */
+	public void setServiceRegistry(ServiceRegistry serviceRegistry) {
+		this.serviceRegistry = serviceRegistry;
+	}
+
+	/**
+	 * @return the workflowService
+	 */
+	public WorkflowService getWorkflowService() {
+		return workflowService;
+	}
+	/**
+	 * @param workflowService
+	 *            the Workflow Service to set
+	 */
+	public void setWorkflowService(WorkflowService workflowService) {
+		this.workflowService = workflowService;
+	}
+
+
 }
+
+

@@ -20,12 +20,13 @@
 		-->
 		<echo message="==========" />
 		<echo message="patch the web application webapps.home=${webapps.home}" />
-
+<!--
 		<copy todir="${webapps.home}/alfresco">
 			<fileset dir="target/${moduleId}-${mypom.version}/web" id="id">
 				<include name="**/**" />
 			</fileset>
 		</copy>
+		-->
 		<copy todir="${webapps.home}/alfresco/WEB-INF/classes">
 			<fileset dir="target/${moduleId}-${mypom.version}/config" id="id">
 				<include name="**/**" />

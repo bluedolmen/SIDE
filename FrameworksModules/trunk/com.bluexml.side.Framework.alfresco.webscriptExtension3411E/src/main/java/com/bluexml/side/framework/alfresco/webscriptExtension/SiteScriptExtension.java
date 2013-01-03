@@ -25,7 +25,7 @@ import org.json.JSONObject;
  */
 public class SiteScriptExtension extends BaseScopableProcessorExtension {
 
-	private Logger logger = Logger.getLogger(getClass());
+	private Logger logger = Logger.getLogger(SiteScriptExtension.class);
 
     private static final String HEADER_CONTENT_TYPE = "Content-Type";
     private static final String CONTENT_TYPE_TEXT_PLAIN = "text/plain";
@@ -35,6 +35,7 @@ public class SiteScriptExtension extends BaseScopableProcessorExtension {
     private static final String BASE_URL = "http://localhost:8080/share";
     private static final String LOGIN_URL = "/page/dologin";
     private static final String CREATE_SITE_URL = "/service/modules/create-site";
+    private static final String DELETE_SITE_URL = "/service/modules/delete-site";
 
 
 	/**
@@ -63,7 +64,11 @@ public class SiteScriptExtension extends BaseScopableProcessorExtension {
 	 */
 	public NodeRef createSite(String baseUrl, String alfrescoUsername, String alfrescoPwd, 
 			String siteTitle, String siteShortname, String siteDescription, String siteVisibility, String sitePreset) {
-        if (logger.isDebugEnabled()) logger.debug("Create site "+siteTitle);
+        if (logger.isDebugEnabled()) {
+        	logger.debug("Create site "+siteTitle+" - sitheShortname ="+siteShortname+" - siteDescription="+siteDescription);
+        	logger.debug("             - siteVisibility ="+siteVisibility+" - sitePreset="+sitePreset);
+        	logger.debug("             - baseUrl ="+baseUrl+" - alfrescoUsername="+alfrescoUsername+" - alfrescoPwd="+alfrescoPwd);
+        }
         NodeRef nodeRef = null;
         if (siteShortname != null) {
         	SiteInfo siteInfo = siteService.getSite(siteShortname);
@@ -97,7 +102,7 @@ public class SiteScriptExtension extends BaseScopableProcessorExtension {
 				}
                
                 // send create-site request
-                makePostCall(httpClient, CREATE_SITE_URL, json.toString(), CONTENT_TYPE_JSON,
+                makePostCall(httpClient, baseUrl+CREATE_SITE_URL, json.toString(), CONTENT_TYPE_JSON,
                         "Create site with name: " + siteShortname, HttpStatus.SC_OK, alfrescoUsername);
                 
                 siteInfo = siteService.getSite(siteShortname);
@@ -112,12 +117,76 @@ public class SiteScriptExtension extends BaseScopableProcessorExtension {
 	            logger.warn("Site (" + siteShortname + ") already exists, cannot create it");
         	}
         } else {
-        	// Site already exists, cannot create it, continue with next one
-            logger.warn("Site shortName parameter is mandatory, cannot create site without shortName");        	
+        	// Site shortname is mandatory
+           logger.warn("Site shortName parameter is mandatory, cannot create site without shortName");        	
         }
 		return nodeRef;
 	}
 
+	/**
+	 * Method to delete a site
+	 * The site is deleted through an http post call using a json structure as done by Share.
+	 * The json structure is of the form:
+	 * {
+     * "shortName" : "mytestsite100",
+     * },
+
+	 * 
+	 * @param baseUrl     		the base url 
+	 * @param alfrescoUsername 	the alfresco user login to use to send request
+	 * @param alfrescoUsername 	the alfresco password to use to send request
+	 * @param siteShortname		the mandatory site short name
+	 *            
+	 * @return nodeRef of the site; null if the site successed to be deleted; in the javascript, use site.getSite(siteShortname) to get the site.
+	 */
+	public NodeRef deleteSite(String baseUrl, String alfrescoUsername, String alfrescoPwd, String siteShortname) {
+        if (logger.isDebugEnabled()) {
+        	logger.debug("Delete site - sitheShortname ="+siteShortname);
+        	logger.debug("             - baseUrl ="+baseUrl+" - alfrescoUsername="+alfrescoUsername+" - alfrescoPwd="+alfrescoPwd);
+        }
+        NodeRef nodeRef = null;
+        if (siteShortname != null) {
+        	SiteInfo siteInfo = siteService.getSite(siteShortname);
+        	if (siteInfo == null) {
+        		if (baseUrl == null) baseUrl = BASE_URL;
+                
+        		// Create Apache HTTP Client to use for both calls: login and create-site
+                HttpClient httpClient = new HttpClient();
+
+                // Login to Share to get a JSESSIONID setup in HTTP Client
+                String loginData = "username=" + alfrescoUsername + "&password=" + alfrescoPwd;
+                makePostCall(httpClient, baseUrl + LOGIN_URL, loginData, CONTENT_TYPE_FORM, "Login to Alfresco Share",
+                        HttpStatus.SC_MOVED_TEMPORARILY, alfrescoUsername);
+                
+                // create body request using site parameters
+                JSONObject json = new JSONObject();
+                try {
+					json.put("shortName", siteShortname);
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+               
+                // send create-site request
+                makePostCall(httpClient, baseUrl+DELETE_SITE_URL, json.toString(), CONTENT_TYPE_JSON,
+                        "Delete site with name: " + siteShortname, HttpStatus.SC_OK, alfrescoUsername);
+                
+                siteInfo = siteService.getSite(siteShortname);
+            	if (siteInfo != null) {
+    	        	// Site already exists, cannot create it, continue with next one
+            		nodeRef = siteInfo.getNodeRef();
+    	            logger.warn("Site (" + siteShortname + ") has not been deleted !!! - Check log.");
+            	}
+        	} else {
+	        	// Site does not exists, cannot delete it, continue with next one
+	            logger.warn("Site (" + siteShortname + ") does not exist, cannot delete it");
+        	}
+        } else {
+        	// Site shortname is mandatory
+            logger.warn("Site shortName parameter is mandatory, cannot delete site without shortName");        	
+        }
+		return nodeRef;
+	}
 	
 
     /**
@@ -133,6 +202,9 @@ public class SiteScriptExtension extends BaseScopableProcessorExtension {
      */
     private void makePostCall(HttpClient httpClient, String url, String data, String dataType,
                               String callName, int expectedStatus, String alfrescoUsername) {
+        if (logger.isDebugEnabled()) {
+            logger.debug(callName + " url: " + url+" - data="+data+" - dataType="+dataType);
+        }
         PostMethod postMethod = null;
         try {
             postMethod = createPostMethod(url, data, dataType);
@@ -198,7 +270,7 @@ public class SiteScriptExtension extends BaseScopableProcessorExtension {
 	/**
 	 * @return the siteService
 	 */
-	public SiteService getsiteService() {
+	public SiteService getSiteService() {
 		return siteService;
 	}
 
@@ -206,7 +278,7 @@ public class SiteScriptExtension extends BaseScopableProcessorExtension {
 	 * @param serviceRegistry
 	 *            the serviceRegistry to set
 	 */
-	public void setsiteService(SiteService siteService) {
+	public void setSiteService(SiteService siteService) {
 		this.siteService = siteService;
 	}
 

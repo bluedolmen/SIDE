@@ -57,5 +57,24 @@
 		<property name="serviceRegistry" ref="ServiceRegistry" />
 		<property name="workflowService" ref="WorkflowService" />
 	</bean>
+	<bean id="side.webscripts.js.node" parent="baseJavaScriptExtension"
+		class="com.bluexml.side.framework.alfresco.webscriptExtension.NodeScriptExtension">
+		<property name="extensionName">
+			<value>sidenode</value>
+		</property>
+		<property name="serviceRegistry" ref="ServiceRegistry" />
+		<property name="nodeService" ref="NodeService" />
+		<property name="behaviourFilter" ref="policyBehaviourFilter" />
+	</bean>
+
+	<bean id="side.webscripts.js.site" parent="baseJavaScriptExtension"
+		class="com.bluexml.side.framework.alfresco.webscriptExtension.SiteScriptExtension">
+		<property name="extensionName">
+			<value>sidesite</value>
+		</property>
+		<property name="serviceRegistry" ref="ServiceRegistry" />
+		<property name="siteService" ref="SiteService" />
+	</bean>
+
 
 </beans>
