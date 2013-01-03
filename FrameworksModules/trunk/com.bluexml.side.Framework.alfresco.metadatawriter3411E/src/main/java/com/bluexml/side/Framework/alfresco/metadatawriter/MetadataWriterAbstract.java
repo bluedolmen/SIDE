@@ -45,7 +45,9 @@ public abstract class MetadataWriterAbstract {
 	Properties mappingProperties = null;
 	
 	protected String NAMESPACEURI;
+	protected String TYPE_ACCES;
 	protected String FOLDER_DOCUMENT_VISA;
+	protected String PROCESSUS;
 	protected QName TYPE_FILE;
 	protected QName ASSOC_FILE_MODELE_CONTENT;
 	protected QName TYPE_VISA;
@@ -54,19 +56,42 @@ public abstract class MetadataWriterAbstract {
 	protected abstract Map<QName, Serializable> getSpecialProperties();
 	protected abstract Map<QName, Serializable> getSpecialVisaProperties();
 
-	public void init() {
+	public void init(String processus) throws Exception {
 			if (((IConfigurationFile)resolver).getDictionary().size() > 0) {
-				NAMESPACEURI = (String) resolver.resolve("mapping.qname.uri");
-				FOLDER_DOCUMENT_VISA = (String) resolver.resolve("mapping.dossier.etape.name");
-				TYPE_FILE = QName.createQName("{" + NAMESPACEURI +"}" + resolver.resolve("mapping.qname.file"));
-				ASSOC_FILE_MODELE_CONTENT = QName.createQName("{" + NAMESPACEURI +"}" + resolver.resolve("mapping.qname.file.content"));
-				TYPE_VISA = QName.createQName("{" + NAMESPACEURI +"}" + resolver.resolve("mapping.qname.visa"));
-				PROP_QNAME_VISA_TYPEVISA = QName.createQName("{" + NAMESPACEURI +"}" + resolver.resolve("mapping.qname.typevisa"));
+				PROCESSUS = getProcessus(processus);
+				NAMESPACEURI = (String) resolver.resolve(PROCESSUS + ".mapping.qname.uri");
+				FOLDER_DOCUMENT_VISA = (String) resolver.resolve(PROCESSUS + ".mapping.dossier.etape.name");
+				TYPE_FILE = QName.createQName("{" + NAMESPACEURI +"}" + resolver.resolve(PROCESSUS + ".mapping.qname.file"));
+				ASSOC_FILE_MODELE_CONTENT = QName.createQName("{" + NAMESPACEURI +"}" + resolver.resolve(PROCESSUS + ".mapping.qname.file.content"));
+				TYPE_VISA = QName.createQName("{" + NAMESPACEURI +"}" + resolver.resolve(PROCESSUS + ".mapping.qname.visa"));
+				PROP_QNAME_VISA_TYPEVISA = QName.createQName("{" + NAMESPACEURI +"}" + resolver.resolve(PROCESSUS + ".mapping.qname.typevisa"));
+				TYPE_ACCES = (String) resolver.resolve(PROCESSUS + "");
+			} else {
+				logger.error("Le dictionnaire n'a pu être initialiser.");
+				throw new Exception();
 			}
 	}
 
-	public void execute() {
-		init();
+	private String getProcessus(String processus) throws Exception {
+		String test = (String) resolver.resolve(processus + ".name");
+		if (test != null && test.equals(processus)) {
+			return processus;
+		}
+		logger.warn("Fichier de propriété du processus " + processus + "non trouvé. Utilisation de la configuration par défault."); 
+		test = (String) resolver.resolve("default.name");
+		if (test != null && test.equals("default")) {
+			return "default";
+		}
+		
+		logger.error("La configuration par défault n'a pu être trouvé.");
+		throw new Exception();
+	}
+	public void execute(String processus) {
+		try {
+			init(processus);
+		} catch (Exception e) {
+			return;
+		}
 		if (logger.isDebugEnabled())
 			logger.debug("curnode=" + curnode);
 		List<FileInfo> fileList = fileFolderService.listFiles(curnode.getNodeRef());
@@ -122,7 +147,11 @@ public abstract class MetadataWriterAbstract {
 			properties.putAll(associationProperties);
 		}
 		
-		columnDefinition = getColumnDefinition();
+		try {
+			columnDefinition = getColumnDefinition();
+		} catch (Exception e) {
+			return;
+		}
 		properties.putAll(columnDefinition);
 		
 		properties = formatDate(properties);
@@ -139,10 +168,10 @@ public abstract class MetadataWriterAbstract {
 		Map<QName, Serializable> associationProperties = new HashMap<QName, Serializable>();
 		int i = 1;
 		Serializable result = null;
-		while(resolver.notNull("mapping.association" + i + ".name")) {
-			List<AssociationRef> assoc = nodeService.getTargetAssocs(curnode.getNodeRef(), QName.createQName("{" + NAMESPACEURI +"}" + resolver.resolve("mapping.association" + i + ".nameassoc")));
+		while(resolver.notNull(PROCESSUS + ".mapping.association" + i + ".name")) {
+			List<AssociationRef> assoc = nodeService.getTargetAssocs(curnode.getNodeRef(), QName.createQName("{" + NAMESPACEURI +"}" + resolver.resolve(PROCESSUS + ".mapping.association" + i + ".nameassoc")));
 			if (assoc.size() > 0) {
-				String name = (String) resolver.resolve("mapping.association" + i + ".qname");
+				String name = (String) resolver.resolve(PROCESSUS + ".mapping.association" + i + ".qname");
 				String[] splittedName = name.split(":");
 				if (splittedName.length > 0) {
 					result = nodeService.getProperty(assoc.get(0).getTargetRef(), QName.createQName("{" + NAMESPACEURI +"}" + splittedName[1]));
@@ -156,19 +185,16 @@ public abstract class MetadataWriterAbstract {
 		return associationProperties;
 	}
 
-	protected Map<QName, Serializable> getColumnDefinition() {
+	protected Map<QName, Serializable> getColumnDefinition() throws Exception {
 		Map<QName, Serializable> columnDefinition = new HashMap<QName, Serializable>();
 		int i = 1;
-		while (resolver.notNull("colonne" + i)) {
-			columnDefinition.put(QName.createQName("{" + NAMESPACEURI +"}" + "colonne" + i), resolver.resolve("colonne" + i));
+		while (resolver.notNull(PROCESSUS + ".colonne" + i)) {
+			columnDefinition.put(QName.createQName("{" + NAMESPACEURI +"}" + "colonne" + i), resolver.resolve(PROCESSUS + ".colonne" + i));
 			i++;
 		}
 		if (columnDefinition.isEmpty()) {
-			try {
-				throw new Exception();
-			} catch (Exception e) {
-				logger.error("Pas de définition de colonne(s) disponible");
-			}
+			logger.error("Pas de définition de colonne(s) disponible");
+			throw new Exception();
 		}
 		return columnDefinition;
 	}
@@ -187,8 +213,8 @@ public abstract class MetadataWriterAbstract {
 		
 		Map<String, Map<QName, Serializable>> etapesMap = new HashMap<String, Map<QName, Serializable>>();
 		int i = 1;
-		while(resolver.notNull("mapping.etape" + i + ".name")) {
-			etapesMap.put((String) resolver.resolve("mapping.etape" + i + ".name"), null);
+		while(resolver.notNull(PROCESSUS + ".mapping.etape" + i + ".name")) {
+			etapesMap.put((String) resolver.resolve(PROCESSUS + ".mapping.etape" + i + ".name"), null);
 			i++;
 		}
 		Map<QName, Serializable> temp = null;
@@ -242,8 +268,8 @@ public abstract class MetadataWriterAbstract {
 		
 		Set<QName> qnameSet = new HashSet<QName>();
 		int i = 1;
-		while(resolver.notNull("mapping.att" + i + ".qname")) {
-			qnameSet.add(QName.createQName(NAMESPACEURI, (String) resolver.resolve("mapping.att" + i + ".qname")));
+		while(resolver.notNull(PROCESSUS + ".mapping.att" + i + ".qname")) {
+			qnameSet.add(QName.createQName(NAMESPACEURI, (String) resolver.resolve(PROCESSUS + ".mapping.att" + i + ".qname")));
 			i++;
 		}
 		
@@ -347,5 +373,8 @@ public abstract class MetadataWriterAbstract {
 	}
 	public QName getPROP_QNAME_VISA_TYPEVISA() {
 		return PROP_QNAME_VISA_TYPEVISA;
+	}
+	public String getPROCESSUS() {
+		return PROCESSUS;
 	}
 }
