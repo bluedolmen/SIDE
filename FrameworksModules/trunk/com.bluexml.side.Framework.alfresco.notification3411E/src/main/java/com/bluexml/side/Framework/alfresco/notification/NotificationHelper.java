@@ -378,6 +378,9 @@ public class NotificationHelper {
 			String owner = (String) serviceRegistry.getNodeService().getProperty(document, ContentModel.PROP_OWNER);
 			if (owner != null) {
 				result.put("owner", owner);
+			} else {
+				owner = (String) serviceRegistry.getNodeService().getProperty(document, ContentModel.PROP_CREATOR);
+				result.put("owner", owner);
 			}
 		
 			return result;
