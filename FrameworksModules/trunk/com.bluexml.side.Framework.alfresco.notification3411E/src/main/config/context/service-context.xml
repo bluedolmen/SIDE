@@ -19,7 +19,7 @@
 -->
 <beans>
 
-	<bean id="notification.policy.helper" class="com.bluexml.side.Framework.alfresco.notification.NotificationHelper"
+	<bean id="notification.helper" class="com.bluexml.side.Framework.alfresco.notification.NotificationHelper"
 		singleton="true">
 		<property name="serviceRegistry" ref="ServiceRegistry" />
 		<!-- set if email action must be run in background or not -->

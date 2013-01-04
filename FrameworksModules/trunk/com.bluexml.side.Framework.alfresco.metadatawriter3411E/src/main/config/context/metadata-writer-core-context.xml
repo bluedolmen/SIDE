@@ -5,7 +5,7 @@
 	  <bean id="metadata-writer.dictionaryBootstrap" parent="dictionaryModelBootstrap" depends-on="dictionaryBootstrap">
 	    <property name="models">
 	      <list>
-	        <value>${config.target.path}/context/metadataWriterModel.xml</value>
+	        <value>alfresco/module/SIDE_metadatawriter/context/metadataWriterModel.xml</value>
 	      </list>
 	    </property>
 	  </bean>
@@ -13,7 +13,7 @@
 	  <bean id="metadata-writer.configBootstrap" class="org.alfresco.web.config.WebClientConfigBootstrap" init-method="init">
 	    <property name="configs">
 	      <list>
-	        <value>${config.target.path}/context/metadata-writer-web-client-config.xml</value>
+	        <value>alfresco/module/SIDE_metadatawriter/context/metadata-writer-web-client-config.xml</value>
 	      </list>
 	    </property>
 	  </bean>
@@ -66,19 +66,23 @@
   	</bean>
   
   	<bean id="mappingProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="classpath:${config.target.path}/mapping.properties"/>
+        <property name="locations"> 
+			<list> 
+				<value>classpath*:alfresco/module/*/*.metadatawriter-mapping.properties"</value> 
+			</list>
+		</property>
         <property name="ignoreUnresolvablePlaceholders" value="true" />
    	</bean>
-<!--     
-   	<bean id="metadatawriter.helper" class="com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterAbstract" init-method="init">
+    
+   	<bean id="metadataWriter.helper" class="com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterAbstract" init-method="init">
 		<property name="serviceRegistry" ref="ServiceRegistry" />
 		<property name="metadataServiceRegistryImpl" ref="metadata-writer.serviceRegistry" />
 		<property name="nodeService" ref="NodeService" />
 		<property name="fileFolderService" ref="FileFolderService" />
 		<property name="resolver" ref="metadatawriter.resolver" />
 	</bean>
- -->	
-	<bean id="metadatawriter.resolver" class="com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterResolverImpl">
-		<property name="resourcePattern" value="classpath:${config.target.path}/mapping.properties" />
+	
+	<bean id="metadatawriter.resolver" class="com.bluexml.side.Framework.alfresco.metadatawriter.MetadataWriterAbstract">
+		<property name="resourcePattern" value="classpath*:alfresco/module/*/*.metadatawriter-mapping.properties" />
 	</bean>
 </beans>
