@@ -178,6 +178,7 @@ public class EditingDocument extends Applet {
 	    	return null;
 		} else if (appli.equals("winword.exe") || appli.equals("excel.exe") || appli.equals("powerpnt.exe")) {
 			String values = WindowsReqistry.readRegistry("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Office", null);
+			System.out.println(values);
 			if (values != null) {
 		    	String [] value = values.split("\\\n");
 				for (String ligne : value) {
@@ -255,16 +256,30 @@ public class EditingDocument extends Applet {
 				if (!monAppli.isAlive()) {
 					myFile.setWritable(true);
 					try {
-						jso.call("Close", new String[1]);
+						jso.eval("Close()");
+						break;
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				}
 			}
+		} else {
+			myFile.setWritable(true);
+			try {
+				jso.eval("Close()");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	public void stop() {
+		myFile.setWritable(true);
+		try {
+			jso.eval("Close()");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		//destroy monAppli
 		if (monAppli != null) {
 			monAppli.interrupt();
