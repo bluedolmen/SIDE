@@ -437,7 +437,8 @@ public class NotificationHelper {
 			}
 		}
 		language = language.toLowerCase();
-		if (props.get(language) == null || dynamicLoading) {
+		Properties langueExist = props.get(language);
+		if (langueExist == null || dynamicLoading) {
 			// load properties
 			Properties prop = new Properties();
 			prop.load(getPropertiesInputStream(language));
@@ -448,7 +449,7 @@ public class NotificationHelper {
 		return props.get(language);
 	}
 
-	private InputStream getPropertiesInputStream(String language) {
+	public InputStream getPropertiesInputStream(String language) {
 		InputStream s = null;
 		// search in alfresco dictionary
 		// compute path with language

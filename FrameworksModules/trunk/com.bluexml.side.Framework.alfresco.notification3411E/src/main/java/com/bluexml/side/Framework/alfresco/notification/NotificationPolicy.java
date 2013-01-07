@@ -105,14 +105,13 @@ public class NotificationPolicy implements OnCreateNodePolicy, OnUpdatePropertie
 		logger.debug("[init]\tenableUpdateEvent=" + enableUpdateEvent);
 		logger.debug("[init]\tenableDeleteEvent=" + enableDeleteEvent);
 		// Bind behaviours to node policies
-
 		// RB: it is necessary to fire event creation after commit in order to
 		// have to the event attributes in the email template.
-		policyComponent.bindClassBehaviour(OnCreateNodePolicy.QNAME, ContentModel.TYPE_CONTENT, new JavaBehaviour(this, "onCreateNode", NotificationFrequency.TRANSACTION_COMMIT));
-		policyComponent.bindClassBehaviour(OnUpdatePropertiesPolicy.QNAME, ContentModel.TYPE_CONTENT, new JavaBehaviour(this, "onUpdateProperties", NotificationFrequency.TRANSACTION_COMMIT));
+		//policyComponent.bindClassBehaviour(OnCreateNodePolicy.QNAME, ContentModel.TYPE_CONTENT, new JavaBehaviour(this, "onCreateNode", NotificationFrequency.TRANSACTION_COMMIT));
+		//policyComponent.bindClassBehaviour(OnUpdatePropertiesPolicy.QNAME, ContentModel.TYPE_CONTENT, new JavaBehaviour(this, "onUpdateProperties", NotificationFrequency.TRANSACTION_COMMIT));
 
 		// to have access to the deleted node we need to work BEFORE node deletion and at first event because at transaction commit the node is deleted ...
-		policyComponent.bindClassBehaviour(BeforeDeleteNodePolicy.QNAME, ContentModel.TYPE_CONTENT, new JavaBehaviour(this, "beforeDeleteNode", NotificationFrequency.FIRST_EVENT));
+		//policyComponent.bindClassBehaviour(BeforeDeleteNodePolicy.QNAME, ContentModel.TYPE_CONTENT, new JavaBehaviour(this, "beforeDeleteNode", NotificationFrequency.FIRST_EVENT));
 
 	}
 
