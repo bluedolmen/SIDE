@@ -30,6 +30,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.extensions.surf.util.I18NUtil;
 
+
 public class NotificationHelper {
 	static Log logger = LogFactory.getLog(NotificationHelper.class);
 
@@ -45,8 +46,9 @@ public class NotificationHelper {
 	// force  recipients email advanced debug purpose
 	protected String forcedEmail = null;
 
+	public static String TYPE_CONTENT_PREFIX = "cm";
 	protected static String PROPERTIES_PATH = "notification.properties";
-	protected static String PROPERTIES_IN_DICTIONARY_PATH = "/app:company_home/app:dictionary/app:email_templates/app:notify_email_templates/cm:notification.properties";
+	protected static String PROPERTIES_IN_DICTIONARY_PATH = "/app:company_home/app:dictionary/app:email_templates/app:notify_email_templates/";
 	public static String TYPE_CALANDAR_NSURI = "http://www.alfresco.org/model/calendar";
 	public static String TYPE_CALANDAR_PREFIX = "ia";
 	public static String TYPE_CALANDAR_EVENT = "{http://www.alfresco.org/model/calendar}calendarEvent";
@@ -190,9 +192,37 @@ public class NotificationHelper {
 	}
 
 	public void sendMails(List<String> dests, String eventType, NodeRef document, String language, Map<String, Object> model) throws Exception {
+		sendMails(dests, eventType, document, language, model, null, null);
+	}
+
+	public void sendMails(List<String> dests, String eventType, NodeRef document, Map<String, Object> model, String propertyFileName, ArrayList<String> resourceCustomPaths) throws Exception {
+		if (logger.isDebugEnabled()) logger.debug("dests :" + dests+" - eventType :"+eventType+ " - document : "+document+" - model : "+model+" - resourceCustomPath : "+resourceCustomPaths);
+		List<String> userIds_filtered = getPersonList(dests);
+		GroupByMap<String> gblanguage = new GroupByMap<String>();
+
+		for (String user : userIds_filtered) {
+			NodeRef person = serviceRegistry.getPersonService().getPerson(user);
+			Boolean userPreference = (Boolean) getUserPreference(person, eventType);
+			if (userPreference) {
+				gblanguage.put(getUserPreference(person, profile_language), user);
+			}
+			if (logger.isDebugEnabled()) logger.debug(user + " preference for " + eventType + " :" + userPreference);
+		}
+
+		if (logger.isDebugEnabled()) logger.debug("userGroup :" + gblanguage);
+
+		for (Map.Entry<Object, List<String>> entry : gblanguage.getEntrySet()) {
+			// send mail for users with language
+			List<String> users = entry.getValue();
+			String language = (String) entry.getKey();
+			sendMails(users, eventType, document, language, model, propertyFileName, resourceCustomPaths);
+		}
+	}
+
+	public void sendMails(List<String> dests, String eventType, NodeRef document, String language, Map<String, Object> model, String propertyFileName, ArrayList<String> resourceCustomPaths) throws Exception {
 		EmailTest emailTest = new EmailTest(serviceRegistry);
 
-		Properties propertiesFor = getPropertiesFor(language);
+		Properties propertiesFor = getPropertiesFor(language,propertyFileName, resourceCustomPaths);
 		String forcedEamilFromProperty = propertiesFor.getProperty("forcedEmail");
 
 		if (forcedEamilFromProperty != null) {
@@ -245,16 +275,17 @@ public class NotificationHelper {
 			// beware this not work in background
 			emailText = serviceRegistry.getTemplateService().processTemplate(templateRef.toString(), model);
 		}*/
-		model = emailTest.createEmailTemplateModel(document);
+		Map<String, Object> modelAll = emailTest.createEmailTemplateModel(document);
 		if (!serviceRegistry.getNodeService().getType(document).equals(QName.createQName("{http://www.alfresco.org/model/calendar}calendarEvent"))) {
 			Map<String, Object> docAttributs = getDocAttributs(document);
 			if (docAttributs != null) {
-				model.putAll(docAttributs);
+				modelAll.putAll(docAttributs);
 			}
-			model.put("userInfo", getUserDetails());
+			modelAll.put("userInfo", getUserDetails());
 		}
-		String emailText = serviceRegistry.getTemplateService().processTemplate(templateRef.toString(), model);
-		subject = serviceRegistry.getTemplateService().processTemplateString( null, (String) subject, model);
+		if (model != null) modelAll.putAll(model);
+		String emailText = serviceRegistry.getTemplateService().processTemplate(templateRef.toString(), modelAll);
+		subject = serviceRegistry.getTemplateService().processTemplateString( null, (String) subject, modelAll);
 		parameterValues.put(MailActionExecuter.PARAM_SUBJECT, subject);
 				
 		parameterValues.put(MailActionExecuter.PARAM_TEXT, emailText); 
@@ -264,7 +295,7 @@ public class NotificationHelper {
 		// schedule the email sending
 		if (Boolean.parseBoolean(propertiesFor.getProperty("usefakeEmailer", Boolean.toString(usefakeEmailer)))) {
 
-			emailTest.doAction(dests, (String) subject, document, templateRef, model);
+			emailTest.doAction(dests, (String) subject, document, templateRef, modelAll);
 		} else {
 			serviceRegistry.getActionService().executeAction(ac, document);
 		}
@@ -424,14 +455,33 @@ public class NotificationHelper {
 		return companyHome;
 	}
 
+	/**
+	 * This method loads the 'notification_<language>.properties' file from the Dictionary path of Alfresco repository as Properties
+	 * @param language the language to load
+	 * @return the set of properties for this language
+	 * @throws Exception
+	 */
 	public Properties getPropertiesFor(String language) throws Exception {
+		return getPropertiesFor(language, null, null);
+	}
+	
+	/**
+	 * This method loads the 'notification_<language>.properties' file from the Dictionary path of Alfresco repository and then overwrite the properties 
+	 * whith the properties files successively contains in resourceCustomPaths[i]+"/cm:"+propertyFileName.basename+<language>+propertyFileName.extension
+	 * @param language the language to load; if not null the propertyFileName is modified in propertyFileName.basename+<language>+propertyFileName.extension; if null the propertyFileName is not modified
+	 * @param propertyFileName the property file name to load
+	 * @param resourceCustomPaths a list of folder where the propertyFileName may be loaded (with the embedded language if not null)
+	 * @return the set of properties for this language
+	 * @throws Exception
+	 */
+	public Properties getPropertiesFor(String language, String propertyFileName, ArrayList<String> resourceCustomPaths) throws Exception {
 		if (props == null) {
 			props = new HashMap<String, Properties>();
 		}
 		if (language == null) {
 			Locale loc = I18NUtil.getLocale();
 			if (loc == null || loc.toString() == null) {
-				language = "en";
+				language = "fr";
 			} else {
 				language = loc.toString().toLowerCase();
 			}
@@ -441,20 +491,75 @@ public class NotificationHelper {
 		if (langueExist == null || dynamicLoading) {
 			// load properties
 			Properties prop = new Properties();
+			// search in alfresco dictionary
 			prop.load(getPropertiesInputStream(language));
+			// custom properties
+			if (resourceCustomPaths != null && !resourceCustomPaths.isEmpty()) {
+				for (String resourceCustomPath : resourceCustomPaths) {
+					Properties customProp = new Properties();
+					customProp.load(getPropertiesInputStream(language,propertyFileName,resourceCustomPath,false));
+					prop.putAll(customProp);
+				}
+			}
 			logger.trace("Properties loaded :" + prop);
 			props.put(language, prop);
 		}
 		// not dynamic so return cached object
 		return props.get(language);
 	}
-
-	public InputStream getPropertiesInputStream(String language) {
-		InputStream s = null;
+	/**
+	 * This method loads the propertyFileName file from the Dictionary path of Alfresco repository and then overwrite the properties 
+	 * whith the properties files successively contains in resourceCustomPaths[i]+"/cm:"+propertyFileName
+	 * @param propertyFileName the property file name to load; if null, set to "notification.properties"
+	 * @param resourceCustomPaths a list of folder where the propertyFileName may be loade
+	 * @return the set of properties
+	 * @throws Exception
+	 */
+	public Properties getPropertiesFor(String propertyFileName, ArrayList<String> resourceCustomPaths) throws Exception {
+		// load properties
+		Properties prop = new Properties();
+		if (propertyFileName == null)  propertyFileName = PROPERTIES_PATH;
 		// search in alfresco dictionary
+		prop.load(getPropertiesInputStream(null,propertyFileName,PROPERTIES_IN_DICTIONARY_PATH,true));
+		// custom properties
+		if (resourceCustomPaths != null && !resourceCustomPaths.isEmpty()) {
+			for (String resourceCustomPath : resourceCustomPaths) {
+				Properties customProp = new Properties();
+				customProp.load(getPropertiesInputStream(null, propertyFileName, resourceCustomPath, false));
+				prop.putAll(customProp);
+			}
+		}
+		logger.trace("Properties loaded :" + prop);
+		return prop;
+	}
+
+	/**
+	 * This method loads the 'notification_<language>.properties' file from the Dictionary path of Alfresco repository as InputStream
+	 * @param language
+	 * @return the inputstream 'notification_<language>.properties' content
+	 */
+	public InputStream getPropertiesInputStream(String language) {
+		// search in alfresco dictionary
+		return getPropertiesInputStream(language,PROPERTIES_PATH,PROPERTIES_IN_DICTIONARY_PATH,true);
+	}
+
+	/**
+	 * This method loads the  file resourceCustomPaths+"/cm:"+propertyFileName.basename+<language>+propertyFileName.extension as InputStream
+	 * @param language the language to load; if not null the propertyFileName is modified in propertyFileName.basename+<language>+propertyFileName.extension; if null the propertyFileName is not modified
+	 * @param propertyFileName the property file name to load
+	 * @param resourceCustomPath the folder where the propertyFileName may be loaded (with the embedded language if not null)
+	 * @param classPath if true, the propertyFileName is loaded from the classpath (without resourceCustomPath)
+	 * @return the inputstream resourceCustomPaths+"/cm:"+propertyFileName.basename+<language>+propertyFileName.extension content
+	 */
+	public InputStream getPropertiesInputStream(String language, String propertyFileName, String resourceCustomPath, boolean classPath) {
+		InputStream s = null;
 		// compute path with language
-		String[] path_dictionary = PROPERTIES_IN_DICTIONARY_PATH.split("\\.");
-		String resourcePath_dictionary = path_dictionary[0] + "_" + language + "." + path_dictionary[1];
+		String[] path_dictionary = propertyFileName.split("\\.");
+		if (!resourceCustomPath.endsWith("/")) resourceCustomPath += "/";
+		path_dictionary[0] = resourceCustomPath+TYPE_CONTENT_PREFIX+":"+path_dictionary[0];
+		String resourcePath_dictionary = path_dictionary[0];
+		if (language != null) resourcePath_dictionary+= "_" + language;
+		resourcePath_dictionary+= "." + path_dictionary[1];
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("getPropertiesInputStream path_dictionary=" + path_dictionary);
@@ -466,29 +571,35 @@ public class NotificationHelper {
 			// try to get the template that match the language (country[variant]?)
 			s = getInputStream(resourcePath_dictionary);
 		} catch (FileNotFoundException e) {
-			logger.debug("no perfect match try on country");
-			// no perfect match found, try to get template for country (without variant)
-			Locale parseLocale = I18NUtil.parseLocale(language);
-			logger.debug("local country :" + parseLocale.getCountry());
-			logger.debug("local variant :" + parseLocale.getVariant());
-			String country = parseLocale.getCountry().toLowerCase();
-			if (!language.equals(country)) {
-				// try on country ?
-				resourcePath_dictionary = path_dictionary[0] + "_" + country + "." + path_dictionary[1];
-				try {
-					s = getInputStream(resourcePath_dictionary);
-				} catch (FileNotFoundException e1) {
-					logger.debug("no match on country");
+			s = null;
+			String country = null;
+			if (language != null) {
+				logger.debug("no perfect match try on country");
+				// no perfect match found, try to get template for country (without variant)
+				Locale parseLocale = I18NUtil.parseLocale(language);
+				logger.debug("local country :" + parseLocale.getCountry());
+				logger.debug("local variant :" + parseLocale.getVariant());
+				country = parseLocale.getCountry().toLowerCase();
+				if (!language.equals(country)) {
+					// try on country ?
+					resourcePath_dictionary = path_dictionary[0] + "_" + country + "." + path_dictionary[1];
+					try {
+						s = getInputStream(resourcePath_dictionary);
+					} catch (FileNotFoundException e1) {
+						logger.debug("no match on country");
+					}
 				}
 			}
-			if (s == null) {
+			if (s == null && classPath) {
 				// file not exist so go ahead, and search for the default configuration for this country
-				language = country;
-				logger.debug("Load default configuration from classPath");
-				// search in classPath (for default values)
-				String[] path = PROPERTIES_PATH.split("\\.");
-				String resourcePath = path[0] + "_" + language + "." + path[1];
-				s = this.getClass().getResourceAsStream(resourcePath);
+				if (country != null) {
+					language = country;
+					logger.debug("Load default configuration from classPath");
+					// search in classPath (for default values)
+					String[] path = PROPERTIES_PATH.split("\\.");
+					String resourcePath = path[0] + "_" + language + "." + path[1];
+					s = this.getClass().getResourceAsStream(resourcePath);
+				}
 				if (s == null) {
 					// not found so we load default file
 					s = this.getClass().getResourceAsStream(PROPERTIES_PATH);
@@ -496,7 +607,6 @@ public class NotificationHelper {
 				}
 			}
 		}
-
 		return s;
 	}
 
