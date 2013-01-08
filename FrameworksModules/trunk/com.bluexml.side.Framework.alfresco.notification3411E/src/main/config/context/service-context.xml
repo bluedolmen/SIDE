@@ -31,13 +31,14 @@
 		<!-- debug : forcedEmail use given email address to send mail whatever email list computed from users profiles -->
 		<!-- <property name="forcedEmail" value="xxx@xxx.com" />-->
 	</bean>
-	
+<!--  	
 	<bean id="notification.policy" class="com.bluexml.side.Framework.alfresco.notification.NotificationPolicy"
 		singleton="true" init-method="init">
 		<property name="serviceRegistry" ref="ServiceRegistry" />
 		<property name="policyComponent" ref="policyComponent" />
 		<property name="notificationHelper" ref="notification.helper" />
-<!-- 		<property name="timeBetweenUpdates" value="30" /> -->
+<!-- 		<property name="timeBetweenUpdates" value="30" /> ->
 		<property name="timeBetweenUpdates" value="300000" />
 	</bean>
+	-->
 </beans>
