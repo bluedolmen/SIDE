@@ -52,6 +52,7 @@ public abstract class MetadataWriterAbstract {
 	protected QName ASSOC_FILE_MODELE_CONTENT;
 	protected QName TYPE_VISA;
 	protected QName PROP_QNAME_VISA_TYPEVISA;
+	protected QName PROP_REF_DOC;
 	
 	protected abstract Map<QName, Serializable> getSpecialProperties();
 	protected abstract Map<QName, Serializable> getSpecialVisaProperties();
@@ -65,6 +66,7 @@ public abstract class MetadataWriterAbstract {
 				ASSOC_FILE_MODELE_CONTENT = QName.createQName("{" + NAMESPACEURI +"}" + resolver.resolve(PROCESSUS + ".mapping.qname.file.content"));
 				TYPE_VISA = QName.createQName("{" + NAMESPACEURI +"}" + resolver.resolve(PROCESSUS + ".mapping.qname.visa"));
 				PROP_QNAME_VISA_TYPEVISA = QName.createQName("{" + NAMESPACEURI +"}" + resolver.resolve(PROCESSUS + ".mapping.qname.typevisa"));
+				PROP_REF_DOC = QName.createQName("{" + NAMESPACEURI +"}" + resolver.resolve(PROCESSUS + ".mapping.qname.refdoc"));
 				TYPE_ACCES = (String) resolver.resolve(PROCESSUS + "");
 			} else {
 				logger.error("Le dictionnaire n'a pu être initialiser.");
@@ -95,6 +97,8 @@ public abstract class MetadataWriterAbstract {
 		if (logger.isDebugEnabled())
 			logger.debug("curnode=" + curnode);
 		List<FileInfo> fileList = fileFolderService.listFiles(curnode.getNodeRef());
+		NodeRef document = new NodeRef((String) nodeService.getProperty(curnode.getNodeRef(), PROP_REF_DOC));
+		fileList.addAll(fileFolderService.listFiles(document));
 		for (FileInfo file : fileList) {
 			if (logger.isDebugEnabled())
 				logger.debug("search if necessary to inject metadata to the file = "
@@ -143,7 +147,7 @@ public abstract class MetadataWriterAbstract {
 		}
 		
 		associationProperties = getAssociationProperties();
-		if (associationProperties != null) {
+		if (associationProperties.size() > 0) {
 			properties.putAll(associationProperties);
 		}
 		
@@ -265,7 +269,7 @@ public abstract class MetadataWriterAbstract {
 	}
 	public Map<QName, Serializable> concatEtapeAttributs(
 			Map<String, Map<QName, Serializable>> etapesMap) {
-		
+
 		Set<QName> qnameSet = new HashSet<QName>();
 		int i = 1;
 		while(resolver.notNull(PROCESSUS + ".mapping.att" + i + ".qname")) {
