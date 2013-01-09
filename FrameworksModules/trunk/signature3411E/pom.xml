@@ -90,7 +90,7 @@
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>alfresco-repository</artifactId>
-      <version>3.4.6</version>
+      <version>3.4.11</version>
       <scope>provided</scope>
       <classifier>enterprise</classifier>
     </dependency>
@@ -103,14 +103,14 @@
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>alfresco-core</artifactId>
-      <version>3.4.6</version>
+      <version>3.4.11</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>alfresco-data-model</artifactId>
-      <version>3.4.6</version>
+      <version>3.4.11</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
@@ -120,6 +120,18 @@
       <version>3.0.0.RELEASE</version>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+		<groupId>com.itextpdf</groupId>
+		<artifactId>itextpdf</artifactId>
+		<version>5.0.6</version>
+		<type>jar</type>
+		<exclusions>
+			<exclusion>
+				<groupId>*</groupId>
+				<artifactId>*</artifactId>
+			</exclusion>
+		</exclusions>
+	</dependency>
     <!-- Don't add here amp dependencies as it will break amp packaging -->
   </dependencies>
   <!-- The scm is required for the buildnumber-maven-plugin which is required for AMP version numbering
