@@ -37,7 +37,7 @@
 		<property name="serviceRegistry" ref="ServiceRegistry" />
 		<property name="policyComponent" ref="policyComponent" />
 		<property name="notificationHelper" ref="notification.helper" />
-<!-- 		<property name="timeBetweenUpdates" value="30" /> ->
+<!- 		<property name="timeBetweenUpdates" value="30" /> ->
 		<property name="timeBetweenUpdates" value="300000" />
 	</bean>
 	-->
