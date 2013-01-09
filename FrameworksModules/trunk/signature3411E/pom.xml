@@ -30,7 +30,7 @@
   In order to be able to use Maven snapshots we cannot use the <version/> below as the AMP module
   version. Instead we use the buildnumber-maven-plugin. This requires a scm connection.
 	 -->
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <description>this is a new Amp project generated using	"com.bluexml.side.Integration.m2.ampArchetype" thanks to change this description</description>
   <parent>
     <groupId>org.bluexml</groupId>
@@ -121,17 +121,17 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-		<groupId>com.itextpdf</groupId>
-		<artifactId>itextpdf</artifactId>
-		<version>5.0.6</version>
-		<type>jar</type>
-		<exclusions>
-			<exclusion>
-				<groupId>*</groupId>
-				<artifactId>*</artifactId>
-			</exclusion>
-		</exclusions>
-	</dependency>
+      <groupId>com.itextpdf</groupId>
+      <artifactId>itextpdf</artifactId>
+      <version>5.0.6</version>
+      <type>jar</type>
+      <exclusions>
+        <exclusion>
+          <groupId>*</groupId>
+          <artifactId>*</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
     <!-- Don't add here amp dependencies as it will break amp packaging -->
   </dependencies>
   <!-- The scm is required for the buildnumber-maven-plugin which is required for AMP version numbering
