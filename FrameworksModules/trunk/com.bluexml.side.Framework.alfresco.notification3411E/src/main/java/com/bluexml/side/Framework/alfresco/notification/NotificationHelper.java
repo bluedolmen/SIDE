@@ -188,7 +188,9 @@ public class NotificationHelper {
 	}
 
 	public Object getUserPreference(NodeRef user, String key) throws Exception {
-		return getUserPreferences(user).get(key);
+		Object obj = getUserPreferences(user).get(key);
+		if (obj == null) return true;
+		else return obj;
 	}
 
 	public void sendMails(List<String> dests, String eventType, NodeRef document, String language, Map<String, Object> model) throws Exception {
@@ -406,12 +408,10 @@ public class NotificationHelper {
 			result.put("docUrl", "document-details?nodeRef=" + document.getStoreRef() + "/" + document.getId());
 			
 			//get owner
-			String owner = (String) serviceRegistry.getNodeService().getProperty(document, ContentModel.PROP_OWNER);
-			if (owner != null) {
-				result.put("owner", owner);
-			} else {
-				owner = (String) serviceRegistry.getNodeService().getProperty(document, ContentModel.PROP_CREATOR);
-				result.put("owner", owner);
+			String owner = serviceRegistry.getOwnableService().getOwner(document);
+			NodeRef onwerNodeRef = serviceRegistry.getPersonService().getPerson(owner);
+			if (onwerNodeRef != null) {
+				result.put("owner", onwerNodeRef);
 			}
 		
 			return result;
@@ -481,27 +481,16 @@ public class NotificationHelper {
 		if (language == null) {
 			Locale loc = I18NUtil.getLocale();
 			if (loc == null || loc.toString() == null) {
-				language = "fr";
+				language = "fr_FR";
 			} else {
-				language = loc.toString().toLowerCase();
+				language = loc.toString();
 			}
 		}
-		language = language.toLowerCase();
+		logger.trace("language :" + language);
 		Properties langueExist = props.get(language);
 		if (langueExist == null || dynamicLoading) {
 			// load properties
-			Properties prop = new Properties();
-			// search in alfresco dictionary
-			prop.load(getPropertiesInputStream(language));
-			// custom properties
-			if (resourceCustomPaths != null && !resourceCustomPaths.isEmpty()) {
-				for (String resourceCustomPath : resourceCustomPaths) {
-					Properties customProp = new Properties();
-					customProp.load(getPropertiesInputStream(language,propertyFileName,resourceCustomPath,false));
-					prop.putAll(customProp);
-				}
-			}
-			logger.trace("Properties loaded :" + prop);
+			Properties prop = getProperties(language, propertyFileName, resourceCustomPaths);
 			props.put(language, prop);
 		}
 		// not dynamic so return cached object
@@ -515,18 +504,33 @@ public class NotificationHelper {
 	 * @return the set of properties
 	 * @throws Exception
 	 */
-	public Properties getPropertiesFor(String propertyFileName, ArrayList<String> resourceCustomPaths) throws Exception {
+	public Properties getProperties(String propertyFileName, ArrayList<String> resourceCustomPaths) throws Exception {
+		return getProperties(null, propertyFileName, resourceCustomPaths);
+	}
+
+	/**
+	 * This method loads the propertyFileName file from the Dictionary path of Alfresco repository (and if not found from classpath) 
+	 * and then overwrite the properties with the properties files successively contains in resourceCustomPaths[i]+"/cm:"+propertyFileName
+	 * @param propertyFileName the property file name to load; if null, set to "notification.properties"
+	 * @param resourceCustomPaths a list of folder where the propertyFileName may be loaded
+	 * @return the set of properties
+	 * @throws Exception
+	 */
+	public Properties getProperties(String language, String propertyFileName, ArrayList<String> resourceCustomPaths) throws Exception {
 		// load properties
 		Properties prop = new Properties();
 		if (propertyFileName == null)  propertyFileName = PROPERTIES_PATH;
 		// search in alfresco dictionary
-		prop.load(getPropertiesInputStream(null,propertyFileName,PROPERTIES_IN_DICTIONARY_PATH,true));
+		prop.load(getPropertiesInputStream(language,propertyFileName,PROPERTIES_IN_DICTIONARY_PATH,true));
 		// custom properties
 		if (resourceCustomPaths != null && !resourceCustomPaths.isEmpty()) {
 			for (String resourceCustomPath : resourceCustomPaths) {
 				Properties customProp = new Properties();
-				customProp.load(getPropertiesInputStream(null, propertyFileName, resourceCustomPath, false));
-				prop.putAll(customProp);
+				InputStream s = getPropertiesInputStream(language, propertyFileName, resourceCustomPath, false);
+				if (s != null) {
+					customProp.load(s);
+					prop.putAll(customProp);
+				}
 			}
 		}
 		logger.trace("Properties loaded :" + prop);
