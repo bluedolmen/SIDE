@@ -11,6 +11,15 @@ public interface IConfigurationFile<K, V> {
 	 * @return
 	 */
 	public abstract V getValue(K key);
+	
+	/**
+	 * get the value for the given key
+	 * 
+	 * @param key
+	 * @param defaultValue, if the key do not exists return this value
+	 * @return
+	 */
+	public abstract V getValue(K key,V defaultValue);
 
 	/**
 	 * true if value exists for this key
@@ -27,4 +36,5 @@ public interface IConfigurationFile<K, V> {
 	 */
 	public abstract Map<K, V> getDictionary();
 
+	
 }

@@ -20,7 +20,7 @@ public abstract class PropertiesConfiguration extends AbstractConfigurationFile<
 			Properties properties = new Properties();
 			try {
 				properties.load(r.getInputStream());
-				logger.info("Load Properties form Resource " + r.getURI());
+				logger.info("Load Properties form Resource " + r);
 			} catch (IOException e) {
 				logger.error("Unexpected error loading property file \"" + r.getFilename() + "\" ", e);
 			}
@@ -34,11 +34,14 @@ public abstract class PropertiesConfiguration extends AbstractConfigurationFile<
 		} else {
 			logger.info("Resource do not exists :" + r.getDescription());
 		}
-
 	}
 
 	public boolean getAsBooleanValue(String key) {
 		return Boolean.parseBoolean(getValue(key).trim());
+	}
+
+	public boolean getAsBooleanValue(String key, boolean defaultValue) {
+		return Boolean.parseBoolean(getValue(key, Boolean.toString(defaultValue)).trim());
 	}
 
 	public abstract boolean isValidePropertiesResource(Properties props);
