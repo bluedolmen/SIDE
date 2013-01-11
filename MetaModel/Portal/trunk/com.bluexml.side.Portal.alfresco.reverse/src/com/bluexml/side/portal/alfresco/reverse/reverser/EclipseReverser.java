@@ -65,6 +65,7 @@ public class EclipseReverser {
 	}
 
 	public Page reverse(PortalLayout layout, Components fromPage, List<Region> regions) throws Exception {
+
 		this.portalLayout = layout;
 		String id = pageName;
 
@@ -82,11 +83,14 @@ public class EclipseReverser {
 		Components fromInstance = ReversePortal.getValueComponents(model.getContent());
 
 		for (Region region : regions) {
+			if (region.getRegionId().contains("+")) {
+				// computed region ...
+			}
 			Component component = getComponent(region, fromInstance, fromPage);
 			if (component != null) {
 				handleComponent(page, component);
 			} else {
-				System.err.println("Missing component for region :" + region.getRegionId() + " scope:" + region.getScope());
+				System.err.println("Missing component for region :" + region.getRegionId() + ", scope:" + region.getScope());
 			}
 		}
 
@@ -263,11 +267,13 @@ public class EclipseReverser {
 	}
 
 	protected Component searchComponent(Region region, Components fromInstance) throws Exception {
+		String regionId = region.getRegionId();
+		System.out.println("EclipseReverser.searchComponent() region :" + regionId);
 		Component com = null;
 		if (fromInstance != null) {
 			List<Component> components = fromInstance.getComponent();
 			for (Component component : components) {
-				String regionId = region.getRegionId();
+				
 				if (regionId.equals(component.getRegionId())) {
 					if (com == null) {
 						com = component;

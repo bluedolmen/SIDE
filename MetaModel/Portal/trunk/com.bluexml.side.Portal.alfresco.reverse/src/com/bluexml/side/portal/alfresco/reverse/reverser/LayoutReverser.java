@@ -41,6 +41,9 @@ public class LayoutReverser {
 	List<Region> regions = new ArrayList<Region>();
 
 	String regexpAttributes = "(([^ =]*)=\"([^\"]*)\")";
+	
+	String regexpRegionIdAttributes = "<@region (id)=([^\"]*\"[^\"]*\") scope=";
+	
 	FreemarkerTags currentOpenedTag = null;
 
 	public List<Region> getRegions() {
@@ -57,14 +60,14 @@ public class LayoutReverser {
 	}
 
 	public PortalLayout parse() throws Exception {
-		System.out.println("LayoutReverser.parse() parse file :" + pageFile);
+		// System.out.println("LayoutReverser.parse() parse file :" + pageFile);
 		boolean previousIsRaw = false;
 		for (Object object : readLines) {
 			currentLineIndex++;
 
 			currentLine = (String) object;
-			//			System.out.println("line :" + currentLine + " (" + currentLineIndex + ")");
-			//			System.out.println("level " + level);
+			// System.out.println("line :" + currentLine + " (" + currentLineIndex + ")");
+			// System.out.println("level " + level);
 			currentLine = currentLine.trim();
 			if (!currentLine.isEmpty()) {
 
@@ -78,8 +81,8 @@ public class LayoutReverser {
 							handledStartTag = true;
 							break;
 						} else {
-							System.out.println("LayoutReverser.parse() no matches regexp:" + string + " line :" + currentLine);
-							System.out.println("\tregexp2 :" + string2 + " line :" + currentLine);
+							// System.out.println("LayoutReverser.parse() no matches regexp:" + string + " line :" + currentLine);
+							// System.out.println("\tregexp2 :" + string2 + " line :" + currentLine);
 						}
 					}
 					if (handledStartTag && previousIsRaw) {
@@ -151,15 +154,18 @@ public class LayoutReverser {
 	}
 
 	protected void handle_region() {
-		System.out.println("LayoutReverser.handle_region()");
+		// System.out.println("LayoutReverser.handle_region()");
 		Map<String, String> properties = new HashMap<String, String>();
 		properties.put("tag", "");
 		int groupId = 2;
 		int groupValue = 3;
 		Map<String, String> atts = new HashMap<String, String>();
 		readAttributes(atts, regexpAttributes, groupId, groupValue);
-
+		if (atts.get("id") == null) {
+			readAttributes(atts, regexpRegionIdAttributes, 1, 2);
+		}
 		String regionId = atts.get("id");
+		
 		String scope = atts.get("scope");
 		createColumn(regionId, properties);
 		Region r = new Region(regionId, scope);
@@ -169,7 +175,7 @@ public class LayoutReverser {
 	}
 
 	protected void handle_include() {
-		System.out.println("LayoutReverser.handle_include()");
+		// System.out.println("LayoutReverser.handle_include()");
 		Map<String, String> properties = new HashMap<String, String>();
 		
 		createColumn("includes", properties);
@@ -178,21 +184,21 @@ public class LayoutReverser {
 	}
 
 	protected void handle_templateHeader() {
-		System.out.println("LayoutReverser.handle_templateHeader()");
+		// System.out.println("LayoutReverser.handle_templateHeader()");
 		Map<String, String> properties = new HashMap<String, String>();
 		properties.put("tag", "@templateHeader");
 		createColumn("@templateHeader", properties);
 	}
 
 	protected void handle_templateBody() {
-		System.out.println("LayoutReverser.handle_templateBody()");
+		// System.out.println("LayoutReverser.handle_templateBody()");
 		Map<String, String> properties = new HashMap<String, String>();
 		properties.put("tag", "@templateBody");
 		createColumn("@templateBody", properties);
 	}
 
 	protected void handle_div() {
-		System.out.println("LayoutReverser.handle_div()");
+		// System.out.println("LayoutReverser.handle_div()");
 		Map<String, String> properties = new HashMap<String, String>();
 		int groupId = 2;
 		int groupValue = 3;
@@ -214,13 +220,13 @@ public class LayoutReverser {
 		Matcher matcher = regexpDiv.matcher(currentLine);
 
 		while (matcher.find()) {
-			System.out.println("MATCHS");
+			// System.out.println("MATCHS");
 			String group = matcher.group();
-			System.out.println("\tgroup:" + group);
+			// System.out.println("\tgroup:" + group);
 			int groupCount = matcher.groupCount();
 			for (int i = 0; i <= groupCount; i++) {
 				String group2 = matcher.group(i);
-				System.out.println("\tgroup (" + i + "):" + group2);
+				// System.out.println("\tgroup (" + i + "):" + group2);
 			}
 
 			String attId = matcher.group(groupId);
@@ -232,50 +238,50 @@ public class LayoutReverser {
 	}
 
 	protected void handle_templateFooter() {
-		System.out.println("LayoutReverser.handle_templateFooter()");
+		// System.out.println("LayoutReverser.handle_templateFooter()");
 		Map<String, String> properties = new HashMap<String, String>();
 		properties.put("tag", "@templateFooter");
 		createColumn("@templateFooter", properties);
 	}
 
 	protected void handle_region_end() {
-		System.out.println("LayoutReverser.handle_region_end()");
+		// System.out.println("LayoutReverser.handle_region_end()");
 		closeColumn();
 	}
 
 	protected void handle_include_end() {
-		System.out.println("LayoutReverser.handle_include_end()");
+		// System.out.println("LayoutReverser.handle_include_end()");
 		closeRawSection();
 	}
 
 	protected void handle_templateHeader_end() {
-		System.out.println("LayoutReverser.handle_templateHeader_end()");
+		// System.out.println("LayoutReverser.handle_templateHeader_end()");
 		//		closeRawSection();
 		closeColumn();
 	}
 
 	protected void handle_templateBody_end() {
-		System.out.println("LayoutReverser.handle_templateBody_end()");
+		// System.out.println("LayoutReverser.handle_templateBody_end()");
 		closeColumn();
 	}
 
 	protected void handle_ifTag_end() {
-		System.out.println("LayoutReverser.handle_ifTag_end()");
+		// System.out.println("LayoutReverser.handle_ifTag_end()");
 		closeColumn();
 	}
 
 	protected void handle_div_end() {
-		System.out.println("LayoutReverser.handle_div_end()");
+		// System.out.println("LayoutReverser.handle_div_end()");
 		closeColumn();
 	}
 
 	protected void handle_templateFooter_end() {
-		System.out.println("LayoutReverser.handle_templateFooter_end()");
+		// System.out.println("LayoutReverser.handle_templateFooter_end()");
 		closeColumn();
 	}
 
 	protected Column createColumn(String name, Map<String, String> properties) {
-		System.out.println("LayoutReverser.createColumn() name:" + name);
+		// System.out.println("LayoutReverser.createColumn() name:" + name);
 		lastOpenedLineIndex = currentLineIndex;
 		Column c = PortalFactory.eINSTANCE.createColumn();
 		c.setName(name);
@@ -298,13 +304,13 @@ public class LayoutReverser {
 		level++;
 		currentChildIndex++;
 
-		System.out.println("LayoutReverser.createColumn() end");
+		// System.out.println("LayoutReverser.createColumn() end");
 		//		print();
 		return c;
 	}
 
 	protected void closeColumn() {
-		System.out.println("LayoutReverser.closeColumn()");
+		// System.out.println("LayoutReverser.closeColumn()");
 
 		Object[] object = (Object[]) child_parent.get(currentCol);
 
@@ -325,12 +331,12 @@ public class LayoutReverser {
 
 		level--;
 		lastClosedLineIndex = currentLineIndex;
-		System.out.println("LayoutReverser.closeColumn() end");
+		// System.out.println("LayoutReverser.closeColumn() end");
 		//		print();
 	}
 
 	protected void extractRawContent(Column c) {
-		System.out.println("LayoutReverser.extractRawContent() column :" + c.getFullName());
+		// System.out.println("LayoutReverser.extractRawContent() column :" + c.getFullName());
 		String rawContent = "";
 		if (lastOpenedLineIndex == lastClosedLineIndex) {
 			rawContent = currentLine;

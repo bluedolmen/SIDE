@@ -67,7 +67,7 @@ public class ReversePortal {
 		};
 
 		for (File page : this.pages.listFiles(filter)) {
-
+			System.out.println("ReversePortal.reverse() Page :" + page);
 			String name = page.getName().replace(".xml", "");
 			// extract page information
 			Page p = loadPage(page);
@@ -83,12 +83,13 @@ public class ReversePortal {
 			File templateFile = getTemplateFile(templateType);
 
 			if (templateInstanceFile.exists() && templateFile.exists()) {
+				System.out.println("ReversePortal.reverse() templateInstance :" + templateFile);
 				// revert pages layouts
 				LayoutReverser lr = new LayoutReverser(templateFile, portal, name);
 				PortalLayout layout = lr.parse();
 
 				// each region must match to a component
-				// components can be defined in tree places ... hum
+				// components can be defined in three places ... hum
 				// SIDE-DATA/components, into page definition and into template-instance definition
 				List<Region> regions = lr.getRegions();
 
