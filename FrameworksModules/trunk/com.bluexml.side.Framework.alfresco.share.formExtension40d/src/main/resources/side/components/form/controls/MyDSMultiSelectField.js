@@ -372,7 +372,19 @@ if (console == undefined) {
             });
             // alert();
          }
-
+      },
+      /**
+       * private method to remove an item
+       * @param {Integer} index index of item to be removed
+       * @private
+       */
+      _removeItem: function(i) {
+         var itemValue = SIDE.MyDDList.superclass._removeItem.call(this, i);
+      
+         this.itemsLabels[i] = null;
+         this.itemsLabels = inputEx.compactArray(this.itemsLabels);
+         
+         return itemValue;
       }
    });
 }());
