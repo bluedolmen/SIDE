@@ -76,35 +76,37 @@ public abstract class DirectWebAppsDeployer extends WarDeployer {
 		FileFilter incrementalFileFilter = new FileFilter() {
 
 			public boolean accept(File pathname) {
-				try {
-					String fileExt = FileHelper.getFileExt(pathname);
-					if (fileExt.equals(packageExt)) {
-						// test if package is newer than the deployed webapp
-						if (cleanned || !incremental || mode.equals(DeployMode.CUSTOM)) {
-							return true;
-						} else {
-							// incremental allowed
-							long module = pathname.lastModified();
-							File deployedWebbAppFolder = getIncrementalLastDeployedFlag();
-							long webapp = deployedWebbAppFolder.lastModified();
-
-							if (module > webapp) {
-								System.out.println("module is newer ");
-								// module must be deployed
+				if (pathname.isFile()) {
+					try {
+						String fileExt = FileHelper.getFileExt(pathname);
+						if (fileExt.equals(packageExt)) {
+							// test if package is newer than the deployed webapp
+							if (cleanned || !incremental || mode.equals(DeployMode.CUSTOM)) {
 								return true;
 							} else {
-								System.out.println("module skipped by incremental deployer :" + pathname);
-								Date dateModule = new Date(module);
-								Date dateWebapp = new Date(webapp);
-								System.out.println("module :" + pathname + "[" + dateModule + "]");
-								System.out.println("webapp :" + deployedWebbAppFolder + "[" + dateWebapp + "]");
+								// incremental allowed
+								long module = pathname.lastModified();
+								File deployedWebbAppFolder = getIncrementalLastDeployedFlag();
+								long webapp = deployedWebbAppFolder.lastModified();
+
+								if (module > webapp) {
+									System.out.println("module is newer ");
+									// module must be deployed
+									return true;
+								} else {
+									System.out.println("module skipped by incremental deployer :" + pathname);
+									Date dateModule = new Date(module);
+									Date dateWebapp = new Date(webapp);
+									System.out.println("module :" + pathname + "[" + dateModule + "]");
+									System.out.println("webapp :" + deployedWebbAppFolder + "[" + dateWebapp + "]");
+								}
 							}
 						}
-					}
-				} catch (Exception e) {
-					System.out.println("fileName :" + pathname);
-					e.printStackTrace();
 
+					} catch (Exception e) {
+						System.out.println("fileName :" + pathname);
+						e.printStackTrace();
+					}
 				}
 
 				return false;
