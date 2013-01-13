@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %Bundle-Name
 Bundle-SymbolicName: com.bluexml.side.Integration.eclipse.branding.enterprise;singleton:=true
-Bundle-Version: 1.0.879.v42459-20130112
+Bundle-Version: 1.0.880.v42479-20130113
 Bundle-Activator: com.bluexml.side.Integration.eclipse.branding.enterprise.Activator
 Bundle-Vendor: %Bundle-Vendor
 Require-Bundle: org.eclipse.ui.intro,
