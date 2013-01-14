@@ -1,9 +1,12 @@
 package com.bluexml.side.Framework.alfresco.signature.repo.action.executer;
 
+import java.util.List;
+
 import org.alfresco.model.ContentModel;
 import org.alfresco.repo.action.executer.ActionExecuterAbstractBase;
 import org.alfresco.service.ServiceRegistry;
 import org.alfresco.service.cmr.model.FileInfo;
+import org.alfresco.service.cmr.repository.ChildAssociationRef;
 import org.alfresco.service.cmr.repository.ContentReader;
 import org.alfresco.service.cmr.repository.ContentWriter;
 import org.alfresco.service.cmr.repository.NodeRef;
@@ -53,8 +56,20 @@ public abstract class BasePDFActionExecuter extends ActionExecuterAbstractBase {
      */
     protected ContentWriter getWriter(String filename, NodeRef destinationParent)
     {
-
-        FileInfo fileInfo = serviceRegistry.getFileFolderService().create(destinationParent,
+    	List<ChildAssociationRef> myChildren = serviceRegistry.getNodeService().getChildAssocs(destinationParent);
+    	for (ChildAssociationRef myChild : myChildren) {
+    		if (serviceRegistry.getNodeService().getProperty(myChild.getChildRef(), ContentModel.PROP_NAME).equals(filename)) {
+    			//serviceRegistry.getFileFolderService().delete(myChild.getChildRef());
+    			serviceRegistry.getPermissionService().getPermissions(myChild.getChildRef());
+    			try {
+    				serviceRegistry.getNodeService().deleteNode(myChild.getChildRef());
+    			} catch(Exception e) {
+    				serviceRegistry.getNodeService().setProperty(myChild.getChildRef(), ContentModel.PROP_NAME, "filename" + ".old");
+    			}
+    			break;
+    		}
+    	}
+    	FileInfo fileInfo = serviceRegistry.getFileFolderService().create(destinationParent,
                 filename, ContentModel.TYPE_CONTENT);
 
         // get the writer and set it up

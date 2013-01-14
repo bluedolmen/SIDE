@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.cert.Certificate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.alfresco.model.ContentModel;
@@ -47,6 +48,8 @@ public class PDFSignatureActionExecuter extends BasePDFStampActionExecuter
     public static final String PARAM_WIDTH = "width";
     public static final String PARAM_HEIGHT = "height";
     public static final String PARAM_KEY_TYPE = "key-type";
+    public static final String PARAM_EXCEPTION = "exception";
+    public static final String PARAM_SIGNED_NAME = "signed-name";
     
     //Aditional parameters to accessing the keystore file 
     public static final String PARAM_ALIAS = "alias";
@@ -79,22 +82,23 @@ public class PDFSignatureActionExecuter extends BasePDFStampActionExecuter
      * @see org.alfresco.repo.action.executer.ActionExecuterAbstractBase#executeImpl(org.alfresco.service.cmr.repository.NodeRef,
      *      org.alfresco.service.cmr.repository.NodeRef)
      */
-    @Override
+    
     protected void executeImpl(Action ruleAction, NodeRef actionedUponNodeRef)
-    {
-        if (serviceRegistry.getNodeService().exists(actionedUponNodeRef) == false)
-        {
-            // node doesn't exist - can't do anything
-            return;
-        }
+    { 
+    	@SuppressWarnings("unchecked")
+		ArrayList<String> myException = (ArrayList<String>) ruleAction.getParameterValue(PARAM_EXCEPTION);
         
         ContentReader actionedUponContentReader = getReader(actionedUponNodeRef);
         
         if (actionedUponContentReader != null)
         {
             // Add the signature to the PDF
-            doSignature(ruleAction, actionedUponNodeRef, actionedUponContentReader);
-
+            try {
+				doSignature(ruleAction, actionedUponNodeRef, actionedUponContentReader);
+			} catch (Exception e) {
+				myException.add("Error on document " + actionedUponNodeRef.getStoreRef() + "/" + actionedUponNodeRef.getId());
+			}
+            
             {
                 if (logger.isDebugEnabled())
                 {
@@ -111,17 +115,19 @@ public class PDFSignatureActionExecuter extends BasePDFStampActionExecuter
      * @param ruleAction
      * @param actionedUponNodeRef
      * @param actionedUponContentReader
+     * @throws Exception 
      */
     protected void doSignature(Action ruleAction, NodeRef actionedUponNodeRef,
-            ContentReader actionedUponContentReader)
+            ContentReader actionedUponContentReader) throws Exception
     {
-
+    	
         NodeRef privateKey = (NodeRef)ruleAction.getParameterValue(PARAM_PRIVATE_KEY);
         String location = (String)ruleAction.getParameterValue(PARAM_LOCATION);
         String reason = (String)ruleAction.getParameterValue(PARAM_REASON);
         String visibility = (String)ruleAction.getParameterValue(PARAM_VISIBILITY);
         String keyPassword = (String)ruleAction.getParameterValue(PARAM_KEY_PASSWORD);
         String keyType = (String)ruleAction.getParameterValue(PARAM_KEY_TYPE);
+        String signedName = (String)ruleAction.getParameterValue(PARAM_SIGNED_NAME);
         int height = Integer.parseInt((String)ruleAction.getParameterValue(PARAM_HEIGHT));
         int width = Integer.parseInt((String)ruleAction.getParameterValue(PARAM_WIDTH));
         
@@ -201,8 +207,19 @@ public class PDFSignatureActionExecuter extends BasePDFStampActionExecuter
 			}
 
 			stamp.close();
-		
-            writer = getWriter(file.getName(), (NodeRef) ruleAction.getParameterValue(PARAM_DESTINATION_FOLDER));
+			
+
+	    	String[] splitedFilename = file.getName().split("\\.");
+	    	String name = "-" + signedName + "." + splitedFilename[splitedFilename.length -1];
+	    	for(int i = splitedFilename.length - 2; i >= 0; i--) {
+	    		if (name.equals("-" + signedName + "." + splitedFilename[splitedFilename.length -1])) {
+	    			name =  splitedFilename[i] +  name;
+	    		} else {
+	    			name =  splitedFilename[i] + "." + name;
+	    		}
+	    	}
+	    	
+            writer = getWriter(name, (NodeRef) ruleAction.getParameterValue(PARAM_DESTINATION_FOLDER));
             writer.setEncoding(actionedUponContentReader.getEncoding());
             writer.setMimetype(FILE_MIMETYPE);
             writer.putContent(file);
@@ -211,7 +228,7 @@ public class PDFSignatureActionExecuter extends BasePDFStampActionExecuter
 		}
 		catch (Exception e)
         {
-            e.printStackTrace();
+            throw e;
         }
         finally 
         {

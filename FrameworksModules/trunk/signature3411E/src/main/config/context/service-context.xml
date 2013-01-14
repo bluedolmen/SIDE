@@ -13,13 +13,8 @@
 	</bean>
 	
 	<bean id="signature.helper"
-		class="com.bluexml.side.Framework.alfresco.signature.repo.action.integration.SignatureHelper"
-		parent="action-executer">
-		<property name="serviceRegistry">
-			<ref bean="ServiceRegistry" />
-		</property>
-		<property name="nodeService">
-			<ref bean="NodeService" />
-		</property>
+		class="com.bluexml.side.Framework.alfresco.signature.integration.SignatureHelper">
+		<property name="serviceRegistry" ref="ServiceRegistry" />
+		<property name="nodeService" ref="nodeService" />
 	</bean>
 </beans>
