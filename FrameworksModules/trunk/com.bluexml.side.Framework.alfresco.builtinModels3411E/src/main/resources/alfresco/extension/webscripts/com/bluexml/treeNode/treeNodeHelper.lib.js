@@ -55,7 +55,7 @@ TreeNodeHelper.createTreeNode = function (type, parent, itemParent, props, creat
 }
 
 /* function to add rules */
-TreeNodeHelper.addTreeNodeRules = function(node, rootName, addedRules) {
+TreeNodeHelper.addTreeNodeRules = function(node, rootName, nodeTypeLocalName, nodeTypeURI, addedRules) {
 	var scriptFolder = search
 			.luceneSearch('PATH:"/app:company_home/app:dictionary/app:scripts"');
 	var scriptName = null;
@@ -77,6 +77,7 @@ TreeNodeHelper.addTreeNodeRules = function(node, rootName, addedRules) {
 		 * addParent rule to add parent to category
 		 */
 		function addParent(rootName) {
+			var treeNodeAssoQName = "buildInLibraryAlfresco:TreeFilter_AssociationTree_TreeFilter";
 			var dataListContainer = document.parent;
 			// search for Documents
 			var target = dataListContainer.childByNamePath(rootName);
@@ -97,13 +98,9 @@ TreeNodeHelper.addTreeNodeRules = function(node, rootName, addedRules) {
 		var props = new Array();
 		props["app:editInline"] = true;
 		createSiteCategoryRoot.addAspect("app:inlineeditable", props);
-		siderule.addScriptRuleWithTypeCondition(createSiteCategoryRoot, node,
-				"inbound", "Structures", SIDE_WCMQS_MODEL_URI, true, false,
-				false, "add parent (inbound) " + rootName,
+		siderule.addScriptRuleWithTypeCondition(createSiteCategoryRoot, node, "inbound", nodeTypeLocalName, nodeTypeURI, true, false, false, "add parent (inbound) " + rootName,
 				"rule that add a parent for " + rootName);
-		siderule.addScriptRuleWithTypeCondition(createSiteCategoryRoot, node,
-				"update", "Structures", SIDE_WCMQS_MODEL_URI, true, false,
-				false, "add parent (update) " + rootName,
+		siderule.addScriptRuleWithTypeCondition(createSiteCategoryRoot, node, "update", nodeTypeLocalName, nodeTypeURI, true, false, false, "add parent (update) " + rootName,
 				"rule that add a parent for " + rootName);
 		addedRules[addedRules.length] = "Inbound Rule '" + scriptName + "' on "
 				+ node.properties["cm:name"];
@@ -131,7 +128,7 @@ TreeNodeHelper.createDataListForTreeNode = function(siteNode, dataListItemType,
 	if (categoryList == null && dataLists.hasPermission("CreateChildren")) {
 		var props = new Array(3);
 		props["cm:title"] = rootName;
-		props["cm:description"] = "Arbre des Structures";
+		props["cm:description"] = "Arbre " + rootName;
 		props["dl:dataListItemType"] = dataListItemType;
 		categoryList = dataLists.createNode(rootName, "dl:dataList", props);
 	}
