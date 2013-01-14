@@ -18,10 +18,6 @@ public class RepositoryPropertiesConfiguration extends PropertiesConfiguration {
 		this.resolver = new RepositoryResourcePatternResolver(serviceRegistry);
 	}
 
-	public boolean getAsBooleanValue(String key) {
-		return Boolean.parseBoolean(getValue(key).trim());
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * @see
