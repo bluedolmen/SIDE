@@ -32,11 +32,10 @@ public class SignatureHelper {
 	 *  WARNING exception are passed to the action by reference because serviceRegistry.getActionService().executeAction() doesn't throw exception.
 	 * @param props all the properties needed to sign
 	 * @param parapheur the parapheur
-	 * @param parapheur the document linked by the parapheur cannot be null but it can not exist.
 	 * @param myFileToSign the list of file(s) to diffuse.
 	 * @return exception if there are
 	 **/
-	public ArrayList<String> execute(Properties props, NodeRef parapheur, NodeRef document, List<AssociationRef> myFileToSign) {
+	public ArrayList<String> execute(Properties props, NodeRef parapheur, List<AssociationRef> myFileToSign) {
 		ArrayList<String> exception = new ArrayList<String>();
 		NodeRef key = null;
 		Map<String, Serializable> params = null;
@@ -83,22 +82,51 @@ public class SignatureHelper {
 				String name = (String) nodeService.getProperty(child.getTargetRef(), ContentModel.PROP_NAME);
 				String[] splitedName = name.split("\\.");
 				name = getNameWithoutExtension(splitedName);
-				//Get all files under parapheur and original document, if document is a folder and it exists. 
-				List<ChildAssociationRef> myFiles = nodeService.getChildAssocs(parapheur);
-				if (nodeService.exists(document) && nodeService.getType(document).equals(ContentModel.TYPE_FOLDER)) {
-					myFiles.addAll(nodeService.getChildAssocs(document));
-        		}
-				for(ChildAssociationRef mychild : myFiles) {
-					// Test if names matche 
-					if (nodeService.getProperty(mychild.getChildRef(), ContentModel.PROP_NAME).equals(name + ".pdf")) {
-						logger.debug("Start signature of document  " + nodeService.getProperty(mychild.getChildRef(), ContentModel.PROP_NAME));
-						serviceRegistry.getActionService().executeAction(signPDF, mychild.getChildRef());
-						break;
+				//Get all files under parapheur/Documents
+				NodeRef documentsFolder = nodeService.getChildByName(parapheur, ContentModel.ASSOC_CONTAINS, "Documents");
+				if (documentsFolder != null) {
+					List<ChildAssociationRef> myFiles = nodeService.getChildAssocs(documentsFolder);
+					for(ChildAssociationRef mychild : myFiles) {
+						if(nodeService.getType(mychild.getChildRef()) == ContentModel.TYPE_CONTENT) {
+							// Test if names matche 
+							if (nodeService.getProperty(mychild.getChildRef(), ContentModel.PROP_NAME).equals(name + ".pdf")) {
+								logger.debug("Start signature of document  " + nodeService.getProperty(mychild.getChildRef(), ContentModel.PROP_NAME));
+								serviceRegistry.getActionService().executeAction(signPDF, mychild.getChildRef());
+								break;
+							}
+						} else if(nodeService.getType(mychild.getChildRef()) == ContentModel.TYPE_FOLDER) {
+							if (searchFilesIntoFolders(mychild.getChildRef(), name + ".pdf",  signPDF)) {
+								break;
+							}
+						}
 					}
+				} else {
+					logger.error("Folder Documents not found.");
+					exception.add("Folder Documents not found.");
+					return exception;
 				}
 			}
 		}
 		return exception;
+	}
+
+	private boolean searchFilesIntoFolders(NodeRef node, String name,
+			Action signPDF) {
+		List<ChildAssociationRef> myFiles = nodeService.getChildAssocs(node);
+		for(ChildAssociationRef mychild : myFiles) {
+			if(nodeService.getType(mychild.getChildRef()) == ContentModel.TYPE_CONTENT) {
+				if (nodeService.getProperty(mychild.getChildRef(), ContentModel.PROP_NAME).equals(name)) {
+					logger.debug("Start signature of document  " + nodeService.getProperty(mychild.getChildRef(), ContentModel.PROP_NAME));
+					serviceRegistry.getActionService().executeAction(signPDF, mychild.getChildRef());
+					return true;
+				}
+			} else if(nodeService.getType(mychild.getChildRef()) == ContentModel.TYPE_FOLDER) {
+				if (searchFilesIntoFolders(mychild.getChildRef(), name,  signPDF)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	private String getNameWithoutExtension(String[] splitedName) {
