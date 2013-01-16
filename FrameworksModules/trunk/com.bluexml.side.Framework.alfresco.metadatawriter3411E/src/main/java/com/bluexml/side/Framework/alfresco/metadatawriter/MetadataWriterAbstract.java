@@ -3,6 +3,7 @@ package com.bluexml.side.Framework.alfresco.metadatawriter;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -96,34 +97,35 @@ public abstract class MetadataWriterAbstract {
 		}
 		if (logger.isDebugEnabled())
 			logger.debug("curnode=" + curnode);
-		List<FileInfo> fileList = fileFolderService.listFiles(curnode.getNodeRef());
-		NodeRef document = new NodeRef((String) nodeService.getProperty(curnode.getNodeRef(), PROP_REF_DOC));
-		fileList.addAll(fileFolderService.listFiles(document));
-		for (FileInfo file : fileList) {
-			if (logger.isDebugEnabled())
-				logger.debug("search if necessary to inject metadata to the file = "
-						+ file.getName());
-			QName type = nodeService.getType(file.getNodeRef());
-			if (type.equals(TYPE_FILE)) {
-				Object obj = nodeService.getProperty(file.getNodeRef(), QName.createQName("http://www.alfresco.org/model/content/1.0", "content"));
-				if (obj != null) {
-					String content = obj.toString();
-					String[] tmp = content.split("\\|");
-					if (tmp != null && tmp.length>1) {
-						tmp = tmp[1].split("\\=");
-						String mimeType = tmp[1];
-						if (logger.isDebugEnabled())logger.debug("mimetype is = " + mimeType);
-						if (mimeType.equals("application/msword")) {
-							// Check if the current file is associated with a model.
-							List<AssociationRef> curNodeAssoc = nodeService
-									.getTargetAssocs(file.getNodeRef(),
-											ASSOC_FILE_MODELE_CONTENT);
-							if (curNodeAssoc.size() == 1) {
-								injectMetada(file.getNodeRef());
-							} else if (curNodeAssoc.size() > 1) {
-								logger.error("file = " + file.getName()
-										+ " is associated to more than one model");
-								logger.error("It is not possible to inject metadata");
+		NodeRef documentsFolder = nodeService.getChildByName(curnode.getNodeRef(), ContentModel.ASSOC_CONTAINS, "Documents");
+		if (documentsFolder != null) {
+			List<FileInfo> fileList = getFilesList(documentsFolder);
+			for (FileInfo file : fileList) {
+				if (logger.isDebugEnabled())
+					logger.debug("search if necessary to inject metadata to the file = "
+							+ file.getName());
+				QName type = nodeService.getType(file.getNodeRef());
+				if (type.equals(TYPE_FILE)) {
+					Object obj = nodeService.getProperty(file.getNodeRef(), QName.createQName("http://www.alfresco.org/model/content/1.0", "content"));
+					if (obj != null) {
+						String content = obj.toString();
+						String[] tmp = content.split("\\|");
+						if (tmp != null && tmp.length>1) {
+							tmp = tmp[1].split("\\=");
+							String mimeType = tmp[1];
+							if (logger.isDebugEnabled())logger.debug("mimetype is = " + mimeType);
+							if (mimeType.equals("application/msword")) {
+								// Check if the current file is associated with a model.
+								List<AssociationRef> curNodeAssoc = nodeService
+										.getTargetAssocs(file.getNodeRef(),
+												ASSOC_FILE_MODELE_CONTENT);
+								if (curNodeAssoc.size() == 1) {
+									injectMetada(file.getNodeRef());
+								} else if (curNodeAssoc.size() > 1) {
+									logger.error("file = " + file.getName()
+											+ " is associated to more than one model");
+									logger.error("It is not possible to inject metadata");
+								}
 							}
 						}
 					}
@@ -132,6 +134,18 @@ public abstract class MetadataWriterAbstract {
 		}
 	}
 
+	private List<FileInfo> getFilesList(NodeRef documentsFolder) {
+		List<FileInfo> result = new ArrayList<FileInfo>();
+		List<ChildAssociationRef> myChildren = nodeService.getChildAssocs(documentsFolder);
+		for(ChildAssociationRef myChild : myChildren) {
+			if (nodeService.getType(myChild.getChildRef()).equals(ContentModel.TYPE_FOLDER) ) {
+				result.addAll(getFilesList(myChild.getChildRef()));
+			} else {
+				result.add(fileFolderService.getFileInfo(myChild.getChildRef()));
+			}
+		}
+		return result;
+	}
 	protected void injectMetada(NodeRef fileNodeRef) {
 		
 		Map<QName, Serializable> accesProperties = null;
