@@ -3,6 +3,7 @@ package com.bluexml.side.Framework.alfresco.signature.integration;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -31,11 +32,12 @@ public class SignatureHelper {
 	 *  This pdf need to be child of parapheur or document.
 	 *  WARNING exception are passed to the action by reference because serviceRegistry.getActionService().executeAction() doesn't throw exception.
 	 * @param props all the properties needed to sign
-	 * @param parapheur the parapheur
+	 * @param entree the folder where are the files to sign.
 	 * @param myFileToSign the list of file(s) to diffuse.
+	 * @param destination The folder where the signed file are created. If null signed file are brother of the original file.
 	 * @return exception if there are
 	 **/
-	public ArrayList<String> execute(Properties props, NodeRef parapheur, List<AssociationRef> myFileToSign) {
+	public ArrayList<String> execute(Properties props, NodeRef entree, List<AssociationRef> myFileToSign, NodeRef destination) {
 		ArrayList<String> exception = new ArrayList<String>();
 		NodeRef key = null;
 		Map<String, Serializable> params = null;
@@ -59,16 +61,14 @@ public class SignatureHelper {
 		}
 		
 		//test if properties are correct.
-		exception = testinit(props, parapheur);
+		exception = testinit(props, entree);
 		if (!exception.isEmpty()) {
 			return exception;
 		} else {
 			//Initialize parameters.
-			params = initParams(props, key, parapheur, exception);
+			params = initParams(props, key, exception);
 		}
 		
-		//Create Sign pdf action.
-		Action signPDF = serviceRegistry.getActionService().createAction("pdf-signature", params);
 		/* Parse myFileToSign, if it is a pdf => sign it
 		 * if not test if a pdf file exist with the same cm:name less the extension.
 		 */
@@ -76,52 +76,63 @@ public class SignatureHelper {
 			ContentReader myReader = serviceRegistry.getContentService().getReader(child.getTargetRef(), ContentModel.PROP_CONTENT);
 			if (myReader.getMimetype().equals("application/pdf")) {
 				logger.debug("Start signature of document  " + nodeService.getProperty(child.getTargetRef(), ContentModel.PROP_NAME));
+				//Create Sign pdf action.
+				if (destination != null && nodeService.exists(destination)) {
+					params.put("destination-folder", destination);
+				} else {
+					params.put("destination-folder", nodeService.getPrimaryParent(child.getTargetRef()).getParentRef());
+				}
+				Action signPDF = serviceRegistry.getActionService().createAction("pdf-signature", params);
 				serviceRegistry.getActionService().executeAction(signPDF, child.getTargetRef());
 			} else {
 				//Get Name without extension
 				String name = (String) nodeService.getProperty(child.getTargetRef(), ContentModel.PROP_NAME);
 				String[] splitedName = name.split("\\.");
 				name = getNameWithoutExtension(splitedName);
-				//Get all files under parapheur/Documents
-				NodeRef documentsFolder = nodeService.getChildByName(parapheur, ContentModel.ASSOC_CONTAINS, "Documents");
-				if (documentsFolder != null) {
-					List<ChildAssociationRef> myFiles = nodeService.getChildAssocs(documentsFolder);
-					for(ChildAssociationRef mychild : myFiles) {
-						if(nodeService.getType(mychild.getChildRef()) == ContentModel.TYPE_CONTENT) {
-							// Test if names matche 
-							if (nodeService.getProperty(mychild.getChildRef(), ContentModel.PROP_NAME).equals(name + ".pdf")) {
-								logger.debug("Start signature of document  " + nodeService.getProperty(mychild.getChildRef(), ContentModel.PROP_NAME));
-								serviceRegistry.getActionService().executeAction(signPDF, mychild.getChildRef());
-								break;
+				//Get all files under parapheurDocuments
+				List<ChildAssociationRef> myFiles = nodeService.getChildAssocs(entree);
+				for(ChildAssociationRef mychild : myFiles) {
+					if(nodeService.getType(mychild.getChildRef()) == ContentModel.TYPE_CONTENT) {
+						// Test if names matche 
+						if (nodeService.getProperty(mychild.getChildRef(), ContentModel.PROP_NAME).equals(name + ".pdf")) {
+							logger.debug("Start signature of document  " + nodeService.getProperty(mychild.getChildRef(), ContentModel.PROP_NAME));
+							if (destination != null && nodeService.exists(destination)) {
+								params.put("destination-folder", destination);
+							} else {
+								params.put("destination-folder", nodeService.getPrimaryParent(mychild.getParentRef()));
 							}
-						} else if(nodeService.getType(mychild.getChildRef()) == ContentModel.TYPE_FOLDER) {
-							if (searchFilesIntoFolders(mychild.getChildRef(), name + ".pdf",  signPDF)) {
-								break;
-							}
+							Action signPDF = serviceRegistry.getActionService().createAction("pdf-signature", params);
+							serviceRegistry.getActionService().executeAction(signPDF, mychild.getChildRef());
+							break;
+						}
+					} else if(nodeService.getType(mychild.getChildRef()) == ContentModel.TYPE_FOLDER) {
+						if (searchFilesIntoFolders(mychild.getChildRef(), name + ".pdf", params, destination)) {
+							break;
 						}
 					}
-				} else {
-					logger.error("Folder Documents not found.");
-					exception.add("Folder Documents not found.");
-					return exception;
 				}
 			}
 		}
 		return exception;
 	}
 
-	private boolean searchFilesIntoFolders(NodeRef node, String name,
-			Action signPDF) {
+	private boolean searchFilesIntoFolders(NodeRef node, String name, Map<String, Serializable> params, NodeRef destination) {
 		List<ChildAssociationRef> myFiles = nodeService.getChildAssocs(node);
 		for(ChildAssociationRef mychild : myFiles) {
 			if(nodeService.getType(mychild.getChildRef()) == ContentModel.TYPE_CONTENT) {
 				if (nodeService.getProperty(mychild.getChildRef(), ContentModel.PROP_NAME).equals(name)) {
 					logger.debug("Start signature of document  " + nodeService.getProperty(mychild.getChildRef(), ContentModel.PROP_NAME));
+					if (destination != null && nodeService.exists(destination)) {
+						params.put("destination-folder", destination);
+					} else {
+						params.put("destination-folder", nodeService.getPrimaryParent(mychild.getParentRef()));
+					}
+					Action signPDF = serviceRegistry.getActionService().createAction("pdf-signature", params);
 					serviceRegistry.getActionService().executeAction(signPDF, mychild.getChildRef());
 					return true;
 				}
 			} else if(nodeService.getType(mychild.getChildRef()) == ContentModel.TYPE_FOLDER) {
-				if (searchFilesIntoFolders(mychild.getChildRef(), name,  signPDF)) {
+				if (searchFilesIntoFolders(mychild.getChildRef(), name, params, destination)) {
 					return true;
 				}
 			}
@@ -145,9 +156,9 @@ public class SignatureHelper {
 		}
 	}
 
-	ArrayList<String> testinit(Properties props, NodeRef parapheur) {
+	ArrayList<String> testinit(Properties props, NodeRef entree) {
 		ArrayList<String> exception = new ArrayList<String>();
-		if (props == null || parapheur == null ) {
+		if (props == null || entree == null) {
 			logger.error("Wrong initialisation of signature helper. This document(s) cannot be signed");
 			exception.add("Wrong initialisation of signature helper. This document(s) cannot be signed");
 			return exception;
@@ -157,16 +168,15 @@ public class SignatureHelper {
 				exception.add("Wrong initialisation of signature helper. This document(s) cannot be signed");
 				return exception;
 			} else {
-					logger.debug("Start signature of document(s) child of  " + nodeService.getProperty(parapheur, ContentModel.PROP_NAME));
+					logger.debug("Start signature of document(s)");
 				}
 			}
 		return exception;
 	}
 
-	private Map<String, Serializable> initParams(Properties props, NodeRef key, NodeRef destination, ArrayList<String> myException) {
+	private Map<String, Serializable> initParams(Properties props, NodeRef key, ArrayList<String> myException) {
 		Map<String, Serializable> params = new HashMap<String, Serializable>();
 		params.put("exception", myException);
-		params.put("destination-folder", destination);
 		params.put("private-key",key);
 		params.put("key-type", (Serializable) props.get("Service.signature.key.type"));
 		params.put("key-password", (Serializable) props.get("Service.signature.key.password"));
