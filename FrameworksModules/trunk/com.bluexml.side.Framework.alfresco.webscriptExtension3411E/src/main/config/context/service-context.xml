@@ -44,9 +44,8 @@
 		<property name="extensionName">
 			<value>siderule</value>
 		</property>
-		<property name="serviceRegistry" ref="ServiceRegistry" />
-		<property name="actionService" ref="actionService" />
-		<property name="ruleService" ref="ruleService" />
+		<property name="rulesService" ref="side.rulesService" />
+		
 	</bean>
 
 	<bean id="side.webscripts.js.workflow" parent="baseJavaScriptExtension"
