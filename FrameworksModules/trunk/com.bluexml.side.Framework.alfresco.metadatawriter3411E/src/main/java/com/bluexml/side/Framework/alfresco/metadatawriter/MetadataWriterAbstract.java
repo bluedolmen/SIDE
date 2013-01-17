@@ -85,21 +85,19 @@ public abstract class MetadataWriterAbstract {
 		if (test != null && test.equals("default")) {
 			return "default";
 		}
-		
 		logger.error("La configuration par défault n'a pu être trouvé.");
 		throw new Exception();
 	}
-	public void execute(String processus) {
+	public void execute(String processus, NodeRef entree) throws Exception {
 		try {
 			init(processus);
 		} catch (Exception e) {
-			return;
+			throw new Exception("Error during initialisation of metadataWriter's configuration.");
 		}
 		if (logger.isDebugEnabled())
-			logger.debug("curnode=" + curnode);
-		NodeRef documentsFolder = nodeService.getChildByName(curnode.getNodeRef(), ContentModel.ASSOC_CONTAINS, "Documents");
-		if (documentsFolder != null) {
-			List<FileInfo> fileList = getFilesList(documentsFolder);
+			logger.debug("curnode=" + entree);
+		if (entree != null && nodeService.exists(entree)) {
+			List<FileInfo> fileList = getFilesList(entree);
 			for (FileInfo file : fileList) {
 				if (logger.isDebugEnabled())
 					logger.debug("search if necessary to inject metadata to the file = "
@@ -120,7 +118,11 @@ public abstract class MetadataWriterAbstract {
 										.getTargetAssocs(file.getNodeRef(),
 												ASSOC_FILE_MODELE_CONTENT);
 								if (curNodeAssoc.size() == 1) {
-									injectMetada(file.getNodeRef());
+									try {
+										injectMetada(file.getNodeRef());
+									} catch(Exception e) {
+										throw e;
+									}
 								} else if (curNodeAssoc.size() > 1) {
 									logger.error("file = " + file.getName()
 											+ " is associated to more than one model");
@@ -131,6 +133,8 @@ public abstract class MetadataWriterAbstract {
 					}
 				}
 			}
+		} else {
+			throw new Exception("Error during initialisation of metadataWriter's input folder.");
 		}
 	}
 
@@ -146,7 +150,7 @@ public abstract class MetadataWriterAbstract {
 		}
 		return result;
 	}
-	protected void injectMetada(NodeRef fileNodeRef) {
+	protected void injectMetada(NodeRef fileNodeRef) throws Exception {
 		
 		Map<QName, Serializable> accesProperties = null;
 		Map<QName, Serializable> columnDefinition = null;
@@ -168,7 +172,7 @@ public abstract class MetadataWriterAbstract {
 		try {
 			columnDefinition = getColumnDefinition();
 		} catch (Exception e) {
-			return;
+			throw new Exception("Error during column definition.");
 		}
 		properties.putAll(columnDefinition);
 		
