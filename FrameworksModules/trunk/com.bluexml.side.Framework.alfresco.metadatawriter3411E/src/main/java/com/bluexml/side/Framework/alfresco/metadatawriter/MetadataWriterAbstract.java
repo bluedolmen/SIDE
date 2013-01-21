@@ -143,7 +143,8 @@ public abstract class MetadataWriterAbstract {
 		List<ChildAssociationRef> myChildren = nodeService.getChildAssocs(documentsFolder);
 		for(ChildAssociationRef myChild : myChildren) {
 			if (nodeService.getType(myChild.getChildRef()).equals(ContentModel.TYPE_FOLDER) ) {
-				result.addAll(getFilesList(myChild.getChildRef()));
+				List<FileInfo> contentFolder = getFilesList(myChild.getChildRef());
+				if (!contentFolder.isEmpty()) result.addAll(contentFolder);
 			} else {
 				result.add(fileFolderService.getFileInfo(myChild.getChildRef()));
 			}
