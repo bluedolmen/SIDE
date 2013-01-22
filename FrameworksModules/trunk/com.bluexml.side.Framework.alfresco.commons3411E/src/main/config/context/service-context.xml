@@ -19,5 +19,10 @@
 			<value>${spaces.company_home.childname}/${spaces.dictionary.childname}/${spaces.scripts.childname}</value>
 		</property>
 	</bean>
+	
+	<bean id="side.abstract.policy" abstract="true"
+		class="com.bluexml.side.framework.alfresco.commons.policies.AbstractPolicy">
+		<property name="authenticationService" ref="authenticationService" />
+	</bean>
 
 </beans>

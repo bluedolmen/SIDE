@@ -92,11 +92,18 @@ public abstract class AbstractConfigurationFile<K, V> implements IConfigurationF
 	 * #getValue(java.lang.Object, java.lang.Object)
 	 */
 	public V getValue(K key, V defaultValue) {
+		V value = getValue(key);
 		if (hasValue(key)) {
-			return getValue(key);
+			if (value != null) {
+				return value;
+			} else {
+				logger.debug("value is Null :" + key + "in " + dictionary);
+			}
 		} else {
-			return defaultValue;
+			logger.debug("key not found :" + key + "in " + dictionary);
 		}
+		logger.debug("return default value for :" + key + " dictionary :" + dictionary);
+		return defaultValue;
 	}
 
 	/*

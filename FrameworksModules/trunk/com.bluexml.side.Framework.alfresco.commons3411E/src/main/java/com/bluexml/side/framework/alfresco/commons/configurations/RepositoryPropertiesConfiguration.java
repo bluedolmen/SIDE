@@ -34,6 +34,7 @@ public class RepositoryPropertiesConfiguration extends PropertiesConfiguration {
 		} catch (Exception e) {
 			logger.error("error when traying to reload configuration", e);
 		}
+		logger.debug("getDictionary() " + dictionary);
 		return Collections.unmodifiableMap(dictionary);
 	}
 

@@ -40,8 +40,10 @@ public abstract class PropertiesConfiguration extends AbstractConfigurationFile<
 		return Boolean.parseBoolean(getValue(key).trim());
 	}
 
-	public boolean getAsBooleanValue(String key, boolean defaultValue) {
-		return Boolean.parseBoolean(getValue(key, Boolean.toString(defaultValue)).trim());
+	public boolean getAsBooleanValue(String key, Boolean defaultValue) {
+		String defaultString = Boolean.toString(defaultValue);
+		String value = getValue(key, defaultString);
+		return Boolean.parseBoolean(value.trim());
 	}
 
 	public abstract boolean isValidePropertiesResource(Properties props);
