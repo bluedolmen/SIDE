@@ -7,23 +7,23 @@
         <technologyVersion description="Check this to generate class models on the major release 3 of Alfresco.&lt;br&gt;Alfresco 3.x is the leading open source collaborative ECM solution.&lt;br&gt;Additionally to content generation, SIDE provides useful server components to enhance some features of this release." id="alfresco_3.4.11E" version="Alfresco3.4.11 Enterprise">
           <generatorVersion class="com.bluexml.side.portal.generator.alfresco3411e.PortalGenerator3411E" hidden="visible" id="com.bluexml.side.Portal.generator.alfresco3411E" version="SIDE Alfresco Portal Generator 3411E">
             <option defaultOption="true" key="com.bluexml.side.Portal.generator.alfresco.doclist" label="Alfresco Share document library component">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.shareDoclist3411E" moduleType="zip" technologyVersion="alfresco_3.4.11E" versionMax="1.0.64" versionMin="1.0.64" />
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.doclist3411E" moduleType="amp" technologyVersion="alfresco_3.4.11E" versionMax="1.0.56" versionMin="1.0.56" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.shareDoclist3411E" moduleType="zip" technologyVersion="alfresco_3.4.11E" versionMax="1.0.65" versionMin="1.0.65" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.doclist3411E" moduleType="amp" technologyVersion="alfresco_3.4.11E" versionMax="1.0.57" versionMin="1.0.57" />
             </option>
             <option defaultOption="true" key="com.bluexml.side.Portal.generator.alfresco.forms" label="document details editing">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.formProcessor3411E" moduleType="amp" technologyVersion="alfresco_3.4.11E" versionMax="1.0.48" versionMin="1.0.48" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.formProcessor3411E" moduleType="amp" technologyVersion="alfresco_3.4.11E" versionMax="1.0.49" versionMin="1.0.49" />
             </option>
             <option defaultOption="false" documentation="add share component to include custom iframe in pages" key="com.bluexml.side.Portal.generator.alfresco.iframe" label="iframe integration">
               <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.shareIframe" moduleType="zip" technologyVersion="alfresco_3.4.11E" versionMax="1.0.15" versionMin="1.0.15" />
             </option>
             <option defaultOption="false" documentation="&lt;p&gt;This option enable Xform integration in Alfresco share.&lt;/p&gt; &lt;ul&gt; &lt;li&gt;Search forms can be accessible from advanced-search page&lt;/li&gt; &lt;li&gt;Results are displayed in documentlist components instead of share result list&lt;/li&gt; &lt;li&gt;Native advanced-search page is no longer accessible&lt;/li&gt; &lt;li&gt;Native open search displays results using documentlist too&lt;/li&gt; &lt;li&gt;Open search DO NOT WORK ANYMORE outside sites&lt;/li&gt; &lt;/ul&gt;" key="com.bluexml.side.Portal.generator.alfresco.xforms34d" label="XForms Integration">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.shareSearchResultsExtension3411E" moduleType="zip" technologyVersion="alfresco_3.4.11E" versionMax="1.0.52" versionMin="1.0.52" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.shareSearchResultsExtension3411E" moduleType="zip" technologyVersion="alfresco_3.4.11E" versionMax="1.0.53" versionMin="1.0.53" />
             </option>
             <mustBeChecked pluginId="com.bluexml.side.Class.generator.alfresco3411E">
               <optionRef optionId="alfresco.share.extension" />
             </mustBeChecked>
             <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.sharePortalExtension3411E" moduleType="zip" technologyVersion="alfresco_3.4.11E" versionMax="1.0.5" versionMin="1.0.5" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.cmisFacetMap3411E" moduleType="amp" technologyVersion="alfresco_3.4.11E" versionMax="1.0.17" versionMin="1.0.17" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.cmisFacetMap3411E" moduleType="amp" technologyVersion="alfresco_3.4.11E" versionMax="1.0.18" versionMin="1.0.18" />
             <configurationParameter dataType="String" defaultValue="http://localhost:8080/share" documentation="Set this value to the URL of the Alfresco Share instance on which you want to generate and deploy" key="alfresco.share.url" label="Alfresco share URL" />
             <configurationParameter dataType="String" defaultValue="1.0" key="com.bluexml.side.Portal.generator.alfresco.module.version" label="Portal module version" />
             <option defaultOption="true" documentation="this must be hidden" hidden="true" key="generator.main" label="main generation" />
