@@ -1,4 +1,4 @@
-function main() {
+﻿function main() {
 
 var ticket = side.getCurrentTicket();
 model.ticket = ticket;
@@ -9,9 +9,10 @@ var webdavUrl = args.webdavurl;
 var xmlConf = new XML(config.script);
 model.publicHost = xmlConf.host.@value.toString();
 model.context = xmlConf.context.@value.toString();
-model.contextWebdav = xmlConf.contextWebdav.@value.toString();
 var commit = xmlConf.commit.@value.toString();
 model.commit = commit;
+var closeMsg = xmlConf.closeMsg.@value.toString();
+model.closeMsg = closeMsg;
 
 var docs = null;
 if (args.mime == "") {
@@ -55,7 +56,7 @@ if (commit === "true") {
 
 
 webdavUrl += '?ticket=' + ticket;
-model.webdavUrl = "http://" + model.publicHost + "/" + model.contextWebdav + webdavUrl;
+model.webdavUrl = "http://" + model.publicHost + "/alfresco" + webdavUrl;
 
 }
 main();
