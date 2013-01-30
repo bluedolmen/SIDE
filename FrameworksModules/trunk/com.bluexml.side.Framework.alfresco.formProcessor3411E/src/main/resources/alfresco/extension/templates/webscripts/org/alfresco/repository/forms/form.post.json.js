@@ -85,25 +85,24 @@ function main()
 		} else {
 			// determine if the exception was a FormNotFoundException, if so
 			// return
-        // 404 status code otherwise return 500
-        if (msg.indexOf("FormNotFoundException") != -1)
-        {
-            status.setCode(404, msg);
+		   // 404 status code otherwise return 500
+		   if (msg.indexOf("FormNotFoundException") != -1)
+		   {
+		      status.setCode(404, msg);
           
             if (logger.isLoggingEnabled())
                 logger.log("Returning 404 status code");
-        }
-        else
-        {
+		   }
+		   else
+		   {
             status.setCode(500, msg);
           
             if (logger.isLoggingEnabled())
                 logger.log("Returning 500 status code");
-        }
-       
+		   }
+		}
         return;
     }
-    
     model.persistedObject = persistedObject.toString();
     if (model.redirect) {
        // add current nodeRef in redirect url in model
