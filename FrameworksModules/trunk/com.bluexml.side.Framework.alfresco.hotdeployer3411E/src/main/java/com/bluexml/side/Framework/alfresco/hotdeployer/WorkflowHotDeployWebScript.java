@@ -17,7 +17,12 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.extensions.webscripts.AbstractWebScript;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.extensions.webscripts.WebScriptResponse;
-
+/**
+ * SIDE Extension
+ * Service to reload workflow
+ * @author davidabad
+ *
+ */
 public class WorkflowHotDeployWebScript extends AbstractWebScript {
 	WorkflowService workflowService;
 	static Log logger = LogFactory.getLog(WorkflowHotDeployWebScript.class);

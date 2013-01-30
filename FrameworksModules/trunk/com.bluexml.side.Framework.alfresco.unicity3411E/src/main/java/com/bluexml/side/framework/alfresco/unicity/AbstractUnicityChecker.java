@@ -1,15 +1,13 @@
 package com.bluexml.side.framework.alfresco.unicity;
- 
+
 import java.util.List;
 
 import org.alfresco.service.namespace.QName;
 
-public abstract class  AbstractUnicityChecker implements UnicityChecker {
-	
-	
-	
+public abstract class AbstractUnicityChecker implements UnicityChecker {
+
 	UnicityXMLReader unicityDescriptorReader = null;
-	
+
 	/**
 	 * @return the unicityDescriptorReader
 	 */
@@ -18,16 +16,15 @@ public abstract class  AbstractUnicityChecker implements UnicityChecker {
 	}
 
 	/**
-	 * @param unicityDescriptorReader the unicityDescriptorReader to set
+	 * @param unicityDescriptorReader
+	 *            the unicityDescriptorReader to set
 	 */
 	public void setUnicityDescriptorReader(UnicityXMLReader unicityDescriptorReader) {
 		this.unicityDescriptorReader = unicityDescriptorReader;
 	}
-	
+
 	public List<QName> getUnicityKeysFor(QName type) throws Exception {
 		return getUnicityDescriptorReader().getValue(type);
 	}
-	
-	
-	
+
 }

@@ -11,10 +11,7 @@
 function main() {
    var argsFilterType = args['filterType'];
    var argsSelectableType = args['selectableType'];
-   var argsSite = args['site'];
-   var argsSelectableTypeIsAspect = args['selectableTypeIsAspect'];
    var argsSearchTerm = args['searchTerm'];
-   var argsAdvancedQuery = args['advancedQuery'];
    var argsMaxResults = args['size'];
    var argsXPath = args['xpath'];
    var pathElements = url.service.split("/");
@@ -24,6 +21,10 @@ function main() {
    var categoryResults = null;
    var resultObj = null;
    var lastPathElement = null;
+   
+   var argsSite = args['site'];
+   var argsSelectableTypeIsAspect = args['selectableTypeIsAspect'];
+   var argsAdvancedQuery = args['advancedQuery'];
 
    if (logger.isLoggingEnabled()) {
       logger.log("children type = " + url.templateArgs.type);

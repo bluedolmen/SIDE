@@ -11,7 +11,12 @@ import org.springframework.extensions.config.ConfigDeployment;
 import org.springframework.extensions.webscripts.AbstractWebScript;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.extensions.webscripts.WebScriptResponse;
-
+/**
+ * SIDE Extension
+ * Service to reload configuration
+ * @author davidabad
+ *
+ */
 public class WebConfigDeployer extends AbstractWebScript {
 	static Log logger = LogFactory.getLog(WebConfigDeployer.class);
 	RepoXMLConfigService webClientConfigService;

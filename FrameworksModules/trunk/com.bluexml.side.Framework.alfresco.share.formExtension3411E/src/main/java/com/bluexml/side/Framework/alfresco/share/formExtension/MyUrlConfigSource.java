@@ -9,7 +9,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.extensions.config.source.UrlConfigSource;
 import org.springframework.extensions.webscripts.ClassPathStore;
-
+/**
+ * SIDE Extension
+ * Extends Original Alfresco code
+ * @author davidabad
+ *
+ */
 public class MyUrlConfigSource extends UrlConfigSource {
 	static Log logger = LogFactory.getLog(MyUrlConfigSource.class);
 	static String regexp = UrlConfigSource.PREFIX_CLASSPATH + "([^*]*)/([^*]*\\*.*)";

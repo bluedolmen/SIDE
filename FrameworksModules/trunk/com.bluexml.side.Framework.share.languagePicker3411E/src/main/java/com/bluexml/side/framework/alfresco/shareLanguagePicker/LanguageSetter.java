@@ -23,6 +23,11 @@ import org.springframework.extensions.webscripts.connector.User;
 
 import com.bluexml.side.framework.alfresco.shareLanguagePicker.connector.MyHttpRequestServletAdaptator;
 
+/**
+ * SIDE Extension
+ * Methods to compute Local
+ * @author davidabad
+ */
 public class LanguageSetter {
 	private static final String ACCEPT_LANGUAGE = "Accept-Language";
 	public static final String SHARE_LANG = "shareLang";

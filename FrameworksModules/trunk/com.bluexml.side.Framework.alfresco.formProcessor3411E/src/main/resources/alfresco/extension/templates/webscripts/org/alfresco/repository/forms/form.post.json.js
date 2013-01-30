@@ -65,7 +65,26 @@ function main()
         if (logger.isLoggingEnabled())
             logger.log(msg);
        
-        // determine if the exception was a FormNotFoundException, if so return
+		// SIDE Extension
+		// if a redirect URL was provided send a redirect response
+		if (model.redirect !== null) {
+
+			status.redirect = true;
+			status.code = 301;
+			if (model.redirect.indexOf("?") != -1) {
+			   model.redirect += "&";
+			} else {
+			   model.redirect += "?";
+			}
+
+			model.redirect += "error=" + msg;
+			status.location = redirect;
+			if (logger.isLoggingEnabled())
+				logger.log("Returning 301 status code to redirect to: " + status.location);
+
+		} else {
+			// determine if the exception was a FormNotFoundException, if so
+			// return
         // 404 status code otherwise return 500
         if (msg.indexOf("FormNotFoundException") != -1)
         {

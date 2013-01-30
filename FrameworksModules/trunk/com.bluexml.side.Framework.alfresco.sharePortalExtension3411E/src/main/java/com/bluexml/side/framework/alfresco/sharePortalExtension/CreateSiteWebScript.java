@@ -9,7 +9,12 @@ import org.springframework.extensions.webscripts.Cache;
 import org.springframework.extensions.webscripts.DeclarativeWebScript;
 import org.springframework.extensions.webscripts.Status;
 import org.springframework.extensions.webscripts.WebScriptRequest;
-
+/**
+ * SIDE Extension
+ * Allow to get presets lists, and provide it to UI
+ * @author davidabad
+ *
+ */
 public class CreateSiteWebScript extends DeclarativeWebScript {
 	private static Logger logger = Logger.getLogger(CreateSiteWebScript.class);
 	protected PresetsManagerExtension persetManager;

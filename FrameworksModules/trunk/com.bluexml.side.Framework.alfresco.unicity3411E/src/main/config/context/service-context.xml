@@ -8,10 +8,9 @@
 	</bean>
 
 	<bean id="unicityCheckerBean" class="com.bluexml.side.framework.alfresco.unicity.LuceneUnicityCheckerImpl" singleton="true">		
-		<property name="indexerAndSearcherFactory" ref="admLuceneIndexerAndSearcherFactory" />
-		<property name="tenantService" ref="tenantService" />
-		<property name="dictionaryService" ref="dictionaryService" />
-		<property name="namespacePrefixResolver" ref="namespaceService" />
+		<property name="searchService" ref="searchService" />
+		<property name="nodeService" ref="nodeService" />
+		
 		<property name="unicityDescriptorReader" ref="unicityDescriptorReader" />
 	</bean>
 	

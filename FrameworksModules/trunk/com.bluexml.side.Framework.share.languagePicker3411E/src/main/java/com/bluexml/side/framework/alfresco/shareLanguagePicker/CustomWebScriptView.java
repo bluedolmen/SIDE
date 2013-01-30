@@ -14,7 +14,14 @@ import org.springframework.extensions.webscripts.servlet.ServletAuthenticatorFac
 import org.springframework.extensions.webscripts.servlet.mvc.WebScriptView;
 import org.springframework.extensions.webscripts.servlet.mvc.WebScriptViewRuntime;
 import org.springframework.web.servlet.LocaleResolver;
-
+/**
+ * SIDE Extension
+ * Extends Original Alfresco code
+ * Local is provided by LocalProvider instead of reading http request
+ * This allow to have an advanced LocalProvider
+ * @author davidabad
+ *
+ */
 public class CustomWebScriptView extends WebScriptView {
 	private static final Log logger = LogFactory.getLog(CustomWebScriptView.class);
 	LocaleResolver localeResolver;

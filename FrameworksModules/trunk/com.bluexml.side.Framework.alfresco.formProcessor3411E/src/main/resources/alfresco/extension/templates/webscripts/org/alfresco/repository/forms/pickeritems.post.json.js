@@ -51,7 +51,7 @@ function main()
          
          if (result != null)
          {
-            // test if current result must be returned by this script
+            // SIDE Extension test if current result must be returned by this script
             if (itemType == null || result.isSubType(itemType) || result.hasAspect(itemType)) {
                // create a separate object if the node represents a user or group
                if (result.isSubType("cm:person"))

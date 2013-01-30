@@ -16,6 +16,11 @@ import org.springframework.extensions.surf.RequestContextUtil;
 import org.springframework.extensions.surf.util.I18NUtil;
 import org.springframework.web.servlet.LocaleResolver;
 
+/**
+ * SIDE Extension
+ * SIDE Local resolver that allow to get Local from user preferences
+ * @author davidabad
+ */
 public class MyLocalResolver implements LocaleResolver, ApplicationContextAware {
 	private static final Log logger = LogFactory.getLog(MyLocalResolver.class);
 	ApplicationContext applicationContext;

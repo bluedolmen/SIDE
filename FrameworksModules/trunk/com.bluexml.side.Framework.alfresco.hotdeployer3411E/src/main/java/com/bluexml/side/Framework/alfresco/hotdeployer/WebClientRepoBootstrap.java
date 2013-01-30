@@ -11,7 +11,12 @@ import org.springframework.extensions.config.ConfigDeployer;
 import org.springframework.extensions.config.ConfigDeployment;
 import org.springframework.extensions.config.ConfigService;
 import org.springframework.extensions.config.source.UrlConfigSource;
-
+/**
+ * SIDE Extension
+ * Extends Original Alfresco Surf code
+ * @author davidabad
+ *
+ */
 public class WebClientRepoBootstrap implements ApplicationContextAware, BeanNameAware, ConfigDeployer {
 
 	/** The bean name. */

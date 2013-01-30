@@ -29,7 +29,7 @@ public class AssociationSearchablePolicy extends AbstractPolicy implements OnCre
 
 	public void init() {
 
-		logger.info("[init] Initializing association synchronisation");
+		logger.info("[init] Initializing association indexation");
 
 		// Create behaviours
 		this.onCreateAssociation = new JavaBehaviour(this, "onCreateAssociation", NotificationFrequency.TRANSACTION_COMMIT);

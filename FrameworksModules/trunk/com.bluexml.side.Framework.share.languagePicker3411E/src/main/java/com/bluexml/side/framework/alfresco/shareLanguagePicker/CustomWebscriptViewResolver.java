@@ -4,7 +4,14 @@ import org.springframework.extensions.webscripts.Match;
 import org.springframework.extensions.webscripts.servlet.mvc.WebScriptViewResolver;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.view.AbstractUrlBasedView;
-
+/**
+ * SIDE Extension
+ * Extends Original Alfresco code
+ * Give LocalProvider to CustomWebScriptView constructor
+ * 
+ * @author davidabad
+ *
+ */
 public class CustomWebscriptViewResolver extends WebScriptViewResolver {
 
 	LocaleResolver localeResolver;

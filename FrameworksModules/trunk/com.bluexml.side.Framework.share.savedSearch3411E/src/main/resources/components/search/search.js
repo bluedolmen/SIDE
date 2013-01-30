@@ -162,37 +162,44 @@
                      minSearchTermLength : 1,
 
                      /**
+                      * SIDE Extension
                       * enable button to save current search in DataListItem
                       */
                      enableSavedSearch : false,
 
                      /**
+                      * SIDE Extension
                       * the DataType to use to store the savedSearch
                       */
                      savedSearchDataType : "",
 
                      /**
+                      * SIDE Extension
                       * export
                       */
                      exportType : null,
 
                      /**
+                      * SIDE Extension
                       * the view to use to export results
                       */
                      exportViewName : null,
 
                      /**
+                      * SIDE Extension
                       * enable/disable export button
                       */
                      enableExport : false,
 
                      /**
+                      * SIDE Extension
                       * set available visibility must be public, private,
                       * public&private public&private let user to choice
                       */
                      savedSearchVisibility : 'public',
 
                      /**
+                      * SIDE Extension
                       * if true allow user to override existing savedSearch
                       */
                      savedSearchAllowOverride : false
@@ -313,6 +320,7 @@
                      // search YUI button
                      this.widgets.searchButton = Alfresco.util.createYUIButton(this, "search-button", this.onSearchClick);
 
+                     /** SIDE Extension **/
                      // button to save search
                      if (this.options.enableSavedSearch && this.options.siteId.length !== 0) {
                         this.widgets.savedSearchButton = new YAHOO.widget.Button({
@@ -546,19 +554,28 @@
                         desc += '</div>';
 
                         // folder path (if any)
-                        if (type === "document" || type === "folder") {
-                           var path = oRecord.getData("path");
-                           if (site) {
-                              if (path === null || path === undefined) {
-                                 path = "";
-                              }
-                              desc += '<div class="details">' + me.msg("message.infolderpath") + ': <a href="' + me._getBrowseUrlForFolderPath(path, site) + '">' + $html('/' + path) + '</a></div>';
-                           } else {
-                              if (path) {
-                                 desc += '<div class="details">' + me.msg("message.infolderpath") + ': <a href="' + me._getBrowseUrlForFolderPath(path) + '">' + $html(path) + '</a></div>';
-                              }
-                           }
-                        }
+            if (type === "document" || type === "folder")
+            {
+               var path = oRecord.getData("path");
+               if (site)
+               {
+                  if (path === null || path === undefined)
+                  {
+                     path = "";
+                  }
+                  desc += '<div class="details">' + me.msg("message.infolderpath") +
+                          ': <a href="' + me._getBrowseUrlForFolderPath(path, site) + '">' + $html('/' + path) + '</a></div>';
+               }
+               else
+               {
+                  if (path)
+                  {
+                     desc += '<div class="details">' + me.msg("message.infolderpath") +
+                          ': <a href="' + me._getBrowseUrlForFolderPath(path) + '">' + $html(path) + '</a></div>';
+                  }
+               }
+            }
+                        
 
                         // tags (if any)
                         var tags = oRecord.getData("tags");
@@ -602,37 +619,48 @@
                         this.widgets.dataTable.set("MSG_EMPTY", "");
                      }
 
-                     // Override abstract function within DataTable to set
-                     // custom error message
-                     this.widgets.dataTable.doBeforeLoadData = function Search_doBeforeLoadData(sRequest, oResponse, oPayload) {
-                        if (oResponse.error) {
-                           try {
-                              var response = YAHOO.lang.JSON.parse(oResponse.responseText);
-                              me.widgets.dataTable.set("MSG_ERROR", response.message);
-                           } catch (e) {
-                              me._setDefaultDataTableErrors(me.widgets.dataTable);
-                           }
-                        } else if (oResponse.results) {
-                           // clear the empty error message
-                           me.widgets.dataTable.set("MSG_EMPTY", "");
-
-                           // update the results count, update hasMoreResults.
-                           me.hasMoreResults = (oResponse.results.length > me.options.maxSearchResults);
-                           if (me.hasMoreResults) {
-                              oResponse.results = oResponse.results.slice(0, me.options.maxSearchResults);
-                           }
-                           me.resultsCount = oResponse.results.length;
-
-                           if (me.resultsCount > me.options.pageSize) {
-                              Dom.removeClass(me.id + "-paginator-top", "hidden");
-                              Dom.removeClass(me.id + "-search-bar-bottom", "hidden");
-                           }
-                        }
-                        // Must return true to have the "Loading..." message
-                        // replaced by the error message
-                        return true;
-                     };
-
+         // Override abstract function within DataTable to set custom error message
+         this.widgets.dataTable.doBeforeLoadData = function Search_doBeforeLoadData(sRequest, oResponse, oPayload)
+         {
+            if (oResponse.error)
+            {
+               try
+               {
+                  var response = YAHOO.lang.JSON.parse(oResponse.responseText);
+                  me.widgets.dataTable.set("MSG_ERROR", response.message);
+               }
+               catch(e)
+               {
+                  me._setDefaultDataTableErrors(me.widgets.dataTable);
+               }
+            }
+            else if (oResponse.results)
+            {
+               // clear the empty error message
+               me.widgets.dataTable.set("MSG_EMPTY", "");
+               
+               // update the results count, update hasMoreResults.
+               me.hasMoreResults = (oResponse.results.length > me.options.maxSearchResults);
+               if (me.hasMoreResults)
+               {
+                  oResponse.results = oResponse.results.slice(0, me.options.maxSearchResults);
+                  me.resultsCount = me.options.maxSearchResults;
+               }
+               else
+               {
+                  me.resultsCount = oResponse.results.length;
+               }
+               
+               if (me.resultsCount > me.options.pageSize)
+               {
+                  Dom.removeClass(me.id + "-paginator-top", "hidden");
+                  Dom.removeClass(me.id + "-search-bar-bottom", "hidden");
+               }
+            }
+            // Must return true to have the "Loading..." message replaced by the error message
+            return true;
+         };
+         
                      // Rendering complete event handler
                      me.widgets.dataTable.subscribe("renderEvent", function() {
                         // Update the paginator
@@ -887,6 +915,7 @@
                   },
 
                   /**
+                   * SIDE Extension
                    * Event handler that gets fired when user clicks the Save
                    * Search button.
                    * 
@@ -1069,24 +1098,35 @@
                      }
 
                      // Failure handler
-                     function failureHandler(sRequest, oResponse) {
-                        if (oResponse.status == 401) {
-                           // Our session has likely timed-out, so refresh to
-                           // offer the login page
+         function failureHandler(sRequest, oResponse)
+         {
+            switch (oResponse.status)
+            {
+               case 401:
+                  // Session has likely timed-out, so refresh to display login page
                            window.location.reload();
-                        } else {
-                           try {
-                              var response = YAHOO.lang.JSON.parse(oResponse.responseText);
-                              this.widgets.dataTable.set("MSG_ERROR", response.message);
-                              this.widgets.dataTable.showTableMessage(response.message, YAHOO.widget.DataTable.CLASS_ERROR);
-                           } catch (e) {
-                              this._setDefaultDataTableErrors(this.widgets.dataTable);
-                              this.widgets.dataTable.render();
-                           }
-                        }
-                     }
+                  break;
+               case 408:
+                  // Timeout waiting on Alfresco server - probably due to heavy load
+                  Dom.get(this.id + '-search-info').innerHTML = this.msg("message.timeout");
+                  break;
+               default:
+                  // General server error code
+                  if (oResponse.responseText)
+                  {
+                     var response = YAHOO.lang.JSON.parse(oResponse.responseText);
+                     Dom.get(this.id + '-search-info').innerHTML = response.message;
+                  }
+                  else
+                  {
+                     Dom.get(this.id + '-search-info').innerHTML = oResponse.statusText;
+                  }
+                  break;
+               }
+             }
 
-                     this.widgets.dataSource.sendRequest(this._buildSearchParams(searchRepository, searchAllSites, searchTerm, searchTag, searchSort), {
+         this.widgets.dataSource.sendRequest(this._buildSearchParams(searchRepository, searchAllSites, searchTerm, searchTag, searchSort),
+         {
                         success : successHandler,
                         failure : failureHandler,
                         scope : this

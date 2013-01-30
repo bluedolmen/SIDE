@@ -628,149 +628,7 @@ function processMultiValue(propName, propValue, operand, pseudo)
    return formQuery;
 }
 
-function getSearchDef(params) {
-   var ftsQuery = "", term = params.term, tag = params.tag, formData = params.query, repoSearch = params.repo;
 
-   // Simple keyword search and tag specific search
-   if (term !== null && term.length !== 0)
-   {
-      // TAG is now part of the default search macro
-      ftsQuery = term + " ";
-   } else if (tag !== null && tag.length !== 0) {
-      // Just look for tag
-      ftsQuery = "TAG:" + tag + " ";
-   }
-
-   // Advanced search form data search.
-   // Supplied as json in the standard Alfresco Forms data structure:
-   // prop_<name>:value|assoc_<name>:value
-   // name = namespace_propertyname|pseudopropertyname
-   // value = string value - comma separated for multi-value, no escaping yet!
-   // - underscore represents colon character in name
-   // - pseudo property is one of any cm:content url property:
-   // mimetype|encoding|size
-   // - always string values - interogate DD for type data
-   if (formData !== null && formData.length !== 0) {
-      var formQuery = "", formJson = jsonUtils.toObject(formData);
-
-      var searchPath = getSearchPath(formJson);
-      if (searchPath != null) {
-         repoSearch = true;
-      }
-
-      formQuery = buildFormQuery(formJson);
-
-      if (formQuery.length !== 0 || ftsQuery.length !== 0 || repoSearch) {
-         // extract data type for this search - advanced search query is type
-         // specific
-         ftsQuery = 'TYPE:"' + formJson.datatype + '"' + (formQuery.length !== 0 ? ' AND ' + addSubQueryParenthesis(formQuery) : '')
-               + (ftsQuery.length !== 0 ? ' AND ' + addSubQueryParenthesis(ftsQuery) : '');
-      }
-   }
-
-   if (ftsQuery.length !== 0 || repoSearch) {
-      
-      // ensure a TYPE is specified - if no add one to remove system objects from result sets
-      if (ftsQuery.indexOf("TYPE:\"") === -1 && ftsQuery.indexOf("TYPE:'") === -1)
-      {
-         ftsQuery += ' AND (+TYPE:"cm:content" +TYPE:"cm:folder")';
-      }
-      
-      
-      // we processed the search terms, so suffix the PATH query
-      var path = null;
-      if (!repoSearch) {
-         path = SITES_SPACE_QNAME_PATH;
-         if (params.siteId !== null && params.siteId.length > 0) {
-            path += "cm:" + search.ISO9075Encode(params.siteId) + "/";
-         } else {
-            path += "*/";
-         }
-         if (params.containerId !== null && params.containerId.length > 0) {
-            path += "cm:" + search.ISO9075Encode(params.containerId) + "/";
-         } else {
-            path += "*/";
-         }
-      } else if (searchPath != undefined && searchPath != '') {
-         path = searchPath;
-         // interprate {site} token
-         if (path.indexOf("{site}") != -1) {
-            if (params.siteId !== null && params.siteId.length > 0) {
-               path = path.replace(/\{site\}/, "cm:" + search.ISO9075Encode(params.siteId));
-            } else {
-               path = path.replace(/\{site\}/, "*");
-            }
-         }
-
-         if (getSearchSubdirectories(formJson)) {
-            path += "/";
-         }
-      }
-
-      if (path !== null) {
-         ftsQuery = 'PATH:"' + path + '/*" AND ' + addSubQueryParenthesis(ftsQuery);
-      }
-      ftsQuery = addSubQueryParenthesis(ftsQuery) + ' AND -TYPE:"cm:thumbnail"';
-
-      ftsQuery = '(' + ftsQuery + ') AND NOT ASPECT:"sys:hidden"';
-      
-      // sort field - expecting field to in one of the following formats:
-      // - short QName form such as: cm:name
-      // - pseudo cm:content field starting with "." such as: .size
-      // - any other directly supported search field such as: TYPE
-      var sortColumns = [];
-      var sortParam = params.sort;
-      if (sortParam != null && sortParam.length != 0) {
-         var sort = sortParam;
-         var asc = true;
-         var separator = sort.indexOf("|");
-         if (separator != -1) {
-            sort = sort.substring(0, separator);
-            asc = (sortParam.substring(separator + 1) == "true");
-         }
-         var column;
-         if (sort.charAt(0) == '.') {
-            // handle pseudo cm:content fields
-            column = "@{http://www.alfresco.org/model/content/1.0}content" + sort;
-         } else if (sort.indexOf(":") != -1) {
-            // handle attribute field sort
-            column = "@" + utils.longQName(sort);
-         } else {
-            // other sort types e.g. TYPE
-            column = sort;
-         }
-         sortColumns.push({
-            column : column,
-            ascending : asc
-         });
-      }
-
-      if (logger.isLoggingEnabled())
-         logger.log("Query:\r\n" + ftsQuery + "\r\nSortby: " + (sort != null ? sort : ""));
-      
-      
-      // perform fts-alfresco language query
-      var queryDef = {
-         query : ftsQuery,
-         language : "fts-alfresco",
-         page : {
-            maxItems : params.maxResults * 2 // allow for space for filtering out results
-         },
-         templates : QUERY_TEMPLATES,
-         defaultField : "keywords",
-         onerror : "no-results",
-         sort : sortColumns
-      };
-      if (logger.isLoggingEnabled()) {
-         logger.log("getSearchResults ftsQuery :" + ftsQuery);
-         logger.log("search.lib.js queryDef:" + queryDef.toSource());
-      }
-
-      return queryDef;
-
-   }
-   return null;
-}
 
 
 /**
@@ -795,73 +653,7 @@ function getSearchResults(params) {
    return processResults(nodes, params.maxResults);
 }
 
-function buildFormQuery(formJson) {
-   // build operator map (group by operator type)
-   var operators = {
-      "OR" : [],
-      "AND" : [],
-      "NOT" : [],
-      "IGNORE" : []
-   };
-   var defaultOperator = 'AND';
-   var behaviors = [ "naive", "group-and", "group-or" ];
-   var defaultBehavior = behaviors[2];
-   // naive is to build query in the field order ...
-   // group is to group fields by operator and link operator group with
-   // "and" or "or"
 
-   // search default operator
-
-   if (formJson["operator-default"]) {
-      // this field is the default logical operator
-      defaultOperator = formJson["operator-default"];
-      if (defaultOperator == 'AND') {
-         defaultBehavior = behaviors[1];
-      } else if (defaultOperator == 'OR') {
-         defaultBehavior = behaviors[2];
-      }
-
-   }
-
-   for ( var p in formJson) {
-      if (p.indexOf("operator-") == -1) {
-         // this field is a logical operator, for a specific field
-         var operatorId = getOperatorId(p);
-         var op = formJson[operatorId];
-         if (operators[op] != null || operators[op] != undefined) {
-            operators[op].push(p);
-         } else if (p.indexOf("prop_") === 0 || p.indexOf("assoc_") === 0) {
-            operators[defaultOperator].push(p);
-            if (logger.isLoggingEnabled()) {
-               logger.log("search.lib.js use default operator for :" + p);
-            }
-         }
-      }
-
-   }
-
-   // now we can build the query according selected behavior
-
-   if (defaultBehavior == "naive") {
-      // iterate fields and use the associated operator
-      // extract form data and generate search query
-      var first = true;
-      for ( var f in formJson) {
-         if (f.indexOf("operator-") == -1) {
-            formQuery += makeQueryFor(formJson, f, formJson["operator-" + f], first);
-            first = false;
-         }
-      }
-   } else {
-      if (defaultBehavior == "group-and") {
-         formQuery = buildGroupedQuery(formJson, operators, "AND");
-      } else if (defaultBehavior == "group-or") {
-         formQuery = buildGroupedQuery(formJson, operators, "OR");
-      }
-   }
-   logger.log("buildFormQuery :" + formQuery);
-   return formQuery;
-}
 
 function makeQueryFor(formJson, p, operator, first) {
 
@@ -1044,6 +836,74 @@ function makeQueryFor(formJson, p, operator, first) {
    return formQuery;
 }
 
+
+function buildFormQuery(formJson) {
+   // build operator map (group by operator type)
+   var operators = {
+      "OR" : [],
+      "AND" : [],
+      "NOT" : [],
+      "IGNORE" : []
+   };
+   var defaultOperator = 'AND';
+   var behaviors = [ "naive", "group-and", "group-or" ];
+   var defaultBehavior = behaviors[2];
+   // naive is to build query in the field order ...
+   // group is to group fields by operator and link operator group with
+   // "and" or "or"
+
+   // search default operator
+
+   if (formJson["operator-default"]) {
+      // this field is the default logical operator
+      defaultOperator = formJson["operator-default"];
+      if (defaultOperator == 'AND') {
+         defaultBehavior = behaviors[1];
+      } else if (defaultOperator == 'OR') {
+         defaultBehavior = behaviors[2];
+      }
+
+   }
+
+   for ( var p in formJson) {
+      if (p.indexOf("operator-") == -1) {
+         // this field is a logical operator, for a specific field
+         var operatorId = getOperatorId(p);
+         var op = formJson[operatorId];
+         if (operators[op] != null || operators[op] != undefined) {
+            operators[op].push(p);
+         } else if (p.indexOf("prop_") === 0 || p.indexOf("assoc_") === 0) {
+            operators[defaultOperator].push(p);
+            if (logger.isLoggingEnabled()) {
+               logger.log("search.lib.js use default operator for :" + p);
+            }
+         }
+      }
+
+   }
+
+   // now we can build the query according selected behavior
+
+   if (defaultBehavior == "naive") {
+      // iterate fields and use the associated operator
+      // extract form data and generate search query
+      var first = true;
+      for ( var f in formJson) {
+         if (f.indexOf("operator-") == -1) {
+            formQuery += makeQueryFor(formJson, f, formJson["operator-" + f], first);
+            first = false;
+         }
+      }
+   } else {
+      if (defaultBehavior == "group-and") {
+         formQuery = buildGroupedQuery(formJson, operators, "AND");
+      } else if (defaultBehavior == "group-or") {
+         formQuery = buildGroupedQuery(formJson, operators, "OR");
+      }
+   }
+   logger.log("buildFormQuery :" + formQuery);
+   return formQuery;
+}
 /**
  * get fields grouped by operator and compute the query Note : grouping NOT
  * operator must be done according to boolean rules ( not(A) AND not(B) -> not(A
@@ -1253,3 +1113,145 @@ function getSavedSearchQueryDef(nodeRef) {
    return getSearchDef(savedSearch);
 }
 
+function getSearchDef(params) {
+   var ftsQuery = "", term = params.term, tag = params.tag, formData = params.query, repoSearch = params.repo;
+
+   // Simple keyword search and tag specific search
+   if (term !== null && term.length !== 0)
+   {
+      // TAG is now part of the default search macro
+      ftsQuery = term + " ";
+   } else if (tag !== null && tag.length !== 0) {
+      // Just look for tag
+      ftsQuery = "TAG:" + tag + " ";
+   }
+
+   // Advanced search form data search.
+   // Supplied as json in the standard Alfresco Forms data structure:
+   // prop_<name>:value|assoc_<name>:value
+   // name = namespace_propertyname|pseudopropertyname
+   // value = string value - comma separated for multi-value, no escaping yet!
+   // - underscore represents colon character in name
+   // - pseudo property is one of any cm:content url property:
+   // mimetype|encoding|size
+   // - always string values - interogate DD for type data
+   if (formData !== null && formData.length !== 0) {
+      var formQuery = "", formJson = jsonUtils.toObject(formData);
+
+      var searchPath = getSearchPath(formJson);
+      if (searchPath != null) {
+         repoSearch = true;
+      }
+
+      formQuery = buildFormQuery(formJson);
+
+      if (formQuery.length !== 0 || ftsQuery.length !== 0 || repoSearch) {
+         // extract data type for this search - advanced search query is type
+         // specific
+         ftsQuery = 'TYPE:"' + formJson.datatype + '"' + (formQuery.length !== 0 ? ' AND ' + addSubQueryParenthesis(formQuery) : '')
+               + (ftsQuery.length !== 0 ? ' AND ' + addSubQueryParenthesis(ftsQuery) : '');
+      }
+   }
+
+   if (ftsQuery.length !== 0 || repoSearch) {
+      
+      // ensure a TYPE is specified - if no add one to remove system objects from result sets
+      if (ftsQuery.indexOf("TYPE:\"") === -1 && ftsQuery.indexOf("TYPE:'") === -1)
+      {
+         ftsQuery += ' AND (+TYPE:"cm:content" +TYPE:"cm:folder")';
+      }
+      
+      
+      // we processed the search terms, so suffix the PATH query
+      var path = null;
+      if (!repoSearch) {
+         path = SITES_SPACE_QNAME_PATH;
+         if (params.siteId !== null && params.siteId.length > 0) {
+            path += "cm:" + search.ISO9075Encode(params.siteId) + "/";
+         } else {
+            path += "*/";
+         }
+         if (params.containerId !== null && params.containerId.length > 0) {
+            path += "cm:" + search.ISO9075Encode(params.containerId) + "/";
+         } else {
+            path += "*/";
+         }
+      } else if (searchPath != undefined && searchPath != '') {
+         path = searchPath;
+         // interprate {site} token
+         if (path.indexOf("{site}") != -1) {
+            if (params.siteId !== null && params.siteId.length > 0) {
+               path = path.replace(/\{site\}/, "cm:" + search.ISO9075Encode(params.siteId));
+            } else {
+               path = path.replace(/\{site\}/, "*");
+            }
+         }
+
+         if (getSearchSubdirectories(formJson)) {
+            path += "/";
+         }
+      }
+
+      if (path !== null) {
+         ftsQuery = 'PATH:"' + path + '/*" AND ' + addSubQueryParenthesis(ftsQuery);
+      }
+      ftsQuery = addSubQueryParenthesis(ftsQuery) + ' AND -TYPE:"cm:thumbnail"';
+
+      ftsQuery = '(' + ftsQuery + ') AND NOT ASPECT:"sys:hidden"';
+      
+      // sort field - expecting field to in one of the following formats:
+      // - short QName form such as: cm:name
+      // - pseudo cm:content field starting with "." such as: .size
+      // - any other directly supported search field such as: TYPE
+      var sortColumns = [];
+      var sortParam = params.sort;
+      if (sortParam != null && sortParam.length != 0) {
+         var sort = sortParam;
+         var asc = true;
+         var separator = sort.indexOf("|");
+         if (separator != -1) {
+            sort = sort.substring(0, separator);
+            asc = (sortParam.substring(separator + 1) == "true");
+         }
+         var column;
+         if (sort.charAt(0) == '.') {
+            // handle pseudo cm:content fields
+            column = "@{http://www.alfresco.org/model/content/1.0}content" + sort;
+         } else if (sort.indexOf(":") != -1) {
+            // handle attribute field sort
+            column = "@" + utils.longQName(sort);
+         } else {
+            // other sort types e.g. TYPE
+            column = sort;
+         }
+         sortColumns.push({
+            column : column,
+            ascending : asc
+         });
+      }
+
+      if (logger.isLoggingEnabled())
+			logger.log("Query:\r\n" + ftsQuery + "\r\nSortby: " + (sortParam != null ? sortParam : ""));
+      
+      // perform fts-alfresco language query
+      var queryDef = {
+         query : ftsQuery,
+         language : "fts-alfresco",
+         page : {
+            maxItems : params.maxResults * 2 // allow for space for filtering out results
+         },
+         templates : QUERY_TEMPLATES,
+         defaultField : "keywords",
+         onerror : "no-results",
+         sort : sortColumns
+      };
+      if (logger.isLoggingEnabled()) {
+         logger.log("getSearchResults ftsQuery :" + ftsQuery);
+         logger.log("search.lib.js queryDef:" + queryDef.toSource());
+      }
+
+      return queryDef;
+
+   }
+   return null;
+}

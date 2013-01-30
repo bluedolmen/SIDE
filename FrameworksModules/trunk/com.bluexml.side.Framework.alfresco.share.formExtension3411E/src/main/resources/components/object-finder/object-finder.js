@@ -334,7 +334,7 @@
          allowNavigationToContentChildren: false,
          
          /**
-          * The action for the select button that triggers the object finder dialog
+          * The label of the select button that triggers the object finder dialog
           *
           * @property selectActionLabel
           * @type string
@@ -1470,6 +1470,7 @@
 
          if (arrItems != "")
          {
+            // SIDE Extension
             Alfresco.util.Ajax.jsonRequest(
             {
                url: Alfresco.constants.PROXY_URI + "api/forms/picker/items",
@@ -2022,6 +2023,7 @@
          createNewItemIcon: "",
          
          /**
+          *	SIDE Extension
           * share siteId, can be used to resolve {site} token in params
           */
          site : (Alfresco.constants.SITE ? Alfresco.constants.SITE : "")
@@ -2806,6 +2808,7 @@
          
          if (this.options.params)
          {
+            // SIDE Extension
             params += "&" + encodeURI(YAHOO.lang.substitute(this.options.params, this.options));
          }
          

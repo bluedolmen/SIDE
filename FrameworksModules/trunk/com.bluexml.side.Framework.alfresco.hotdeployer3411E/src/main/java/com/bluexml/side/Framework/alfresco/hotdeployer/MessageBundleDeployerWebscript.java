@@ -12,7 +12,12 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.extensions.webscripts.AbstractWebScript;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.extensions.webscripts.WebScriptResponse;
-
+/**
+ * SIDE Extension
+ * Service to reload i18n messages
+ * @author davidabad
+ *
+ */
 public class MessageBundleDeployerWebscript extends AbstractWebScript {
 	static Log logger = LogFactory.getLog(MessageBundleDeployerWebscript.class);
 	private RepoAdminService repoAdminService;
