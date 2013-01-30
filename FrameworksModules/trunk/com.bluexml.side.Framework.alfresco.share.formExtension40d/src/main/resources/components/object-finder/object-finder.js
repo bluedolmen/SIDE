@@ -368,6 +368,11 @@
          startLocation: null,
          
          /**
+          * share siteId, can be used to resolve {site} token in params
+          */
+         site : (Alfresco.constants.SITE ? Alfresco.constants.SITE : ""),
+
+         /**
           * Specifies the parameters to pass to the node locator service
           * when determining the start location node.
           * 
@@ -1497,6 +1502,7 @@
 
          if (arrItems !== "")
          {
+            // SIDE Extension itemType
             Alfresco.util.Ajax.jsonRequest(
             {
                url: Alfresco.constants.PROXY_URI + "api/forms/picker/items",
@@ -1504,7 +1510,8 @@
                dataObj:
                {
                   items: arrItems.split(","),
-                  itemValueType: this.options.valueType
+                  itemValueType: this.options.valueType,
+                  itemType: this.options.itemType
                },
                successCallback:
                {
@@ -2261,7 +2268,13 @@
           * @type string
           * @default ""
           */
-         createNewItemIcon: ""
+         createNewItemIcon: "",
+         
+         /**
+          *	SIDE Extension
+          * share siteId, can be used to resolve {site} token in params
+          */
+         site : (Alfresco.constants.SITE ? Alfresco.constants.SITE : "")
       },
 
       /**
@@ -3044,7 +3057,8 @@
          
          if (this.options.params)
          {
-            params += "&" + encodeURI(this.options.params);
+            // SIDE Extension
+            params += "&" + encodeURI(YAHOO.lang.substitute(this.options.params, this.options));
          }
          
          return params;

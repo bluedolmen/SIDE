@@ -52,7 +52,8 @@ function main() {
 
 		if (logger.isLoggingEnabled())
 			logger.log(msg);
-
+			
+		// SIDE Extension
 		// if a redirect URL was provided send a redirect response
 		if (model.redirect !== null) {
 

@@ -3,7 +3,7 @@
 
 function main() {
 	var argsFilterType = args['filterType'], argsSelectableType = args['selectableType'], argsSearchTerm = args['searchTerm'], argsMaxResults = args['size'], argsXPath = args['xpath'], pathElements = url.service
-			.split("/"), parent = null, rootNode = companyhome, results = [], categoryResults = null, resultObj = null, lastPathElement = null;
+			.split("/"), parent = null, rootNode = companyhome, results = [], categoryResults = null, resultObj = null, lastPathElement = null,;
 
 	var argsSite = args['site'], argsSelectableTypeIsAspect = args['selectableTypeIsAspect'], argsAdvancedQuery = args['advancedQuery'];
 
@@ -406,8 +406,7 @@ function findGroups(searchTerm, maxResults, results, xpath) {
 
 		if (logger.isLoggingEnabled())
 			logger.log("group query = " + query);
-		// @migation@ TODO : from node get the qnamePath and compare with xpath
-		// instead of do a lucene search
+			
 		var searchResults = search.query({
 			query : query
 		});

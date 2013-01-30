@@ -9,7 +9,7 @@
 
 	<bean id="unicityCheckerBean" class="com.bluexml.side.framework.alfresco.unicity.LuceneUnicityCheckerImpl" singleton="true">		
 		<property name="searchService" ref="searchService" />
-		<property name="admSearchService" ref="ADMSearchService" />
+		<property name="nodeService" ref="nodeService" />
 		
 		<property name="unicityDescriptorReader" ref="unicityDescriptorReader" />
 	</bean>

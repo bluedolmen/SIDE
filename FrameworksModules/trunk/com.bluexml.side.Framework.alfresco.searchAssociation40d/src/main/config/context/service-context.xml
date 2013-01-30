@@ -18,10 +18,10 @@
 	
 -->
 <beans>
-    
-    
-    
-    <bean id="associationSearchablePolicy" class="com.bluexml.side.framework.alfresco.searchassociation.AssociationSearchablePolicy" init-method="init">
+
+	<bean id="associationSearchablePolicy"
+		class="com.bluexml.side.framework.alfresco.searchassociation.AssociationSearchablePolicy"
+		init-method="init" parent="side.abstract.policy">
 		<property name="policyComponent" ref="policyComponent" />
 		<property name="nodeService" ref="NodeService" />
 		<property name="dictionaryService" ref="DictionaryService" />

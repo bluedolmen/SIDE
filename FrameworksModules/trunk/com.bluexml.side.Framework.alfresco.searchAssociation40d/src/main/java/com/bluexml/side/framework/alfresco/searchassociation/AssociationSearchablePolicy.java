@@ -17,7 +17,9 @@ import org.alfresco.service.namespace.NamespaceService;
 import org.alfresco.service.namespace.QName;
 import org.apache.log4j.Logger;
 
-public class AssociationSearchablePolicy implements OnCreateAssociationPolicy, OnDeleteAssociationPolicy {
+import com.bluexml.side.framework.alfresco.commons.policies.AbstractPolicy;
+
+public class AssociationSearchablePolicy extends AbstractPolicy implements OnCreateAssociationPolicy, OnDeleteAssociationPolicy {
 
 	// Behaviours
 	private Behaviour onCreateAssociation;
@@ -50,12 +52,11 @@ public class AssociationSearchablePolicy implements OnCreateAssociationPolicy, O
 			logger.debug("Association synchronisation policy, ASSOCIATION '" + associationRef.toString() + "'");
 			logger.debug("Association synchronisation policy, property '" + hiddenSearchablePropertyQName + "'");
 		}
-		if (dictionaryService.getProperty(hiddenSearchablePropertyQName) != null) {
-			// Register the association in the transaction
 
-			NodeRef sourceRef = associationRef.getSourceRef();
-			NodeRef targetRef = associationRef.getTargetRef();
+		NodeRef sourceRef = associationRef.getSourceRef();
+		NodeRef targetRef = associationRef.getTargetRef();
 
+		if (isValideNodeAndContext(sourceRef) && isValideNodeAndContext(targetRef) && dictionaryService.getProperty(hiddenSearchablePropertyQName) != null) {
 			Serializable property = nodeService.getProperty(sourceRef, hiddenSearchablePropertyQName);
 
 			// update the property value (search in multivalue field if entry exists if not add it)
@@ -66,6 +67,7 @@ public class AssociationSearchablePolicy implements OnCreateAssociationPolicy, O
 				property = new ArrayList<String>();
 			}
 			if (property instanceof ArrayList) {
+				@SuppressWarnings("unchecked")
 				ArrayList<Serializable> l = (ArrayList<Serializable>) property;
 				boolean exists = false;
 				for (Serializable serializable : l) {
@@ -96,7 +98,7 @@ public class AssociationSearchablePolicy implements OnCreateAssociationPolicy, O
 		NodeRef sourceRef = associationRef.getSourceRef();
 		NodeRef targetRef = associationRef.getTargetRef();
 
-		if (dictionaryService.getProperty(hiddenSearchablePropertyQName) != null) {
+		if (isValideNodeAndContext(sourceRef) && isValideNodeAndContext(targetRef) && dictionaryService.getProperty(hiddenSearchablePropertyQName) != null) {
 			Serializable property = nodeService.getProperty(sourceRef, hiddenSearchablePropertyQName);
 
 			// update the property value (search in multivalue field if entry exists if not add it)
@@ -104,6 +106,7 @@ public class AssociationSearchablePolicy implements OnCreateAssociationPolicy, O
 				logger.debug("Association Searchable policy, remove reference '" + targetRef + "' to " + sourceRef + "in property " + hiddenSearchablePropertyQName);
 			}
 			if (property instanceof ArrayList) {
+				@SuppressWarnings("unchecked")
 				ArrayList<Serializable> l = (ArrayList<Serializable>) property;
 				if (logger.isDebugEnabled()) {
 					logger.debug("Association Searchable policy, before removed refs :" + l.size());
@@ -139,6 +142,11 @@ public class AssociationSearchablePolicy implements OnCreateAssociationPolicy, O
 
 	public void setNodeService(NodeService nodeService) {
 		this.nodeService = nodeService;
+	}
+
+	@Override
+	public NodeService getNodeService() {
+		return nodeService;
 	}
 
 }

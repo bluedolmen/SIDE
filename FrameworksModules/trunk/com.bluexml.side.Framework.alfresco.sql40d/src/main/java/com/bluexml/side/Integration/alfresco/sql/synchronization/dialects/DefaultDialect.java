@@ -33,6 +33,7 @@ public class DefaultDialect implements SynchronizationDialect {
 			put(DataTypeDefinition.LONG, "INTEGER");
 			put(DataTypeDefinition.PATH, "VARCHAR(512)");
 			put(DataTypeDefinition.TEXT, "VARCHAR");	
+			put(DataTypeDefinition.MLTEXT, "VARCHAR");	
 		}
 	};
 

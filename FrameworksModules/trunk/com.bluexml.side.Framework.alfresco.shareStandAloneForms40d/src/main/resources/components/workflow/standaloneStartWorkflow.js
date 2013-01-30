@@ -1,9 +1,11 @@
-
+if (typeof SIDE == "undefined" || !SIDE) {
+   var SIDE = {};
+}
 /**
  * StartWorkflow component.
  *
  * @namespace Alfresco.component
- * @class Alfresco.component.StartWorkflow
+ * @class SIDE.StandAloneStartWorkflow
  */
 (function()
 {
@@ -17,19 +19,19 @@
     * StartWorkflow constructor.
     *
     * @param {String} htmlId The HTML id of the parent element
-    * @return {Alfresco.component.StartWorkflow} The new StartWorkflow instance
+    * @return {SIDE.StandAloneStartWorkflow} The new StartWorkflow instance
     * @constructor
     */
-   Alfresco.component.StartWorkflow = function StartWorkflow_constructor(htmlId)
+   SIDE.StandAloneStartWorkflow = function StartWorkflow_constructor(htmlId)
    {
-      Alfresco.component.StartWorkflow.superclass.constructor.call(this, htmlId, ["button"]);
+      SIDE.StandAloneStartWorkflow.superclass.constructor.call(this, htmlId, ["button"]);
 
       // Re-register with our own name
-      this.name = "Alfresco.component.StartWorkflow";
+      this.name = "SIDE.StandAloneStartWorkflow";
       Alfresco.util.ComponentManager.reregister(this);
 
       // Instance variables
-      this.options = YAHOO.lang.merge(this.options, Alfresco.component.StartWorkflow.superclass.options);
+      this.options = YAHOO.lang.merge(this.options, SIDE.StandAloneStartWorkflow.superclass.options);
       this.selectedItems = "";
       this.destination = "";
       this.workflowTypes = [];
@@ -40,7 +42,7 @@
       return this;
    };
 
-   YAHOO.extend(Alfresco.component.StartWorkflow, Alfresco.component.ShareFormManager,
+   YAHOO.extend(SIDE.StandAloneStartWorkflow, Alfresco.component.StartWorkflow,
    {
 
       /**
@@ -90,7 +92,7 @@
       onReady: function StartWorkflow_onReady()
       {
     	 
-         return Alfresco.component.StartWorkflow.superclass.onReady.call(this);
+         return SIDE.StandAloneStartWorkflow.superclass.onReady.call(this);
       },
 
       /**
@@ -103,7 +105,7 @@
       onObjectFinderReady: function StartWorkflow_onObjectFinderReady(layer, args)
       {
          var objectFinder = args[1].eventGroup;
-         if (objectFinder.options.field == "assoc_packageItems" && objectFinder.eventGroup.indexOf(this.id) == 0)
+         if (objectFinder.options.field == "assoc_packageItems" && objectFinder.eventGroup.replace("formPortlet","workflowdata").indexOf(this.id) == 0)
          {
             objectFinder.selectItems(this.options.selectedItems);
          }

@@ -11,10 +11,10 @@ function main() {
 
 	if (args.config != null && args.config != "") {
 		// so filter are defined in component instance (see side portal model)
-		var conf = eval('(' + unescape(args.config) + ')');
+		var confs = eval('(' + unescape(args.config) + ')');
 
-		for ( var c = 0; c < conf.length; c++) {
-			var conf = conf[c];
+		for ( var c = 0; c < confs.length; c++) {
+			var conf = confs[c];
 
 			filters.push({
 				id : conf.id,

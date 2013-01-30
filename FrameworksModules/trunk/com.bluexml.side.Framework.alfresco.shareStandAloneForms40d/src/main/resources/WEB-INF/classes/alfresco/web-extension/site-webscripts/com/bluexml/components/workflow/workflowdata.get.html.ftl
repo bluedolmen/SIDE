@@ -1,6 +1,6 @@
 <#assign el=args.htmlid?js_string>
 <script type="text/javascript">//<![CDATA[
-   new Alfresco.component.StartWorkflow("${el}").setOptions({
+   new SIDE.StandAloneStartWorkflow("${el}").setOptions({
       failureMessage: "message.failure",
       submitButtonMessageKey: "button.startWorkflow",
       selectedItems: "${(page.url.args.selectedItems!"")?js_string}",

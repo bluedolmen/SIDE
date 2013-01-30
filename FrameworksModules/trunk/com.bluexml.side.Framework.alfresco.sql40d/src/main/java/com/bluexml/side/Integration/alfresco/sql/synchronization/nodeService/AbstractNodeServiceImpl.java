@@ -37,6 +37,13 @@ public abstract class AbstractNodeServiceImpl implements com.bluexml.side.Integr
         onDeleteAssociationDelegate = policyComponent.registerAssociationPolicy(NodeServicePolicies.OnDeleteAssociationPolicy.class);
 	}
 	
+	/*
+	 * get the Type of the node
+	 */
+	public QName getType(NodeRef nodeRef)  {
+		return nodeService.getType(nodeRef);
+	}
+
 	protected void invokeOnCreateNode(NodeRef nodeRef) {
         Set<QName> qnames = getTypeAndAspectQNames(nodeRef);
         NodeServicePolicies.OnCreateNodePolicy policy = onCreateNodeDelegate.get(nodeRef, qnames);

@@ -51,7 +51,8 @@ function getfilters() {
 		logger.log("getFilter data :" + data);		
 		var obj = {
 			id : filterType,
-			label : f.name,
+			label : (f.properties["cm:title"] ? f.properties["cm:title"] : f.name ),
+			description : (f.properties["cm:description"] ? f.properties["cm:description"] : "" ),
 			data : data
 		};
 		filters.push(obj);

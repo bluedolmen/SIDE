@@ -26,6 +26,7 @@ public class OracleDialect extends DefaultDialect {
 			put(DataTypeDefinition.LONG, "INTEGER");
 			put(DataTypeDefinition.PATH, "VARCHAR(512)");
 			put(DataTypeDefinition.TEXT, "VARCHAR");	
+			put(DataTypeDefinition.MLTEXT, "VARCHAR");	
 		}
 	};
 

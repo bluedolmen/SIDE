@@ -15,9 +15,12 @@ import java.util.regex.Pattern;
 import org.alfresco.model.ContentModel;
 import org.alfresco.repo.forms.FormData;
 import org.alfresco.repo.forms.FormData.FieldData;
+import org.alfresco.repo.model.filefolder.FileFolderServiceImpl.InvalidTypeException;
 import org.alfresco.service.cmr.dictionary.AssociationDefinition;
 import org.alfresco.service.cmr.dictionary.ChildAssociationDefinition;
+import org.alfresco.service.cmr.repository.ContentIOException;
 import org.alfresco.service.cmr.repository.ContentWriter;
+import org.alfresco.service.cmr.repository.InvalidNodeRefException;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.namespace.QName;
 import org.apache.commons.logging.Log;
@@ -49,11 +52,13 @@ public class CustomNodeFormProcessor extends NodeFormProcessor {
 		// implements File field persistance
 		int fileFieldCount = 0;
 		for (FieldData fieldData : data) {
-			// NOTE: ignore file fields for now, not supported yet!
+
 			if (fieldData.isFile() == true && fieldData instanceof CustomFormData.FieldData) {
 				CustomFormData.FieldData cfd = (CustomFormData.FieldData) fieldData;
 				if (fileFieldCount == 0) {
 					InputStream inputStream = cfd.getInputStream();
+					try {
+						if (inputStream.available() > 0) {
 
 					ContentWriter writer = this.contentService.getWriter(nodeRef, ContentModel.PROP_CONTENT, true);
 					String mimetype = cfd.getMimetype();
@@ -64,11 +69,23 @@ public class CustomNodeFormProcessor extends NodeFormProcessor {
 					
 					writer.setMimetype(mimetype);
 					writer.putContent(inputStream);
+						}
+					} catch (InvalidTypeException e1) {
+						logger.error(e1);
+					} catch (ContentIOException e1) {
+						logger.error(e1);
+					} catch (InvalidNodeRefException e1) {
+						logger.error(e1);
+					} catch (IOException e1) {
+						logger.error(e1);
+					} finally {
 					try {
 						inputStream.close();
 					} catch (IOException e) {
 						logger.error("trying to close inputStream fail", e);
 					}
+					}
+
 				} else {
 					// TODO multi file upload not implemented yet
 				}

@@ -21,6 +21,7 @@ import org.alfresco.service.namespace.QName;
 public abstract class AbstractFilterer implements Filterer {
 
 	public boolean accept(NodeRef nodeRef) {
+		if (!nodeService.exists(nodeRef)) return false;
 		return StoreRef.STORE_REF_WORKSPACE_SPACESSTORE.equals(nodeRef.getStoreRef()) && acceptQName(nodeService.getType(nodeRef));
 	}
 
@@ -46,6 +47,10 @@ public abstract class AbstractFilterer implements Filterer {
 
 	public boolean acceptTypeQName(QName qname) {
 		return acceptQName(qname);
+	}
+	
+	public boolean acceptPropertyQName(String className, QName propertyQname) {
+		return acceptPropertyQName(propertyQname);
 	}
 	
 	public boolean acceptPropertyQName(QName qname) {

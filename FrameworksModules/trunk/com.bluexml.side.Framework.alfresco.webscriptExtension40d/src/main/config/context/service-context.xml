@@ -36,7 +36,7 @@
 		<property name="cmisDictionaryService" ref="CMISDictionaryService" />
 		<property name="cmisQueryService" ref="CMISQueryService" />
 		<property name="paging" ref="webscripts.js.paging" />
-		<property name="cmiswebscript" ref="webscripts.js.cmisserver" />
+		<property name="cmiswebscript" ref="webscripts.js.cmis" />
 		<property name="imageResolver" ref="webscripts.repo.imageresolver"></property>
 	</bean>
 	<bean id="side.webscripts.js.rule" parent="baseJavaScriptExtension"
@@ -44,9 +44,8 @@
 		<property name="extensionName">
 			<value>siderule</value>
 		</property>
-		<property name="serviceRegistry" ref="ServiceRegistry" />
-		<property name="actionService" ref="actionService" />
-		<property name="ruleService" ref="ruleService" />
+		<property name="rulesService" ref="side.rulesService" />
+		
 	</bean>
 
 	<bean id="side.webscripts.js.workflow" parent="baseJavaScriptExtension"
@@ -57,5 +56,24 @@
 		<property name="serviceRegistry" ref="ServiceRegistry" />
 		<property name="workflowService" ref="WorkflowService" />
 	</bean>
+	<bean id="side.webscripts.js.node" parent="baseJavaScriptExtension"
+		class="com.bluexml.side.framework.alfresco.webscriptExtension.NodeScriptExtension">
+		<property name="extensionName">
+			<value>sidenode</value>
+		</property>
+		<property name="serviceRegistry" ref="ServiceRegistry" />
+		<property name="nodeService" ref="NodeService" />
+		<property name="behaviourFilter" ref="policyBehaviourFilter" />
+	</bean>
+
+	<bean id="side.webscripts.js.site" parent="baseJavaScriptExtension"
+		class="com.bluexml.side.framework.alfresco.webscriptExtension.SiteScriptExtension">
+		<property name="extensionName">
+			<value>sidesite</value>
+		</property>
+		<property name="serviceRegistry" ref="ServiceRegistry" />
+		<property name="siteService" ref="SiteService" />
+	</bean>
+
 
 </beans>

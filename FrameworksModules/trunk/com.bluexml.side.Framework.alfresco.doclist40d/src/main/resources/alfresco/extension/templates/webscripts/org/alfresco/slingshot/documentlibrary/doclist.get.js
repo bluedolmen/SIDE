@@ -185,10 +185,14 @@ function getDoclist() {
 			// Does this collection of nodes have potentially differering paths?
 			if (filterParams.variablePath || item.isLink) {
 				locationNode = item.isLink ? item.linkedNode : item.node;
-				location = Common.getLocation(locationNode,
-						parsedArgs.libraryRoot);
-			} else {
-				location = {
+            // Ensure we have Read permissions on the destination on the link object
+            if (!locationNode.hasPermission("Read")) break;
+            location = Common.getLocation(locationNode, parsedArgs.libraryRoot);
+         }
+         else
+         {
+            location =
+            {
 					site : parsedArgs.location.site,
 					siteTitle : parsedArgs.location.siteTitle,
 					container : parsedArgs.location.container,

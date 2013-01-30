@@ -1155,7 +1155,7 @@
                         tag : encodeURIComponent(searchTag),
                         sort : encodeURIComponent(searchSort),
                         query : encodeURIComponent(this.options.searchQuery),
-								maxResults : this.options.maxSearchResults + 1
+                        maxResults : maxResults != null ? maxResults : this.options.maxSearchResults + 1
                      // to calculate whether more results were available
                      });
 

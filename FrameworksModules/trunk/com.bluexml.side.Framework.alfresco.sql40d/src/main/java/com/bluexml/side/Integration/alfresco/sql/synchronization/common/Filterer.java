@@ -18,6 +18,8 @@ public interface Filterer {
 	
 	public boolean acceptAssociationQName(QName qname);
 	
+	public boolean acceptPropertyQName(String className, QName propertyQname);
+
 	public boolean acceptPropertyQName(QName qname);
 	
 	public boolean accept(NodeRef nodeRef);

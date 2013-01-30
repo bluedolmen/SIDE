@@ -255,6 +255,9 @@ var Filters =
         	 
         	 if (path) {
         		 query_path = '+PATH:"' + path + '"';
+        		 if (parsedArgs.location.site) {
+        		    query_path = query_path.replace(/\{site\}/g,"cm:" + parsedArgs.location.site);
+        		 }
         	 }
         	 
         	 query = query_type + " " + query_aspect + " " + query_path + " " + query_notAspects + " ";

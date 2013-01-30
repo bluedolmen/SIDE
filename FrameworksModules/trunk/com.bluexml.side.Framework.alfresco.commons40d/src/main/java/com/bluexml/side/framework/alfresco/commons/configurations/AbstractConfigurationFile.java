@@ -1,13 +1,18 @@
 package com.bluexml.side.framework.alfresco.commons.configurations;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
 /**
  * SIDE Extension
  * 
@@ -18,16 +23,22 @@ public abstract class AbstractConfigurationFile<K, V> implements IConfigurationF
 	protected Log logger = LogFactory.getLog(getClass());
 
 	/** The path matching resource pattern resolver */
-	protected PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+	protected ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 
 	/** The Dictionary. */
-	protected Map<K, V> dictionary = new HashMap<K, V>();
+	protected Map<K, V> dictionary = null;
 
 	Resource[] resources = null;
-	
-	/*
-	 * Helper methods
-	 */
+
+	List<String> resourcePatterns;
+
+	public AbstractConfigurationFile() {
+
+	}
+
+	public AbstractConfigurationFile(ResourcePatternResolver resolver) {
+		this.resolver = resolver;
+	}
 
 	/**
 	 * method to load dictionary from resource
@@ -42,20 +53,26 @@ public abstract class AbstractConfigurationFile<K, V> implements IConfigurationF
 	 */
 
 	public void setResourcePattern(String resourcePattern) {
-		try {
-			resources = resolver.getResources(resourcePattern);
-			reloadResource();
-		} catch (Exception e) {
-			logger.error("error when traying to load configuration", e);
-		}
+		this.resourcePatterns = new ArrayList<String>();
+		this.resourcePatterns.add(resourcePattern);
 	}
-	
-	protected void reloadResource() throws Exception {
-		dictionary.clear();
-		for (Resource r : resources) {
-			logger.info("Loading resource " + r.getDescription());
-			loadResource(r);
+
+	public void setResourcePatterns(List<String> resourcePatterns) {
+		this.resourcePatterns = resourcePatterns;
+	}
+
+	protected List<Resource> getResources() {
+		List<Resource> lresources = new ArrayList<Resource>();
+		for (String string : resourcePatterns) {
+			try {
+				Resource[] resources2 = resolver.getResources(string);
+				List<Resource> asList = Arrays.asList(resources2);
+				lresources.addAll(asList);
+			} catch (IOException e) {
+				logger.error("error when traying to load configuration", e);
+			}
 		}
+		return lresources;
 	}
 
 	/*
@@ -76,6 +93,27 @@ public abstract class AbstractConfigurationFile<K, V> implements IConfigurationF
 	 * (non-Javadoc)
 	 * @see
 	 * com.bluexml.side.framework.alfresco.commons.configurations.IConfigurationFile
+	 * #getValue(java.lang.Object, java.lang.Object)
+	 */
+	public V getValue(K key, V defaultValue) {
+		V value = getValue(key);
+		if (hasValue(key)) {
+			if (value != null) {
+				return value;
+			} else {
+				logger.debug("value is Null :" + key + "in " + dictionary);
+			}
+		} else {
+			logger.debug("key not found :" + key + "in " + dictionary);
+		}
+		logger.debug("return default value for :" + key + " dictionary :" + dictionary);
+		return defaultValue;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.bluexml.side.framework.alfresco.commons.configurations.IConfigurationFile
 	 * #hasValue(K)
 	 */
 	public boolean hasValue(K key) {
@@ -89,10 +127,13 @@ public abstract class AbstractConfigurationFile<K, V> implements IConfigurationF
 	 * #getDictionary()
 	 */
 	public Map<K, V> getDictionary() {
-		if (logger.isDebugEnabled()) {
-			// dynamic reload so configuration can be reloaded, to work the resource path need to be an URL or local file path
+		if (dictionary == null) {
+			dictionary = new HashMap<K, V>();
 			try {
-				reloadResource();
+				for (Resource r : getResources()) {
+					logger.info("Loading resource " + r.getDescription());
+					loadResource(r);
+				}
 			} catch (Exception e) {
 				logger.error("error when traying to reload configuration", e);
 			}

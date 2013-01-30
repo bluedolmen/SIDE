@@ -56,4 +56,39 @@
 		<!-- use file: prefix to enable dynamic reload -->
 <!-- 		<property name="resourcePattern" value="file:/..." /> -->
 	</bean>
+	
+	<bean id="dbNodeService" class="com.bluexml.side.framework.alfresco.formProcessor.MyDbNodeServiceImpl" init-method="init" >
+      <property name="dictionaryService">
+         <ref bean="dictionaryService" />
+      </property>
+      <property name="transactionService">
+         <ref bean="transactionService" />
+      </property>
+      <property name="qnameDAO">
+         <ref bean="qnameDAO" />
+      </property>
+      <property name="nodeDAO">
+         <ref bean="nodeDAO" />
+      </property>
+      <property name="policyComponent">
+         <ref bean="policyComponent"/>
+      </property>
+      <property name="storeArchiveMap">
+         <ref bean="storeArchiveMap"/>
+      </property>
+      <property name="avmNodeService">
+         <ref bean="avmNodeService"/>
+      </property>
+      <property name="nodeIndexer">
+         <ref bean="nodeIndexer"/>
+      </property>
+      <property name="tenantService">
+         <ref bean="tenantService"/>
+      </property>
+      <property name="storesToIgnorePolicies">
+         <ref bean="storesToIgnorePolicies"/>
+      </property>
+      <property name="enableTimestampPropagation" value="${system.enableTimestampPropagation}" />
+   </bean>
+   
 </beans>

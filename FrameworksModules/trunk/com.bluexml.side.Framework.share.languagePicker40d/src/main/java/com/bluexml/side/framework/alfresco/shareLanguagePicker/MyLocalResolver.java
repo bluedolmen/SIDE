@@ -27,6 +27,7 @@ public class MyLocalResolver implements LocaleResolver, ApplicationContextAware 
 
 	static {
 		logger.debug("MyLocalResolver Class Loaded");
+		logger.debug("MyLocalResolver default locale is :" + Locale.getDefault());
 	}
 
 	public Locale resolveLocale(HttpServletRequest request) {
