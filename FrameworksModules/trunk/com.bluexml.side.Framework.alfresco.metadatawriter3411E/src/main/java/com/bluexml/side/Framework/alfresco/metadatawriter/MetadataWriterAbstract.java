@@ -146,7 +146,8 @@ public abstract class MetadataWriterAbstract {
 				List<FileInfo> contentFolder = getFilesList(myChild.getChildRef());
 				if (!contentFolder.isEmpty()) result.addAll(contentFolder);
 			} else {
-				result.add(fileFolderService.getFileInfo(myChild.getChildRef()));
+				FileInfo fi = fileFolderService.getFileInfo(myChild.getChildRef());
+				if (fi != null) result.add(fi);
 			}
 		}
 		return result;
