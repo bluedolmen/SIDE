@@ -36,7 +36,7 @@
 		<property name="cmisDictionaryService" ref="CMISDictionaryService" />
 		<property name="cmisQueryService" ref="CMISQueryService" />
 		<property name="paging" ref="webscripts.js.paging" />
-		<property name="cmiswebscript" ref="webscripts.js.cmis" />
+		<property name="cmiswebscript" ref="webscripts.js.cmisserver" />
 		<property name="imageResolver" ref="webscripts.repo.imageresolver"></property>
 	</bean>
 	<bean id="side.webscripts.js.rule" parent="baseJavaScriptExtension"
