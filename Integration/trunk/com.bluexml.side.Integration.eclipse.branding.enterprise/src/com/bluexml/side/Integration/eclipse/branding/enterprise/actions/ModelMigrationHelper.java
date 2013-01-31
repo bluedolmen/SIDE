@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import com.bluexml.side.application.Application;
 import com.bluexml.side.application.ComponantConfiguration;
+import com.bluexml.side.application.ConfigurationParameters;
 import com.bluexml.side.application.GeneratorConfiguration;
 import com.bluexml.side.application.Model;
 import com.bluexml.side.application.ModuleConstraint;
@@ -75,6 +76,13 @@ public class ModelMigrationHelper {
 		List<File> mavenModules = getMavenModules(source);
 
 		List<File> modelsTarget = getModels(target);
+
+		//		System.out.println("ModelMigrationHelper.updateProject() models :" + models.size());
+		//		System.out.println("ModelMigrationHelper.updateProject() diagrams :" + diagrams.size());
+		//		System.out.println("ModelMigrationHelper.updateProject() applicationModels :" + applicationModels.size());
+		//		System.out.println("ModelMigrationHelper.updateProject() mavenModules :" + mavenModules.size());
+		//		System.out.println("ModelMigrationHelper.updateProject() targetModels :" + modelsTarget.size());
+
 		monitor2.beginTask("updating project", models.size() + applicationModels.size() + mavenModules.size() + diagrams.size());
 		// System.out.println("ModelMigrationHelper.updateProject() models to update :" + models.size());
 		monitor2.subTask("models references");
@@ -165,6 +173,15 @@ public class ModelMigrationHelper {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @param file
+	 * @param libraryId
+	 * @param source, can be null if project copy is disabled
+	 * @throws IOException
+	 * @throws CoreException
+	 * @throws Exception
+	 */
 	protected void updateApplicationModel(File file, String libraryId, IProject source) throws IOException, CoreException, Exception {
 
 		IFile model = IFileHelper.getIFile(file);
@@ -198,6 +215,12 @@ public class ModelMigrationHelper {
 				String toreplace = split[1];
 
 				modelItem.setFile(file2.replace(toreplace, source.getName()));
+			} else if (eObject2 instanceof ConfigurationParameters && source != null) {
+				ConfigurationParameters conf = (ConfigurationParameters) eObject2;
+				if ("generation.options.logPath".equals(conf.getKey()) || "generation.options.destinationPath".equals(conf.getKey())) {
+					String val = conf.getValue().split("/")[1];
+					conf.setValue(conf.getValue().replaceFirst(val, source.getName()));
+				}
 			}
 		}
 
@@ -275,7 +298,7 @@ public class ModelMigrationHelper {
 						if (o instanceof List<?>) {
 							if (o instanceof EObjectEList) {
 
-								// System.out.println("ModelMigrationHelper.updateModel() le truc est une list de truc");
+								//								System.out.println("ModelMigrationHelper.updateModel() le truc est une list de truc");
 								EObjectEList<EObject> l = (EObjectEList<EObject>) o;
 								EObjectEList<EObject> l_r = (EObjectEList<EObject>) o_resolved;
 								Map<Object, Object[]> toReplace = new HashMap<Object, Object[]>();
@@ -284,7 +307,7 @@ public class ModelMigrationHelper {
 									int indexOf = l.indexOf(object);
 									EObject updateElement = updateElement(esf, object, l_r.get(indexOf), modelsTarget);
 									if (updateElement != null) {
-										// System.out.println("ModelMigrationHelper.updateModel() indexof :" + indexOf);
+										//										System.out.println("ModelMigrationHelper.updateModel() indexof :" + indexOf);
 										toReplace.put(l_r.get(indexOf), new Object[] { indexOf, updateElement });
 									}
 								}
@@ -294,7 +317,7 @@ public class ModelMigrationHelper {
 
 									Object object = entry.getKey();
 									EObject updateElement = (EObject) entry.getValue()[1];
-									// System.out.println("ModelMigrationHelper.updateModel() REPLACE " + o + " by " + updateElement);
+									//									System.out.println("ModelMigrationHelper.updateModel() REPLACE " + object + " by " + updateElement);
 
 									// System.out.println("ModelMigrationHelper.updateModel() BEFORE size :" + l.size());
 									int indexOf = (Integer) entry.getValue()[0];
@@ -305,19 +328,19 @@ public class ModelMigrationHelper {
 
 								}
 							} else {
-								// System.out.println("ModelMigrationHelper.updateModel() o: " + eObject2 + " for :" + esf.getName());
+								//								System.err.println("ModelMigrationHelper.updateModel() NOT Managed o: " + o + " for :" + esf.getName());
 							}
 						} else {
 							if (o instanceof EObject) {
 								EObject updateElement = updateElement(esf, (EObject) o, (EObject) o_resolved, modelsTarget);
 								if (updateElement != null) {
-									// System.out.println("ModelMigrationHelper.updateModel() REPLACE " + o + " by " + updateElement);
+									//									System.out.println("ModelMigrationHelper.updateModel() REPLACE " + o + " by " + updateElement);
 									eObject2.eSet(esf, updateElement);
 								}
 							}
 						}
 					} else {
-						// System.out.println("ModelMigrationHelper.updateModel() null value in " + model + " on " + eObject2 + " ref :" + esf.getName());
+						//						System.out.println("ModelMigrationHelper.updateModel() null value in " + model + " on " + eObject2 + " ref :" + esf.getName());
 					}
 				} catch (EqualsException e) {
 					throw new Exception("Please Check your models for missing references in " + model + " on " + eObject2 + " ref :" + esf.getName());
@@ -331,17 +354,17 @@ public class ModelMigrationHelper {
 
 	protected EObject updateElement(EStructuralFeature esf, EObject eo2, EObject resolved, List<File> modelsTarget) throws Exception {
 		if (eo2.eIsProxy()) {
-			// System.out.println("ModelMigrationHelper.updateModel() search on feature " + esf.getName());
+			//			System.out.println("ModelMigrationHelper.updateModel() search on feature " + esf.getName());
 			if (eo2 instanceof InternalEObject) {
-				// System.out.println("ModelMigrationHelper.updateModel() le truc est un proxy interne de machin " + eo2);
+				//				System.out.println("ModelMigrationHelper.updateModel() le truc est un proxy interne de machin " + eo2);
 				// search in target for the same object
 				return searchForSameObjectIn(resolved, modelsTarget);
 
 			} else {
-				// System.out.println("ModelMigrationHelper.updateModel() le truc est un proxy externe de machin " + eo2);
+				//				System.out.println("ModelMigrationHelper.updateModel() le truc est un proxy externe de machin " + eo2);
 			}
 		} else {
-			// System.out.println("ModelMigrationHelper.updateModel() le truc est un machin" + eo2);
+			//			System.out.println("ModelMigrationHelper.updateModel() le truc est un machin" + eo2);
 		}
 		return null;
 	}
@@ -505,15 +528,13 @@ public class ModelMigrationHelper {
 		public boolean equals(Object arg0) {
 			if (arg0 instanceof ComparableEObject) {
 				try {
-					ModelMigrationHelper.equals(eObject, ((ComparableEObject) arg0).eObject);
+					return ModelMigrationHelper.equals(eObject, ((ComparableEObject) arg0).eObject);
 				} catch (RootElementException e) {
 					throw new EqualsException(e.getMessage(), e.getCause());
 				}
 			} else {
-
+				return false;
 			}
-			return false;
 		}
-
 	}
 }
