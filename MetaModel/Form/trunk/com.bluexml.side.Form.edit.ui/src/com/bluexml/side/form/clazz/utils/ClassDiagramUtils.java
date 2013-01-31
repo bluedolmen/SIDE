@@ -63,7 +63,7 @@ public class ClassDiagramUtils {
 				if (metaInfoMap.containsKey("multiple") && metaInfoMap.get("multiple") != null && metaInfoMap.get("multiple").equals("True")) {
 					((ChoiceField) field).setMultiple(true);
 				}
-			} else if (typ.equals(DataType.STRING)) {
+			} else if (typ.equals(DataType.STRING) | typ.equals(DataType.CHAR)) {
 				// Email Field
 				if (Boolean.parseBoolean(metaInfoMap.get("email"))) {
 					field = FormFactory.eINSTANCE.createEmailField();
@@ -86,7 +86,7 @@ public class ClassDiagramUtils {
 				// Time Field
 			} else if (typ.equals(DataType.TIME)) {
 				field = FormFactory.eINSTANCE.createTimeField();
-			} else if (typ.equals(DataType.BOOLEAN)) {
+			} else if (typ.equals(DataType.BOOLEAN) || typ.equals(DataType.BYTE)) {
 				// Boolean Field
 				field = FormFactory.eINSTANCE.createBooleanField();
 			} else if (typ.equals(DataType.INT)) {

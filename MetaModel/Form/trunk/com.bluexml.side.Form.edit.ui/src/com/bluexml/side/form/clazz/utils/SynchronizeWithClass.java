@@ -86,7 +86,7 @@ public class SynchronizeWithClass {
 
 				if (!(abstractClass instanceof Clazz) ^ !((Clazz) abstractClass).isAbstract()) {
 					FormContainer formContainer = null;
-					
+
 					if (!CommonServices.isNativeModel(abstractClass) || includeAlfrescoNativeClass) {
 
 						if (fc instanceof ClassFormCollection) {
@@ -326,19 +326,26 @@ public class SynchronizeWithClass {
 				if (headless) {
 					EList<?> children = null;
 					EObject eContainer = eObject.eContainer();
-					if (eContainer instanceof FormGroup) {
-						FormGroup fg = (FormGroup) eContainer;
+					System.out.println("SynchronizeWithClass.removeInvalide() eContainer :" + eContainer);
+					if (eContainer != null) {
+						if (eContainer instanceof FormGroup) {
+							FormGroup fg = (FormGroup) eContainer;
 
-						if (fg.getChildren().contains(eObject)) {
-							children = fg.getChildren();
-						} else if (fg.getDisabled().contains(eObject)) {
-							children = fg.getDisabled();
+							if (fg.getChildren().contains(eObject)) {
+								children = fg.getChildren();
+							} else if (fg.getDisabled().contains(eObject)) {
+								children = fg.getDisabled();
+							}
+						} else if (eContainer instanceof FormCollection) {
+							children = ((FormCollection) eContainer).getForms();
 						}
-					} else if (eContainer instanceof FormCollection) {
-						children = ((FormCollection) eContainer).getForms();
+
+						boolean remove = children.remove(eObject);
+						System.out.println("SynchronizeWithClass.removeInvalide() removed? " + remove);
+					} else {
+						System.out.println("SynchronizeWithClass.removeInvalide() allready removed !");
 					}
-					boolean remove = children.remove(eObject);
-					System.out.println("SynchronizeWithClass.removeInvalide() removed? " + remove);
+
 				} else {
 					Command delCmd = RemoveCommand.create(domain, eObject);
 					removeCommands.append(delCmd);
@@ -478,6 +485,8 @@ public class SynchronizeWithClass {
 				fieldForAttribute = SearchInitialization.getSearchFieldForAttribute(attribute);
 			} else if (o instanceof FormClass || o instanceof FormWorkflow) {
 				fieldForAttribute = ClassDiagramUtils.getFieldForAttribute(attribute);
+			} else {
+				System.out.println("SynchronizeWithClass.synchronizeMissingAttributes() o :"+o);
 			}
 			if (WorkflowInitialization.filterFormElement(filterNS, fieldForAttribute)) {
 
