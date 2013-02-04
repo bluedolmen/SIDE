@@ -93,7 +93,9 @@ if (!Array.prototype.indexOf) {
          editConfig : {
             disabled : true,
             formconfig : {}
-         }
+         },
+         nodoubleValue : true,
+         nodoubleLabel : true
       },
 
       setOptions : function(options) {
@@ -162,8 +164,12 @@ if (!Array.prototype.indexOf) {
                disabled : true,
                field : this.options.field,
                compactMode : true,
-               currentValue : this.initialValue
+               currentValue : this.initialValue,
+               itemType : this.options.itemType,
+               showLinkToTarget : this.options.showLinkToTarget ? this.options.showLinkToTarget : false,
+               targetLinkTemplate : this.options.targetLinkTemplate ? this.options.targetLinkTemplate : null
             }).setMessages(this.messages);
+
          } else if (this.options.multipleSelectMode) {
             // cardinality n-n
             var multiselect = new SIDE.MyDSMultiSelectField({
@@ -173,7 +179,9 @@ if (!Array.prototype.indexOf) {
                labelKey : "name",
                parentEl : this.htmlid,
                currentValueHtmlId : this.currentValueHtmlId,
-               editConfig : this.options.editConfig
+               editConfig : this.options.editConfig,
+               nodoubleValue : this.options.nodoubleValue,
+               nodoubleLabel : this.options.nodoubleLabel
             }, this.initialValue);
             multiselect.setMessages(this.messages);
             var me = this;

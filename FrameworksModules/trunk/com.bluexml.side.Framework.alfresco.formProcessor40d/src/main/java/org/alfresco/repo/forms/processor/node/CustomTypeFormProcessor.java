@@ -24,6 +24,7 @@ import org.alfresco.repo.model.filefolder.FileFolderServiceImpl.InvalidTypeExcep
 import org.alfresco.service.cmr.dictionary.AssociationDefinition;
 import org.alfresco.service.cmr.dictionary.ChildAssociationDefinition;
 import org.alfresco.service.cmr.dictionary.TypeDefinition;
+import org.alfresco.service.cmr.repository.ChildAssociationRef;
 import org.alfresco.service.cmr.repository.ContentIOException;
 import org.alfresco.service.cmr.repository.ContentWriter;
 import org.alfresco.service.cmr.repository.DuplicateChildNodeNameException;
@@ -356,7 +357,8 @@ public class CustomTypeFormProcessor extends TypeFormProcessor {
 		// create the node
 		Map<QName, Serializable> nodeProps = new HashMap<QName, Serializable>(1);
 		nodeProps.put(ContentModel.PROP_NAME, nodeName);
-		nodeRef = this.nodeService.createNode(parentRef, ContentModel.ASSOC_CONTAINS, QName.createQName(NamespaceService.CONTENT_MODEL_1_0_URI, QName.createValidLocalName(nodeName)), typeDef.getName(), nodeProps).getChildRef();
+		ChildAssociationRef createNode = this.nodeService.createNode(parentRef, ContentModel.ASSOC_CONTAINS, QName.createQName(NamespaceService.CONTENT_MODEL_1_0_URI, QName.createValidLocalName(nodeName)), typeDef.getName(), nodeProps);
+		nodeRef = createNode.getChildRef();
 		return nodeRef;
 	}
 

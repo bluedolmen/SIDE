@@ -1,6 +1,6 @@
 {<#if validity == true>
 "validity":true
-<#else/>
+<#else>
 "validity":false
 </#if>,
 "ticket":"${ticket}",

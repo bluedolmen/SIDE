@@ -15,6 +15,14 @@
    
    autocomplete.setOptions(
    { 
+     <#if field.control.params.showTargetLink??>
+     showLinkToTarget: ${field.control.params.showTargetLink},
+      <#if page?? && page.url.templateArgs.site??>
+     targetLinkTemplate: "${url.context}/page/site/${page.url.templateArgs.site!""}/document-details?nodeRef={nodeRef}",
+      <#else>
+     targetLinkTemplate: "${url.context}/page/document-details?nodeRef={nodeRef}",
+      </#if>
+     </#if>
      <#if form.mode == "view" || (field.disabled && !(field.control.params.forceEditable?? && field.control.params.forceEditable == "true"))>disabled: true,</#if>
      itemType: "${field.endpointType}",
      field: "${field.name}",
@@ -42,7 +50,7 @@
 
 //]]></script>
 
-<div class="form-field">
+<div class="form-field form-field-asso-autocomplete">
    <#if form.mode == "view">
       <div id="${controlId}" class="viewmode-field">
          <#if field.endpointMandatory && field.value == "">

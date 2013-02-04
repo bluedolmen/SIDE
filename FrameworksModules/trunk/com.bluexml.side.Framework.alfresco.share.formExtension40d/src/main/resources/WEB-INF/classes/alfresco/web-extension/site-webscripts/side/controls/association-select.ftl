@@ -16,6 +16,14 @@
    
    combo.setOptions(
    {
+     <#if field.control.params.showTargetLink??>
+      showLinkToTarget: ${field.control.params.showTargetLink},
+      <#if page?? && page.url.templateArgs.site??>
+         targetLinkTemplate: "${url.context}/page/site/${page.url.templateArgs.site!""}/document-details?nodeRef={nodeRef}",
+      <#else>
+         targetLinkTemplate: "${url.context}/page/document-details?nodeRef={nodeRef}",
+      </#if>
+     </#if>
    	 <#if form.mode == "view" || (field.disabled && !(field.control.params.forceEditable?? && field.control.params.forceEditable == "true"))>disabled: true,</#if>
      itemType: "<#if field.control.params.itemType??>${field.control.params.itemType}<#else>${field.endpointType}</#if>",
      field: "${field.name}",
@@ -36,6 +44,8 @@
 	 <#if field.control.params.addNewConfig??>, addNewConfig : <@addNewConfig field /></#if>
 	 <#if field.control.params.editConfig??>, editConfig : <@editConfig field /></#if>
 	 <#if field.control.params.startLocation??>, startLocation : "${field.control.params.startLocation}"</#if>
+	 <#if field.control.params.nodoubleValue??>, nodoubleValue : ${field.control.params.nodoubleValue}</#if>
+	 <#if field.control.params.nodoubleLabel??>, nodoubleLabel : ${field.control.params.nodoubleLabel}</#if>
    });
    
    
@@ -47,7 +57,7 @@
 
 //]]></script>
 
-<div class="form-field">
+<div class="form-field form-field-asso">
    <#if form.mode == "view">
       <div id="${controlId}" class="viewmode-field">
          <#if field.endpointMandatory && field.value == "">

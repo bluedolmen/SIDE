@@ -134,24 +134,23 @@ if (typeof SIDE == "undefined" || !SIDE) {
          var previousAction = subButton.onclick;
 
          this.widgets.inputFile = Dom.get(this.id);
-
-         // get the cm_field if any
-         var cm_name_field = this._getFileNameField();
+         
          var me = this;
          YAHOO.util.Event.addListener(this.widgets.inputFile, "change", function(p_sType, p_aArgs) {
-            if (cm_name_field) {
+            // get the cm_name field if any
+            var cm_name_field = me._getFileNameField();
+            if (cm_name_field && cm_name_field == "") {
                var inputFileValue = me.widgets.inputFile.value;
                var index = inputFileValue.lastIndexOf('/');
                var index2 = inputFileValue.lastIndexOf('\\');
                if (index != -1 || index2 != -1) {
                   index = index > index2 ? index : index2;
-                  cm_name_field.value = inputFileValue.substring(index, inputFileValue.length - 1);
+                  cm_name_field.value = inputFileValue.substring(index + 1, inputFileValue.length );
                } else {
                   cm_name_field.value = inputFileValue;
                }
-               cm_name_field.form.formRuntime.updateSubmitElements();
-
             }
+            me.widgets.inputFile.form.formRuntime.updateSubmitElements();
          });
       },
 

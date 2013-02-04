@@ -2,7 +2,7 @@
 
 
 
-<div class="form-field">
+<div class="form-field form-field-dateListRange">
 <script type="text/javascript">//<![CDATA[
 (function()
 {	

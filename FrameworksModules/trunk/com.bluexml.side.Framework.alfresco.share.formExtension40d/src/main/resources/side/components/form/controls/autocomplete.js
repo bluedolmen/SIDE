@@ -120,6 +120,9 @@ if (!Array.prototype.indexOf) {
 					field : this.options.field,
 					compactMode : true,
 					currentValue : this.initialValue,
+               itemType : this.options.itemType,
+               showLinkToTarget : this.options.showLinkToTarget ? this.options.showLinkToTarget : false,
+               targetLinkTemplate : this.options.targetLinkTemplate ? this.options.targetLinkTemplate : null
 				});
 			} else if (this.options.multipleSelectMode) {
 				// cardinality n-n

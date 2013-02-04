@@ -101,7 +101,7 @@
 </#macro>
 
 <#macro renderSet set>
-   <#-- SIDE Id -->
+   <!-- SIDE.custom.Controller -->
    <#if (set.id != "")>
        <@renderRule "${args.htmlid}-${set.id}-pre" "SIDE.custom.Controller.onSet"/>
 	   <div id="${set.id?replace('.', '_')}" class="set">
@@ -109,7 +109,7 @@
        <@renderRule "${args.htmlid}-main-set-pre" "SIDE.custom.Controller.onSet"/>
    	   <div class="set">
    </#if>
-   </#-- SIDE -->
+   
    
    <#if set.appearance??>
       <#if set.appearance == "fieldset">
@@ -160,8 +160,8 @@
 <#macro renderFieldHelp field>
    <#if field.help?? && field.help?length &gt; 0>
       <span class="help-icon">
-         <img src="${url.context}/res/components/form/images/help.png" title="${msg("form.field.help")}" 
-              onclick="javascript:Alfresco.util.toggleHelpText('${fieldHtmlId}-help');" />
+         <img id="${fieldHtmlId}-help-icon" src="${url.context}/res/components/form/images/help.png" title="${msg("form.field.help")}" 
+              onclick="javascript:Alfresco.util.toggleHelpText('${fieldHtmlId}-help');" tabindex="0"/>
       </span>
       <div class="help-text" id="${fieldHtmlId}-help">${field.help?html}</div>
    </#if>

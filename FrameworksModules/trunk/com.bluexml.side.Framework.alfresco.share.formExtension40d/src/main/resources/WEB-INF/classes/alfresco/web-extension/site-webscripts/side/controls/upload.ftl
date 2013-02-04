@@ -8,7 +8,7 @@
 <#-- NOTE: content properties are not shown at all in view mode -->
 
 <#if form.mode != "view">
-<div class="form-field" id="${fieldHtmlId}-field">
+<div class="form-field form-field-upload" id="${fieldHtmlId}-field">
    <#if jsDisabled == false>
    <script type="text/javascript">//<![CDATA[
    (function()

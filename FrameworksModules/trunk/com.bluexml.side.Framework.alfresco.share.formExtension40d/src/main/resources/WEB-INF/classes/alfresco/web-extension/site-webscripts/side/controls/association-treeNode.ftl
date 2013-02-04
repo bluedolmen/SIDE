@@ -9,18 +9,22 @@
    {
    <#if field.control.params.showTargetLink??>
       showLinkToTarget: ${field.control.params.showTargetLink},
+      <#if page?? && page.url.templateArgs.site??>
       targetLinkTemplate: "${url.context}/page/site/${page.url.templateArgs.site!""}/document-details?nodeRef={nodeRef}",
+      <#else>
+      targetLinkTemplate: "${url.context}/page/document-details?nodeRef={nodeRef}",
+      </#if>
    </#if>
       itemType: "${field.endpointType}",
       multipleSelectMode: <#if field.control.params.multipleSelectMode??>${field.control.params.multipleSelectMode}<#else>${field.endpointMany?string}</#if>,
       itemFamily: "treeNode",
-      params: "${field.control.params.params!""}&site=" + (Alfresco ? Alfresco.constants.SITE : ""),
+      params: "${field.control.params.params!""}&site={site}",
       allowNavigationToContentChildren: true
    });
 })();
 //]]></script>
 
-<div class="form-field">
+<div class="form-field form-field-treeNode">
    <#if form.mode == "view">
       <div id="${controlId}" class="viewmode-field">
          <#if field.endpointMandatory && field.value == "">

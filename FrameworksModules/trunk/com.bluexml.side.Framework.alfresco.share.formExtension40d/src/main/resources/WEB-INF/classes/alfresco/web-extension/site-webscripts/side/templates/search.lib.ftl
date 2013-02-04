@@ -24,9 +24,11 @@
 </#macro>
 
 <#macro renderOperator id operators=[['OR','form.control.search.operator.OR',true],['AND','form.control.search.operator.AND',false],['NOT','form.control.search.operator.NOT',false]] name=id onchange="">
+<#if (operators?size > 0)>
 <select name="operator-${name}" id="operator-${id}" class="default-search-operator" onchange="${onchange}">
 	<#list operators as op>
 	<option value="${op[0]}" id="${op[0]}"<#if op[2]> selected="true"</#if>>${msg(op[1])}</option>
 	</#list>
 </select>
+</#if>
 </#macro>

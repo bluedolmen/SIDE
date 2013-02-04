@@ -12,7 +12,7 @@
 <#--link rel="stylesheet" type="text/css" href="${page.url.context}/res${cssFile}" /-->
 <#if (cssFile?starts_with("http"))>
 @import "${cssFile}";
-<#else/>
+<#else>
 @import "${page.url.context}/res${cssFile}";
 </#if>
 </#list>
