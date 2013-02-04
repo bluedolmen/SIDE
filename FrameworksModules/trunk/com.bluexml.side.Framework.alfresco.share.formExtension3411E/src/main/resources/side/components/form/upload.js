@@ -134,11 +134,11 @@ if (typeof SIDE == "undefined" || !SIDE) {
          var previousAction = subButton.onclick;
 
          this.widgets.inputFile = Dom.get(this.id);
-
-         // get the cm_field if any
-         var cm_name_field = this._getFileNameField();
+         
          var me = this;
          YAHOO.util.Event.addListener(this.widgets.inputFile, "change", function(p_sType, p_aArgs) {
+            // get the cm_name field if any
+            var cm_name_field = me._getFileNameField();
             if (cm_name_field && cm_name_field == "") {
                var inputFileValue = me.widgets.inputFile.value;
                var index = inputFileValue.lastIndexOf('/');

@@ -10,7 +10,7 @@
 <#--link rel="stylesheet" type="text/css" href="${page.url.context}/res${cssFile}" /-->
 <#if (cssFile?starts_with("http"))>
 @import "${cssFile}";
-<#else/>
+<#else>
 @import "${page.url.context}/res${cssFile}";
 </#if>
 </#list>
@@ -21,7 +21,7 @@
 <#list config.global.forms.dependencies.js as jsFile>
 <#if (jsFile?starts_with("http"))>
 <script type="text/javascript" src="${jsFile}"></script>
-<#else/>
+<#else>
 <script type="text/javascript" src="${page.url.context}/res${jsFile}"></script>
 </#if>
 </#list>
