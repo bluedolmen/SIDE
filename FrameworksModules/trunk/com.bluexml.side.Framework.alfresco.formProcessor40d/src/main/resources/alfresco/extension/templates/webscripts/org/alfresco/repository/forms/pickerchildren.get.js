@@ -3,7 +3,7 @@
 
 function main() {
 	var argsFilterType = args['filterType'], argsSelectableType = args['selectableType'], argsSearchTerm = args['searchTerm'], argsMaxResults = args['size'], argsXPath = args['xpath'], pathElements = url.service
-			.split("/"), parent = null, rootNode = companyhome, results = [], categoryResults = null, resultObj = null, lastPathElement = null;
+			.split("/"), parent = null, rootNode = companyhome, results = [], categoryResults = null, resultObj = null, lastPathElement = null, argsRootNode = null;
 
 	var argsSite = args['site'], argsSelectableTypeIsAspect = args['selectableTypeIsAspect'], argsAdvancedQuery = args['advancedQuery'];
 

@@ -737,16 +737,16 @@ function makeQueryFor(formJson, p, operator, first) {
 				}
 			} else if (p.indexOf("assoc_") === 0 && p.match("_added$") == "_added") {
 				var regexp = new RegExp("assoc_([^_]+)_(.*)_added");
-				var propName = '@' + p.replace(regexp, "$1:$2") + "search";
+				var propName = '@' + escapeQName(p.replace(regexp, "$1:$2") + "search");
 				if (propValue.indexOf(',') != -1) {
 					var values = propValue.split(',');
 					formQuery += (first ? '' : ' ' + operator + ' ');
 					for ( var c = 0; c < values.length; c++) {
 						var value = values[c];
-						formQuery += escapeQName(propName) + ':"' + values[c] + '"' + (c == values.length - 1 ? '' : ' ' + operator + ' ');
+						formQuery += propName + ':"' + values[c] + '"' + (c == values.length - 1 ? '' : ' ' + operator + ' ');
 					}
 				} else {
-					formQuery += (first ? '' : ' ' + operator + ' ') + escapeQName(propName) + ':"' + propValue + '"';
+					formQuery += (first ? '' : ' ' + operator + ' ') + propName + ':"' + propValue + '"';
 				}
 			}
 		}
