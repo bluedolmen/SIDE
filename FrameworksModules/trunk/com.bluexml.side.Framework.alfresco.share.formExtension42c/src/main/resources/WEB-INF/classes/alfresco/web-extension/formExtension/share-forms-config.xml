@@ -1,0 +1,58 @@
+<alfresco-config>
+	<config>
+		<forms>
+			<dependencies>
+				<!-- <css src="/fdk/left-aligned-label.css" /> -->
+				<css src="/yui/tabview/assets/skins/sam/tabview.css" />
+				<css src="/yui/autocomplete/assets/skins/sam/autocomplete.css" />
+				<css src="/yui/container/assets/skins/sam/container.css" />
+				<css src="/fdk/accordion/accordion.css" />
+				<css src="/fdk/exif-accordion.css" />
+				<css src="/fdk/progress-bar.css" />
+
+				<css src="/yui/reset-fonts/reset-fonts.css" />
+				<css src="/yui/assets/skins/sam/skin.css" />
+				<css src="/inputex/inputex-min.css" />
+
+				<css src="/side/components/form/controls/selectbox.css" />
+				<css src="/side/components/form/controls/autocomplete.css" />
+				<css src="/side/components/form/presentation.css" />
+
+				<js src="/yui/tabview/tabview-min.js" />
+				<js src="/yui/animation/animation-min.js" />
+				<js src="/yui/datasource/datasource-min.js" />
+				<js src="/yui/autocomplete/autocomplete-min.js" />
+				<js src="/yui/slider/slider-min.js" />
+				<js src="/fdk/accordion/accordion-min.js" />
+				<js src="/side/components/form/upload.js" />
+				<js src="/yui/event-delegate/event-delegate-min.js" />
+				<js src="/yui/utilities/utilities.js" />
+				<!-- js src="/inputex/inputex-min.js" /> -->
+				<js src="/inputex/inputex.js" />
+				<js src="/side/components/form/controls/MyDSSelectField.js" />
+				<js src="/side/components/form/controls/MyDSMultiSelectField.js" />
+
+				<js src="/side/components/form/controls/MyMultiAutoCompleteField.js" />
+				<js src="/side/components/form/controls/MyAutoCompleteField.js" />
+
+				<js src="/side/components/form/controls/combobox.js" />
+
+				<js src="/side/components/form/controls/MyDSRadioFields.js" />
+				<js src="/side/components/form/controls/MyDSCheckFields.js" />
+
+				<js src="/side/components/form/controls/selectbox.js" />
+				<js src="/side/components/form/controls/autocomplete.js" />
+
+				<js src="/side/components/form/controls/createTarget.js" />
+				<js src="/modules/simple-dialog.js" />
+				<js src="/side/components/form/controls/dateSelectList.js" />
+				<js src="/side/components/form/controls/dateRangeSelectList.js" />
+
+				<js src="/side/components/object-finder/object-finder.js" />
+
+
+			</dependencies>
+		</forms>
+	</config>
+
+</alfresco-config>

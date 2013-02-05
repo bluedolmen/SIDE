@@ -1,0 +1,8 @@
+<webscript>
+  <shortname>File Upload</shortname>
+  <description><![CDATA[
+  
+   ]]>
+  </description>
+  <url>/side/api/multipartcallback?nodeRef={nodeRef}&amp;successCallback={successCallback}&amp;successScope={successScope}</url>
+</webscript>
