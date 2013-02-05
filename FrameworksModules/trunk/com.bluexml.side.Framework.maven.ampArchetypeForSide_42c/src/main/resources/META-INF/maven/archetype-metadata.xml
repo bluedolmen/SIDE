@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype-descriptor name="ampArchetype">
+	<requiredProperties>
+		<requiredProperty key="project-name">
+			 <defaultValue>newAmpProject</defaultValue> 
+		</requiredProperty>
+		<requiredProperty key="project-description">
+			<defaultValue>this is a new Amp project generated using	"com.bluexml.side.Integration.m2.ampArchetype" thanks to change this description</defaultValue>
+		</requiredProperty>
+	</requiredProperties>
+
+	<fileSets>
+		<fileSet filtered="true" packaged="true" encoding="UTF-8">
+			<directory>src/main/java</directory>
+			<includes>
+				<include>**/*.java</include>
+			</includes>
+		</fileSet>
+		<fileSet filtered="true" encoding="UTF-8">
+			<directory>src/main/webapp</directory>
+			<includes>
+				<include>**/*.txt</include>
+				<include>**/*.jsp</include>
+			</includes>
+		</fileSet>
+		<fileSet filtered="true" encoding="UTF-8">
+			<directory>src/main/config</directory>
+			<includes>
+				<include>**/*.xml</include>
+				<include>**/*.properties</include>
+			</includes>
+		</fileSet>
+		<fileSet encoding="UTF-8">
+			<directory>src/main/webapp</directory>
+			<includes>
+				<include>**/*.js</include>
+				<include>**/*.gif</include>
+				<include>**/*.css</include>
+			</includes>
+		</fileSet>
+		<fileSet filtered="true" encoding="UTF-8">
+			<directory>src/test/properties</directory>
+			<includes>
+				<include>**/*.properties</include>
+			</includes>
+		</fileSet>
+		<fileSet filtered="true" encoding="UTF-8">
+			<directory>src/test/resources</directory>
+			<includes>
+				<include>**/*.xml</include>
+				<include>**/*.properties</include>
+			</includes>
+		</fileSet>
+		<fileSet filtered="true" encoding="UTF-8">
+			<directory></directory>
+			<includes>
+				<include>build.properties</include>
+				<include>build.xml</include>
+				<include>module.properties</include>
+				<include>README.txt</include>
+				<include>TODO.txt</include>
+				<include>.classpath</include>
+				<include>.project</include>
+			</includes>
+		</fileSet>
+		<fileSet filtered="true" encoding="UTF-8">
+			<directory>.settings</directory>
+			<includes>
+				<include>*.prefs</include>
+			</includes>
+		</fileSet>
+		<fileSet filtered="true" encoding="UTF-8">
+			<directory>src/main/resources</directory>
+			<includes>
+				<include>**/*.*</include>
+				<include>**</include>
+			</includes>
+		</fileSet>
+		<fileSet encoding="UTF-8">
+			<directory></directory>
+			<includes>
+				<include>lib/maven-ant-tasks-2.1.3.jar</include>
+			</includes>
+		</fileSet>
+	</fileSets>
+</archetype-descriptor>
