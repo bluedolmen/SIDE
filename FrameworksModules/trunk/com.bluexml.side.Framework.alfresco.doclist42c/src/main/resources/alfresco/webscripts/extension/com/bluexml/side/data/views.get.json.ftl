@@ -1,0 +1,1 @@
+<#include "${viewTemplate}/${viewName}.get.json.ftl"><#t>
