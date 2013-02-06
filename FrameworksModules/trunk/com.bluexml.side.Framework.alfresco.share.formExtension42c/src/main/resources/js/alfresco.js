@@ -422,7 +422,7 @@ Alfresco.util.substituteDotNotation = function(str, obj)
    {
       return Alfresco.util.findValueByDotNotation(obj, p_key);
    });
-}
+};
 
 /**
  * Check if an array contains an object
@@ -585,14 +585,17 @@ Alfresco.util.BYTES_GB = 1073741824;
  *
  * @method Alfresco.util.formatFileSize
  * @param fileSize {number} File size in bytes
+ * @param decimalPlaces {int} number of decimal places
  * @return {string} The file size in a readable form, i.e 1.2mb
  * @static
  * @throws {Error}
  */
-Alfresco.util.formatFileSize = function(fileSize)
+Alfresco.util.formatFileSize = function(fileSize, decimalPlaces)
 {
+   var decimalPlaces = decimalPlaces || 0;
    if (typeof fileSize == "string")
    {
+      fileSize = fileSize.replace(/,/gi,"");
       fileSize = parseInt(fileSize, 10);
    }
    
@@ -602,16 +605,16 @@ Alfresco.util.formatFileSize = function(fileSize)
    }
    else if (fileSize < Alfresco.util.BYTES_MB)
    {
-      fileSize = Math.round(fileSize / Alfresco.util.BYTES_KB);
+      fileSize = (fileSize / Alfresco.util.BYTES_KB).toFixed(decimalPlaces);
       return fileSize + " " + Alfresco.util.message("size.kilobytes");
    }
    else if (fileSize < Alfresco.util.BYTES_GB)
    {
-      fileSize = Math.round(fileSize / Alfresco.util.BYTES_MB);
+      fileSize = (fileSize / Alfresco.util.BYTES_MB).toFixed(decimalPlaces);
       return fileSize + " " + Alfresco.util.message("size.megabytes");
    }
 
-   fileSize = Math.round(fileSize / Alfresco.util.BYTES_GB);
+   fileSize = (fileSize / Alfresco.util.BYTES_GB).toFixed(decimalPlaces);
    return fileSize + " " + Alfresco.util.message("size.gigabytes");
 };
 
@@ -625,7 +628,7 @@ Alfresco.util.formatFileSize = function(fileSize)
  * @return {string} The icon name, e.g. doc-file-32.png
  * @static
  */
-Alfresco.util.getFileIcon = function(p_fileName, p_fileType, p_iconSize)
+Alfresco.util.getFileIcon = function(p_fileName, p_fileType, p_iconSize, p_fileParentType)
 {
    // Mapping from extn to icon name for cm:content
    var extns = 
@@ -644,7 +647,11 @@ Alfresco.util.getFileIcon = function(p_fileName, p_fileType, p_iconSize)
       "divx": "video",
       "doc": "doc",
       "docx": "doc",
+      "docm": "doc",
+      "dotx": "doc",
+      "dotm": "doc",
       "eml": "eml",
+      "eps": "eps",
       "fla": "fla",
       "flv": "video",
       "fxp": "fxp",
@@ -663,6 +670,7 @@ Alfresco.util.getFileIcon = function(p_fileName, p_fileType, p_iconSize)
       "mpeg": "video",
       "mpeg2": "video",
       "mpv2": "video",
+      "msg": "eml",
       "numbers": "numbers",
       "odg": "odg",
       "odp": "odp",
@@ -676,6 +684,16 @@ Alfresco.util.getFileIcon = function(p_fileName, p_fileType, p_iconSize)
       "ppj": "ppj",
       "ppt": "ppt",
       "pptx": "ppt",
+      "pptm": "ppt",
+      "pps": "ppt",
+      "ppsx": "ppt",
+      "ppsm": "ppt",
+      "pot": "ppt",
+      "potx": "ppt",
+      "potm": "ppt",
+      "ppam": "ppt",
+      "sldx": "ppt",
+      "sldm": "ppt",
       "psd": "psd",
       "qt": "video",
       "rtf": "rtf",
@@ -690,6 +708,11 @@ Alfresco.util.getFileIcon = function(p_fileName, p_fileType, p_iconSize)
       "wmv": "video",
       "xls": "xls",
       "xlsx": "xls",
+      "xltx": "xls",
+      "xlsm": "xls",
+      "xltm": "xls",
+      "xlam": "xls",
+      "xlsb": "xls",
       "xml": "xml",
       "xvid": "video",
       "zip": "zip"
@@ -697,6 +720,7 @@ Alfresco.util.getFileIcon = function(p_fileName, p_fileType, p_iconSize)
 
    var prefix = "generic",
       fileType = typeof p_fileType === "string" ? p_fileType : "cm:content",
+      fileParentType = typeof p_fileParentType === "string" ? p_fileParentType : null,
       iconSize = typeof p_iconSize === "number" ? p_iconSize : 32;
    
    // If type = cm:content, then use extn look-up
@@ -711,7 +735,18 @@ Alfresco.util.getFileIcon = function(p_fileName, p_fileType, p_iconSize)
    }
    else if (typeof type == "undefined")
    {
-      type = "file";
+      if (fileParentType !== null)
+      {
+         type = Alfresco.util.getFileIcon.types[fileParentType];
+         if (typeof type == "undefined")
+         {
+            type = "file";
+         }
+      }
+      else
+      {
+      	type = "file";
+      }
    }
    return prefix + "-" + type + "-" + iconSize + ".png";
 };
@@ -761,6 +796,182 @@ Alfresco.util.getFileExtension = function(filePath)
    return null;
 };
 
+
+/**
+ * Loads a webscript into a target element.
+ *
+ * @method loadWebscript
+ * @param config
+ * @param config.method {String} (Optional) Defaults to "GET"
+ * @param config.url {String} The url to the webscript to load
+ * @param config.properties {Object} An object literal with the webscript parameters
+ * @param config.target {HTMLElement|String|null} The html element that will contain the new webscript.
+ *        If null a div with the hidden class will be appended to the body.
+ */
+Alfresco.util.loadWebscript = function (config)
+{
+   // Help creating a target & htmlid if none has been provided
+   var c = Alfresco.util.deepCopy(config);
+   c.method = c.method || Alfresco.util.Ajax.GET;
+   c.properties = c.properties || {};
+   c.properties.htmlid = c.properties.htmlid || Alfresco.util.generateDomId();
+
+   // Load the form for the specific workflow
+   Alfresco.util.Ajax.request(
+   {
+      method: c.method,
+      url: c.url,
+      dataObj: c.properties,
+      successCallback:
+      {
+         fn: function loadWebscript_successCallback(response, config)
+         {
+            // Split markup and script elements
+            var result = Alfresco.util.Ajax.sanitizeMarkup(response.serverResponse.responseText);
+
+            // Create temporary element to insert html
+            var wrapper = document.createElement("div");
+            wrapper.innerHTML = result[0];
+            if (!YAHOO.util.Selector.query("#" + c.properties.htmlid, wrapper, true))
+            {
+               wrapper.setAttribute("id", c.properties.htmlid);
+            }
+            var target = YAHOO.util.Dom.get(c.target);
+            if (!target)
+            {
+               target = document.createElement("div");
+               YAHOO.util.Dom.addClass(target, "hidden");
+               document.body.appendChild(target);
+            }
+            target.appendChild(wrapper);
+
+            // Run the js code from the webscript's <script> elements
+            window.setTimeout(result[1], 0);
+         },
+         scope: this,
+         obj: config
+      },
+      failureMessage: Alfresco.util.message("message.failure"),
+      scope: this,
+      execScripts: false
+   });
+};
+
+/**
+ *
+ * @param password
+ * @param config
+ * @param config.username
+ * @param config.minLength
+ */
+Alfresco.util.getPasswordStrength = function(password, config)
+{
+   // Merge default config with overrides
+   var c = YAHOO.lang.merge({
+      username: null,
+      minLength: 0
+   }, config);
+
+   // Note we are avoiding character classes to make algorithm i18n safe.
+   var strength = 0,
+      DIGITS = /\d/,
+      NODIGITS = /\D/,
+      SPECIAL_CHARS = /([!,@,#,$,%,^,&,*,?,_,~])/,
+      tmp;
+   if ((!password || password.length < config.minLength) && config.minLength > 0)
+   {
+      // Its too short to be a valid password.
+      return null;
+   }
+   else if (config.username && config.username.indexOf(password) != -1 || password.indexOf(config.username) != -1)
+   {
+      // The password matches the username, in other words its W.E.A.K.
+      strength = 0;
+   }
+   else
+   {
+      // We have a password of at least 8 characters
+      strength += 10;
+
+      // Reward longer passwords
+      if (password.length > (config.minLength + 2))
+      {
+         strength += 10;
+      }
+      if (password.length > (config.minLength + 4))
+      {
+         strength += 10;
+      }
+      if (password.length > (config.minLength + 6))
+      {
+         strength += 20;
+      }
+
+      // Reward the mix of numbers and non numbers
+      if (password.match(DIGITS) && password.match(NODIGITS))
+      {
+         strength += 10;
+      }
+      // Reward having at least 3 numbers
+      if ((password.match(DIGITS) || []).length > 2)
+      {
+         strength += 10;
+      }
+
+      // Reward mixing upper and lower case
+      var upper = 0, lower = 0, c;
+      for (var i = 0; i < password.length; i++)
+      {
+         c = password.charAt(i);
+         if (c.toUpperCase() != c.toLowerCase())
+         {
+            // Ok now we now it is an actual character (can't use regexp since they dont handle foreign characters)
+            if (c.toUpperCase() == c)
+            {
+               upper++;
+            }
+            if (c.toLowerCase() == c)
+            {
+               lower++;
+            }
+         }
+      }
+      if (upper > 0 && lower > 0)
+      {
+         strength += 10;
+         if (upper > 1 && lower > 1)
+         {
+            // Reward a spreaded mix
+            strength += 10;
+         }
+      }
+
+      // Reward special characters
+      tmp = password.match(SPECIAL_CHARS);
+      if (tmp)
+      {
+         strength += 10;
+         if ((tmp || []).length > 3)
+         {
+            strength += 10;
+         }
+      }
+   }
+
+   var css = [
+      { name: "weak",   interval: [0, 20] },
+      { name: "medium", interval: [21, 30] },
+      { name: "strong", interval: [31, 50] },
+      { name: "best",   interval: [51, 110] }];
+   for (var i = 0; i < css.length; i++)
+   {
+      if (strength >= css[i].interval[0] && strength <= css[i].interval[1])
+      {
+         return { name: css[i].name }
+      }
+   }
+};
+
 /**
  * Returns the windows scroll position that later can be used for i.e. window.scrollTo.
  *
@@ -791,13 +1002,22 @@ Alfresco.util.getScrollPosition = function()
  * Formats a Freemarker datetime into more UI-friendly format
  *
  * @method Alfresco.util.formatDate
- * @param date {string} Optional: Date as returned from data webscript. Today used if missing.
+ * @param date {string|Date} Optional: Date as ISO8601 compatible string or JavaScript Date Object. Today used if missing.
  * @param mask {string} Optional: Mask to use to override default.
  * @return {string} Date formatted for UI
  * @static
  */
 Alfresco.util.formatDate = function(date)
 {
+   if (YAHOO.lang.isString(date))
+   {
+      // if we've got a date as an ISO8601 string, convert to date Object before proceeding - otherwise pass it through
+      var dateObj = Alfresco.util.fromISO8601(date);
+      if (dateObj)
+      {
+         arguments[0] = dateObj;
+      }
+   }
    try
    {
       return Alfresco.thirdparty.dateFormat.apply(this, arguments);
@@ -932,6 +1152,24 @@ Alfresco.util.toExplodedJSONDate = function(date)
 };
 
 /**
+ * Render relative dates on the client
+ *
+ * Converts all ISO8601 dates within the specified container to relative dates.
+ * (indicated by <span class="relativeTime">{date.iso8601}</span>)
+ *
+ * @method Alfresco.util.renderRelativeTime
+ * @param id {String} ID of HTML element containing
+ *
+ */
+Alfresco.util.renderRelativeTime = function(id)
+{
+   YAHOO.util.Dom.getElementsByClassName("relativeTime", "span", id , function()
+   {
+      this.innerHTML = Alfresco.util.relativeTime(this.innerHTML);
+   })
+};
+
+/**
  * Generate a relative time between two Date objects.
  * 
  * @method Alfresco.util.relativeTime
@@ -1018,41 +1256,105 @@ Alfresco.util.relativeTime = function(from, to)
 /**
  * Converts a date to a more user friendly date
  * 
- * @method Alfresco.util.friendlyDate
- * @param date {Date} - the date being converted
+ * @method Alfresco.util.relativeDate
+ * @param date {Date|String} - the date being converted
  * @param format {string} - the date format
+ * @param options {object} - overrides the default options.
  * @return {string} - the user friendly date
  */
-Alfresco.util.friendlyDate = function(date, format) 
+Alfresco.util.relativeDate = function(date, format, options)
 {
-   var $msg = Alfresco.util.message,
-      now = new Date(),
+   var $msg = Alfresco.util.message;
+
+   if (YAHOO.lang.isString(date))
+   {
+      date = Alfresco.util.fromISO8601(date);
+   }
+
+   if (YAHOO.lang.isObject(format))
+   {
+      options = format;
+      format = $msg("date-format.default");
+   }
+
+
+   var now = new Date(),
+      today = new Date(now.getTime()),
       dateFormat = Alfresco.thirdparty.dateFormat,
       dateMath = YAHOO.widget.DateMath,
       isoMask = Alfresco.thirdparty.dateFormat.masks.isoDate,
       isoDate = dateFormat(date, isoMask),
       isoToday = dateFormat(now, isoMask),
       isoYesterday = dateFormat(dateMath.add(now, dateMath.DAY, -1), isoMask),
-      isoTomorrow = dateFormat(dateMath.add(now, dateMath.DAY, 1), isoMask);
-      result = "";
+      isoTomorrow = dateFormat(dateMath.add(now, dateMath.DAY, 1), isoMask),
+      result = "",
+      defaults =
+      {
+         // limit to just yesterday, today, tomorrow.
+         limit: false
+      };
+
+   options = options || {}
+   options = YAHOO.lang.augmentObject(options, defaults);
+
+   // reset time on today (ISO dates already ignore time)
+   today.setHours(0,0,0,0);
    
    switch(isoDate) 
    {
       case isoToday:
-         result = $msg("dateFormat.friendly.today");
+         result = $msg("relative.today");
          break;
       case isoYesterday:
-         result = $msg("dateFormat.friendly.yesterday");
+         result = $msg("relative.yesterday");
          break;
       case isoTomorrow:
-         result = $msg("dateFormat.friendly.tomorrow");
+         result = $msg("relative.tomorrow");
          break;
-      default:
-         result = dateFormat(date, format);
+   }
+   if (!options.limit && result === "")
+   {
+      var lastSunday = dateMath.add(now, dateMath.DAY, -now.getDay()),
+            sundayBeforeLast = dateMath.add(lastSunday, dateMath.DAY, -7),
+            nextSunday = dateMath.add(lastSunday, dateMath.DAY, +7),
+            sundayAfterNext = dateMath.add(lastSunday, dateMath.DAY, +7);
+
+      if (date < today && date > lastSunday)
+      {
+         // Earlier This week
+         result = $msg("relative.earlierThisWeek");
+      }
+      else if (date < lastSunday && date > sundayBeforeLast)
+      {
+         // Last week
+         result = $msg("relative.lastWeek");
+      }
+      else if (date > today && date < nextSunday)
+      {
+         // Later this week
+         result = $msg("relative.laterThisWeek");
+      }
+      else if (date > nextSunday && date < sundayAfterNext)
+      {
+         // Next Week
+         result = $msg("relative.nextWeek");
+      }
+      else if (options.olderDates && date < today)
+      {
+         result = options.olderDates;
+      }
+      else if (options.futureDates && date > today)
+      {
+         result = options.futureDates;
+      }
 
    }
+   if (result === "")
+   {
+      result = dateFormat(date, format)
+   }
    return result;
-}
+};
 
 /**
  * Pad a value with leading zeros to the specified length.
@@ -1525,7 +1827,11 @@ Alfresco.util.createYUIButton = function(p_scope, p_name, p_onclick, p_obj, p_oE
             if (obj.type == "menu")
             {
                // Special case for a menu
-               button.getMenu().subscribe("click", p_onclick, p_scope, true);
+               button.getMenu().subscribe("click", function (p_sType, p_aArgs, p_oObj)
+               {
+                  p_aArgs[p_aArgs.length] = p_name;
+                  p_onclick.call(p_scope, p_sType, p_aArgs, p_oObj);
+               }, p_scope, true);
                button.getMenu().subscribe("keydown", function (p_sType, p_aArgs, p_oObj)
                {
                   if (p_aArgs[0].keyCode == YUIKeyListener.KEY.ENTER)
@@ -1682,7 +1988,7 @@ Alfresco.util.createTwister = function(p_controller, p_filterName, p_config)
    YUIEvent.addListener(elController, "click", function(p_event, p_obj)
    {
       // Only expand/collapse if actual twister element is clicked (not for inner elements, i.e. twister actions)
-      if (p_event.target == p_event.currentTarget)
+      if (YUIEvent.getTarget(p_event) == elController)
       {
          // Update UI to new state
          var collapse = YUIDom.hasClass(p_obj.controller, config.CLASS_OPEN);
@@ -1749,7 +2055,9 @@ Alfresco.util.createYUIPanel = function(p_el, p_params, p_custom)
          fixedcenter: YAHOO.env.ua.mobile === null ? "contained" : false,
          close: true,
          visible: false,
-         postmethod: "none"
+         postmethod: "none", // Will make Dialogs not auto submit <form>s it finds in the dialog
+         hideaftersubmit: false, // Will stop Dialogs from hiding themselves on submits
+         fireHideShowEvents: true
       },
       custom =
       {
@@ -1776,6 +2084,8 @@ Alfresco.util.createYUIPanel = function(p_el, p_params, p_custom)
       panel.render(document.body);
    }
 
+   if (params.fireHideShowEvents)
+   {
    // Let other components react to when a panel is shown or hidden
    panel.subscribe("show", function (p_event, p_args)
    {
@@ -1788,16 +2098,150 @@ Alfresco.util.createYUIPanel = function(p_el, p_params, p_custom)
          panel: this
       });
    });
-   panel.subscribe("hide", function (p_event, p_args)
+      var hidePanel = function (p_event, p_args)
    {
       YAHOO.Bubbling.fire("hidePanel",
       {
          panel: this
       });
-   });
-
+      }
+      panel.subscribe("hide", hidePanel);
+      panel.subscribe("destroy", hidePanel);
+   }
    return panel;
 };
+
+/**
+ * Wrapper to create a YUI Overlay with common attributes, as follows:
+ * <pre>
+ *   modal: false,
+ *   draggable false,
+ *   close: false,
+ *   visible: false,
+ *   iframe: false
+ * </pre>
+ *
+ * All supplied object parameters are passed to the panel constructor
+ * e.g. var overlay = Alfresco.util.createYUIOverlay(Dom.get(this.id),
+ * {
+ *    effect:
+ *    {
+ *       effect: YAHOO.widget.ContainerEffect.FADE,
+ *       duration: 0.25
+ *    }
+ * }, { render: false });
+ *
+ * @method Alfresco.util.createYUIOverlay
+ * @param p_el {string|HTMLElement} The element ID representing the Panel or the element representing the Panel
+ * @param p_params {object} Optional extra/overridden object parameters to pass to Panel constructor:
+ * @param p_custom {object} Optional parameters to customise Panel creation:
+ * <pre>
+ *    render {boolean} By default the new Overlay will be rendered to document.body. Set to false to prevent this.
+ *    type {object} Use to override YAHOO.widget.Overlay default type
+ * </pre>
+ * @return {YAHOO.widget.Overlay|flags.type} New Overlay instance
+ * @static
+ */
+Alfresco.util.createYUIOverlay = function(p_el, p_params, p_custom)
+{
+   // Default constructor parameters
+   var overlay,
+         params =
+         {
+            modal: false,
+            draggable: false,
+            close: false,
+            visible: false,
+            iframe: false,
+            fireHideShowEvents: true
+         },
+         custom =
+         {
+            render: true,
+            type: YAHOO.widget.Overlay
+         };
+
+   // Any extra/overridden constructor parameters?
+   if (typeof p_params == "object")
+   {
+      params = YAHOO.lang.merge(params, p_params);
+   }
+
+   // Make sure we don't fix center in mobile devices
+   if (params.fixedcenter)
+   {
+      params.fixedcenter = YAHOO.env.ua.mobile === null;
+   }
+
+   // Any customisation?
+   if (typeof p_custom == "object")
+   {
+      custom = YAHOO.lang.merge(custom, p_custom);
+   }
+
+   // Create and return the overlay
+   overlay = new (custom.type)(p_el, params);
+
+   var PREVENT_SCROLLBAR_FIX = (YAHOO.widget.Module.prototype.platform === "mac" && 0 < YAHOO.env.ua.gecko);
+   if (PREVENT_SCROLLBAR_FIX)
+   {
+      // Prevent Mac Firefox 3.x scrollbar bugfix from being applied by YUI
+      overlay.hideEvent.unsubscribe(overlay.hideMacGeckoScrollbars, overlay, true);
+      overlay.showEvent.unsubscribe(overlay.showMacGeckoScrollbars, overlay, true);
+      overlay.hideMacGeckoScrollbars = function (){ Dom.replaceClass(this.element, "prevent-scrollbars", "hide-scrollbars"); },
+      overlay.showMacGeckoScrollbars = function(){ Dom.replaceClass(this.element, "hide-scrollbars", "prevent-scrollbars"); };
+   }
+
+   if (custom.render)
+   {
+      overlay.render(document.body);
+   }
+
+   if (params.fireHideShowEvents)
+   {
+      // Let other components react to when a panel is shown or hidden
+      overlay.showEvent.subscribe(function (p_event, p_args)
+      {
+         YAHOO.Bubbling.fire("showOverlay",
+         {
+            overlay: this
+         });
+      });
+      var hideOverlay = function (p_event, p_args)
+      {
+         YAHOO.Bubbling.fire("hideOverlay",
+         {
+            overlay: this
+   		});
+      };
+      overlay.hideEvent.subscribe(hideOverlay);
+      overlay.destroyEvent.subscribe(hideOverlay);
+   }
+   return overlay;
+};
+
+
+/**
+ * Creates an "information balloon tooltip" UI control attached to a passed-in element.
+ * This is similar to the standard balloon UI Control, but designed for better legibility of larger amounts of information
+ *
+ * @method Alfresco.util.createInfoBalloon
+ * @param p_context {Element|string} Element (or DOM ID) to align the balloon to
+ * @param p_params {object} Optional additional configuration to override the defaults
+ * <pre>
+ *    width {string} CSS width of the tooltip. Defaults to 30em
+ * </pre>
+ * @return {object|null} Balloon instance
+ */
+Alfresco.util.createInfoBalloon = function(p_context, p_params)
+{
+   p_params = YAHOO.lang.merge(
+         {
+            wrapperClass: "info-balloon",
+            arrowClass: "info-balloon-arrow"
+         }, p_params || {});
+   return Alfresco.util.createBalloon(p_context, p_params);
+},
 
 /**
  * Creates a "balloon tooltip" UI control attached to a passed-in element.
@@ -1808,9 +2252,10 @@ Alfresco.util.createYUIPanel = function(p_el, p_params, p_custom)
  * <pre>
  *    width {string} CSS width of the tooltip. Defaults to 30em
  * </pre>
+ * @param p_autoDisplay {boolean} Hides
  * @return {object|null} Balloon instance
  */
-Alfresco.util.createBalloon = function(p_context, p_params)
+Alfresco.util.createBalloon = function(p_context, p_params, showEvent, hideEvent)
 {
    var elContext = YUIDom.get(p_context);
    if (YAHOO.lang.isNull(elContext))
@@ -1825,10 +2270,23 @@ Alfresco.util.createBalloon = function(p_context, p_params)
       html: "",
       text: "",
       closeButton: true,
-      width: "30em"
+      /*width: "30em",*/
+      wrapperClass: "balloon",
+      arrowClass: "balloon-arrow"
    }, p_params || {});
 
-   return (new Alfresco.widget.Balloon(elContext, p_params));
+   var balloon = new Alfresco.widget.Balloon(elContext, p_params);
+
+   if (showEvent)
+   {
+      YAHOO.util.Event.addListener(p_context, showEvent, balloon.show, balloon, true);
+   }
+   if (hideEvent)
+   {
+      YAHOO.util.Event.addListener(p_context, hideEvent, balloon.hide, balloon, true);
+   }
+
+   return balloon;
 };
 
 (function()
@@ -1843,7 +2301,7 @@ Alfresco.util.createBalloon = function(p_context, p_params)
     * Alfresco library aliases
     */
    var $html = Alfresco.util.encodeHTML,
-      PREVENT_SCROLLBAR_FIX = (YAHOO.widget.Module.prototype.platform === "mac" && 0 < YAHOO.env.ua.gecko && YAHOO.env.ua.gecko < 2);
+         PREVENT_SCROLLBAR_FIX = (YAHOO.widget.Module.prototype.platform === "mac" && 0 < YAHOO.env.ua.gecko);
 
    /**
     * Alfresco.widget.Balloon constructor.
@@ -1856,44 +2314,37 @@ Alfresco.util.createBalloon = function(p_context, p_params)
     */
    Alfresco.widget.Balloon = function(p_context, p_params)
    {
-      var balloon = new YAHOO.widget.Overlay(Alfresco.util.generateDomId(),
+      this.context = p_context;
+      var balloon = new Alfresco.util.createYUIOverlay(Alfresco.util.generateDomId(),
       {
          context:
          [
             p_context,
             "bl",
             "tl",
-            ["beforeShow", "windowResize"]
+            ["beforeShow", "windowResize", "windowScroll", "textResize"]
          ],
          constraintoviewport: true,
          visible: false,
-         width: p_params.width || "30em",
+         width: p_params.width || "auto",
          effect:
          {
             effect: p_params.effectType,
             duration: p_params.effectDuration
-         }
+         },
+         fireHideShowEvents: false
       });
       
-      if (PREVENT_SCROLLBAR_FIX)
-      {
-         // Prevent Mac Firefox 3.x scrollbar bugfix from being applied by YUI
-         balloon.hideEvent.unsubscribe(balloon.hideMacGeckoScrollbars, balloon, true);
-         balloon.showEvent.unsubscribe(balloon.showMacGeckoScrollbars, balloon, true);
-         balloon.hideMacGeckoScrollbars = function (){ Dom.replaceClass(this.element, "prevent-scrollbars", "hide-scrollbars"); },
-         balloon.showMacGeckoScrollbars = function(){ Dom.replaceClass(this.element, "hide-scrollbars", "prevent-scrollbars"); };
-      }
-
       var wrapper = document.createElement("div"),
          arrow = document.createElement("div");
 
-      Dom.addClass(wrapper, "balloon");
-      Dom.addClass(arrow, "balloon-arrow");
+      Dom.addClass(wrapper, p_params.wrapperClass);
+      Dom.addClass(arrow, p_params.arrowClass);
 
       if (p_params.closeButton)
       {
          var closeButton = document.createElement("div");
-         closeButton.innerHTML = "X";
+         closeButton.innerHTML = "x";
          Dom.addClass(closeButton, "closeButton");
          Event.addListener(closeButton, "click", this.hide, this, true);
          wrapper.appendChild(closeButton);
@@ -1913,11 +2364,24 @@ Alfresco.util.createBalloon = function(p_context, p_params)
       
       this.onClose = new YAHOO.util.CustomEvent("close" , this);
       this.onShow = new YAHOO.util.CustomEvent("show" , this);
+
+      // Register to enable hide all functionality.
+      this.name = "Alfresco.widget.Balloon";
+      this.id = this.balloon.id;
+      Alfresco.util.ComponentManager.register(this);
+
       return this;
    };
 
    Alfresco.widget.Balloon.prototype =
    {
+      /**
+       * The element to position the balloon after
+       *
+       * @property context
+       */
+      context: null,
+
       /**
        * YAHOO.widget.Overlay instance
        *
@@ -1940,6 +2404,8 @@ Alfresco.util.createBalloon = function(p_context, p_params)
       hide: function Balloon_hide()
       {
          this.balloon.hide();
+         // Unregister here since this is the closest we've got to a destroy method.
+         Alfresco.util.ComponentManager.unregister(this);
          this.onClose.fire();
       },
       
@@ -1950,11 +2416,36 @@ Alfresco.util.createBalloon = function(p_context, p_params)
       */
       show: function Balloon_show()
       {
-         this.balloon.show();
-         this.balloon.bringToTop();
-         this.onShow.fire();
+         if (this.content.innerHTML && this.content.innerHTML.length > 0 && Alfresco.util.isVisible(this.context))
+         {
+            // Reregister to ensure we're tracked.
+            Alfresco.util.ComponentManager.reregister(this);
+            this.balloon.show();
+            this.balloon.bringToTop();
+
+            // Hide Other Balloons
+            this.hideOthers();
+
+            this.onShow.fire();
+         }
       },
       
+      /**
+       * Ensures that the current Balloon is the only one showing.
+       * @method hideOthers
+       */
+      hideOthers: function Balloon_hideOthers()
+      {
+         var balloons = Alfresco.util.ComponentManager.find({ name: this.name});
+         for (var i=0; i < balloons.length; i++)
+         {
+            if (balloons[i].id != this.id)
+            {
+               balloons[i].balloon.hide();
+            }
+         }
+      },
+
       /**
        * Sets the HTML content of the balloon.
        *
@@ -1980,6 +2471,975 @@ Alfresco.util.createBalloon = function(p_context, p_params)
       }
    };
 })();
+
+
+(function()
+{
+/**
+    * YUI Library aliases
+    */
+   var Dom = YAHOO.util.Dom;
+
+   /**
+    * Alfresco.widget.PasswordStrengthMeter constructor.
+    * Should not be created directly, but via the Alfresco.util.createBalloon static function.
+    *
+    * @param p_context {object}
+    * @param p_params {object}
+    * @return {Alfresco.widget.PasswordStrengthMeter} The new instance
+    * @constructor
+    */
+   Alfresco.widget.PasswordStrengthMeter = function(p_context, p_params)
+   {
+      this.context = Dom.get(p_context);
+      this.params = YAHOO.lang.merge(Alfresco.util.deepCopy(this.params), p_params);
+      this._generateMarkup();
+      return this;
+   };
+
+   Alfresco.widget.PasswordStrengthMeter.prototype =
+   {
+      context: null,
+
+      params:
+      {
+         /**
+          * The users username used to match passwords against.
+          *
+          * @property username
+          * @type string
+          */
+         username: null,
+
+         /**
+          * Minimum length of a password
+          *
+          * @property minLength
+          * @type int
+          * @default 8
+          */
+         minLength: 8
+      },
+
+      /**
+       * Generate mark-up
+       *
+       * @method _generateMarkup
+       * @protected
+       */
+      _generateMarkup: function PasswordStrengthMeter__generateMarkup()
+      {
+         Dom.addClass(this.context, "passwordStrengthMeter");
+
+         var label = document.createElement("span");
+         label.appendChild(document.createTextNode(Alfresco.util.message("password-strength-meter.label")));
+         this.context.appendChild(label);
+
+         var strengths = document.createElement("ul"),
+            strength;
+         for (var i = 0; i < 4; i++)
+         {
+            strength = document.createElement("li");
+            Dom.addClass(strength, "passwordStrengthMeterStrength-" + (i + 1));
+            strength.innerHTML = "&nbsp;";
+            strengths.appendChild(strength);
+         }
+         this.context.appendChild(strengths);
+
+         var clear = document.createElement("div");
+         Dom.addClass(clear, "clear");
+         this.context.appendChild(clear);
+      },
+
+      /**
+       * Will update password strength meter based on the password parameter.
+       *
+       * @method setStrength
+       * @param password {string} The password
+       */
+      setStrength: function AccountCompletion_setStrength(password)
+      {
+         // Get password & reset password strength meter
+         password = YAHOO.lang.trim(password);
+
+         var passwordStrengthEl = Selector.query("ul", this.context, true);
+         passwordStrengthEl.setAttribute("class", "");
+
+         // Display password strength if it is a password
+         var strength = Alfresco.util.getPasswordStrength(password, {
+            username: this.params.username,
+            minLength: this.params.minLength
+         });
+         if (strength)
+         {
+            Dom.addClass(passwordStrengthEl, "passwordStrengthMeterStrength-" + strength.name);
+         }
+      }
+   };
+
+})();
+
+(function()
+{
+   /**
+    * YUI Library aliases
+    */
+   var Dom = YAHOO.util.Dom,
+      Event = YAHOO.util.Event,
+      KeyListener = YAHOO.util.KeyListener;
+
+   /**
+    * Alfresco.widget.MultiSelectAutoComplete constructor.
+    * Should not be created directly, but via the Alfresco.util.createBalloon static function.
+    *
+    * @param p_context {object}
+    * @param p_params {object}
+    * @return {Alfresco.widget.MultiSelectAutoComplete} The new instance
+    * @constructor
+    */
+   Alfresco.widget.MultiSelectAutoComplete = function(p_context, p_params)
+   {
+      this.context = Dom.get(p_context);
+      this.params = YAHOO.lang.merge(Alfresco.util.deepCopy(this.params), p_params);
+      this.markupGenerated = false;
+      this.hiddenInput = null;
+      this.itemIds = null;
+      this.newInput = null;
+      this.newInputUsed = false;
+      this.itemContainer = null;
+      this.autoComplete = null;
+      this.queuedPasteEvent = false;
+      if(!this.context || !this.params.itemUrl)
+      {
+         throw new Error("Parameter p_context and p_params.itemUrl must be provided.");
+      }
+
+      this._generateMarkup();
+
+      return this;
+   };
+
+   Alfresco.widget.MultiSelectAutoComplete.prototype =
+   {
+      context: null,
+
+      params:
+      {
+         /**
+          *
+          */
+         value: "",
+
+         /**
+          * The url to retrieve the auto complete data including a query substitute token to insert the actual query term.
+          * I.e. "proxy/alfresco/api/people?filter={query}"
+          *
+          * @property itemUrl
+          * @type string
+          */
+         itemUrl: null,
+
+
+         /**
+          * The path to the items array in the server response
+          *
+          * @property itemPath
+          * @type string
+          */
+         itemPath: "data",
+
+         /**
+          *
+          *
+          * @property itemId
+          * @type string
+          */
+         itemId: "id",
+
+         /**
+          * This is the field that will be displayed once an item is selected.
+          * It will also be used in the suggested items menu as long as itemTemplate hasn't been defined.
+          *
+          * @property itemName
+          * @type string
+          */
+         itemName: "name",
+
+         /**
+          * For more complex displays of the suggested items a template can be provided.
+          * I.e. "<b>{firstName}</b> {lastName}"
+          *
+          * @property itemTemplate
+          * @type string
+          */
+         itemTemplate: null,
+
+         /**
+          * Item ids that not will be displayed in the result
+          *
+          * @property forbiddenItemIds
+          * @type array
+          */
+         forbiddenItemIds: [],
+
+         /**
+          * A form instance to add the validations to.
+          *
+          */
+         form: null,
+
+         /**
+          * Decides how the selected values shall be stored.
+          * "single" - stores them in 1 single hidden input element (with the selected items ids in a comma separated string)
+          * "multiple" - stores them in multiple hidden input elements (one per selected value)
+          *
+          * @property formInputMode
+          * @type string
+          */
+         formInputMode: "multiple",
+
+         /**
+          * The value of the hidden input elements name attribute, i.e. something like
+          * "emails" when formInputMode is "single" or "emails[]" when formInputMode is "multiple".
+          *
+          * @property formInputName
+          * @type string
+          */
+         formInputName: "-",
+
+         /**
+          * Standard callback object to add in custom behaviour when a new item is created.
+          *
+          * @property onItemInputCreate
+          * @type object
+          */
+         onItemInputCreate: null,
+
+         /**
+          * Standard callback object to add in custom behaviour when escape is clicked.
+          *
+          * @property onItemInputEscape
+          * @type object
+          */
+         onItemInputEscape: null,
+
+         /**
+          * The key codes that will make the typed word into a box.
+          * By default just enter, but a comma could also be used by setting it to:
+          * [YAHOO.util.KeyListener.KEY.ENTER, 44]
+          */
+         delimiterKeyCodes: [ YAHOO.util.KeyListener.KEY.ENTER ],
+
+         /**
+          * When pasting in text to the control the usual delimiterKeyCodes act as delimiters against the pasted string.
+          * However when the paste is done newline characters are transformed to space characters.
+          * To make newline characters act as delimiters on paste set this to [ YAHOO.util.KeyListener.KEY.SPACE ]
+          */
+         pasteDelimiterKeyCodes: []
+      },
+
+      /**
+       *
+       */
+      focus: function()
+      {
+         if (Alfresco.util.isVisible(this.newInput))
+         {
+            this.newInput.focus();
+         }
+      },
+
+      /**
+       * Generate mark-up
+       *
+       * @method _generateMarkup
+       * @protected
+       */
+      _generateMarkup: function MultiSelectAutoComplete__generateMarkup()
+      {
+         // Reset the array of persisted item ids...
+         this.itemIds = [];
+
+         if (this.markupGenerated)
+         {
+            this._generateCurrentItemMarkup();
+            return;
+         }
+
+         Dom.addClass(this.context, "input");
+
+         var eAutoCompleteWrapper = document.createElement("span"),
+            eAutoComplete = document.createElement("div");
+
+         if (this.params.formInputMode == "single")
+         {
+            // Create a hidden input field - the value of this field is what will be used to update the
+            this.hiddenInput = document.createElement("input");
+            YUIDom.setAttribute(this.hiddenInput, "type", "hidden");
+            YUIDom.setAttribute(this.hiddenInput, "name", this.params.formInputName);
+         }
+
+         // Create a new input field for entering new items (this will also allow the user to select items from
+         // an auto-complete list...
+         this.newInput = document.createElement("input");
+         YUIDom.setAttribute(this.newInput, "type", "text");
+         YUIDom.setAttribute(this.newInput, "tabindex", "0");
+
+         // Add the new item input field and the auto-complete drop-down DIV element to the auto-complete wrapper
+         eAutoCompleteWrapper.appendChild(this.newInput);
+         eAutoCompleteWrapper.appendChild(eAutoComplete);
+
+         // Create a new edit box (this contains all item spans, as well as the auto-complete enabled input field for
+         // adding new items)...
+         var editBox = document.createElement("div");
+         YUIDom.addClass(editBox, "inlineItemEdit"); // This class should make the span look like a text input box
+         this.itemContainer = document.createElement("span");
+         editBox.appendChild(this.itemContainer);
+         editBox.appendChild(eAutoCompleteWrapper); // Add the auto-complete wrapper (this contains the input field for typing items)
+
+         // Add any previously applied items to the edit box, updating the array of applied item nodeRefs as we go...
+         this._generateCurrentItemMarkup();
+
+         // Add the main edit box to the form (all the items go in this box)
+         this.context.appendChild(editBox);
+
+         YUIDom.addClass(eAutoCompleteWrapper, "inlineItemEditAutoCompleteWrapper");
+         YUIDom.addClass(eAutoComplete, "inlineItemEditAutoComplete");
+
+         if (this.hiddenInput)
+         {
+            // Set the current items in the hidden field and add it to the dom...
+            YUIDom.setAttribute(this.hiddenInput, "value", this.itemIds.toString());
+            this.context.appendChild(this.hiddenInput);
+         }
+
+
+         /* ************************************************************************************
+          *
+          * This section of code deals with setting up the auto-complete widget for the new item
+          * input field. We need to set up a data source for retrieving the existing items and
+          * which we will need to filter on the client.
+          *
+          **************************************************************************************/
+         var oDS = new YAHOO.util.XHRDataSource();
+         oDS.connXhrMode = "ignoreStaleRequests";
+         oDS.responseType = YAHOO.util.XHRDataSource.TYPE_JSON;
+         // This schema indicates where to find the item name in the JSON response
+         oDS.responseSchema =
+         {
+            /*fields : [this.params.itemName, this.params.itemId],*/
+            resultsList : this.params.itemPath
+         };
+         this.autoComplete = new YAHOO.widget.AutoComplete(this.newInput, eAutoComplete, oDS);
+         this.autoComplete.questionMark = false;     // Removes the question mark on the query string (this will be ignored anyway)
+         var url = this.params.itemUrl;
+         this.autoComplete.generateRequest = function(query)
+         {
+            return YAHOO.lang.substitute(url, { query: query });
+         };
+         this.autoComplete.applyLocalFilter = false;  // Filter the results on the client
+         this.autoComplete.queryDelay = 0.1           // Throttle requests sent
+         this.autoComplete.animSpeed = 0.08;
+         this.autoComplete.itemSelectEvent.subscribe(function(type, args)
+         {
+            // If the user clicks on an entry in the list then apply the selected item
+            var itemName = args[2][1][this.params.itemName],
+                itemId = args[2][1][this.params.itemId];
+            this._applyItem(itemName, itemId, { type: "change" });
+            if (YUIDom.isAncestor(this.itemContainer, this.newInput))
+            {
+               // We must have just finished editing a item, therefore we need to move
+               // the auto-complete box out of the current items...
+               YUIDom.insertAfter(this.newInput.parentNode, this.itemContainer);
+            }
+         }, this, true);
+         // Update the result filter to remove any results that have already been used...
+         this.autoComplete.dataReturnEvent.subscribe(function(type, args)
+         {
+            var results = args[2], currentItemId;
+            for (i = 0, j = results.length; i < j; i++)
+            {
+               currentItemId = results[i][this.params.itemId];
+               if (Alfresco.util.arrayContains(this.itemIds, currentItemId) || Alfresco.util.arrayContains(this.params.forbiddenItemIds, currentItemId))
+               {
+                  results.splice(i, 1); // Remove the result because it's already been used
+                  i--;                  // Decrement the index because it's about to get incremented (this avoids skipping an entry)
+                  j--;                  // Decrement the target length, because the arrays got shorter
+               }
+            }
+         }, this, true);
+
+         // User custom template if provided
+         if (this.params.itemTemplate)
+         {
+            this.autoComplete.formatResult = Alfresco.util.bind(function(oResultData, sQuery, sResultMatch)
+            {
+               return YAHOO.lang.substitute(this.params.itemTemplate, oResultData[1], function(key, value)
+               {
+                  return Alfresco.util.encodeHTML(value);
+               });
+            }, this);
+         }
+         /* **************************************************************************************
+          *
+          * This section of code deals with handling enter keypresses in the new item input field.
+          * We need to capture ENTER keypresses and prevent the form being submitted, but instead
+          * make a request to create the item provided and then add it to the hidden variable that
+          * will get submitted when the "Save" link is used.
+          *
+          ****************************************************************************************/
+         var _this = this;
+         Event.addListener(this.newInput, "keyup", function(e)
+         {
+            _this.newInputUsed = true;
+            if (this.value.length > 0)
+            {
+               // Remove error indications since have started to type something
+               Dom.removeClass(_this.itemContainer.parentNode, "mandatory");
+               Dom.removeClass(_this.context, "invalid");
+
+               if (_this.queuedPasteEvent)
+               {
+                  _this.queuedPasteEvent = false;
+                  var inputValue = this.value,
+                     c, code,
+                     values = [],
+                     value = '';
+
+                  for(var i = 0; i < inputValue.length; i++)
+                  {
+                     c = inputValue.charAt(i);
+                     code = c.charCodeAt(0);
+                     if (Alfresco.util.arrayContains(_this.params.delimiterKeyCodes, code) || Alfresco.util.arrayContains(_this.params.pasteDelimiterKeyCodes, code))
+                     {
+                        value = YAHOO.lang.trim(value);
+                        if (value.length > 0)
+                        {
+                           values.push(value);
+                        }
+                        value = '';
+                     }
+                     else
+                     {
+                        value += c;
+                     }
+                  }
+                  value = YAHOO.lang.trim(value);
+                  if (value.length > 0)
+                  {
+                     values.push(value);
+                  }
+
+                  this.value = "";
+                  for (i = 0; i < values.length; i++)
+                  {
+                     value = YAHOO.lang.trim(values[i]);
+                     _this._createItem(value, value, null);
+                     YUIDom.insertAfter(_this.newInput.parentNode, _this.itemContainer);
+                  }
+
+                  YAHOO.lang.later(50, _this.newInput, function()
+                  {
+                     // Focus the input element for IE
+                     this.focus();
+                     _this._triggerFormValidation({ type: "keyup" }, _this.context);
+                  });
+               }
+            }
+         });
+         Event.addListener(this.newInput, "paste", function(e)
+         {
+            _this.queuedPasteEvent = true;
+         });
+         Event.addListener(this.newInput, "keypress", function(e)
+         {
+            if (Alfresco.util.hasKeyCode(e, _this.params.delimiterKeyCodes) && this.value.length > 0)
+            {
+               Event.stopEvent(e); // Prevent the surrounding form from being submitted
+               _this._createItem(this.value, this.value, { type: "change"});
+               YUIDom.insertAfter(_this.newInput.parentNode, _this.itemContainer);
+               YAHOO.lang.later(50, _this.newInput, function()
+               {
+                  // Focus the input element for IE
+                  this.focus();
+               });
+            }
+         });
+
+         // This section of code handles deleting configured items through the use of the backspace key....
+         Event.addListener(this.newInput, "keydown", function(e)
+         {
+            if (Alfresco.util.hasKeyCode(e, 8) && this.newInput.value.length == 0)
+            {
+               if (this._editingItemIndex >= 0)
+               {
+                  // If a item is being edited then we just need to remove the item and reset the input field
+                  this.itemIds.splice(this._editingItemIndex, 1); // Remove the item, the item span has already been removed
+                  YUIDom.insertAfter(this.newInput.parentNode, this.itemContainer); // Return the auto-complete elements to their correct position
+                  this._hideFormErrorContainer();
+               }
+               else if (!this._itemPrimedForDelete && this.itemContainer.children.length > 0)
+               {
+                  this._itemPrimedForDelete = true;
+                  var lastItem = YUIDom.getLastChild(this.itemContainer);
+                  YUIDom.addClass(lastItem, "inlineItemEditItemPrimed");
+                  YUIDom.addClass(lastItem.children[2], "hidden");
+                  YUIDom.removeClass(lastItem.children[3], "hidden");
+                  this._hideFormErrorContainer(lastItem);
+               }
+               else
+               {
+                  // The backspace key was used when there are no more characters to delete
+                  // so we need to delete the last item...
+                  if (this.itemIds.length > 0)
+                  {
+                     this.itemIds.pop();
+                     if (this.hiddenInput)
+                     {
+                        YUIDom.setAttribute(this.hiddenInput, "value", this.itemIds.toString());
+                     }
+                     var itemEl = YUIDom.getLastChild(this.itemContainer);
+                     this.itemContainer.removeChild(itemEl);
+                     this._hideFormErrorContainer(itemEl);
+                  }
+                  this._itemPrimedForDelete = false; // If we've deleted a item then we're no longer primed for deletion...
+               }
+            }
+            else if (this._itemPrimedForDelete == true)
+            {
+               // If any key other than backspace is pressed and the last item has been primed for deletion
+               // then we should put it back to the normal state...
+               this._itemPrimedForDelete = false;
+               if (this.itemContainer.children.length > 0)
+               {
+                  var lastItem = YUIDom.getLastChild(this.itemContainer);
+                  YUIDom.removeClass(lastItem, "inlineItemEditItemPrimed");
+                  YUIDom.addClass(lastItem.children[3], "hidden");
+                  YUIDom.removeClass(lastItem.children[2], "hidden");
+               }
+            }
+         }, this, true);
+
+         this.autoComplete.textboxBlurEvent.subscribe(function(type, args)
+         {
+            this.newInputUsed = true;
+            var value = YAHOO.lang.trim(args[0].getInputEl().value);
+            if (value.length > 0)
+            {
+               this._createItem(value, value, { type: "blur" });
+            }
+            else
+            {
+               YAHOO.lang.later(50, this, function()
+               {
+                  // Delay validation since blur event sometimes happens before other events that might change the value
+                  this._triggerFormValidation({ type: "blur" }, this.context);
+               });
+            }
+            YUIDom.insertAfter(this.newInput.parentNode, this.itemContainer);
+         }, this, true);
+
+         Event.addListener(this.newInput, "focus", function(type, args)
+         {
+            this._triggerFormValidation({ type: "focus" }, this.context);
+         }, this, true);
+
+         Event.addListener(editBox, "click", function(e)
+         {
+            YAHOO.lang.later(50, this, function()
+            {
+               // Select the input element for IE
+               if (document.activeElement != this.newInput)
+               {
+                  this.newInput.select();
+               }
+            });
+            Event.stopEvent(e);
+
+         }, this, true);
+
+         // Key Listener for [Escape] to cancel
+         var escapeKeyListener = new KeyListener(this.newInput,
+         {
+            keys: [KeyListener.KEY.ESCAPE]
+         },
+         {
+            fn: function(id, keyEvent)
+            {
+               Event.stopEvent(keyEvent[1]);
+               this.newInput.value = "";
+               if (this.params.onItemInputEscape && YAHOO.lang.isFunction(this.params.onItemInputEscape))
+               {
+                  this.params.onItemInputEscape.fn.call(this.params.onItemInputEscape.scope);
+               }
+            },
+            scope: this,
+            correctScope: true
+         });
+         escapeKeyListener.enable();
+
+         // Connect to form if available
+         if (this.params.form)
+         {
+            // Add our internal validator methods that will make sure all the validators in the formValidations param are used.
+            this.params.form.addValidation(this.context, Alfresco.util.bind(this.isValid, this), {}, "blur", Alfresco.util.bind(this.getTitle, this), Alfresco.util.bind(this.getValidationConfig, this));
+         }
+
+         this.markupGenerated = true;
+      },
+
+      _itemIdValidations: {},
+      _validations: [],
+
+      /**
+       * @method addValidation
+       * @param validationHandler {function} Function to call to handle the actual validation
+       * @param validationArgs {object} Optional object representing the arguments to pass to the validation handler function
+       * @param message {string} Message to be displayed when validation fails
+       */
+      addValidation: function(validationHandler, validationArgs, message)
+      {
+         this._validations.push(
+         {
+            handler: validationHandler,
+            args: validationArgs,
+            message: message
+         });
+      },
+
+      _triggerFormValidation: function(event, field)
+      {
+         if (this.params.form)
+         {
+            // So getTitle() will be correct since messages is called before isValid()
+            this.isValid();
+
+            // Call forms runtime so it can call our callbacks: getTitle(), isValid() & getValidationConfig()
+            this.params.form.validate(event, field.id);
+         }
+      },
+
+      _hideFormErrorContainer: function(field)
+      {
+         this._errorContainer = null;
+
+         if (this.params.form)
+         {
+            if (field)
+            {
+               this.params.form.hideErrorContainer(field);
+            }
+            this.params.form.hideErrorContainer(this.context);
+         }
+      },
+
+      isValid: function()
+      {
+         if (!this.newInputUsed)
+         {
+            // handle the mandatory case by ourselves
+            if (this.params.mandatory && this.params.value.length == 0)
+            {
+               Dom.addClass(this.itemContainer.parentNode, "mandatory");
+            }
+            return true;
+         }
+         Dom.removeClass(this.itemContainer.parentNode, "mandatory");
+
+         // First check all itemIds validation state
+         var itemEls = YAHOO.util.Selector.query(".inlineItemEditItem", this.context),
+            value;
+         for (var i = 0; i < itemEls.length; i++)
+         {
+            value = YAHOO.util.Selector.query("input", itemEls[i], true).value;
+            if (!(this._itemIdValidations[value] || 0) == (this._validations || []).length)
+            {
+               if (!Dom.get(this._errorContainer))
+               {
+                  this._errorContainer = itemEls[i]; // this.context;
+               }
+               Dom.addClass(this.itemContainer.parentNode.parentNode, "suppress-validation");
+               return false;
+            }
+         }
+
+         if (this.itemIds.length == 0 && this.params.mandatory)
+         {
+            Dom.removeClass(this.itemContainer.parentNode.parentNode, "suppress-validation");
+            this._errorContainer = this.context;
+            this._errorMessage = Alfresco.util.message("Alfresco.forms.validation.mandatory.message");
+            return false;
+         }
+
+         this._errorMessage = null;
+         this._errorContainer = null;
+         return true;
+      },
+
+      getTitle: function()
+      {
+         return (this._errorMessage ? this._errorMessage : (this.params.title || ""));
+      },
+
+      getValidationConfig: function()
+      {
+         return {};
+      },
+
+      /**
+       * Called after a new item has been added, will
+       */
+      _validateItem: function(itemValue, itemName, container)
+      {
+         var valid = true;
+         if (YAHOO.lang.isArray(this._validations))
+         {
+            var v;
+            for (var i = 0; i < this._validations.length; i++)
+            {
+               v = this._validations[i];
+
+               // Call validator by faking the fieldId parameter pretending its a hidden input field
+               var result = v.handler({ value: itemValue, type: "hidden" }, v.args, {}, this.params.form);
+               if (YAHOO.lang.isBoolean(result) && result)
+               {
+                  // Validation was ok
+                  this._itemIdValidations[itemValue] = (this._itemIdValidations[itemValue] || 0) + 1;
+               }
+               else
+               {
+                  // The value was invalid
+                  valid = false;
+                  this._errorContainer = container; //this.context;;
+                  this._errorMessage = v.message;
+
+                  if (YAHOO.lang.isNumber(result))
+                  {
+                     // The result is a transaction id waiting for server response
+                     this._errorMessage = Alfresco.util.message("Alfresco.widget.MultiSelectAutoComplete.pending");
+                  }
+               }
+            }
+         }
+
+         // We got here then all items have valid values
+         return valid;
+      },
+
+      _createItem: function MultiSelectAutoComplete__createItem(itemName, itemId, triggerFormValidationEvent)
+      {
+         this._applyItem(itemName, itemId, triggerFormValidationEvent);
+
+         if (YUIDom.isAncestor(this.itemContainer, this))
+         {
+            // We must have just finished editing a item, therefore we need to move
+            // the auto-complete box out of the current items...
+            YUIDom.insertAfter(this.newInput.parentNode, this.itemContainer);
+         }
+
+         if (this.params.onItemCreate && YAHOO.lang.isFunction(this.params.onItemCreate))
+         {
+            this.params.onItemCreate.fn.call(this.params.onItemCreate.scope, itemId);
+         }
+      },
+
+      /**
+       * Adds a new span that represents an applied item. This span contains an icon that can
+       * be clicked on to remove the item.
+       *
+       * @method _addItem
+       * @param itemName The name of the item
+       * @param itemId The id of the item
+       */
+      _addItem: function MultiSelectAutoComplete__addItem(itemName, itemId)
+      {
+         var item = Alfresco.util.encodeHTML(itemName),
+            invalidIcon = document.createElement("img"),
+            span = document.createElement("span"),
+            label = document.createElement("span"),
+            hiddenItemInput = document.createElement("input"),
+            removeIcon = document.createElement("img"),
+            removeIconEdit = document.createElement("img");
+
+         Alfresco.util.generateDomId(span);
+         YUIDom.addClass(span, "inlineItemEditItem");
+         //span.setAttribute("tabindex", "0");
+         label.innerHTML = item;
+         YUIDom.setAttribute(invalidIcon, "src", Alfresco.constants.URL_RESCONTEXT + "components/images/warning-16.png");
+         YUIDom.setAttribute(removeIcon, "src", Alfresco.constants.URL_RESCONTEXT + "components/images/delete-item-off.png");
+         YUIDom.setAttribute(removeIcon, "width", 16);
+         YUIDom.setAttribute(removeIconEdit, "src", Alfresco.constants.URL_RESCONTEXT + "components/images/delete-item-on.png");
+         YUIDom.setAttribute(removeIconEdit, "width", 16);
+         YUIDom.addClass(removeIconEdit, "hidden");
+         span.appendChild(invalidIcon);
+         span.appendChild(label);
+         span.appendChild(removeIcon);
+         span.appendChild(removeIconEdit);
+
+         var result = this._validateItem(itemId, itemName, span);
+         if (YAHOO.lang.isBoolean(result))
+         {
+            if (result)
+            {
+               YUIDom.addClass(invalidIcon, "hidden");
+            }
+            else
+            {
+               Dom.addClass(span, "invalid");
+            }
+         }
+         else if (YAHOO.lang.isNumber(result))
+         {
+            YUIDom.addClass(invalidIcon, "hidden");
+         }
+
+         if (this.params.formInputMode == "multiple")
+         {
+            YUIDom.setAttribute(hiddenItemInput, "type", "hidden");
+            YUIDom.setAttribute(hiddenItemInput, "name", this.params.formInputName);
+            YUIDom.setAttribute(hiddenItemInput, "value", itemId);
+            span.appendChild(hiddenItemInput);
+         }
+
+         // Make sure we add the item in the right place...
+         if (YUIDom.isAncestor(this.itemContainer, this.newInput))
+         {
+            // An existing item has been edited, so insert it before the input item...
+            YUIDom.insertBefore(span, this.newInput.parentNode);
+         }
+         else
+         {
+            // Add the new item at the end of the list...
+            this.itemContainer.appendChild(span);
+         }
+         this._editingItemIndex = -1; // If we've just added a item then we're not editing one
+
+
+         // Function for deterining the index of a item...
+         var findItemIndex = function InsituEditor_itemEditor_findItemIndex(itemSpan)
+         {
+            // Get the index of where the span ended up, needed to insert the nodeRef in the correct place...
+            var spanIndex = 0,
+                tmp = itemSpan;
+            while((tmp = tmp.previousSibling) != null)
+            {
+               spanIndex++;
+            }
+            return spanIndex;
+         };
+
+         var _this = this;
+
+         // Function for removing a itemId from the array of itemids...
+         var removeItemId = function MultiSelectAutoComplete_removeItemId(itemId)
+         {
+            var index = Alfresco.util.arrayIndex(_this.itemIds, itemId);
+            if (index != -1)
+            {
+               _this.itemIds.splice(index, 1);
+            }
+         };
+
+         // Handler the user choosing to remove a item...
+         Event.addListener(removeIcon, "click", function(e)
+         {
+            removeItemId(itemId);
+            if (this.hiddenInput)
+            {
+               YUIDom.setAttribute(_this.hiddenInput, "value", _this.itemIds.toString());
+            }
+            _this.itemContainer.removeChild(span);
+
+            // Make sure ballons are updated
+            _this._hideFormErrorContainer(span);
+         });
+
+         // Handle the user choosing to edit a item...
+         Event.addListener(label, "click", function(e)
+         {
+            // When the item label is clicked we need to make it editable. The new item box needs to
+            // replace the item span and have it's value set to the item being edited.
+            YUIDom.insertBefore(_this.newInput.parentNode, span);
+            _this.itemContainer.removeChild(span);
+            _this.newInput.value = itemName;
+
+            removeItemId(itemId);
+            _this._editingItemIndex = findItemIndex(span); // Set the index of the span being edited.
+
+            _this._hideFormErrorContainer(span);
+
+            _this.newInput.select();
+
+            Event.stopEvent(e);
+         });
+
+         return findItemIndex(span);
+      },
+
+      /**
+       * Applies a item to the document being edited. This will add a new span to represent
+       * the applied item, update the the overall hidden input field that will be submitted
+       * and reset the new item input field.
+       *
+       * @method _applyItem
+       * @param itemName The name of the item
+       * @param itemId The ItemId of the item
+       */
+      _applyItem: function MultiSelectAutoComplete__applyItem(itemName, itemId, triggerFormValidationEvent)
+      {
+         var index = this._addItem(itemName, itemId);
+         this.newInput.value = "";
+
+         // Add the itemId of the item into the hidden value field...
+         this.itemIds.splice(index, 0, itemId);
+         if (this.hiddenInput)
+         {
+            YUIDom.setAttribute(this.hiddenInput, "value", this.itemIds.toString());
+         }
+
+         // Ensure that auto-complete drop-down is hidden...
+         this.autoComplete.collapseContainer();
+
+         // Make sure balloons are updated
+         if (triggerFormValidationEvent)
+         {
+            this._triggerFormValidation(triggerFormValidationEvent, this.context);
+         }
+      },
+
+      /**
+       * Generates the markup that displays the currently applied items. This function
+       * can be called once the main markup has been created to allow only item changes
+       * to be rendered.
+       *
+       * @method _generateCurrentItemMarkup
+       */
+      _generateCurrentItemMarkup: function MultiSelectAutoComplete__generateCurrentItemMarkup()
+      {
+         // Clear any previously created span items...
+         if (this.itemContainer.hasChildNodes())
+         {
+             while (this.itemContainer.childNodes.length >= 1)
+             {
+                this.itemContainer.removeChild( this.itemContainer.firstChild );
+             }
+         }
+
+         // Add any previously applied items to the edit box, updating the array of applied item itemIds as we go...
+         this.params.value = this.params.value || [];
+         // Need to check that the value param has been set because if the node did not have
+         // a cm:itemgable option then it would be undefined.
+         for (i = 0, j = this.params.value.length; i < j; i++)
+         {
+            this._addItem(this.params.value[i][this.params.itemName], this.params.value[i][this.params.itemId]);
+            this.itemIds.push(this.params.value[i][this.params.itemId]);
+         }
+      }
+
+   };
+
+})();
+
 
 /**
  * Create Insitu Editor
@@ -2641,14 +4101,6 @@ Alfresco.util.createInsituEditor = function(p_context, p_params, p_callback)
             this.form.addValidation(this.inputBox, vals[i].type, vals[i].args, vals[i].when, vals[i].message);
          }
 
-         // Override Forms Runtime's error handling
-         var scope = this;
-         this.form.addError = function InsituEditor_textBox_addError(msg, field)
-         {
-            scope.balloon.html(msg);
-            scope.balloon.show();
-         };
-
          // Initialise the form
          this.form.init();
 
@@ -2873,9 +4325,9 @@ Alfresco.util.createInsituEditor = function(p_context, p_params, p_callback)
          label.innerHTML = tag;
          var removeIcon = document.createElement("img"),
              removeIconEdit = document.createElement("img");
-         YUIDom.setAttribute(removeIcon, "src", Alfresco.constants.URL_RESCONTEXT + "components/images/delete-tag-off.png");
+         YUIDom.setAttribute(removeIcon, "src", Alfresco.constants.URL_RESCONTEXT + "components/images/delete-item-off.png");
          YUIDom.setAttribute(removeIcon, "width", 16);
-         YUIDom.setAttribute(removeIconEdit, "src", Alfresco.constants.URL_RESCONTEXT + "components/images/delete-tag-on.png");
+         YUIDom.setAttribute(removeIconEdit, "src", Alfresco.constants.URL_RESCONTEXT + "components/images/delete-item-on.png");
          YUIDom.setAttribute(removeIconEdit, "width", 16);
          YUIDom.addClass(removeIconEdit, "hidden");
          span.appendChild(label);
@@ -3259,14 +4711,6 @@ Alfresco.util.createInsituEditor = function(p_context, p_params, p_callback)
             this.form.addValidation(this.inputBox, vals[i].type, vals[i].args, vals[i].when, vals[i].message);
          }
 
-         // Override Forms Runtime's error handling
-         var scope = this;
-         this.form.addError = function InsituEditor_tagEditor_addError(msg, field)
-         {
-            scope.balloon.html(msg);
-            scope.balloon.show();
-         };
-
          // Initialise the form
          this.form.init();
          this.markupGenerated = true;
@@ -3341,6 +4785,9 @@ Alfresco.util.createInsituEditor = function(p_context, p_params, p_callback)
  */
 Alfresco.util.findEventClass = function(p_eventTarget, p_tagName)
 {
+   if (!p_eventTarget)
+      return null;
+
    var src = p_eventTarget.element;
    var tagName = (p_tagName || "span").toLowerCase();
 
@@ -3831,7 +5278,14 @@ Alfresco.util.siteURL = function(pageURI, obj, absolute)
  */
 Alfresco.util.parseURL = function(url)
 {
-   var a = document.createElement("a");
+   var a = document.createElement("a"),
+         _sanitizedPathname = function(pathname)
+         {
+            // pathname MUST include leading slash (IE<9: this code is for you).
+            var prepend = (pathname.substring(0,1) === "/")? "" : "/";
+            return prepend + pathname;
+         };
+
    a.href = url;
    var urlObject = {
       // protocol includes trailing colon.
@@ -3840,12 +5294,10 @@ Alfresco.util.parseURL = function(url)
       port: a.port,
       // host = hostname:port
       host: a.host,
-      pathname: a.pathname,
+      pathname: _sanitizedPathname(a.pathname),
       // search and hash include question mark and hash symbol respectively
       search: a.search,
       hash: a.hash,
-      // url = protocol + "//" + host + pathname + search + hash
-      url: url,
       queryParams: Alfresco.util.getQueryStringParameters(url),
       getUrl: function()
       {
@@ -3857,7 +5309,7 @@ Alfresco.util.parseURL = function(url)
       }
    }
    return urlObject;
-}
+};
 
 /**
  * Navigates to a url
@@ -4309,6 +5761,22 @@ Alfresco.util.isAutocompleteIgnoreKey = function(nKeyCode)
    return false;
 };
 
+/**
+ * Helps checking the event's keyCode in all browsers (FF uses charCode)
+ *
+ * @param event {Object}
+ * @param keyCode {int|Array} An int describing the keyCode or an array of keyCode integers
+ */
+Alfresco.util.hasKeyCode = function (event, keyCode)
+{
+   var code = event.charCode ? event.charCode : event.keyCode;
+   if (YAHOO.lang.isArray(keyCode))
+   {
+      return Alfresco.util.arrayContains(keyCode, code);
+   }
+   return keyCode == code;
+};
+
 
 /**
  * Wrapper for helping components specify their YUI components.
@@ -4349,7 +5817,10 @@ Alfresco.util.YUILoaderHelper = function()
          yuiLoader = new YAHOO.util.YUILoader(
          {
             base: Alfresco.constants.URL_RESCONTEXT + "yui/",
-            filter: Alfresco.constants.DEBUG ? "DEBUG" : "",
+            filter: Alfresco.constants.DEBUG ? "DEBUG" : {
+               'searchExp': "-min\\.js",
+               'replaceStr': "-min.js?v=" +YAHOO.VERSION
+            },
             loadOptional: false,
             skin: {},
             onSuccess: Alfresco.util.YUILoaderHelper.onLoaderComplete,
@@ -4703,6 +6174,26 @@ Alfresco.util.PopupManager = function()
          }
          // Construct the YUI Dialog that will display the message
          var message = new YAHOO.widget.Dialog("message", dialogConfig);
+
+         // This method allows to stop animanions before destroy to avoid NPE
+         message.destroyWithAnimationsStop = function()
+         {
+            if (message._fadingIn || message._fadingOut)
+            {
+               if(message._cachedEffects && message._cachedEffects.length > 0)
+               {
+                  for(var i = 0; i < message._cachedEffects.length; i++)
+                  {
+                     var effect = message._cachedEffects[i];
+                     if (effect.animIn)
+                        effect.animIn.stop();
+                     if (effect.animOut)
+                        effect.animOut.stop();
+                  }
+               }
+            }
+            message.destroy();
+         }
 
          // Set the message that should be displayed
          var bd =  "<span class='" + c.spanClass + "'>" + (c.noEscape ? c.text : $html(c.text)) + "</span>";
@@ -5197,7 +6688,10 @@ Alfresco.util.PopupManager = function()
                fn: function PopupManager_displayWebscript_successCallback(response, config)
                {
                   // Instantiate a Panel from script
-                  p.setHeader(config.title);
+                  if (config.title)
+                  {
+	                  p.setHeader(config.title);
+                  }
                   p.setBody(response.serverResponse.responseText);
                   p.render(document.body);
                   p.show();
@@ -5468,7 +6962,7 @@ Alfresco.util.Ajax = function()
                   c.url += (c.url.indexOf("?") == -1 ? "?" : "&") + this.jsonToParamString(c.dataObj, true);
                }
             }
-            else
+            else if (c.method.toUpperCase() !== this.DELETE)
             {
                // If json is used encode the dataObj parameter and put it in the body
                c.dataStr = YAHOO.lang.JSON.stringify(c.dataObj || {});
@@ -5484,9 +6978,9 @@ Alfresco.util.Ajax = function()
                   // Encode the dataObj and put it in the url
                   c.url += (c.url.indexOf("?") == -1 ? "?" : "&") + this.jsonToParamString(c.dataObj, true);
                }
-               else
+               else if (c.method.toUpperCase() !== this.DELETE)
                {
-                  // Enccode the dataObj and put it in the body
+                  // Encode the dataObj and put it in the body
                   c.dataStr = this.jsonToParamString(c.dataObj, true);
                }
             }
@@ -5527,6 +7021,14 @@ Alfresco.util.Ajax = function()
                   c.method = this.POST;
                }
             }
+         }
+
+         // Add a noCache parameter to the URL to ensure that XHR requests are always made to the
+         // server. This is added to tackle a specific problem in IE where 304 responses are assumed
+         // for XHR requests. This has intentionally been conditionally added just for IE
+         if (YAHOO.env.ua.ie > 0)
+         {
+            c.url += (c.url.indexOf("?") == -1 ? "?" : "&") + "noCache=" + new Date().getTime();
          }
 
          // Make the request
@@ -6139,9 +7641,30 @@ Alfresco.util.Anim = function()
          if (el)
          {
             // Set outColor to existing backgroundColor
+            // Fix for ALF-12308 Stack specific: Script error when reply on a topic
+            // ColorAnim.parseColor() returns null for rgba(0, 0, 0, 0).
+            // Also IE and FF return "transparent" which cannot be parsed as well.
+            //debugger;
+            var rgbaRegexp = /^rgba\((\d+), (\d+), (\d+), (\d+)\)$/i,
+                  transparent = /^transparent$/i,
+                  outColor = YUIDom.getStyle(el, "backgroundColor");
+            if (rgbaRegexp.test(outColor))
+            {
+               var rgba = rgbaRegexp.exec(outColor);
+               // Check wether it's black
+               if (rgba[1] == 0 && rgba[2] == 0 && rgba[3] == 0 && rgba[4] == 0)
+                  outColor = "#fff";
+               else
+                  outColor = "rgb(" + rgba[1] + ", " + rgba[2] + ", " + rgba[3] + ")";
+            }
+            else if (transparent.test(outColor))
+            {
+               outColor = "#fff";
+            }
+
             var attr = YAHOO.lang.merge(this.pulseAttributes,
             {
-               outColor: YUIDom.getStyle(el, "backgroundColor")
+               outColor: outColor
             });
             if (typeof p_attributes == "object")
             {
@@ -6377,6 +7900,10 @@ Alfresco.constants = YAHOO.lang.merge(Alfresco.constants || {},
          
          /* Properties */
          properties: properties,
+         hasProperty: function(property)
+         {
+            return properties.hasOwnProperty(property);
+         },
          
          /* Aspects */
          aspects: aspects,
@@ -6600,7 +8127,7 @@ else
          return false;
       }
    };
-}
+};
 
 
 /**
@@ -6792,7 +8319,8 @@ Alfresco.thirdparty.fromISO8601 = function()
       //   formattedString:
       //      A string such as 2005-06-30T08:05:00-07:00 or 2005-06-30 or T08:05:00
 
-      var isoRegExp = /^(?:(\d{4})(?:-(\d{2})(?:-(\d{2}))?)?)?(?:T(\d{2}):(\d{2})(?::(\d{2})(.\d+)?)?((?:[+-](\d{2}):(\d{2}))|Z)?)?$/;
+      // Modified to parse ISO822 style timezone offsets: (0500 instead of 05:00), which are still valid but not previous supported
+      var isoRegExp = /^(?:(\d{4})(?:-(\d{2})(?:-(\d{2}))?)?)?(?:T(\d{2}):(\d{2})(?::(\d{2})(.\d+)?)?((?:[+-](\d{2}):?(\d{2}))|Z)?)?$/;
 
       return function(formattedString)
       {
@@ -6981,6 +8509,8 @@ Alfresco.service.BaseService.prototype =
 
    YAHOO.extend(Alfresco.service.Preferences, Alfresco.service.BaseService,
    {
+      _prefs: null,
+
       /**
        * Gets a user specific property
        *
@@ -6994,7 +8524,23 @@ Alfresco.service.BaseService.prototype =
       },
 
       /**
-       * Requests a user specific property
+       * Get the complete copy of the currently cached user preferences. This value is set once per page load - a component
+       * should retrieve this once onReady() but not assume the state is correct after that. The component should maintain
+       * its own local copies of values as modified by set(), add() or remote() operations until the next page refresh.
+       *
+       * @method get
+       */
+      get: function Preferences_get()
+      {
+         if (this._prefs === null)
+         {
+            this._prefs = YAHOO.lang.JSON.parse(Alfresco.constants.USERPREFERENCES);
+         }
+         return this._prefs;
+      },
+
+      /**
+       * Requests a fresh copy of a user specific property
        *
        * @method request
        * @param name {string} The name of the property to get, or null or no param for all
@@ -7099,6 +8645,20 @@ Alfresco.service.BaseService.prototype =
             scope: this
          };
          this.request(name, rc);
+      },
+
+      /**
+       *
+       * @param dashlet
+       * @param name
+       */
+      getDashletId: function Preferences_getDashletId(dashlet, name)
+      {
+         var siteId = (dashlet.options.siteId && dashlet.options.siteId != "") ? "." + dashlet.options.siteId : "",
+            regionId = (dashlet.options.regionId && dashlet.options.regionId != "") ? "." + dashlet.options.regionId : "",
+            constantPrefix = "org.alfresco.share.";
+
+         return constantPrefix + name + ".dashlet" + regionId + siteId;
       }
    });
 })();
@@ -7202,6 +8762,67 @@ Alfresco.service.BaseService.prototype =
          this._jsonCall(Alfresco.util.Ajax.DELETE, this._url(node) + "/" + encodeURIComponent(this._ratingScheme), null, responseConfig);
       }
    });
+})();
+
+/**
+ * Alfresco QuickShare  Service.
+ *
+ * @namespace Alfresco.service
+ * @class Alfresco.service.QuickShare
+ */
+(function()
+{
+   /**
+    * Ratings Service constructor.
+    *
+    * @return {Alfresco.service.QuickShare} The new Alfresco.service.QuickShare  instance
+    * @constructor
+    */
+   Alfresco.service.QuickShare = function QuickShare_constructor()
+   {
+      return Alfresco.service.QuickShare.superclass.constructor.call(this);
+   };
+
+   YAHOO.extend(Alfresco.service.QuickShare, Alfresco.service.BaseService,
+         {
+            /**
+             * Helper method for creating urls
+             *
+             * @method _url
+             * @param action Part of the url
+             * @param id {string} NodeRef or sharedId
+             * @return {string} The base url to the ratings webscripts
+             * @protected
+             */
+            _url: function QuickShare_url(action, id)
+            {
+               return Alfresco.constants.PROXY_URI + "api/internal/shared/" + action + "/" + id;
+            },
+
+            /**
+             * Sets a user rating on the specified NodeRef
+             *
+             * @method set
+             * @param node {NodeRef|string} Node reference
+             * @param responseConfig {object} A config object with only success and failure callbacks and messages
+             */
+            share: function QuickShare_set(node, responseConfig)
+            {
+               this._jsonCall(Alfresco.util.Ajax.POST, this._url("share", (node + "").replace(":/", "")), {}, responseConfig);
+            },
+
+            /**
+             * Stop the node from being share.
+             *
+             * @method unshare
+             * @param sharedId {string} Id to the share to remove
+             * @param responseConfig {object} A config object with only success and failure callbacks and messages
+             */
+            unshare: function QuickShare_remove(sharedId, responseConfig)
+            {
+               this._jsonCall(Alfresco.util.Ajax.DELETE, this._url("unshare", sharedId), null, responseConfig);
+            }
+         });
 })();
 
 /**
@@ -7586,7 +9207,7 @@ Alfresco.util.RENDERLOOPSIZE = 25;
          var fnActionHandler = function Base_attachLinkClickListeners_fnActionHandler(layer, args)
          {
             var anchor = args[1].anchor,
-               name = anchor.getAttribute("name"),
+               name = anchor.getAttribute("name") || anchor.name,
                rel = anchor.getAttribute("rel");
 
             if (this.invokeAction(name, rel, anchor))
@@ -7733,10 +9354,12 @@ Alfresco.util.RENDERLOOPSIZE = 25;
       this.filterName = this.name.substring(this.name.lastIndexOf(".") + 1);
       this.controlsDeactivated = false;
       this.uniqueEventKey = Alfresco.util.generateDomId(null, "filter");
+      this.SELECTED_CLASS = "selected";
 
       // Decoupled event listeners
       YAHOO.Bubbling.on("filterChanged", this.onFilterChanged, this);
       YAHOO.Bubbling.on("deactivateAllControls", this.onDeactivateAllControls, this);
+      YAHOO.Bubbling.on("hideFilter", this.onHideFilter, this);
       
       return this;
    };
@@ -7774,6 +9397,46 @@ Alfresco.util.RENDERLOOPSIZE = 25;
        * @type {string}
        */
       uniqueEventKey: null,
+
+      /**
+       * The css class to apply on the selected filter
+       *
+       * @property SELECTED_CLASS
+       * @type {string}
+       * @default "selected"
+       */
+      SELECTED_CLASS: "selected",
+
+      /**
+       * The css class to to apply on disabled filter
+       *
+       * @property DISABLED_CLASS
+       * @type {string}
+       * @default "disabled"
+       */
+      DISABLED_CLASS: "disabled",
+
+      /**
+       * Css class to use for selected filter
+       *
+       * @method setSelectedClass
+       * @param p_sSelectedClass {string} Css class to use for selected filter
+       */
+      setSelectedClass: function BaseFilter_setSelectedClass(p_sSelectedClass)
+      {
+         this.SELECTED_CLASS = p_sSelectedClass;
+      },
+
+      /**
+       * Css class to use for disabled filter
+       *
+       * @method setDisabledClass
+       * @param p_sDisabledClass {string} Css class to use for disabled filter
+       */
+      setDisabledClass: function BaseFilter_setSelectedClass(p_sDisabledClass)
+      {
+         this.DISABLED_CLASS = p_sDisabledClass;
+      },
 
       /**
        * Set the filterId(s) this filter will be owning.
@@ -7836,14 +9499,19 @@ Alfresco.util.RENDERLOOPSIZE = 25;
                }
                
                var filterId = owner.className,
-                  filterData = anchor.rel;
+                           filterData = anchor.rel,
+                           filterObj =
+                           {
+                              filterOwner: me.name,
+                              filterId: filterId
+                           };
 
-               YAHOO.Bubbling.fire("changeFilter",
+               if (Alfresco.util.isValueSet(filterData))
                {
-                  filterOwner: me.name,
-                  filterId: filterId,
-                  filterData: filterData
-               });
+                   filterObj.filterData = filterData;
+               }
+
+               YAHOO.Bubbling.fire("changeFilter", filterObj);
 
                // If a function has been provided which corresponds to the filter Id, then call it
                if (typeof me[filterId] == "function")
@@ -7862,6 +9530,15 @@ Alfresco.util.RENDERLOOPSIZE = 25;
        * BUBBLING LIBRARY EVENT HANDLERS FOR PAGE EVENTS
        * Disconnected event handlers for inter-component event notification
        */
+
+      onHideFilter: function()
+      {
+         var filters = YUISelector.query("a", this.id);
+         for (var i = 0, ii = filters.length; i < ii; i++)
+         {
+            YUIDom.addClass(filters[i], "hidden");
+         }
+      },
 
       /**
        * Fired when the currently active filter has changed
@@ -7884,7 +9561,7 @@ Alfresco.util.RENDERLOOPSIZE = 25;
                // Remove the old highlight, as it might no longer be correct
                if (this.selectedFilter !== null)
                {
-                  YUIDom.removeClass(this.selectedFilter, "selected");
+                  YUIDom.removeClass(this.selectedFilter, this.SELECTED_CLASS);
                }
 
                // Need to find the selectedFilter element, from the current filterId
@@ -7893,7 +9570,7 @@ Alfresco.util.RENDERLOOPSIZE = 25;
                {
                   // This component now owns the active filter
                   this.selectedFilter = candidates[0].parentNode;
-                  YUIDom.addClass(this.selectedFilter, "selected");
+                  YUIDom.addClass(this.selectedFilter, this.SELECTED_CLASS);
                   filterFound = true;
                }
                else if (candidates.length > 1)
@@ -7911,7 +9588,7 @@ Alfresco.util.RENDERLOOPSIZE = 25;
                         {
                            // This component now owns the active filter
                            this.selectedFilter = candidates[i].parentNode;
-                           YUIDom.addClass(this.selectedFilter, "selected");
+                           YUIDom.addClass(this.selectedFilter, this.SELECTED_CLASS);
                            filterFound = true;
                         }
                      }
@@ -7923,7 +9600,7 @@ Alfresco.util.RENDERLOOPSIZE = 25;
                      {
                         // This component now owns the active filter
                         this.selectedFilter = candidates[0].parentNode.parentNode;
-                        YUIDom.addClass(this.selectedFilter, "selected");
+                        YUIDom.addClass(this.selectedFilter, this.SELECTED_CLASS);
                         filterFound = true;
                      }
                   }
@@ -7940,7 +9617,7 @@ Alfresco.util.RENDERLOOPSIZE = 25;
                // Currently filtering by something other than this component
                if (this.selectedFilter !== null)
                {
-                  YUIDom.removeClass(this.selectedFilter, "selected");
+                  YUIDom.removeClass(this.selectedFilter, this.SELECTED_CLASS);
                }
             }
          }
@@ -7970,7 +9647,7 @@ Alfresco.util.RENDERLOOPSIZE = 25;
          var filters = YUISelector.query("a." + this.uniqueEventKey, this.id);
          for (var i = 0, ii = filters.length; i < ii; i++)
          {
-            YUIDom.addClass(filters[i], "disabled");
+            YUIDom.addClass(filters[i], this.DISABLED_CLASS);
          }
       }
    });
@@ -9045,4 +10722,45 @@ Alfresco.util.toggleClass = function(element, className)
    {
       YUIDom.addClass(element, className);
    }
+};
+/**
+ * Returns trimmed value. This method uses YAHOO.lang.trim + remove IDEOGRAPHIC SPACE (\u3000)
+ *
+ * @method Alfresco.util.trim
+ * @param value {string} String value which we trim
+ * @return {string} trimmed value
+ * @static
+ */
+Alfresco.util.trim = function(value)
+{
+   var s = YAHOO.lang.trim(value);
+   return s ? s.replace(/(^[\s\u3000]+|[\s\u3000]+$)/g, '') : s;
+};
+
+/**
+ * Generates a URL to retrieve a thumbnail based on the node and thumbnail name supplied.
+ *
+ * @method generateThumbnailUrl
+ */
+Alfresco.util.generateThumbnailUrl = function(jsNode, thumbnailName)
+{
+   var url,
+         nodeRef = jsNode.isLink ? jsNode.linkedNode.nodeRef : jsNode.nodeRef;;
+   if (jsNode.properties["cm:lastThumbnailModification"])
+   {
+      var thumbnailModData = jsNode.properties["cm:lastThumbnailModification"];
+      for (var i = 0; i < thumbnailModData.length; i++)
+      {
+         if (thumbnailModData[i].indexOf(thumbnailName) != -1)
+         {
+            url = Alfresco.constants.PROXY_URI + "api/node/" + nodeRef.uri + "/content/thumbnails/" + thumbnailName + "?c=queue&ph=true&lastModified=" + thumbnailModData[i];
+            break;
+         }
+      }
+   }
+   if (YAHOO.lang.isUndefined(url) || YAHOO.lang.isNull(url))
+   {
+      url = Alfresco.constants.PROXY_URI + "api/node/" + nodeRef.uri + "/content/thumbnails/" + thumbnailName + "?c=queue&ph=true";
+   }
+   return url;
 };

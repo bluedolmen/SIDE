@@ -54,7 +54,7 @@ var Filters =
    {
       var filterParams =
       {
-         query: "+PATH:\"" + parsedArgs.pathNode.qnamePath + "/*\"",
+         query: "",
          limitResults: null,
          sort: [
          {
@@ -154,8 +154,7 @@ var Filters =
 
          case "editingMe":
             filterQuery = this.constructPathQuery(parsedArgs);
-            filterQuery += " +((+ASPECT:\"workingcopy\"";
-            filterQuery += " +@cm\\:workingCopyOwner:\"" + person.properties.userName + '")';
+            filterQuery += " +((+@cm\\:workingCopyOwner:\"" + person.properties.userName + '")';
             filterQuery += " OR (+@cm\\:lockOwner:\"" + person.properties.userName + '"';
             filterQuery += " +@cm\\:lockType:\"WRITE_LOCK\"))";
             filterParams.query = filterQuery;
@@ -171,21 +170,23 @@ var Filters =
             break;
 
          case "favourites":
-            var foundOne = false;
-
             for (var favourite in favourites)
             {
-               if (foundOne)
+               if (filterQuery)
                {
                   filterQuery += " OR ";
                }
-               foundOne = true;
                filterQuery += "ID:\"" + favourite + "\"";
             }
             
-            if (filterQuery.length > 0)
+            if (filterQuery.length !== 0)
             {
-               filterQuery = "+(" + filterQuery + ") " + this.constructPathQuery(parsedArgs);
+               filterQuery = "+(" + filterQuery + ")";
+               // no need to specify path here for all sites - IDs are exact matches
+               if (parsedArgs.nodeRef != "alfresco://sites/home" && parsedArgs.nodeRef != "alfresco://company/home")
+               {
+                  filterQuery += ' +PATH:"' + parsedArgs.rootNode.qnamePath + '//*"';
+               }
             }
             else
             {
@@ -193,6 +194,18 @@ var Filters =
                filterQuery = "+ID:\"\"";
             }
             
+            filterParams.query = filterQuery;
+            break;
+
+         case "synced":
+            filterQuery = this.constructPathQuery(parsedArgs);
+            filterQuery += " +ASPECT:\"sync:syncSetMemberNode\"";
+            filterParams.query = filterQuery;
+            break;
+
+         case "syncedErrors":
+            filterQuery = this.constructPathQuery(parsedArgs);
+            filterQuery += " +ASPECT:\"sync:failed\"";
             filterParams.query = filterQuery;
             break;
 
@@ -212,100 +225,100 @@ var Filters =
             break;
          // SIDE start
          case "metadata":
-        	 var type,aspect,notAspects,path;
-        	 var searchObj = {};
-        	 if (parsedArgs.args.search) {
-        		 logger.log("parsedArgs.args.search :" + parsedArgs.args.search);
-        		 searchObj = eval('('+parsedArgs.args.search+')');
-        	 }
-        	 if (filterData != null && filterData != "" && filterData != "null") {
-        		 logger.log("filterData :" + filterData);
-        		 searchObj = eval('('+filterData+')');
-        	 }
-        	 
-        	 type = searchObj.type;
-        	 aspect = searchObj.aspect;
-        	 notAspects = searchObj.notAspects;
-        	 path = searchObj.path;
-        	 
-        	 
-        	 var logicalOperator = " AND ";
-        	 if (searchObj.operator && searchObj.operator.toLowerCase() == "or") {
+            var type,aspect,notAspects,path;
+            var searchObj = {};
+            if (parsedArgs.args.search) {
+               logger.log("parsedArgs.args.search :" + parsedArgs.args.search);
+               searchObj = eval('('+parsedArgs.args.search+')');
+            }
+            if (filterData != null && filterData != "" && filterData != "null") {
+               logger.log("filterData :" + filterData);
+               searchObj = eval('('+filterData+')');
+            }
+            
+            type = searchObj.type;
+            aspect = searchObj.aspect;
+            notAspects = searchObj.notAspects;
+            path = searchObj.path;
+            
+            
+            var logicalOperator = " AND ";
+            if (searchObj.operator && searchObj.operator.toLowerCase() == "or") {
             	logicalOperator = " OR ";
              }
-        	  
-        	 var query = "";
-        	 var query_type = "";
-        	 var query_aspect = "";
-        	 var query_path = "";
-        	 var query_notAspects = "";
-        	 
-        	 if (type) {
-        		 query_type = '+TYPE:"' + type + '"';
-        	 }
-        	 if (aspect) {
-        		 query_aspect = '+ASPECT:"' + aspect + '"';
-        	 }
-        	 
-        	 if (notAspects) {
-        		 for (var c=0 ; c<notAspects.length ; c++) {
+             
+            var query = "";
+            var query_type = "";
+            var query_aspect = "";
+            var query_path = "";
+            var query_notAspects = "";
+            
+            if (type) {
+               query_type = '+TYPE:"' + type + '"';
+            }
+            if (aspect) {
+               query_aspect = '+ASPECT:"' + aspect + '"';
+            }
+            
+            if (notAspects) {
+               for (var c=0 ; c<notAspects.length ; c++) {
         			 query_notAspects += ' -ASPECT:"' + notAspects[c] + '"'; 
-        		 }        		 
-        	 }
-        	 
-        	 if (path) {
-        		 query_path = '+PATH:"' + path + '"';
-        		 if (parsedArgs.location.site) {
-        		    query_path = query_path.replace(/\{site\}/g,"cm:" + parsedArgs.location.site);
-        		 }
-        	 }
-        	 
-        	 query = query_type + " " + query_aspect + " " + query_path + " " + query_notAspects + " ";
-        	 
-        	 
-        	 var propQuery="";
-        	 
-        	 /*
+               }               
+            }
+            
+            if (path) {
+               query_path = '+PATH:"' + path + '"';
+               if (parsedArgs.location.site) {
+                  query_path = query_path.replace(/\{site\}/g,"cm:" + parsedArgs.location.site);
+               }
+            }
+            
+            query = query_type + " " + query_aspect + " " + query_path + " " + query_notAspects + " ";
+            
+            var propQuery="";
+            
+            /*
 				 * for (var prop in properties) { if (properties[prop] != "") {
 				 * propQuery+="@"+prop; propQuery+=":"+properties[prop];
 				 * propQuery+=operator; } }
 				 */
-        	 propQuery= Filters.parseAdvancedSearch(searchObj);
+            propQuery= Filters.parseAdvancedSearch(searchObj);
 
-			if (propQuery !=="") {
-        		 var ind=propQuery.lastIndexOf(logicalOperator);
-        		 propQuery=propQuery.substring(0,ind);
-        		 propQuery=propQuery.replace(/([{}])/g,"\\$1");
-        		 propQuery=propQuery.replace(/(http):/g,"$1\\:");
-        		 query+=" +(";
-        		 query+=propQuery
-	        	 query+=") ";
-        	}
-        	 
-        	 
-        	 filterParams.query=query;
-        	 
-        	 break;
+            if (propQuery !=="") {
+               var ind=propQuery.lastIndexOf(logicalOperator);
+               propQuery=propQuery.substring(0,ind);
+               propQuery=propQuery.replace(/([{}])/g,"\\$1");
+               propQuery=propQuery.replace(/(http):/g,"$1\\:");
+               query+=" +(";
+               query+=propQuery
+	            query+=") ";
+            }
+            
+            filterParams.query=query;
+            
+            break;
          case "fullTextSearch":
-        	 var siteId = (args.site !== undefined) ? args.site : null;
-        	 var containerId = (args.container !== undefined) ? args.container : null;
-        	 var term = (args.term !== undefined) ? args.term : null;
-        	 var maxResults = (args.maxResults !== undefined) ? parseInt(args.maxResults, 10) : DEFAULT_MAX_RESULTS;
-        	 //TODO replace this by calling search.lib.js and set filterParams as queryDef 
-        	 filterParams.query= getSearchQuery(term, maxResults, siteId, containerId);
-        	 break;
-             // SIDE end
+            var siteId = (args.site !== undefined) ? args.site : null;
+            var containerId = (args.container !== undefined) ? args.container : null;
+            var term = (args.term !== undefined) ? args.term : null;
+            var maxResults = (args.maxResults !== undefined) ? parseInt(args.maxResults, 10) : DEFAULT_MAX_RESULTS;
+            //TODO replace this by calling search.lib.js and set filterParams as queryDef 
+            filterParams.query= getSearchQuery(term, maxResults, siteId, containerId);
+            break;
+            // SIDE end
          case "category":
             // Remove any trailing "/" character
             if (filterData.charAt(filterData.length - 1) == "/")
             {
                filterData = filterData.slice(0, -1);
             }
-            filterParams.query = "+PATH:\"/cm:generalclassifiable" + Filters.iso9075EncodePath(filterData) + "/member\"";
+            filterQuery = this.constructPathQuery(parsedArgs);
+            filterParams.query = filterQuery + " +PATH:\"/cm:generalclassifiable" + Filters.iso9075EncodePath(filterData) + "/member\"";
             break;
          case "savedSearch":
-        	filterParams = getSavedSearchQueryDef(filterData);
-        	break;
+            // SIDE
+            filterParams = getSavedSearchQueryDef(filterData);
+            break;
          default: // "path"
             filterParams.variablePath = false;
             filterQuery = "+PATH:\"" + parsedArgs.pathNode.qnamePath + "/*\"";
@@ -327,12 +340,16 @@ var Filters =
       var pathQuery = "";
       if (parsedArgs.nodeRef != "alfresco://company/home")
       {
-         pathQuery = "+PATH:\"" + parsedArgs.rootNode.qnamePath;
          if (parsedArgs.nodeRef == "alfresco://sites/home")
          {
-            pathQuery += "/*/cm:documentLibrary";
+            // all sites query - better with //cm:*
+            pathQuery = '+PATH:"' + parsedArgs.rootNode.qnamePath + '//cm:*"';
          }
-         pathQuery += "//*\"";
+         else
+         {
+            // site specific query - better with //*
+            pathQuery = '+PATH:"' + parsedArgs.rootNode.qnamePath + '//*"';
+         }
       }
       return pathQuery;
    },

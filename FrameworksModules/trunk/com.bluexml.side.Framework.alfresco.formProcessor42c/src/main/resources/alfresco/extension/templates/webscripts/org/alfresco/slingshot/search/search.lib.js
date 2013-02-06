@@ -95,6 +95,7 @@ function getRepositoryItem(folderPath, node) {
 				modifiedByUser : node.properties["cm:modifier"],
 				createdOn : node.properties["cm:created"],
 				createdByUser : node.properties["cm:creator"],
+            mimetype: node.mimetype,
             path : folderPath.join("/"),
             node : node
 			};
@@ -142,6 +143,7 @@ function getDocumentItem(siteId, containerId, pathParts, node) {
 				modifiedByUser : node.properties["cm:modifier"],
 				createdOn : node.properties["cm:created"],
 				createdByUser : node.properties["cm:creator"],
+            mimetype: node.mimetype,
             path : pathParts.join("/"),
             node : node
 			};
@@ -405,9 +407,9 @@ function getDataItem(siteId, containerId, pathParts, node) {
 			createdOn : node.properties["cm:created"],
 			createdByUser : node.properties["cm:creator"],
 			size : -1,
-         displayName : node.name,
+         displayName : node.name, 		// unfortunately does not have a common display name property
          node : node
-		// unfortunately does not have a common display name property
+
 		};
 		item.modifiedBy = getPersonDisplayName(item.modifiedByUser);
 		item.createdBy = getPersonDisplayName(item.createdByUser);
@@ -459,18 +461,33 @@ function getItem(siteId, containerId, pathParts, node) {
  * not match [2] = remaining part of the cm:name based path to the object - as
  * an array
  */
-function splitQNamePath(node) {
-	var path = node.qnamePath, displayPath = node.displayPath.split("/"), parts = null;
+function splitQNamePath(node, rootNodeDisplayPath, rootNodeQNamePath)
+{
+   var path = node.qnamePath,
+       displayPath = node.displayPath.split("/"),
+       parts = null;
+   
+   // restructure the display path of the node if we have an overriden root node
+   if (rootNodeDisplayPath != null && path.indexOf(rootNodeQNamePath) === 0)
+   {
+      var nodeDisplayPath = node.displayPath.split("/");
+      nodeDisplayPath = nodeDisplayPath.splice(rootNodeDisplayPath.length);
+      nodeDisplayPath.unshift("");
+      displayPath = nodeDisplayPath;
+   }
 
-	if (path.match("^" + SITES_SPACE_QNAME_PATH) == SITES_SPACE_QNAME_PATH) {
-		var tmp = path.substring(SITES_SPACE_QNAME_PATH.length), pos = tmp.indexOf('/');
-		if (pos >= 1) {
-			// site id is the cm:name for the site - we cannot use the encoded
-			// QName version
+   if (path.match("^"+SITES_SPACE_QNAME_PATH) == SITES_SPACE_QNAME_PATH)
+   {
+      var tmp = path.substring(SITES_SPACE_QNAME_PATH.length),
+          pos = tmp.indexOf('/');
+      if (pos >= 1)
+      {
+         // site id is the cm:name for the site - we cannot use the encoded QName version
 			var siteId = displayPath[3];
 			tmp = tmp.substring(pos + 1);
 			pos = tmp.indexOf('/');
-			if (pos >= 1) {
+         if (pos >= 1)
+         {
 				// strip container id from the path
 				var containerId = tmp.substring(0, pos);
 				containerId = containerId.substring(containerId.indexOf(":") + 1);
@@ -488,25 +505,36 @@ function splitQNamePath(node) {
  * 
  * @return the final search results object
  */
-function processResults(nodes, maxResults) {
+function processResults(nodes, maxResults, rootNode)
+{
 	// empty cache state
 	processedCache = {};
-	var results = [], added = 0, parts, item, failed = 0, i, j;
+   var results = [],
+      added = 0,
+      parts,
+      item,
+      failed = 0,
+      rootNodeDisplayPath = rootNode ? rootNode.displayPath.split("/") : null,
+      rootNodeQNamePath = rootNode ? rootNode.qnamePath : null;
 
 	if (logger.isLoggingEnabled())
 		logger.log("Processing resultset of length: " + nodes.length);
 
-	for (i = 0, j = nodes.length; i < j && added < maxResults; i++) {
+   for (var i = 0, j = nodes.length; i < j && added < maxResults; i++)
+   {
 		/**
-		 * For each node we extract the site/container qname path and then let
-		 * the per-container helper function decide what to do.
+       * For each node we extract the site/container qname path and then
+       * let the per-container helper function decide what to do.
 		 */
-		parts = splitQNamePath(nodes[i]);
+      parts = splitQNamePath(nodes[i], rootNodeDisplayPath, rootNodeQNamePath);
 		item = getItem(parts[0], parts[1], parts[2], nodes[i]);
-		if (item !== null) {
+      if (item !== null)
+      {
 			results.push(item);
 			added++;
-		} else {
+      }
+      else
+      {
 			failed++;
 		}
 	}
@@ -514,7 +542,8 @@ function processResults(nodes, maxResults) {
 	if (logger.isLoggingEnabled())
 		logger.log("Filtered resultset to length: " + results.length + ". Discarded item count: " + failed);
 
-	return ({
+   return (
+   {
 		items : results
 	});
 }
@@ -553,6 +582,106 @@ function escapeString(value) {
 }
 
 /**
+ * Helper method used to determine whether the property value is multi-valued.
+ *
+ * @param propValue the property value to test
+ * @param modePropValue the logical operand that should be used for multi-value property
+ * @return true if it is multi-valued, false otherwise
+ */
+function isMultiValueProperty(propValue, modePropValue)
+{
+   return modePropValue != null && propValue.indexOf(",") !== -1;
+}
+
+/**
+ * Helper method used to construct lucene query fragment for a multi-valued property.
+ *
+ * @param propName property name
+ * @param propValue property value (comma separated)
+ * @param operand logical operand that should be used
+ * @param pseudo is it a pseudo property
+ * @return lucene query with multi-valued property
+ */
+function processMultiValue(propName, propValue, operand, pseudo)
+{
+   var multiValue = propValue.split(","),
+       formQuery = "";
+   for (var i = 0; i < multiValue.length; i++)
+   {
+      if (i > 0)
+      {
+         formQuery += ' ' + operand + ' ';
+      }
+      
+      if (pseudo)
+      {
+         formQuery += '(cm:content.' + propName + ':"' + multiValue[i] + '")';
+      }
+      else
+      {
+         formQuery += '(' + escapeQName(propName) + ':"' + multiValue[i] + '")';
+      }
+   }
+   
+   return formQuery;
+}
+
+/**
+ * Resolve a root node reference to use as the Repository root for a search.
+ * 
+ * NOTE: see ParseArgs.resolveNode()
+ * 
+ * @method resolveRootNode
+ * @param reference {string} "virtual" nodeRef, nodeRef or xpath expressions
+ * @return {ScriptNode|null} Node corresponding to supplied expression. Returns null if node cannot be resolved.
+ */
+function resolveRootNode(reference)
+{
+   var node = null;
+   try
+   {
+      if (reference == "alfresco://company/home")
+      {
+         node = null;
+      }
+      else if (reference == "alfresco://user/home")
+      {
+         node = userhome;
+      }
+      else if (reference == "alfresco://sites/home")
+      {
+         node = companyhome.childrenByXPath("st:sites")[0];
+      }
+      else if (reference.indexOf("://") > 0)
+      {
+         if (reference.indexOf(":") < reference.indexOf("://"))
+         {
+            var newRef = "/" + reference.replace("://", "/");
+            var newRefNodes = search.xpathSearch(newRef);
+            node = search.findNode(String(newRefNodes[0].nodeRef));
+         }
+         else
+         {
+            node = search.findNode(reference);
+         }
+      }
+      else if (reference.substring(0, 1) == "/")
+      {
+         node = search.xpathSearch(reference)[0];
+      }
+      if (node === null)
+      {
+         logger.log("Unable to resolve specified root node reference: " + reference);
+      }
+   }
+   catch (e)
+   {
+      node = null;
+   }
+   return node;
+}
+
+/**
  * Return Search results with the given search terms. Patched and extended by
  * SIDE to enable advanced search with operator, fix sorting ... "or" is the
  * default operator, AND and NOT are also supported - as is any other valid
@@ -576,14 +705,14 @@ function getSearchResults(params) {
 
 function makeQueryFor(formJson, p, operator, first) {
 
-	// retrieve value and check there is someting to search for
+	// retrieve value and check there is something to search for
 	// currently all values are returned as strings
 
 	var formQuery = "";
 	if (operator != 'IGNORE') {
-		var propValue = formJson[p];
+		var propValue = formJson[p], modePropValue = formJson[p + "-mode"];
 		if (propValue != null && propValue.length !== 0) {
-			if (p.indexOf("prop_") === 0) {
+			if (p.indexOf("prop_") === 0 && p.match("-mode$") != "-mode") {
 				// found a property - is it namespace_propertyname or pseudo
 				// property format?
 				var propName = p.substr(5);
@@ -683,70 +812,67 @@ function makeQueryFor(formJson, p, operator, first) {
 							queryTerm = queryTerm.replace(new RegExp(notString, "g"), "NOT");
 
 						} else {
-							// normal propValue
-							// special case of enumeration value like v1,v2,v3
-							// must be
-							// converted in composed request
-							// we make the assumption that field other than
-							// cm:content
-							// with pattern like v1,v2 is enumeration
-							// the only sure test is to request the dictionary
-							// service
-							// about the field type this will degrade reponse
-							// time
+						   
+						   // propValue that contains ',' could be :
+						   // - normal property that contains ','
+						   // - a multivalued property (so request could include several value with operand 'or' or 'and'
+						   // - a simple property with constraints LIST (so several value can be selected and serialized in propvalue only operand 'or')
+						   
+						   // SIDE provide sidedictionary.isMultivalued and sidedictionary.haveListConstaint  
 
-							// so if field is not cm:content (cm:content is not
-							// an enum
-							// and can contains ',')
-							// value contains ',' but never match the regExp :
-							// "(, )|(
-							// ,)|( , )", we make the assumption that the field
-							// is a
-							// Enum value list
-
-							var isNotEnum = new RegExp("(, )|( ,)|( , )", "g");
-							var m = propValue.match(isNotEnum);
-							if (propValue.indexOf(",") != -1 && propName != "cm:content" && m == null) {
-							   var terms = propValue.split(",");
-                        // TODO : must use dictionary service to resolve isMultiple
-                        var isMultiple = false;
-                        for ( var tc = 0; tc < terms.length; tc++) {
-                           var cterm = terms[tc];
-                           var enumterm = propName + ':"' + cterm + '"';
-                           // two cases :
-                           // field with constraints LIST (Enumeration) simple value
-                           // field with constraints LIST (Enumeration) multiple value
-                           // the operator to use must be OR if simple value (because no results in this case)
-                           // if multiple value use the operator as is
-                           var enumOp = isMultiple ? operator : "OR";
-                           queryTerm += (tc == 0 ? '' : ' ' + enumOp + ' ') + enumterm;
-                        }
-                        queryTerm = addSubQueryParenthesis(queryTerm);
-							} else {
-								queryTerm = escapeQName(propName) + ':"' + propValue + '"';
-							}
-
+						   var containsComma = propValue.indexOf(",") != -1;
+						   
+						   if (containsComma) {
+						      var isMultiple = sidedictionary.isMultivalued(propName);
+						      var haveListConstaint = sidedictionary.haveListConstaint(propName);
+						      if (isMultiple || haveListConstaint) {
+	                        for ( var tc = 0; tc < terms.length; tc++) {
+	                           var cterm = terms[tc];
+	                           var enumterm = propName + ':"' + cterm + '"';
+	                           // the operator to use must be OR if simple value this implies that the property have LIST constraint (because no results in the other case)
+	                           // if multiple value use the given operator as is
+	                           var enumOp = isMultiple ? operator : "OR";
+	                           queryTerm += (tc == 0 ? '' : ' ' + enumOp + ' ') + enumterm;
+	                        }
+	                        queryTerm = addSubQueryParenthesis(queryTerm);
+						      } else {
+						         // provalue contains ',' but this is not a serialised value list
+						         queryTerm = escapeQName(propName) + ':"' + propValue + '"';
+						      }
+						   } else {
+						      // propvalue do not contains ','
+						      queryTerm = escapeQName(propName) + ':"' + propValue + '"';
+						   }
 						}
 						formQuery += (first ? '' : ' ' + operator + ' ') + queryTerm;
 
 					}
 				} else {
-					// pseudo cm:content property - e.g. mimetype, size or
-					// encoding
-					formQuery += (first ? '' : ' ' + operator + ' ') + 'cm:content.' + propName + ':"' + propValue + '"';
+				   if (isMultiValueProperty(propValue, modePropValue))
+               {
+                  // multi-valued pseudo cm:content property - e.g. mimetype, size or encoding
+                  formQuery += (first ? '(' : ' AND (');
+                  formQuery += processMultiValue(propName, propValue, modePropValue, true);
+                  formQuery += ')';
+               }
+               else
+               {
+                  // single pseudo cm:content property - e.g. mimetype, size or encoding
+                  formQuery += (first ? '' : ' AND ') + 'cm:content.' + propName + ':"' + propValue + '"';
+               }
 				}
 			} else if (p.indexOf("assoc_") === 0 && p.match("_added$") == "_added") {
 				var regexp = new RegExp("assoc_([^_]+)_(.*)_added");
-				var propName = '@' + escapeQName(p.replace(regexp, "$1:$2") + "search");
+				var propName_asso = '@' + escapeQName(p.replace(regexp, "$1:$2") + "search");
 				if (propValue.indexOf(',') != -1) {
 					var values = propValue.split(',');
 					formQuery += (first ? '' : ' ' + operator + ' ');
 					for ( var c = 0; c < values.length; c++) {
 						var value = values[c];
-						formQuery += propName + ':"' + values[c] + '"' + (c == values.length - 1 ? '' : ' ' + operator + ' ');
+						formQuery += propName_asso + ':"' + values[c] + '"' + (c == values.length - 1 ? '' : ' ' + operator + ' ');
 					}
 				} else {
-					formQuery += (first ? '' : ' ' + operator + ' ') + propName + ':"' + propValue + '"';
+					formQuery += (first ? '' : ' ' + operator + ' ') + propName_asso + ':"' + propValue + '"';
 				}
 			}
 		}
@@ -1097,24 +1223,25 @@ function getSearchDef(params) {
 			path = searchPath;
 			// interprate {site} token
          if (path.indexOf("{site}") != -1) {
-			if (params.siteId !== null && params.siteId.length > 0) {
-				path = path.replace(/\{site\}/, "cm:" + search.ISO9075Encode(params.siteId));
+				if (params.siteId !== null && params.siteId.length > 0) {
+					path = path.replace(/\{site\}/, "cm:" + search.ISO9075Encode(params.siteId));
             } else {
                path = path.replace(/\{site\}/, "*");
-			}
+				}
          }
 
 			if (getSearchSubdirectories(formJson)) {
 				path += "/";
 			}
 		}
-
-		if (path !== null) {
+		
+		if (params.repo && rootNode !== null) {
+         ftsQuery = 'PATH:"' + rootNode.qnamePath + '//*" AND (' + ftsQuery + ')';
+      } else if (path !== null) {
 			ftsQuery = 'PATH:"' + path + '/*" AND ' + addSubQueryParenthesis(ftsQuery);
 		}
 
 		ftsQuery = addSubQueryParenthesis(ftsQuery) + ' AND -TYPE:"cm:thumbnail" AND -TYPE:"cm:failedThumbnail" AND -TYPE:"cm:rating"';
-
 		ftsQuery = addSubQueryParenthesis(ftsQuery) + ' AND NOT ASPECT:"sys:hidden"';
 
 		// sort field - expecting field to in one of the following formats:
@@ -1122,14 +1249,14 @@ function getSearchDef(params) {
 		// - pseudo cm:content field starting with "." such as: .size
 		// - any other directly supported search field such as: TYPE
 		var sortColumns = [];
-		var sortParam = params.sort;
-		if (sortParam != null && sortParam.length != 0) {
-			var sort = sortParam;
+		var sort = params.sort;
+		if (sort != null && sort.length != 0) {
 			var asc = true;
 			var separator = sort.indexOf("|");
 			if (separator != -1) {
+				asc = (sort.substring(separator + 1) == "true");
 				sort = sort.substring(0, separator);
-				asc = (sortParam.substring(separator + 1) == "true");
+
 			}
 			var column;
 			if (sort.charAt(0) == '.') {
@@ -1149,7 +1276,7 @@ function getSearchDef(params) {
 		}
 
 		if (logger.isLoggingEnabled())
-			logger.log("Query:\r\n" + ftsQuery + "\r\nSortby: " + (sortParam != null ? sortParam : ""));
+         logger.log("Query:\r\n" + ftsQuery + "\r\nSortby: " + (sort != null ? sort : ""));
 
 		// perform fts-alfresco language query
 		var queryDef = {
@@ -1175,16 +1302,20 @@ function getSearchDef(params) {
 }
 
 /**
- * Return the fts-alfresco query template to use. The default searches name,
- * title, descripton, calendar, link, full text and tag fields. It is
- * configurable via the .config.xml attached to this webscript.
+ * Return the fts-alfresco query template to use.
+ * The default searches name, title, descripton, calendar, link, full text and tag fields.
+ * It is configurable via the .config.xml attached to this webscript.
  */
-function getQueryTemplate() {
-	var t = [ {
+function getQueryTemplate()
+{
+   var t =
+      [{
 		field : "keywords",
 		template : "%(cm:name cm:title cm:description ia:whatEvent ia:descriptionEvent lnk:title lnk:description TEXT TAG)"
-	} ], qt = new XML(config.script)["default-query-template"];
-	if (qt != null && qt.length != 0) {
+      }],
+      qt = new XML(config.script)["default-query-template"];
+   if (qt != null && qt.length() != 0)
+   {
 		t[0].template = qt.toString();
 	}
 	return t;

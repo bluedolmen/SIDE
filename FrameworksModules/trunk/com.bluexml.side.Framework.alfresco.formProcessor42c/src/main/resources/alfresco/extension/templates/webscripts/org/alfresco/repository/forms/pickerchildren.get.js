@@ -66,6 +66,7 @@ function main() {
 			var nodeRef = url.templateArgs.store_type + "://" + url.templateArgs.store_id + "/" + url.templateArgs.id;
 			// determine if we need to resolve the parent NodeRef
 
+			// SIDE improve test
 			if (argsXPath != null && argsXPath.match("[,\{]") == null && argsXPath.indexOf("://") == -1) {
 				// resolve the provided XPath to a NodeRef
 				var nodes = search.xpathSearch(argsXPath);
@@ -341,6 +342,10 @@ function sortByName(a, b) {
 	return (b.properties.name.toLowerCase() > a.properties.name.toLowerCase() ? -1 : 1);
 }
 
+/**
+ * SIDE add xpath filter
+ *
+ */
 function findUsers(searchTerm, maxResults, results, xpath) {
 	// construct query string
 	var query = '+TYPE:"cm:person"';
@@ -385,6 +390,10 @@ function findUsers(searchTerm, maxResults, results, xpath) {
 	}
 }
 
+/**
+ * SIDE add xpath filter
+ *
+ */
 function findGroups(searchTerm, maxResults, results, xpath) {
 	var searchTermPattern = "*";
 

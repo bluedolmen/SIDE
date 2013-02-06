@@ -331,7 +331,6 @@
             {
                fn: function AmSD__defaultDoBeforeSubmit()
                {
-                  this.widgets.okButton.set("disabled", true);
                   this.widgets.cancelButton.set("disabled", true);
                },
                scope: this
@@ -374,10 +373,9 @@
          // Make sure ok button is in the correct state if dialog is reused  
          if (this.isFormOwner)
          {
-            this.widgets.okButton.set("disabled", false);
             this.widgets.cancelButton.set("disabled", false);
          }
-         this.form.updateSubmitElements();
+         this.form.validate();
 
          this.dialog.show();
 
@@ -444,6 +442,7 @@
 
          if (this.options.destroyOnHide)
          {
+            // SIDE
             YAHOO.Bubbling.fire("formContainerDestroyed", this);
             YAHOO.Bubbling.unsubscribe("beforeFormRuntimeInit", this.onBeforeFormRuntimeInit, this);
             this.dialog.destroy();
@@ -518,11 +517,10 @@
             // Form definition
             this.isFormOwner = true;
             this.form = new Alfresco.forms.Form(this.id + "-form");
-            
+            // SIDE
             if (this.options.doBeforeFormSubmit) {
                this.form.doBeforeFormSubmit = this.options.doBeforeFormSubmit;
             }
-
             
             this.form.setSubmitElements(this.widgets.okButton);
             this.form.setAJAXSubmit(true,
@@ -539,7 +537,6 @@
                }
             });
             this.form.setSubmitAsJSON(true);
-            this.form.setShowSubmitStateDynamically(true, false);
 
             // Initialise the form
             this.form.init();
@@ -591,7 +588,7 @@
 	         });
 	         
 	         this.formsServiceDeferred.fulfil("onBeforeFormRuntimeInit");
-         }
+         } // SIDE
       },
 
       /**
@@ -659,10 +656,9 @@
          // Make sure ok button is in the correct state if dialog is reused
          if (this.isFormOwner)
          {
-            this.widgets.okButton.set("disabled", false);
             this.widgets.cancelButton.set("disabled", false);
          }
-         this.form.updateSubmitElements();
+         this.form.validate();
 
          // Invoke the callback if one was supplied
          if (typeof this.options.onFailure.fn == "function")

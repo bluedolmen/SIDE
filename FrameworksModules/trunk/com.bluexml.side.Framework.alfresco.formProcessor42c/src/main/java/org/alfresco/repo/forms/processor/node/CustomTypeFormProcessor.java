@@ -44,11 +44,12 @@ import org.apache.commons.logging.LogFactory;
 
 import com.bluexml.side.framework.alfresco.commons.configurations.SimplePropertiesConfiguration;
 import com.bluexml.side.framework.alfresco.formProcessor.CustomFormData;
+
 /**
  * SIDE Extension
  * Extends Original Alfresco code
+ * 
  * @author davidabad
- *
  */
 public class CustomTypeFormProcessor extends TypeFormProcessor {
 	private static Log logger = LogFactory.getLog(CustomTypeFormProcessor.class);
@@ -119,15 +120,14 @@ public class CustomTypeFormProcessor extends TypeFormProcessor {
 					InputStream inputStream = cfd.getInputStream();
 					try {
 						if (inputStream.available() > 0) {
-					ContentWriter writer = this.contentService.getWriter(nodeRef, ContentModel.PROP_CONTENT, true);
-					String mimetype = cfd.getMimetype();
-					logger.debug("write content in :" + nodeRef);
-					logger.debug("mimeType :" + mimetype);
-					logger.debug("encoding :" + writer.getEncoding());
+							ContentWriter writer = this.contentService.getWriter(nodeRef, ContentModel.PROP_CONTENT, true);
+							String mimetype = cfd.getMimetype();
+							logger.debug("write content in :" + nodeRef);
+							logger.debug("mimeType :" + mimetype);
+							logger.debug("encoding :" + writer.getEncoding());
 
-					writer.setMimetype(mimetype);
-
-					writer.putContent(inputStream);
+							writer.setMimetype(mimetype);
+							writer.putContent(inputStream);
 						}
 					} catch (InvalidTypeException e1) {
 						logger.error(e1);
@@ -238,38 +238,14 @@ public class CustomTypeFormProcessor extends TypeFormProcessor {
 				throw new FormException("Failed to persist form for '" + typeDef.getName().toPrefixString(this.namespaceService) + "' as '" + DESTINATION + "' data was not provided.");
 			}
 			// create the parent NodeRef
+			
+			// SIDE handle NodeRef and Xpath destination 
 			String destinationString = (String) destination.getValue();
-			//.matches("([^:]*)://([^/])/(.*)")
 			if (NodeRef.isNodeRef(destinationString)) {
 				// is nodeRef
 				parentRef = new NodeRef(destinationString);
 			} else {
-				// not nodeRef try to resolve the string
-				String regexp = "/([^:]*):([^/]*)";
-				String cleanPath = "";
-				Pattern p = Pattern.compile(regexp);
-				Matcher matcher = p.matcher(destinationString);
-				while (matcher.find()) {
-					String group1 = matcher.group(1);
-					String group2 = matcher.group(2);
-
-					cleanPath += "/" + group1 + ":" + ISO9075.encode(group2);
-				}
-				logger.debug("encoded destination XPath :" + cleanPath);
-
-				ResultSet results = searchService.query(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE, SearchService.LANGUAGE_XPATH, cleanPath);
-				List<NodeRef> nodeRefs = results.getNodeRefs();
-				if (nodeRefs.size() == 1) {
-					// ok
-					parentRef = nodeRefs.get(0);
-					if (!fileFolderService.getFileInfo(parentRef).isFolder()) {
-						// error
-						throw new FormException("the destination is not a folder, please check");
-					}
-				} else {
-					// error
-					throw new FormException("unable to convert destination path to nodeRef, please check");
-				}
+				parentRef = getDestinationNodeRefFromXPath(parentRef, destinationString);
 			}
 
 			// remove the destination data to avoid warning during persistence,
@@ -296,6 +272,7 @@ public class CustomTypeFormProcessor extends TypeFormProcessor {
 			}
 
 			if (nodeName == null || nodeName.length() == 0) {
+				// SIDE handle File upload and cm:name field
 				// no name found in fieldData, so search for a FileField
 				if (data instanceof CustomFormData) {
 					// search for file name in fields
@@ -322,7 +299,7 @@ public class CustomTypeFormProcessor extends TypeFormProcessor {
 				logger.debug("nodeName found in FormData :" + nodeName);
 			}
 
-			// test if file Exists
+			// SIDE handle File upload test if file Exists
 			NodeRef searchSimple = this.fileFolderService.searchSimple(parentRef, nodeName);
 			if (searchSimple != null) {
 				logger.debug("File exists continu with behavior :" + this.creationbehavior);
@@ -352,6 +329,36 @@ public class CustomTypeFormProcessor extends TypeFormProcessor {
 		return nodeRef;
 	}
 
+	protected NodeRef getDestinationNodeRefFromXPath(NodeRef parentRef, String destinationString) {
+		// not nodeRef try to resolve the string
+		String regexp = "/([^:]*):([^/]*)";
+		String cleanPath = "";
+		Pattern p = Pattern.compile(regexp);
+		Matcher matcher = p.matcher(destinationString);
+		while (matcher.find()) {
+			String group1 = matcher.group(1);
+			String group2 = matcher.group(2);
+
+			cleanPath += "/" + group1 + ":" + ISO9075.encode(group2);
+		}
+		logger.debug("encoded destination XPath :" + cleanPath);
+
+		ResultSet results = searchService.query(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE, SearchService.LANGUAGE_XPATH, cleanPath);
+		List<NodeRef> nodeRefs = results.getNodeRefs();
+		if (nodeRefs.size() == 1) {
+			// ok
+			parentRef = nodeRefs.get(0);
+			if (!fileFolderService.getFileInfo(parentRef).isFolder()) {
+				// error
+				throw new FormException("the destination is not a folder, please check");
+			}
+		} else {
+			// error
+			throw new FormException("unable to convert destination path to nodeRef, please check");
+		}
+		return parentRef;
+	}
+
 	protected NodeRef createNode(TypeDefinition typeDef, NodeRef parentRef, String nodeName) {
 		NodeRef nodeRef;
 		// create the node
@@ -362,89 +369,90 @@ public class CustomTypeFormProcessor extends TypeFormProcessor {
 		return nodeRef;
 	}
 
-	@Override
-	protected void processAssociationPersist(NodeRef nodeRef, Map<QName, AssociationDefinition> assocDefs, Map<QName, ChildAssociationDefinition> childAssocDefs, FieldData fieldData, List<org.alfresco.repo.forms.processor.node.AbstractAssocCommand> assocCommands) {
-		if (getLogger().isDebugEnabled())
-			getLogger().debug("Processing field " + fieldData + " for association persistence");
-
-		String fieldName = fieldData.getName();
-		Matcher m = this.associationNamePattern.matcher(fieldName.replaceAll(DOT_CHARACTER_REPLACEMENT, DOT_CHARACTER));
-		if (m.matches()) {
-			String qNamePrefix = m.group(1);
-			String localName = m.group(2);
-			String assocSuffix = m.group(3);
-
-			QName fullQName = QName.createQName(qNamePrefix, localName, namespaceService);
-
-			// ensure that the association being persisted is defined in the model
-			AssociationDefinition assocDef = assocDefs.get(fullQName);
-
-			// TODO: if the association is not defined on the node, check for the association
-			// in all models, however, the source of an association can be critical so we
-			// can't just look up the association in the model regardless. We need to
-			// either check the source class of the node and the assoc def match or we
-			// check that the association was defined as part of an aspect (where by it's
-			// nature can have any source type)
-
-			// SIDE : since forms and model are generated by SIDE we make the assertion that fields are valid, so no advanced validation are done
-			if (assocDef == null) {
-				if (getLogger().isDebugEnabled()) {
-					getLogger().debug("Field '" + fieldName + "' as an association definition can not be found in the current model");
-				}
-				assocDef = this.dictionaryService.getAssociation(fullQName);
-
-				if (assocDef == null) {
-					if (getLogger().isWarnEnabled()) {
-						getLogger().warn("Ignoring field '" + fieldName + "' as an association definition can not be found in ANY models ");
-					}
-					return;
-				} else {
-					if (getLogger().isDebugEnabled()) {
-						getLogger().debug("Field '" + fieldName + "' Found as an association definition in another model : " + assocDef.getModel().getName());
-					}
-				}
-			}
-
-			String value = (String) fieldData.getValue();
-			String[] nodeRefs = value.split(",");
-
-			// Each element in this array will be a new target node in association
-			// with the current node.
-			for (String nextTargetNode : nodeRefs) {
-				if (nextTargetNode.length() > 0) {
-					if (NodeRef.isNodeRef(nextTargetNode)) {
-						if (assocSuffix.equals(ASSOC_DATA_ADDED_SUFFIX)) {
-							if (assocDef.isChild()) {
-								assocCommands.add(new AddChildAssocCommand(nodeRef, new NodeRef(nextTargetNode), fullQName));
-							} else {
-								assocCommands.add(new AddAssocCommand(nodeRef, new NodeRef(nextTargetNode), fullQName));
-							}
-						} else if (assocSuffix.equals(ASSOC_DATA_REMOVED_SUFFIX)) {
-							if (assocDef.isChild()) {
-								assocCommands.add(new RemoveChildAssocCommand(nodeRef, new NodeRef(nextTargetNode), fullQName));
-							} else {
-								assocCommands.add(new RemoveAssocCommand(nodeRef, new NodeRef(nextTargetNode), fullQName));
-							}
-						} else {
-							if (getLogger().isWarnEnabled()) {
-								StringBuilder msg = new StringBuilder();
-								msg.append("Ignoring 'fieldName ").append(fieldName).append("' as it does not have one of the expected suffixes (").append(ASSOC_DATA_ADDED_SUFFIX).append(" or ").append(ASSOC_DATA_REMOVED_SUFFIX).append(")");
-								getLogger().warn(msg.toString());
-							}
-						}
-					} else {
-						if (getLogger().isWarnEnabled()) {
-							StringBuilder msg = new StringBuilder();
-							msg.append("targetNode ").append(nextTargetNode).append(" is not a valid NodeRef and has been ignored.");
-							getLogger().warn(msg.toString());
-						}
-					}
-				}
-			}
-		} else if (getLogger().isWarnEnabled()) {
-			getLogger().warn("Ignoring unrecognised field '" + fieldName + "'");
-		}
-	}
+	// CHECK WHAT IS THE SIDE IMPROVEMENT ?? 
+//	@Override
+//	protected void processAssociationPersist(NodeRef nodeRef, Map<QName, AssociationDefinition> assocDefs, Map<QName, ChildAssociationDefinition> childAssocDefs, FieldData fieldData, List<org.alfresco.repo.forms.processor.node.AbstractAssocCommand> assocCommands) {
+//		if (getLogger().isDebugEnabled())
+//			getLogger().debug("Processing field " + fieldData + " for association persistence");
+//
+//		String fieldName = fieldData.getName();
+//		Matcher m = this.associationNamePattern.matcher(fieldName.replaceAll(DOT_CHARACTER_REPLACEMENT, DOT_CHARACTER));
+//		if (m.matches()) {
+//			String qNamePrefix = m.group(1);
+//			String localName = m.group(2);
+//			String assocSuffix = m.group(3);
+//
+//			QName fullQName = QName.createQName(qNamePrefix, localName, namespaceService);
+//
+//			// ensure that the association being persisted is defined in the model
+//			AssociationDefinition assocDef = assocDefs.get(fullQName);
+//
+//			// TODO: if the association is not defined on the node, check for the association
+//			// in all models, however, the source of an association can be critical so we
+//			// can't just look up the association in the model regardless. We need to
+//			// either check the source class of the node and the assoc def match or we
+//			// check that the association was defined as part of an aspect (where by it's
+//			// nature can have any source type)
+//
+//			// SIDE : since forms and model are generated by SIDE we make the assertion that fields are valid, so no advanced validation are done
+//			if (assocDef == null) {
+//				if (getLogger().isDebugEnabled()) {
+//					getLogger().debug("Field '" + fieldName + "' as an association definition can not be found in the current model");
+//				}
+//				assocDef = this.dictionaryService.getAssociation(fullQName);
+//
+//				if (assocDef == null) {
+//					if (getLogger().isWarnEnabled()) {
+//						getLogger().warn("Ignoring field '" + fieldName + "' as an association definition can not be found in ANY models ");
+//					}
+//					return;
+//				} else {
+//					if (getLogger().isDebugEnabled()) {
+//						getLogger().debug("Field '" + fieldName + "' Found as an association definition in another model : " + assocDef.getModel().getName());
+//					}
+//				}
+//			}
+//
+//			String value = (String) fieldData.getValue();
+//			String[] nodeRefs = value.split(",");
+//
+//			// Each element in this array will be a new target node in association
+//			// with the current node.
+//			for (String nextTargetNode : nodeRefs) {
+//				if (nextTargetNode.length() > 0) {
+//					if (NodeRef.isNodeRef(nextTargetNode)) {
+//						if (assocSuffix.equals(ASSOC_DATA_ADDED_SUFFIX)) {
+//							if (assocDef.isChild()) {
+//								assocCommands.add(new AddChildAssocCommand(nodeRef, new NodeRef(nextTargetNode), fullQName));
+//							} else {
+//								assocCommands.add(new AddAssocCommand(nodeRef, new NodeRef(nextTargetNode), fullQName));
+//							}
+//						} else if (assocSuffix.equals(ASSOC_DATA_REMOVED_SUFFIX)) {
+//							if (assocDef.isChild()) {
+//								assocCommands.add(new RemoveChildAssocCommand(nodeRef, new NodeRef(nextTargetNode), fullQName));
+//							} else {
+//								assocCommands.add(new RemoveAssocCommand(nodeRef, new NodeRef(nextTargetNode), fullQName));
+//							}
+//						} else {
+//							if (getLogger().isWarnEnabled()) {
+//								StringBuilder msg = new StringBuilder();
+//								msg.append("Ignoring 'fieldName ").append(fieldName).append("' as it does not have one of the expected suffixes (").append(ASSOC_DATA_ADDED_SUFFIX).append(" or ").append(ASSOC_DATA_REMOVED_SUFFIX).append(")");
+//								getLogger().warn(msg.toString());
+//							}
+//						}
+//					} else {
+//						if (getLogger().isWarnEnabled()) {
+//							StringBuilder msg = new StringBuilder();
+//							msg.append("targetNode ").append(nextTargetNode).append(" is not a valid NodeRef and has been ignored.");
+//							getLogger().warn(msg.toString());
+//						}
+//					}
+//				}
+//			}
+//		} else if (getLogger().isWarnEnabled()) {
+//			getLogger().warn("Ignoring unrecognised field '" + fieldName + "'");
+//		}
+//	}
 
 	public enum CREATE_BEHAVIORS {
 		INCREMENT_NAME, OVERRIDE, FAIL

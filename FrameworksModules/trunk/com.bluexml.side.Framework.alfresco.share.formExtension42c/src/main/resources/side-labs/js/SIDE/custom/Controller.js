@@ -59,7 +59,6 @@ SIDE.custom.Controller.dispatch = function(htmlId) {
 }
 
 SIDE.custom.Controller.on = function(htmlId){
-	//http://kinedoc.org/Kinedoc-war/vues/img/aide.gif
 	var champCourant = dojo.byId(htmlId);
 	var img = dojo.create("img",{src:"/share/side-labs/css/img/aide.gif"},htmlId,"last");
 }

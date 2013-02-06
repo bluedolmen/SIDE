@@ -35,12 +35,4 @@
 		</property>
 	</bean>
 	
-	<bean id="OpenCMISDictionaryService" class="org.alfresco.opencmis.dictionary.CMISStrictDictionaryServiceFixed" >
-        <property name="cmisMapping"                  ref="OpenCMISMapping" />
-        <property name="dictionaryService"            ref="dictionaryService" />
-        <property name="dictionaryDAO"                ref="dictionaryDAO" />
-        <property name="tenantService"                ref="tenantService" />
-        <property name="propertyLuceneBuilderMapping" ref="OpenCMISPropertyLuceneBuilderMapping" />
-        <property name="propertyAccessorMapping"      ref="OpenCMISPropertyAccessorMapping" />
-    </bean>
 </beans>

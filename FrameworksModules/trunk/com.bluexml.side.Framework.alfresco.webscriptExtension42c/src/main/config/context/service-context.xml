@@ -74,6 +74,14 @@
 		<property name="serviceRegistry" ref="ServiceRegistry" />
 		<property name="siteService" ref="SiteService" />
 	</bean>
+	
+	<bean id="side.webscripts.js.dictionary" parent="baseJavaScriptExtension"
+		class="com.bluexml.side.framework.alfresco.webscriptExtension.DictionaryScriptExtension">
+		<property name="extensionName">
+			<value>sidedictionary</value>
+		</property>
+		<property name="serviceRegistry" ref="ServiceRegistry" />
+	</bean>
 
 
 </beans>

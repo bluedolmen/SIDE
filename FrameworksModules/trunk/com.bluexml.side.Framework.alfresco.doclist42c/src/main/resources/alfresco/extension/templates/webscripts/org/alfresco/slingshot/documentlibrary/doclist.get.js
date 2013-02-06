@@ -134,7 +134,7 @@ function getDoclist() {
                language : filterParams.language,
                page :
                {
-                  maxItems : (filterParams.limitResults ? parseInt(filterParams.limitResults, 10) : 0)
+               	maxItems: totalItemCount
                },
                sort : filterParams.sort,
                templates : filterParams.templates,
@@ -144,26 +144,51 @@ function getDoclist() {
          }
          logger.log("doclist queryDef :" + queryDef.toSource());
          allNodes = search.query(queryDef);
+         totalRecords = allNodes.length;
       }
    }
+   
+   if (logger.isLoggingEnabled())
+   logger.log("doclist.get.js - query results: " + allNodes.length);
+   // Generate the qname path match regex required for all sites 'documentLibrary' results match
+   var pathRegex;
+   if (allSites)
+   {
+      // escape the forward slash characters in the qname path
+      // TODO: replace with java.lang.String regex match for performance
+      var pathMatch = new String(parsedArgs.rootNode.qnamePath).replace(/\//g, '\\/') + "\\/.*\\/cm:documentLibrary\\/.*";
+      pathRegex = new RegExp(pathMatch, "gi");
+      if (logger.isLoggingEnabled())
+         logger.log("doclist.get.js - will match results using regex: " + pathMatch);
+   }
+   
    // Ensure folders and folderlinks appear at the top of the list
    var folderNodes = [], documentNodes = [];
 
-   for each(node in allNodes)
+   for each (node in allNodes)
    {
-      try
+      if (totalItemCount !== 0)
       {
-         if (node.isContainer || node.isLinkToContainer)
+         try
          {
-            folderNodes.push(node);
-         } else
-         {
-            documentNodes.push(node);
+            if (!allSites || node.qnamePath.match(pathRegex))
+            {
+               totalItemCount--;
+               if (node.isContainer || node.isLinkToContainer)
+               {
+                  folderNodes.push(node);
+               }
+               else
+               {
+                  documentNodes.push(node);
+               }
+            }
          }
-      } catch (e)
-      {
-         // Possibly an old indexed node - ignore it
-      }
+         catch (e)
+         {
+            // Possibly an old indexed node - ignore it
+         }
+      } else break;
    }
 
    // Node type counts
@@ -179,6 +204,9 @@ function getDoclist() {
       nodes = folderNodes.concat(documentNodes);
    }
 
+   if (logger.isLoggingEnabled())
+      logger.log("doclist.get.js - totalRecords: " + totalRecords);
+   
    // Pagination
    var pageSize = args.size || nodes.length, pagePos = args.pos || "1", startIndex = (pagePos - 1) * pageSize;
 
@@ -233,9 +261,8 @@ function getDoclist() {
                file : node.name
             };
          }
-         location.parent =
-         {};
-         if (node.parent != null && node.parent.hasPermission("Read"))
+         location.parent = {};
+         if (node.parent != null && node.parent.isContainer && node.parent.hasPermission("Read"))
          {
             location.parent.nodeRef = String(node.parent.nodeRef.toString());
          }
@@ -244,14 +271,25 @@ function getDoclist() {
          item.location = location;
 
          // Is our thumbnail type registered?
-         if (isThumbnailNameRegistered && item.node.isSubType("cm:content"))
+         var is = item.node.properties.content.inputStream;
+         try
          {
-            // Make sure we have a thumbnail.
-            thumbnail = item.node.getThumbnail(THUMBNAIL_NAME);
-            if (thumbnail === null)
+            if (isThumbnailNameRegistered && item.node.isSubType("cm:content") && (null != is))
             {
-               // No thumbnail, so queue creation
-               item.node.createThumbnail(THUMBNAIL_NAME, true);
+               // Make sure we have a thumbnail.
+               thumbnail = item.node.getThumbnail(THUMBNAIL_NAME);
+               if (thumbnail === null)
+               {
+                  // No thumbnail, so queue creation
+                  item.node.createThumbnail(THUMBNAIL_NAME, true);
+               }
+            }
+         }
+         finally
+         {
+            if (null != is)
+            {
+               is.close();
             }
          }
 
@@ -277,7 +315,7 @@ function getDoclist() {
     */
    for each(item in items)
    {
-      if (item.customObj.isWorkingCopy)
+      if (item.customObj && item.customObj.isWorkingCopy)
       {
          var workingCopyOriginal = String(item.customObj.workingCopyOriginal);
          for ( var i = 0, ii = items.length; i < ii; i++)

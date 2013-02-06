@@ -1476,12 +1476,21 @@
             arrItems = this.options.currentValue;
          }
 
+         // populate with previous if no value set
+         if (arrItems === "")
+         {
+            var arrItemsEl = Dom.get(this.currentValueHtmlId);
+            if (arrItemsEl != null)
+            {
+               arrItems = arrItemsEl.value;
+            }
+         }
+         
          var onSuccess = function ObjectFinder__loadSelectedItems_onSuccess(response)
          {
             var items = response.json.data.items,
                item;
             this.selectedItems = {};
-            //this.singleSelectedItem = null; 
 
             for (var i = 0, il = items.length; i < il; i++)
             {
@@ -2359,7 +2368,7 @@
        */
       getIconURL: function ObjectRenderer_getIconURL(item, size)
       {
-         return Alfresco.constants.URL_RESCONTEXT + 'components/images/filetypes/' + Alfresco.util.getFileIcon(item.name, item.type, size);
+         return Alfresco.constants.URL_RESCONTEXT + 'components/images/filetypes/' + Alfresco.util.getFileIcon(item.name, item.type, size, item.parentType);
       },
       
       /**
@@ -2378,6 +2387,10 @@
          {
             if (p_key.toLowerCase() == "icon")
             {
+               if (item.parentType == null && item.parent && item.parent.type)
+               {
+                  item.parentType = item.parent.type;
+               }
                return '<img src="' + me.getIconURL(item, iconSize) + '" width="' + iconSize + '" alt="' + $html(item.description) + '" title="' + $html(item.name) + '" />'; 
             }
             return $html(p_value);

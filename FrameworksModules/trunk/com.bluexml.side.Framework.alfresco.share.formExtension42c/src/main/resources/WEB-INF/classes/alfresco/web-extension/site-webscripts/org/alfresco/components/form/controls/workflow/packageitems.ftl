@@ -2,7 +2,12 @@
 
 <#macro setPackageItemOptions field>
 
-   <#local documentLinkResolver>function(item){ return Alfresco.util.siteURL("document-details?nodeRef=" + item.nodeRef, { site: item.site }); }</#local>
+   <#local documentLinkResolver>
+function(item)
+{
+   return item.isContainer ? Alfresco.util.siteURL("folder-details?nodeRef=" + item.nodeRef, { site: item.site }) : Alfresco.util.siteURL("document-details?nodeRef=" + item.nodeRef, { site: item.site });
+}
+   </#local>
    <#local allowAddAction = false>
    <#local allowRemoveAllAction = false>
    <#local allowRemoveAction = false>
@@ -40,9 +45,11 @@
       {
          showLinkToTarget: true,
          targetLinkTemplate: ${documentLinkResolver},         
-         <#if form.mode == "create" && form.destination?? && form.destination?length &gt; 0>
+      <#if form.mode == "create" && form.destination?? && form.destination?length &gt; 0>
          startLocation: "${form.destination?js_string}",
-         </#if>
+      <#elseif field.control.params.startLocation??>
+         startLocation: "${field.control.params.startLocation?js_string}",
+      </#if>
          itemType: "<#if field.control.params.itemType??>${field.control.params.itemType}<#else>sys:base</#if>",
          displayMode: "${field.control.params.displayMode!"list"}",
          listItemActions: [

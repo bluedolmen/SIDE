@@ -1,31 +1,40 @@
 <#assign workingCopyLabel = " " + message("coci_service.working_copy_label")>
 
+<#-- This function is used below to detect numerical property values of Infinity, -Infinity and NaN -->
+<#macro renderNumber value=0>
+<#if value?is_number>
+   <#if value?c == '\xfffd' || value?c == '\x221e' || value?c == '-\x221e'>0
+   <#else>${value?c}
+   </#if>
+</#if>
+</#macro>
+
 <#macro dateFormat date=""><#if date?is_date>${xmldate(date)}</#if></#macro>
 
 <#macro itemJSON item>
    <#escape x as jsonUtils.encodeJSONString(x)>
-      <#assign node = item.node>
-      <#assign version = "1.0">
-      <#if node.hasAspect("cm:versionable") && node.versionHistory?size != 0><#assign version = node.versionHistory[0].versionLabel></#if>
+      <#local node = item.node>
+      <#local version = "1.0">
+      <#if node.hasAspect("cm:versionable")><#local version = node.properties["cm:versionLabel"]!""></#if>
       <#if item.createdBy??>
-         <#assign createdBy = item.createdBy.displayName>
-         <#assign createdByUser = item.createdBy.userName>
+         <#local createdBy = item.createdBy.displayName>
+         <#local createdByUser = item.createdBy.userName>
       <#else>
-         <#assign createdBy="" createdByUser="">
+         <#local createdBy="" createdByUser="">
       </#if>
       <#if item.modifiedBy??>
-         <#assign modifiedBy = item.modifiedBy.displayName>
-         <#assign modifiedByUser = item.modifiedBy.userName>
+         <#local modifiedBy = item.modifiedBy.displayName>
+         <#local modifiedByUser = item.modifiedBy.userName>
       <#else>
-         <#assign modifiedBy="" modifiedByUser="">
+         <#local modifiedBy="" modifiedByUser="">
       </#if>
       <#if item.lockedBy??>
-         <#assign lockedBy = item.lockedBy.displayName>
-         <#assign lockedByUser = item.lockedBy.userName>
+         <#local lockedBy = item.lockedBy.displayName>
+         <#local lockedByUser = item.lockedBy.userName>
       <#else>
-         <#assign lockedBy="" lockedByUser="">
+         <#local lockedBy="" lockedByUser="">
       </#if>
-      <#assign tags><#list item.tags as tag>"${tag}"<#if tag_has_next>,</#if></#list></#assign>
+      <#local tags><#list item.tags as tag>"${tag}"<#if tag_has_next>,</#if></#list></#local>
    "nodeRef": "${node.nodeRef}",
    "nodeType": "${shortQName(node.type)}",
    "type": "${item.type}",
@@ -47,6 +56,13 @@
    "modifiedOn": "<@dateFormat node.properties.modified />",
    "modifiedBy": "${modifiedBy}",
    "modifiedByUser": "${modifiedByUser}",
+   <#if node.hasAspect("cm:thumbnailModification")>
+      <#list node.properties.lastThumbnailModification as thumbnailMod>
+         <#if thumbnailMod?contains("doclib")>
+   "lastThumbnailModification": "${thumbnailMod}",
+         </#if>
+      </#list>
+   </#if>
    "lockedBy": "${lockedBy}",
    "lockedByUser": "${lockedByUser}",
    "size": "${node.size?c}",
@@ -88,8 +104,8 @@
    },
    <#if node.hasAspect("cm:geographic")>"geolocation":
    {
-      "latitude": ${(node.properties["cm:latitude"]!0)?c},
-      "longitude": ${(node.properties["cm:longitude"]!0)?c}
+      "latitude": <@renderNumber node.properties["cm:latitude"] />,
+      "longitude": <@renderNumber node.properties["cm:longitude"] />
    },</#if>
    <#if node.hasAspect("audio:audio")>"audio":
    {
@@ -98,9 +114,9 @@
       "composer": "${node.properties["audio:composer"]!""}",
       "engineer": "${node.properties["audio:engineer"]!""}",
       "genre": "${node.properties["audio:genre"]!""}",
-      "trackNumber": ${(node.properties["audio:trackNumber"]!0)?c},
+      "trackNumber": <@renderNumber node.properties["audio:trackNumber"] />,
       "releaseDate": "<@dateFormat node.properties["audio:releaseDate"] />",
-      "sampleRate": ${(node.properties["audio:sampleRate"]!0)?c},
+      "sampleRate": <@renderNumber node.properties["audio:sampleRate"] />,
       "sampleType": "${node.properties["audio:sampleType"]!""}",
       "channelType": "${node.properties["audio:channelType"]!""}",
       "compressor": "${node.properties["audio:compressor"]!""}"
@@ -108,19 +124,19 @@
    <#if node.hasAspect("exif:exif")>"exif":
    {
       "dateTimeOriginal": "<@dateFormat node.properties["exif:dateTimeOriginal"] />",
-      "pixelXDimension": ${(node.properties["exif:pixelXDimension"]!0)?c},
-      "pixelYDimension": ${(node.properties["exif:pixelYDimension"]!0)?c},
-      "exposureTime": ${(node.properties["exif:exposureTime"]!0)?c},
-      "fNumber": ${(node.properties["exif:fNumber"]!0)?c},
+      "pixelXDimension": <@renderNumber node.properties["exif:pixelXDimension"] />,
+      "pixelYDimension": <@renderNumber node.properties["exif:pixelYDimension"] />,
+      "exposureTime": <@renderNumber node.properties["exif:exposureTime"] />,
+      "fNumber": <@renderNumber node.properties["exif:fNumber"] />,
       "flash": ${(node.properties["exif:flash"]!false)?string},
-      "focalLength": ${(node.properties["exif:focalLength"]!0)?c},
+      "focalLength": <@renderNumber node.properties["exif:focalLength"] />,
       "isoSpeedRatings": "${node.properties["exif:isoSpeedRatings"]!""}",
       "manufacturer": "${node.properties["exif:manufacturer"]!""}",
       "model": "${node.properties["exif:model"]!""}",
       "software": "${node.properties["exif:software"]!""}",
-      "orientation": ${(node.properties["exif:orientation"]!0)?c},
-      "xResolution": ${(node.properties["exif:xResolution"]!0)?c},
-      "yResolution": ${(node.properties["exif:yResolution"]!0)?c},
+      "orientation": <@renderNumber node.properties["exif:orientation"] />,
+      "xResolution": <@renderNumber node.properties["exif:xResolution"] />,
+      "yResolution": <@renderNumber node.properties["exif:yResolution"] />,
       "resolutionUnit": "${node.properties["exif:resolutionUnit"]!""}"
    },</#if>
    "permissions":

@@ -87,30 +87,31 @@
    </div>
 </#macro>   
 
+<#macro renderField field>
+	<@customizedRenderField field/>
+</#macro>
+
 <#macro customizedRenderField field>
    <@preRule field args.htmlid/>
-   <#if field.control?? && field.control.template?exists>
+   <#if field.control?? && field.control.template??>
+      <#assign fieldHtmlId=args.htmlid?js_string + "_" + field.id >
       <#include "${field.control.template}" />
    </#if>
    <@postRule field args.htmlid/>   
    <@postGenericRule field args.htmlid/>   
 </#macro>
 
-<#macro renderField field>
-	<@customizedRenderField field/>
-</#macro>
+
 
 <#macro renderSet set>
    <!-- SIDE.custom.Controller -->
    <#if (set.id != "")>
        <@renderRule "${args.htmlid}-${set.id}-pre" "SIDE.custom.Controller.onSet"/>
-	   <div id="${set.id?replace('.', '_')}" class="set">
+   <div id="${set.id?replace('.', '_')}" class="set">
    <#else>
        <@renderRule "${args.htmlid}-main-set-pre" "SIDE.custom.Controller.onSet"/>
-   	   <div class="set">
+   <div class="set">
    </#if>
-   
-   
    <#if set.appearance??>
       <#if set.appearance == "fieldset">
          <fieldset><legend>${set.label}</legend>
@@ -155,13 +156,13 @@
        <@renderRule "${args.htmlid}-${set.id}-post" "SIDE.custom.Controller.onSet"/>
    <#else>
        <@renderRule "${args.htmlid}-main-set-post" "SIDE.custom.Controller.onSet"/>
-   </#if></#macro>
+   </#if>
+</#macro>
 
 <#macro renderFieldHelp field>
    <#if field.help?? && field.help?length &gt; 0>
       <span class="help-icon">
-         <img id="${fieldHtmlId}-help-icon" src="${url.context}/res/components/form/images/help.png" title="${msg("form.field.help")}" 
-              onclick="javascript:Alfresco.util.toggleHelpText('${fieldHtmlId}-help');" tabindex="0"/>
+         <img id="${fieldHtmlId}-help-icon" src="${url.context}/res/components/form/images/help.png" title="${msg("form.field.help")}" tabindex="0"/>
       </span>
       <div class="help-text" id="${fieldHtmlId}-help">${field.help?html}</div>
    </#if>
