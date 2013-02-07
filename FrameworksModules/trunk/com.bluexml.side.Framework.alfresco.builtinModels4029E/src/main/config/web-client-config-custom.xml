@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<alfresco-config>
+
+	<config evaluator="string-compare" condition="Content Wizards">
+		<content-types>
+
+
+		</content-types>
+	</config>
+
+	<config evaluator="string-compare" condition="Space Wizards">
+		<folder-types>
+
+
+		</folder-types>
+	</config>
+
+	<config evaluator="string-compare" condition="Action Wizards">
+		<!-- The list of aspects to show in the add/remove features action -->
+		<!-- and the has-aspect condition -->
+		<aspects>
+			<aspect name="buildInLibraryAlfresco:HasTreeFilter" />
+			<aspect name="buildInLibraryAlfresco:TreeFilter" />
+
+
+		</aspects>
+
+		<!-- The list of types shown in the is-subtype condition -->
+		<subtypes>
+
+
+		</subtypes>
+
+		<!-- The list of content and/or folder types shown in the specialise-type 
+			action -->
+		<specialise-types>
+
+
+		</specialise-types>
+
+	</config>
+
+	<config evaluator="string-compare" condition="Advanced Search">
+		<advanced-search>
+			<content-types>
+
+
+			</content-types>
+			<custom-properties>
+				<meta-data aspect="buildInLibraryAlfresco:TreeFilter"
+					property="buildInLibraryAlfresco:TreeFilter_root" />
+
+
+			</custom-properties>
+		</advanced-search>
+	</config>
+
+	<config>
+		<client>
+			<simple-search-additional-attributes>
+
+
+			</simple-search-additional-attributes>
+		</client>
+	</config>
+
+	<config evaluator="string-compare" condition="Languages"
+		replace="true">
+		<languages>
+			<language locale="fr_FR">French</language>
+		</languages>
+	</config>
+
+
+
+
+
+	<config evaluator="aspect-name" condition="buildInLibraryAlfresco:HasTreeFilter">
+		<property-sheet>
+		</property-sheet>
+	</config>
+	<config evaluator="aspect-name" condition="buildInLibraryAlfresco:TreeFilter">
+		<property-sheet>
+			<show-property name="buildInLibraryAlfresco:TreeFilter_root" />
+		</property-sheet>
+	</config>
+
+	<config xmlns:xi="http://www.w3.org/2001/XInclude">
+		<actions>
+
+
+			<!-- <action id="edit_doc_details"> <permissions> <permission allow="true">Write</permission> 
+				</permissions> <label-id>edit</label-id> <image>/images/icons/edit_icon.gif</image> 
+				<action-listener>#{CreateTypeDialog.editProperties}</action-listener> <params> 
+				<param name="id">#{actionContext.id}</param> </params> </action> -->
+			<!-- bug 842 <action-group id="browse_create_menu"> </action-group> -->
+		</actions>
+
+		<dialogs>
+
+		</dialogs>
+	</config>
+
+
+</alfresco-config>
