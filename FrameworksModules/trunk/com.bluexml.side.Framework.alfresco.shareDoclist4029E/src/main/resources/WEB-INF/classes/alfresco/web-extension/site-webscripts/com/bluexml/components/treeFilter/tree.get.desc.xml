@@ -1,0 +1,24 @@
+<webscript>
+  <shortname>DocLib Tree</shortname>
+  <description><![CDATA[
+  	Document Library: Tree Component
+  	this component display a tree, selecting a node fire FilterChange event,
+  	document list update the contents using "metadata" filter type
+  
+  	see filters.lib.js > parseAdvancedSearch
+  	<ul>
+  		<li>{nodeType} : the QName of the node type</li>
+		<li>{assoType} : the association used to link parent to children</li>
+		<li>{nodeTypeDocument} : the type of document that refert to nodes</li>
+		<li>{assoTypeDocument} : the association used by document to refert to nodes</li>
+		<li>{selectableTypeIsAspect} : true if the nodeType and nodeTypeDocument is an Aspect</li> 
+		<li>{rootProperty} : the boolean property used to set a node as root</li>
+		<li>{rootName} : the root cm:name value</li>
+	</ul>
+	
+	you can used SIDE built-in model (buildInLibraryAlfresco) that includes Aspect usable with this filter
+	if you do not use built-in model you must setup component instance by setting <properties> in template instance
+  ]]>
+  </description>
+  <url>/components/filterTree?assoType={assoType}&amp;nodeType={nodeType}&amp;nodeTypeDocument={nodeTypeDocument}&amp;assoTypeDocument={assoTypeDocument}&amp;selectableTypeIsAspect={selectableTypeIsAspect}&amp;rootProperty={rootProperty}&amp;rootName={rootName}</url>
+</webscript>
