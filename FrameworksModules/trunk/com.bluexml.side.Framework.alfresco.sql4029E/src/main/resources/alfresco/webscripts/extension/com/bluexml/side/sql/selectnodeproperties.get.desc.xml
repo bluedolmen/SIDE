@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+    <shortname>SQL Search Service / Select Node Properties</shortname>
+    <description>This webscript is used to query the SQL replicate database retrieving a list of nodes that satisfies the given SQL constraint. The retrieved nodes are described with all their properties.</description>
+    <url>/sql/selectnodeproperties?type={type}&amp;where={where?}</url>
+    <format default="xml">argument</format>
+    <authentication>user</authentication>
+    <transaction>none</transaction>
+</webscript>
