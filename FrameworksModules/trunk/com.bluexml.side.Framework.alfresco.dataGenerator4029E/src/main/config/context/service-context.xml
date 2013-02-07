@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+<!--
+	Licensed to the Apache Software Foundation (ASF) under one or more
+	contributor license agreements.  See the NOTICE file distributed with
+	this work for additional information regarding copyright ownership.
+	The ASF licenses this file to You under the Apache License, Version 2.0
+	(the "License"); you may not use this file except in compliance with
+	the License.  You may obtain a copy of the License at
+	
+	http://www.apache.org/licenses/LICENSE-2.0
+	
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+	
+-->
+<beans>
+	<!-- context -->
+	
+	<bean id="springContext"
+		  class="com.bluexml.side.Framework.alfresco.dataGenerator.context.SpringContext" >
+	</bean>
+	
+	<bean id="pathReader"
+	      class="com.bluexml.side.Framework.alfresco.dataGenerator.context.PathReader">
+	</bean>
+
+	<!-- structure -->
+	  
+	<bean id="nativeAlfrescoModelStructure" 
+		  class="com.bluexml.side.Framework.alfresco.dataGenerator.structure.NativeAlfrescoModelStructure"
+		  init-method="init" />
+		  
+	<bean id="alfrescoModelStructure" 
+		  class="com.bluexml.side.Framework.alfresco.dataGenerator.structure.AlfrescoModelStructure">
+		<property name="nativeStructure" ref="nativeAlfrescoModelStructure" />
+	</bean> 
+	
+	<!-- dictionary -->
+	 
+	<bean id="alfrescoModelDictionary"
+		  class="com.bluexml.side.Framework.alfresco.dataGenerator.dictionary.AlfrescoModelDictionary" >
+		  <property name="dictionaryService" ref="dictionaryService" />
+		  <property name="alfrescoModelStructure" ref="alfrescoModelStructure" />
+		  <property name="pathReader" ref="pathReader"/>
+	</bean>
+	
+	<!-- generator -->
+	
+	<bean id="nativeInstance"
+		  class="com.bluexml.side.Framework.alfresco.dataGenerator.generator.NativeInstance" >
+		 <property name="generator" ref="nativeAlfrescoModelRandomDataGenerator" /> 
+	</bean>
+		  	
+	<bean id="instance"
+		  class="com.bluexml.side.Framework.alfresco.dataGenerator.generator.Instance" >
+		<property name="structure" ref="alfrescoModelStructure" />
+		<property name="alfrescoModelRandomGenerator" ref="alfrescoModelRandomGenerator" />
+		<property name="alfrescoModelDatasInstance" ref="alfrescoModelData" />
+		<property name="nativeInstance" ref="nativeInstance" /> 
+		<property name="services" ref="instanceServices" />
+	</bean>
+	
+	<bean id="instanceServices"
+		  class="com.bluexml.side.Framework.alfresco.dataGenerator.generator.InstanceServices" >
+		  <property name="alfrescoModelRandomGenerator" ref="alfrescoModelRandomGenerator" />
+	</bean>
+	
+	<bean id="nativeAlfrescoModelRandomDataGenerator"
+		  class="com.bluexml.side.Framework.alfresco.dataGenerator.generator.NativeAlfrescoModelRandomDataGenerator" >
+		  <property name="generator" ref="alfrescoModelRandomGenerator" />
+		  <property name="nativeAlfrescoStructure" ref="nativeAlfrescoModelStructure" />
+	</bean>
+	
+	<bean id="alfrescoModelRandomGenerator"
+		  class="com.bluexml.side.Framework.alfresco.dataGenerator.generator.AlfrescoModelRandomDataGenerator" >
+		 <property name="instance" ref="instance" />
+		 <property name="alfrescoModelDatas" ref="alfrescoModelData" /> 
+		 <property name="dictionary" ref="alfrescoModelDictionary" />
+		 <property name="service" ref="dictionaryService" />
+		 <property name="structure" ref="alfrescoModelStructure" />
+		 <property name="generatorServices" ref="dataGeneratorServices" />
+	</bean>
+	
+	<bean id="dataGeneratorServices"
+		  class="com.bluexml.side.Framework.alfresco.dataGenerator.generator.DataGeneratorServices" >
+		 <property name="generator" ref="alfrescoModelRandomGenerator" /> 
+	</bean>
+	
+	<!-- data -->
+
+	<bean id="alfrescoModelData"
+		  class="com.bluexml.side.Framework.alfresco.dataGenerator.data.AlfrescoModelData" >	  
+	</bean>
+	
+	<!-- serialization -->
+	
+	<bean id="XMLForACPMappingBuilder"
+		  class="com.bluexml.side.Framework.alfresco.dataGenerator.serialization.mapping.XMLForACPMappingBuilder" >
+		  <property name="helper" ref="XMLForACPMappingHelper" />
+		  <property name="alfrescoModelData" ref="alfrescoModelData" />
+	</bean>
+	
+	<bean id="XMLForACPMappingHelper"
+		  class="com.bluexml.side.Framework.alfresco.dataGenerator.serialization.mapping.XMLForACPMappingHelper" >
+		  <property name="builder" ref="XMLForACPMappingBuilder" />
+		  <property name="services" ref="XMLForACPMappingServices" />
+	</bean>
+	
+	<bean id="XMLForACPMappingServices"
+		  class="com.bluexml.side.Framework.alfresco.dataGenerator.serialization.mapping.XMLForACPMappingServices" >
+		  <property name="helper" ref="XMLForACPMappingHelper" />
+	</bean>
+	
+	<bean id="XMLForACPSerializer"
+		  class="com.bluexml.side.Framework.alfresco.dataGenerator.serialization.XMLForACPSerializer" >
+		  <property name="builder" ref="XMLForACPMappingBuilder" />
+	</bean>
+	
+	<bean id="acpPackaging"
+		  class="com.bluexml.side.Framework.alfresco.dataGenerator.serialization.ACPPackaging" >
+		<property name="xmlSerializer" ref="XMLForACPSerializer" />
+		<property name="nativeGenerator" ref="nativeAlfrescoModelRandomDataGenerator" />  
+	</bean>
+	
+	<!-- import -->
+	
+	<bean id="importACP" 
+		  class="com.bluexml.side.Framework.alfresco.dataGenerator.load.ImportACP" >
+		 <property name="services" ref="importACPServices" />
+		 <property name="fileFolderService" ref="fileFolderService" /> 
+		 <property name="serviceRegistry" ref="ServiceRegistry" />
+	</bean>
+	
+	<bean id="importACPServices"
+		  class="com.bluexml.side.Framework.alfresco.dataGenerator.load.ImportACPServices" >
+		  <property name="importer" ref="importACP" />
+		  <property name="serviceRegistry" ref="ServiceRegistry" />
+	</bean>
+	
+	<bean id="folderStructure"
+		  class="com.bluexml.side.Framework.alfresco.dataGenerator.load.FolderStructure" >
+		  <property name="service" ref="ServiceRegistry" />
+	</bean>
+			
+    <!-- webscripts -->
+    
+    <bean id="webscript.extension.com.bluexml.side.data.form.fillparameters.get"
+    	  class="com.bluexml.side.Framework.alfresco.dataGenerator.webscript.FillForm"
+    	  parent="webscript">
+    	  <property name="dictionaryService" ref="dictionaryService" />
+    </bean>
+    
+    <bean id="webscript.extension.com.bluexml.side.data.generate.generate.post"
+    	  class="com.bluexml.side.Framework.alfresco.dataGenerator.webscript.Generate"
+    	  parent="webscript">
+    	  <property name="alfrescoModelRandomGenerator" ref="alfrescoModelRandomGenerator" />
+    	  <property name="alfrescoModelDictionary" ref="alfrescoModelDictionary" />
+    	  <property name="XMLForACPSerializer" ref="XMLForACPSerializer" />
+    	  <property name="ACPPackaging" ref="acpPackaging" />
+    	  <property name="importACP" ref="importACP" />
+    	  <property name="nativeAlfrescoModelRandomDataGenerator" ref="nativeAlfrescoModelRandomDataGenerator" />
+    	  <property name="folderStructure" ref="folderStructure" />
+    </bean>
+</beans>
