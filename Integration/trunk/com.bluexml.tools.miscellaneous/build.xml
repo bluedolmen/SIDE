@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     3 déc. 2012 15:41:39                                                        
+
+     little tools    
+     a set of little tools
+                   
+     davidabad                                                                
+     ====================================================================== -->
+<project name="little tools" default="default">
+	<description>
+            a set of little tools
+    </description>
+	<property file="build.${user.name}.properties" />
+	<!-- ================================= 
+          target: default              
+         ================================= -->
+	<target name="default" depends="" description="a set of little tools">
+
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: patchJarFile                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="patchJarFile">
+		<antcall target="maven_install" />
+		<jar destfile="${basedir}/patchedJars" jarfile="${jar2patch}" update="true">
+			<fileset dir="${basedir}/target/classes" id="id">
+			</fileset>
+		</jar>
+	</target>
+
+	<target name="maven_install" depends="" description="do mvn install">
+		<maven basedir="${basedir}" options="" goal="clean" resultproperty="maven.build.result" />
+		<maven basedir="${basedir}" options="" goal="install" resultproperty="maven.build.result" />
+	</target>
+
+
+	<!-- ========
+			we do not use artifact: to avoid jvm termination error
+		 ======== -->
+	<macrodef name="maven">
+		<attribute name="options" default="" />
+		<attribute name="goal" />
+		<attribute name="basedir" />
+		<attribute name="resultproperty" default="maven.result" />
+		<element name="args" implicit="true" optional="true" />
+		<sequential>
+			<java classname="org.codehaus.classworlds.Launcher" fork="true" dir="@{basedir}" resultproperty="@{resultproperty}">
+				<jvmarg value="-Xmx512m" />
+				<classpath>
+					<fileset dir="${maven.home}/boot">
+						<include name="*.jar" />
+					</fileset>
+					<fileset dir="${maven.home}/lib">
+						<include name="*.jar" />
+					</fileset>
+				</classpath>
+				<sysproperty key="classworlds.conf" value="${maven.home}/bin/m2.conf" />
+				<sysproperty key="maven.home" value="${maven.home}" />
+				<arg line="--batch-mode @{options} @{goal}" />
+			</java>
+			<echo message="exit code : ${maven.build.result}" />
+		</sequential>
+	</macrodef>
+
+</project>
