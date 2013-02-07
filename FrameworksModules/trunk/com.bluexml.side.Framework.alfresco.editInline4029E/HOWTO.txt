@@ -1,0 +1,6 @@
+Pour générer un keystore :
+1) Placez vous dans le répertoire bin de votre dossier java.
+2) Exécutez cette commande: keytool -genkey -alias bxalfresccoilineedit -validity 1095
+3) Les mot de passes à saisir sont "secret" deux fois.
+4) Un fichier ".keystore" es généré dans votre dossier personnel.
+5) Vous pouvez le copier dans le répertoire "keystore" de ce projet.
