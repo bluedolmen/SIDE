@@ -74,7 +74,7 @@ public class DeployAll {
 		String repoSnapshotID = props.getProperty(repoSnapshotIDKey, "thirdpartysnapshot");
 
 		String classifier = StringUtils.trimToNull(props.getProperty(defaultClassifier));
-		
+
 		String profilesString = props.getProperty(profiles);
 		List<String> profiles = null;
 		if (profilesString != null && !profilesString.equals("")) {
@@ -110,36 +110,41 @@ public class DeployAll {
 					}
 
 					System.out.println("ArtifactId: " + artifactID + ", version: " + version + ", qualifier: " + qualifier);
-					String cl = "";
-					if (folderType.equals("pom")) {
-						// pom location
-						File pomHomes = new File(props.getProperty("pom.homes", "poms/maven"));
-						File pomFile = null;
-						// search folder with same artifactId
-						// could be in some subfolders
-						File artifactFolder = getArtifactFolder(pomHomes, artifactID).get(0);
-						FileFilter ff = new FileFilter() {
+					if (!"sources".equals(qualifier)) {
 
-							public boolean accept(File pathname) {
-								return pathname.getName().equals("pom.xml");
+						String cl = "";
+						if (folderType.equals("pom")) {
+							// pom location
+							File pomHomes = new File(props.getProperty("pom.homes", "poms/maven"));
+							File pomFile = null;
+							// search folder with same artifactId
+							// could be in some subfolders
+							File artifactFolder = getArtifactFolder(pomHomes, artifactID).get(0);
+							FileFilter ff = new FileFilter() {
+
+								public boolean accept(File pathname) {
+									return pathname.getName().equals("pom.xml");
+								}
+							};
+							File[] listFiles = artifactFolder.listFiles(ff);
+							if (listFiles.length == 1) {
+								pomFile = listFiles[0];
 							}
-						};
-						File[] listFiles = artifactFolder.listFiles(ff);
-						if (listFiles.length == 1) {
-							pomFile = listFiles[0];
+
+							if (pomFile != null) {
+								cl = buildCommandLineFromPom(repo, repoIdentifier, file, profiles, pomFile);
+							}
+
+						} else {
+
+							cl = buildCommandLine(repo, repoIdentifier, file, profiles, props.getProperty(defaultGroupId, artifactID), artifactID, version, artifactsType, classifier);
+
 						}
+						cl = "cd " + props.getProperty("project.home", ".") + ";\n" + cl;
 
-						if (pomFile != null) {
-							cl = buildCommandLineFromPom(repo, repoIdentifier, file, profiles, pomFile);
-						}
-
-					} else {
-
-						cl = buildCommandLine(repo, repoIdentifier, file, profiles, props.getProperty(defaultGroupId, artifactID), artifactID, version, artifactsType, classifier);
-
+						System.out.println(cl);
+						fw.write(cl);
 					}
-					System.out.println(cl);
-					fw.write(cl);
 				}
 
 			}
@@ -170,6 +175,10 @@ public class DeployAll {
 			parameters.put("classifier", classifier);
 		}
 
+		File sourceForArtifact = getSourceForArtifact(file);
+		if (sourceForArtifact.exists()) {
+			parameters.put("sources", sourceForArtifact.getAbsolutePath());
+		}
 		String options = " ";
 		for (Map.Entry<String, String> en : parameters.entrySet()) {
 			if (en.getValue() != null) {
@@ -232,6 +241,11 @@ public class DeployAll {
 			}
 		}
 		return lf;
+	}
+
+	public static File getSourceForArtifact(File artifact) {
+		String name = artifact.getName();
+		return new File(artifact.getParentFile(), name.replace(".jar", "-sources.jar"));
 	}
 
 }
