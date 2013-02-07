@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<component>
+   <scope>template</scope>
+   <region-id>formPortlet</region-id>
+   <source-id>standalonestartworkflow</source-id>
+   <url>/components/form?formId={formId}&amp;css={css}&amp;js={js}</url>
+   <properties>
+      <itemKind>workflow</itemKind>
+      <itemId>{itemId}</itemId>
+      <submitType>{submitType}</submitType>
+      <showCaption>true</showCaption>
+      <formUI>true</formUI>
+      <showCancelButton>true</showCancelButton>
+      <destination>{destination}</destination>
+      <mode>create</mode>
+   </properties>
+</component>

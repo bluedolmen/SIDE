@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<page>
+   	<title>standaloneeditform</title>
+   	<title-id>page.standaloneeditform.title</title-id>
+   	<description>SIDE Generated Portal Page</description>
+   	<description-id>page.standaloneeditform.description</description-id>
+   	<template-instance>standaloneeditform</template-instance>
+   	<authentication>user</authentication>
+</page>
