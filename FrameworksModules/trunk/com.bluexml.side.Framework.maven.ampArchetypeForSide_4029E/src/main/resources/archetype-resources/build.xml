@@ -1,0 +1,92 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<project xmlns:artifact="antlib:org.apache.maven.artifact.ant" name="${groupId}.${artifactId}" default="patchWebapps">
+	<property file="build.${symbol_dollar}{user.name}.properties" />
+	<property file="${symbol_dollar}{basedir}/../../../../build.${user.name}.properties" />
+	<property file="${symbol_dollar}{user.home}/build.properties" />
+	<path id="maven-ant-tasks.classpath" path="lib/maven-ant-tasks-2.1.3.jar" />
+	<typedef resource="org/apache/maven/artifact/ant/antlib.xml" uri="antlib:org.apache.maven.artifact.ant" classpathref="maven-ant-tasks.classpath" />
+	<artifact:pom id="mypom" file="pom.xml" />
+	<property name="moduleId" value="${symbol_dollar}{mypom.artifactId}" />
+
+	<!-- ================================= 
+          target: name              
+         ================================= -->
+	<target name="patchWebapps" depends="maven_install" description="build and install in local alfresco">
+		<echo message="==========" />
+		<echo message="patch the web application webapps.home=${symbol_dollar}{webapps.home}" />
+
+		<copy todir="${symbol_dollar}{webapps.home}/alfresco" overwrite="true" failonerror="false" verbose="true">
+			<fileset dir="target/${symbol_dollar}{moduleId}-${symbol_dollar}{mypom.version}/web" id="id">
+				<include name="**/**" />
+			</fileset>
+		</copy>
+		<copy todir="${symbol_dollar}{webapps.home}/alfresco/WEB-INF/classes" overwrite="true" failonerror="false" verbose="true">
+			<fileset dir="target/${symbol_dollar}{moduleId}-${symbol_dollar}{mypom.version}/config" id="id">
+				<include name="**/**" />
+			</fileset>
+		</copy>
+		<delete failonerror="false" verbose="true">
+			<fileset dir="${symbol_dollar}{webapps.home}/alfresco/WEB-INF/lib">
+				<include name="${symbol_dollar}{moduleId}-*.jar" />
+			</fileset>
+		</delete>
+		<copy todir="${symbol_dollar}{webapps.home}/alfresco/WEB-INF/lib" overwrite="true" failonerror="false" verbose="true">
+			<fileset dir="target/${symbol_dollar}{moduleId}-${symbol_dollar}{mypom.version}/lib" id="id">
+				<include name="**/**" />
+			</fileset>
+		</copy>
+
+		<copy todir="${symbol_dollar}{webapps.home}/alfresco/WEB-INF/classes/${symbol_dollar}{mypom.properties.config.target.path}" overwrite="true" failonerror="false" verbose="true">
+			<fileset dir="target/${symbol_dollar}{moduleId}-${symbol_dollar}{mypom.version}" id="id">
+				<include name="module.properties" />
+			</fileset>
+		</copy>
+		<echo message="==========" />
+		
+	</target>
+
+
+	<!-- ================================= 
+          target: name              
+         ================================= -->
+	<target name="maven_install" depends="" description="do mvn install">
+		<maven basedir="${symbol_dollar}{basedir}" options="" goal="clean" resultproperty="maven.build.result" />
+		<maven basedir="${symbol_dollar}{basedir}" options="-P public" goal="install" resultproperty="maven.build.result" />
+	</target>
+
+	<target name="maven_deploy" depends="" description="do mvn deploy">
+		<maven basedir="${symbol_dollar}{basedir}" options="" goal="clean" resultproperty="maven.build.result" />
+		<maven basedir="${symbol_dollar}{basedir}" options="-P public" goal="deploy" resultproperty="maven.build.result" />
+	</target>
+
+	<!-- ========
+		we do not use artifact: to avoid jvm termination error
+	 ======== -->
+	<macrodef name="maven">
+		<attribute name="options" default="" />
+		<attribute name="goal" />
+		<attribute name="basedir" />
+		<attribute name="resultproperty" default="maven.result" />
+		<element name="args" implicit="true" optional="true" />
+		<sequential>
+			<java classname="org.codehaus.classworlds.Launcher" fork="true" dir="@{basedir}" resultproperty="@{resultproperty}">
+				<jvmarg value="-Xmx512m" />
+				<classpath>
+					<fileset dir="${symbol_dollar}{maven.home}/boot">
+						<include name="*.jar" />
+					</fileset>
+					<fileset dir="${symbol_dollar}{maven.home}/lib">
+						<include name="*.jar" />
+					</fileset>
+				</classpath>
+				<sysproperty key="classworlds.conf" value="${symbol_dollar}{maven.home}/bin/m2.conf" />
+				<sysproperty key="maven.home" value="${symbol_dollar}{maven.home}" />
+				<arg line="--batch-mode @{options} @{goal}" />
+			</java>
+			<echo message="exit code : ${symbol_dollar}{maven.build.result}" />
+		</sequential>
+	</macrodef>
+
+</project>

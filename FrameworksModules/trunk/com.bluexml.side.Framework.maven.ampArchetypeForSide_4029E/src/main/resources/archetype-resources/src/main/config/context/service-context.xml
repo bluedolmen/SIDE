@@ -1,0 +1,20 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+<beans>
+    
+    <!-- A simple class that is initialized by Spring -->
+    <bean id="${symbol_dollar}{groupId}.${symbol_dollar}{artifactId}.exampleBean" class="com.sourcesense.demoamp.Demo" init-method="init" />
+    
+    <!-- A simple module component that will be executed once -->
+    <bean id="${symbol_dollar}{groupId}.${symbol_dollar}{artifactId}.exampleComponent" class="com.sourcesense.demoamp.DemoComponent" parent="module.baseComponent" >
+        <property name="moduleId" value="${symbol_dollar}{pom.groupId}.${symbol_dollar}{pom.artifactId}" />  <!-- See module.properties -->
+        <property name="name" value="exampleComponent" />
+        <property name="description" value="A demonstration component" />
+        <property name="sinceVersion" value="2.0" />
+        <property name="appliesFromVersion" value="2.0" />
+    </bean>
+    
+</beans>
