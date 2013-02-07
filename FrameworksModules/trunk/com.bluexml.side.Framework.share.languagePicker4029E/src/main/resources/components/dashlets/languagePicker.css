@@ -1,0 +1,25 @@
+a.languagePickerLink:hover
+{
+	text-decoration: none;
+}
+
+a.languagePickerLink:hover>div
+{
+	background-color: #FF8;
+}
+
+.languagePickerItem
+{
+	clear:both;
+	height:30px;
+	margin: 6px 0;
+	cursor: pointer;
+}
+
+.languagePickerItem>img
+{
+	height:30px;
+	width:30px;
+	margin: auto 6px;
+	vertical-align: middle;
+}
