@@ -7,11 +7,9 @@ public class GeneratorParameterContentProvider implements IStructuredContentProv
 
 	private GeneratorParameterDataStructure dataStructure;
 
-	public GeneratorParameterContentProvider(
-			GeneratorParameterDataStructure p_dataStructure) {
+	public GeneratorParameterContentProvider(GeneratorParameterDataStructure p_dataStructure) {
 		dataStructure = p_dataStructure;
 	}
-
 
 	public Object[] getElements(Object inputElement) {
 		if (dataStructure != null && dataStructure.getData() != null) {
@@ -19,7 +17,7 @@ public class GeneratorParameterContentProvider implements IStructuredContentProv
 		} else {
 			return null;
 		}
-			
+
 	}
 
 	public void setDataStructure(GeneratorParameterDataStructure dataStructure) {
@@ -27,11 +25,13 @@ public class GeneratorParameterContentProvider implements IStructuredContentProv
 	}
 
 	public void dispose() {
-		//nothing to do
+		// nothing to do
+		System.out.println("GeneratorParameterContentProvider.dispose()");
 	}
 
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-		//nothing to do
+		// nothing to do
+		System.out.println("GeneratorParameterContentProvider.inputChanged() oldInput" + oldInput + " newInput" + newInput);
 	}
 
 }

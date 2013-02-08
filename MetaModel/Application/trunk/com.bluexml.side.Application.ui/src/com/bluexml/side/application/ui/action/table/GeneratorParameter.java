@@ -42,43 +42,61 @@ public class GeneratorParameter implements Comparable<GeneratorParameter>, Resou
 		this.documentation = documentation;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.bluexml.side.application.ui.action.table.ResourceTableCellData#getKey()
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.bluexml.side.application.ui.action.table.ResourceTableCellData#getKey
+	 * ()
 	 */
 	public String getKey() {
 		return key;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.bluexml.side.application.ui.action.table.ResourceTableCellData#setKey(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.bluexml.side.application.ui.action.table.ResourceTableCellData#setKey
+	 * (java.lang.String)
 	 */
 	public void setKey(String key) {
 		this.key = key;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.bluexml.side.application.ui.action.table.ResourceTableCellData#getValue()
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.bluexml.side.application.ui.action.table.ResourceTableCellData#getValue
+	 * ()
 	 */
 	public String getValue() {
 		return value;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.bluexml.side.application.ui.action.table.ResourceTableCellData#setValue(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.bluexml.side.application.ui.action.table.ResourceTableCellData#setValue
+	 * (java.lang.String)
 	 */
 	public void setValue(String value) {
 		this.value = value;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.bluexml.side.application.ui.action.table.ResourceTableCellData#getLabel()
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.bluexml.side.application.ui.action.table.ResourceTableCellData#getLabel
+	 * ()
 	 */
 	public String getLabel() {
 		return label;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.bluexml.side.application.ui.action.table.ResourceTableCellData#setLabel(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.bluexml.side.application.ui.action.table.ResourceTableCellData#setLabel
+	 * (java.lang.String)
 	 */
 	public void setLabel(String label) {
 		this.label = label;
@@ -95,4 +113,10 @@ public class GeneratorParameter implements Comparable<GeneratorParameter>, Resou
 	public int compareTo(GeneratorParameter o) {
 		return label.compareTo(o.getLabel());
 	}
+
+	@Override
+	public String toString() {
+		return "{key :" + this.key + ", value :" + this.value + "}";
+	}
+
 }

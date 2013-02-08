@@ -82,4 +82,10 @@ public class GeneratorParameterDataStructure {
 		return result;
 	}
 
+	@Override
+	public String toString() {
+		String s = "data : " + data;
+		return s;
+	}
+
 }
