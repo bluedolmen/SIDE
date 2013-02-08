@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.core.labs.feature" label="SIDE Core Components" version="1.0.395.v43010-20130131" provider-name="blueXML">
+<feature id="com.bluexml.side.Common.core.labs.feature" label="SIDE Core Components" version="1.0.396.v43377-20130208" provider-name="blueXML">
   <description url="http://www.bluexml.com">SIDE MDA environment eases the development of extensions on specialized
 frameworks like Alfresco. This feature gathers common tools for
 SIDE modelers.</description>
@@ -625,15 +625,15 @@ Program, unless a warranty or assumption of liability accompanies a
 copy of the Program in return for a fee.
 
                      END OF TERMS AND CONDITIONS</license>
-  <includes id="com.bluexml.side.Application.feature" version="1.0.190.v41542-20121220" />
-  <includes id="com.bluexml.side.Class.modeler.feature" version="1.0.160.v41542-20121220" />
+  <includes id="com.bluexml.side.Application.feature" version="1.0.191.v43377-20130208" />
+  <includes id="com.bluexml.side.Class.modeler.feature" version="1.0.161.v43377-20130208" />
   <includes id="com.bluexml.side.Common.feature" version="1.0.56.v41542-20121220" />
-  <includes id="com.bluexml.side.Form.feature" version="1.0.168.v43010-20130131" />
+  <includes id="com.bluexml.side.Form.feature" version="1.0.169.v43377-20130208" />
   <includes id="com.bluexml.side.Portal.modeler.feature" version="1.0.72.v41542-20121220" />
   <includes id="com.bluexml.side.Requirements.feature" version="1.0.123.v41542-20121220" />
   <includes id="com.bluexml.side.View.feature" version="1.0.92.v41542-20121220" />
   <includes id="com.bluexml.side.Workflow.modeler.feature" version="1.0.115.v42185-20130103" />
-  <includes id="com.bluexml.side.Util.feature" version="1.0.333.v42425-20130111" />
+  <includes id="com.bluexml.side.Util.feature" version="1.0.334.v43377-20130208" />
   <includes id="com.bluexml.side.Deployer.documentation.feature" version="1.0.47.v41542-20121220" />
   <plugin id="com.bluexml.side.Integration.standAlone" download-size="0" install-size="0" version="1.0.56.v41542-20121220" unpack="false" />
   <plugin id="com.bluexml.side.Application.ui.newSIDEProject" download-size="0" install-size="0" version="1.0.11.v41542-20121220" unpack="false" />
