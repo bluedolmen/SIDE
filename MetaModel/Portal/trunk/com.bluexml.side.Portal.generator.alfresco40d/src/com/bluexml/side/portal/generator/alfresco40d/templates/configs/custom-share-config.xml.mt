@@ -9,7 +9,7 @@ import com.bluexml.side.portal.generator.alfresco40d.templates.configs.custom-sh
 
 <%script type="Portal" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 <alfresco-config>
-<%for (pageSet[ID.toLowerCase().trim() == "advsearch"].portlets.associationPortlet[name.toLowerCase().trim() == "search" && isPortletInternal != null]){%>
+<%for (pageSet[ID.toLowerCase().trim() == "advsearch"].portlets.associationPortlet[(name.toLowerCase().trim() == "search" || name.toLowerCase().trim() == "advsearch") && isPortletInternal != null]){%>
 	<config evaluator="string-compare" condition="AdvancedSearch"<%if (getFirstMetainfoValue("replace","false") == "true"){%> replace="true"<%}%>>
 		<advanced-search>
 			<!-- Forms for the advanced search type list -->
