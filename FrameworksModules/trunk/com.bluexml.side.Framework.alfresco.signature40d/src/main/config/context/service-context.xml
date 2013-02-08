@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- pdfsignature -->
+	<bean id="pdf-signature"
+		class="com.bluexml.side.Framework.alfresco.signature.repo.action.executer.PDFSignatureActionExecuter"
+		parent="action-executer">
+		<property name="serviceRegistry">
+			<ref bean="ServiceRegistry" />
+		</property>
+	</bean>
+	
+	<bean id="signature.helper"
+		class="com.bluexml.side.Framework.alfresco.signature.integration.SignatureHelper">
+		<property name="serviceRegistry" ref="ServiceRegistry" />
+		<property name="nodeService" ref="nodeService" />
+	</bean>
+</beans>
