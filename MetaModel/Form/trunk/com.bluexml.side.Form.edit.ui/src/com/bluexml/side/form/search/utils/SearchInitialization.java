@@ -214,6 +214,8 @@ public class SearchInitialization {
 	 * <p/>
 	 * Downgraded types: DateTime (to Date)
 	 * 
+	 * TODO : Look at initialization ClassForm field and do same here
+	 * 
 	 * @param att
 	 * @return
 	 */
@@ -256,6 +258,8 @@ public class SearchInitialization {
 			} else if (att.getTyp().equals(DataType.BYTE)) {
 				// Byte Field
 				field = FormFactory.eINSTANCE.createNumericalSearchField();
+			} else if (att.getTyp().equals(DataType.CUSTOM)) {
+				field = FormFactory.eINSTANCE.createCharSearchField();
 			} else if (att.getTyp().equals(DataType.OBJECT)) {
 				field = FormFactory.eINSTANCE.createCharSearchField();
 			} else {
