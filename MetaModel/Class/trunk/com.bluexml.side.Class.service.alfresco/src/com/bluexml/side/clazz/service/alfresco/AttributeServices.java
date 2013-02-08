@@ -148,7 +148,7 @@ public class AttributeServices {
 			}
 			// add none bijective mapping
 			m2.put(DataType.CHAR, Text);
-			m2.put(DataType.BYTE, Int);
+			m2.put(DataType.BYTE, Boolean);
 			m2.put(DataType.SHORT, Int);
 			m2.put(DataType.TIME, Datetime);
 
