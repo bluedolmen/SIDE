@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.alfresco.repo.action.executer.MailActionExecuter.URLHelper;
-import org.alfresco.repo.admin.SysAdminParams;
-import org.alfresco.repo.admin.SysAdminParamsImpl;
 import org.alfresco.repo.template.DateCompareMethod;
 import org.alfresco.repo.template.HasAspectMethod;
 import org.alfresco.repo.template.I18NMessageMethod;
