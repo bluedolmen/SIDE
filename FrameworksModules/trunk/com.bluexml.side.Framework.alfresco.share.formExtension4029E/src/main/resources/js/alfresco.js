@@ -644,6 +644,9 @@ Alfresco.util.getFileIcon = function(p_fileName, p_fileType, p_iconSize)
       "divx": "video",
       "doc": "doc",
       "docx": "doc",
+      "docm": "doc",
+      "dotx": "doc",
+      "dotm": "doc",
       "eml": "eml",
       "fla": "fla",
       "flv": "video",
@@ -676,7 +679,15 @@ Alfresco.util.getFileIcon = function(p_fileName, p_fileType, p_iconSize)
       "ppj": "ppj",
       "ppt": "ppt",
       "pptx": "ppt",
-      "psd": "psd",
+      "pptm": "ppt",
+      "ppsx": "ppt",
+      "ppsm": "ppt",
+      "potx": "ppt",
+      "potm": "ppt",
+      "ppam": "ppt",
+      "sldx": "ppt",
+      "sldm": "ppt",
+     "psd": "psd",
       "qt": "video",
       "rtf": "rtf",
       "snd": "audio",
@@ -690,6 +701,11 @@ Alfresco.util.getFileIcon = function(p_fileName, p_fileType, p_iconSize)
       "wmv": "video",
       "xls": "xls",
       "xlsx": "xls",
+      "xltx": "xls",
+      "xlsm": "xls",
+      "xltm": "xls",
+      "xlam": "xls",
+      "xlsb": "xls",
       "xml": "xml",
       "xvid": "video",
       "zip": "zip"
@@ -791,13 +807,22 @@ Alfresco.util.getScrollPosition = function()
  * Formats a Freemarker datetime into more UI-friendly format
  *
  * @method Alfresco.util.formatDate
- * @param date {string} Optional: Date as returned from data webscript. Today used if missing.
+ * @param date {string|Date} Optional: Date as ISO8601 compatible string or JavaScript Date Object. Today used if missing.
  * @param mask {string} Optional: Mask to use to override default.
  * @return {string} Date formatted for UI
  * @static
  */
 Alfresco.util.formatDate = function(date)
 {
+   if (YAHOO.lang.isString(date))
+   {
+      // if we've got a date as an ISO8601 string, convert to date Object before proceeding - otherwise pass it through
+      var dateObj = Alfresco.util.fromISO8601(date);
+      if (dateObj)
+      {
+         arguments[0] = dateObj;
+      }
+   }
    try
    {
       return Alfresco.thirdparty.dateFormat.apply(this, arguments);
@@ -932,6 +957,24 @@ Alfresco.util.toExplodedJSONDate = function(date)
 };
 
 /**
+ * Render relative dates on the client
+ *
+ * Converts all ISO8601 dates within the specified container to relative dates.
+ * (indicated by <span class="relativeTime">{date.iso8601}</span>)
+ *
+ * @method Alfresco.util.renderRelativeTime
+ * @param id {String} ID of HTML element containing
+ *
+ */
+Alfresco.util.renderRelativeTime = function(id)
+{
+   YAHOO.util.Dom.getElementsByClassName("relativeTime", "span", id , function()
+   {
+      this.innerHTML = Alfresco.util.relativeTime(this.innerHTML);
+   })
+}
+
+/**
  * Generate a relative time between two Date objects.
  * 
  * @method Alfresco.util.relativeTime
@@ -1018,38 +1061,102 @@ Alfresco.util.relativeTime = function(from, to)
 /**
  * Converts a date to a more user friendly date
  * 
- * @method Alfresco.util.friendlyDate
- * @param date {Date} - the date being converted
+ * @method Alfresco.util.relativeDate
+ * @param date {Date|String} - the date being converted
  * @param format {string} - the date format
+ * @param options {object} - overrides the default options.
  * @return {string} - the user friendly date
  */
-Alfresco.util.friendlyDate = function(date, format) 
+Alfresco.util.relativeDate = function(date, format, options)
 {
-   var $msg = Alfresco.util.message,
-      now = new Date(),
+   var $msg = Alfresco.util.message;
+
+   if (YAHOO.lang.isString(date))
+   {
+      date = Alfresco.util.fromISO8601(date);
+   }
+
+   if (YAHOO.lang.isObject(format))
+   {
+      options = format;
+      format = $msg("date-format.default");
+   }
+
+
+   var now = new Date(),
+      today = new Date(now.getTime()),
       dateFormat = Alfresco.thirdparty.dateFormat,
       dateMath = YAHOO.widget.DateMath,
       isoMask = Alfresco.thirdparty.dateFormat.masks.isoDate,
       isoDate = dateFormat(date, isoMask),
       isoToday = dateFormat(now, isoMask),
       isoYesterday = dateFormat(dateMath.add(now, dateMath.DAY, -1), isoMask),
-      isoTomorrow = dateFormat(dateMath.add(now, dateMath.DAY, 1), isoMask);
-      result = "";
-   
+      isoTomorrow = dateFormat(dateMath.add(now, dateMath.DAY, 1), isoMask),
+      result = "",
+      defaults =
+         {
+            // limit to just yesterday, today, tomorrow.
+            limit: false
+         };
+
+   options = options || {}
+   options = YAHOO.lang.augmentObject(options, defaults);
+
+   // reset time on today (ISO dates already ignore time)
+   today.setHours(0,0,0,0);
+
    switch(isoDate) 
    {
       case isoToday:
-         result = $msg("dateFormat.friendly.today");
+         result = $msg("relative.today");
          break;
       case isoYesterday:
-         result = $msg("dateFormat.friendly.yesterday");
+         result = $msg("relative.yesterday");
          break;
       case isoTomorrow:
-         result = $msg("dateFormat.friendly.tomorrow");
+         result = $msg("relative.tomorrow");
          break;
-      default:
-         result = dateFormat(date, format);
+   }
+   if (!options.limit && result === "")
+   {
+      var lastSunday = dateMath.add(now, dateMath.DAY, -now.getDay()),
+         sundayBeforeLast = dateMath.add(lastSunday, dateMath.DAY, -7),
+         nextSunday = dateMath.add(lastSunday, dateMath.DAY, +7),
+         sundayAfterNext = dateMath.add(lastSunday, dateMath.DAY, +7);
 
+      if (date < today && date > lastSunday)
+      {
+         // Earlier This week
+         result = $msg("relative.earlierThisWeek");
+      }
+      else if (date < lastSunday && date > sundayBeforeLast)
+      {
+         // Last week
+         result = $msg("relative.lastWeek");
+      }
+      else if (date > today && date < nextSunday)
+      {
+         // Later this week
+         result = $msg("relative.laterThisWeek");
+      }
+      else if (date > nextSunday && date < sundayAfterNext)
+      {
+         // Next Week
+         result = $msg("relative.nextWeek");
+      }
+      else if (options.olderDates && date < today)
+      {
+         result = options.olderDates;
+      }
+      else if (options.futureDates && date > today)
+      {
+         result = options.futureDates;
+      }
+      
+   }
+   if (result === "")
+   {
+      result = dateFormat(date, format)
    }
    return result;
 }
@@ -3341,6 +3448,9 @@ Alfresco.util.createInsituEditor = function(p_context, p_params, p_callback)
  */
 Alfresco.util.findEventClass = function(p_eventTarget, p_tagName)
 {
+   if (!p_eventTarget)
+      return null;
+   
    var src = p_eventTarget.element;
    var tagName = (p_tagName || "span").toLowerCase();
 
@@ -3831,7 +3941,14 @@ Alfresco.util.siteURL = function(pageURI, obj, absolute)
  */
 Alfresco.util.parseURL = function(url)
 {
-   var a = document.createElement("a");
+   var a = document.createElement("a"),
+      _sanitizedPathname = function(pathname)
+      {
+         // pathname MUST include leading slash (IE<9: this code is for you).
+         var prepend = (pathname.substring(0,1) === "/")? "" : "/";
+         return prepend + pathname;
+      };
+
    a.href = url;
    var urlObject = {
       // protocol includes trailing colon.
@@ -3840,12 +3957,10 @@ Alfresco.util.parseURL = function(url)
       port: a.port,
       // host = hostname:port
       host: a.host,
-      pathname: a.pathname,
+      pathname: _sanitizedPathname(a.pathname),
       // search and hash include question mark and hash symbol respectively
       search: a.search,
       hash: a.hash,
-      // url = protocol + "//" + host + pathname + search + hash
-      url: url,
       queryParams: Alfresco.util.getQueryStringParameters(url),
       getUrl: function()
       {
@@ -4704,6 +4819,26 @@ Alfresco.util.PopupManager = function()
          // Construct the YUI Dialog that will display the message
          var message = new YAHOO.widget.Dialog("message", dialogConfig);
 
+         // This method allows to stop animanions before destroy to avoid NPE
+         message.destroyWithAnimationsStop = function()
+         {
+            if (message._fadingIn || message._fadingOut)
+            {
+               if(message._cachedEffects && message._cachedEffects.length > 0)
+               {
+                  for(var i = 0; i < message._cachedEffects.length; i++)
+                  {
+                     var effect = message._cachedEffects[i];
+                     if (effect.animIn)
+                        effect.animIn.stop();
+                     if (effect.animOut)
+                        effect.animOut.stop();
+                  }
+               }
+            }
+            message.destroy();
+         }
+
          // Set the message that should be displayed
          var bd =  "<span class='" + c.spanClass + "'>" + (c.noEscape ? c.text : $html(c.text)) + "</span>";
          message.setBody(bd);
@@ -5468,7 +5603,7 @@ Alfresco.util.Ajax = function()
                   c.url += (c.url.indexOf("?") == -1 ? "?" : "&") + this.jsonToParamString(c.dataObj, true);
                }
             }
-            else
+            else if (c.method.toUpperCase() !== this.DELETE)
             {
                // If json is used encode the dataObj parameter and put it in the body
                c.dataStr = YAHOO.lang.JSON.stringify(c.dataObj || {});
@@ -5484,7 +5619,7 @@ Alfresco.util.Ajax = function()
                   // Encode the dataObj and put it in the url
                   c.url += (c.url.indexOf("?") == -1 ? "?" : "&") + this.jsonToParamString(c.dataObj, true);
                }
-               else
+               else if (c.method.toUpperCase() !== this.DELETE)
                {
                   // Enccode the dataObj and put it in the body
                   c.dataStr = this.jsonToParamString(c.dataObj, true);
@@ -5529,6 +5664,14 @@ Alfresco.util.Ajax = function()
             }
          }
 
+         // Add a noCache parameter to the URL to ensure that XHR requests are always made to the
+         // server. This is added to tackle a specific problem in IE where 304 responses are assumed
+         // for XHR requests. This has intentionally been conditionally added just for IE
+         if (YAHOO.env.ua.ie > 0)
+         {
+            c.url += (c.url.indexOf("?") == -1 ? "?" : "&") + "noCache=" + new Date().getTime();
+         }
+         
          // Make the request
          YAHOO.util.Connect.asyncRequest (c.method, c.url, callback, c.dataStr);
       },
@@ -6139,9 +6282,30 @@ Alfresco.util.Anim = function()
          if (el)
          {
             // Set outColor to existing backgroundColor
+            // Fix for ALF-12308 Stack specific: Script error when reply on a topic
+            // ColorAnim.parseColor() returns null for rgba(0, 0, 0, 0).
+            // Also IE and FF return "transparent" which cannot be parsed as well.
+            //debugger;
+            var rgbaRegexp = /^rgba\((\d+), (\d+), (\d+), (\d+)\)$/i,
+                transparent = /^transparent$/i,
+                outColor = YUIDom.getStyle(el, "backgroundColor");
+            if (rgbaRegexp.test(outColor))
+            {
+               var rgba = rgbaRegexp.exec(outColor);
+               // Check wether it's black
+               if (rgba[1] == 0 && rgba[2] == 0 && rgba[3] == 0 && rgba[4] == 0)
+                  outColor = "#fff";
+               else
+                  outColor = "rgb(" + rgba[1] + ", " + rgba[2] + ", " + rgba[3] + ")";
+            }
+            else if (transparent.test(outColor))
+            {
+               outColor = "#fff";
+            }
+            
             var attr = YAHOO.lang.merge(this.pulseAttributes,
             {
-               outColor: YUIDom.getStyle(el, "backgroundColor")
+               outColor: outColor
             });
             if (typeof p_attributes == "object")
             {
@@ -6377,6 +6541,10 @@ Alfresco.constants = YAHOO.lang.merge(Alfresco.constants || {},
          
          /* Properties */
          properties: properties,
+         hasProperty: function(property)
+         {
+            return properties.hasOwnProperty(property);
+         },
          
          /* Aspects */
          aspects: aspects,
@@ -6792,7 +6960,8 @@ Alfresco.thirdparty.fromISO8601 = function()
       //   formattedString:
       //      A string such as 2005-06-30T08:05:00-07:00 or 2005-06-30 or T08:05:00
 
-      var isoRegExp = /^(?:(\d{4})(?:-(\d{2})(?:-(\d{2}))?)?)?(?:T(\d{2}):(\d{2})(?::(\d{2})(.\d+)?)?((?:[+-](\d{2}):(\d{2}))|Z)?)?$/;
+      // Modified to parse ISO822 style timezone offsets: (0500 instead of 05:00), which are still valid but not previous supported
+      var isoRegExp = /^(?:(\d{4})(?:-(\d{2})(?:-(\d{2}))?)?)?(?:T(\d{2}):(\d{2})(?::(\d{2})(.\d+)?)?((?:[+-](\d{2}):?(\d{2}))|Z)?)?$/;
 
       return function(formattedString)
       {
@@ -7737,6 +7906,7 @@ Alfresco.util.RENDERLOOPSIZE = 25;
       // Decoupled event listeners
       YAHOO.Bubbling.on("filterChanged", this.onFilterChanged, this);
       YAHOO.Bubbling.on("deactivateAllControls", this.onDeactivateAllControls, this);
+      YAHOO.Bubbling.on("hideFilter", this.onHideFilter, this);
       
       return this;
    };
@@ -7836,14 +8006,19 @@ Alfresco.util.RENDERLOOPSIZE = 25;
                }
                
                var filterId = owner.className,
-                  filterData = anchor.rel;
+                  filterData = anchor.rel,
+                  filterObj =
+                  {
+                     filterOwner: me.name,
+                     filterId: filterId
+                  };
 
-               YAHOO.Bubbling.fire("changeFilter",
+               if (Alfresco.util.isValueSet(filterData))
                {
-                  filterOwner: me.name,
-                  filterId: filterId,
-                  filterData: filterData
-               });
+                  filterObj.filterData = filterData;
+               }
+
+               YAHOO.Bubbling.fire("changeFilter", filterObj);
 
                // If a function has been provided which corresponds to the filter Id, then call it
                if (typeof me[filterId] == "function")
@@ -7862,6 +8037,15 @@ Alfresco.util.RENDERLOOPSIZE = 25;
        * BUBBLING LIBRARY EVENT HANDLERS FOR PAGE EVENTS
        * Disconnected event handlers for inter-component event notification
        */
+
+      onHideFilter: function() 
+      {
+         var filters = YUISelector.query("a", this.id);
+         for (var i = 0, ii = filters.length; i < ii; i++)
+         {
+            YUIDom.addClass(filters[i], "hidden");
+         }
+      },
 
       /**
        * Fired when the currently active filter has changed
