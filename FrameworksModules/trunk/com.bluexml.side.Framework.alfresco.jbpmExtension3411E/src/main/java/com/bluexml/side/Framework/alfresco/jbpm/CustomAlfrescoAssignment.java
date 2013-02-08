@@ -74,6 +74,7 @@ public class CustomAlfrescoAssignment extends JBPMSpringAssignmentHandler {
         if (actor != null)
         {
             String actorValStr = actor.getTextTrim();
+            if (logger.isDebugEnabled()) logger.debug("actor "+actorValStr);
             if (actorValStr != null && actorValStr.length() > 0)
             {
                 if (actorValStr.startsWith("#{"))
@@ -117,8 +118,7 @@ public class CustomAlfrescoAssignment extends JBPMSpringAssignmentHandler {
         if (pooledactors != null)
         {
             String pooledactorValStr = pooledactors.getTextTrim();
-            if (logger.isDebugEnabled())
-                logger.debug("Pooled Actor "+pooledactorValStr);
+            if (logger.isDebugEnabled()) logger.debug("Pooled Actor "+pooledactorValStr);
             if (pooledactorValStr != null && pooledactorValStr.length() > 0)
             {
                 if (pooledactorValStr.startsWith("#{"))
@@ -236,12 +236,14 @@ public class CustomAlfrescoAssignment extends JBPMSpringAssignmentHandler {
         //
         if (assignedActor != null)
         {
+        	if (logger.isDebugEnabled()) logger.debug("Assign actor : "+assignedActor);
             assignable.setActorId(assignedActor);
         }
         if (assignedPooledActors != null)
         {
+        	if (logger.isDebugEnabled()) logger.debug("Assign pooled actor : "+assignedPooledActors.toString());
             assignable.setPooledActors(assignedPooledActors);
-        }
+        }        
     }
 
     
