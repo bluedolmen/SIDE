@@ -1,0 +1,303 @@
+Dim mesEtapes(0 To 49, 0 To 2) As Variant
+
+Private Sub Document_open()
+ chargerDonnes
+ For Each oStory In ActiveDocument.StoryRanges
+     Do
+         oStory.Fields.Update
+         Set oStory = oStory.Next
+     Loop Until oStory Is Nothing
+ Next
+End Sub
+Private Sub chargerDonnes()
+ Dim nbBookmark As Integer
+ Dim nameBookmark As String
+ Dim temp As Variant
+ Dim rang As Integer
+ 
+ CleanTable
+ 
+ nbBookmark = ActiveDocument.Bookmarks.Count
+ For intIndex = 1 To nbBookmark
+    nameBookmark = ActiveDocument.Bookmarks.Item(intIndex).Name
+    temp = Split(nameBookmark, "VisaEtape_")
+    If (UBound(temp) > 0) Then
+        'nameEtape = Split(temp(1), "_")
+            'If (UBound(nameEtape) > 0) Then
+                ChargerBookmark (nameBookmark)
+            'End If
+    End If
+ Next
+ UpdateTableByDate
+End Sub
+Private Sub ChargerBookmark(nameBookmark)
+    Dim mesProps(0 To 9, 0 To 1) As String
+    Dim monEtape(0 To 9, 0 To 1) As String
+    Dim nomEtape As Variant
+    Dim nbProperties As Integer
+    Dim nameProperties As String
+    Dim temp As Variant
+    Dim rang As Integer
+    Dim test As Boolean
+    Dim longPrecedent As Integer
+    
+    'Rcupre les donnes de l'tape en cours dans les customProperties.
+    rang = 0
+    nbProperties = ActiveDocument.CustomDocumentProperties.Count
+    For intIndex = 1 To nbProperties
+        nameProperties = ActiveDocument.CustomDocumentProperties.Item(intIndex).Name
+        temp = Split(nameProperties, nameBookmark + "_")
+        If (UBound(temp) > 0) Then
+            mesProps(rang, 0) = nameProperties
+            If (ActiveDocument.CustomDocumentProperties(nameProperties) <> "") Then
+                mesProps(rang, 1) = ActiveDocument.CustomDocumentProperties(nameProperties)
+                Else
+                    mesProps(rang, 1) = " "
+            End If
+        rang = rang + 1
+        End If
+    Next
+    
+    'Vrifie que les donnes ont toutes le mme nombre d'lment.
+    If (rang > 0) Then
+        test = True
+        longPrecedent = -1
+        For intIndex = 0 To rang - 1
+            If (longPrecedent = -1) Then
+                longPrecedent = UBound(Split(mesProps(intIndex, 1), ","))
+            Else
+                If (longPrecedent <> UBound(Split(mesProps(intIndex, 1), ","))) Then
+                    test = False
+                End If
+            End If
+        Next
+        
+        'Prpare les donnes par lot (une ligne du tableau = un lot) puis les remplit mesEtapes
+        If (test) Then
+            For intIndex = 0 To UBound(Split(mesProps(0, 1), ","))
+                For intIndex2 = 0 To rang - 1
+                    nomEtape = Split(mesProps(intIndex2, 0), "_")
+                    monEtape(intIndex2, 0) = nomEtape(UBound(nomEtape))
+                    monEtape(intIndex2, 1) = Split(mesProps(intIndex2, 1), ", ")(intIndex)
+                Next
+                UpdateMesEtapes monEtape, nomEtape(1), rang
+                'UpdateTable monEtape, nameBookmark, rang
+                ReDim nomEtape(0 To 10, 0 To 1) As String
+            Next
+        End If
+    End If
+    
+End Sub
+Private Sub UpdateBookmark(BookmarkToUpdate As String, TextToUse As String)
+ Dim BMRange As range
+ Set BMRange = ActiveDocument.Bookmarks(BookmarkToUpdate).range
+ BMRange.Text = TextToUse
+ ActiveDocument.Bookmarks.Add BookmarkToUpdate, BMRange
+End Sub
+Private Sub SupprimerPuces()
+    Dim maTable As Table
+    Dim maRow As range
+    Dim rowCount As Integer
+    Dim nbBookmark As Integer
+    Dim nameBookmark As String
+    Dim temp As Variant
+    Dim testLigne As Boolean
+    
+    nbBookmark = ActiveDocument.Bookmarks.Count
+    For intIndex = 1 To nbBookmark
+        nameBookmark = ActiveDocument.Bookmarks.Item(intIndex).Name
+        temp = Split(nameBookmark, "VisaEtape_")
+        If (UBound(temp) > 0) Then
+            Set maTable = ActiveDocument.Bookmarks.Item(nameBookmark).range.Tables(1)
+            Set maRow = ActiveDocument.Bookmarks.Item(nameBookmark).range.Rows(1).range
+            rowCount = ActiveDocument.Bookmarks.Item(nameBookmark).range.Rows(1).Cells.Count
+            For Index = rowCount To 2 Step -1
+                maRow.Cells(Index).range.Text = ""
+            Next
+            For intIndex2 = 1 To maTable.Rows.Count
+            testLigne = True
+                For bookmarkIndex = 1 To nbBookmark
+                    If (maTable.Rows(intIndex2).range = ActiveDocument.Bookmarks.Item(bookmarkIndex).range.Rows(1).range) Then
+                        testLigne = False
+                    End If
+                Next
+                If (testLigne) Then
+                    maTable.Rows(intIndex2).Delete
+                End If
+            Next
+        End If
+    Next
+End Sub
+Private Sub CleanTable()
+    Dim range As range
+    Dim maTable As Table
+    Dim maRow As range
+    
+    Set range = ActiveDocument.Bookmarks.Item("Visa").range
+    Set maTable = range.Tables(1)
+    Set maRow = range.Rows(1).range
+    
+    For intIndex2 = maTable.Rows.Count - 1 To 1 Step -1
+        maTable.Rows(intIndex2).Delete
+    Next
+    
+    rowCount = maRow.Cells.Count
+    For Index = rowCount To 1 Step -1
+        maRow.Cells(Index).range.Text = ""
+    Next
+    
+    
+    
+End Sub
+Private Sub UpdateMesEtapes(ByRef monEtape As Variant, ByRef nameBookmark As Variant, rang As Variant)
+ For intIndex = 0 To UBound(mesEtapes)
+    If (mesEtapes(intIndex, 0) = Empty) Then
+        mesEtapes(intIndex, 0) = nameBookmark
+        mesEtapes(intIndex, 1) = monEtape
+        mesEtapes(intIndex, 2) = rang
+        Exit Sub
+    End If
+ Next
+End Sub
+Private Sub UpdateTableByDate()
+ Dim earliestDate As Variant
+ Dim rang As Integer
+ Dim monEtape As Variant
+ 
+ Do
+    earliestDate = Empty
+    For intIndex = 0 To UBound(mesEtapes)
+
+       If (mesEtapes(intIndex, 0) <> Empty) Then
+        If (mesEtapes(intIndex, 1)(0, 1) <> " ") Then
+          If (earliestDate = Empty) Then
+              earliestDate = DateValue(getDate(mesEtapes(intIndex, 1), mesEtapes(intIndex, 2)))
+              rang = mesEtapes(intIndex, 2)
+              monEtape = mesEtapes(intIndex, 1)
+              monBookmark = mesEtapes(intIndex, 0)
+              Index = intIndex
+          Else
+               If (mesEtapes(intIndex, 1)(0, 1) <> " ") Then
+                   testDate = DateValue(getDate(mesEtapes(intIndex, 1), mesEtapes(intIndex, 2)))
+                   diff = DateDiff("y", earliestDate, testDate)
+                   If (diff < 0) Then
+                       earliestDate = testDate
+                       Index = intIndex
+                       rang = mesEtapes(intIndex, 2)
+                       monEtape = mesEtapes(intIndex, 1)
+                       monBookmark = mesEtapes(intIndex, 0)
+                   End If
+               End If
+            End If
+          End If
+       Else
+          If (mesEtapes(intIndex, 2) = Empty) Then
+              Exit For
+          End If
+       End If
+    Next
+    If (earliestDate <> Empty) Then
+        mesEtapes(Index, 0) = Empty
+        UpdateTable monEtape, monBookmark, rang
+    End If
+Loop While earliestDate <> Empty
+End Sub
+
+Private Function getDate(ByRef monEnsemble As Variant, ByVal limit As Integer) As String
+ Dim isDate As Variant
+ For intIndex = 0 To limit - 1
+    isDate = Split(monEnsemble(intIndex, 1), "/")
+    If (UBound(isDate) = 2) Then
+        getDate = monEnsemble(intIndex, 1)
+    End If
+ Next
+ If (getDate = Empty) Then
+    getDate = ""
+ End If
+End Function
+'Deprecated Used to sort table by visa
+Private Sub UpdateTable(ByRef monEtape As Variant, ByRef nameBookmark As Variant, rang As Variant)
+    Dim range As range
+    Dim test As Variant
+    Dim row As row
+    Dim visaName As String
+    Dim tempVisaName As Variant
+    Dim nameProp As String
+    Dim valueProp As String
+    
+    tempVisaName = Split(nameBookmark, "_")
+    visaName = tempVisaName(UBound(tempVisaName))
+    
+    If (monEtape(0, 1) <> "" And monEtape(0, 1) <> " ") Then
+        Set range = ActiveDocument.Bookmarks.Item("Visa").range
+        test = range.Rows(1).Cells(2).range.Text
+        If (test <> Chr(13) & Chr(7)) Then
+            Set row = range.Rows.Add
+            row.Cells(1).range.Text = UCase(visaName)
+            With ActiveDocument.Bookmarks
+                 .Add range:=row.Cells(1).range, Name:="Visa"
+                 .DefaultSorting = wdSortByName
+                 .ShowHidden = False
+            End With
+        Else
+            Set row = range.Rows(1)
+            row.Cells(1).range.Text = UCase(visaName)
+        End If
+        For intIndex = 0 To rang - 1
+            nameProp = monEtape(intIndex, 0)
+            valueProp = monEtape(intIndex, 1)
+            Select Case nameProp
+                Case Is = ActiveDocument.CustomDocumentProperties("colonne1")
+                    row.Cells(2).range.Text = valueProp
+                Case Is = ActiveDocument.CustomDocumentProperties("colonne2")
+                    row.Cells(3).range.Text = valueProp
+                Case Is = ActiveDocument.CustomDocumentProperties("colonne3")
+                    row.Cells(4).range.Text = valueProp
+                Case Is = ActiveDocument.CustomDocumentProperties("colonne4")
+                    row.Cells(5).range.Text = valueProp
+                Case Is = ActiveDocument.CustomDocumentProperties("colonne5")
+                    row.Cells(6).range.Text = valueProp
+                Case Is = ActiveDocument.CustomDocumentProperties("colonne6")
+                    row.Cells(7).range.Text = valueProp
+                Case Is = ActiveDocument.CustomDocumentProperties("colonne7")
+                    row.Cells(8).range.Text = valueProp
+                Case Is = ActiveDocument.CustomDocumentProperties("colonne8")
+                    row.Cells(9).range.Text = valueProp
+                Case Is = ActiveDocument.CustomDocumentProperties("colonne9")
+                    row.Cells(10).range.Text = valueProp
+                Case Is = ActiveDocument.CustomDocumentProperties("colonne10")
+                    row.Cells(11).range.Text = valueProp
+            End Select
+        Next
+    End If
+End Sub
+'Deprecated
+Private Sub UpdateTableau(typeVisa As String, nom As String, dateVisa As String, functionVisa As String, visa As String)
+    If (nom <> "" And nom <> " ") Then
+        Dim test As String
+        Dim range As range
+        Dim row As row
+        Set range = ActiveDocument.Bookmarks.Item(typeVisa).range
+        
+        test = ActiveDocument.Bookmarks.Item(typeVisa).range.Rows(1).Cells(5).range.Words.Item(1).Text
+        If (test = "Accepte" Or test = "Refuse") Then
+            Set row = range.Rows.Add
+            row.Cells(1).range.Text = UCase(typeVisa)
+            With ActiveDocument.Bookmarks
+                 .Add range:=row.Cells(1).range, Name:=typeVisa
+                 .DefaultSorting = wdSortByName
+                 .ShowHidden = False
+            End With
+            row.Cells(5).range.Text = visa
+            row.Cells(4).range.Text = dateVisa
+            row.Cells(3).range.Text = functionVisa
+            row.Cells(2).range.Text = nom
+        Else
+            Set row = range.Rows(1)
+            row.Cells(5).range.Text = visa
+            row.Cells(4).range.Text = dateVisa
+            row.Cells(3).range.Text = functionVisa
+            row.Cells(2).range.Text = nom
+        End If
+    End If
+End Sub
