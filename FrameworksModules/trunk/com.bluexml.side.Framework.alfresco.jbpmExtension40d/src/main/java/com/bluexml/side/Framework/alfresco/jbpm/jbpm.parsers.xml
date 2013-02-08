@@ -1,0 +1,4 @@
+<parsers>
+  <parser class="com.bluexml.side.Framework.alfresco.jbpm.CustomJBPMJpdlArchiveParser" />
+  <parser class="org.jbpm.jpdl.par.FileArchiveParser" />
+</parsers>
