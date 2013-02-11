@@ -52,10 +52,11 @@
    <element name="modelLibrary">
       <complexType>
          <sequence>
+            <element ref="moduleDependence" minOccurs="0" maxOccurs="unbounded"/>
             <element ref="generatorVersion" minOccurs="0" maxOccurs="unbounded"/>
             <element ref="deployerVersion" minOccurs="0" maxOccurs="unbounded"/>
          </sequence>
-         <attribute name="label" type="string">
+         <attribute name="label" type="string" use="required">
             <annotation>
                <documentation>
                   
