@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
-<product name="SIDE Enterprise" uid="sideEnterprise" id="com.bluexml.side.Integration.eclipse.branding.enterprise.product" application="org.eclipse.ui.ide.workbench" version="1.0.943" useFeatures="true" includeLaunchers="true">
+<product name="SIDE Enterprise" uid="sideEnterprise" id="com.bluexml.side.Integration.eclipse.branding.enterprise.product" application="org.eclipse.ui.ide.workbench" version="1.0.944" useFeatures="true" includeLaunchers="true">
   <aboutInfo>
     <image path="icons/about.gif" />
     <text>SIDE by http://www.bluexml.com</text>
@@ -350,8 +350,8 @@
     <feature id="org.eclipse.platform" version="3.7.0.v20110530-9gF7UHNFFt4cwE-pkZDJ7oz-mj4OSEIlu9SEv0f" />
     <feature id="com.bluexml.side.Integration.eclipse.dependencies.feature" version="1.0.4.v41542-20121220" />
     <feature id="org.eclipse.m2e.feature" version="1.0.0.20110607-2117" />
-    <feature id="com.bluexml.side.Common.core.enterprise.feature" version="1.0.906.v43507-20130210" />
-    <feature id="com.bluexml.side.Common.forAlfresco.enterprise.feature" version="1.0.702.v43377-20130208" />
+    <feature id="com.bluexml.side.Common.core.enterprise.feature" version="1.0.907.v43557-20130211" />
+    <feature id="com.bluexml.side.Common.forAlfresco.enterprise.feature" version="1.0.703.v43557-20130211" />
   </features>
   <configurations>
     <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="4" />
