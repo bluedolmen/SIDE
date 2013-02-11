@@ -1,0 +1,25 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SIDE View Generator for Alfresco 4.0.d
+Bundle-SymbolicName: com.bluexml.side.View.generator.alfresco4029E;singleton:=true
+Bundle-Version: 1.0.5.v43377-20130208
+Bundle-Activator: com.bluexml.side.view.generator.alfresco4029E.Activator
+Bundle-Vendor: BLUEXML
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ com.bluexml.side.Application,
+ com.bluexml.side.View,
+ com.bluexml.side.View.generator.alfresco,
+ com.bluexml.side.Util.generator,
+ com.bluexml.side.Util.generator.acceleo,
+ com.bluexml.side.Util.generator.alfresco,
+ com.bluexml.side.Util.security,
+ com.bluexml.side.Class.service.alfresco,
+ com.bluexml.side.Util.libs,
+ com.bluexml.side.Util.componentMonitor,
+ com.bluexml.side.Util.dependencies,
+ com.bluexml.side.View.generator.alfresco34d,
+ com.bluexml.side.View.generator.alfresco40d
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
