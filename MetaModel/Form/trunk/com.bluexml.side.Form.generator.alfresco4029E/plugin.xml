@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+  <extension point="com.bluexml.side.Application.com_bluexml_application_configuration">
+    <metamodel description="Check this to generate form models on leading frameworks.&lt;br&gt; This Form Metamodel allows to model Web Forms to integrate in your web application or web framework customizations.&lt;br&gt;SIDE provides the modeler to graphically produce form models and various generators to instantiate these models on leading frameworks." id="http://www.kerblue.org/form/1.0" name="KSR400 Form" url="http://www.kerblue.org/form/1.0">
+      <technology description="Check this to generate on the Alfresco product line.&lt;br&gt;Alfresco is the leading open source ECM solution.&lt;br&gt;SIDE allows to optimize the configuration of the Alfresco content model, views, forms and reports." id="alfresco" name="Alfresco" url="http://www.alfresco.com">
+        <technologyVersion description="Check this to generate on the major release 3.4 of Alfresco.&lt;br&gt;Alfresco 3.4.d is the leading open source collaborative ECM solution.&lt;br&gt;Additionally to content generation, SIDE provides useful server components to enhance some features of this release." id="alfresco_4029E" version="Alfresco 4.0.2.9 Enterprise">
+          <generatorVersion class="com.bluexml.side.form.generator.alfresco4029E.FormGenerator4029E" description="This generator generate configuration from Forms Models for Alfresco Share" hidden="visible" id="com.bluexml.side.Form.generator.alfresco4029E" version="Alfresco Share Forms Generator">
+            <configurationParameter dataType="String" defaultValue="1.0" key="com.bluexml.side.Form.generator.alfresco4029E.module.version" label="Form Module version" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.share.formExtension4029E" moduleType="zip" technologyVersion="alfresco_4029E" versionMax="1.0.41" versionMin="1.0.41" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.sharePortalExtension4029E" moduleType="zip" technologyVersion="alfresco_4029E" versionMax="1.0.5" versionMin="1.0.5" />
+            <option defaultOption="true" documentation="this must be hidden" hidden="true" key="generator.main" label="main generation" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.share.Inputex" moduleType="zip" technologyVersion="alfresco_4029E" versionMax="1.0.6" versionMin="1.0.6" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.share.autoConnect4029E" moduleType="zip" technologyVersion="alfresco_4029E" versionMax="1.0.7" versionMin="1.0.7" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.formProcessor4029E" moduleType="amp" technologyVersion="alfresco_4029E" versionMax="1.0.37" versionMin="1.0.37" />
+          </generatorVersion>
+        </technologyVersion>
+      </technology>
+    </metamodel>
+  </extension>
+</plugin>
+
