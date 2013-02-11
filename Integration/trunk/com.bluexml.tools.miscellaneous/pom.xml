@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.bluexml.tools</groupId>
   <artifactId>miscellaneous</artifactId>
-  <version>0.0.2</version>
+  <version>0.0.3</version>
   <description>project that provide miscellaneous tools to quickly do some litle job</description>
   <dependencies>
     <dependency>
