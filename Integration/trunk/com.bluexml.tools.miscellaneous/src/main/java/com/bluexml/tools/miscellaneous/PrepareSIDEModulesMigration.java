@@ -13,8 +13,11 @@ import java.util.regex.Pattern;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.IOFileFilter;
 import org.apache.commons.io.filefilter.TrueFileFilter;
+import org.apache.commons.lang.StringUtils;
 
 public class PrepareSIDEModulesMigration {
+
+	private static final String MIGRATION_FOLDER = "migrationFolder";
 
 	/**
 	 * @param args
@@ -63,14 +66,34 @@ public class PrepareSIDEModulesMigration {
 
 		File workspaceFile = new File(workspace);
 
-		File frameworkmodulesPathFile = new File(frameworkmodulesPath);
-
 		final String versionInProjectName = getVersionInProjectName(classifier_base, version_base);
 		String versionInProjectName2 = getVersionInProjectName(classifier_target, version_target);
 
+		if (frameworkmodulesPath.contains(",")) {
+			// this is a list of paths
+			String[] split = frameworkmodulesPath.split(",");
+			for (String string : split) {
+				if (StringUtils.trimToNull(string) != null) {
+					executeInpath(inplace, string, classifier_base, version_base, classifier_target, version_target, frameworkmodulesInplace, workspaceFile, versionInProjectName, versionInProjectName2);
+				}
+			}
+		} else {
+			executeInpath(inplace, frameworkmodulesPath, classifier_base, version_base, classifier_target, version_target, frameworkmodulesInplace, workspaceFile, versionInProjectName, versionInProjectName2);
+		}
+
+		System.out.println("Job's done !");
+		System.out.println("Please check " + MIGRATION_FOLDER);
+		System.out.println("If all is ok you can use commit.sh in a terminal do : cd " + MIGRATION_FOLDER + "; sh commit.sh");
+		System.out.println("This script will create new svn projet and commit resources, add 'target' to svn:ignore ...");
+
+	}
+
+	private static void executeInpath(boolean inplace, String frameworkmodulesPath, String classifier_base, String version_base, String classifier_target, String version_target, String frameworkmodulesInplace, File workspaceFile, final String versionInProjectName,
+			String versionInProjectName2) {
+		File frameworkmodulesPathFile = new File(frameworkmodulesPath);
 		if (inplace) {
 			frameworkmodulesPathFile = new File(frameworkmodulesInplace);
-			Collection listFiles = FileUtils.listFiles(frameworkmodulesPathFile, TrueFileFilter.INSTANCE, new IOFileFilter() {
+			Collection<?> listFiles = FileUtils.listFiles(frameworkmodulesPathFile, TrueFileFilter.INSTANCE, new IOFileFilter() {
 
 				public boolean accept(File dir, String name) {
 					return !name.equals(".svn");
@@ -123,7 +146,7 @@ public class PrepareSIDEModulesMigration {
 
 	protected static void reNameResources(final String versionInProjectName, File copyDir, String versionInProjectName2, String version_base, String classifier_base, String version_target, String classifier_target) {
 		System.out.println("PrepareSIDEModulesMigration.reNameResources() " + versionInProjectName + "->" + versionInProjectName2);
-		Collection listFiles = FileUtils.listFiles(copyDir, TrueFileFilter.INSTANCE, new IOFileFilter() {
+		Collection<?> listFiles = FileUtils.listFiles(copyDir, TrueFileFilter.INSTANCE, new IOFileFilter() {
 
 			public boolean accept(File dir, String name) {
 				return !name.equals(".svn");
@@ -141,7 +164,10 @@ public class PrepareSIDEModulesMigration {
 
 			renameFile(versionInProjectName, versionInProjectName2, f);
 		}
-		renameFile(versionInProjectName, versionInProjectName2, copyDir);
+		
+		// renameFile(versionInProjectName, versionInProjectName2, copyDir);
+		
+		renameDirectories(copyDir, versionInProjectName, versionInProjectName2);
 	}
 
 	protected static void replaceVersionInFile(final String versionInProjectName, String versionInProjectName2, String version_base, String classifier_base, String version_target, String classifier_target, File f, boolean inplace) {
@@ -213,7 +239,7 @@ public class PrepareSIDEModulesMigration {
 
 	protected static File copyDir(File workspaceFile, File srcDir) {
 
-		File destDir0 = new File(workspaceFile, "migrationFolder");
+		File destDir0 = new File(workspaceFile, MIGRATION_FOLDER);
 		File destDir = new File(destDir0, srcDir.getName());
 		try {
 			FileUtils.copyDirectory(srcDir, destDir, new FileFilter() {
@@ -231,6 +257,25 @@ public class PrepareSIDEModulesMigration {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	/**
+	 * You need to rename Directory from the deeper (to avoid that subPath changes before completion)  
+	 * @param home
+	 * @param name
+	 * @param newName
+	 */
+	protected static void renameDirectories(File home, String name, String newName) {
+		File[] listFiles = home.listFiles();
+
+		for (File file : listFiles) {
+			if (file.isDirectory()) {
+				// rename subDirectories FIRST
+				renameDirectories(file, name, newName);
+			}
+		}
+		// try to rename this Directory
+		renameFile(name, newName, home);
 	}
 
 	protected static String getVersionInProjectName(final String classifier_base, final String version_base) {

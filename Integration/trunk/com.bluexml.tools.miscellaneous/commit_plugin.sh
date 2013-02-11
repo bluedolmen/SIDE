@@ -2,11 +2,13 @@
 
 
 commitProject() {
-echo "Share New Project $1"
-SVN_ROOT=http://svn.bluexml.com/private/S-IDE/FrameworksModules/trunk
-PROJECT_PATH=$1
-PROJECT_NAME=${PROJECT_PATH:2}
 
+echo "Share New Project $1"
+SVN_ROOT=http://svn.bluexml.com/private/S-IDE/MetaModel/$2/trunk
+PROJECT_PATH=$1
+PROJECT_NAME=${PROJECT_PATH##*/}
+echo "ProjectName :$PROJECT_NAME"
+cd $PROJECT_PATH/..
 if test ! -d $PROJECT_NAME/.svn
 then
 echo "project must be created :"
@@ -20,19 +22,20 @@ fi
 
 cd $PROJECT_NAME
 pwd
-echo "svn propset svn:ignore \"target\" ."
-svn propset svn:ignore "target" .
+echo "svn propset svn:ignore \"bin\" ."
+svn propset svn:ignore "bin" .
 
-for f in `find . ! -path "./target*" -and ! -name "." -and ! -path "./.svn*"`
+for f in `find . ! -path "./bin*" -and ! -name "." -and ! -path "./.svn*"`
 do
+echo "svn add -N $f;"
 svn add -N $f;
 done
 
+echo "svn commit -m \"Initial import.\""
 svn commit -m "Initial import."
-cd ..
 }
 
-for d in `find . -type d -maxdepth 1 -and ! -name "."`
-do
-commitProject $d
-done
+path=$1
+type=$2
+
+commitProject $path $type
