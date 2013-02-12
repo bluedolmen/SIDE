@@ -1,4 +1,4 @@
-package com.bluexml.side.util.framework.tools.alfresco4029;
+package com.bluexml.side.util.framework.tools.alfresco4029E;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
