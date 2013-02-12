@@ -31,9 +31,9 @@ if test ! -d $PROJECT_NAME/.svn
 then
 echo "project must be created :"
 echo "svn mkdir --parents -m \"Initial import.\" $SVN_ROOT/$PROJECT_NAME"
-#svn mkdir --parents -m "Initial import." $SVN_ROOT/$PROJECT_NAME
+svn mkdir --parents -m "Initial import." $SVN_ROOT/$PROJECT_NAME
 echo "svn checkout $SVN_ROOT/$PROJECT_NAME -r HEAD --depth=immediates --force"
-#svn checkout $SVN_ROOT/$PROJECT_NAME -r HEAD --depth=immediates --force
+svn checkout $SVN_ROOT/$PROJECT_NAME -r HEAD --depth=immediates --force
 else
 echo "project is a working copy : $PROJECT_NAME"
 fi
@@ -41,16 +41,16 @@ fi
 cd $PROJECT_NAME
 pwd
 echo "svn propset svn:ignore \"$IGNORE\" ."
-#svn propset svn:ignore $IGNORE .
+svn propset svn:ignore $IGNORE .
 
 for f in `find . ! -path "./$IGNORE*" -and ! -name "." -and ! -path "./.svn*"`
 do
 echo "svn add -N $f;"
-#svn add -N $f;
+svn add -N $f;
 done
 
 echo "svn commit -m \"Initial import.\""
-#svn commit -m "Initial import."
+svn commit -m "Initial import."
 }
 
 # use readlink to ensure than the commitProject have absolute
