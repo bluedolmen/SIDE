@@ -114,12 +114,12 @@
       <classifier>community</classifier>
       <scope>provided</scope>
     </dependency>
-    <dependency>
+    <!--  <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
       <version>3.0.0.RELEASE</version>
       <scope>provided</scope>
-    </dependency>
+    </dependency>-->
     <dependency>
       <groupId>com.itextpdf</groupId>
       <artifactId>itextpdf</artifactId>
@@ -131,6 +131,7 @@
           <artifactId>*</artifactId>
         </exclusion>
       </exclusions>
+      <scope>provided</scope>
     </dependency>
     <!-- Don't add here amp dependencies as it will break amp packaging -->
   </dependencies>
