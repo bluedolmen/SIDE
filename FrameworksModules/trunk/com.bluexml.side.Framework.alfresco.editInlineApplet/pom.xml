@@ -8,7 +8,7 @@
   </parent>
   <groupId>com.bluexml.side.Framework.alfresco</groupId>
   <artifactId>editInlineApplet</artifactId>
-  <version>1.0.4</version>
+  <version>1.0.5</version>
   <name>com.bluexml.side.Framework.alfresco.editInlineApplet</name>
   <dependencies>
     <dependency>
