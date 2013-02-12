@@ -55,9 +55,9 @@
 			jetty run deployment, does not impact AMP behavior which is typically environment independent
 		-->
     <env>local</env>
-    <config.target.path>alfresco/module/SIDE_jbpmExtension3411E</config.target.path>
+    <config.target.path>alfresco/module/SIDE_jbpmExtension40d</config.target.path>
     <!-- Webapp used to test/develop locally the AMP -->
-    <webapp.name>SIDE_jbpmExtension3411E-webapp</webapp.name>
+    <webapp.name>SIDE_jbpmExtension40d-webapp</webapp.name>
     <!-- 
 			| 
 			| By default the src/test/properties/local/application.properties uses the property "alfresco.data.location" to  specify where
