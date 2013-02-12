@@ -127,16 +127,19 @@
 	  <groupId>org.springframework</groupId>
 	  <artifactId>org.springframework.core</artifactId>
 	  <version>3.0.5.RELEASE</version>
+      <scope>provided</scope>
 	</dependency>
 	<dependency>
 	  <groupId>org.springframework</groupId>
 	  <artifactId>org.springframework.beans</artifactId>
 	  <version>3.0.5.RELEASE</version>
+      <scope>provided</scope>
 	</dependency>
 	<dependency>
 	  <groupId>org.springframework</groupId>
 	  <artifactId>org.springframework.transaction</artifactId>
 	  <version>3.0.5.RELEASE</version>
+      <scope>provided</scope>
 	</dependency>
     <!-- SURF -->
    <!--  <dependency>
