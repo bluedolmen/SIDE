@@ -94,12 +94,6 @@
       <scope>provided</scope>
       <classifier>community</classifier>
     </dependency>
-    <!--  <dependency>
-      <groupId>org.springframework.extensions.surf</groupId>
-      <artifactId>spring-webscripts</artifactId>
-      <version>1.0.0.CI-SNAPSHOT</version>
-      <scope>provided</scope>
-    </dependency>-->
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>alfresco-core</artifactId>
@@ -114,6 +108,12 @@
       <classifier>community</classifier>
       <scope>provided</scope>
     </dependency>
+    <!--  <dependency>
+      <groupId>org.springframework.extensions.surf</groupId>
+      <artifactId>spring-webscripts</artifactId>
+      <version>1.0.0.CI-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
@@ -121,22 +121,22 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.jmock</groupId>
-      <artifactId>jmock</artifactId>
-      <version>2.5.1</version>
-      <scope>test</scope>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <type>jar</type>
+      <version>3.0.0.RELEASE</version>
     </dependency>
     <dependency>
-      <groupId>org.jmock</groupId>
-      <artifactId>jmock-legacy</artifactId>
-      <version>2.5.1</version>
-      <scope>test</scope>
-    </dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>org.springframework.beans</artifactId>
+      <version>3.0.5.RELEASE</version>
+      <scope>provided</scope>
+    </dependency> -->
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.7</version>
-      <scope>test</scope>
+      <groupId>org.springframework.extensions.surf</groupId>
+      <artifactId>spring-surf-core</artifactId>
+      <version>1.0.0</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.poi</groupId>
@@ -164,12 +164,6 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.springframework.extensions.surf</groupId>
-      <artifactId>spring-surf-core</artifactId>
-      <version>1.0.0</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
       <groupId>org.apache.pdfbox</groupId>
       <artifactId>pdfbox</artifactId>
       <version>1.6.0</version>
@@ -181,19 +175,6 @@
       <version>1.4</version>
       <scope>provided</scope>
     </dependency>
-    <!-- <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context</artifactId>
-      <type>jar</type>
-      <version>3.0.0.RELEASE</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>org.springframework.beans</artifactId>
-      <version>3.0.5.RELEASE</version>
-      <scope>provided</scope>
-    </dependency> -->
-    <!-- Don't add here amp dependencies as it will break amp packaging -->
     <dependency>
       <groupId>com.bluexml.side.Framework.alfresco</groupId>
       <artifactId>commons40d</artifactId>
@@ -208,6 +189,25 @@
       <classifier>classes</classifier>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>org.jmock</groupId>
+      <artifactId>jmock</artifactId>
+      <version>2.5.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jmock</groupId>
+      <artifactId>jmock-legacy</artifactId>
+      <version>2.5.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.7</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- Don't add here amp dependencies as it will break amp packaging -->
   </dependencies>
   <!-- The scm is required for the buildnumber-maven-plugin which is required for AMP version numbering
 -->
