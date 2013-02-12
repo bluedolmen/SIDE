@@ -35,6 +35,7 @@ public class EditingDocument extends Applet {
 		try {
 			jso = JSObject.getWindow(this);
 			String tmpdir = System.getProperty("java.io.tmpdir");
+			String tmpdirReplaced = tmpdir.replaceAll("/", "\\\\");
 			String webdav = getParameter("webdavUrl");
 			webdav = webdav.replaceAll(" ", "%20");
 			webdav = webdav.replaceAll("à", "%c3%a0");
@@ -58,7 +59,9 @@ public class EditingDocument extends Applet {
 			uc.connect();
 
 			InputStream input = uc.getInputStream();
-			myFile = new File(tmpdir + "tmp.doc");
+			fileName = getFileName(getParameter("webdavUrl"));
+			fileName = fileName.replaceAll(" ", "_");
+			myFile = new File(tmpdirReplaced + fileName + "_tmp.doc");
 			FileOutputStream fos = new FileOutputStream(myFile);
 			byte[] buffer = new byte[1024];
 			int count = 0;
@@ -69,11 +72,10 @@ public class EditingDocument extends Applet {
 			fos.close();
 
 			Thread.sleep(5000);
-			String tmpdirReplaced = tmpdir.replaceAll("/", "\\\\");
-			fileName = getFileName(getParameter("webdavUrl"));
-			fileName = fileName.replaceAll(" ", "_");
+			
+			
 			//text += " " + fileName;
-			String[] command = { "cmd", "/c", "copy /y " + tmpdirReplaced + "tmp.doc" + " " + tmpdirReplaced + fileName };
+			String[] command = { "cmd", "/c", "copy /y " + tmpdirReplaced + fileName + "_tmp.doc" + " " + tmpdirReplaced + fileName };
 			ProcessBuilder copyFiles = new ProcessBuilder(command);
 			copyFiles.redirectErrorStream(true);
 			Process p = copyFiles.start();
@@ -93,7 +95,7 @@ public class EditingDocument extends Applet {
 			//		+ "C:\\Users\\Public\\tmp.doc" + " " + "C:\\Users\\Public\\" + fileName);
 			//Thread.sleep(5000);
 			myFile.delete();
-			myFile = new File(tmpdir + fileName);
+			myFile = new File(tmpdirReplaced + fileName);
 			if (!getParameter("mode").equals("write")) {
 				myFile.setReadOnly();
 			}
@@ -156,23 +158,32 @@ public class EditingDocument extends Applet {
 	private String checkAppli(String appli) {
 		if (appli.equals("soffice.exe")) {
 			String values = WindowsReqistry.readRegistry("HKEY_LOCAL_MACHINE\\SOFTWARE\\OpenOffice.org\\OpenOffice.org", null);
-	    	if (values != null) {
+	    	System.out.println(values);
+			if (values != null) {
 				String [] value = values.split("\\\n");
 				if (value.length >= 1) {
-			        values = WindowsReqistry.readRegistry(value[1], "Path");
-			        if (values != null) {
-			        	String Newvalues = values.replaceAll("\\n", "");
-						File exe = new File (Newvalues.replaceAll("\\r", ""));
-				        if (exe.exists()) {
-				        	return Newvalues.replaceAll("\\r", "");
+					System.out.println("value.length >= 1");
+					for (int i = 0; i < value.length; i++) {
+				        values = WindowsReqistry.readRegistry(value[i], "Path");
+				        System.out.println(value[i]);
+				        System.out.println(values);
+				        if (values != null) {
+				        	System.out.println("values.length >= 1");
+				        	String Newvalues = values.replaceAll("\\n", "");
+							File exe = new File (Newvalues.replaceAll("\\r", ""));
+					        if (exe.exists()) {
+					        	System.out.println(exe + " 1");
+					        	return Newvalues.replaceAll("\\r", "");
+					        }
+							String[] splitedValues = values.split("\\\n");
+							splitedValues = splitedValues[2].split("[\\s][\\s][\\s][\\s]");
+					        exe = new File (splitedValues[splitedValues.length - 1].replaceAll("\\r", ""));
+					        if (exe.exists()) {
+					        	System.out.println(exe + " 2");
+					        	return splitedValues[splitedValues.length - 1].replaceAll("\\r", "");
+					        }
 				        }
-						value = values.split("\\\n");
-				        value = value[2].split("[\\s][\\s][\\s][\\s]");
-				        exe = new File (value[value.length - 1].replaceAll("\\r", "") + appli);
-				        if (exe.exists()) {
-				        	return value[value.length - 1].replaceAll("\\r", "");
-				        }
-			        }
+					}
 				}
 	    	}
 	    	return null;
@@ -247,14 +258,21 @@ public class EditingDocument extends Applet {
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
-					e.printStackTrace();
+					save();
+					if (myFile != null) {
+						myFile.delete();
+					}
+					jso.eval("Close()");
+					break;
 				}
 				if (lastModified < myFile.lastModified()) {
 					lastModified = myFile.lastModified();
 					save();
 				}
 				if (!monAppli.isAlive()) {
-					myFile.setWritable(true);
+					if (myFile != null) {
+						myFile.delete();
+					}
 					try {
 						jso.eval("Close()");
 						break;
@@ -264,7 +282,9 @@ public class EditingDocument extends Applet {
 				}
 			}
 		} else {
-			myFile.setWritable(true);
+			if (myFile != null) {
+				myFile.delete();
+			}
 			try {
 				jso.eval("Close()");
 			} catch (Exception e) {

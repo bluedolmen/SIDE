@@ -46,6 +46,7 @@ public class WindowsReqistry {
             return parsed[parsed.length-1];
         }
         catch (Exception e) {
+        	e.printStackTrace();
             return null;
         }
 
