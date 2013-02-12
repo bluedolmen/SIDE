@@ -339,7 +339,7 @@
             <directory>src/test/properties/${env}</directory>
             <targetPath>alfresco/extension</targetPath>
           </testResource>
-          <!-- src/main/config/ is copied into  ==> target/test-classes/alfresco/module/alfresco/module/signature3411E to
+          <!-- src/main/config/ is copied into  ==> target/test-classes/alfresco/module/alfresco/module/signature40d to
 						be picked up by the maven-war plugin
 						Best practice tacken from recordsmanagement.amp, is enforced troughout the whole archetype. 
 						This convention is also used for module.properties filtering.
