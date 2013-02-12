@@ -104,7 +104,6 @@ public class ReversePortal {
 					PortalHelper.createMetaInfo(reverse, "rawContentJs", "<import resource=\"classpath:/alfresco/templates/org/alfresco/" + jsFileName + "\">", true);
 				}
 			}
-
 		}
 
 		return portal;

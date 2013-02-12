@@ -41,9 +41,9 @@ public class LayoutReverser {
 	List<Region> regions = new ArrayList<Region>();
 
 	String regexpAttributes = "(([^ =]*)=\"([^\"]*)\")";
-	
-	String regexpRegionIdAttributes = "<@region (id)=([^\"]*\"[^\"]*\") scope=";
-	
+
+	String regexpRegionIdAttributes = "<@region (id)=(.*) scope=";
+
 	FreemarkerTags currentOpenedTag = null;
 
 	public List<Region> getRegions() {
@@ -90,6 +90,11 @@ public class LayoutReverser {
 						closeRawSection();
 						previousIsRaw = false;
 					}
+					/*
+					 * start_tag
+					 * autoclose
+					 * end_tag (+ curent context)
+					 */
 					if (currentLine.matches(FreemarkerTags.include.start_tag)) {
 						currentOpenedTag = FreemarkerTags.include;
 						handle_include();
@@ -105,6 +110,9 @@ public class LayoutReverser {
 					} else if (currentLine.matches(FreemarkerTags.region.start_tag)) {
 						currentOpenedTag = FreemarkerTags.region;
 						handle_region();
+					} else if (currentLine.matches(FreemarkerTags.marckup.start_tag)) {
+						currentOpenedTag = FreemarkerTags.marckup;
+						handle_markup();
 					} else if (currentLine.matches(FreemarkerTags.templateFooter.start_tag)) {
 						currentOpenedTag = FreemarkerTags.templateFooter;
 						handle_templateFooter();
@@ -115,6 +123,7 @@ public class LayoutReverser {
 						handle_templateBody();
 						closeColumn();
 					} else if (currentLine.matches(FreemarkerTags.templateHeader_autoclose.start_tag)) {
+						System.out.println("LayoutReverser.parse() templateHeader_autoclose");
 						handle_templateHeader();
 						closeColumn();
 					} else if (currentLine.matches(FreemarkerTags.include.end_tag) && currentOpenedTag.equals(FreemarkerTags.include)) {
@@ -127,6 +136,8 @@ public class LayoutReverser {
 						handle_div_end();
 					} else if (currentLine.matches(FreemarkerTags.region.end_tag) && currentOpenedTag.equals(FreemarkerTags.region)) {
 						// auto close
+					} else if (currentLine.matches(FreemarkerTags.marckup.end_tag) && currentOpenedTag.equals(FreemarkerTags.marckup)) {
+						handle_markup_end();
 					} else if (currentLine.matches(FreemarkerTags.templateFooter.end_tag) && currentOpenedTag.equals(FreemarkerTags.templateFooter)) {
 						handle_templateFooter_end();
 					} else {
@@ -147,6 +158,11 @@ public class LayoutReverser {
 		return extractedLayout;
 	}
 
+	private void handle_markup_end() {
+		System.out.println("LayoutReverser.handle_markup_end()");
+		closeColumn();
+	}
+
 	public void closeRawSection() {
 		Column c = currentCol;
 		closeColumn();
@@ -165,7 +181,7 @@ public class LayoutReverser {
 			readAttributes(atts, regexpRegionIdAttributes, 1, 2);
 		}
 		String regionId = atts.get("id");
-		
+
 		String scope = atts.get("scope");
 		createColumn(regionId, properties);
 		Region r = new Region(regionId, scope);
@@ -177,14 +193,14 @@ public class LayoutReverser {
 	protected void handle_include() {
 		// System.out.println("LayoutReverser.handle_include()");
 		Map<String, String> properties = new HashMap<String, String>();
-		
+
 		createColumn("includes", properties);
 		// auto close
 		handle_include_end();
 	}
 
 	protected void handle_templateHeader() {
-		// System.out.println("LayoutReverser.handle_templateHeader()");
+		 System.out.println("LayoutReverser.handle_templateHeader()");
 		Map<String, String> properties = new HashMap<String, String>();
 		properties.put("tag", "@templateHeader");
 		createColumn("@templateHeader", properties);
@@ -194,7 +210,23 @@ public class LayoutReverser {
 		// System.out.println("LayoutReverser.handle_templateBody()");
 		Map<String, String> properties = new HashMap<String, String>();
 		properties.put("tag", "@templateBody");
+		
+		int groupId = 2;
+		int groupValue = 3;
+		Map<String, String> atts = new HashMap<String, String>();
+		readAttributes(atts, regexpAttributes, groupId, groupValue);
+		if (atts.containsKey("type")) {
+			properties.put("type", atts.get("type"));
+		}
+		// TODO type must be handled by generator 4.2+
 		createColumn("@templateBody", properties);
+	}
+
+	protected void handle_markup() {
+		System.out.println("LayoutReverser.handle_markup()");
+		Map<String, String> properties = new HashMap<String, String>();
+		properties.put("tag", "@markup");
+		createColumn("@markup", properties);
 	}
 
 	protected void handle_div() {
@@ -255,7 +287,7 @@ public class LayoutReverser {
 	}
 
 	protected void handle_templateHeader_end() {
-		// System.out.println("LayoutReverser.handle_templateHeader_end()");
+		 System.out.println("LayoutReverser.handle_templateHeader_end()");
 		//		closeRawSection();
 		closeColumn();
 	}
@@ -353,8 +385,17 @@ public class LayoutReverser {
 	}
 
 	enum FreemarkerTags {
-		templateFooter("<@templateFooter>", "</@>"), region("<@region.*", "/>"), include("<#include.*", "/>"), templateHeader("<@templateHeader>", "</@>"), templateBody("<@templateBody>", "</@>"), div(".*<div.*", ".*</div>.*"), templateFooter_autoclose("<@templateFooter[ ]*/>",
-				"/>"), templateHeader_autoclose("<@templateHeader[ ]*/>", "/>"), templateBody_autoclose("<@templateBody[ ]*/>", "/>");
+		templateFooter("<@templateFooter>", "</@>"),
+		region("<@region.*", "/>"),
+		include("<#include.*", "/>"),
+		templateHeader("<@templateHeader>", "</@>"),
+		templateBody("<@templateBody.*", "</@>"),
+		div(".*<div.*", ".*</div>.*"),
+		templateFooter_autoclose("<@templateFooter[ ]*/>", "/>"),
+		templateHeader_autoclose("<@templateHeader[ ]*/>", "/>"),
+		templateBody_autoclose("<@templateBody[ ]*/>", "/>"),
+		marckup("<@markup.*>", "</@>"),
+		marckup_autoclose("<@markup.*", "</@>");
 		String start_tag;
 		String end_tag;
 
@@ -363,5 +404,4 @@ public class LayoutReverser {
 			this.start_tag = start_tag;
 		}
 	}
-
 }

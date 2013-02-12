@@ -83,7 +83,7 @@ public class EclipseReverser {
 		Components fromInstance = ReversePortal.getValueComponents(model.getContent());
 
 		for (Region region : regions) {
-			if (region.getRegionId().contains("+")) {
+			if (!region.getRegionId().startsWith("\"")) {
 				// computed region ...
 			}
 			Component component = getComponent(region, fromInstance, fromPage);
