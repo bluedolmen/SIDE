@@ -5,6 +5,6 @@
 
 	
 	<!-- Bean action definitions -->
-	<import resource="classpath:alfresco/module/SIDE_signature3411E/context/service-context.xml" />
+	<import resource="classpath:${config.target.path}/context/service-context.xml" />
 	
 </beans>
