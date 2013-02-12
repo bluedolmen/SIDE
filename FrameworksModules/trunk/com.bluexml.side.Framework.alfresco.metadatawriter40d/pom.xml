@@ -108,16 +108,17 @@
       <classifier>community</classifier>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>org.alfresco</groupId>
+      <artifactId>alfresco-web-client</artifactId>
+      <version>4.0.d</version>
+      <scope>provided</scope>
+      <classifier>community</classifier>
+    </dependency>
     <!--  <dependency>
       <groupId>org.springframework.extensions.surf</groupId>
       <artifactId>spring-webscripts</artifactId>
       <version>1.0.0.CI-SNAPSHOT</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-core</artifactId>
-      <version>3.0.5.RELEASE</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -132,7 +133,13 @@
       <version>3.0.5.RELEASE</version>
       <scope>provided</scope>
     </dependency> -->
-    <dependency>
+	<dependency>
+	  <groupId>org.springframework</groupId>
+	  <artifactId>org.springframework.core</artifactId>
+	  <version>3.0.5.RELEASE</version>
+      <scope>provided</scope>
+	</dependency>    
+	<dependency>
       <groupId>org.springframework.extensions.surf</groupId>
       <artifactId>spring-surf-core</artifactId>
       <version>1.0.0</version>
@@ -143,13 +150,6 @@
       <artifactId>poi</artifactId>
       <version>3.9-beta1-20121129-alfresco-patched</version>
       <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.alfresco</groupId>
-      <artifactId>alfresco-web-client</artifactId>
-      <version>4.0.d</version>
-      <scope>provided</scope>
-      <classifier>community</classifier>
     </dependency>
     <dependency>
       <groupId>commons-logging</groupId>
