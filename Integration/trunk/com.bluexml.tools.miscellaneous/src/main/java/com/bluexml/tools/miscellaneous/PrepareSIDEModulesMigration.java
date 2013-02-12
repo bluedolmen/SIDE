@@ -10,6 +10,8 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.management.RuntimeErrorException;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.IOFileFilter;
 import org.apache.commons.io.filefilter.TrueFileFilter;
@@ -65,6 +67,17 @@ public class PrepareSIDEModulesMigration {
 		}
 
 		File workspaceFile = new File(workspace);
+
+		File targetHome = new File(workspaceFile, MIGRATION_FOLDER);
+		if (targetHome.exists()) {
+			try {
+				FileUtils.deleteDirectory(targetHome);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+		}
 
 		final String versionInProjectName = getVersionInProjectName(classifier_base, version_base);
 		String versionInProjectName2 = getVersionInProjectName(classifier_target, version_target);
@@ -164,9 +177,9 @@ public class PrepareSIDEModulesMigration {
 
 			renameFile(versionInProjectName, versionInProjectName2, f);
 		}
-		
+
 		// renameFile(versionInProjectName, versionInProjectName2, copyDir);
-		
+
 		renameDirectories(copyDir, versionInProjectName, versionInProjectName2);
 	}
 
@@ -260,7 +273,9 @@ public class PrepareSIDEModulesMigration {
 	}
 
 	/**
-	 * You need to rename Directory from the deeper (to avoid that subPath changes before completion)  
+	 * You need to rename Directory from the deeper (to avoid that subPath
+	 * changes before completion)
+	 * 
 	 * @param home
 	 * @param name
 	 * @param newName
