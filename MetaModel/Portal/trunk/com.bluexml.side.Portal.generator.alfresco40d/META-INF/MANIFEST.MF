@@ -22,3 +22,4 @@ Require-Bundle: org.eclipse.ui,
  com.bluexml.side.Portal.generator.alfresco34d
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
+Export-Package: com.bluexml.side.portal.generator.alfresco40d
