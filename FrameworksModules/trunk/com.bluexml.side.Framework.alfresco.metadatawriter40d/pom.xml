@@ -55,9 +55,9 @@
 			jetty run deployment, does not impact AMP behavior which is typically environment independent
 		-->
     <env>local</env>
-    <config.target.path>alfresco/module/SIDE_metadatawriter3411E</config.target.path>
+    <config.target.path>alfresco/module/SIDE_metadatawriter40d</config.target.path>
     <!-- Webapp used to test/develop locally the AMP -->
-    <webapp.name>SIDE_metadatawriter3411E-webapp</webapp.name>
+    <webapp.name>SIDE_metadatawriter40d-webapp</webapp.name>
     <!-- 
 			| 
 			| By default the src/test/properties/local/application.properties uses the property "alfresco.data.location" to  specify where
@@ -414,7 +414,7 @@
             <directory>src/test/properties/${env}</directory>
             <targetPath>alfresco/extension</targetPath>
           </testResource>
-          <!-- src/main/config/ is copied into  ==> target/test-classes/alfresco/module/alfresco/module/metadatawriter3411E to
+          <!-- src/main/config/ is copied into  ==> target/test-classes/alfresco/module/alfresco/module/metadatawriter40d to
 						be picked up by the maven-war plugin
 						Best practice tacken from recordsmanagement.amp, is enforced troughout the whole archetype. 
 						This convention is also used for module.properties filtering.

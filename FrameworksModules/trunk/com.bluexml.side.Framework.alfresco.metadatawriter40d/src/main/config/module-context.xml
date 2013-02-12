@@ -2,6 +2,6 @@
 <!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
 
 <beans>
-     <import resource="classpath:alfresco/module/SIDE_metadatawriter3411E/context/metadata-writer-core-context.xml" />
-     <import resource="classpath:alfresco/module/SIDE_metadatawriter3411E/context/metadata-writer-service-context.xml" />
+     <import resource="classpath:${config.target.path}/context/metadata-writer-core-context.xml" />
+     <import resource="classpath:${config.target.path}/context/metadata-writer-service-context.xml" />
 </beans>
