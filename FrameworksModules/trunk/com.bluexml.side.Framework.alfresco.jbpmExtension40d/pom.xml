@@ -30,7 +30,7 @@
   In order to be able to use Maven snapshots we cannot use the <version/> below as the AMP module
   version. Instead we use the buildnumber-maven-plugin. This requires a scm connection.
 	 -->
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <description>this is a new Amp project generated using	"com.bluexml.side.Integration.m2.ampArchetype" thanks to change this description</description>
   <parent>
     <groupId>org.bluexml</groupId>
@@ -124,25 +124,25 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-	  <groupId>org.springframework</groupId>
-	  <artifactId>org.springframework.core</artifactId>
-	  <version>3.0.5.RELEASE</version>
+      <groupId>org.springframework</groupId>
+      <artifactId>org.springframework.core</artifactId>
+      <version>3.0.5.RELEASE</version>
       <scope>provided</scope>
-	</dependency>
-	<dependency>
-	  <groupId>org.springframework</groupId>
-	  <artifactId>org.springframework.beans</artifactId>
-	  <version>3.0.5.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>org.springframework.beans</artifactId>
+      <version>3.0.5.RELEASE</version>
       <scope>provided</scope>
-	</dependency>
-	<dependency>
-	  <groupId>org.springframework</groupId>
-	  <artifactId>org.springframework.transaction</artifactId>
-	  <version>3.0.5.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>org.springframework.transaction</artifactId>
+      <version>3.0.5.RELEASE</version>
       <scope>provided</scope>
-	</dependency>
+    </dependency>
     <!-- SURF -->
-   <!--  <dependency>
+    <!--  <dependency>
       <groupId>org.springframework.extensions.surf</groupId>
       <artifactId>spring-webscripts</artifactId>
       <version>1.0.0.CI-SNAPSHOT</version>
@@ -161,7 +161,7 @@
       <scope>provided</scope>
     </dependency> -->
     <!-- jbpm -->
-     <dependency>
+    <dependency>
       <groupId>org.jbpm.jbpm3</groupId>
       <artifactId>jbpm-jpdl</artifactId>
       <version>3.3.1.GA</version>
