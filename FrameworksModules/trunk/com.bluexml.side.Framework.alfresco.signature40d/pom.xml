@@ -144,7 +144,7 @@
           <artifactId>*</artifactId>
         </exclusion>
       </exclusions>
-      <scope>provided</scope>
+      <scope>compile</scope>
     </dependency>
     <!-- Don't add here amp dependencies as it will break amp packaging -->
   </dependencies>
