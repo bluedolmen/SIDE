@@ -12,7 +12,7 @@ import com.bluexml.side.portal.generator.alfresco.templates.services.ClazzServic
 <%script type="Page" name="alfrescoGenerator" file="<%createNavigationComponentTemplate%>" post="trim()"%>
 <?xml version='1.0' encoding='UTF-8'?>
 <template-instance>
-   <template-type>com/bluexml/alfresco/<%ID%></template-type>
+   <template-type>com/bluexml/<%ID.toLowerCase()%></template-type>
    <properties>
    <%for (metainfo[key.startsWith("prop_")]){%>
    	  <%key.substring(5).put("propertyTag")%>

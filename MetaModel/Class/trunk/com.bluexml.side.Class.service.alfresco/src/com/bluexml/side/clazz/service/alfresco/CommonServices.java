@@ -1,7 +1,9 @@
 package com.bluexml.side.clazz.service.alfresco;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.util.EList;
@@ -222,6 +224,7 @@ public class CommonServices {
 
 	/**
 	 * use this when you need to compute QName
+	 * 
 	 * @param element
 	 * @return
 	 * @throws Exception
@@ -242,14 +245,21 @@ public class CommonServices {
 	}
 
 	/**
-	 * only use this if you need to know if current element if reversed from native alfresco model
+	 * only use this if you need to know if current element if reversed from
+	 * native alfresco model
 	 * main case to add defaults properties ...
+	 * 
 	 * @param element
 	 * @return
 	 * @throws Exception
 	 */
 	public static boolean isNativeModel(ModelElement element) throws Exception {
 		return getNamespaceURI(element).startsWith("http://www.alfresco.org/model");
+	}
+
+	public static void log(EObject o, String message) {
+		message = message.replaceFirst(Pattern.quote("{object}"), o.toString()).replaceFirst(Pattern.quote("{date}"), new Date().toString());
+		System.out.println("CommonServices.log() :" + message);
 	}
 
 }
