@@ -62,7 +62,8 @@ var Filters = {
             }],
             language: "lucene",
             templates: null,
-            variablePath: true
+            variablePath: true,
+            ignoreTypes: Filters.IGNORED_TYPES
         };
 
         optional = optional || {};
@@ -316,6 +317,13 @@ var Filters = {
             case "savedSearch":
                 filterParams = getSavedSearchQueryDef(filterData);
                 break;
+                
+            case "aspect":
+                filterQuery = "+PATH:\"" + parsedArgs.rootNode.qnamePath + "//*\"";
+                filterQuery += "+ASPECT:\"" + args.filterData + "\"";
+                filterParams.query = filterQuery;
+                break;
+                
             default:
                 // "path"
                 filterParams.variablePath = false;
