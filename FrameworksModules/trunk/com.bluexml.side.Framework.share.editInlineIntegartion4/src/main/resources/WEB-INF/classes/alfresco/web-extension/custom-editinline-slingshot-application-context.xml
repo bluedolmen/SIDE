@@ -51,6 +51,9 @@
 			
 			<!-- SIDE Edit inline modif to create a custom-share-documentlibrary-config.xml -->
 			<value>classpath:alfresco/web-extension/custom-editinline-share-documentlibrary-config.xml</value>
+			
+			<!-- Open config for another custom-share-documentlibrary-config file-->
+			<value>classpath:alfresco/web-extension/custom-share-documentlibrary-config.xml</value>
          </list>
       </constructor-arg>
    </bean>
