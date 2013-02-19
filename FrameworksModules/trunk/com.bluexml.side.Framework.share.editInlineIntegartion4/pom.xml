@@ -4,7 +4,7 @@
   <groupId>com.bluexml.side.Framework.share</groupId>
   <artifactId>editInlineIntegartion4</artifactId>
   <name>Integration of editInline for alfresco 4</name>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
   <packaging>zip</packaging>
   <parent>
     <groupId>org.bluexml</groupId>
