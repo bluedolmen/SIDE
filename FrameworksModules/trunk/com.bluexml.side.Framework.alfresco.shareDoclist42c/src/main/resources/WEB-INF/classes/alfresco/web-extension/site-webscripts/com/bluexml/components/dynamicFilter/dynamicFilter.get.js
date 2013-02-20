@@ -43,6 +43,15 @@ function main() {
 	logger.log("dynamicFilters :" + filters.toSource());
 	model.filters = filters;
 	model.headerLabelId = headerLabelId;
+	
+	var docListFilter = {
+      id : "BaseFilter",
+      name : "Alfresco.component.BaseFilter",
+      initArgs: [ "SIDE.DocListFilter", "\"" + args.htmlid + "\""],
+      assignTo : "filter",
+      useMessages : false
+   };
+   model.widgets = [docListFilter];
 }
 
 main();

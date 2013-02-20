@@ -1,4 +1,30 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <template-instance>
-   <template-type>com/bluexml/standalonestartworkflow</template-type>
+	<template-type>com/bluexml/standalonestartworkflow</template-type>
+	<components>
+		<component>
+			<region-id>formPortlet</region-id>
+			<url>/components/form?formId={formId}&amp;redirect={redirect}&amp;css={css}&amp;js={js}</url>
+			<properties>
+				<itemKind>workflow</itemKind>
+				<itemId>{itemId}</itemId>
+				<submitType>{submitType}</submitType>
+				<showCaption>true</showCaption>
+				<formUI>true</formUI>
+				<showCancelButton>true</showCancelButton>
+				<destination>{destination}</destination>
+				<mode>create</mode>
+			</properties>
+		</component>
+		<component>
+			<region-id>workflowdata</region-id>
+			<url>/components/workflow/workflowdata?&amp;css={css}&amp;js={js}
+			</url>
+			<properties>
+				<destination>{destination}</destination>
+				<selectedItems>{selectedItems}</selectedItems>
+			</properties>
+		</component>
+
+	</components>
 </template-instance>

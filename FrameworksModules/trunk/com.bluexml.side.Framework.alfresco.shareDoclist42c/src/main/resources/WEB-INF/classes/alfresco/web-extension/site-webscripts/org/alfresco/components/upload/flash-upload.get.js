@@ -44,3 +44,15 @@ if (availableContentTypes.length == 0) {
 }
 
 model.contentTypes = contentTypes;
+
+function main()
+{
+   // Widget instantiation metadata...
+   var flashUpload = {
+      id : "FlashUpload", 
+      name : "Alfresco.FlashUpload"
+   };
+   model.widgets = [flashUpload];
+}
+
+main();

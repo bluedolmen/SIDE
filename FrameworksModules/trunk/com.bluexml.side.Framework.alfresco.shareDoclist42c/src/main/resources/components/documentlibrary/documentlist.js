@@ -1008,14 +1008,7 @@
           * @type number
           * @default 3
           */
-         actionsSplitAt: 3,
-
-         /**
-          * SIDE search object used to implements metadata filter
-          */
-         search : {
-
-         }
+         actionsSplitAt: 3
       },
 
       /**
@@ -4121,19 +4114,8 @@
             });
 
          // Filter parameters
-         // SIDE if options.search.type exists use SIDE
-         // metadata filter
-         if (this.options.search.type && this.options.search.type.length > 0)
-         {
-            params += "?filter=metadata";
-            // so document list can be used to display
-            // search results
-            // search parameters
-            if (this.options.search)
-            {
-               params += "&search=" + encodeURIComponent(JSON.stringify(this.options.search));
-            }
-         } else if (obj.filter.filterId == "metadata")
+         // SIDE metadata filter
+         if (obj.filter.filterId == "metadata")
          {
             params += "?filter=metadata";
             // SIDE metadata filter
@@ -4142,12 +4124,6 @@
             {
                params += "&search=" + encodeURIComponent(obj.filter.filterData);
             }
-         } else if (this.options.search.fullText && this.options.search.fullText.length > 0)
-         {
-            // so document list can be used to display
-            // search results
-            params += "?filter=fullTextSearch";
-            params += "&term=" + this.options.search.fullText;
          } else
          {
             // Default Alfresco filters

@@ -1,6 +1,6 @@
 <#assign filterIds = "">
 <div class="filter doclib-filter">
-   <h2>${msg(headerLabelId)}</h2>
+   <h2 class="alfresco-twister">${msg(headerLabelId)}</h2>
    <ul class="filterLink">
    <#list filters as filter>
       <#assign filterIds>${filterIds}"${filter.id}"<#if filter_has_next>,</#if></#assign>
@@ -9,6 +9,8 @@
    </ul>
 </div>
 
-<script type="text/javascript">//<![CDATA[
-   new Alfresco.component.BaseFilter("SIDE.DocListFilter", "${args.htmlid}").setFilterIds([${filterIds}]);
-//]]></script>
+<@createWidgets group="documentlibrary"/>
+<@inlineScript group="documentlibrary">
+   <#-- JavaScript to be executed AFTER widget instantiation here -->
+   filter.setFilterIds([${filterIds}]);
+</@>

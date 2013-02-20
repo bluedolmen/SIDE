@@ -1,30 +1,24 @@
-<#assign treeConfig = config.scoped["DocumentLibrary"]["tree"]!>
-<#if treeConfig.getChildValue??>
-   <#assign evaluateChildFolders = treeConfig.getChildValue("evaluate-child-folders")!"true">
-   <#assign maximumFolderCount = treeConfig.getChildValue("maximum-folder-count")!"-1">
-</#if>
-<script type="text/javascript">//<![CDATA[
-   new SIDE.DocListTree("${args.htmlid}").setOptions(
-   {
-      siteId: "${page.url.templateArgs.site!""}",
-      containerId: "${template.properties.container!"documentLibrary"}",
-      evaluateChildFolders: ${evaluateChildFolders!"false"},
-      maximumFolderCount: ${maximumFolderCount!"-1"},
-      nodeType: "${nodeType}",
-      selectableTypeIsAspect: "${selectableTypeIsAspect}",
-      assoType: "${assoType}",
-      nodeTypeDocument: "${nodeTypeDocument}",
-      assoTypeDocument: "${assoTypeDocument}",
-      documentTypeIsAspect : "${documentTypeIsAspect}",
-      rootProperty: "${rootProperty}",
-      rootName: "${rootName}",
-      rootLabel: "${msg(rootLabelId)}",
-      rootPath: "${rootPath!""}"
-   }).setMessages(
-      ${messages}
-   );
-//]]></script>
-<div class="treeview filter">
-   <h2 id="${args.htmlid}-h2">${msg(rootLabelId)}</h2>
-   <div id="${args.htmlid}-treeview" class="tree"></div>
-</div>
+<@markup id="css" >
+   <#-- CSS Dependencies -->
+   <@link rel="stylesheet" type="text/css" href="${url.context}/res/components/documentlibrary/tree.css" group="documentlibrary"/>
+</@>
+
+<@markup id="js">
+   <#-- JavaScript Dependencies -->
+   <@script type="text/javascript" src="${url.context}/res/components/documentlibrary/tree.js" group="documentlibrary"/>
+   <@script type="text/javascript" src="${url.context}/res/side/components/filterTree/tree.js" group="documentlibrary"/>
+</@>
+
+<@markup id="widgets">
+   <@createWidgets group="documentlibrary"/>
+</@>
+
+<@uniqueIdDiv>
+   <@markup id="html">
+   <#assign id=args.htmlid?html>
+      <div class="treeview filter">
+         <h2 id="${id}-h2" class="alfresco-twister">${msg("header.library")}</h2>
+         <div id="${id}-treeview" class="tree"></div>
+      </div>
+   </@>
+</@>

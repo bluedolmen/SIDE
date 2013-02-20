@@ -4,12 +4,11 @@
 <beans>
 
    <bean id="webframework.presets.manager" class="com.bluexml.side.framework.alfresco.sharePortalExtension.PresetsManagerExtension">
-      <property name="searchPath" ref="webframework.presets.searchpath" />
       <property name="modelObjectService" ref="webframework.service.modelobject" />
+      <property name="searchPath" ref="webframework.presets.searchpath" />
       <property name="files">
          <list>
             <value>presets.xml</value>
-            <value>side-*-presets.xml</value>
          </list>
       </property>
    </bean>

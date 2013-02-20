@@ -1,9 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <page>
-   	<title>standaloneform</title>
-   	<title-id>page.standaloneform.title</title-id>
-   	<description>SIDE Generated Portal Page</description>
-   	<description-id>page.standaloneform.description</description-id>
-   	<template-instance>standaloneform</template-instance>
-   	<authentication>user</authentication>
+	<title>standaloneform</title>
+	<title-id>page.standaloneform.title</title-id>
+	<description>SIDE Generated Portal Page</description>
+	<description-id>page.standaloneform.description</description-id>
+	<template-instance>standaloneform</template-instance>
+	<authentication>user</authentication>
+	
 </page>

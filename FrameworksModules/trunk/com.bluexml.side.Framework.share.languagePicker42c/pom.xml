@@ -4,7 +4,7 @@
   <groupId>com.bluexml.side.Framework.share</groupId>
   <artifactId>languagePicker42c</artifactId>
   <name>com.bluexml.side.Framework.share.languagePicker42c</name>
-  <version>1.0.9</version>
+  <version>1.0.0</version>
   <packaging>zip</packaging>
   <parent>
     <groupId>org.bluexml</groupId>

@@ -86,5 +86,39 @@
 			<url>/components/workflow/workflow-toolbar</url>
 		</component>
 
+
+		<components>
+
+			<component>
+				<region-id>data-header</region-id>
+				<url>/components/workflow/task-edit-header</url>
+			</component>
+
+			<component>
+				<region-id>data-form</region-id>
+				<url>/components/form?formId={formId}&amp;redirect={redirect}&amp;css={css}&amp;js={js}
+				</url>
+				<properties>
+					<itemKind>task</itemKind>
+					<itemId>{taskId}</itemId>
+					<mode>edit</mode>
+					<formUI>true</formUI>
+					<submitType>json</submitType>
+					<showCaption>true</showCaption>
+					<showCancelButton>true</showCancelButton>
+				</properties>
+			</component>
+
+			<component>
+				<region-id>data-loader</region-id>
+				<url>/components/data/data-loader</url>
+				<properties>
+					<url>api/task-instances/{taskId}?detailed=true</url>
+					<eventName>taskDetailedData</eventName>
+					<eventData>data</eventData>
+				</properties>
+			</component>
+
+		</components>
 	</components>
 </template-instance>

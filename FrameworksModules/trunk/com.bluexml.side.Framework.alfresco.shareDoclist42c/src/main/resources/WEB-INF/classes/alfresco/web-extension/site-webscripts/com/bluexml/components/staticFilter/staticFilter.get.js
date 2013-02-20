@@ -26,7 +26,17 @@ function main() {
 
 	logger.log("filters :" + filters.toSource());
 	model.filters = filters;
+	
 	model.headerLabelId = paramValide("headerLabelId", "portlet." + page.id + "." + args["region-id"]+".header");
+	
+	var docListFilter = {
+      id : "BaseFilter",
+      name : "Alfresco.component.BaseFilter",
+      initArgs: [ "SIDE.DocListFilter", "\"" + args.htmlid + "\""],
+      assignTo : "filter",
+      useMessages : false
+   };
+   model.widgets = [docListFilter];
 }
 
 main();

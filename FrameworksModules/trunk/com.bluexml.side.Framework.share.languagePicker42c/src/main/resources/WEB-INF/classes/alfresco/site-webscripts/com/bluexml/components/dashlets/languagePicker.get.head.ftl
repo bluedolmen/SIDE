@@ -1,2 +1,0 @@
-<script type="text/javascript" src="${page.url.context}/components/dashlets/languagePicker.js"></script>
-<link rel="stylesheet" href="${page.url.context}/components/dashlets/languagePicker.css" type="text/css" media="screen"/>
