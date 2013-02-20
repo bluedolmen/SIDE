@@ -65,10 +65,6 @@
          id="com.bluexml.side.Common.forAlfresco3411E.sideenterprise.feature"
          version="1.0.147.v43717-20130213"/>
 
-   <includes
-         id="com.bluexml.side.Common.forAlfresco42c.sideenterprise.feature"
-         version="0.0.0"/>
-
    <requires>
       <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.core.runtime"/>
