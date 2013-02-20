@@ -712,10 +712,6 @@
                this._sortNodeChildren(parentNode);
             }
          }
-         
-         // Make sure that the drag and drop targets are correctly set...
-         this._applyDropTargets();
-
       },
 
       /**
@@ -993,6 +989,9 @@
                   {
                      callback.fn.call(callback.scope ? callback.scope : this, callback.obj);
                   }
+                  
+                  // Make sure that the drag and drop targets are correctly set...
+                  this._applyDropTargets();
                }
             },
 

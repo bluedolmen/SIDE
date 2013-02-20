@@ -51,14 +51,15 @@ function getRootNode(params) {
 	rootQuery += " AND ";
 
 	var path = null;
-	if (params.site) {
-		path = SITES_SPACE_QNAME_PATH;
-		if (params.site !== null && params.site.length > 0) {
-			path += "cm:" + search.ISO9075Encode(params.site) + "//*";
-		}
-	} else if (params.path) {
+	
+	if (params.path != "") {
 		path = params.path;
-	}
+	} else if (params.site != "") {
+      path = SITES_SPACE_QNAME_PATH;
+      if (params.site !== null && params.site.length > 0) {
+         path += "cm:" + search.ISO9075Encode(params.site) + "//*";
+      }
+   }
 
 	if (path != null) {
 		path = "PATH:\"" + path + "\"";

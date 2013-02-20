@@ -90,6 +90,16 @@ if (console == undefined) {
       },
 
       /**
+       * Object container for initialization options
+       */
+      options:
+      {   
+         /**
+          * The path where to search nodes, if null path is /app:company_home/st:sites/{site}//*
+          */
+         rootPath: "" 
+      },
+      /**
        * Fired by YUI when parent element is available for scripting
        * 
        * @method onReady
@@ -284,15 +294,25 @@ if (console == undefined) {
        *           {string} Path to query
        */
       _buildTreeNodeUrl_nodeChild : function DLT__buildTreeNodeUrl(node) {
-         var uriTemplate = "side/slingshot/doclib/treenode/site/"
-               + $combine(encodeURIComponent(this.options.siteId), encodeURIComponent(this.options.containerId), Alfresco.util.encodeURIPath(node.data.path));
-         uriTemplate += "?perms=false&children=" + this.options.evaluateChildFolders + "&max=" + this.options.maximumFolderCount;
+         var uriTemplate = "";
+         if (this.options.rootPath != "") {
+            uriTemplate = "side/slingshot/doclib/treenode/path?rootPath="
+               + Alfresco.util.encodeURIPath(this.options.rootPath);
+            uriTemplate += "&";
+         } else {
+            uriTemplate = "side/slingshot/doclib/treenode/site/"
+               + $combine(encodeURIComponent(this.options.siteId), encodeURIComponent(this.options.containerId));
+            uriTemplate += "?";
+               
+         }
+         uriTemplate += "perms=false&children=" + this.options.evaluateChildFolders + "&max=" + this.options.maximumFolderCount;
          uriTemplate += "&nodeType=" + this.options.nodeType;
          uriTemplate += "&selectableTypeIsAspect=" + this.options.selectableTypeIsAspect;
          uriTemplate += "&assoType=" + this.options.assoType;
          uriTemplate += "&rootProperty=" + this.options.rootProperty;
          uriTemplate += "&rootName=" + this.options.rootName;
          uriTemplate += "&nodeRef=" + node.data.nodeRef;
+         
          this.log("URL :" + uriTemplate);
 
          return Alfresco.constants.PROXY_URI + uriTemplate;

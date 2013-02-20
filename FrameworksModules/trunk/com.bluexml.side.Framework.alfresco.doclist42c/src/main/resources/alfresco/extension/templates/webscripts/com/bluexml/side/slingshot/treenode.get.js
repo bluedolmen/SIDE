@@ -8,8 +8,8 @@ model.treenode = getTreeNode();
 function getTreeNode() {
 	try {
 		var params = {};
-		params.path = url.templateArgs.path || "";
-		params.site = url.templateArgs.site;
+		params.path = args["rootPath"] || "";
+		params.site = url.templateArgs.site || "";
 		
 		params.evalChildFolders = args["children"] !== "false";
 		params.argMax = parseInt(args["max"], 10);

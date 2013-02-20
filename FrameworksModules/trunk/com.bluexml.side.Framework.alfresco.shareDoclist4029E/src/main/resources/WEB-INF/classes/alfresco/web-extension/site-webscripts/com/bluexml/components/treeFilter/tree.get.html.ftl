@@ -18,7 +18,8 @@
       documentTypeIsAspect : "${documentTypeIsAspect}",
       rootProperty: "${rootProperty}",
       rootName: "${rootName}",
-      rootLabel: "${msg(rootLabelId)}"
+      rootLabel: "${msg(rootLabelId)}",
+      rootPath: "${rootPath!""}"
    }).setMessages(
       ${messages}
    );

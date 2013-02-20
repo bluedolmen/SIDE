@@ -21,6 +21,7 @@ function main() {
 		model.rootLabelId = paramValide("headerLabelId", "portlet." + page.id + "." + args["region-id"] + ".header");
 		model.documentTypeIsAspect = paramValide("documentTypeIsAspect", "false");
 		model.rootName = args.rootName;
+		model.rootPath = paramValide("rootPath", "");
 
 	} else {
 		// error
