@@ -7,11 +7,11 @@
         <technologyVersion description="Check this to generate on the major release 3.4 of Alfresco.&lt;br&gt;Alfresco 3.4.d is the leading open source collaborative ECM solution.&lt;br&gt;Additionally to content generation, SIDE provides useful server components to enhance some features of this release." id="alfresco_42c" version="Alfresco 4.2.c">
           <generatorVersion class="com.bluexml.side.form.generator.alfresco42c.FormGenerator42c" description="This generator generate configuration from Forms Models for Alfresco Share" hidden="visible" id="com.bluexml.side.Form.generator.alfresco42c" version="Alfresco Share Forms Generator">
             <configurationParameter dataType="String" defaultValue="1.0" key="com.bluexml.side.Form.generator.alfresco42c.module.version" label="Form Module version" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.share.formExtension42c" moduleType="zip" technologyVersion="alfresco_42c" versionMax="1.0.41" versionMin="1.0.41" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.sharePortalExtension42c" moduleType="zip" technologyVersion="alfresco_42c" versionMax="1.0.5" versionMin="1.0.5" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.share.formExtension42c" moduleType="zip" technologyVersion="alfresco_42c" versionMax="1.0.1" versionMin="1.0.1" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.sharePortalExtension42c" moduleType="zip" technologyVersion="alfresco_42c" versionMax="1.0.1" versionMin="1.0.1" />
             <option defaultOption="true" documentation="this must be hidden" hidden="true" key="generator.main" label="main generation" />
             <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.share.Inputex" moduleType="zip" technologyVersion="alfresco_42c" versionMax="1.0.6" versionMin="1.0.6" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.formProcessor42c" moduleType="amp" technologyVersion="alfresco_42c" versionMax="1.0.37" versionMin="1.0.37" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.formProcessor42c" moduleType="amp" technologyVersion="alfresco_42c" versionMax="1.0.1" versionMin="1.0.1" />
           </generatorVersion>
         </technologyVersion>
       </technology>
