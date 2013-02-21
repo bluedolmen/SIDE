@@ -132,7 +132,7 @@ function getCreateContent()
                   itemid = attr["itemid"] ? attr["itemid"].toString() : null,
                   formid = attr["formid"] ? attr["formid"].toString() : null,
                   isContainer = attr["isContainer"] ? attr["isContainer"].toString() : "false",
-                  url = "create-content?destination={node.nodeRef}";
+                  url = "create-content?destination={nodeRef}";
                if (permission)
                {
                   content.permission += (content.permission.length == 0 ? "" : ",") + permission;
