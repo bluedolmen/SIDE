@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: BuiltinModelsAlfresco
 Bundle-SymbolicName: com.bluexml.side.Util.framework.tools.builtinModelsAlfresco;singleton:=true
-Bundle-Version: 1.0.7.v43985-20130220
+Bundle-Version: 1.0.8.v44038-20130221
 Bundle-Activator: com.bluexml.side.util.framework.tools.builtinmodelsalfresco.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.ui,
