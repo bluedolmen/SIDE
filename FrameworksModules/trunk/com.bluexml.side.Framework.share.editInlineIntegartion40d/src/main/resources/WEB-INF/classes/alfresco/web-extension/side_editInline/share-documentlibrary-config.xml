@@ -1,0 +1,89 @@
+<alfresco-config>
+   <!-- Document Library Custom Code config section -->
+   <config evaluator="string-compare" condition="DocLibCustom">
+      <!--
+         Custom Code dependencies.
+
+         Note: files specified in the "src" attribute resolve relative to the /share/res/ servlet context. -->
+         <dependencies>
+            <js src="/components/extension/documentlibrary/side-editinline-action.js" />
+			<js src="/components/extension/documentlibrary/side-commit-action.js" />
+         </dependencies>
+   </config>
+   
+   <!-- Document Library Actions config section -->
+   <config evaluator="string-compare" condition="DocLibActions">
+      <!--
+         Action definitions
+      -->
+      <actions>
+		<!-- Edit online -->
+         <action id="document-edit-online" type="javascript" label="actions.document.edit-online">
+            <param name="function">onActionEditOnline</param>
+            <permissions>
+               <permission allow="true">Write</permission>
+            </permissions>
+            <!-- vti module check, mimetype check, userAgent check -->
+            <evaluator>evaluator.doclib.action.onlineEditCustom</evaluator>
+			<evaluator negate="true">evaluator.doclib.action.side.onlineEditMimetype</evaluator>
+         </action>
+		 
+         <!-- Edit offline -->
+         <action id="document-edit-offline" type="javascript" label="actions.document.edit-offline">
+            <param name="function">onActionEditOffline</param>
+            <permissions>
+               <permission allow="true">Write</permission>
+            </permissions>
+            <evaluator negate="true">evaluator.doclib.action.notEditable</evaluator>
+			<evaluator negate="true">evaluator.doclib.action.side.onlineEditMimetype</evaluator>
+		 </action>
+	  
+		 <!-- Start Side extension commit : Commit action for working copy -->
+         <action id="document-side-commit-editing" type="javascript" label="actions.document.side.commit-editing">
+            <param name="function">onActionSideCommitEditing</param>
+            <permissions>
+               <permission allow="true">Write</permission>
+            </permissions>
+            <evaluator>evaluator.doclib.action.isWorkingCopy</evaluator>
+            <evaluator>evaluator.doclib.action.editableByCurrentUser</evaluator> 
+         </action>
+      	 <!-- End Side extension commit : Commit action for working copy -->
+		 
+	  	<!-- Start Side extension edit online: add action to edit online using remote copy through applet -->
+         <action id="document-side-edit-online" type="javascript" label="actions.document.side.edit-online">
+            <param name="function">onActionSideEditOnline</param>
+            <permissions>
+               <permission allow="true">Write</permission>
+            </permissions>
+            <!-- mimetype check, userAgent check -->
+            <evaluator>evaluator.doclib.action.side.onlineEditMimetype</evaluator>
+            <evaluator negate="true">evaluator.doclib.action.notEditable</evaluator>
+         </action>
+      	 <!-- End Side extension edit online: add action to edit online using remote copy through applet -->
+      </actions>
+
+      <!--
+         Action Group definitions
+      -->
+      <actionGroups>
+         <actionGroup id="document-browse">
+      	 	<!-- Start Side extension edit online: add action to edit online using remote copy through applet -->
+            <action index="205" id="document-side-edit-online" />
+	      	<!-- End Side extension edit online: add action to edit online using remote copy through applet -->
+	     	<!-- Start Side extension commit : Commit action for working copy -->
+            <action index="295" id="document-side-commit-editing" />
+      	 	<!-- End Side extension commit : Commit action for working copy -->
+         </actionGroup>
+
+         <actionGroup id="document-details">
+      	 	<!-- Start Side extension edit online: add action to edit online using remote copy through applet -->
+            <action index="195" id="document-side-edit-online" />
+      	 	<!-- End Side extension edit online: add action to edit online using remote copy through applet -->
+     	 	<!-- Start Side extension commit : Commit action for working copy -->
+            <action index="285" id="document-side-commit-editing" />
+      	 	<!-- End Side extension commit : Commit action for working copy -->
+         </actionGroup>
+      </actionGroups>
+   </config>
+
+</alfresco-config>

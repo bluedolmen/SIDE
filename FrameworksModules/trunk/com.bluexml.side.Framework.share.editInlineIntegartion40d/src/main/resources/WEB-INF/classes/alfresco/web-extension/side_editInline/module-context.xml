@@ -2,6 +2,7 @@
 <!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans-2.0.dtd'>
 
 <beans>
+
 	<bean id="side_editInline.messages.resources" class="org.springframework.extensions.surf.util.ResourceBundleBootstrapComponent">
       <property name="resourceBundles">
          <list>
@@ -9,4 +10,24 @@
          </list>
       </property>
    </bean>
+   
+      <!-- Provide editInline config -->
+	<bean id="editinlineURLConfig"
+		class="org.springframework.extensions.config.source.UrlConfigSource">
+		<constructor-arg>
+			<list>
+				<value>webapp:WEB-INF/classes/alfresco/web-extension/side_editInline/share-documentlibrary-config.xml</value>
+				<value>webapp:WEB-INF/classes/alfresco/web-extension/side_editInline/share-documentlibrary-config-custom.xml</value>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<!-- Provide default editInline config -->
+	<bean id="editinlineClientConfig"
+		class="com.bluexml.side.Framework.alfresco.share.formExtension.MyConfigBootStrap"
+		init-method="register">
+		<property name="configService" ref="web.config" />
+		<property name="urlConfigSource" ref="editinlineURLConfig" />
+	</bean>
+
 </beans>
