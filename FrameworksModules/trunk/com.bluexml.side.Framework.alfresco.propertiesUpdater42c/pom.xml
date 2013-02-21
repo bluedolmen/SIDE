@@ -111,13 +111,13 @@
     <dependency>
       <groupId>com.bluexml.side.Framework.alfresco</groupId>
       <artifactId>commons42c</artifactId>
-      <version>1.0.14</version>
+      <version>1.0.1</version>
       <type>amp</type>
     </dependency>
     <dependency>
       <groupId>com.bluexml.side.Framework.alfresco</groupId>
       <artifactId>commons42c</artifactId>
-      <version>1.0.14</version>
+      <version>1.0.1</version>
       <classifier>classes</classifier>
       <scope>provided</scope>
     </dependency>
@@ -366,6 +366,6 @@
       </dependencies>
     </profile>
   </profiles>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
 </project>
 
