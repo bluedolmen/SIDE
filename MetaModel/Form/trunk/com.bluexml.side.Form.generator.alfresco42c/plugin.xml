@@ -11,7 +11,6 @@
             <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.sharePortalExtension42c" moduleType="zip" technologyVersion="alfresco_42c" versionMax="1.0.5" versionMin="1.0.5" />
             <option defaultOption="true" documentation="this must be hidden" hidden="true" key="generator.main" label="main generation" />
             <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.share.Inputex" moduleType="zip" technologyVersion="alfresco_42c" versionMax="1.0.6" versionMin="1.0.6" />
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.share.autoConnect42c" moduleType="zip" technologyVersion="alfresco_42c" versionMax="1.0.7" versionMin="1.0.7" />
             <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.formProcessor42c" moduleType="amp" technologyVersion="alfresco_42c" versionMax="1.0.37" versionMin="1.0.37" />
           </generatorVersion>
         </technologyVersion>
