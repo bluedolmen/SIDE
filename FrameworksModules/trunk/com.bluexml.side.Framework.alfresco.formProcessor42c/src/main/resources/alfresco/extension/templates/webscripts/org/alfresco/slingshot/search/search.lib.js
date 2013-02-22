@@ -1159,8 +1159,8 @@ function getSavedSearchQueryDef(nodeRef) {
 }
 
 function getSearchDef(params) {
-	var ftsQuery = "", term = params.term, tag = params.tag, formData = params.query;
-
+	var ftsQuery = "", term = params.term, tag = params.tag, formData = params.query,
+	rootNode = resolveRootNode(params.rootNode);
 	// Simple keyword search and tag specific search
 	if (term !== null && term.length !== 0) {
 		// TAG is now part of the default macro

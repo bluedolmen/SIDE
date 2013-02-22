@@ -21,15 +21,15 @@ package com.bluexml.side.framework.alfresco.sharePortalExtension;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
+import org.springframework.extensions.surf.ModelObject;
 import org.springframework.extensions.surf.ModelObjectService;
 import org.springframework.extensions.surf.PresetsManager;
 import org.springframework.extensions.surf.exception.ModelObjectPersisterException;
@@ -44,16 +44,14 @@ import org.springframework.extensions.webscripts.Store;
 /**
  * Spring util bean responsible for preset model object generation.
  * <p>
- * Presets are defined as XML snippets representing the model objects for a
- * given set. Each file can contain many presets each referenced by a unique ID.
- * The preset definitions can be located in any Store and any number of stores
- * can be searched.
+ * Presets are defined as XML snippets representing the model objects for a given set.
+ * Each file can contain many presets each referenced by a unique ID. The preset definitions
+ * can be located in any Store and any number of stores can be searched.
  * <p>
- * A set of parameterised model objects such as page, template instances and
- * component bindings can be defined for a preset. The XML for each model object
- * definition is effectively identical to that used to define the model object
- * within its own file - but nested within the preset structure as follows:
- * 
+ * A set of parameterised model objects such as page, template instances and component
+ * bindings can be defined for a preset. The XML for each model object definition is
+ * effectively identical to that used to define the model object within its own file -
+ * but nested within the preset structure as follows:
  * <pre>
  * <{@code}?xml version='1.0' encoding='UTF-8'?>
  * <{@code}presets>
@@ -73,20 +71,12 @@ import org.springframework.extensions.webscripts.Store;
  *     <{@code}/preset>
  * <{@code}/presets>
  * </pre>
- * 
- * One important difference to standard model object XML is that the ID for an
- * object is specified as an attribute on the parent element, for instance:
- * 
- * <pre>
- * <{@code}page id="user/${userid}/dashboard">
- * </pre>
- * 
- * See the file slingshot\config\alfresco\site-data\presets\presets.xml for
- * example usage.
+ * One important difference to standard model object XML is that the ID for an object is
+ * specified as an attribute on the parent element, for instance:
+ * <pre><{@code}page id="user/${userid}/dashboard"></pre>
+ * See the file slingshot\config\alfresco\site-data\presets\presets.xml for example usage.
  * <p>
- * Each preset supports parameterisation via "token" name/value pair
- * replacements. For example:
- * 
+ * Each preset supports parameterisation via "token" name/value pair replacements. For example:
  * <pre>
  *     <{@code}preset id="site-dashboard">
  *         <{@code}components>
@@ -98,26 +88,40 @@ import org.springframework.extensions.webscripts.Store;
  *             <{@code}/component>
  *             ...
  * </pre>
- * 
- * where the values of "${scope}" and "${siteid}" would be replaced if supplied
- * in the token map during preset construction. See the method constructPreset()
- * below.
+ * where the values of "${scope}" and "${siteid}" would be replaced if supplied in the token
+ * map during preset construction. See the method constructPreset() below.
  * </p>
- * 
  * @author Kevin Roast
  * 
  * SIDE Extension
  * Extends Original Alfresco code
- * Allow to load presets from multiple paths
+ * presets ids is provided by this class so we can get lists of them
  * @author davidabad
  */
-public class PresetsManagerExtension extends PresetsManager {
-	Log logger = LogFactory.getLog(PresetsManagerExtension.class);
-	private SearchPath searchPath;
-    private List<String> files;
+public class PresetsManagerExtension extends PresetsManager
+{
+    /**
+     * <p>The {@link SearchPath} instance to use when looking up preset configuration files. This should
+     * be defined in the Spring application context.</p>
+     */
+    private SearchPath searchPath;
+    
+    /**
+     * <p>A {@link List} of suffices that valid presets configuration files are allowed to have. Only
+     * files that end in a suffix defined in this list will be processed.</p>
+     */
+    private List<String> fileSuffices;
 
+    /**
+     * <p>An array of all the {@link Document} instances that represent all the preset configuration files
+     * processed for the application. This array is generated at application startup by the <code>init</code>
+     * method.</p>
+     */
     private Document[] documents;
 
+    /**
+     * <p>The {@link ModelObjectService} is required in order to create new objects from the presets.</p>
+     */
     private ModelObjectService modelObjectService;
 
     /**
@@ -129,7 +133,7 @@ public class PresetsManagerExtension extends PresetsManager {
     }
 
     /**
-     * @param searchPath        the SearchPath to set
+     * @param searchPath The SearchPath to set
      */
     public void setSearchPath(SearchPath searchPath)
     {
@@ -137,48 +141,65 @@ public class PresetsManagerExtension extends PresetsManager {
     }
 
     /**
-     * @param files             the preset files list to set
+     * <p>This setter is provided to allow the Spring application context to set the filename suffices
+     * that should be used for presets. Originally this was treated as a list of complete filenames but
+     * has since been expanded to increase the ability to extend default application presets.</p>
+     * 
+     * @param files A list of filename suffices that can be matched to presets configuration files.
      */
     public void setFiles(List<String> files)
     {
-        this.files = files;
+        this.fileSuffices = files;
     }
 
-
     /**
-     * Initialise the presets manager
+     * <p>Initialise the presets manager to load all the presets configuration files.</p>
      */
     private void init()
     {
-        if (this.searchPath == null || this.files == null)
+        if (this.searchPath == null || this.fileSuffices == null)
         {
             throw new IllegalArgumentException("SearchPath and Files list are mandatory.");
         }
 
-        // search for our preset XML descriptor documents
+        // Search for our preset XML descriptor documents
+        
+        // Find all the preset configuration files in all the configured stores. In order to maintain
+        // a sensible precedence order we will search the stores in order and then check every 
+        // document path against the list of suffices. This is not the most efficient way of processing
+        // the configuration files but as this only happens at application startup it is not a major
+        // problem...
         List<Document> docs = new ArrayList<Document>(4);
         for (Store store : this.searchPath.getStores())
         {
-            for (String file : this.files)
+            // For the current storee...
+            for (String path: store.getAllDocumentPaths())
             {
-                try
+                // ...get all the documents...
+                for (String fileSuffix : this.fileSuffices)
                 {
-                    if (store.hasDocument(file))
+                    // ...and see if each ends with the current file suffix...
+                    if (path.endsWith(fileSuffix))
                     {
-                        docs.add(XMLUtil.parse(store.getDocument(file)));
+                        try
+                        {
+                            docs.add(XMLUtil.parse(store.getDocument(path)));
+                        }
+                        catch (IOException ioe)
+                        {
+                            throw new PlatformRuntimeException("Error loading presets XML file: " +
+                                    fileSuffix + " in store: " + store.toString(), ioe);
+                        }
+                        catch (DocumentException de)
+                        {
+                            de.printStackTrace();
+                            throw new PlatformRuntimeException("Error processing presets XML file: " +
+                                    fileSuffix + " in store: " + store.toString(), de);
+                        }
+                        break; // No point in carrying on around the loop, we've already added the file.
                     }
                 }
-                catch (IOException ioe)
-                {
-                    throw new PlatformRuntimeException("Error loading presets XML file: " +
-                            file + " in store: " + store.toString(), ioe);
-                }
-                catch (DocumentException de)
-                {
-                    de.printStackTrace();
-                    throw new PlatformRuntimeException("Error processing presets XML file: " +
-                            file + " in store: " + store.toString(), de);
-                }
+                
             }
         }
         this.documents = docs.toArray(new Document[docs.size()]);
@@ -210,6 +231,7 @@ public class PresetsManagerExtension extends PresetsManager {
             }
         }
 
+        List<ModelObject> docsToCreate = new LinkedList<ModelObject>();
         boolean foundPreset = false;
         for (int i=0; (!foundPreset && i<this.documents.length); i++)
         {
@@ -277,15 +299,8 @@ public class PresetsManagerExtension extends PresetsManager {
                                 }
                             }
 
-                            // persist the object
-                            try
-                            {
-                                modelObjectService.saveObject(component);
-                            }
-                            catch (ModelObjectPersisterException e)
-                            {
-                                e.printStackTrace();
-                            }
+                            // collect the object to persist later
+                            docsToCreate.add(component);
                         }
                     }
 
@@ -336,15 +351,8 @@ public class PresetsManagerExtension extends PresetsManager {
                                 }
                             }
 
-                            // persist the object
-                            try
-                            {
-                                modelObjectService.saveObject(page);
-                            }
-                            catch (ModelObjectPersisterException e)
-                            {
-                                e.printStackTrace();
-                            }
+                            // collect the object to persist later
+                            docsToCreate.add(page);
                         }
                     }
 
@@ -391,19 +399,25 @@ public class PresetsManagerExtension extends PresetsManager {
                                 }
                             }
 
-                            // persist the object
-                            try
-                            {
-                                modelObjectService.saveObject(template);
-                            }
-                            catch (ModelObjectPersisterException e)
-                            {
-                                e.printStackTrace();
-                            }
+                            // collect the object to persist later
+                            docsToCreate.add(template);
                         }
                     }
 
                     // TODO: any chrome, associations, types, themes etc. in the preset...
+
+                    // Bulk create the documents
+                    if (!docsToCreate.isEmpty())
+                    {
+                        try
+                        {
+                            modelObjectService.saveObjects(docsToCreate);
+                        }
+                        catch (ModelObjectPersisterException e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }
 
                     // found our preset - no need to process further
                     break;
@@ -411,7 +425,6 @@ public class PresetsManagerExtension extends PresetsManager {
             }
         }
     }
-
 
     /**
      * Replace token strings - marked by ${...} in the given string with
@@ -439,11 +452,10 @@ public class PresetsManagerExtension extends PresetsManager {
                 }
             }
         }
-
         return s;
     }
-
-	@SuppressWarnings("unchecked")
+    
+    @SuppressWarnings("unchecked")
 	public List<String> getPresetsIds() {
 		List<String> ids = new ArrayList<String>();
 		synchronized (this) {

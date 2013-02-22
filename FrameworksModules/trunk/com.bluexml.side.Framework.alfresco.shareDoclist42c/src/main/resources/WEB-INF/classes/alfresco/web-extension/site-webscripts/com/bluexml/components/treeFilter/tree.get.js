@@ -26,32 +26,32 @@ function main() {
    }
    
    if (paramValide("rootName")) {
+      var docListTree = {
+        id : "DocListTree", 
+        name : "SIDE.DocListTree",
+        options : {
+           siteId : (page.url.templateArgs.site != null) ? page.url.templateArgs.site : "",
+           containerId : template.properties.container != null ? template.properties.container : "documentLibrary",
+           evaluateChildFolders : (evaluateChildFolders == "true"),
+           maximumFolderCount : parseInt(maximumFolderCount),
+           setDropTargets : true,
+           assoType : paramValide("assoType", "buildInLibraryAlfresco:TreeFilter_AssociationTree_TreeFilter"),
+           nodeType : paramValide("nodeType", "buildInLibraryAlfresco:TreeFilter"),
+           nodeTypeDocument : paramValide("nodeTypeDocument", "buildInLibraryAlfresco:HasTreeFilter"),
+           assoTypeDocument : paramValide("assoTypeDocument", "buildInLibraryAlfresco:HasTreeFilter_hasTreeFilter_TreeFilter"),
+           selectableTypeIsAspect : paramValide("selectableTypeIsAspect", "true"),
+           rootProperty : paramValide("rootProperty", "buildInLibraryAlfresco:TreeFilter_root"),
+           rootLabelId : paramValide("headerLabelId", "portlet." + page.id + "." + args["region-id"] + ".header"),
+           documentTypeIsAspect : paramValide("documentTypeIsAspect", "false"),
+           rootName : args.rootName,
+           rootPath : paramValide("rootPath", "")
+        }
+      };
+      model.widgets = [docListTree];
+   } else {
       throw "PLease check parameters rootName is Missing";
    }
    
-   var docListTree = {
-     id : "DocListTree", 
-     name : "Alfresco.DocListTree",
-     options : {
-        siteId : (page.url.templateArgs.site != null) ? page.url.templateArgs.site : "",
-        containerId : template.properties.container != null ? template.properties.container : "documentLibrary",
-        evaluateChildFolders : (evaluateChildFolders == "true"),
-        maximumFolderCount : parseInt(maximumFolderCount),
-        setDropTargets : true,
-        assoType : paramValide("assoType", "buildInLibraryAlfresco:TreeFilter_AssociationTree_TreeFilter"),
-        nodeType : paramValide("nodeType", "buildInLibraryAlfresco:TreeFilter"),
-        nodeTypeDocument : paramValide("nodeTypeDocument", "buildInLibraryAlfresco:HasTreeFilter"),
-        assoTypeDocument : paramValide("assoTypeDocument", "buildInLibraryAlfresco:HasTreeFilter_hasTreeFilter_TreeFilter"),
-        selectableTypeIsAspect : paramValide("selectableTypeIsAspect", "true"),
-        rootProperty : paramValide("rootProperty", "buildInLibraryAlfresco:TreeFilter_root"),
-        rootLabelId : paramValide("headerLabelId", "portlet." + page.id + "." + args["region-id"] + ".header"),
-        documentTypeIsAspect : paramValide("documentTypeIsAspect", "false"),
-        rootName : args.rootName,
-        rootPath : paramValide("rootPath", "")
-     }
-   };
-   model.widgets = [docListTree];
-	
 }
 
 function paramValide(param, defaultValue) {

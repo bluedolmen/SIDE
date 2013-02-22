@@ -144,7 +144,6 @@
       <groupId>com.bluexml.side.Framework.alfresco</groupId>
       <artifactId>unicity42c</artifactId>
       <version>1.0.1</version>
-      <scope>provided</scope>
       <type>amp</type>
     </dependency>
     <dependency>

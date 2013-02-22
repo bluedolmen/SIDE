@@ -47,7 +47,7 @@ function main() {
 	var docListFilter = {
       id : "BaseFilter",
       name : "Alfresco.component.BaseFilter",
-      initArgs: [ "SIDE.DocListFilter", "\"" + args.htmlid + "\""],
+      initArgs: [ "Alfresco.DocListFilter", "\"" + args.htmlid + "\""],
       assignTo : "filter",
       useMessages : false
    };

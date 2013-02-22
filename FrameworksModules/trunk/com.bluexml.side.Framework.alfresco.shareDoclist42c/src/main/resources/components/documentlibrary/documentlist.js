@@ -4122,7 +4122,7 @@
             // search parameters
             if (obj.filter.filterData)
             {
-               params += "&search=" + encodeURIComponent(obj.filter.filterData);
+               params += "&filterData=" + encodeURIComponent(obj.filter.filterData);
             }
          } else
          {
