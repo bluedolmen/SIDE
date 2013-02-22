@@ -7,11 +7,11 @@
         <technologyVersion description="Check this to generate class models on the major release 3 of Alfresco.&lt;br&gt;Alfresco 3.x is the leading open source collaborative ECM solution.&lt;br&gt;Additionally to content generation, SIDE provides useful server components to enhance some features of this release." id="alfresco_42c" version="Alfresco 4.2.c">
           <generatorVersion class="com.bluexml.side.portal.generator.alfresco42c.AlfPortalGenerator42c" hidden="visible" id="com.bluexml.side.Portal.generator.alfresco42c" version="SIDE Alfresco Portal Generator 4.0.d Community">
             <option defaultOption="true" key="com.bluexml.side.Portal.generator.alfresco.doclist" label="Alfresco Share document library component">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.shareDoclist42c" moduleType="zip" technologyVersion="alfresco_42c" versionMax="1.0.2" versionMin="1.0.2" />
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.doclist42c" moduleType="amp" technologyVersion="alfresco_42c" versionMax="1.0.1" versionMin="1.0.1" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.shareDoclist42c" moduleType="zip" technologyVersion="alfresco_42c" versionMax="1.0.3" versionMin="1.0.3" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.doclist42c" moduleType="amp" technologyVersion="alfresco_42c" versionMax="1.0.2" versionMin="1.0.2" />
             </option>
             <option defaultOption="true" key="com.bluexml.side.Portal.generator.alfresco.forms" label="document details editing">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.formProcessor42c" moduleType="amp" technologyVersion="alfresco_42c" versionMax="1.0.1" versionMin="1.0.1" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.formProcessor42c" moduleType="amp" technologyVersion="alfresco_42c" versionMax="1.0.2" versionMin="1.0.2" />
             </option>
             <option defaultOption="false" documentation="add share component to include custom iframe in pages" key="com.bluexml.side.Portal.generator.alfresco.iframe" label="iframe integration">
               <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.shareIframe" moduleType="zip" technologyVersion="alfresco_42c" versionMax="1.0.15" versionMin="1.0.15" />
@@ -19,13 +19,13 @@
             <mustBeChecked pluginId="com.bluexml.side.Class.generator.alfresco42c">
               <optionRef optionId="alfresco.share.extension" />
             </mustBeChecked>
-            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.sharePortalExtension42c" moduleType="zip" technologyVersion="alfresco_42c" versionMax="1.0.1" versionMin="1.0.1" />
+            <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.sharePortalExtension42c" moduleType="zip" technologyVersion="alfresco_42c" versionMax="1.0.2" versionMin="1.0.2" />
             <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.cmisFacetMap42c" moduleType="amp" technologyVersion="alfresco_42c" versionMax="1.0.1" versionMin="1.0.1" />
             <configurationParameter dataType="String" defaultValue="http://localhost:8080/share" documentation="Set this value to the URL of the Alfresco Share instance on which you want to generate and deploy" key="alfresco.share.url" label="Alfresco share URL" />
             <configurationParameter dataType="String" defaultValue="1.0" key="com.bluexml.side.Portal.generator.alfresco.module.version" label="Portal module version" />
             <option defaultOption="true" documentation="this must be hidden" hidden="true" key="generator.main" label="main generation" />
             <option defaultOption="false" documentation="add a dashlet to let user choose the UI language, this is persited in user profile" hidden="false" key="portal.dashlet.language.picker" label="language picker dashlet">
-              <moduleDependence label="languagePicker" moduleId="com.bluexml.side.Framework.share.languagePicker42c" moduleType="zip" technologyVersion="alfresco_42c" versionMax="1.0.1" versionMin="1.0.1" />
+              <moduleDependence label="languagePicker" moduleId="com.bluexml.side.Framework.share.languagePicker42c" moduleType="zip" technologyVersion="alfresco_42c" versionMax="1.0.2" versionMin="1.0.2" />
             </option>
             <option defaultOption="false" documentation="module that use DataList to save search see portal model documentation" hidden="false" key="portal.save.search" label="save search">
               <moduleDependence label="saved search extension" moduleId="com.bluexml.side.Framework.share.savedSearch42c" moduleType="zip" technologyVersion="alfresco_42c" versionMax="1.0.1" versionMin="1.0.1" />
