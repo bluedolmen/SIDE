@@ -3,11 +3,14 @@ package com.bluexml.side.Portal.modeler.diagram.dialogs.viewer;
 import java.util.Arrays;
 
 import org.eclipse.jface.viewers.CellEditor;
+import org.eclipse.jface.viewers.ICellEditorListener;
 import org.eclipse.jface.viewers.ICellModifier;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.jface.viewers.Viewer;
@@ -28,24 +31,24 @@ public class InstancesViewer {
 	private static final int ATTRIBUTENAME_WIDTH = 150;
 
 	private static final int VALUE_WIDTH = 150;
-			
+
 	private TableViewer tableViewer;
 
-	private String[] columnNames = new String[] { "Attribute", "Value"};
-	
+	private String[] columnNames = new String[] { "Attribute", "Value" };
+
 	private InstancesDataStructure dataStruct;
-	
+
 	protected CellEditor[] editors;
-	
+
 	protected Table table;
-	
+
 	public InstancesViewer(Composite p_parent, InstancesDataStructure p_dataStruct) {
 		if (p_dataStruct != null) {
 			this.dataStruct = p_dataStruct;
-		} 			
-		createTableViewer(p_parent);		
+		}
+		createTableViewer(p_parent);
 	}
-	
+
 	private void createTableViewer(Composite p_parent) {
 		Table table = createTable(p_parent);
 		tableViewer = new TableViewer(table);
@@ -54,28 +57,43 @@ public class InstancesViewer {
 		tableViewer.setColumnProperties(columnNames);
 
 		editors = new CellEditor[2];
-		
+
 		TextCellEditor attributeEditor = new TextCellEditor(table);
-        ((Text) attributeEditor.getControl()).setTextLimit(60);  
-        attributeEditor.getControl().setEnabled(false);
-        editors[0] = attributeEditor;   
-        
-        TextCellEditor valueEditor = new TextCellEditor(table);
-        ((Text) valueEditor.getControl()).setTextLimit(250);
-        
-        DialogResourceCellEditor ceditor = new DialogResourceCellEditor(table);
-        
-//        editors[1] = valueEditor;
-        
-        editors[1] = ceditor;
-        
-        tableViewer.setCellEditors(editors);
+		((Text) attributeEditor.getControl()).setTextLimit(60);
+		attributeEditor.getControl().setEnabled(false);
+		editors[0] = attributeEditor;
+
+		TextCellEditor valueEditor = new TextCellEditor(table);
+		((Text) valueEditor.getControl()).setTextLimit(250);
+
+		final DialogResourceCellEditor ceditor = new DialogResourceCellEditor(table);
+		ceditor.addListener(new ICellEditorListener() {
+
+			public void editorValueChanged(boolean oldValidState, boolean newValidState) {
+
+			}
+
+			public void cancelEditor() {
+
+			}
+
+			public void applyEditorValue() {
+				ISelection selection = tableViewer.getSelection();
+				tableViewer.getCellModifier().modify(selection, columnNames[1], ceditor.getValue());
+
+			}
+		});
+		//        editors[1] = valueEditor;
+
+		editors[1] = ceditor;
+
+		tableViewer.setCellEditors(editors);
 		tableViewer.setContentProvider(new InstancesContentProvider());
 		tableViewer.setLabelProvider(new InstancesLabelProvider());
 		tableViewer.setInput(dataStruct);
 		tableViewer.setCellModifier(new InstancesCellModifier());
 	}
-	
+
 	private Table createTable(Composite composite) {
 		int style = SWT.SINGLE | SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.HIDE_SELECTION;
 
@@ -86,7 +104,7 @@ public class InstancesViewer {
 
 		TableColumn widthColumn = new TableColumn(table, SWT.LEFT);
 		widthColumn.setText(columnNames[1]);
-		widthColumn.setWidth(VALUE_WIDTH);				
+		widthColumn.setWidth(VALUE_WIDTH);
 
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
@@ -97,29 +115,28 @@ public class InstancesViewer {
 
 		return table;
 	}
-	
+
 	public void refresh() {
-		tableViewer.refresh();		
+		tableViewer.refresh();
 	}
-	
+
 	public Object getSelection() {
 		return ((IStructuredSelection) tableViewer.getSelection()).getFirstElement();
 	}
-	
+
 	/**
 	 * 
 	 */
 	public void remove() {
-		dataStruct.remove(getSelection());		
+		dataStruct.remove(getSelection());
 		tableViewer.refresh();
 	}
-	
+
 	/**
 	 * Internal class to handle modification
 	 */
 	class InstancesContentProvider implements IStructuredContentProvider {
 		/**
-		 * 
 		 * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(java.lang.Object)
 		 */
 		public Object[] getElements(Object inputElement) {
@@ -127,7 +144,6 @@ public class InstancesViewer {
 		}
 
 		/**
-		 * 
 		 * @see org.eclipse.jface.viewers.IContentProvider#dispose()
 		 */
 		public void dispose() {
@@ -135,7 +151,6 @@ public class InstancesViewer {
 		}
 
 		/**
-		 * 
 		 * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse.jface.viewers.Viewer,
 		 *      java.lang.Object, java.lang.Object)
 		 */
@@ -143,15 +158,14 @@ public class InstancesViewer {
 			// nothing to do
 		}
 	}
-	
+
 	/**
-	 * 
 	 * @return
 	 */
 	public InstancesDataStructure getData() {
 		return dataStruct;
 	}
-	
+
 	/**
 	 * Internal class to handle modification
 	 */
@@ -172,29 +186,28 @@ public class InstancesViewer {
 			String result = "";
 			switch (columnIndex) {
 			case 0:
-				result = ((InstancesObject)element).getKey();
+				result = ((InstancesObject) element).getKey();
 				break;
 			case 1:
-				result = ((InstancesObject)element).getValue();
-				break;			
+				result = ((InstancesObject) element).getValue();
+				break;
 			default:
 				break;
 			}
 			return result;
 		}
 	}
-	
+
 	/**
 	 * Internal class to handle modification
 	 */
 	class InstancesCellModifier implements ICellModifier {
 		/**
-		 * 
 		 * @see org.eclipse.jface.viewers.ICellModifier#canModify(java.lang.Object,
 		 *      java.lang.String)
 		 */
 		public boolean canModify(Object element, String property) {
-			
+
 			int index = Arrays.asList(columnNames).indexOf(property);
 			if (index == 0) {
 				return false;
@@ -203,52 +216,61 @@ public class InstancesViewer {
 		}
 
 		/**
-		 * 
 		 * @see org.eclipse.jface.viewers.ICellModifier#getValue(java.lang.Object,
 		 *      java.lang.String)
 		 */
-		public Object getValue(Object element, String property) {			
+		public Object getValue(Object element, String property) {
 			Object result = null;
-            int index = Arrays.asList(columnNames).indexOf(property);
-            if (element instanceof InstancesObject) {
-	            switch (index)
-	            {
-	                case 0:
-	                    
-	                    break;
-	                case 1 :
-	                	result = ((InstancesObject)element).getValue();
-	                	break;                
-	                default:
-	                    break;
-	            }
-            }
+			int index = Arrays.asList(columnNames).indexOf(property);
+			if (element instanceof InstancesObject) {
+				switch (index) {
+				case 0:
+
+					break;
+				case 1:
+					result = ((InstancesObject) element).getValue();
+					break;
+				default:
+					break;
+				}
+			}
 			return result;
 		}
 
 		/**
-		 * 
 		 * @see org.eclipse.jface.viewers.ICellModifier#modify(java.lang.Object,
 		 *      java.lang.String, java.lang.Object)
 		 */
 		public void modify(Object element, String property, Object value) {
-			TableItem item = (TableItem) element;
-			
-            int index = Arrays.asList(columnNames).indexOf(property);
-            if (item.getData() instanceof InstancesObject) {
-	            switch (index)
-	            {
-	                case 0:	                	
-	                    break;
-	                case 1:
-	                	((InstancesObject)item.getData()).setValue((String) value);
-	                    break;               
-	                default:
-	                    break;
-	            }
-            }
-            tableViewer.update(item.getData(), null);
+			InstancesObject instanceObject = null;
+			if (element instanceof StructuredSelection) {
+				Object s = ((StructuredSelection) element).getFirstElement();
+				if (s != null && s instanceof InstancesObject) {
+					instanceObject = (InstancesObject) s;
+				}
+			} else if (element instanceof TableItem) {
+				TableItem item = (TableItem) element;
+				if (item.getData() instanceof InstancesObject) {
+					instanceObject = (InstancesObject) item.getData();
+				}
+			}
+			if (instanceObject != null) {
+
+				int index = Arrays.asList(columnNames).indexOf(property);
+
+				switch (index) {
+				case 0:
+					break;
+				case 1:
+					instanceObject.setValue((String) value);
+					break;
+				default:
+					break;
+				}
+
+				tableViewer.update(instanceObject, null);
+			}
 		}
 	}
-	
+
 }
