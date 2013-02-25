@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Portal.modeler.feature" label="SIDE Portal Modeler" version="1.0.72.v41542-20121220" provider-name="BlueXML">
+<feature id="com.bluexml.side.Portal.modeler.feature" label="SIDE Portal Modeler" version="1.0.73.v44223-20130225" provider-name="BlueXML">
   <description url="http://www.side-labs.com">SIDE lets developers who are new to Alfresco get started quickly and helps experienced developers get the job done even faster.</description>
   <copyright url="http://www.bluexml.com/copyright">Copyright 2005-2012 BlueXML SARL.</copyright>
   <license url="http://www.side-labs.com/en/index.php/Product:License">SIDE SOFTWARE IS LICENSED BY BLUEXML. PLEASE GO TO http://www.side-labs.com/en/index.php/Product:License. READ THIS AGREEMENT CAREFULLY BEFORE PURCHASING AND/OR USING SIDE SOFTWARE.</license>
@@ -35,6 +35,6 @@
   <plugin id="com.bluexml.side.Portal" download-size="0" install-size="0" version="1.0.55.v41542-20121220" unpack="false" />
   <plugin id="com.bluexml.side.Portal.edit" download-size="0" install-size="0" version="1.0.53.v41542-20121220" unpack="false" />
   <plugin id="com.bluexml.side.Portal.editor" download-size="0" install-size="0" version="1.0.42.v41542-20121220" unpack="false" />
-  <plugin id="com.bluexml.side.Portal.modeler" download-size="0" install-size="0" version="1.0.58.v41542-20121220" unpack="false" />
+  <plugin id="com.bluexml.side.Portal.modeler" download-size="0" install-size="0" version="1.0.59.v44223-20130225" unpack="false" />
 </feature>
 
