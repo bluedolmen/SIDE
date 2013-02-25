@@ -237,10 +237,6 @@ var Filters =
          case "metadata":
             var type,aspect,notAspects,path;
             var searchObj = {};
-            if (parsedArgs.args.search) {
-               logger.log("parsedArgs.args.search :" + parsedArgs.args.search);
-               searchObj = eval('('+parsedArgs.args.search+')');
-            }
             if (filterData != null && filterData != "" && filterData != "null") {
                logger.log("filterData :" + filterData);
                searchObj = eval('('+filterData+')');
