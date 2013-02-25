@@ -8,7 +8,7 @@ import com.bluexml.side.clazz.service.alfresco.CommonServices
 <%getProperty("alf.share.paths.web-ext.components")%>template.inline-edit.inline-edit.xml
 <%}%>
 
-<%script type="Portal" name="alfrescoGenerator" file="<%validatedFilename%>"%>
+<%script type="HavePortlet" name="alfrescoGenerator" file="<%validatedFilename%>"%>
 <!-- Inline Edit Form -->
 <component>
    <scope>template</scope>
