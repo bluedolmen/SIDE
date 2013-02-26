@@ -32,6 +32,8 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.viewers.CellEditor;
+import org.eclipse.jface.viewers.ICellEditorListener;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
@@ -186,7 +188,7 @@ public class ApplicationDialog extends Dialog {
 		super(parentShell);
 		//		setShellStyle(SWT.DIALOG_TRIM | SWT.MODELESS | getDefaultOrientation());
 		setShellStyle(SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL | getDefaultOrientation());
- 
+
 		try {
 			URI uri = URI.createFileURI(file.getRawLocation().toFile().getAbsolutePath());
 			XMIResource resource = new XMIResourceImpl(uri);
@@ -246,11 +248,10 @@ public class ApplicationDialog extends Dialog {
 				e.printStackTrace();
 			}
 			// Refresh documentation
-			if (configuration != null)
-				if (configuration.getDescription() != null) {
-					configurationList.setToolTipText(configuration.getDescription());
-					//					config_description.setText(configuration.getDescription());
-				}
+			if (configuration != null) if (configuration.getDescription() != null) {
+				configurationList.setToolTipText(configuration.getDescription());
+				//					config_description.setText(configuration.getDescription());
+			}
 
 			// Refresh tree
 			initializeTree();
@@ -523,8 +524,7 @@ public class ApplicationDialog extends Dialog {
 
 	private void collectImplNode(TreeItem[] items, Set<TreeItem> generators) {
 		for (TreeItem item : items) {
-			if (item.getData() instanceof ImplNode)
-				generators.add(item);
+			if (item.getData() instanceof ImplNode) generators.add(item);
 			collectImplNode(item.getItems(), generators);
 		}
 	}
@@ -1248,8 +1248,7 @@ public class ApplicationDialog extends Dialog {
 						if (config != null) {
 							application.getElements().remove(config);
 							configurationList.remove(name);
-							if (configurationList.getItemCount() > 0)
-								configurationList.select(0);
+							if (configurationList.getItemCount() > 0) configurationList.select(0);
 						}
 					}
 				}
@@ -1394,10 +1393,8 @@ public class ApplicationDialog extends Dialog {
 		Configuration config = getCurrentConfiguration();
 		boolean exist = false;
 		for (ConfigurationParameters p : config.getParameters())
-			if (p.getKey() != null && p.getKey().equals(key))
-				exist = true;
-		if (!exist)
-			addStaticParam(key, value, config);
+			if (p.getKey() != null && p.getKey().equals(key)) exist = true;
+		if (!exist) addStaticParam(key, value, config);
 	}
 
 	/**
@@ -1411,8 +1408,7 @@ public class ApplicationDialog extends Dialog {
 	protected static void addStaticParam(String key, String value, Configuration config) {
 		boolean exist = false;
 		for (ConfigurationParameters p : config.getParameters())
-			if (p.getKey() != null && p.getKey().equals(key))
-				exist = true;
+			if (p.getKey() != null && p.getKey().equals(key)) exist = true;
 		if (!exist) {
 			ConfigurationParameters param = ApplicationFactory.eINSTANCE.createConfigurationParameters();
 			param.setKey(key);
@@ -1502,7 +1498,22 @@ public class ApplicationDialog extends Dialog {
 		TextCellEditor textEditor = new TextCellEditor(generatorParameters);
 		editors[1] = (CellEditor) textEditor;
 
-		editors[1] = (CellEditor) new DialogResourceCellEditor(generatorParameters);
+		final DialogResourceCellEditor dialogResourceCellEditor = new DialogResourceCellEditor(generatorParameters);
+		dialogResourceCellEditor.addListener(new ICellEditorListener() {
+
+			public void editorValueChanged(boolean oldValidState, boolean newValidState) {
+			}
+
+			public void cancelEditor() {
+			}
+
+			public void applyEditorValue() {
+				ISelection selection = generatorParametersViewer.getSelection();
+				generatorParametersViewer.getCellModifier().modify(selection, columnNames[1], dialogResourceCellEditor.getValue());
+			}
+		});
+
+		editors[1] = (CellEditor) dialogResourceCellEditor;
 
 		// Assign the cell editors to the viewer
 		generatorParametersViewer.setCellEditors(editors);

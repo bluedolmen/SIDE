@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ICellModifier;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.widgets.TableItem;
 
@@ -55,32 +56,40 @@ public class GeneratorParameterCellModifier implements ICellModifier {
 	}
 
 	public void modify(Object element, String property, Object value) {
-		TableItem item = (TableItem) element;
+		Object data = null;
+		if (element instanceof StructuredSelection) {
+			data = ((StructuredSelection) element).getFirstElement();
+			
+		} else if (element instanceof TableItem) {
+			TableItem item = (TableItem) element;
+			data = item.getData();
+		}
+
 		int index = Arrays.asList(columnNames).indexOf(property);
-		if (item != null) {
+		if (data != null) {
 			switch (index) {
 			case 0:
-				dataStructure.setLabel(item.getData(), (String) value);
+				dataStructure.setLabel(data, (String) value);
 				break;
 			case 1:
 				if (value != null) {
-					dataStructure.setValue(item.getData(), (String) value);
+					dataStructure.setValue(data, (String) value);
 				}
 				break;
 			default:
 				break;
 			}
 			ApplicationDialog.modificationMade();
-			updateApplication(item);
-			generatorParametersViewer.update(item.getData(), null);
+			updateApplication(data);
+			generatorParametersViewer.update(data, null);
 		} else {
 			throw new RuntimeException("Error on data, selection was null");
 		}
 	}
 
-	private void updateApplication(TableItem item) {
-		if (item.getData() instanceof GeneratorParameter) {
-			ResourceTableCellData modifiedParam = (ResourceTableCellData) item.getData();
+	private void updateApplication(Object data) {
+		if (data instanceof GeneratorParameter) {
+			ResourceTableCellData modifiedParam = (ResourceTableCellData) data;
 			Configuration config = ApplicationDialog.getCurrentConfiguration();
 			if (config != null) {
 				// Search generator parameter
