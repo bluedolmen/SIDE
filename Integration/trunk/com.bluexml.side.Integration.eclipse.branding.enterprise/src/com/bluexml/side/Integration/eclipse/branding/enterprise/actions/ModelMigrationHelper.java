@@ -39,6 +39,7 @@ import com.bluexml.side.common.ModelElement;
 import com.bluexml.side.common.NameSpace;
 import com.bluexml.side.common.NamedModelElement;
 import com.bluexml.side.integration.eclipse.builder.settings.SIDEBuilderConfiguration;
+import com.bluexml.side.portal.Column;
 import com.bluexml.side.portal.HavePortlet;
 import com.bluexml.side.portal.InstanciatePortletType;
 import com.bluexml.side.portal.Page;
@@ -69,6 +70,8 @@ public class ModelMigrationHelper {
 	}
 
 	public void updateProject(final IProject source, IProject target, String libraryId, boolean makeCopy, IProgressMonitor monitor2) throws Exception {
+		System.out.println("ModelMigrationHelper.updateProject() source :"+source.getName());
+		System.out.println("ModelMigrationHelper.updateProject() target :"+target.getName());
 		List<File> models = getModels(source);
 		List<File> diagrams = getDiagrams(source);
 		List<File> applicationModels = getApplicationModels(source);
@@ -133,6 +136,8 @@ public class ModelMigrationHelper {
 				conf.setApplicationRessourcePath(replace);
 				conf.reload();
 				conf.persist();
+			} else {
+				
 			}
 		}
 
@@ -208,13 +213,14 @@ public class ModelMigrationHelper {
 					}
 				}
 			} else if (eObject2 instanceof Model && source != null) {
-				// check models list
+				// check models list 
+				// disabled models are not renamed
 				Model modelItem = (Model) eObject2;
 				String file2 = modelItem.getFile();
 				String[] split = file2.split("/");
 				String toreplace = split[1];
 
-				modelItem.setFile(file2.replace(toreplace, source.getName()));
+				modelItem.setFile(file2.replaceFirst(toreplace, source.getName()));
 			} else if (eObject2 instanceof ConfigurationParameters && source != null) {
 				ConfigurationParameters conf = (ConfigurationParameters) eObject2;
 				if ("generation.options.logPath".equals(conf.getKey()) || "generation.options.destinationPath".equals(conf.getKey())) {
@@ -230,27 +236,27 @@ public class ModelMigrationHelper {
 
 	}
 
-	public List<File> getModels(IProject source) {
+	public static List<File> getModels(IProject source) {
 		String[] accepted = { ".dt", ".portal", ".form", ".view", ".workflow" };
 		return getModels(source, accepted);
 	}
 
-	public List<File> getDiagrams(IProject source) {
+	public static List<File> getDiagrams(IProject source) {
 		String[] accepted = { ".dtdi", ".portaldi", ".workflowdi" };
 		return getModels(source, accepted);
 	}
 
-	public List<File> getApplicationModels(IProject source) {
+	public static List<File> getApplicationModels(IProject source) {
 		String[] accepted = { ".application" };
 		return getModels(source, accepted);
 	}
 
-	public List<File> getMavenModules(IProject source) {
+	public static List<File> getMavenModules(IProject source) {
 		String[] accepted = { "pom.xml" };
 		return getModels(source, accepted);
 	}
-
-	public List<File> getModels(IProject source, final String[] fileExt) {
+	
+	public static List<File> getModels(IProject source, final String[] fileExt) {
 		File projectHome = IFileHelper.convertIRessourceToFile(source);
 		FilenameFilter filter = new FilenameFilter() {
 			public boolean accept(File file, String name) {
@@ -416,8 +422,8 @@ public class ModelMigrationHelper {
 	public static boolean equals(EObject a, EObject b) throws RootElementException {
 		EClass aeClass = a.eClass();
 		EClass beClass = b.eClass();
-		// System.out.println("ModelMigrationHelper.equals() a :" + a);
-		// System.out.println("ModelMigrationHelper.equals() b :" + b);
+//		 System.out.println("ModelMigrationHelper.equals() a :" + a);
+//		 System.out.println("ModelMigrationHelper.equals() b :" + b);
 		boolean equals = aeClass.equals(beClass);
 
 		if (equals) {
@@ -429,11 +435,18 @@ public class ModelMigrationHelper {
 				String fullNameB = namedModelElementB.getFullName();
 
 				equals &= isInSameNS(namedModelElementA, namedModelElementB);
-				equals &= fullNameA.equals(fullNameB);
+				
+				if (a instanceof Column) {
+					equals &= avoid40_42_missmatchs(fullNameA).equals(avoid40_42_missmatchs(fullNameB));
+				} else {
+					equals &= fullNameA.equals(fullNameB);
+				}
+				
+				
 
 			} else {
 
-				// System.out.println("ModelMigrationHelper.equals() not NamedElement " + a);
+//				 System.out.println("ModelMigrationHelper.equals() not NamedElement " + a);
 
 				if (a instanceof Portlet && b instanceof Portlet) {
 					equals &= getRootName(a).equals(getRootName(b));
@@ -445,7 +458,9 @@ public class ModelMigrationHelper {
 				} else if (a instanceof PortletType && b instanceof PortletType) {
 					equals &= getRootName(a).equals(getRootName(b));
 					equals &= ((PortletType) a).getId().equals(((PortletType) b).getId());
-					equals &= ((PortletType) a).getName().equals(((PortletType) b).getName());
+					String name = StringUtils.trimToEmpty(((PortletType) a).getName());
+					String name2 = StringUtils.trimToEmpty(((PortletType) b).getName());
+					equals &= name.equals(name2);
 
 				} else if (a instanceof PortletAttribute) {
 					PortletAttribute portA = (PortletAttribute) a;
@@ -482,12 +497,17 @@ public class ModelMigrationHelper {
 					equals &= ((EnumerationLiteral) a).getName().equals(((EnumerationLiteral) b).getName());
 					equals &= ((EnumerationLiteral) a).getValue().equals(((EnumerationLiteral) b).getValue());
 				} else {
-					System.out.println("ModelMigrationHelper.equals() not managed to be compared NEED TO BE ADDED TO CONTROLER :" + a.getClass());
+//					System.out.println("ModelMigrationHelper.equals() not managed to be compared NEED TO BE ADDED TO CONTROLER :" + a.getClass());
 					throw new UnsupportedOperationException("equals on " + a.getClass() + " is not supported this need to be implemented");
 				}
 			}
 		}
 		return equals;
+	}
+
+	protected static String avoid40_42_missmatchs(String fullNameA) {
+		String replaceAll = fullNameA.replaceAll("\\.@markup", "");
+		return replaceAll;
 	}
 
 	public static boolean isInSameNS(ModelElement a, ModelElement b) throws RootElementException {

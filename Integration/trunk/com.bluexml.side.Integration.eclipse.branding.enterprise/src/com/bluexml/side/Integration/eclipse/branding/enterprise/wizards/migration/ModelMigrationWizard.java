@@ -92,7 +92,7 @@ public class ModelMigrationWizard extends Wizard implements IWorkbenchWizard {
 			project.copy(description, true, monitor2);
 			IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(description.getName());
 			project2Update = project;
-
+			
 		}
 
 		// execute models conversion
