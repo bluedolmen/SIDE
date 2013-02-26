@@ -1,6 +1,7 @@
 package com.bluexml.side.clazz.edit.ui.actions;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.EList;
@@ -13,6 +14,7 @@ import org.eclipse.ui.IWorkbenchPart;
 
 import com.bluexml.side.clazz.ClassPackage;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.FormModelInitializer;
+import com.bluexml.side.clazz.edit.ui.actions.initializer.FormSearchModelInitializer;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.InitializerRegister;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.ModelCreator;
 import com.bluexml.side.clazz.edit.ui.actions.initializer.ModelCreator.ASK_USER;
@@ -61,8 +63,11 @@ public class InitializeFormClassModel implements IObjectActionDelegate {
 			ClassPackage cp = (ClassPackage) EResourceUtils.openModel(iFile).get(0);
 
 			InitializerRegister initilizerList = InitializerRegister.getDefaultInitializerRegister(iFile, cp, ASK_USER.ASK);
-
-			for (ModelCreator initializer : initilizerList.getInitializers(FormModelInitializer.class).values()) {
+			ArrayList<ModelCreator> initializers = new ArrayList<ModelCreator>();
+			initializers.addAll(initilizerList.getInitializers(FormModelInitializer.class).values());
+			initializers.addAll(initilizerList.getInitializers(FormSearchModelInitializer.class).values());
+			
+			for (ModelCreator initializer : initializers) {
 				initializer.initialize();
 			}
 		}
