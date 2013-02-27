@@ -323,6 +323,29 @@
          // search YUI button
          this.widgets.searchButton = Alfresco.util.createYUIButton(this, "search-button", this.onSearchClick);
          
+         // SIDE save search
+         // button to save search
+         if (this.options.enableSavedSearch && this.options.siteId.length !== 0) {
+            this.widgets.savedSearchButton = new YAHOO.widget.Button({
+               id : this.id + "_save-search-button",
+               type : "push",
+               label : this.msg("button.save-search"),
+               container : this.id + "-right-buttons"
+            });
+            this.widgets.savedSearchButton.on("click", this.onSaveSearchClick, this.widgets.savedSearchButton, this);
+         }
+
+         // button to export search result
+         if (this.options.enableExport && this.options.searchQuery.length !== 0) {
+            this.widgets.exportCSVButton = new YAHOO.widget.Button({
+               id : this.id + "_export",
+               type : "push",
+               label : this.msg("button.search-export"),
+               container : this.id + "-right-buttons"
+            });
+            this.widgets.exportCSVButton.on("click", this.onExport2csv, this.widgets.exportCSVButton, this);
+         }
+         
          // menu button for sort options
          this.widgets.sortButton = new YAHOO.widget.Button(this.id + "-sort-menubutton",
          {
