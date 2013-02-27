@@ -52,7 +52,7 @@ function getRootNode(params) {
 
 	var path = null;
 	
-	if (params.path != "") {
+	if (params.path && params.path != "") {
 		path = params.path;
 	} else if (params.site != "") {
       path = SITES_SPACE_QNAME_PATH;
