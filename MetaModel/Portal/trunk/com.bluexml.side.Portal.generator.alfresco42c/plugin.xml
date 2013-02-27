@@ -7,11 +7,11 @@
         <technologyVersion description="Check this to generate class models on the major release 3 of Alfresco.&lt;br&gt;Alfresco 3.x is the leading open source collaborative ECM solution.&lt;br&gt;Additionally to content generation, SIDE provides useful server components to enhance some features of this release." id="alfresco_42c" version="Alfresco 4.2.c">
           <generatorVersion class="com.bluexml.side.portal.generator.alfresco42c.AlfPortalGenerator42c" hidden="visible" id="com.bluexml.side.Portal.generator.alfresco42c" version="SIDE Alfresco Portal Generator 4.0.d Community">
             <option defaultOption="true" key="com.bluexml.side.Portal.generator.alfresco.doclist" label="Alfresco Share document library component">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.shareDoclist42c" moduleType="zip" technologyVersion="alfresco_42c" versionMax="1.0.4" versionMin="1.0.4" />
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.doclist42c" moduleType="amp" technologyVersion="alfresco_42c" versionMax="1.0.3" versionMin="1.0.3" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.shareDoclist42c" moduleType="zip" technologyVersion="alfresco_42c" versionMax="1.0.5" versionMin="1.0.5" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.doclist42c" moduleType="amp" technologyVersion="alfresco_42c" versionMax="1.0.4" versionMin="1.0.4" />
             </option>
             <option defaultOption="true" key="com.bluexml.side.Portal.generator.alfresco.forms" label="document details editing">
-              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.formProcessor42c" moduleType="amp" technologyVersion="alfresco_42c" versionMax="1.0.2" versionMin="1.0.2" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.formProcessor42c" moduleType="amp" technologyVersion="alfresco_42c" versionMax="1.0.3" versionMin="1.0.3" />
             </option>
             <option defaultOption="false" documentation="add share component to include custom iframe in pages" key="com.bluexml.side.Portal.generator.alfresco.iframe" label="iframe integration">
               <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.shareIframe" moduleType="zip" technologyVersion="alfresco_42c" versionMax="1.0.15" versionMin="1.0.15" />
@@ -28,7 +28,7 @@
               <moduleDependence label="languagePicker" moduleId="com.bluexml.side.Framework.share.languagePicker42c" moduleType="zip" technologyVersion="alfresco_42c" versionMax="1.0.2" versionMin="1.0.2" />
             </option>
             <option defaultOption="false" documentation="module that use DataList to save search see portal model documentation" hidden="false" key="portal.save.search" label="save search">
-              <moduleDependence label="saved search extension" moduleId="com.bluexml.side.Framework.share.savedSearch42c" moduleType="zip" technologyVersion="alfresco_42c" versionMax="1.0.1" versionMin="1.0.1" />
+              <moduleDependence label="saved search extension" moduleId="com.bluexml.side.Framework.share.savedSearch42c" moduleType="zip" technologyVersion="alfresco_42c" versionMax="1.0.2" versionMin="1.0.2" />
             </option>
             <option defaultOption="false" documentation="this option install a share extension that allow MS office user to edit document" hidden="false" key="com.bluexml.side.Portal.generator.alfresco42c.editContentInline" label="edit content inline">
               <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.editInline42c" moduleType="amp" technologyVersion="alfresco_42c" versionMax="1.0.1" versionMin="1.0.1" />
