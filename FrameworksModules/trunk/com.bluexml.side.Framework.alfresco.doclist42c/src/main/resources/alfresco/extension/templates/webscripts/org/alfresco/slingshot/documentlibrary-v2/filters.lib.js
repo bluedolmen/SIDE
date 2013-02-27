@@ -324,6 +324,7 @@ var Filters =
          case "savedSearch":
             // SIDE
             filterParams = getSavedSearchQueryDef(filterData);
+            filterParams.templates = null;
             break;
             
          case "aspect":

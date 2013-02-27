@@ -306,6 +306,7 @@ var Filters =
             break;
          case "savedSearch":
         	filterParams = getSavedSearchQueryDef(filterData);
+        	filterParams.templates = null;
         	break;
          case "aspect":
             filterQuery = "+PATH:\"" + parsedArgs.rootNode.qnamePath + "//*\"";
