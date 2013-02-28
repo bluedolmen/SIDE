@@ -3,7 +3,7 @@ metamodel http://www.kerblue.org/class/1.0
 
 import templates.alfrescoshare.uploadForm.file-upload-js-get-lib
 import templates.servicesTemplates.Common
-import com.bluexml.side.clazz.service.alfresco.CommonServices
+import com.bluexml.side.clazz.service.alfresco.ClassServices
 %>
 
 <%--
@@ -80,10 +80,7 @@ dnd.upload.tooltip=<p>\u30c7\u30b9\u30af\u30c8\u30c3\u30d7\u304b\u3089\u30d5\u30
 <p>\u30c9\u30e9\u30c3\u30b0&\u30c9\u30ed\u30c3\u30d7\u3092\u884c\u3046\u306b\u306f\u3001\u4ee5\u4e0b\u306e\u30a2\u30c3\u30d7\u30ed\u30fc\u30c0\u3092\u9589\u3058\u3066\u304f\u3060\u3055\u3044\u3002</p>
 
 
-## Custom Types
-<%for (getAllAbstractClasses().nSort("name")){%>
-### <%getFullName()%>
-<%for (getSortedAttibutes()){%>
-<%getPrefixedQName("_")%>=<%getLabel()%>
-<%}%>
+## SIDE view labels
+<%for (getAllReferencedAttributes()){%>
+<%getPrefixedQualifiedName().replaceAll(":", "_")%>=<%getLabel()%>
 <%}%>

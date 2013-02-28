@@ -3,7 +3,7 @@ metamodel http://www.kerblue.org/class/1.0
 
 import templates.alfrescoshare.uploadForm.file-upload-js-get-lib
 import templates.servicesTemplates.Common
-import com.bluexml.side.clazz.service.alfresco.CommonServices
+import com.bluexml.side.clazz.service.alfresco.ClassServices
 %>
 
 <%--
@@ -80,10 +80,7 @@ dnd.upload.tooltip=<p>You can also drag and drop files from your desktop into th
    <p>To use drag and drop instead, close the uploader below.</p>
 
 
-## Custom Types
-<%for (getAllAbstractClasses().nSort("name")){%>
-### <%getFullName()%>
-<%for (getSortedAttibutes()){%>
-<%getPrefixedQName("_")%>=<%getLabel()%>
-<%}%>
+## SIDE view labels
+<%for (getAllReferencedAttributes()){%>
+<%getPrefixedQualifiedName().replaceAll(":", "_")%>=<%getLabel()%>
 <%}%>

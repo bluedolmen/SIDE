@@ -153,7 +153,8 @@ public class ClassServices {
 	}
 	
 	public static EList<Attribute> getAllReferencedAttributes(ClassPackage p) throws Exception {
-		String oclExp="self.getAllAbstractClasses().getAllAttributes() ->asSet() ->sortedBy(name)";
+		// String oclExp="self.getAllAbstractClasses().getAllAttributes() ->asSet() ->sortedBy(name)";
+		String oclExp="self.getAllAbstractClasses().getAllAttributes() ->asSet() ->sortedBy(if getLogicalNameSpace().oclIsUndefined() then name else getLogicalNameSpace().prefix.concat(name) endif)";
 		EList<Attribute> eval = OCLEvaluator.eval(p,oclExp);
 		return eval;
 	}

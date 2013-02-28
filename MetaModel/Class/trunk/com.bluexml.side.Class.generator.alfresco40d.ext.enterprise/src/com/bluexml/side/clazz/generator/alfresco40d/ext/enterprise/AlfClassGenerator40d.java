@@ -37,6 +37,8 @@ public class AlfClassGenerator40d extends AlfrescoGenerator346e {
 		map.put(templateBase346e + string, templateBase40d + string); //$NON-NLS-1$
 		string = doclist + "documentlist.get_ja" + i18nFileExt;
 		map.put(templateBase346e + string, templateBase40d + string); //$NON-NLS-1$
+		string = doclist + "documentlist.get" + i18nFileExt;
+		map.put(templateBase346e + string, templateBase40d + string); //$NON-NLS-1$
 
 		string = "alfrescoGenerator_model.mt";
 		map.put(templateBase34d + "model/" + string, templateBase40d + "Model/" + string); //$NON-NLS-1$
