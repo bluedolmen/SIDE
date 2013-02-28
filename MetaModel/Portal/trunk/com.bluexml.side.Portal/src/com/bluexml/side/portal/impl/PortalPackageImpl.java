@@ -1061,7 +1061,7 @@ public class PortalPackageImpl extends EPackageImpl implements PortalPackage {
 		initEReference(getPortlet_IsPortletInternal(), this.getPortletInternal(), null, "isPortletInternal", null, 0, 1, Portlet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPortlet_IsInstanceOfPortletType(), this.getInstanciatePortletType(), null, "isInstanceOfPortletType", null, 0, 1, Portlet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPortlet_Title(), ecorePackage.getEString(), "title", null, 0, 1, Portlet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPortlet_SubPortlets(), this.getPortlet(), null, "subPortlets", null, 0, -1, Portlet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPortlet_SubPortlets(), this.getPortlet(), null, "subPortlets", null, 0, -1, Portlet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(portletEClass, ecorePackage.getEString(), "getLabel", 1, 1, IS_UNIQUE, IS_ORDERED);
 

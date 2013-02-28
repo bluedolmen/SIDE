@@ -65,7 +65,6 @@ public class PortletItemProvider
 			addNamePropertyDescriptor(object);
 			addIsPortletInternalPropertyDescriptor(object);
 			addTitlePropertyDescriptor(object);
-			addSubPortletsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -137,28 +136,6 @@ public class PortletItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Sub Portlets feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSubPortletsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Portlet_subPortlets_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Portlet_subPortlets_feature", "_UI_Portlet_type"),
-				 PortalPackage.Literals.PORTLET__SUB_PORTLETS,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -171,6 +148,7 @@ public class PortletItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(PortalPackage.Literals.PORTLET__IS_INSTANCE_OF_PORTLET_TYPE);
+			childrenFeatures.add(PortalPackage.Literals.PORTLET__SUB_PORTLETS);
 		}
 		return childrenFeatures;
 	}
@@ -203,11 +181,12 @@ public class PortletItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Portlet)object).getName();
+		Portlet portlet = (Portlet)object;
+		String label = portlet.getTitle() != null ? portlet.getTitle() : portlet.getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Portlet_type") :
 			getString("_UI_Portlet_type") + " " + label;
@@ -230,6 +209,7 @@ public class PortletItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case PortalPackage.PORTLET__IS_INSTANCE_OF_PORTLET_TYPE:
+			case PortalPackage.PORTLET__SUB_PORTLETS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -251,6 +231,11 @@ public class PortletItemProvider
 			(createChildParameter
 				(PortalPackage.Literals.PORTLET__IS_INSTANCE_OF_PORTLET_TYPE,
 				 PortalFactory.eINSTANCE.createInstanciatePortletType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(PortalPackage.Literals.PORTLET__SUB_PORTLETS,
+				 PortalFactory.eINSTANCE.createPortlet()));
 	}
 
 }

@@ -77,8 +77,7 @@ public class IFileHelper {
 			return new File(ir.getLocationURI());
 		} else {
 			return rawLocation.makeAbsolute().toFile();
-		}
-				
+		}		
 	}
 
 	public static String convertIRessourceToSystemString(IResource ir) {

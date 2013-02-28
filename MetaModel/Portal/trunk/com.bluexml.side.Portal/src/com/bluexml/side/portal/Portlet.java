@@ -136,7 +136,7 @@ public interface Portlet extends PortalModelElement {
 	void setTitle(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Sub Portlets</b></em>' reference list.
+	 * Returns the value of the '<em><b>Sub Portlets</b></em>' containment reference list.
 	 * The list contents are of type {@link com.bluexml.side.portal.Portlet}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -144,9 +144,9 @@ public interface Portlet extends PortalModelElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Sub Portlets</em>' reference list.
+	 * @return the value of the '<em>Sub Portlets</em>' containment reference list.
 	 * @see com.bluexml.side.portal.PortalPackage#getPortlet_SubPortlets()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<Portlet> getSubPortlets();

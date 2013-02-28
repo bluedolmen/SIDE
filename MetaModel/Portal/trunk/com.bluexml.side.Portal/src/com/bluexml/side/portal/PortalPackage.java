@@ -852,7 +852,7 @@ public interface PortalPackage extends EPackage {
 	int PORTLET__TITLE = PORTAL_MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Sub Portlets</b></em>' reference list.
+	 * The feature id for the '<em><b>Sub Portlets</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2338,10 +2338,10 @@ public interface PortalPackage extends EPackage {
 	EAttribute getPortlet_Title();
 
 	/**
-	 * Returns the meta object for the reference list '{@link com.bluexml.side.portal.Portlet#getSubPortlets <em>Sub Portlets</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.bluexml.side.portal.Portlet#getSubPortlets <em>Sub Portlets</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Sub Portlets</em>'.
+	 * @return the meta object for the containment reference list '<em>Sub Portlets</em>'.
 	 * @see com.bluexml.side.portal.Portlet#getSubPortlets()
 	 * @see #getPortlet()
 	 * @generated
@@ -3012,7 +3012,7 @@ public interface PortalPackage extends EPackage {
 		EAttribute PORTLET__TITLE = eINSTANCE.getPortlet_Title();
 
 		/**
-		 * The meta object literal for the '<em><b>Sub Portlets</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Sub Portlets</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

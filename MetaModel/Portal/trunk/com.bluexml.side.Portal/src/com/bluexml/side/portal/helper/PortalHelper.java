@@ -64,6 +64,12 @@ public class PortalHelper {
 		return portletView;
 	}
 	
+	public static Portlet createPortlet(Portlet parent, String portletName) throws Exception {
+		Portlet portletView = PortalFactory.eINSTANCE.createPortlet();
+		portletView.setName(portletName);
+		parent.getSubPortlets().add(portletView);
+		return portletView;
+	}
 	
 	public static Portlet createPortlet(Portal portal, String portletName, Map<String, String> properties) throws Exception {
 		Portlet portletView = PortalFactory.eINSTANCE.createPortlet();
@@ -71,6 +77,12 @@ public class PortalHelper {
 		portletView.setName(portletName);
 		portal.getPortletSet().add(portletView);
 		return portletView;
+	}
+	
+	public static Portlet createPortlet(Portal portal, Portlet parent, String portletName, Map<String, String> properties) throws Exception {
+		Portlet createPortlet = createPortlet(parent, portletName);
+		createPortlet.setIsInstanceOfPortletType(createPortletInstance(portal, properties));
+		return createPortlet;
 	}
 
 	public static InstanciatePortletType createPortletInstance(Portal portal, Map<String, String> properties) throws Exception {

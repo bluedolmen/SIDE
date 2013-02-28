@@ -113,7 +113,7 @@ public class EclipseReverser {
 		handleProperties(props, properties);
 
 		Portlet createPortlet = PortalHelper.createPortlet(rootObject, portletName, props);
-
+		createPortlet.setTitle(page.getID() + "." + portletName);
 		handleSubComponents(component, portletName, createPortlet);
 
 		PortalHelper.createHavePortlet(portalLayout, getMatchingColumn(portletName), 1, page, createPortlet);
@@ -139,12 +139,13 @@ public class EclipseReverser {
 			//						createPortlet.getMetainfo().add(createMetaInfo);
 
 			// create subPortelts
+
 			List<SubComponent> subComponents = subComponentsE.getSubComponent();
 			for (SubComponent subComponent : subComponents) {
 				String id2 = subComponent.getId(); // Meta-info
-				Portlet subcreatePortlet_ = PortalHelper.createPortlet(rootObject, portletName);
+				Portlet subcreatePortlet_ = PortalHelper.createPortlet(createPortlet, portletName);
 				PortalHelper.createMetaInfo(subcreatePortlet_, "subComponent_id", id2, false);
-				createPortlet.getSubPortlets().add(subcreatePortlet_);
+//				createPortlet.getSubPortlets().add(subcreatePortlet_);
 				Evaluations evaluationsE = subComponent.getEvaluations();
 				if (evaluationsE != null) {
 
@@ -156,7 +157,7 @@ public class EclipseReverser {
 						Map<String, String> subPortelt_props = new HashMap<String, String>();
 						subPortelt_props.put("url", url);
 						handleProperties(subPortelt_props, properties2);
-						Portlet subcreatePortlet = PortalHelper.createPortlet(rootObject, portletName, subPortelt_props);
+						Portlet subcreatePortlet = PortalHelper.createPortlet(rootObject, subcreatePortlet_, portletName, subPortelt_props);
 
 						PortalHelper.createMetaInfo(subcreatePortlet, "evaluation_id", evaluation_id, false);
 
@@ -178,7 +179,7 @@ public class EclipseReverser {
 							}
 						}
 
-						subcreatePortlet_.getSubPortlets().add(subcreatePortlet);
+//						subcreatePortlet_.getSubPortlets().add(subcreatePortlet);
 
 					}
 				}
@@ -273,7 +274,7 @@ public class EclipseReverser {
 		if (fromInstance != null) {
 			List<Component> components = fromInstance.getComponent();
 			for (Component component : components) {
-				
+
 				if (regionId.equals(component.getRegionId())) {
 					if (com == null) {
 						com = component;

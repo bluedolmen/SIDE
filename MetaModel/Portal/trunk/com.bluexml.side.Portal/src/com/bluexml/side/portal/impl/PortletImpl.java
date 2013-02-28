@@ -15,6 +15,8 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.Query;
@@ -107,7 +109,7 @@ public class PortletImpl extends PortalModelElementImpl implements Portlet {
 	protected String title = TITLE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getSubPortlets() <em>Sub Portlets</em>}' reference list.
+	 * The cached value of the '{@link #getSubPortlets() <em>Sub Portlets</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getSubPortlets()
@@ -265,7 +267,7 @@ public class PortletImpl extends PortalModelElementImpl implements Portlet {
 	 */
 	public EList<Portlet> getSubPortlets() {
 		if (subPortlets == null) {
-			subPortlets = new EObjectResolvingEList<Portlet>(Portlet.class, this, PortalPackage.PORTLET__SUB_PORTLETS);
+			subPortlets = new EObjectContainmentEList<Portlet>(Portlet.class, this, PortalPackage.PORTLET__SUB_PORTLETS);
 		}
 		return subPortlets;
 	}
@@ -315,6 +317,8 @@ public class PortletImpl extends PortalModelElementImpl implements Portlet {
 		switch (featureID) {
 			case PortalPackage.PORTLET__IS_INSTANCE_OF_PORTLET_TYPE:
 				return basicSetIsInstanceOfPortletType(null, msgs);
+			case PortalPackage.PORTLET__SUB_PORTLETS:
+				return ((InternalEList<?>)getSubPortlets()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
