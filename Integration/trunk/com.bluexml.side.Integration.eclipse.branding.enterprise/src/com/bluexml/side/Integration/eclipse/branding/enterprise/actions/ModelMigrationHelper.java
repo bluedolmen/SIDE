@@ -452,6 +452,10 @@ public class ModelMigrationHelper {
 					equals &= getRootName(a).equals(getRootName(b));
 					// System.out.println("ModelMigrationHelper.equals() is Portlet");
 					equals &= ((Portlet) a).getName().equals(((Portlet) b).getName());
+
+					String name = StringUtils.trimToEmpty(((Portlet) a).getTitle());
+					String name2 = StringUtils.trimToEmpty(((Portlet) b).getTitle());
+					equals &= name.equals(name2);
 				} else if (a instanceof Page && b instanceof Page) {
 					equals &= getRootName(a).equals(getRootName(b));
 					equals &= ((Page) a).getID().equals(((Page) b).getID());

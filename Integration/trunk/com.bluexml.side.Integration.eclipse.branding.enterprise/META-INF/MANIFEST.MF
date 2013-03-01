@@ -24,7 +24,8 @@ Require-Bundle: org.eclipse.ui.intro,
  org.eclipse.m2e.maven.runtime,
  com.bluexml.side.Application.ui,
  com.bluexml.side.Util.framework.tools,
- com.bluexml.side.Util.antRunner
+ com.bluexml.side.Util.antRunner,
+ com.bluexml.side.Util.metaModel.validate;bundle-version="1.0.39"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.ui.actions,
