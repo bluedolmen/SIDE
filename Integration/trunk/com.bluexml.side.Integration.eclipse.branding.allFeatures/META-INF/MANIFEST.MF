@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE AllFeatures - Product to build SIDE products
 Bundle-SymbolicName: com.bluexml.side.Integration.eclipse.branding.allFeatures;singleton:=true
-Bundle-Version: 1.0.471.v44415-20130301
+Bundle-Version: 1.0.472.v44428-20130302
 Bundle-Activator: com.bluexml.side.integration.eclipse.branding.allFeatures.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.ui,
