@@ -106,12 +106,17 @@ public class ClassServices {
 	}
 
 	public static boolean isChildOfCmContent(AbstractClass c) throws Exception {
-		return isChildOf(c, "cm:content");
+		return c.getGeneralizations().size() == 0 || isChildOf(c, "cm:content");
 	}
 	
 	public static boolean isChildOfDlItem(AbstractClass c) throws Exception {
 		return isChildOf(c, "dl:dataListItem");
 	}
+	
+	public static boolean isUploadable(AbstractClass c) throws Exception {
+		return isChildOfCmContent(c) && !isChildOf(c, "dl:dataListItem");
+	}
+	
 	
 	public static boolean isChildOf(AbstractClass c,String qname) throws Exception {
 		EList<AbstractClass> l = c.getInheritedClasses();
