@@ -667,7 +667,19 @@
                   {
                      if (jsNode.hasProperty(p_key))
                      {
-                        value = '<span class="item">' + label + $html(jsNode.properties[p_key]) + '</span>';
+                        value = jsNode.properties[p_key];
+                        if (value != null && typeof value == "object") {
+                           // SIDE FIX to manage date without using renderer
+                           if (value.iso8601) {
+                              // format the date
+                              value = Alfresco.util.relativeDate(Alfresco.util.fromISO8601(value.iso8601),scope.msg("date-format.fullDateTime"),{limit : true});
+                           } else if (value.displayName) {
+                              value = value.displayName;
+                           } else {
+                              value = '<span style="color:red;">' + (typeof value) + '</span>';
+                           }
+                        }
+                        value = '<span class="item">' + label + $html(value) + '</span>';
                      }
                   }
 
@@ -787,7 +799,20 @@
                   {
                      if (jsNode.hasProperty(p_key))
                      {
-                        value = '<span class="item">' + label + $html(jsNode.properties[p_key]) + '</span>';
+                        value = jsNode.properties[p_key];
+                        if (value != null && typeof value == "object") {
+                           // SIDE FIX to manage date without using renderer
+                           if (value.iso8601) {
+                              // format the date
+                              // value = Alfresco.util.relativeDate(Alfresco.util.fromISO8601(value.iso8601), scope.msg("date-format.fullDateTime"), {limit : true});
+                              value = $date(Alfresco.util.fromISO8601(value.iso8601), scope.msg("date-format.fullDateTime"));
+                           } else if (value.displayName) {
+                              value = value.displayName;
+                           } else {
+                              value = '<span style="color:red;">' + (typeof value) + '</span>';
+                           }
+                        }
+                        value = '<span class="item">' + label + $html(value) + '</span>';
                      }
                   }
 

@@ -10,5 +10,5 @@
 </div>
 
 <script type="text/javascript">//<![CDATA[
-   new Alfresco.component.BaseFilter("SIDE.DocListFilter", "${args.htmlid}").setFilterIds([${filterIds}]);
+   new Alfresco.component.BaseFilter("SIDE.staticFilter${args.htmlid}", "${args.htmlid}").setFilterIds([${filterIds}]);
 //]]></script>

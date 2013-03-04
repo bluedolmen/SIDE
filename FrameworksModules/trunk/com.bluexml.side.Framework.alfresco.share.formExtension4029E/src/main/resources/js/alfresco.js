@@ -8091,7 +8091,10 @@ Alfresco.util.RENDERLOOPSIZE = 25;
                       */
                      for (var i = 0, ii = candidates.length; i < ii; i++)
                      {
-                        if (candidates[i].firstChild.rel == obj.filterData)
+                        // SIDE
+                        var cleanrel = unescape(candidates[i].firstChild.rel);
+                        cleanrel = cleanrel.substring(0,cleanrel.lastIndexOf("|"));
+                        if (cleanrel == obj.filterData)
                         {
                            // This component now owns the active filter
                            this.selectedFilter = candidates[i].parentNode;

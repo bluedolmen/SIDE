@@ -1,9 +1,9 @@
 <webscript>	
 	<!-- Details of the web script -->
-	<shortname>Rochefort liberAcces : call action</shortname>
+	<shortname>Call an Alfresco Action</shortname>
   	<description>This webscript is used to call an action on a node</description>   	
    	<!-- Web script URL's 	-->
-   	<url>/liberacces/callaction?nodeRef={nodeRef?}&amp;actionName={actionName?}</url>   
+   	<url>/side/callaction?nodeRef={nodeRef?}&amp;actionName={actionName?}</url>   
    	<format default="json">extension</format>
    	<authentication>user</authentication>
    	<transaction>required</transaction>
