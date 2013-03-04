@@ -12,7 +12,7 @@
         <option defaultOption="false" hidden="false" key="com.bluexml.side.Portal.generator.alfresco.forms" label="com.bluexml.side.Portal.generator.alfresco.forms" />
         <option defaultOption="false" hidden="false" key="com.bluexml.side.Portal.generator.alfresco.doclist" label="com.bluexml.side.Portal.generator.alfresco.doclist" />
       </generatorVersion>
-      <generatorVersion class="com.bluexml.side.util.framework.tools.alfresco4029E.Activator" hidden="visible" id="com.bluexml.side.View.generator.alfresco 4029E" version="auto" />
+      <generatorVersion class="com.bluexml.side.util.framework.tools.alfresco4029E.Activator" hidden="visible" id="com.bluexml.side.View.generator.alfresco4029E" version="auto" />
       <generatorVersion class="com.bluexml.side.util.framework.tools.alfresco4029E.Activator" hidden="visible" id="com.bluexml.side.Form.generator.alfresco4029E" version="com.bluexml.side.Util.framework.tools.alfresco4029E.generatorVersion4" />
       <deployerVersion class="com.bluexml.side.util.framework.tools.alfresco4029E.Activator" hidden="visible" id="com.bluexml.side.Deployer.alfrescoDirectCopy4029E" shared="false" version="com.bluexml.side.Util.framework.tools.alfresco4029E.deployerVersion1">
         <option defaultOption="false" hidden="false" key="com.bluexml.side.Deployer.alfrescoDirectCopy4029E.clean" label="com.bluexml.side.Deployer.alfrescoDirectCopy4029E.clean" />
