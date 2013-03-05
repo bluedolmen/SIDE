@@ -157,7 +157,39 @@ public class EditingDocument extends Applet {
 
 	private String checkAppli(String appli) {
 		if (appli.equals("soffice.exe")) {
-			String values = WindowsReqistry.readRegistry("HKEY_LOCAL_MACHINE\\SOFTWARE\\OpenOffice.org\\OpenOffice.org", null);
+			//LibreOffice
+			String values = WindowsReqistry.readRegistry("HKEY_LOCAL_MACHINE\\SOFTWARE\\LibreOffice\\LibreOffice", null);
+	    	System.out.println(values);
+			if (values != null) {
+				String [] value = values.split("\\\n");
+				if (value.length >= 1) {
+					System.out.println("value.length >= 1");
+					for (int i = 0; i < value.length; i++) {
+				        values = WindowsReqistry.readRegistry(value[i], "Path");
+				        System.out.println(value[i]);
+				        System.out.println(values);
+				        if (values != null) {
+				        	System.out.println("values.length >= 1");
+				        	String Newvalues = values.replaceAll("\\n", "");
+							File exe = new File (Newvalues.replaceAll("\\r", ""));
+					        if (exe.exists()) {
+					        	System.out.println(exe + " 1");
+					        	return Newvalues.replaceAll("\\r", "");
+					        }
+							String[] splitedValues = values.split("\\\n");
+							splitedValues = splitedValues[2].split("[\\s][\\s][\\s][\\s]");
+					        exe = new File (splitedValues[splitedValues.length - 1].replaceAll("\\r", ""));
+					        if (exe.exists()) {
+					        	System.out.println(exe + " 2");
+					        	return splitedValues[splitedValues.length - 1].replaceAll("\\r", "");
+					        }
+				        }
+					}
+				}
+	    	}
+			
+			//OpenOffice
+			values = WindowsReqistry.readRegistry("HKEY_LOCAL_MACHINE\\SOFTWARE\\OpenOffice.org\\OpenOffice.org", null);
 	    	System.out.println(values);
 			if (values != null) {
 				String [] value = values.split("\\\n");
