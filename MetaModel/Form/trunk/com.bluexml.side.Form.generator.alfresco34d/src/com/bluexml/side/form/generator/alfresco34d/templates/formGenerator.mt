@@ -187,7 +187,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 	<%}else if (filter("TextField")){%>
 		<%-- Be careful: TextField for SIDE is ContentField|RichText|TextArea for Alfresco --%>
 		<%for (filter("TextField")) {%>
-			<%if (widget.toLowerCase() == "richtext") {%>
+			<%if (widget.toString().equalsIgnoreCase("Rich Text Editor")) {%>
 				<%getRichTextControl()%>
 			<%}else{%>
 				<%-- TextAreaEditor --%>
