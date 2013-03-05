@@ -42,37 +42,41 @@ public class WorkflowScriptExtension extends BaseScopableProcessorExtension {
         if (logger.isDebugEnabled()) logger.debug("Process document "+document.getNodeRef());
 		ArrayList<String> concernedTasks = new ArrayList<String>();
 		ArrayList<String> concernedInstances = new ArrayList<String>();
-		for (WorkflowDefinition def : workflowService.getAllDefinitions()) {
-			if (namespace == null || def.getName().startsWith(namespace)) {
-				List<WorkflowInstance> instances = workflowService.getActiveWorkflows(def.getId());
-				for (WorkflowInstance instance : instances) {
-			         if (logger.isDebugEnabled()) logger.debug("Process instance "+instance.toString()+" of workflow defintion " + def.getName());
-					 NodeRef pkg = instance.getWorkflowPackage();
-					 if (pkg != null) {
-				         if (logger.isDebugEnabled()) logger.debug("Process package " + pkg);
-						 List<ChildAssociationRef> docs = serviceRegistry.getNodeService().getChildAssocs(pkg);
-						 if (docs != null && !docs.isEmpty()) {
-							 NodeRef pkg0 = docs.get(0).getChildRef();
-					         if (logger.isDebugEnabled()) logger.debug("Process package child " + pkg0);
-							 if (pkg0.equals(document.getNodeRef())) {
-								 // this instance is based on the document; we must get its tasks if any
-								 List<WorkflowPath> paths = workflowService.getWorkflowPaths(instance.getId());
-								 for (WorkflowPath path : paths) {
-							         if (logger.isDebugEnabled()) logger.debug("Process path " + path.getId());
-									 List<WorkflowTask> tasks = workflowService.getTasksForWorkflowPath(path.getId());
-									 for (WorkflowTask task : tasks) {
-								         if (logger.isDebugEnabled()) logger.debug("Return tasks " + task.getName()+" - "+task.getId());
-										 String st = def.getId()+"/"+instance.getId()+"/"+task.getId();									 
-								         if (!concernedTasks.contains(st)) concernedTasks.add(st);
-										 if (!concernedInstances.contains(instance.getId())) concernedInstances.add(instance.getId());
-									 }
-								 }
+		List<WorkflowInstance> myInstancesActive = workflowService.getActiveWorkflows();
+		List<WorkflowInstance> myInstances = workflowService.getWorkflowsForContent(document.getNodeRef(), true);
+		NodeRef myPackage = myInstances.get(0).getWorkflowPackage();
+		for (WorkflowInstance instance : myInstancesActive) {
+			if (instance.getWorkflowPackage().equals(myPackage) ) {
+				myInstances.add(instance);
+			}
+		}
+		for (WorkflowInstance instance : myInstances) {
+			WorkflowDefinition def = instance.getDefinition();
+	         if (logger.isDebugEnabled()) logger.debug("Process instance "+instance.toString()+" of workflow defintion " + def.getName());
+			 NodeRef pkg = instance.getWorkflowPackage();
+			 if (pkg != null) {
+		         if (logger.isDebugEnabled()) logger.debug("Process package " + pkg);
+				 List<ChildAssociationRef> docs = serviceRegistry.getNodeService().getChildAssocs(pkg);
+				 if (docs != null && !docs.isEmpty()) {
+					 NodeRef pkg0 = docs.get(0).getChildRef();
+			         if (logger.isDebugEnabled()) logger.debug("Process package child " + pkg0);
+					 if (pkg0.equals(document.getNodeRef())) {
+						 // this instance is based on the document; we must get its tasks if any
+						 List<WorkflowPath> paths = workflowService.getWorkflowPaths(instance.getId());
+						 for (WorkflowPath path : paths) {
+					         if (logger.isDebugEnabled()) logger.debug("Process path " + path.getId());
+							 List<WorkflowTask> tasks = workflowService.getTasksForWorkflowPath(path.getId());
+							 for (WorkflowTask task : tasks) {
+						         if (logger.isDebugEnabled()) logger.debug("Return tasks " + task.getName()+" - "+task.getId());
+						         String st = def.getId()+"/"+instance.getId()+"/"+task.getId();									 
+						         if (!concernedTasks.contains(st)) concernedTasks.add(st);
+								 if (!concernedInstances.contains(instance.getId())) concernedInstances.add(instance.getId());
 							 }
 						 }
 					 }
-				}		
-			}
-		}
+				 }
+			 }
+		}		
 		// also store the instance without task
 		for (WorkflowInstance instance :  workflowService.getWorkflowsForContent(document.getNodeRef(), true)) {
 			if (!concernedInstances.contains(instance.getId())) {
