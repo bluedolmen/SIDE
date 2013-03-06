@@ -95,8 +95,8 @@
           target: applyConfig              
          ================================= -->
 	<target name="applyConfig" depends="check-properties,patchWars" description="apply configuration to build deployment archive">
-		<mkdir dir="${configPath}/${tomcat.webapps.target}/alfresco" />
-		<mkdir dir="${configPath}/${tomcat.webapps.target}/share" />
+		<!-- <mkdir dir="${configPath}/${tomcat.webapps.target}/alfresco" /> -->
+		<!-- <mkdir dir="${configPath}/${tomcat.webapps.target}/share" /> -->
 		<mkdir dir="${commonConfigPath}" />
 
 		<copy file="${tomcat.home}/webapps/alfresco.war" tofile="${buildPath}/alfresco.war" failonerror="false" />
@@ -155,11 +155,11 @@
 		<!-- make final tomcat patch -->
 		<zip destfile="${tomcatPatch}" comment="Build date: ${NOW_FR} \nunzip in tomcat home directory, delete alfresco and shared explosed webapps">
 			<zipfileset dir="${configPath}">
-				<exclude name="webapps/**" />
+				<exclude name="webapps*/**" />
 			</zipfileset>
 			<zipfileset dir="${commonConfigPath}">
 				<exclude name="**" if="shared_configConf.disable" />
-				<exclude name="webapps/**" />
+				<exclude name="webapps*/**" />
 			</zipfileset>
 			<zipfileset dir="${buildPath}" prefix="${tomcat.webapps.target}">
 				<include name="*.war" />
@@ -337,8 +337,8 @@
 	<!-- ================================= 
           target: install              
          ================================= -->
-	<target name="install" depends="applyConfig,cleanShared" description="install project package including wars and configuration files in tomcat">
-		<delete verbose="true">
+	<target name="install" depends="applyConfig, cleanShared" description="install project package including wars and configuration files in tomcat">
+		<delete verbose="false">
 			<fileset dir="${tomcat.home}/webapps">
 				<include name="alfresco.war" />
 				<include name="share.war" />

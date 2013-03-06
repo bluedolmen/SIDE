@@ -6,3 +6,5 @@ tomcat.webapps.target=webapps
 # this folder contains host specific files to apply on war files
 config=${velocity_userName}
 side.configuration=${velocity_projectName}
+
+isDirectDeployer=true

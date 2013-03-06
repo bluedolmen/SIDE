@@ -21,14 +21,4 @@ import com.bluexml.side.clazz.service.alfresco.AssociationServices
       </list>
       </property>
    </bean>
-<%for (getInnerView()){%>
-   <!-- Display Template: Type=<%filter("view.AbstractViewOf").viewOf.filter("clazz.Clazz").getPrefixedQName()%>, view= <%filter("view.AbstractViewOf").name%>-->
-   <bean id="evaluator.doclib.metadata.side.<%filter("view.AbstractViewOf").viewOf.filter("clazz.Clazz").getPrefixedQName()%>_<%filter("view.AbstractViewOf").name%>"
-      parent="evaluator.doclib.action.nodeType">
-      <property name="types">
-      <list>
-         <value><%filter("view.AbstractViewOf").viewOf.filter("clazz.Clazz").getPrefixedQName()%></value>
-      </list>
-      </property>
-	</bean>
-<%}%><%}%><%}%><%}%>
+<%}%><%}%><%}%>

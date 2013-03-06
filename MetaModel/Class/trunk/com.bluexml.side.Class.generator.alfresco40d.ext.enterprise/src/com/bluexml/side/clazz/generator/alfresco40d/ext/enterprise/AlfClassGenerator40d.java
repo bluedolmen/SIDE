@@ -15,7 +15,7 @@ public class AlfClassGenerator40d extends AlfrescoGenerator346e {
 
 		templates.add(templateBase40d + doclist + "documentlist.get_nl" + i18nFileExt); //$NON-NLS-1$
 		templates.add(templateBase40d + "alfrescoshare/changetype/change-type.get_nl" + i18nFileExt); //$NON-NLS-1$
-
+		templates.add(templateBase40d + doclist + "portal-evaluators-context.mt"); //$NON-NLS-1$
 		return templates;
 	}
 

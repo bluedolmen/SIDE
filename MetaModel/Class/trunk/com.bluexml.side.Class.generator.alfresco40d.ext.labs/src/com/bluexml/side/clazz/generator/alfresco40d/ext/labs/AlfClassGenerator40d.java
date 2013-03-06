@@ -34,6 +34,8 @@ public class AlfClassGenerator40d extends AlfrescoGenerator {
 
 		templates.add(templateBase40d + "/Model/single-child-associations.properties.mt");
 		templates.add(templateBase40d + "/Model/properties_synchronization.mt");
+		
+		templates.add(templateBase40d + doclist + "portal-evaluators-context.mt"); //$NON-NLS-1$
 
 		return templates;
 	}
