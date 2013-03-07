@@ -375,7 +375,7 @@ function findUsers(searchTerm, maxResults, results, xpath) {
 	// create person objet for each result
 	for each( var node in searchResults) {
 		if (logger.isLoggingEnabled())
-			logger.log("found user = " + user.userName);
+			logger.log("found user = " + node.userName);
 
 		// add to results
 		results.push({
