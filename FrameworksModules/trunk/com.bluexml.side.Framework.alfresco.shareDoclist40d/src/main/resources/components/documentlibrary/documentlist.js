@@ -1620,7 +1620,7 @@
 	                                 // SIDE FIX to manage date without using renderer
 	                                 if (value.iso8601) {
 	                                    // format the date
-	                                    value = Alfresco.util.friendlyDate(Alfresco.util.fromISO8601(value.iso8601));
+	                                    value = $date(Alfresco.util.fromISO8601(value.iso8601), scope.msg("date-format.fullDateTime"));
 	                                 } else if (value.displayName) {
 	                                    value = value.displayName;
 	                                 } else {
