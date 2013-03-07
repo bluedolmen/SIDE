@@ -241,14 +241,14 @@ public class FormElementItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((FormElement)object).getId();
+		String label = ((FormElement)object).getLabelOrName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_FormElement_type") :
-			getString("_UI_FormElement_type") + " " + label;
+			label;
 	}
 
 	/**

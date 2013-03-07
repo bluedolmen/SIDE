@@ -103,15 +103,11 @@ public class TextFieldItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @_generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Field)object).getId();
-		if (((Field)object).getLabel() != null && ((Field)object).getLabel().length() > 0) {
-			label = ((Field)object).getLabel();
-		}
-		
+		String label = ((Field)object).getLabelOrName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_TextField_type") :
 			label;

@@ -102,10 +102,11 @@ public class URLFieldItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((URLField)object).getLabel();
+		String label = ((URLField)object).getLabelOrName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_URLField_type") :
 			label;

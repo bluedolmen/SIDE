@@ -75,10 +75,11 @@ public class PasswordFieldItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((PasswordField)object).getLabel();
+		String label = ((PasswordField)object).getLabelOrName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_PasswordField_type") :
 			label;

@@ -102,14 +102,14 @@ public class PhoneNumberFieldItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((PhoneNumberField)object).getId();
+		String label = ((PhoneNumberField)object).getLabelOrName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_PhoneNumberField_type") :
-			getString("_UI_PhoneNumberField_type") + " " + label;
+			label;
 	}
 
 	/**

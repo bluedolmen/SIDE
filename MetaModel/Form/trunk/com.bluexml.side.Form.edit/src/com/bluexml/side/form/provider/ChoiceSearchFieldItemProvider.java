@@ -125,14 +125,14 @@ public class ChoiceSearchFieldItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ChoiceSearchField)object).getId();
+		String label = ((ChoiceSearchField)object).getLabelOrName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ChoiceSearchField_type") :
-			getString("_UI_ChoiceSearchField_type") + " " + label;
+			label;
 	}
 
 	/**

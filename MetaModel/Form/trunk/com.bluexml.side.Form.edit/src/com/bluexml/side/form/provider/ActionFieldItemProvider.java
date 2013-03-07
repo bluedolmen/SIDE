@@ -103,14 +103,11 @@ public class ActionFieldItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ActionField)object).getId();
-		if (((Field)object).getLabel() != null && ((Field)object).getLabel().length() > 0) {
-			label = ((Field)object).getLabel();
-		}
-
+		String label = ((ActionField)object).getLabelOrName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ActionField_type") :
 			label + " (button)";

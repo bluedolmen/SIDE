@@ -171,10 +171,11 @@ public class DecimalFieldItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((DecimalField)object).getLabel();
+		String label = ((DecimalField)object).getLabelOrName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_DecimalField_type") :
 			label;

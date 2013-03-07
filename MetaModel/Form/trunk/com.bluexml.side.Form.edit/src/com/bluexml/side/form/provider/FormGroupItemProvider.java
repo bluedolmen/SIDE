@@ -151,10 +151,11 @@ public class FormGroupItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((FormGroup)object).getLabel();
+		String label = ((FormGroup)object).getLabelOrName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_FormGroup_type") :
 			label;

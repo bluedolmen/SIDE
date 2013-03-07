@@ -125,14 +125,14 @@ public class BooleanSearchFieldItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((BooleanSearchField)object).getId();
+		String label = ((BooleanSearchField)object).getLabelOrName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_BooleanSearchField_type") :
-			getString("_UI_BooleanSearchField_type") + " " + label;
+			label;
 	}
 
 	/**

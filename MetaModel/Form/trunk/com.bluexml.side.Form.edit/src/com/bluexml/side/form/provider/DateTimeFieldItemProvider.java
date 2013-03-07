@@ -79,10 +79,10 @@ public class DateTimeFieldItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((DateTimeField)object).getId();
+		String label = ((DateTimeField)object).getLabelOrName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_DateTimeField_type") :
-			getString("_UI_DateTimeField_type") + " " + label;
+			label;
 	}
 
 	/**

@@ -76,10 +76,11 @@ public class FormAspectItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((FormAspect)object).getLabel();
+		String label = ((FormAspect)object).getLabelOrName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_FormAspect_type") :
 			label;

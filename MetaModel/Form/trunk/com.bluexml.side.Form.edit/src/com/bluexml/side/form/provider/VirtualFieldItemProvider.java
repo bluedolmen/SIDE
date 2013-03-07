@@ -100,10 +100,11 @@ public class VirtualFieldItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((VirtualField)object).getLabel();
+		String label = ((VirtualField)object).getLabelOrName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_VirtualField_type") :
 			getString("_UI_VirtualField_type") + " to " + label;

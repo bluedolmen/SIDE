@@ -75,10 +75,11 @@ public class BooleanFieldItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((BooleanField)object).getLabel();
+		String label = ((BooleanField)object).getLabelOrName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_BooleanField_type") :
 			label;

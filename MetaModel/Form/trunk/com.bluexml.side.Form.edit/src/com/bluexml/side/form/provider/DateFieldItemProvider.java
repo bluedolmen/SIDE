@@ -148,10 +148,11 @@ public class DateFieldItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((DateField)object).getLabel();
+		String label = ((DateField)object).getLabelOrName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_DateField_type") :
 			label;

@@ -125,14 +125,14 @@ public class FileSearchFieldItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((FileSearchField)object).getId();
+		String label = ((FileSearchField)object).getLabelOrName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_FileSearchField_type") :
-			getString("_UI_FileSearchField_type") + " " + label;
+			label;
 	}
 
 	/**
