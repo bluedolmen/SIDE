@@ -1782,11 +1782,11 @@
 
          /**
           * Initial filter to show on load.
-          *
+          * SIDE set to null so we can test if is initialized or not by setOptions
           * @property initialFilter
           * @type object
           */
-         initialFilter: {},
+         initialFilter: null,
 
          /**
           * Delay time value for "More Actions" popup, in milliseconds
@@ -2916,7 +2916,8 @@
             return filterObj;
          };
 
-         this.options.initialFilter = fnDecodeBookmarkedFilter(bookmarkedFilter);
+         // SIDE use the defined initialiFilter if no filter is provided in bookmark
+         this.options.initialFilter = (this.options.initialFilter != null && bookmarkedFilter == "path|/") ? this.options.initialFilter : fnDecodeBookmarkedFilter(bookmarkedFilter);
 
          // Register History Manager filter update callback
          YAHOO.util.History.register("filter", bookmarkedFilter, function DL_onHistoryManagerFilterChanged(newFilter)
