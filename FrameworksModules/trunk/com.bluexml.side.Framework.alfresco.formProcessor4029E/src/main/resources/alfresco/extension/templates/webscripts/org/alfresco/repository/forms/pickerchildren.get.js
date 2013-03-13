@@ -34,7 +34,8 @@ function main() {
 			params.rootName = args["rootName"];
 			params.assoType = args["assoType"];
 			params.selectableRoot = args["selectableRoot"] == "true";
-
+			params.path = argsXPath;
+			
 			var hasSubfolders = true;
 			var argMax = parseInt(args["max"], 10);
 			var maxItems = isNaN(argMax) ? -1 : argMax;
