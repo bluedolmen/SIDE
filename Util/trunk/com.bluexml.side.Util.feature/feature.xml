@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Util.feature" label="SIDE Modeler Generator Deployer MDA Utilities" version="1.0.336.v44376-20130228" provider-name="BlueXML">
+<feature id="com.bluexml.side.Util.feature" label="SIDE Modeler Generator Deployer MDA Utilities" version="1.0.337.v44826-20130314" provider-name="BlueXML">
   <copyright url="http://www.bluexml.com/copyright">Copyright 2005-2012 BlueXML SARL.</copyright>
   <description url="http://www.side-labs.com">SIDE lets developers who are new to Alfresco get started quickly and helps experienced developers get the job done even faster.</description>
   <license url="http://www.side-labs.com/en/index.php/Product:License">SIDE SOFTWARE IS LICENSED BY BLUEXML. PLEASE GO TO http://www.side-labs.com/en/index.php/Product:License. READ THIS AGREEMENT CAREFULLY BEFORE PURCHASING AND/OR USING SIDE SOFTWARE.</license>
@@ -41,7 +41,7 @@
   <plugin id="com.bluexml.side.Util.generator" download-size="0" install-size="0" version="1.0.82.v41542-20121220" unpack="false" />
   <plugin id="com.bluexml.side.Util.generator.acceleo" download-size="0" install-size="0" version="1.0.67.v41542-20121220" unpack="false" />
   <plugin id="com.bluexml.side.Util.generator.alfresco" download-size="0" install-size="0" version="1.0.53.v41542-20121220" unpack="false" />
-  <plugin id="com.bluexml.side.Util.libs" download-size="0" install-size="0" version="1.0.118.v44376-20130228" unpack="false" />
+  <plugin id="com.bluexml.side.Util.libs" download-size="0" install-size="0" version="1.0.119.v44826-20130314" unpack="false" />
   <plugin id="com.bluexml.side.Util.log" download-size="0" install-size="0" version="1.0.42.v41542-20121220" unpack="false" />
   <plugin id="com.bluexml.side.Util.metaModel.validate" download-size="0" install-size="0" version="1.0.39.v41542-20121220" unpack="false" />
   <plugin id="com.bluexml.side.Util.model.merge" download-size="0" install-size="0" version="1.0.36.v41542-20121220" unpack="false" />
