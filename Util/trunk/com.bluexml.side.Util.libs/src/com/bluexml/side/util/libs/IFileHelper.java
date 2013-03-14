@@ -42,7 +42,7 @@ public class IFileHelper {
 		IFile result = null;
 		ResourcesPlugin.getWorkspace().getRoot().findContainersForLocationURI(toConvert.toURI());
 		IFile[] results = ResourcesPlugin.getWorkspace().getRoot().findFilesForLocationURI(toConvert.toURI());
-		if (results.length == 1) {
+		if (results.length > 0) {
 			result = results[0];
 		}
 		return result;
@@ -52,7 +52,7 @@ public class IFileHelper {
 		IContainer result = null;
 		IContainer[] results = ResourcesPlugin.getWorkspace().getRoot().findContainersForLocationURI(toConvert.toURI());
 
-		if (results.length == 1) {
+		if (results.length > 1) {
 			result = results[0];
 		}
 		return (IFolder) result;
