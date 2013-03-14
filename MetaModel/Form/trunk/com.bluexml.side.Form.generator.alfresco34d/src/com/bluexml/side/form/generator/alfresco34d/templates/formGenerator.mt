@@ -11,7 +11,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.formGenerator-workf
 %>
 
 <%script type="form.FormCollection" name="fileName"%>
-<%if (eContainer() == null) {%><%getProperty("alf.share.paths.web-ext")%>/<%getModuleIdService(getRootPackage().name)%>/share-forms-config.xml<%}%>
+<%if (eContainer() == null) {%><%getProperty("alf.share.paths.web-ext")%>/<%getModuleIdService()%>/share-forms-config.xml<%}%>
 
 <%script type="form.FormCollection" name="generate" file="<%fileName()%>" %>
 <?xml version="1.0" encoding="iso-8859-1"?>

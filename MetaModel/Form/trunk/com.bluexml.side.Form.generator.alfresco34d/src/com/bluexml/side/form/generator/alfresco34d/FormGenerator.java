@@ -6,8 +6,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.common.util.EList;
 
+import com.bluexml.side.clazz.service.alfresco.CommonServices;
+import com.bluexml.side.common.MetaInfo;
+import com.bluexml.side.common.NamedModelElement;
 import com.bluexml.side.util.generator.alfresco.AbstractAlfrescoGenerator;
 
 public class FormGenerator extends AbstractAlfrescoGenerator {
@@ -45,9 +48,20 @@ public class FormGenerator extends AbstractAlfrescoGenerator {
 	}
 
 	// acceleo services
-	public String getModuleIdService(EObject ob, String modelId) throws Exception {
+	public String getModuleIdService(NamedModelElement element) throws Exception {
+
+		com.bluexml.side.common.Package root = (com.bluexml.side.common.Package) CommonServices.getRootContainer(element);
+		String modelId = root.getName();
+		EList<MetaInfo> metainfo = root.getMetainfo();
+
+		for (MetaInfo metaInfo2 : metainfo) {
+			if (metaInfo2.getKey().equals("forcedModelName")) {
+				modelId = metaInfo2.getValue();
+				break;
+			}
+		}
+
 		return buildModuleProperties(modelId).getProperty("module.id"); //$NON-NLS-1$
 	}
 
-	
 }

@@ -9,7 +9,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.messages
 
   
 <%script type="form.FormCollection" name="fileName"%>
-<%if (eContainer() == null) {%><%getProperty("alf.share.paths.web-ext")%>/<%getModuleIdService(getRootPackage().name)%>/<%getRootPackage().name%>_fr.properties<%}%>
+<%if (eContainer() == null) {%><%getProperty("alf.share.paths.web-ext")%>/<%getModuleIdService()%>/<%getRootPackage().name%>_fr.properties<%}%>
 
 <%script type="form.FormCollection" name="generate" file="<%fileName()%>" %>
 <%for (forms){%>

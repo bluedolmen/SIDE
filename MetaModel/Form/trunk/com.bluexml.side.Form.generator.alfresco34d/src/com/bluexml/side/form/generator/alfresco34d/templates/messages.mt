@@ -8,7 +8,7 @@ import com.bluexml.side.form.generator.alfresco34d.templates.services.form
 %>
   
 <%script type="form.FormCollection" name="fileName"%>
-<%if (eContainer() == null) {%><%getProperty("alf.share.paths.web-ext")%>/<%getModuleIdService(getRootPackage().name)%>/<%getRootPackage().name%>.properties<%}%>
+<%if (eContainer() == null) {%><%getProperty("alf.share.paths.web-ext")%>/<%getModuleIdService()%>/<%getRootPackage().name%>.properties<%}%>
 
 <%script type="form.FormCollection" name="generate" file="<%fileName()%>" %>
 <%for (forms){%>
