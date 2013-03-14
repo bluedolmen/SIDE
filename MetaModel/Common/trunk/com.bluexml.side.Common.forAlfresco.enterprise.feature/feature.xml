@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.forAlfresco.enterprise.feature" label="SIDE Generators For Alfresco 3.2.0r Enterprise" version="1.0.723.v44754-20130313" provider-name="BlueXML">
+<feature id="com.bluexml.side.Common.forAlfresco.enterprise.feature" label="SIDE Generators For Alfresco 3.2.0r Enterprise" version="1.0.724.v44826-20130314" provider-name="BlueXML">
   <description url="http://www.side-labs.com">SIDE lets developers who are new to Alfresco get started quickly and helps experienced developers get the job done even faster.</description>
   <copyright url="http://www.bluexml.com/copyright">Copyright 2005-2012 BlueXML SARL.</copyright>
   <license url="http://www.side-labs.com/en/index.php/Product:License">SIDE SOFTWARE IS LICENSED BY BLUEXML. PLEASE GO TO http://www.side-labs.com/en/index.php/Product:License. READ THIS AGREEMENT CAREFULLY BEFORE PURCHASING AND/OR USING SIDE SOFTWARE.</license>
-  <includes id="com.bluexml.side.Common.forAlfresco34d.sideenterprise.feature" version="1.0.122.v44516-20130305" />
+  <includes id="com.bluexml.side.Common.forAlfresco34d.sideenterprise.feature" version="1.0.123.v44826-20130314" />
   <includes id="com.bluexml.side.Deployer.xforms.feature" version="1.0.40.v41542-20121220" />
   <includes id="com.bluexml.side.Deployer.xformsDirectCopy.feature" version="1.0.33.v41542-20121220" />
   <includes id="com.bluexml.side.Deployer.demoWebApplication.feature" version="1.0.5.v41542-20121220" />
@@ -13,7 +13,7 @@
   <includes id="com.bluexml.side.Common.forBirtReport.sideenterprise.feature" version="1.0.6.v41542-20121220" />
   <includes id="com.bluexml.side.Common.forFacetMap.sideenterprise.feature" version="1.0.12.v41542-20121220" />
   <includes id="com.bluexml.side.Common.forAlfresco346E.sideenterprise.feature" version="1.0.138.v44516-20130305" />
-  <includes id="com.bluexml.side.Common.forAlfresco40d.sideenterprise.feature" version="1.0.53.v44754-20130313" />
+  <includes id="com.bluexml.side.Common.forAlfresco40d.sideenterprise.feature" version="1.0.54.v44826-20130314" />
   <includes id="com.bluexml.side.Common.forAlfresco3411E.sideenterprise.feature" version="1.0.149.v44516-20130305" />
   <includes id="com.bluexml.side.Common.forAlfresco4029E.sideenterprise.feature" version="1.0.47.v44754-20130313" />
   <requires>
