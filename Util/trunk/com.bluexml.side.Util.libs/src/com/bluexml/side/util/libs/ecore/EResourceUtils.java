@@ -282,6 +282,12 @@ public class EResourceUtils {
 		EList<EObject> l = inputResource.getContents();
 		return l;
 	}
+	
+	public static EObject openRootModelElement(IFile classModel) throws IOException {
+		EList<?> l = EResourceUtils.openModel(classModel);
+		return (EObject) l.get(0);
+	}
+	
 
 	/************************
 	 * SAVING ***************************
