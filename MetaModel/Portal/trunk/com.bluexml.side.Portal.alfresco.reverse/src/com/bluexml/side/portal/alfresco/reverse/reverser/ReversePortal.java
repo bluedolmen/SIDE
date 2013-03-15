@@ -172,4 +172,17 @@ public class ReversePortal {
 		return (Page) root;
 
 	}
+
+	public void postChanges() throws Exception {
+		//		OCLRunnable action = new OCLRunnable() {
+		//			@Override
+		//			public <T> EList<T> run(EList<T> selection) {
+		//
+		//				return selection;
+		//			}
+		//		};
+		// the regexMatch do not work ...
+		//		String oclSelector = "common::MetaInfo.allInstances() ->select(x:common::MetaInfo|x.key = 'rawContent' and x.multilineValue.regexMatch('(.|\n|\r)*include(.|\n|\r)*') = 'true')";
+		//		OCLModelUpdater.applyChanges(portal, oclSelector, action );
+	}
 }

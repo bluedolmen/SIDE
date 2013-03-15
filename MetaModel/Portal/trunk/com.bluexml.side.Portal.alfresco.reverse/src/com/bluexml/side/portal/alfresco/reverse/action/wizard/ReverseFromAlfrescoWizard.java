@@ -83,6 +83,7 @@ public class ReverseFromAlfrescoWizard extends Wizard implements IWorkbenchWizar
 							ReversePortal rp = new ReversePortal(rootFile, sideModelRepo);
 							
 							rp.reverse();
+							rp.postChanges();
 							rp.persist();
 						}
 

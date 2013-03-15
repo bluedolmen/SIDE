@@ -11,6 +11,7 @@ Require-Bundle: org.eclipse.ui,
  com.bluexml.side.Util.libs,
  com.bluexml.side.Util.framework.tools,
  com.bluexml.side.Util.ecore,
- com.bluexml.side.Portal
+ com.bluexml.side.Portal,
+ com.bluexml.side.Util.metaModel.validate
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
