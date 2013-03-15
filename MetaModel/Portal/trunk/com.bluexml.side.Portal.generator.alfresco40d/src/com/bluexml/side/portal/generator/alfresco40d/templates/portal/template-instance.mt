@@ -68,7 +68,7 @@ import com.bluexml.side.portal.generator.alfresco.templates.services.ClazzServic
      <%}%>
 <%script type="Portlet" name="computeUrlTag" post="trim()"%>
 <%for (isInstanceOfPortletType.instances){%>
-<%if (instanceOf.name == "url"){%><url><%value%></url><%}%><%}%>
+<%if (instanceOf.name == "url"){%><url><%value.replaceAll("&","&amp;")%></url><%}%><%}%>
 <%script type="Portlet" name="computeProperties" post="trim()"%>
 <%if (isInstanceOfPortletType.instances[instanceOf.name != "scope" && instanceOf.name != "url" && instanceOf.name != "region-id" && instanceOf.name != "source-id" && value != null && value != ""].nSize() > 0){%>
 <properties>
