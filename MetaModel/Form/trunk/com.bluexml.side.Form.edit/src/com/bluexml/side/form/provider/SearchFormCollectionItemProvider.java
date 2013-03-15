@@ -18,6 +18,8 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
+import com.bluexml.side.common.CommonFactory;
+import com.bluexml.side.common.CommonPackage;
 import com.bluexml.side.form.FormFactory;
 import com.bluexml.side.form.FormPackage;
 import com.bluexml.side.form.SearchFormCollection;
@@ -111,6 +113,11 @@ public class SearchFormCollectionItemProvider extends
 		newChildDescriptors.add(createChildParameter(
 				FormPackage.Literals.FORM_COLLECTION__FORMS,
 				FormFactory.eINSTANCE.createFormSearch()));
+		
+		newChildDescriptors.add
+		(createChildParameter
+			(CommonPackage.Literals.MODEL_ELEMENT__METAINFO,
+			 CommonFactory.eINSTANCE.createMetaInfo()));
 	}
 
 }

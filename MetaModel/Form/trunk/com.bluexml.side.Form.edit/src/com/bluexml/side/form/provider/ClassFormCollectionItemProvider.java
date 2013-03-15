@@ -118,11 +118,11 @@ public class ClassFormCollectionItemProvider
 			(FormPackage.Literals.FORM_COLLECTION__FORMS,
 			 FormFactory.eINSTANCE.createFormClass()));
 		
-//		newChildDescriptors.add
-//		(createChildParameter
-//			(CommonPackage.Literals.MODEL_ELEMENT__METAINFO_GROUP,
-//			 CommonFactory.eINSTANCE.createMetaInfoGroup()));
-//		
+		newChildDescriptors.add
+		(createChildParameter
+			(CommonPackage.Literals.MODEL_ELEMENT__METAINFO,
+			 CommonFactory.eINSTANCE.createMetaInfo()));
+		
 	}
 
 }
