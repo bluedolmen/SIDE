@@ -44,7 +44,10 @@ public class PortalHelper {
 		return p;
 	}
 
-	public static void createHavePortlet(PortalLayout layout, Column createColumn, int eobjectIndex, Page page, Portlet portletView) {
+	public static void createHavePortlet(PortalLayout layout, Column createColumn, int eobjectIndex, Page page, Portlet portletView) throws Exception {
+		if (layout == null || createColumn == null || page == null || portletView == null) {
+			throw new Exception("some required parameter is null :{layout :"+layout+", column :"+createColumn+", page :"+page+", portlet :"+portletView);
+		}
 		HavePortlet haveProtView = PortalFactory.eINSTANCE.createHavePortlet();
 		haveProtView.setAssociationPage(page);
 		haveProtView.setAssociationPortlet(portletView);
