@@ -109,7 +109,7 @@ public class PortalModelInitializer extends ModelAndDiagramInitializer {
 		String pageId = "document-details"; //$NON-NLS-1$
 		int index = 0;
 		String initializerIndex = InitializerRegister.DEFAULT_ANOTHER_FORM_COLLECTION; //$NON-NLS-1$
-		create_page_internal_portlet(portal, layout, createColumn, pageId, index, initializerIndex, InternalPortletType.FORM, Visibility.PRIVATE, null, null);
+		create_page_internal_portlet(portal, layout, createColumn, pageId, index, initializerIndex, InternalPortletType.FORM, Visibility.PRIVATE, null, pageId);
 	}
 
 	private void createAdvsearchPage(Portal portal, PortalLayout layout, Column createColumn) throws Exception {
@@ -154,10 +154,11 @@ public class PortalModelInitializer extends ModelAndDiagramInitializer {
 		// create "uploadableTypes" portlet
 		createHavePortlet(portal, layout, createColumn, "uploadableTypes", 1, page, portletInternal2);
 		createHavePortlet(portal, layout, createColumn, "toolbar-create-content", 2, page, portletInternal2);
+		createHavePortlet(portal, layout, createColumn, "subtypes", 3, page, portletInternal2);
 		return page;
 	}
 
-	private void createHavePortlet(Portal portal, PortalLayout layout, Column createColumn, String portletId, int eobjectIndex, Page page, PortletInternal portletInternal) {
+	private void createHavePortlet(Portal portal, PortalLayout layout, Column createColumn, String portletId, int eobjectIndex, Page page, PortletInternal portletInternal) throws Exception {
 		Portlet portlet = createPortletInstance_Internal(portal, portletId, portletInternal);
 
 		PortalHelper.createHavePortlet(layout, createColumn, eobjectIndex, page, portlet);
