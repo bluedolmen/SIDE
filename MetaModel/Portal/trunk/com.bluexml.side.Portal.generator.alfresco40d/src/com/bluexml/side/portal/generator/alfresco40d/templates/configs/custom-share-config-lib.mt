@@ -260,9 +260,7 @@ import com.bluexml.side.clazz.service.alfresco.ClassServices
    <content id="xml" mimetype="text/xml" label="create-content.xml" itemid="cm:content"/>
 <%}%>
 <%for (isPortletInternal.form.forms.filter("form.FormClass")){%>
-	<%if (filter("form.ClassReference").real_class.isUploadable()){%>
-   <content mimetype="" icon="plain-text" label="menu.create-content.<%real_class.name%>" itemid="<%real_class.getPrefixedQName()%>"<%if (eContainer("form.FormCollection").name != "default"){%> formid="<%eContainer("form.FormCollection").name%>"<%}%> isContainer="<%real_class.isFolder()%>"/>
-	<%}%>
+   <content mimetype="" icon="<%if (filter("form.ClassReference").real_class.isFolder()){%>folder<%}else{%>plain-text<%}%>" label="menu.create-content.<%real_class.name%>" itemid="<%real_class.getPrefixedQName()%>"<%if (eContainer("form.FormCollection").name != "default"){%> formid="<%eContainer("form.FormCollection").name%>"<%}%> isContainer="<%real_class.isFolder()%>"/>
 <%}%>
 </create-content>
 <%}%>

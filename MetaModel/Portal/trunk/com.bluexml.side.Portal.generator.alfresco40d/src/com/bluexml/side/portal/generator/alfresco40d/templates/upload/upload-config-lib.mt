@@ -9,7 +9,7 @@ import com.bluexml.side.clazz.service.alfresco.ClassServices
 <%for (pageSet[ID.toLowerCase().trim() == "documentlibrary"].portlets.associationPortlet[name.toLowerCase().trim() == "uploadabletypes" && isPortletInternal != null]){%>
 <upload>
 <%for (isPortletInternal.form.forms){%>
-	<%if (!filter("form.ClassReference").real_class.isUploadable()){%>
+	<%if (filter("form.ClassReference").real_class.isUploadable()){%>
 	<type qname="<%filter("form.ClassReference").real_class.getPrefixedQName()%>" labelId="type.<%filter("form.ClassReference").real_class.getPrefixedQName("_")%>" />
 	<%}%>	
 <%}%>
