@@ -15,7 +15,7 @@ import com.bluexml.side.form.generator.alfresco34d.FormGenerator
 
 <beans>
 
-   <bean id="<%getRootPackage().name%>ResourceBundle" class="org.springframework.extensions.surf.util.ResourceBundleBootstrapComponent">
+   <bean id="<%getModelName()%>ResourceBundle" class="org.springframework.extensions.surf.util.ResourceBundleBootstrapComponent">
       <property name="resourceBundles">
          <list>
             <value>alfresco.web-extension.<%getModuleIdService()%>.<%getRootPackage().name%></value>
@@ -23,8 +23,8 @@ import com.bluexml.side.form.generator.alfresco34d.FormGenerator
       </property>
    </bean>
 
-   <!-- Provide <%getRootPackage().name%> form config -->
-	<bean id="<%getRootPackage().name%>FormsURLConfig"
+   <!-- Provide <%getModelName()%> form config -->
+	<bean id="<%getModelName()%>FormsURLConfig"
 		class="org.springframework.extensions.config.source.UrlConfigSource">
 		<constructor-arg>
 			<list>
@@ -35,10 +35,10 @@ import com.bluexml.side.form.generator.alfresco34d.FormGenerator
 	</bean>
 
 	<!-- Provide default form config -->
-	<bean id="<%getRootPackage().name%>FormsClientConfig"
+	<bean id="<%getModelName()%>FormsClientConfig"
 		class="com.bluexml.side.Framework.alfresco.share.formExtension.MyConfigBootStrap"
 		init-method="register">
 		<property name="configService" ref="web.config" />
-		<property name="urlConfigSource" ref="<%getRootPackage().name%>FormsURLConfig" />
+		<property name="urlConfigSource" ref="<%getModelName()%>FormsURLConfig" />
 	</bean>
 </beans>

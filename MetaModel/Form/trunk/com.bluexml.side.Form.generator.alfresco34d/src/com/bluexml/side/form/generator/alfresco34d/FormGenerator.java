@@ -49,19 +49,21 @@ public class FormGenerator extends AbstractAlfrescoGenerator {
 
 	// acceleo services
 	public String getModuleIdService(NamedModelElement element) throws Exception {
+		String modelId = getModelName(element);
+		return buildModuleProperties(modelId).getProperty("module.id"); //$NON-NLS-1$
+	}
 
+	public String getModelName(NamedModelElement element) {
 		com.bluexml.side.common.Package root = (com.bluexml.side.common.Package) CommonServices.getRootContainer(element);
 		String modelId = root.getName();
 		EList<MetaInfo> metainfo = root.getMetainfo();
-
 		for (MetaInfo metaInfo2 : metainfo) {
 			if (metaInfo2.getKey().equals("forcedModelName")) {
 				modelId = metaInfo2.getValue();
 				break;
 			}
 		}
-
-		return buildModuleProperties(modelId).getProperty("module.id"); //$NON-NLS-1$
+		return modelId;
 	}
 
 }
