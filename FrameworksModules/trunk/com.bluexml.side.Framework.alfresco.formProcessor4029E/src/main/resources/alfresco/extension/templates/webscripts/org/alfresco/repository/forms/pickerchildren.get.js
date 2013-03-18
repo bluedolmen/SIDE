@@ -513,7 +513,8 @@ function findGroups(searchTerm, maxResults, results, xpath)
     }
 
     if (logger.isLoggingEnabled()) logger.log("Finding groups matching pattern: " + searchTermPattern);
-
+    
+    var paging = utils.createPaging(maxResults, 0);
     var searchResults = groups.getGroupsInZone(searchTerm, "APP.DEFAULT", paging, "displayName");
     for each(var node in searchResults)
     {
