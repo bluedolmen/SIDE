@@ -101,8 +101,7 @@ public class ClassServices {
 	}
 
 	public static boolean isFolder(AbstractClass cl2) throws Exception {
-		return isChildOf(cl2, "cm:folder");
-		
+		return CommonServices.getPrefixedQName(cl2).equals("cm:folder") || isChildOf(cl2, "cm:folder");
 	}
 
 	public static boolean isChildOfCmContent(AbstractClass c) throws Exception {
@@ -114,7 +113,7 @@ public class ClassServices {
 	}
 	
 	public static boolean isUploadable(AbstractClass c) throws Exception {
-		return isChildOfCmContent(c) && !isChildOf(c, "dl:dataListItem");
+		return CommonServices.getPrefixedQName(c).equals("cm:content") || (isChildOfCmContent(c) && !isChildOf(c, "dl:dataListItem"));
 	}
 	
 	
