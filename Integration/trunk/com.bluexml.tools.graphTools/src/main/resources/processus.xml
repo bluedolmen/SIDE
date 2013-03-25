@@ -1,0 +1,114 @@
+<com.bluexml.tools.graph.model.GraphObject>
+  <edges>
+    <com.bluexml.tools.graph.model.Edge>
+      <node1>
+        <uid serialization="custom">
+          <java.util.UUID>
+            <default>
+              <leastSigBits>-8736428449796074596</leastSigBits>
+              <mostSigBits>6515444811322052025</mostSigBits>
+            </default>
+          </java.util.UUID>
+        </uid>
+        <label>P1_Etape3 Correction</label>
+        <filterMatch>false</filterMatch>
+      </node1>
+      <node2>
+        <uid serialization="custom">
+          <java.util.UUID>
+            <default>
+              <leastSigBits>-7132885259925547610</leastSigBits>
+              <mostSigBits>-4022956261756744008</mostSigBits>
+            </default>
+          </java.util.UUID>
+        </uid>
+        <label>P1_Etape2 Validation</label>
+        <filterMatch>false</filterMatch>
+      </node2>
+      <directed>true</directed>
+      <uid serialization="custom">
+        <java.util.UUID>
+          <default>
+            <leastSigBits>-5607920856870820561</leastSigBits>
+            <mostSigBits>2943450542290387623</mostSigBits>
+          </default>
+        </java.util.UUID>
+      </uid>
+      <label>correction</label>
+      <filterMatch>false</filterMatch>
+    </com.bluexml.tools.graph.model.Edge>
+    <com.bluexml.tools.graph.model.Edge>
+      <node1 reference="../../com.bluexml.tools.graph.model.Edge/node1"/>
+      <node2>
+        <uid serialization="custom">
+          <java.util.UUID>
+            <default>
+              <leastSigBits>-8523096280363786183</leastSigBits>
+              <mostSigBits>-15233095682732898</mostSigBits>
+            </default>
+          </java.util.UUID>
+        </uid>
+        <label>P1_Etape1 Demarrage</label>
+        <filterMatch>false</filterMatch>
+      </node2>
+      <directed>true</directed>
+      <uid serialization="custom">
+        <java.util.UUID>
+          <default>
+            <leastSigBits>-5802443036906577670</leastSigBits>
+            <mostSigBits>3089885248846119523</mostSigBits>
+          </default>
+        </java.util.UUID>
+      </uid>
+      <label>correction</label>
+      <filterMatch>false</filterMatch>
+    </com.bluexml.tools.graph.model.Edge>
+    <com.bluexml.tools.graph.model.Edge>
+      <node1 reference="../../com.bluexml.tools.graph.model.Edge[2]/node2"/>
+      <node2 reference="../../com.bluexml.tools.graph.model.Edge/node1"/>
+      <directed>true</directed>
+      <uid serialization="custom">
+        <java.util.UUID>
+          <default>
+            <leastSigBits>-5892716503336192802</leastSigBits>
+            <mostSigBits>-6495655711805323596</mostSigBits>
+          </default>
+        </java.util.UUID>
+      </uid>
+      <label>validation</label>
+      <filterMatch>false</filterMatch>
+    </com.bluexml.tools.graph.model.Edge>
+    <com.bluexml.tools.graph.model.Edge>
+      <node1 reference="../../com.bluexml.tools.graph.model.Edge/node2"/>
+      <node2 reference="../../com.bluexml.tools.graph.model.Edge[2]/node2"/>
+      <directed>true</directed>
+      <uid serialization="custom">
+        <java.util.UUID>
+          <default>
+            <leastSigBits>-8125459394191511160</leastSigBits>
+            <mostSigBits>853253250006205317</mostSigBits>
+          </default>
+        </java.util.UUID>
+      </uid>
+      <label>validation</label>
+      <filterMatch>false</filterMatch>
+    </com.bluexml.tools.graph.model.Edge>
+  </edges>
+  <nodes>
+    <com.bluexml.tools.graph.model.Node reference="../../edges/com.bluexml.tools.graph.model.Edge[2]/node2"/>
+    <com.bluexml.tools.graph.model.Node>
+      <uid serialization="custom">
+        <java.util.UUID>
+          <default>
+            <leastSigBits>-7199737355210498542</leastSigBits>
+            <mostSigBits>7455077303180281756</mostSigBits>
+          </default>
+        </java.util.UUID>
+      </uid>
+      <label>abandonEtape</label>
+      <filterMatch>false</filterMatch>
+    </com.bluexml.tools.graph.model.Node>
+    <com.bluexml.tools.graph.model.Node reference="../../edges/com.bluexml.tools.graph.model.Edge/node2"/>
+    <com.bluexml.tools.graph.model.Node reference="../../edges/com.bluexml.tools.graph.model.Edge/node1"/>
+  </nodes>
+</com.bluexml.tools.graph.model.GraphObject>
