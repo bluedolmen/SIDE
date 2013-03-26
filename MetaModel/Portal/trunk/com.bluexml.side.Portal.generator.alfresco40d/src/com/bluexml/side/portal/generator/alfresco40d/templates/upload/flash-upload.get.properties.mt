@@ -2,6 +2,7 @@
 metamodel http://www.kerblue.org/portal/1.0
 import com.bluexml.side.portal.generator.alfresco.templates.services.ClazzService
 import com.bluexml.side.clazz.service.alfresco.CommonServices
+import com.bluexml.side.portal.generator.alfresco40d.templates.upload.upload-config-lib
 %>
 <%script type="Portal" name="validatedFilename" post="trim()" %>
 <%getProperty("alf.share.paths.web-ext.alf.components")%>/upload/flash-upload.get.properties
@@ -36,8 +37,5 @@ label.majorVersion.more=major changes ({0})
 label.comments=Comments
 
 type.cm_content=Content
-<%for (pageSet[ID.toLowerCase().trim() == "documentlibrary"].portlets.associationPortlet[name.toLowerCase().trim() == "uploadabletypes" && isPortletInternal != null]){%>
-<%for (isPortletInternal.form.forms){%>
-type.<%filter("form.ClassReference").real_class.getPrefixedQName("_")%><%filter("form.ClassReference").real_class.getLabel()%>
-<%}%>
-<%}%>
+
+<%i18nGenerator%>

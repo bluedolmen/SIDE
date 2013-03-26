@@ -2,6 +2,7 @@
 metamodel http://www.kerblue.org/portal/1.0
 import com.bluexml.side.portal.generator.alfresco.templates.services.ClazzService
 import com.bluexml.side.clazz.service.alfresco.CommonServices
+import com.bluexml.side.portal.generator.alfresco40d.templates.upload.upload-config-lib
 %>
 <%script type="Portal" name="validatedFilename" post="trim()" %>
 <%getProperty("alf.share.paths.web-ext.alf.components")%>/upload/html-upload.get_fr.properties
@@ -33,8 +34,4 @@ message.failure.413=Quota d\u00e9pass\u00e9
 message.illegalCharacters=Les noms de fichier ne peuvent contenir aucun caract\u00e8re ill\u00e9gal sur un syst\u00e8me d'exploitation.
 
 type.cm_content=Contenu
-<%for (pageSet[ID.toLowerCase().trim() == "documentlibrary"].portlets.associationPortlet[name.toLowerCase().trim() == "uploadabletypes" && isPortletInternal != null]){%>
-<%for (isPortletInternal.form.forms){%>
-type.<%filter("form.ClassReference").real_class.getPrefixedQName("_")%><%filter("form.ClassReference").real_class.getLabel()%>
-<%}%>
-<%}%>
+<%i18nGenerator%>

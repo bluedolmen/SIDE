@@ -2,6 +2,7 @@
 metamodel http://www.kerblue.org/portal/1.0
 import com.bluexml.side.portal.generator.alfresco.templates.services.ClazzService
 import com.bluexml.side.clazz.service.alfresco.CommonServices
+import com.bluexml.side.portal.generator.alfresco40d.templates.upload.upload-config-lib
 %>
 <%script type="Portal" name="validatedFilename" post="trim()" %>
 <%getProperty("alf.share.paths.web-ext.alf.components")%>/upload/html-upload.get_ja.properties
@@ -33,8 +34,4 @@ message.failure.413=\u30af\u30a9\u30fc\u30bf\u3092\u8d85\u3048\u3066\u3044\u307e
 message.illegalCharacters=\u30d5\u30a1\u30a4\u30eb\u540d\u306b\u3001\u30aa\u30da\u30ec\u30fc\u30b7\u30e7\u30f3\u30b7\u30b9\u30c6\u30e0\u3067\u4f7f\u7528\u3067\u304d\u306a\u3044\u6587\u5b57\u3092\u542b\u3081\u308b\u3053\u3068\u306f\u3067\u304d\u307e\u305b\u3093\u3002
 
 type.cm_content=\u30b3\u30f3\u30c6\u30f3\u30c4
-<%for (pageSet[ID.toLowerCase().trim() == "documentlibrary"].portlets.associationPortlet[name.toLowerCase().trim() == "uploadabletypes" && isPortletInternal != null]){%>
-<%for (isPortletInternal.form.forms){%>
-type.<%filter("form.ClassReference").real_class.getPrefixedQName("_")%><%filter("form.ClassReference").real_class.getLabel()%>
-<%}%>
-<%}%>
+<%i18nGenerator%>

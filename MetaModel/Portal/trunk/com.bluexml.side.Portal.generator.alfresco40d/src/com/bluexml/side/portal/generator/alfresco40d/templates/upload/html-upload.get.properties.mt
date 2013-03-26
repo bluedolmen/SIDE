@@ -2,6 +2,8 @@
 metamodel http://www.kerblue.org/portal/1.0
 import com.bluexml.side.portal.generator.alfresco.templates.services.ClazzService
 import com.bluexml.side.clazz.service.alfresco.CommonServices
+import com.bluexml.side.portal.generator.alfresco40d.templates.upload.upload-config-lib
+
 %>
 <%script type="Portal" name="validatedFilename" post="trim()" %>
 <%getProperty("alf.share.paths.web-ext.alf.components")%>/upload/html-upload.get.properties

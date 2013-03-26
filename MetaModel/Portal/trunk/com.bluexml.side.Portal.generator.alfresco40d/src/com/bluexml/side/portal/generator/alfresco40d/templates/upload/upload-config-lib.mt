@@ -15,3 +15,11 @@ import com.bluexml.side.clazz.service.alfresco.ClassServices
 <%}%>
 </upload>
 <%}%>
+
+
+<%script type="Portal" name="i18nGenerator" %>
+<%for (portletSet[name.toLowerCase().trim() == "uploadabletypes" && isPortletInternal != null]){%>
+<%for (isPortletInternal.form.forms){%>
+type.<%filter("form.ClassReference").real_class.getPrefixedQName("_")%>=<%filter("form.ClassReference").real_class.getLabel()%>
+<%}%>
+<%}%>
