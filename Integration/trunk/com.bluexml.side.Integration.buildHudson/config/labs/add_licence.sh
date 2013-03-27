@@ -7,7 +7,8 @@ IFS=$'\n'
 var=`cat $licence`
 
 
-for f in `find $chemin -type f -name "*.java" `; do
+# avoid webscript js files
+for f in `find $chemin -type f -and \( -name "*.java" -or -name "*.js" \) -and ! \( -path "*/resources/alfresco/*" -or -path "*web-extension*" \) -and -path "*com.bluexml*" `; do
 	filein=$f
 	num=1
 	perl -pi -le 'print "/*" if $. == "'$num'"' $filein

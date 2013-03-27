@@ -16,7 +16,7 @@ fi
 
 cd $BUILD_PATH
 
-rm -rf $SOURCE_PATH/S-IDE/Util/trunk/com.bluexml.side.Util.security.enterprise
+#rm -rf $SOURCE_PATH/S-IDE/Util/trunk/com.bluexml.side.Util.security.enterprise
 
 echo "Process java file to remove reference to package security"
 
@@ -36,7 +36,7 @@ for f in `find $SOURCE_PATH -type f -name "*.java"`; do
     then
         echo "remove enterprise check from $f"
         # delete every line betwen the pattern 'public boolean check' and '}'
-        perl -pi -e 'if(/public boolean check[ ]*\(/../\}/){s/^.*$//s unless /(public boolean check[ ]*\(|\})/}' $f
+        perl -pi -e 'if(/public boolean check[ ]*\(/../return/){s/^.*$//s unless /(public boolean check[ ]*\()/}' $f
         line1=`grep -n "public boolean check[ ]*(" $f`
         num=`echo $line1 | sed -n 's/\([0-9]*\).*/\1/p'`
         echo "num# $num"
@@ -62,7 +62,7 @@ for f in `find $SOURCE_PATH -type f -name "*.java"`; do
         # delete every line betwen the pattern 'public boolean check' and '}'
         perl -pi -e 'if(/public static Boolean checkElementValidity/../return null;/){s/^.*$//s unless /(public static Boolean checkElementValidity|return null;)/}' $f
         line1=`grep -n "public static Boolean checkElementValidity" $f`
-        num=`echo $line1 | sed -n 's/\([0-9]*\)/\1/p'`
+        num=`echo $line1 | sed -n 's/\([0-9]*\).*/\1/p'`
         num1=$(($num+1))
         perl -pi -e 's/return null/\t\treturn true/ if $. == "'$num1'"' $f
     fi
@@ -70,18 +70,21 @@ done
 
 echo "Process feature.xml file to remove reference to package security"
 for f in `find $SOURCE_PATH -type f -name "feature.xml"`; do
+    echo "fix $f"
     perl -0 -p -i -e 's/( *)<plugin( *)(\s+)( *)id="com.bluexml.side.Util.security.enterprise"[^<]*//sg' $f
 done
 
 echo "Process xml file to remove reference to package security"
 for f in `find $SOURCE_PATH -type f -name "*.xml"`; do
     # delete line having the pattern 'com.bluexml.side.Util.security'
+    echo "fix $f"
     perl -ni -e 'print unless /com.bluexml.side.Util.security.enterprise/' $f
 done
 
 echo "Process Manifest file to remove reference to package security"
 for f in `find $SOURCE_PATH -type f -name "*.MF"`; do
     # delete line having the pattern 'com.bluexml.side.Util.security'
+    echo "fix $f"
     perl -ni -e 'print unless /com.bluexml.side.Util.security.enterprise/' $f
 done
 
@@ -89,4 +92,4 @@ done
 echo "Modify header of source file using the openSourcePublication project"
 cd $BUILD_PATH/labs
 chmod +x add_licence.sh
-./add_licence.sh LICENSE-notices $SOURCE_PATH
+#$BUILD_PATH/labs/add_licence.sh LICENSE-notices $SOURCE_PATH
