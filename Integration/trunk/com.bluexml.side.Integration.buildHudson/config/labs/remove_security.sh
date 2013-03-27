@@ -32,25 +32,37 @@ for f in `find $SOURCE_PATH -type f -name "*.java"`; do
     perl -ni -e 'print unless /com.bluexml.side.util.security.SecurityHelper/' $f
     perl -ni -e 'print unless /com.bluexml.side.util.security.preferences.SidePreferences/' $f
 
-
-
     if grep -n "public boolean check[ ]*(" $f
     then
         echo "remove enterprise check from $f"
         # delete every line betwen the pattern 'public boolean check' and '}'
         perl -pi -e 'if(/public boolean check[ ]*\(/../\}/){s/^.*$//s unless /(public boolean check[ ]*\(|\})/}' $f
         line1=`grep -n "public boolean check[ ]*(" $f`
-        num=`echo $lign1 | sed 's/\([0-9]*\)/\1/p'`
+        num=`echo $line1 | sed -n 's/\([0-9]*\).*/\1/p'`
+        echo "num# $num"
+        num1=$(($num+1))
+        perl -pi -e 'print "\t\treturn true;\n" if $. == "'$num1'"' $f
+    fi
+
+    if grep -n "public boolean checkOption[ ]*(" $f
+    then
+        echo "remove enterprise checkOption "
+        # delete every line betwen the pattern 'public boolean check' and '}'
+        perl -pi -e 'if(/public boolean checkOption[ ]*\(/../return/){s/^.*$//s unless /(public boolean checkOption[ ]*\()/}' $f
+        line1=`grep -n "public boolean checkOption[ ]*(" $f`
+        num=`echo $line1 | sed -n 's/\([0-9]*\).*/\1/p'`
+        echo "num# $num"
         num1=$(($num+1))
         perl -pi -e 'print "\t\treturn true;\n" if $. == "'$num1'"' $f
     fi
 
     if grep -n "public static Boolean checkElementValidity" $f
     then
+        echo "remove checkElementValidity from $f"
         # delete every line betwen the pattern 'public boolean check' and '}'
         perl -pi -e 'if(/public static Boolean checkElementValidity/../return null;/){s/^.*$//s unless /(public static Boolean checkElementValidity|return null;)/}' $f
         line1=`grep -n "public static Boolean checkElementValidity" $f`
-        num=`echo $lign1 | sed 's/\([0-9]*\)/\1/p'`
+        num=`echo $line1 | sed -n 's/\([0-9]*\)/\1/p'`
         num1=$(($num+1))
         perl -pi -e 's/return null/\t\treturn true/ if $. == "'$num1'"' $f
     fi
