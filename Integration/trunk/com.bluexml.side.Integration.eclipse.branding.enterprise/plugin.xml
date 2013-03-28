@@ -26,10 +26,10 @@
     <repository activator="com.bluexml.side.Integration.eclipse.branding.enterprise.Activator" pluginId="com.bluexml.side.Integration.eclipse.branding.enterprise" repositoryName="com.bluexml.side.Integration.eclipse.branding.enterprise.repository" repositoryPath="/com/bluexml/side/Integration/eclipse/branding/enterprise/repository/m2repositoryForSIDE.zip" />
   </extension>
   <extension point="com.bluexml.side.Application.com_bluexml_application_configuration">
-    <moduleDependence label="Alfresco Extension 3.2r2 CE" moduleId="com.bluexml.side.Framework.maven.ampArchetypeForSide" moduleType="jar" technologyVersion="internal" versionMax="1.0.19" versionMin="1.0.19" />
-    <moduleDependence label="Alfresco Share Extension 3.2r2 CE" moduleId="com.bluexml.side.Framework.maven.warPatchArchetypeForSide" moduleType="jar" technologyVersion="internal" versionMax="1.0.20" versionMin="1.0.20" />
-    <moduleDependence label="Alfresco Extension 3.4.d CE" moduleId="com.bluexml.side.Framework.maven.ampArchetypeForSide_34dCE" moduleType="jar" technologyVersion="internal" versionMax="1.0.9" versionMin="1.0.9" />
-    <moduleDependence label="Alfresco Share Extension 3.4.d CE" moduleId="com.bluexml.side.Framework.maven.warPatchArchetypeForSide_34dCE" moduleType="jar" technologyVersion="internal" versionMax="1.0.9" versionMin="1.0.9" />
+    <moduleDependence label="Alfresco Extension 3.2r2 CE" moduleId="com.bluexml.side.Framework.maven.ampArchetypeForSide" moduleType="jar" technologyVersion="internal" versionMax="1.0.20" versionMin="1.0.20" />
+    <moduleDependence label="Alfresco Share Extension 3.2r2 CE" moduleId="com.bluexml.side.Framework.maven.warPatchArchetypeForSide" moduleType="jar" technologyVersion="internal" versionMax="1.0.21" versionMin="1.0.21" />
+    <moduleDependence label="Alfresco Extension 3.4.d CE" moduleId="com.bluexml.side.Framework.maven.ampArchetypeForSide_34dCE" moduleType="jar" technologyVersion="internal" versionMax="1.0.10" versionMin="1.0.10" />
+    <moduleDependence label="Alfresco Share Extension 3.4.d CE" moduleId="com.bluexml.side.Framework.maven.warPatchArchetypeForSide_34dCE" moduleType="jar" technologyVersion="internal" versionMax="1.0.10" versionMin="1.0.10" />
   </extension>
 </plugin>
 
