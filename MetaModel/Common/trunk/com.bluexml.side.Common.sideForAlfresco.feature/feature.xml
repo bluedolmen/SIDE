@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.sideForAlfresco.feature" label="SIDE for Alfresco" version="1.0.1130.v45101-20130327" provider-name="blueXML" plugin="com.bluexml.side.Integration.eclipse.branding.labs">
+<feature id="com.bluexml.side.Common.sideForAlfresco.feature" label="SIDE for Alfresco" version="1.0.1131.v45155-20130328" provider-name="blueXML" plugin="com.bluexml.side.Integration.eclipse.branding.labs">
   <description url="http://www.side-labs.com">SIDE lets developers who are new to Alfresco get started quickly and helps experienced developers get the job done even faster.</description>
   <copyright url="http://www.bluexml.com/copyright">Copyright 2005-2012 BlueXML SARL.</copyright>
   <license url="http://www.bluexml.com">GNU GENERAL PUBLIC LICENSE
@@ -623,18 +623,18 @@ Program, unless a warranty or assumption of liability accompanies a
 copy of the Program in return for a fee.
 
                      END OF TERMS AND CONDITIONS</license>
-  <includes id="com.bluexml.side.Class.generator.alfresco.feature" version="1.0.640.v43717-20130213" />
-  <includes id="com.bluexml.side.Deployer.alfresco.feature" version="1.0.57.v43377-20130208" />
-  <includes id="com.bluexml.side.Deployer.alfrescoDirectCopy.feature" version="1.0.58.v43377-20130208" />
-  <includes id="com.bluexml.side.Deployer.xforms.feature" version="1.0.40.v41542-20121220" />
-  <includes id="com.bluexml.side.Deployer.xformsDirectCopy.feature" version="1.0.33.v41542-20121220" />
-  <includes id="com.bluexml.side.Deployer.facetMap.feature" version="1.0.38.v41542-20121220" />
-  <includes id="com.bluexml.side.Deployer.report.feature" version="1.0.37.v41542-20121220" />
-  <includes id="com.bluexml.side.Form.generator.xforms.feature" version="1.0.219.v43377-20130208" />
-  <includes id="com.bluexml.side.Portal.generator.alfresco.feature" version="1.0.125.v41542-20121220" />
-  <includes id="com.bluexml.side.View.generator.alfresco.feature" version="1.0.68.v41542-20121220" />
-  <includes id="com.bluexml.side.View.generator.facetmap.feature" version="1.0.93.v41542-20121220" />
-  <includes id="com.bluexml.side.Workflow.generator.alfresco.feature" version="1.0.86.v43377-20130208" />
-  <plugin id="com.bluexml.side.Integration.eclipse.branding.labs" download-size="0" install-size="0" version="1.0.1045.v45101-20130327" unpack="false" />
+  <includes id="com.bluexml.side.Class.generator.alfresco.feature" version="1.0.641.v45155-20130328" />
+  <includes id="com.bluexml.side.Deployer.alfresco.feature" version="1.0.58.v45155-20130328" />
+  <includes id="com.bluexml.side.Deployer.alfrescoDirectCopy.feature" version="1.0.59.v45155-20130328" />
+  <includes id="com.bluexml.side.Deployer.xforms.feature" version="1.0.41.v45155-20130328" />
+  <includes id="com.bluexml.side.Deployer.xformsDirectCopy.feature" version="1.0.34.v45155-20130328" />
+  <includes id="com.bluexml.side.Deployer.facetMap.feature" version="1.0.39.v45155-20130328" />
+  <includes id="com.bluexml.side.Deployer.report.feature" version="1.0.38.v45155-20130328" />
+  <includes id="com.bluexml.side.Form.generator.xforms.feature" version="1.0.220.v45155-20130328" />
+  <includes id="com.bluexml.side.Portal.generator.alfresco.feature" version="1.0.126.v45155-20130328" />
+  <includes id="com.bluexml.side.View.generator.alfresco.feature" version="1.0.69.v45155-20130328" />
+  <includes id="com.bluexml.side.View.generator.facetmap.feature" version="1.0.94.v45155-20130328" />
+  <includes id="com.bluexml.side.Workflow.generator.alfresco.feature" version="1.0.87.v45155-20130328" />
+  <plugin id="com.bluexml.side.Integration.eclipse.branding.labs" download-size="0" install-size="0" version="1.0.1046.v45155-20130328" unpack="false" />
 </feature>
 
