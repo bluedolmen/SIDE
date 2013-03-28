@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.bluexml.tools</groupId>
   <artifactId>miscellaneous</artifactId>
-  <version>0.0.6</version>
+  <version>0.0.7</version>
   <description>project that provide miscellaneous tools to quickly do some litle job</description>
   <dependencies>
     <dependency>
@@ -19,14 +19,14 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-    	<groupId>org.apache.batik.dom</groupId>
-    	<artifactId>svg</artifactId>
-    	<version>1.6.0</version>
+      <groupId>org.apache.batik.dom</groupId>
+      <artifactId>svg</artifactId>
+      <version>1.6.0</version>
     </dependency>
     <dependency>
-    	<groupId>org.apache.batik</groupId>
-    	<artifactId>svggen</artifactId>
-    	<version>1.6.0</version>
+      <groupId>org.apache.batik</groupId>
+      <artifactId>svggen</artifactId>
+      <version>1.6.0</version>
     </dependency>
   </dependencies>
 </project>
