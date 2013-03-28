@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Application.feature" label="SIDE Application Modeler" version="1.0.192.v44286-20130226" provider-name="BlueXML">
+<feature id="com.bluexml.side.Application.feature" label="SIDE Application Modeler" version="1.0.193.v45155-20130328" provider-name="BlueXML">
   <description url="http://www.side-labs.com">SIDE lets developers who are new to Alfresco get started quickly and helps experienced developers get the job done even faster.</description>
   <copyright url="http://www.bluexml.com/copyright">Copyright (C) 2007-20013  BlueXML - www.bluexml.com</copyright>
   <license url="http://www.side-labs.com/en/index.php/Product:License">This program is free software: you can redistribute it and/or modify
@@ -26,11 +26,11 @@
     <import plugin="org.eclipse.ui.ide" />
     <import plugin="org.eclipse.ui" />
   </requires>
-  <plugin id="com.bluexml.side.Application" download-size="0" install-size="0" version="1.0.61.v41542-20121220" unpack="false" />
-  <plugin id="com.bluexml.side.Application.edit" download-size="0" install-size="0" version="1.0.49.v41542-20121220" unpack="false" />
-  <plugin id="com.bluexml.side.Application.editor" download-size="0" install-size="0" version="1.0.40.v41542-20121220" unpack="false" />
-  <plugin id="com.bluexml.side.Application.ui" download-size="0" install-size="0" version="1.0.185.v44286-20130226" unpack="false" />
-  <plugin id="com.bluexml.side.Application.startup" download-size="0" install-size="0" version="1.0.23.v41542-20121220" unpack="false" />
-  <plugin id="com.bluexml.side.Application.customModules" download-size="0" install-size="0" version="1.0.6.v43377-20130208" unpack="false" />
+  <plugin id="com.bluexml.side.Application" download-size="0" install-size="0" version="1.0.62.v45155-20130328" unpack="false" />
+  <plugin id="com.bluexml.side.Application.edit" download-size="0" install-size="0" version="1.0.50.v45155-20130328" unpack="false" />
+  <plugin id="com.bluexml.side.Application.editor" download-size="0" install-size="0" version="1.0.41.v45155-20130328" unpack="false" />
+  <plugin id="com.bluexml.side.Application.ui" download-size="0" install-size="0" version="1.0.186.v45155-20130328" unpack="false" />
+  <plugin id="com.bluexml.side.Application.startup" download-size="0" install-size="0" version="1.0.24.v45155-20130328" unpack="false" />
+  <plugin id="com.bluexml.side.Application.customModules" download-size="0" install-size="0" version="1.0.7.v45155-20130328" unpack="false" />
 </feature>
 
