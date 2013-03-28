@@ -20,7 +20,6 @@
     <import plugin="com.bluexml.side.Util.generator.alfresco" />
     <import plugin="com.bluexml.side.Class.service.alfresco" />
     <import plugin="com.bluexml.side.View.generator.facetmap" />
-    <import plugin="com.bluexml.side.Util.security.enterprise" />
   </requires>
   <plugin id="com.bluexml.side.View.generator.facetmap.enterprise" download-size="0" install-size="0" version="1.0.32.v41542-20121220" unpack="false" />
 </feature>

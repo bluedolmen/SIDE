@@ -26,7 +26,6 @@
     <import plugin="com.bluexml.side.Util.componentMonitor" />
     <import plugin="com.bluexml.side.Class.service.alfresco" />
     <import plugin="com.bluexml.side.Class.generator.alfresco" />
-    <import plugin="com.bluexml.side.Util.security.enterprise" />
   </requires>
   <plugin id="com.bluexml.side.Class.generator.alfresco.enterprise" download-size="0" install-size="0" version="1.0.43.v41542-20121220" unpack="false" />
   <plugin id="com.bluexml.side.Class.generator.alfresco.api" download-size="0" install-size="0" version="1.0.20.v41542-20121220" unpack="false" />

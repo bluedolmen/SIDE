@@ -17,7 +17,6 @@ Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.Util.libs,
  com.bluexml.side.Class.service.alfresco,
  com.bluexml.side.View,
- com.bluexml.side.Form,
- com.bluexml.side.Util.security.enterprise
+ com.bluexml.side.Form
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy

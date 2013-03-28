@@ -18,8 +18,7 @@ Require-Bundle: com.bluexml.side.Util.libs,
  com.bluexml.side.Util.ecore,
  org.eclipse.emf.ecore.xmi,
  com.bluexml.side.Util.log,
- com.bluexml.side.Form.generator.xforms.worker,
- com.bluexml.side.Util.security.enterprise
+ com.bluexml.side.Form.generator.xforms.worker
 Bundle-ClassPath: .
 Export-Package: com.bluexml.side.forms.generator.alfresco.chiba.enterprise
 Import-Package: javax.activation,

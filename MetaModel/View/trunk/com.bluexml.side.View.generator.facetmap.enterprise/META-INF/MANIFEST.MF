@@ -19,8 +19,7 @@ Require-Bundle: org.eclipse.ui,
  com.bluexml.side.Util.componentMonitor,
  com.bluexml.side.Util.generator.alfresco,
  com.bluexml.side.Class.service.alfresco,
- com.bluexml.side.View.generator.facetmap,
- com.bluexml.side.Util.security.enterprise
+ com.bluexml.side.View.generator.facetmap
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: com.bluexml.side.view.generator.facetmap.enterprise

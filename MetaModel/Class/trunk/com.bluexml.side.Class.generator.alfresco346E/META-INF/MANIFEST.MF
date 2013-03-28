@@ -28,7 +28,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ocl,
  org.eclipse.ocl.ecore,
  org.eclipse.ui,
- com.bluexml.side.Util.security.enterprise,
  com.bluexml.side.Class.generator.alfresco34d.ext.sideenterprise,
  com.bluexml.side.Class.generator.alfresco.extension.sideEnterprise,
  com.bluexml.side.Class.generator.alfresco

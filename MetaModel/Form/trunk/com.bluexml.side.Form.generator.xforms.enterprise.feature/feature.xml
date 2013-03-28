@@ -17,7 +17,6 @@
     <import plugin="com.bluexml.side.Util.ecore" />
     <import plugin="org.eclipse.emf.ecore.xmi" />
     <import plugin="com.bluexml.side.Util.log" />
-    <import plugin="com.bluexml.side.Util.security.enterprise" />
     <import plugin="org.apache.xerces" />
     <import plugin="com.bluexml.side.Form.generator.xforms.worker" />
   </requires>

@@ -640,6 +640,5 @@ copy of the Program in return for a fee.
   <plugin id="com.bluexml.side.Class.edit.ui" download-size="0" install-size="0" version="1.0.63.v44857-20130315" unpack="false" />
   <plugin id="com.bluexml.side.Integration.eclipse.builder" download-size="0" install-size="0" version="1.0.69.v41542-20121220" unpack="false" />
   <plugin id="com.bluexml.side.Util.antRunner" download-size="0" install-size="0" version="1.0.39.v41542-20121220" unpack="false" />
-  <plugin id="com.bluexml.side.Util.security.enterprise" download-size="0" install-size="0" version="1.0.18.v41542-20121220" unpack="false" />
 </feature>
 

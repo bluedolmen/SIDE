@@ -9,6 +9,5 @@
     <import plugin="org.eclipse.ui.forms" />
     <import plugin="com.bluexml.side.Util.security" />
   </requires>
-  <plugin id="com.bluexml.side.Util.security.enterprise" download-size="0" install-size="0" version="1.0.18.v41542-20121220" unpack="false" />
 </feature>
 

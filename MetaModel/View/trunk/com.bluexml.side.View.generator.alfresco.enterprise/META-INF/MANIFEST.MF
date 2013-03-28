@@ -17,7 +17,6 @@ Require-Bundle: org.eclipse.core.runtime,
  com.bluexml.side.Util.log,
  com.bluexml.side.Class.service.alfresco,
  com.bluexml.side.View.generator.alfresco,
- com.bluexml.side.Util.security.enterprise,
  com.bluexml.side.View.generator.alfresco.extension.sideEnterprise
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
