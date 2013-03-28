@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.forAlfresco40d.sideenterprise.feature" label="SIDE for Alfresco 4.0.d CE" version="1.0.57.v45075-20130326" provider-name="BLUEXML">
+<feature id="com.bluexml.side.Common.forAlfresco40d.sideenterprise.feature" label="SIDE for Alfresco 4.0.d CE" version="1.0.58.v45155-20130328" provider-name="BLUEXML">
   <description url="http://www.side-labs.com">SIDE lets developers who are new to Alfresco get started quickly and helps experienced developers get the job done even faster.</description>
   <copyright url="http://www.bluexml.com/copyright">Copyright (C) 2007-20013  BlueXML - www.bluexml.com</copyright>
   <license url="http://www.side-labs.com/en/index.php/Product:License">This program is free software: you can redistribute it and/or modify
@@ -14,15 +14,15 @@
 
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</license>
-  <plugin id="com.bluexml.side.Class.generator.alfresco40d" download-size="0" install-size="0" version="1.0.9.v44581-20130306" unpack="false" />
-  <plugin id="com.bluexml.side.Class.generator.alfresco40d.ext.enterprise" download-size="0" install-size="0" version="1.0.17.v44581-20130306" unpack="false" />
-  <plugin id="com.bluexml.side.Deployer.alfresco40d" download-size="0" install-size="0" version="1.0.4.v43377-20130208" unpack="false" />
-  <plugin id="com.bluexml.side.Deployer.alfrescoDirectCopy40d" download-size="0" install-size="0" version="1.0.5.v43377-20130208" unpack="false" />
-  <plugin id="com.bluexml.side.Form.generator.alfresco40d" download-size="0" install-size="0" version="1.0.25.v44926-20130318" unpack="false" />
-  <plugin id="com.bluexml.side.Form.generator.xforms.chiba40d" download-size="0" install-size="0" version="1.0.4.v43377-20130208" unpack="false" />
-  <plugin id="com.bluexml.side.Portal.generator.alfresco40d" download-size="0" install-size="0" version="1.0.47.v45075-20130326" unpack="false" />
-  <plugin id="com.bluexml.side.Util.framework.tools.alfresco40d" download-size="0" install-size="0" version="1.0.17.v44857-20130315" unpack="false" />
-  <plugin id="com.bluexml.side.View.generator.alfresco40d" download-size="0" install-size="0" version="1.0.8.v44581-20130306" unpack="false" />
-  <plugin id="com.bluexml.side.Workflow.generator.alfresco40d" download-size="0" install-size="0" version="1.0.8.v43829-20130214" unpack="false" />
+  <plugin id="com.bluexml.side.Class.generator.alfresco40d" download-size="0" install-size="0" version="1.0.10.v45155-20130328" unpack="false" />
+  <plugin id="com.bluexml.side.Class.generator.alfresco40d.ext.enterprise" download-size="0" install-size="0" version="1.0.18.v45155-20130328" unpack="false" />
+  <plugin id="com.bluexml.side.Deployer.alfresco40d" download-size="0" install-size="0" version="1.0.5.v45155-20130328" unpack="false" />
+  <plugin id="com.bluexml.side.Deployer.alfrescoDirectCopy40d" download-size="0" install-size="0" version="1.0.6.v45155-20130328" unpack="false" />
+  <plugin id="com.bluexml.side.Form.generator.alfresco40d" download-size="0" install-size="0" version="1.0.26.v45155-20130328" unpack="false" />
+  <plugin id="com.bluexml.side.Form.generator.xforms.chiba40d" download-size="0" install-size="0" version="1.0.5.v45155-20130328" unpack="false" />
+  <plugin id="com.bluexml.side.Portal.generator.alfresco40d" download-size="0" install-size="0" version="1.0.48.v45155-20130328" unpack="false" />
+  <plugin id="com.bluexml.side.Util.framework.tools.alfresco40d" download-size="0" install-size="0" version="1.0.18.v45155-20130328" unpack="false" />
+  <plugin id="com.bluexml.side.View.generator.alfresco40d" download-size="0" install-size="0" version="1.0.9.v45155-20130328" unpack="false" />
+  <plugin id="com.bluexml.side.Workflow.generator.alfresco40d" download-size="0" install-size="0" version="1.0.9.v45155-20130328" unpack="false" />
 </feature>
 
