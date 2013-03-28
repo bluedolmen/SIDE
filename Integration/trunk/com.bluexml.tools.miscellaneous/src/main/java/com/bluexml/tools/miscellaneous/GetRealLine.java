@@ -23,27 +23,37 @@ public class GetRealLine {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-
+		System.out.println("GetRealLine.main()" + args[0] + " " + args[1]);
 		list = new ArrayList<File>();
-		File file = new File("/Users/davidabad/servers/alfresco-enterprise-3.4.11/tomcat/webapps/alfresco/WEB-INF/classes/alfresco/extension/templates/webscripts/org/alfresco/slingshot/documentlibrary/doclist.get.js");
-		File concatened = new File("/Volumes/Data/SVN/projects/Ifremer/IfremerV5/src/modules/mavenProjects/alfresco_ifremer_wcmqs/concatened.js");
-		
+
+		File file = new File(args[0]);
+		String absolutePath = file.getAbsolutePath();
+		String substring = absolutePath.substring(0, absolutePath.indexOf("WEB-INF/classes") + 15);
+		System.out.println("GetRealLine.main() :" + substring);
+		home = new File(substring);
+
+		File concatened = new File("/Volumes/Data/SVN/side/HEAD/S-IDE/Integration/trunk/com.bluexml.tools.miscellaneous/test.js");
+
 		try {
 			FileUtils.writeStringToFile(concatened, "");
-			int countLine = countLine(file, new HashMap<File, Integer>(),concatened);
+			int countLine = countLine(file, new HashMap<File, Integer>(), concatened);
 			System.out.println("GetRealLine.main() total :" + countLine);
-			list.remove(0);
+			//			File remove = list.remove(0);
+			//			list.add(remove);
 			for (File f : list) {
 				System.out.println("GetRealLine.main() file " + f.getName() + " #" + map.get(f));
 			}
-			String[] fileForLine = getFileForLine(500);
+			if (args[1] != null) {
+				String[] fileForLine = getFileForLine(Integer.parseInt(args[1]));
+				if (fileForLine != null) {
+					System.out.println("File :" + fileForLine[0] + "#" + fileForLine[1]);
+					System.out.println("line " + args[1] + " is " + fileForLine[1]);
+				} else {
+					System.out.println("There is't line #" + args[1]);
+				}
 
-			System.out.println("File :" + fileForLine[0] + "#" + fileForLine[1]);
-			
-			System.out.println("GetRealLine.main() build concatened file");
-			
-			
-						
+			}
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -53,21 +63,22 @@ public class GetRealLine {
 	protected static String[] getFileForLine(int l) {
 		String[] rt = new String[] {};
 		int c = 0;
+		int p = 0;
 		for (File f1 : list) {
 			if (c + map.get(f1) >= l) {
-				return new String[] { f1.getAbsolutePath(), "" + (l - c) };
+				return new String[] { f1.getAbsolutePath(), "" + (l + p - c) };
 			}
 			c += map.get(f1);
+			p++;
 		}
 		return null;
 	}
 
 	protected static int countLine(File file, Map<File, Integer> reg, File concatened) throws IOException {
-		list.add(file);
 		LineIterator lineIterator = FileUtils.lineIterator(file);
 		int c = 0;
 		int cFile = 0;
-		while (lineIterator.hasNext()) {			
+		while (lineIterator.hasNext()) {
 			String nextLine = lineIterator.nextLine();
 			Pattern p = Pattern.compile("<import resource=\"classpath:/([^\"]*)\">$");
 			Matcher matcher = p.matcher(nextLine);
@@ -79,16 +90,17 @@ public class GetRealLine {
 				File inFile = new File(home, group);
 				c += countLine(inFile, reg, concatened);
 			} else {
-				FileWriter fileWritter = new FileWriter(concatened,true);
-    	        BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
-    	        bufferWritter.write(nextLine+"\n");
-    	        bufferWritter.close();
-    	        c++;
+				FileWriter fileWritter = new FileWriter(concatened, true);
+				BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+				bufferWritter.write(nextLine + "\n");
+				bufferWritter.close();
+				c++;
 			}
-			
+
 			cFile++;
 		}
 		map.put(file, cFile);
+		list.add(file);
 		return c;
 	}
 
