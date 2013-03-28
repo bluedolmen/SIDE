@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Alfresco4029
 Bundle-SymbolicName: com.bluexml.side.Util.framework.tools.alfresco4029E;singleton:=true
-Bundle-Version: 1.0.6.v44857-20130315
+Bundle-Version: 1.0.7.v45155-20130328
 Bundle-Activator: com.bluexml.side.util.framework.tools.alfresco4029E.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.ui,
