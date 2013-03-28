@@ -15,7 +15,7 @@ echo "Scan source directory for maven project and log \"compile\" scoped depende
 echo "USAGE :"
 echo "checkModules.sh <filter> <ALFRESCO_LIB_HOME> <FRAMEWORK_SRC_HOME>"
 echo "example :>bash checkModules.sh 40d ~/servers/Alfresco/tomcat/webapps/alfresco/WEB-INF/lib /Users/davidabad/SIDE_SVN/FrameworksModules/trunk"
-fi
+else
 
 ALF_VERSION=$1
 ALFRESCO_LIB_HOME=$2
@@ -53,3 +53,4 @@ done
 if [ "MATCHES" == "1" ];then echo "--------------------------------------------------" >> $EXEC_HOME/summary.txt;fi
 #echo "END____________________`pwd`__________________" >> $EXEC_HOME/summary.txt
 done
+fi

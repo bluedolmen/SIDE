@@ -13,10 +13,8 @@ if [ $showUsage -eq 1 ]; then
 
 echo "USAGE :"
 echo "checkModules.sh <filter> <FRAMEWORK_SRC_HOME>"
-echo "example :>bash checkModules.sh 40d ~/servers/Alfresco/tomcat/webapps/alfresco/WEB-INF/lib /Users/davidabad/SIDE_SVN/FrameworksModules/trunk"
-fi
-
-
+echo "example :>bash checkModules.sh 40d /Users/davidabad/SIDE_SVN/FrameworksModules/trunk"
+else
 
 ALF_VERSION=$1
 FRAMEWORK_SRC_HOME=$2
@@ -48,3 +46,5 @@ fi
 if [ "$MATCHES" == "1" ];then echo "MATCHES END------------------------`pwd`--------------------------" >> $EXEC_HOME/summary.txt;fi
 #echo "END____________________`pwd`__________________" >> $EXEC_HOME/summary.txt
 done
+
+fi
