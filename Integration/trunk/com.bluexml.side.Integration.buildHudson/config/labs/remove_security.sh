@@ -23,8 +23,8 @@ echo "Process java file to remove reference to package security"
 for f in `find $SOURCE_PATH -type f -name "*.java"`; do
     # find the text and replace it
     perl -p -i -e 's/com.bluexml.side.util.security.preferences.SWTResourceManager/com.swtdesigner.SWTResourceManager/g' $f
-    perl -p -i -e 's/implements Checkable/ /g' $f
-    perl -p -i -e 's/, Checkable \{/ \{/g' $f
+#    perl -p -i -e 's/implements Checkable/ /g' $f
+#    perl -p -i -e 's/, Checkable \{/ \{/g' $f
 
     # delete line having the pattern 'com.bluexml.side.Util.security'
     perl -ni -e 'print unless /com.bluexml.side.Util.security.enterprise/' $f
@@ -87,9 +87,3 @@ for f in `find $SOURCE_PATH -type f -name "*.MF"`; do
     echo "fix $f"
     perl -ni -e 'print unless /com.bluexml.side.Util.security.enterprise/' $f
 done
-
-# modify header of the source file with license mention and copyright using the openSourcePublication project
-echo "Modify header of source file using the openSourcePublication project"
-cd $BUILD_PATH/labs
-chmod +x add_licence.sh
-#$BUILD_PATH/labs/add_licence.sh LICENSE-notices $SOURCE_PATH
