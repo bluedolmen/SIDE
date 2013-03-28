@@ -70,4 +70,13 @@ for f in `find $chemin -type f -name "*.mt" `; do
 	perl -pi -le 'print "--%>" if $. == "'$num'"' $filein
 done
 
+# add license.txt into all project
+
+for f in `find $chemin -type f -name ".project" `; do
+path=${f%/*}
+echo "add license file in $path"
+cp $licence $path/license.txt
+done
+
+
 IFS=$old_IFS
