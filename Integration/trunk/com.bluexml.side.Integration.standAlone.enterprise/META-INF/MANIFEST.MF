@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Enterprise StandAlone Plug-in
 Bundle-SymbolicName: com.bluexml.side.Integration.standAlone.enterprise;singleton:=true
-Bundle-Version: 1.0.10.v41542-20121220
+Bundle-Version: 1.0.11.v45155-20130328
 Bundle-Activator: com.bluexml.side.integration.standalone.enterprise.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.ui;bundle-version="3.4.0",
