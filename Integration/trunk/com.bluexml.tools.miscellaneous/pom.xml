@@ -18,6 +18,16 @@
       <type>jar</type>
       <scope>compile</scope>
     </dependency>
+    <dependency>
+    	<groupId>org.apache.batik.dom</groupId>
+    	<artifactId>svg</artifactId>
+    	<version>1.6.0</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.apache.batik</groupId>
+    	<artifactId>svggen</artifactId>
+    	<version>1.6.0</version>
+    </dependency>
   </dependencies>
 </project>
 
