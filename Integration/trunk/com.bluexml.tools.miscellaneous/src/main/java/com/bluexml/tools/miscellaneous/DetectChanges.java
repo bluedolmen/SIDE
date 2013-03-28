@@ -2,12 +2,15 @@ package com.bluexml.tools.miscellaneous;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -28,27 +31,42 @@ public class DetectChanges {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String tomcatV1 = "/Users/davidabad/servers/alfresco-community-4.0.d/tomcat";
-		String tomcatV2 = "/Users/davidabad/servers/alfresco-enterprise-4.0.2.9/tomcat";
-		String modules = "/Users/davidabad/SIDE_SVN/FrameworksModules/trunk";
-		if (args.length == 3) {
+
+		Properties props = new Properties();
+
+		InputStream resourceAsStream = PrepareSIDEModulesMigration.class.getResourceAsStream("config.properties");
+		if (resourceAsStream != null) {
+			try {
+				props.load(resourceAsStream);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		String tomcatV1 = props.getProperty("detectChanges.tomcat1");
+		String tomcatV2 = props.getProperty("detectChanges.tomcat2");
+		String modules = props.getProperty("detectChanges.modulesHome");
+		String modulesFilterlocal = props.getProperty("detectChanges.modulesFilter");
+		if (args.length == 4) {
 			tomcatV1 = args[0];
 			tomcatV2 = args[1];
 			modules = args[2];
+			modulesFilterlocal = args[3];
 		}
-
+		final String modulesFilter = modulesFilterlocal;
 		final File v1 = new File(tomcatV1 + "/webapps/alfresco");
 		final File v2 = new File(tomcatV2 + "/webapps/alfresco");
+		final File module = new File(modules);
 
 		Map<File, ArrayList<Map<String, File>>> tocheck = new HashMap<File, ArrayList<Map<String, File>>>();
-
-		final File module = new File(modules);
 
 		final Map<File, ArrayList<Map<String, File>>> tocheckA = new HashMap<File, ArrayList<Map<String, File>>>();
 		Thread a = new Thread(new Runnable() {
 
 			public void run() {
-				checkWebApp(tocheckA, module, v1, v2, ".*4029E");
+
+				checkWebApp(tocheckA, module, v1, v2, modulesFilter);
 			}
 		});
 		a.start();
@@ -59,7 +77,7 @@ public class DetectChanges {
 		Thread b = new Thread(new Runnable() {
 
 			public void run() {
-				checkWebApp(tocheckB, module, v12, v22, ".*4029E");
+				checkWebApp(tocheckB, module, v12, v22, modulesFilter);
 			}
 		});
 		b.start();
@@ -106,49 +124,58 @@ public class DetectChanges {
 	}
 
 	private static void checkWebApp(Map<File, ArrayList<Map<String, File>>> tocheck, File module, File v1, File v2, String pattern) {
-
+		int totalModulesFile = 0;
+		int totalFiles2check = 0;
 		boolean share = v1.getAbsolutePath().endsWith("share");
 		System.out.println("DetectChanges.checkWebApp() search in " + (share ? "share" : "alfresco") + " START " + new Date());
 		File[] matchingModules = DetectChanges.getMatchingModules(module, (share ? ".*share" : "") + pattern);
 		for (File file : matchingModules) {
+			
 			System.out.println("DetectChanges.main() Module :" + file);
 			ArrayList<File> files = DetectChanges.getFiles(file);
 			for (File file2 : files) {
+				totalModulesFile++;
 				File computePathV1 = DetectChanges.computePath(v1, file2);
 				File computePathV2 = DetectChanges.computePath(v2, file2);
 				//				System.out.println("DetectChanges.main() V1 :" + computePathV1);
-				//				System.out.println("DetectChanges.main() V1 :" + computePathV2);
+				//				System.out.println("DetectChanges.main() V2 :" + computePathV2);
 				if (computePathV1 != null) {
+					if (computePathV2 != null) {
 
-					try {
-						boolean contentEquals = FileUtils.contentEquals(computePathV1, computePathV2);
-						//						boolean contentEquals = false;
-						if (contentEquals) {
-							//							System.out.println("DetectChanges.main() no changes between alfresco version for " + file2);
-						} else {
-							Map<String, File> map = new HashMap<String, File>();
-							map.put("file", file2);
-							//							map.put("v1", computePathV1);
-							//							map.put("v2", computePathV2);
-							if (tocheck.containsKey(file)) {
-								tocheck.get(file).add(map);
+						try {
+							boolean contentEquals = FileUtils.contentEquals(computePathV1, computePathV2);
+							//						boolean contentEquals = false;
+							if (contentEquals) {
+								//							System.out.println("DetectChanges.main() no changes between alfresco version for " + file2);
 							} else {
-								ArrayList<Map<String, File>> arrayList = new ArrayList<Map<String, File>>();
-								arrayList.add(map);
-								tocheck.put(file, arrayList);
+								Map<String, File> map = new HashMap<String, File>();
+								map.put("file", file2);
+								//							map.put("v1", computePathV1);
+								//							map.put("v2", computePathV2);
+								if (tocheck.containsKey(file)) {
+									tocheck.get(file).add(map);
+								} else {
+									ArrayList<Map<String, File>> arrayList = new ArrayList<Map<String, File>>();
+									arrayList.add(map);
+									tocheck.put(file, arrayList);
+								}
+								System.out.println("DetectChanges.checkWebApp() TO CHECK :" + map);
+								totalFiles2check++;
 							}
-							System.out.println("DetectChanges.checkWebApp() TO CHECK :" + map);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							//							System.err.println("DetectChanges.main() V1 :" + computePathV1);
+							//							System.err.println("DetectChanges.main() V2 :" + computePathV2);
 						}
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+					} else {
+						System.err.println("Target File in V2 no not exists anymore !" + file2);
 					}
-				} else {
-					//					System.out.println("DetectChanges.main() no matches for " + file2);
 				}
 			}
 		}
-		System.out.println("DetectChanges.checkWebApp() search in " + (share ? "share" : "alfresco") + " END " + new Date());
+		System.out.println("DetectChanges.checkWebApp() search in " + (share ? "share" : "alfresco") + " END " + new Date() + " file to checks :" + totalFiles2check + " / " + totalModulesFile);
+
 	}
 
 	/**
@@ -162,7 +189,8 @@ public class DetectChanges {
 		Collection<?> listFiles = FileUtils.listFiles(module, null, true);
 		for (Object object : listFiles) {
 			File f = (File) object;
-			if (f.isFile() && f.getAbsolutePath().matches(".*main/resources.*") && !f.getAbsolutePath().matches(".*target.*")) {
+			String absolutePath = f.getAbsolutePath();
+			if (f.isFile() && absolutePath.matches(".*main/resources.*") && !absolutePath.matches(".*target.*")) {
 				ok.add(f);
 			}
 		}
@@ -178,13 +206,10 @@ public class DetectChanges {
 	}
 
 	public static File computePath(final File org, final File f) {
-		final String replaceFirst = f.getAbsolutePath().replaceFirst(".*main/resources", "").replaceFirst(".*alfresco/extension", "");
+		final String replaceFirst = f.getAbsolutePath().replaceFirst(".*main/resources", "").replaceFirst(".*alfresco/extension", "").replaceFirst("/web-extension", "");
 
 		//		System.out.println("DetectChanges.computePath() search for " + replaceFirst + " in " + org);
-		
-		
-		
-		
+
 		Iterator<?> iterator = FileUtils.listFiles(org, new IOFileFilter() {
 
 			public boolean accept(File dir, String name) {
