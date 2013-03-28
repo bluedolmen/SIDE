@@ -208,17 +208,28 @@ public class DependencyTree {
 
 		logger.info("try to Fix some anomalies");
 		boolean featureAutoFix = Boolean.parseBoolean(graphCollectorConfiguration.getProperty("autoFix.features", "false"));
+		boolean featureForceLicenseFix = Boolean.parseBoolean(graphCollectorConfiguration.getProperty("autoFix.features.lincense.force", "false"));
+		boolean featureForceCopyRightFix = Boolean.parseBoolean(graphCollectorConfiguration.getProperty("autoFix.features.copyright.force", "false"));
 		if (featureAutoFix) {
+			
 
 			Element root = getSampleFeature();
 
-			List<String> list8 = compReg.getAnomaly().getFeatureNoCopyright();
+			ArrayList<String> allFeatures = new ArrayList<String>();
+			for (String string : compReg.getFeaturesRegister().keySet()) {
+				if (string.contains("com.bluexml.side")) {
+					allFeatures.add(string);		
+				}
+			}
+			
+			
+			List<String> list8 = featureForceCopyRightFix ? allFeatures : compReg.getAnomaly().getFeatureNoCopyright();
 			if (list8.size() > 0) {
 				logger.info("FIX Feature Missing copyright");
 				fixFeatureElement(root, list8, "copyright");
 			}
 
-			List<String> list9 = compReg.getAnomaly().getFeatureNoLicence();
+			List<String> list9 = featureForceLicenseFix ? allFeatures : compReg.getAnomaly().getFeatureNoLicence();
 			if (list9.size() > 0) {
 				logger.info("FIX Feature Missing Licence");
 				fixFeatureElement(root, list9, "license");
