@@ -3,8 +3,8 @@
 <plugin>
   <extension point="com.bluexml.side.util.framework.tooling">
     <modelLibrary activator="com.bluexml.side.util.framework.tools.alfresco42c.Activator" archivePath="/com/bluexml/side/util/framework/tools/alfresco42c/models/alfresco42c.zip" id="alfresco_42c" label="Alfresco Models 4.2.c" pluginId="com.bluexml.side.Util.framework.tools.alfresco42c" projectId="Model-library-Alfresco-4.2.c-CE">
-      <moduleDependence label="Alfresco 4.2.c" moduleId="com.bluexml.side.Framework.maven.ampArchetypeForSide_42c" moduleType="jar" technologyVersion="internal" versionMax="1.0.8" versionMin="1.0.8" />
-      <moduleDependence label="Alfresco Share 4.2.c" moduleId="com.bluexml.side.Framework.maven.warPatchArchetypeForSide_42c" moduleType="jar" technologyVersion="internal" versionMax="1.0.7" versionMin="1.0.7" />
+      <moduleDependence label="Alfresco 4.2.c" moduleId="com.bluexml.side.Framework.maven.ampArchetypeForSide_42c" moduleType="jar" technologyVersion="internal" versionMax="1.0.9" versionMin="1.0.9" />
+      <moduleDependence label="Alfresco Share 4.2.c" moduleId="com.bluexml.side.Framework.maven.warPatchArchetypeForSide_42c" moduleType="jar" technologyVersion="internal" versionMax="1.0.8" versionMin="1.0.8" />
       <generatorVersion class="com.bluexml.side.util.framework.tools.alfresco42c.Activator" hidden="visible" id="com.bluexml.side.Class.generator.alfresco42c" version="auto">
         <option defaultOption="false" hidden="false" key="alfresco.share.extension" label="alfresco.share.extension" />
       </generatorVersion>
