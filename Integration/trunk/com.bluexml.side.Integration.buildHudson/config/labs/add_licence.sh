@@ -10,6 +10,7 @@ var=`cat $licence`
 # avoid webscript js files
 for f in `find $chemin -type f -name "*.java" `; do
 	filein=$f
+    echo "add license header in : $f"
 	num=1
 	perl -pi -le 'print "/*" if $. == "'$num'"' $filein
 	num=$(($num+1))
@@ -59,6 +60,7 @@ done
 
 for f in `find $chemin -type f -name "*.mt" `; do
 	filein=$f
+    echo "add license header in : $f"
 	num=1
 	perl -pi -le 'print "<%--" if $. == "'$num'"' $filein
 	num=$(($num+1))
