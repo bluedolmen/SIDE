@@ -22,6 +22,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import com.bluexml.side.alfresco.binding.security.Permissions;
+
 public class ReadAlfrescoPermission {
 
 	/**
@@ -34,7 +36,7 @@ public class ReadAlfrescoPermission {
 			jaxbContext = JAXBContext.newInstance("com.bluexml.side.alfresco.binding", ReadAlfrescoPermission.class.getClassLoader());
 			Unmarshaller unm = jaxbContext.createUnmarshaller();
 			Object root = unm.unmarshal(new File(args[0]));
-			com.bluexml.side.alfresco.binding.Permissions alfModel = (com.bluexml.side.alfresco.binding.Permissions) root;
+			Permissions alfModel = (Permissions) root;
 			
 			//  TODO build .dot file following permissions map
 			
