@@ -6,7 +6,12 @@
   <name>deployerAsArtifact</name>
   <version>0.0.8</version>
   <description>use this project to deploy jar to SIDE maven third party repository
-copy jars files into "jarToDeploy" execute main java method, execute the bash file.</description>
+  copy jars files into "jarToDeploy" execute main java method, execute the bash file.</description>
+  <parent>
+    <groupId>org.bluexml</groupId>
+    <artifactId>superpom</artifactId>
+    <version>1.10</version>
+  </parent>
   <build>
     <plugins>
       <plugin>
