@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.bluexml.utils</groupId>
   <artifactId>graphTools</artifactId>
-  <version>0.0.3</version>
+  <version>0.0.4</version>
   <name>com.bluexml.utils.graphTools</name>
   <description>Library to create Graph and export them into some forma including png, gml, svg, dot</description>
   <parent>
