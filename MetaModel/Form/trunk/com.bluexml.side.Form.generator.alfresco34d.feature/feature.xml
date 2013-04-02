@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Form.generator.alfresco34d.feature" label="Alfresco 3.4.d Form Generator" version="1.0.101.v45155-20130328" provider-name="BLUEXML">
+<feature id="com.bluexml.side.Form.generator.alfresco34d.feature" label="Alfresco 3.4.d Form Generator" version="1.0.102.v45758-20130402" provider-name="BLUEXML">
   <description url="http://www.side-labs.com">SIDE lets developers who are new to Alfresco get started quickly and helps experienced developers get the job done even faster.</description>
   <copyright url="http://www.bluexml.com/copyright">Copyright (C) 2007-20013  BlueXML - www.bluexml.com</copyright>
   <license url="http://www.side-labs.com/en/index.php/Product:License">This program is free software: you can redistribute it and/or modify
@@ -14,6 +14,6 @@
 
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</license>
-  <plugin id="com.bluexml.side.Form.generator.alfresco34d" download-size="0" install-size="0" version="1.0.100.v45155-20130328" unpack="false" />
+  <plugin id="com.bluexml.side.Form.generator.alfresco34d" download-size="0" install-size="0" version="1.0.101.v45758-20130402" unpack="false" />
 </feature>
 
