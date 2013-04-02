@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SIDE Forms Generator for Alfresco 4.0.d
 Bundle-SymbolicName: com.bluexml.side.Form.generator.alfresco42c;singleton:=true
-Bundle-Version: 1.0.8.v45155-20130328
+Bundle-Version: 1.0.9.v45758-20130402
 Bundle-Activator: com.bluexml.side.form.generator.alfresco42c.Activator
 Bundle-Vendor: BLUEXML
 Require-Bundle: org.eclipse.ui,
