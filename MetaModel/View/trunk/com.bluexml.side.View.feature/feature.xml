@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.View.feature" label="SIDE View Modeler" version="1.0.93.v45155-20130328" provider-name="BlueXML">
+<feature id="com.bluexml.side.View.feature" label="SIDE View Modeler" version="1.0.94.v45758-20130402" provider-name="BlueXML">
   <description url="http://www.side-labs.com">SIDE lets developers who are new to Alfresco get started quickly and helps experienced developers get the job done even faster.</description>
   <copyright url="http://www.bluexml.com/copyright">Copyright (C) 2007-20013  BlueXML - www.bluexml.com</copyright>
   <license url="http://www.side-labs.com/en/index.php/Product:License">This program is free software: you can redistribute it and/or modify
@@ -50,10 +50,10 @@
     <import plugin="com.bluexml.side.Util.dependencies" />
     <import plugin="com.bluexml.side.Util.componentMonitor" />
   </requires>
-  <plugin id="com.bluexml.side.View" download-size="0" install-size="0" version="1.0.61.v45155-20130328" unpack="false" />
-  <plugin id="com.bluexml.side.View.edit" download-size="0" install-size="0" version="1.0.52.v45155-20130328" unpack="false" />
-  <plugin id="com.bluexml.side.View.edit.ui" download-size="0" install-size="0" version="1.0.57.v45155-20130328" unpack="false" />
-  <plugin id="com.bluexml.side.View.editor" download-size="0" install-size="0" version="1.0.37.v45155-20130328" unpack="false" />
-  <plugin id="com.bluexml.side.View.generator.documentation" download-size="0" install-size="0" version="1.0.28.v45155-20130328" unpack="false" />
+  <plugin id="com.bluexml.side.View" download-size="0" install-size="0" version="1.0.62.v45758-20130402" unpack="false" />
+  <plugin id="com.bluexml.side.View.edit" download-size="0" install-size="0" version="1.0.53.v45758-20130402" unpack="false" />
+  <plugin id="com.bluexml.side.View.edit.ui" download-size="0" install-size="0" version="1.0.58.v45758-20130402" unpack="false" />
+  <plugin id="com.bluexml.side.View.editor" download-size="0" install-size="0" version="1.0.38.v45758-20130402" unpack="false" />
+  <plugin id="com.bluexml.side.View.generator.documentation" download-size="0" install-size="0" version="1.0.29.v45758-20130402" unpack="false" />
 </feature>
 
