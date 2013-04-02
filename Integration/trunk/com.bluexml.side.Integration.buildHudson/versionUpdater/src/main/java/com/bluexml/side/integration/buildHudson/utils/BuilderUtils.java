@@ -13,7 +13,7 @@
 
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 package com.bluexml.side.integration.buildHudson.utils;
 
 import java.io.BufferedReader;
@@ -331,7 +331,8 @@ public class BuilderUtils {
 				boolean char1 = ligne.charAt(0) == 'A' || ligne.charAt(0) == 'U' || ligne.charAt(0) == 'D' || ligne.charAt(0) == ' ';
 				boolean char2 = ligne.charAt(1) == 'A' || ligne.charAt(1) == 'U' || ligne.charAt(1) == 'D' || ligne.charAt(1) == ' ';
 				if (char1 && char2) {
-					System.out.println("ligneChar 1,2 :" + ligne.substring(0, 2));
+					String svnStatus = ligne.substring(0, 2);
+					logger.debug("ligneChar 1,2 :" + svnStatus);
 					if (ligne.indexOf("Integration") > -1 || ligne.indexOf("FrameworksModules") > -1) {
 						for (String id : listeProjetPomsAll) {
 							String projectNameRegExp = "^.*(/[^/]*/)pom\\.xml$";
@@ -352,9 +353,21 @@ public class BuilderUtils {
 
 					for (int i = 0; i < proj.length; i++) {
 						String id = proj[i];
-						if (!listeProjetModif.contains(id)) {
-							listeProjetModif.add(id);
-							logger.debug("found an updated eclipse project (plugin or feature): " + id);
+						// check if this is an eclipse project
+						try {
+							String pathToLocalCopy = getPathToLocalCopy(id);
+							// if no error thow the project exists
+							// check for .project file
+							if (new File(new File(pathToLocalCopy), ".project").exists()) {
+								if (!listeProjetModif.contains(id)) {
+									listeProjetModif.add(id);
+									logger.debug("found an updated eclipse project (plugin or feature): " + id);
+								}
+							} else {
+								logger.debug("current 'project' :" + id + " do not have .project file");
+							}
+						} catch (Exception e) {
+							logger.error("updated project do not exists :" + id + ", svn status :" + svnStatus, e);
 						}
 					}
 				}
@@ -515,8 +528,7 @@ public class BuilderUtils {
 				Integer.valueOf(pattern[i]);
 				number[i] = pattern[i];
 			} catch (NumberFormatException e) {
-				if (change)
-					number[i] = "0";
+				if (change) number[i] = "0";
 				else {
 					if (pattern[i].equals("u")) {
 						change = true;

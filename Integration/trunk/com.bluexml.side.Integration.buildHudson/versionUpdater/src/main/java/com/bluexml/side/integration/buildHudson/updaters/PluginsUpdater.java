@@ -133,7 +133,7 @@ public class PluginsUpdater {
 			// get dependencies
 
 			// check if marked
-			// check if in pluginUpdeted
+			// check if in pluginUpdated
 			// so update ref
 
 			pluginsUpdated.add(plugin);
