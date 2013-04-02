@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Deployer.xformsDirectCopy.feature" label="SIDE Direct xForm Deployer Feature" version="1.0.34.v45155-20130328" provider-name="BlueXML">
+<feature id="com.bluexml.side.Deployer.xformsDirectCopy.feature" label="SIDE Direct xForm Deployer Feature" version="1.0.35.v45758-20130402" provider-name="BlueXML">
   <description url="http://www.side-labs.com">SIDE lets developers who are new to Alfresco get started quickly and helps experienced developers get the job done even faster.</description>
   <copyright url="http://www.bluexml.com/copyright">Copyright (C) 2007-20013  BlueXML - www.bluexml.com</copyright>
   <license url="http://www.side-labs.com/en/index.php/Product:License">This program is free software: you can redistribute it and/or modify
@@ -21,6 +21,6 @@
     <import plugin="com.bluexml.side.Application" />
     <import plugin="org.eclipse.core.runtime" />
   </requires>
-  <plugin id="com.bluexml.side.Deployer.xformsDirectCopy" download-size="0" install-size="0" version="1.0.30.v45155-20130328" unpack="false" />
+  <plugin id="com.bluexml.side.Deployer.xformsDirectCopy" download-size="0" install-size="0" version="1.0.31.v45758-20130402" unpack="false" />
 </feature>
 
