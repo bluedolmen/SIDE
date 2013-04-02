@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.forAlfresco4029E.feature" label="SIDE for Alfresco 4.0.d CE" version="1.0.41.v45155-20130328" provider-name="BLUEXML">
+<feature id="com.bluexml.side.Common.forAlfresco4029E.feature" label="SIDE for Alfresco 4.0.d CE" version="1.0.42.v45758-20130402" provider-name="BLUEXML">
   <description url="http://www.side-labs.com">SIDE lets developers who are new to Alfresco get started quickly and helps experienced developers get the job done even faster.</description>
   <copyright url="http://www.bluexml.com/copyright">Copyright 2005-2012 BlueXML SARL.</copyright>
   <license url="http://www.side-labs.com/en/index.php/Product:License">SIDE SOFTWARE IS LICENSED BY BLUEXML. PLEASE GO TO http://www.side-labs.com/en/index.php/Product:License. READ THIS AGREEMENT CAREFULLY BEFORE PURCHASING AND/OR USING SIDE SOFTWARE.</license>
-  <plugin id="com.bluexml.side.Class.generator.alfresco4029E" download-size="0" install-size="0" version="1.0.8.v45155-20130328" unpack="false" />
-  <plugin id="com.bluexml.side.Class.generator.alfresco4029E.ext.labs" download-size="0" install-size="0" version="1.0.10.v45155-20130328" unpack="false" />
-  <plugin id="com.bluexml.side.Deployer.alfresco4029E" download-size="0" install-size="0" version="1.0.5.v45155-20130328" unpack="false" />
-  <plugin id="com.bluexml.side.Deployer.alfrescoDirectCopy4029E" download-size="0" install-size="0" version="1.0.6.v45155-20130328" unpack="false" />
-  <plugin id="com.bluexml.side.Form.generator.alfresco4029E" download-size="0" install-size="0" version="1.0.28.v45155-20130328" unpack="false" />
-  <plugin id="com.bluexml.side.Portal.generator.alfresco4029E" download-size="0" install-size="0" version="1.0.38.v45155-20130328" unpack="false" />
-  <plugin id="com.bluexml.side.View.generator.alfresco4029E" download-size="0" install-size="0" version="1.0.6.v45155-20130328" unpack="false" />
-  <plugin id="com.bluexml.side.Workflow.generator.alfresco4029E" download-size="0" install-size="0" version="1.0.11.v45155-20130328" unpack="false" />
+  <plugin id="com.bluexml.side.Class.generator.alfresco4029E" download-size="0" install-size="0" version="1.0.9.v45758-20130402" unpack="false" />
+  <plugin id="com.bluexml.side.Class.generator.alfresco4029E.ext.labs" download-size="0" install-size="0" version="1.0.11.v45758-20130402" unpack="false" />
+  <plugin id="com.bluexml.side.Deployer.alfresco4029E" download-size="0" install-size="0" version="1.0.6.v45758-20130402" unpack="false" />
+  <plugin id="com.bluexml.side.Deployer.alfrescoDirectCopy4029E" download-size="0" install-size="0" version="1.0.7.v45758-20130402" unpack="false" />
+  <plugin id="com.bluexml.side.Form.generator.alfresco4029E" download-size="0" install-size="0" version="1.0.29.v45758-20130402" unpack="false" />
+  <plugin id="com.bluexml.side.Portal.generator.alfresco4029E" download-size="0" install-size="0" version="1.0.39.v45758-20130402" unpack="false" />
+  <plugin id="com.bluexml.side.View.generator.alfresco4029E" download-size="0" install-size="0" version="1.0.7.v45758-20130402" unpack="false" />
+  <plugin id="com.bluexml.side.Workflow.generator.alfresco4029E" download-size="0" install-size="0" version="1.0.12.v45758-20130402" unpack="false" />
 </feature>
 
