@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: com.bluexml.side.View.editor;singleton:=true
-Bundle-Version: 1.0.37.v45155-20130328
+Bundle-Version: 1.0.38.v45758-20130402
 Bundle-ClassPath: .
 Bundle-Activator: com.bluexml.side.view.presentation.ViewEditorPlugin$Implementation
 Bundle-Vendor: %providerName
