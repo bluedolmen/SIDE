@@ -1,0 +1,6 @@
+<webscript>
+	<shortname>User Activity Stats</shortname>
+	<description>Display activity stats</description>
+	<url>/alfea/components/activity-stats/user-activity-stats</url>
+	<family>alfea</family>
+</webscript>

@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<template-instance>
+	<template-type>com/alfea/user-activity-stats</template-type>
+	<components>
+		<component>
+			<region-id>title</region-id>
+			<url>/components/title/simple-title</url>
+			<properties>
+				<title>page.activity-stats.title</title>
+			</properties>
+		</component>
+		<component>
+			<region-id>toolbar</region-id>
+			<url>/components/profile/userprofile-toolbar</url>
+		</component>
+      	<component>
+			<region-id>user-activity-stats</region-id>
+			<url>/alfea/components/activity-stats/user-activity-stats</url>
+		</component>
+	</components>
+</template-instance>
