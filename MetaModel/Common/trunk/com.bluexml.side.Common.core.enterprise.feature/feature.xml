@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.core.enterprise.feature" label="SIDE Enterprise Core Components" version="1.0.958.v46345-20130402" provider-name="BlueXML" plugin="com.bluexml.side.Integration.eclipse.branding.enterprise">
+<feature id="com.bluexml.side.Common.core.enterprise.feature" label="SIDE Enterprise Core Components" version="1.0.959.v46384-20130403" provider-name="BlueXML" plugin="com.bluexml.side.Integration.eclipse.branding.enterprise">
   <description url="http://www.side-labs.com">SIDE lets developers who are new to Alfresco get started quickly and helps experienced developers get the job done even faster.</description>
   <copyright url="http://www.bluexml.com/copyright">Copyright (C) 2007-20013  BlueXML - www.bluexml.com</copyright>
   <license url="http://www.side-labs.com/en/index.php/Product:License">This program is free software: you can redistribute it and/or modify
@@ -31,7 +31,7 @@
     <import plugin="org.eclipse.ui.forms" />
     <import plugin="com.bluexml.side.Util.security" />
   </requires>
-  <plugin id="com.bluexml.side.Integration.eclipse.branding.enterprise" download-size="0" install-size="0" version="1.0.959.v46345-20130402" unpack="false" />
+  <plugin id="com.bluexml.side.Integration.eclipse.branding.enterprise" download-size="0" install-size="0" version="1.0.960.v46384-20130403" unpack="false" />
   <plugin id="com.bluexml.side.Integration.standAlone.enterprise" download-size="0" install-size="0" version="1.0.12.v45758-20130402" unpack="false" />
   <plugin id="com.bluexml.side.Class.alfresco.reverse" download-size="0" install-size="0" version="1.0.18.v45758-20130402" unpack="false" />
   <plugin id="com.bluexml.side.Application.ui.newSIDEProject" download-size="0" install-size="0" version="1.0.14.v45758-20130402" unpack="false" />
