@@ -51,6 +51,30 @@ function getActivitiesNumber(oldestDate) {
 }
 
 /**
+ * Call remote Repo script to get documents number
+ * @return
+ */
+function getDocumentsNumber() {
+   var type = new XML(config.script)["type"];
+   if (type == null) type = "cm:content";
+   var site = new XML(config.script)["site"];
+   if (site == null) site = "blueparapheur";
+	var result = {
+		status : 0
+	};
+	var connector = remote.connect("alfresco");
+	//TODO May be create a faster java backed webscript to get the number of documents
+	result = connector.get("/alfea/activity-stats/list-documents/"+site.toString()+"?type="+type.toString());
+	if (result.status == 200) {
+		var list = eval("(" + result + ")");
+		return list.number;
+	}
+
+	status.setCode(result.status, result.response);
+	return null;
+}
+
+/**
  * Convert from ISO8601 date to JavaScript date
  * @param formattedString
  * @return
@@ -102,10 +126,12 @@ function main() {
 	var date = new Date();
 	date.setHours(0, 0, 0, 0);
 	var activitiesNumber = getActivitiesNumber(date);
+	var documentsNumber = getDocumentsNumber();
 
 	model.connectedUsersCount = connectedUsers.connectedUsersCount;
 	model.connectedUsers = connectedUsers.connectedUsers;
 	model.activitiesNumber = activitiesNumber;	
+	model.documentsNumber = documentsNumber;	
 }
 
 main();

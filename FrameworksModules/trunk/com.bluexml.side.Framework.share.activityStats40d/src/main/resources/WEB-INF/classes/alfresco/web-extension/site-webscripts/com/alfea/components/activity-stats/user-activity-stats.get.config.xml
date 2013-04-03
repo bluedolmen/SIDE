@@ -1,4 +1,8 @@
 <config>
+	<sites>
+		<!-- For specific list of site; if only one site no select list; if empty, all sites proposed in select list -->
+		<!-- <site name="siteIdentifier" displayName="siteDisplayName"/> -->
+	</sites>
 	<activitytypes>
 		<!-- Document Library activity types -->
 		<activitytype id="org.alfresco.documentlibrary.file-added" label="activity-stats.label.org.alfresco.documentlibrary.file-added"/>

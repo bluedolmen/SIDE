@@ -13,11 +13,13 @@
 	        var data = new google.visualization.DataTable();
 	        data.addColumn('string', 'Label');
 	        data.addColumn('number', 'Value');
-	        data.addRows(2);
+	        data.addRows(3);
 	        data.setValue(0, 0, '${msg("activity-stats.sessions")}');
 	        data.setValue(0, 1, ${connectedUsersCount});
 	        data.setValue(1, 0, '${msg("activity-stats.activities")}');
 	        data.setValue(1, 1, ${activitiesNumber});
+	        data.setValue(2, 0, '${msg("activity-stats.documents")}');
+	        data.setValue(2, 1, ${documentsNumber});
 	
 	        var chart = new google.visualization.Gauge(document.getElementById('${args.htmlid}-gauges_div'));
 	        var options = {width: 400, height: 120, redFrom: 90, redTo: 100, yellowFrom:75, yellowTo: 90, minorTicks: 5};

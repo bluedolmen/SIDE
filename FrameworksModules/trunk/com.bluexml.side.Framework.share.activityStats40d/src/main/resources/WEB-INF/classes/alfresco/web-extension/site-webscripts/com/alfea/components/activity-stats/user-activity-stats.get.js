@@ -4,18 +4,28 @@
  */
 function getSites()
 {
-	// Call the correct repo script depending on the mode
-	var connector = remote.connect("alfresco");
-	var result = connector.get("/alfea/activity-stats/list-sites");
-
-   if (result.status == 200)
-   {
-      // Create javascript objects from the server response
-      return eval("(" + result + ")");
-   }
-   
-   status.setCode(result.status, result.response);
-   return null;
+	var myConfig = new XML(config.script), sites = [];
+	for each(var site in myConfig.sites.site)
+	{
+		sites.push({
+	        name: site.@name.toString(),
+	        displayName: site.@displayName.toString()
+		});
+  	}
+	if (sites.length == 0) {
+		// Call the correct repo script depending on the mode
+		var connector = remote.connect("alfresco");
+		var result = connector.get("/alfea/activity-stats/list-sites");
+	   	if (result.status == 200)
+	   	{
+	      // Create javascript objects from the server response
+	      return eval("(" + result + ")");
+	   	}   
+   		status.setCode(result.status, result.response);
+	} else {
+		return sites;
+	}
+   	return null;
 }
 /**
 * Parses the config file and returns an object model of activity types
