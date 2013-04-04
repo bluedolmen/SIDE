@@ -22,7 +22,7 @@
 		to be able to use Maven snapshots we cannot use the <version/> below as the 
 		AMP module version. Instead we use the buildnumber-maven-plugin. This requires 
 		a scm connection. -->
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <description>this is a new Amp project generated using	"com.bluexml.side.Integration.m2.ampArchetype" thanks to change this description</description>
   <parent>
     <groupId>org.bluexml</groupId>
@@ -126,15 +126,15 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-  		<groupId>org.json</groupId>
-  		<artifactId>json</artifactId>
-  		<version>20090211</version>
-	</dependency>
-	<dependency>
-  		<groupId>org.junit</groupId>
-  		<artifactId>com.springsource.org.junit</artifactId>
-  		<version>4.10.0</version>
-	</dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>20090211</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit</groupId>
+      <artifactId>com.springsource.org.junit</artifactId>
+      <version>4.10.0</version>
+    </dependency>
     <!-- Don't add here amp dependencies as it will break amp packaging -->
     <dependency>
       <groupId>javax.servlet</groupId>
