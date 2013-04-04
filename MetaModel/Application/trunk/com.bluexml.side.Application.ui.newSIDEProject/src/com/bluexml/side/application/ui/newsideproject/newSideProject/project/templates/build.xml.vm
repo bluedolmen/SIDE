@@ -331,7 +331,7 @@
 		<attribute name="webappName" />
 		<sequential>
 			<echo message="applyConfig2ExplodedWar config ${config} into @{webappName}" />
-			<copy todir="${tomcat.home}/${tomcat.webapps.target}/@{webappName}" failonerror="true" verbose="true" overwrite="true">
+			<copy todir="${tomcat.home}/${tomcat.webapps.target}/@{webappName}" failonerror="false" verbose="true" overwrite="true">
 				<fileset dir="${commonConfigPath}/${tomcat.webapps.target}/@{webappName}">
 					<include name="**" />
 				</fileset>
