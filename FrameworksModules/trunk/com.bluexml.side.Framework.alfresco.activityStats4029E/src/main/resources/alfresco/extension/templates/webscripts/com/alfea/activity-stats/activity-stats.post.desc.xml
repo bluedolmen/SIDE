@@ -1,0 +1,9 @@
+<webscript>
+	<shortname>Activity Stats</shortname>
+	<description>Give stats on activity depending the given parameters (types, period, sites, person)</description>
+	<url>/alfea/activity-stats/activity-stats</url>
+	<format default="json"></format>
+	<family>alfea</family>
+	<authentication>user</authentication>
+	<transaction allow="readonly">required</transaction>
+</webscript>

@@ -1,0 +1,9 @@
+<webscript>
+	<shortname>Connected users</shortname>
+	<description>Give the number of connected users</description>
+	<url>/alfea/activity-stats/connected-users</url>
+	<format default="json"></format>
+	<family>alfea</family>
+	<authentication>user</authentication>
+	<transaction allow="readonly">required</transaction>
+</webscript>

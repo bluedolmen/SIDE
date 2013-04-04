@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+<beans>
+
+    <!-- Chart Service -->
+	<bean id="com.alfea.chartService" class="com.alfea.alfresco.repo.services.impl.ChartServiceImpl">
+   	</bean>
+
+    <!-- Activity Stats Service-->
+	<bean id="com.alfea.activityStatsService" class="com.alfea.alfresco.repo.services.impl.ActivityStatsServiceImpl">
+   		<property name="activityService" ref="activityService"/>
+   	</bean>
+   	
+</beans>

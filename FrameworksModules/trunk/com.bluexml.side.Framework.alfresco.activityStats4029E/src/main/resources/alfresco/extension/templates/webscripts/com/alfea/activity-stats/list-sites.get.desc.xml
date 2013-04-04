@@ -1,0 +1,9 @@
+<webscript>
+	<shortname>List Sites</shortname>
+	<description>Give the list of available sites</description>
+	<url>/alfea/activity-stats/list-sites</url>
+	<format default="json"></format>
+	<family>alfea</family>
+	<authentication>user</authentication>
+	<transaction allow="readonly">required</transaction>
+</webscript>

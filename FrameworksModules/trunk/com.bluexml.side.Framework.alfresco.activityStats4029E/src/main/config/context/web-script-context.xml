@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+<beans>
+
+    <!-- Connected Users Web Script -->
+	<bean id="webscript.com.alfea.activity-stats.connected-users.get" class="com.alfea.alfresco.repo.web.scripts.activity.stats.ConnectedUsersWebScript" parent="webscript">
+ 		<property name="repoServerMgmt" ref="RepoServerMgmt"/>
+   		<property name="nodeService" ref="nodeService"/>
+   		<property name="personService" ref="personService"/>
+   		<property name="authorityService" ref="authorityService"/>
+   	</bean>
+
+    <!-- Activity Stats Web Script GET-->
+	<bean id="webscript.com.alfea.activity-stats.activity-stats.get" class="com.alfea.alfresco.repo.web.scripts.activity.stats.ActivityStatsWebScript" parent="webscript">
+ 		<property name="siteService" ref="siteService"/>
+   		<property name="chartService" ref="com.alfea.chartService"/>
+   		<property name="activityStatsService" ref="com.alfea.activityStatsService"/>
+   		<property name="authorityService" ref="authorityService"/>
+   	</bean>
+   	
+</beans>

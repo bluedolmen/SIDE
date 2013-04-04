@@ -1,0 +1,10 @@
+<webscript>
+  <shortname>Site Statistics</shortname>
+  <description> <![CDATA[
+  Get the number of documents of a certain type in a site
+  ]]></description>
+  <url>/alfea/activity-stats/list-documents/{siteName}?type={type?}</url>
+  <format default="json">argument</format>
+  <authentication>user</authentication>
+  <transaction allow="readonly">required</transaction>
+</webscript>
