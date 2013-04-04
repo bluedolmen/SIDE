@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="com.bluexml.side.Common.forAlfresco4029E.sideenterprise.feature" label="SIDE for Alfresco 4.0.d CE" version="1.0.51.v45758-20130402" provider-name="BLUEXML">
+<feature id="com.bluexml.side.Common.forAlfresco4029E.sideenterprise.feature" label="SIDE for Alfresco 4.0.d CE" version="1.0.52.v46429-20130404" provider-name="BLUEXML">
   <description url="http://www.side-labs.com">SIDE lets developers who are new to Alfresco get started quickly and helps experienced developers get the job done even faster.</description>
   <copyright url="http://www.bluexml.com/copyright">Copyright (C) 2007-20013  BlueXML - www.bluexml.com</copyright>
   <license url="http://www.side-labs.com/en/index.php/Product:License">This program is free software: you can redistribute it and/or modify
@@ -19,7 +19,7 @@
   <plugin id="com.bluexml.side.Deployer.alfresco4029E" download-size="0" install-size="0" version="1.0.6.v45758-20130402" unpack="false" />
   <plugin id="com.bluexml.side.Deployer.alfrescoDirectCopy4029E" download-size="0" install-size="0" version="1.0.7.v45758-20130402" unpack="false" />
   <plugin id="com.bluexml.side.Form.generator.alfresco4029E" download-size="0" install-size="0" version="1.0.29.v45758-20130402" unpack="false" />
-  <plugin id="com.bluexml.side.Portal.generator.alfresco4029E" download-size="0" install-size="0" version="1.0.39.v45758-20130402" unpack="false" />
+  <plugin id="com.bluexml.side.Portal.generator.alfresco4029E" download-size="0" install-size="0" version="1.0.40.v46429-20130404" unpack="false" />
   <plugin id="com.bluexml.side.Util.framework.tools.alfresco4029E" download-size="0" install-size="0" version="1.0.8.v45758-20130402" unpack="false" />
   <plugin id="com.bluexml.side.View.generator.alfresco4029E" download-size="0" install-size="0" version="1.0.7.v45758-20130402" unpack="false" />
   <plugin id="com.bluexml.side.Workflow.generator.alfresco4029E" download-size="0" install-size="0" version="1.0.12.v45758-20130402" unpack="false" />
