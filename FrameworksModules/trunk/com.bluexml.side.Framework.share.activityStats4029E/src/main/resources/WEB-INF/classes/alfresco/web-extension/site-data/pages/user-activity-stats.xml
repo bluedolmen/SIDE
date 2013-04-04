@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<page>
+   <title>Activity Stats</title>
+   <title-id>page.activity-stats.title</title-id>
+   <description>Statistics on users activity</description>
+   <description-id>Statistics on users activity</description-id>
+   <template-instance>user-activity-stats</template-instance>
+   <authentication>user</authentication>
+</page>

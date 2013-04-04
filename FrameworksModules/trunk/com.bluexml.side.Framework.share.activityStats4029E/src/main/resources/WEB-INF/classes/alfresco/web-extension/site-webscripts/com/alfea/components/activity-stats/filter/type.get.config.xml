@@ -1,0 +1,7 @@
+<config>
+   <filters>
+      <filter id="type" data="doc.create" label="link.doc.create"/>
+      <filter id="type" data="doc.modify" label="link.doc.modify" />
+      <filter id="type" data="doc.delete" label="link.doc.delete" />
+   </filters>
+</config>

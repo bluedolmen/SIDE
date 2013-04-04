@@ -1,0 +1,76 @@
+<config>
+	<sites>
+		<!-- For specific list of site; if only one site no select list; if empty, all sites proposed in select list -->
+		<!-- <site name="siteIdentifier" displayName="siteDisplayName"/> -->
+	</sites>
+	<activitytypes>
+		<!-- Document Library activity types -->
+		<activitytype id="org.alfresco.documentlibrary.file-added" label="activity-stats.label.org.alfresco.documentlibrary.file-added"/>
+		<activitytype id="org.alfresco.documentlibrary.files-added" label="activity-stats.label.org.alfresco.documentlibrary.files-added"/>
+		<activitytype id="org.alfresco.documentlibrary.file-created" label="activity-stats.label.org.alfresco.documentlibrary.file-created"/>
+		<activitytype id="org.alfresco.documentlibrary.file-updated" label="activity-stats.label.org.alfresco.documentlibrary.file-updated"/>
+		<activitytype id="org.alfresco.documentlibrary.files-updated" label="activity-stats.label.org.alfresco.documentlibrary.files-updated"/>
+		<activitytype id="org.alfresco.documentlibrary.file-deleted" label="activity-stats.label.org.alfresco.documentlibrary.file-deleted"/>
+		<activitytype id="org.alfresco.documentlibrary.files-deleted" label="activity-stats.label.org.alfresco.documentlibrary.files-deleted"/>
+		<activitytype id="org.alfresco.documentlibrary.inline-edit" label="activity-stats.label.org.alfresco.documentlibrary.inline-edit"/>
+		<activitytype id="org.alfresco.documentlibrary.google-docs-checkout" label="activity-stats.label.org.alfresco.documentlibrary.google-docs-checkout"/>
+		<activitytype id="org.alfresco.documentlibrary.google-docs-checkin" label="activity-stats.label.org.alfresco.documentlibrary.google-docs-checkin"/>
+		
+		<!-- Blog activity types -->
+		<activitytype id="org.alfresco.blog.post-created" label="activity-stats.label.org.alfresco.blog.post-created"/>
+		<activitytype id="org.alfresco.blog.post-updated" label="activity-stats.label.org.alfresco.blog.post-updated"/>
+		<activitytype id="org.alfresco.blog.post-deleted" label="activity-stats.label.org.alfresco.blog.post-deleted"/>
+
+		<!-- Comment activity types -->
+		<activitytype id="org.alfresco.comments.comment-created" label="activity-stats.label.org.alfresco.comments.comment-created"/>
+		<activitytype id="org.alfresco.comments.comment-updated" label="activity-stats.label.org.alfresco.comments.comment-updated"/>
+		<activitytype id="org.alfresco.comments.comment-deleted" label="activity-stats.label.org.alfresco.comments.comment-deleted"/>
+		
+		<!-- Discussion activity types -->
+		<activitytype id="org.alfresco.discussions.post-created" label="activity-stats.label.org.alfresco.discussions.post-created"/>
+		<activitytype id="org.alfresco.discussions.post-updated" label="activity-stats.label.org.alfresco.discussions.post-updated"/>
+		<activitytype id="org.alfresco.discussions.post-deleted" label="activity-stats.label.org.alfresco.discussions.post-deleted"/>
+		<activitytype id="org.alfresco.discussions.reply-created" label="activity-stats.label.org.alfresco.discussions.reply-created"/>
+		<activitytype id="org.alfresco.discussions.reply-updated" label="activity-stats.label.org.alfresco.discussions.reply-updated"/>
+		
+		<!-- Data List activity types -->
+		<activitytype id="org.alfresco.datalists.list-created" label="activity-stats.label.org.alfresco.datalists.list-created"/>
+		<activitytype id="org.alfresco.datalists.list-updated" label="activity-stats.label.org.alfresco.datalists.list-updated"/>
+		<activitytype id="org.alfresco.datalists.list-deleted" label="activity-stats.label.org.alfresco.datalists.list-deleted"/>
+		
+		<!-- Link activity types -->
+		<activitytype id="org.alfresco.links.link-created" label="activity-stats.label.org.alfresco.links.link-created"/>
+		<activitytype id="org.alfresco.links.link-updated" label="activity-stats.label.org.alfresco.links.link-updated"/>
+		<activitytype id="org.alfresco.links.link-deleted" label="activity-stats.label.org.alfresco.links.link-deleted"/>
+		
+		<!-- Site activity types -->
+		<activitytype id="org.alfresco.site.user-joined" label="activity-stats.label.org.alfresco.site.user-joined"/>
+		<activitytype id="org.alfresco.site.user-left" label="activity-stats.label.org.alfresco.site.user-left"/>
+		<activitytype id="org.alfresco.site.user-role-changed" label="activity-stats.label.org.alfresco.site.user-role-changed"/>
+		<activitytype id="org.alfresco.site.group-role-changed" label="activity-stats.label.org.alfresco.site.user-role-changed"/>
+		<activitytype id="org.alfresco.site.group-removed" label="activity-stats.label.org.alfresco.site.group-removed"/>
+		<activitytype id="org.alfresco.site.group-added" label="activity-stats.label.org.alfresco.site.group-added"/>
+		        
+		<!-- Calendar activity types -->
+		<activitytype id="org.alfresco.calendar.event-created" label="activity-stats.label.org.alfresco.calendar.event-created"/>
+		<activitytype id="org.alfresco.calendar.event-updated" label="activity-stats.label.org.alfresco.calendar.event-updated"/>
+		<activitytype id="org.alfresco.calendar.event-deleted" label="activity-stats.label.org.alfresco.calendar.event-deleted"/>
+		
+		<!-- Wiki activity types -->
+		<activitytype id="org.alfresco.wiki.page-created" label="activity-stats.label.org.alfresco.wiki.page-created"/>
+		<activitytype id="org.alfresco.wiki.page-edited" label="activity-stats.label.org.alfresco.wiki.page-edited"/>
+		<activitytype id="org.alfresco.wiki.page-renamed" label="activity-stats.label.org.alfresco.wiki.page-renamed"/>
+		<activitytype id="org.alfresco.wiki.page-deleted" label="activity-stats.label.org.alfresco.wiki.page-deleted"/>
+
+		<!-- Wiki activity types -->
+		<activitytype id="org.alfresco.wiki.page-created" label="activity-stats.label.org.alfresco.wiki.page-created"/>
+		<activitytype id="org.alfresco.wiki.page-edited" label="activity-stats.label.org.alfresco.wiki.page-edited"/>
+		<activitytype id="org.alfresco.wiki.page-renamed" label="activity-stats.label.org.alfresco.wiki.page-renamed"/>
+		<activitytype id="org.alfresco.wiki.page-deleted" label="activity-stats.label.org.alfresco.wiki.page-deleted"/>
+
+		<!-- CMA activity types -->
+		<activitytype id="com.alfea.cma.case-created" label="activity-stats.label.com.alfea.cma.case-created"/>
+		<activitytype id="com.alfea.cma.case-closed" label="activity-stats.label.com.alfea.cma.case-closed"/>
+		<activitytype id="com.alfea.cma.case-reopened" label="activity-stats.label.com.alfea.cma.case-reopened"/>		
+	</activitytypes>
+</config>

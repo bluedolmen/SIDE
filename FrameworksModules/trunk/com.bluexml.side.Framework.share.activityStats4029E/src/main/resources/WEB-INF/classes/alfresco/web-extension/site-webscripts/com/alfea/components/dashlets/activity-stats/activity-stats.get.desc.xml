@@ -1,0 +1,7 @@
+<webscript>
+	<shortname>Activity Stats</shortname>
+	<description>Displays Activitiy Stats</description>
+	<family>user-dashlet</family>
+	<family>alfea</family>
+	<url>/alfea/components/dashlets/activity-stats</url>
+</webscript>
