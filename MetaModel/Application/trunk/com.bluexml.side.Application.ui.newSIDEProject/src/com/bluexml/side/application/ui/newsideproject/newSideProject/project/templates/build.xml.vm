@@ -42,13 +42,11 @@
 	<!-- file and directory paths -->
 	<property name="buildName" value="${ant.project.name}_${version.build}" />
 	<property name="buildPath" value="${basedir}/build/${buildName}" />
-	<property name="alfrescoVersion" value="${velocity_alfrescoVersion}" />
 	<property name="tomcatPatch" value="${buildPath}-[${config}]_${NOW_FR}.zip" />
 	<property name="configPath" value="${basedir}/src/configs/${config}" />
 	<property name="commonConfigPath" value="${basedir}/src/configs/commonConf" />
 	<property name="modulesHome" value="${basedir}/src/modules" />
 	<property name="projectHome" value="${modulesHome}/mavenProjects" />
-	<property name="technoVersion" value="${basedir}/build/generated/${alfrescoVersion}" />
 	<property name="alfrescoModules" value="${buildPath}/alfrescoModules" />
 	<property name="shareModules" value="${buildPath}/shareModules" />
 
@@ -95,71 +93,19 @@
           target: applyConfig              
          ================================= -->
 	<target name="applyConfig" depends="check-properties,patchWars" description="apply configuration to build deployment archive">
-		<!-- <mkdir dir="${configPath}/${tomcat.webapps.target}/alfresco" /> -->
-		<!-- <mkdir dir="${configPath}/${tomcat.webapps.target}/share" /> -->
 		<mkdir dir="${commonConfigPath}" />
 
-		<copy file="${tomcat.home}/webapps/alfresco.war" tofile="${buildPath}/alfresco.war" failonerror="false" />
-		<copy file="${tomcat.home}/webapps/share.war" tofile="${buildPath}/share.war" failonerror="false" />
-		<copy file="${tomcat.home}/webapps/xforms.war" tofile="${buildPath}/xforms.war" failonerror="false" />
-		<copy file="${tomcat.home}/webapps/side-demo.war" tofile="${buildPath}/side-demo.war" failonerror="false" />
-		<copy file="${tomcat.home}/webapps/facetmap.war" tofile="${buildPath}/facetmap.war" failonerror="false" />
-
-		<condition property="xforms-war-exists">
-			<and>
-				<available type="file" file="${buildPath}/xforms.war" />
-				<available type="dir" file="${configPath}/${tomcat.webapps.target}/xforms" />
-			</and>
-		</condition>
-		<available type="dir" file="${commonConfigPath}/${tomcat.webapps.target}/xforms" property="xforms-commonConf"/>
-		
-		<condition property="alfresco-war-exists">
-			<and>
-				<available type="file" file="${buildPath}/alfresco.war" />
-				<available type="dir" file="${configPath}/${tomcat.webapps.target}/alfresco" />
-			</and>
-		</condition>
-		<available type="dir" file="${commonConfigPath}/${tomcat.webapps.target}/alfresco" property="alfresco-commonConf"/>
-		
-		<condition property="share-war-exists">
-			<and>
-				<available type="file" file="${buildPath}/share.war" />
-				<available type="dir" file="${configPath}/${tomcat.webapps.target}/share" />
-			</and>
-		</condition>
-		<available type="dir" file="${commonConfigPath}/${tomcat.webapps.target}/share" property="share-commonConf" />
-		
-		<condition property="side-demo-war-exists">
-			<and>
-				<available type="file" file="${buildPath}/side-demo.war" />
-				<available type="dir" file="${configPath}/${tomcat.webapps.target}/side-demo" />
-			</and>
-		</condition>
-		<available type="dir" file="${commonConfigPath}/${tomcat.webapps.target}/side-demo" property="side-demo-commonConf" />
-		
-		<condition property="facetmap-war-exists">
-			<and>
-				<available type="file" file="${buildPath}/facetmap.war" />
-				<available type="dir" file="${configPath}/${tomcat.webapps.target}/facetmap" />
-			</and>
-		</condition>
-		<available type="dir" file="${commonConfigPath}/${tomcat.webapps.target}/facetmap" property="facetmap-commonConf" />
-
-		<!-- patch war-->
-		<antcall target="update-alfresco.war" />
-		<antcall target="update-share.war" />
-		<antcall target="update-xforms.war" />
-		<antcall target="update-side-demo.war" />
-		<antcall target="update-facetmap.war" />
+		<copy file="${tomcat.home}/${tomcat.webapps.target}/alfresco.war" tofile="${buildPath}/alfresco.war" failonerror="false" />
+		<copy file="${tomcat.home}/${tomcat.webapps.target}/share.war" tofile="${buildPath}/share.war" failonerror="false" />
 
 		<!-- make final tomcat patch -->
 		<zip destfile="${tomcatPatch}" comment="Build date: ${NOW_FR} \nunzip in tomcat home directory, delete alfresco and shared explosed webapps">
 			<zipfileset dir="${configPath}">
-				<exclude name="webapps*/**" />
+				<exclude name="webapps/**" />
 			</zipfileset>
 			<zipfileset dir="${commonConfigPath}">
 				<exclude name="**" if="shared_configConf.disable" />
-				<exclude name="webapps*/**" />
+				<exclude name="webapps/**" />
 			</zipfileset>
 			<zipfileset dir="${buildPath}" prefix="${tomcat.webapps.target}">
 				<include name="*.war" />
@@ -229,81 +175,43 @@
 	<target name="patchWars" depends="buildAll">
 		<!-- Beware deployer must to patch war file not exploded directory or set isDirectDeployer property -->
 		<antcall target="side-deploy" />
-		<antcall target="makeWarsFromExplodedWar" />
+		<antcall target="unpackWars" />
+		<antcall target="makeWarsWithConfig" />
 		<eclipse.refreshLocal resource="${ant.project.name}" depth="infinite" />
 	</target>
 
 	<!-- - - - - - - - - - - - - - - - - - 
-          target: makeWars                      
+          target: unpackWars                      
          - - - - - - - - - - - - - - - - - -->
-	<target name="makeWarsFromExplodedWar" if="isDirectDeployer">
-		<zip destfile="${tomcat.home}/webapps/alfresco.war" update="false" whenempty="skip">
-			<zipfileset dir="${tomcat.home}/webapps/alfresco">
-				<include name="**" />
-			</zipfileset>
-		</zip>
-		<zip destfile="${tomcat.home}/webapps/share.war" update="false" whenempty="skip">
-			<zipfileset dir="${tomcat.home}/webapps/share">
-				<include name="**" />
-			</zipfileset>
-		</zip>
+	<target name="unpackWars" unless="isDirectDeployer">
+		<delete dir="${tomcat.home}/${tomcat.webapps.target}/alfresco" verbose="true" quiet="true" />
+		<delete dir="${tomcat.home}/${tomcat.webapps.target}/share" verbose="true" quiet="true" />
+		<!-- unzip shared, and webapps -->
+		<unzip dest="${tomcat.home}/${tomcat.webapps.target}/alfresco" src="${tomcat.home}/${tomcat.webapps.target}/alfresco.war" overwrite="true" />
+		<unzip dest="${tomcat.home}/${tomcat.webapps.target}/share" src="${tomcat.home}/${tomcat.webapps.target}/share.war" overwrite="true" />
 	</target>
-	
+
+
 	<!-- - - - - - - - - - - - - - - - - - 
-          target: update-alfresco.war                      
-           Note: as zip command take into account modification date for updating its content (if newer, update; if older does not update),
-          a copy is made of the config to have a newer modification date and then war is updated through zip command.                      
+	      target: makeWarsWithConfig package webapps with configuration
          - - - - - - - - - - - - - - - - - -->
-	<target name="update-alfresco.war" if="alfresco-war-exists">
-		<echo message="Process Alfresco war with config" level="info" />
-		<delete dir="${buildPath}/config" failonerror="false" />
-		<copy todir="${buildPath}/config" failonerror="true" verbose="true">
-			<fileset dir="${commonConfigPath}/webapps/alfresco">
-				<include name="**" />
-			</fileset>
-			<fileset dir="${configPath}/webapps/alfresco">
-				<include name="**" />
-			</fileset>
-		</copy>
-		<zip destfile="${buildPath}/alfresco.war" update="true" whenempty="skip">
-			<zipfileset dir="${buildPath}/config">
-				<include name="**" />
-			</zipfileset>
-		</zip>
-		<delete file="${buildPath}/config" failonerror="false" />
+	<target name="makeWarsWithConfig" description="copy configurations and package webapps">
+		<applyConfig2ExplodedWar webappname="alfresco" />
+		<applyConfig2ExplodedWar webappname="share" />
+		<antcall target="makeWarsFromExplodedWar" />
 	</target>
 
 	<!-- - - - - - - - - - - - - - - - - - 
-          target: update-share.war                      
+          target: makeWarsFromExplodedWar, package webapps
          - - - - - - - - - - - - - - - - - -->
-	<target name="update-share.war" if="share-war-exists">
-		<echo message="Process Share war with config" level="info" />
-		<delete dir="${buildPath}/config" failonerror="false" />
-		<copy todir="${buildPath}/config" failonerror="true" verbose="true">
-			<fileset dir="${commonConfigPath}/webapps/share">
-				<include name="**" />
-			</fileset>
-			<fileset dir="${configPath}/webapps/share">
-				<include name="**" />
-			</fileset>
-		</copy>
-		<zip destfile="${buildPath}/share.war" update="true" whenempty="skip">
-			<zipfileset dir="${buildPath}/config">
+	<target name="makeWarsFromExplodedWar">
+		<zip destfile="${tomcat.home}/${tomcat.webapps.target}/alfresco.war" update="false" whenempty="skip">
+			<zipfileset dir="${tomcat.home}/${tomcat.webapps.target}/alfresco">
 				<include name="**" />
 			</zipfileset>
 		</zip>
-		<delete file="${buildPath}/config" failonerror="false" />
-	</target>
-
-	<!-- - - - - - - - - - - - - - - - - - 
-          target: update-facetmap.war                      
-         - - - - - - - - - - - - - - - - - -->
-	<target name="update-facetmap.war" if="facetmap-war-exists">
-		<zip destfile="${buildPath}/facetmap.war" update="true" whenempty="skip">
-			<zipfileset dir="${configPath}/${tomcat.webapps.target}/facetmap">
-				<include name="**" />
-			</zipfileset>
-			<zipfileset dir="${commonConfigPath}/webapps/facetmap">
+		<zip destfile="${tomcat.home}/${tomcat.webapps.target}/share.war" update="false" whenempty="skip">
+			<zipfileset dir="${tomcat.home}/${tomcat.webapps.target}/share">
 				<include name="**" />
 			</zipfileset>
 		</zip>
@@ -338,20 +246,14 @@
           target: install              
          ================================= -->
 	<target name="install" depends="applyConfig, cleanShared" description="install project package including wars and configuration files in tomcat">
-		<delete verbose="false">
+		<delete verbose="true">
 			<fileset dir="${tomcat.home}/webapps">
 				<include name="alfresco.war" />
 				<include name="share.war" />
-				<include name="xforms.war" />
-				<include name="side-demo.war" />
-				<include name="facetmap.war" />
 			</fileset>
 		</delete>
-		<delete dir="${tomcat.home}/webapps/alfresco" verbose="true" quiet="true" />
-		<delete dir="${tomcat.home}/webapps/share" verbose="true" quiet="true" />
-		<delete dir="${tomcat.home}/webapps/xforms" verbose="true" quiet="true" />
-		<delete dir="${tomcat.home}/webapps/side-demo" verbose="true" quiet="true" />
-		<delete dir="${tomcat.home}/webapps/facetmap" verbose="true" quiet="true" />
+		<delete dir="${tomcat.home}/${tomcat.webapps.target}/alfresco" verbose="true" quiet="true" />
+		<delete dir="${tomcat.home}/${tomcat.webapps.target}/share" verbose="true" quiet="true" />
 		<!-- unzip shared, and webapps -->
 		<unzip dest="${tomcat.home}" src="${tomcatPatch}" overwrite="true" />
 	</target>
@@ -362,7 +264,7 @@
 	<target name="installConfig" depends="cleanShared" description="to install uniquely the current config including commonConf">
 		<echo message="Copy the current config including commonConf" level="info" />		
 		<!-- copy tomcat shared from common and user configuration -->
-		<copy todir="${tomcat.home}/shared" failonerror="true" overwrite="true" verbose="true">
+		<copy todir="${tomcat.home}/shared" failonerror="false" overwrite="true" verbose="true">
 			<fileset dir="${commonConfigPath}/shared">
 				<include name="**" />
 			</fileset>
@@ -370,29 +272,9 @@
 				<include name="**" />
 			</fileset>
 		</copy>
-
-		<!-- copy file to alfreco webapp -->
-		<echo message="Copy specific config files on Alfresco webapp" level="info" />
-		<copy todir="${tomcat.home}/${tomcat.webapps.target}/alfresco" failonerror="true" overwrite="true" verbose="true">
-			<fileset dir="${commonConfigPath}/${tomcat.webapps.target}/alfresco">
-				<include name="**" />
-			</fileset>
-			<fileset dir="${configPath}/${tomcat.webapps.target}/alfresco">
-				<include name="**" />
-			</fileset>
-		</copy>
-		
-		<!-- copy file to share webapp -->
-		<echo message="Copy specific config files on Share webapp" level="info" />
-		<copy todir="${tomcat.home}/${tomcat.webapps.target}/share" failonerror="true" overwrite="true" verbose="true">
-			<fileset dir="${commonConfigPath}/${tomcat.webapps.target}/share">
-				<include name="**" />
-			</fileset>
-			<fileset dir="${configPath}/${tomcat.webapps.target}/share">
-				<include name="**" />
-			</fileset>
-		</copy>
-
+		<!-- copy files into webapps (alfresco and share) -->
+		<applyConfig2ExplodedWar webappname="alfresco" />
+		<applyConfig2ExplodedWar webappname="share" />
 	</target>
 
 
@@ -441,4 +323,22 @@
 		</sequential>
 	</macrodef>
 
+	<!-- ================================= 
+	         applyConfig2ExplodedWar
+	         This macro copy configurations files into the given webapp
+	     ================================= -->
+	<macrodef name="applyConfig2ExplodedWar" description="copy configurations files into war">
+		<attribute name="webappName" />
+		<sequential>
+			<echo message="applyConfig2ExplodedWar config ${config} into @{webappName}" />
+			<copy todir="${tomcat.home}/${tomcat.webapps.target}/@{webappName}" failonerror="true" verbose="true" overwrite="true">
+				<fileset dir="${commonConfigPath}/${tomcat.webapps.target}/@{webappName}">
+					<include name="**" />
+				</fileset>
+				<fileset dir="${configPath}/${tomcat.webapps.target}/@{webappName}">
+					<include name="**" />
+				</fileset>
+			</copy>
+		</sequential>
+	</macrodef>
 </project>
