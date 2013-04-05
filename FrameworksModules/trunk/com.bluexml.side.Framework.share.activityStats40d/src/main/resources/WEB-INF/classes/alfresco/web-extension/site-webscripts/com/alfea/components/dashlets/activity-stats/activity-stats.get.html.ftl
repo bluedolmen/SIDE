@@ -22,7 +22,7 @@
 	        data.setValue(2, 1, ${documentsNumber});
 	
 	        var chart = new google.visualization.Gauge(document.getElementById('${args.htmlid}-gauges_div'));
-	        var options = {width: 400, height: 120, redFrom: 400, redTo: 500, yellowFrom:300, yellowTo: 400, minorTicks: 20};
+	        var options = {width: 400, height: 120, redFrom: 400, redTo: 500, yellowFrom:300, yellowTo: 400, minorTicks: 20, max:500};
 	        chart.draw(data, options);
 	      }
 	    </script>

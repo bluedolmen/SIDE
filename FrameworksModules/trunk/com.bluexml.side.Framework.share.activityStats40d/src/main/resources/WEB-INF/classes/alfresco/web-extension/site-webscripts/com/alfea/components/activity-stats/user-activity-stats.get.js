@@ -19,7 +19,8 @@ function getSites()
 	   	if (result.status == 200)
 	   	{
 	      // Create javascript objects from the server response
-	      return eval("(" + result + ")");
+	      var st = eval("(" + result + ")");
+	      return st.sites;
 	   	}   
    		status.setCode(result.status, result.response);
 	} else {
@@ -51,7 +52,7 @@ function main()
 {	
 	var sites = getSites();
 	var activityTypes = getActivityTypes();
-	model.sites = sites.sites;
+	model.sites = sites;
 	model.activityTypes = activityTypes;
 }
 
