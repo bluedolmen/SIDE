@@ -39,7 +39,7 @@
             </option>
             <option defaultOption="false" documentation="alfresco extension to add activity stats" hidden="false" key="com.bluexml.side.Portal.generator.alfresco4029E.activityStats" label="Activity Stats">
               <moduleDependence moduleId="com.bluexml.side.Framework.alfresco.activityStats40d" moduleType="amp" technologyVersion="alfresco_40d" versionMax="1.0.2" versionMin="1.0.2" />
-              <moduleDependence moduleId="com.bluexml.side.Framework.share.activityStats40d" moduleType="zip" technologyVersion="alfresco_40d" versionMax="1.0.2" versionMin="1.0.2" />
+              <moduleDependence moduleId="com.bluexml.side.Framework.share.activityStats40d" moduleType="zip" technologyVersion="alfresco_40d" versionMax="1.0.3" versionMin="1.0.3" />
             </option>
           </generatorVersion>
         </technologyVersion>
